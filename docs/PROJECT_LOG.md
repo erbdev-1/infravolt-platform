@@ -248,3 +248,45 @@ FND-013 has implementation and verification evidence and awaits Founder/PR revie
 ### Status and next step
 
 FND-018 and FND-019 have implementation and verification evidence and await Founder/PR review before merge. WP-05 is complete across `S1-ARCH-002` and `S1-ARCH-003`. WP-06/FND-014–016 is the next integration-order package; it remains outside this increment.
+
+## 2026-07-18 — WP-06 trusted host, market and locale
+
+**Authority:** Founder-authorised Sprint 1 continuation under G0-COND-001
+
+**Scope:** FND-014, FND-015 and FND-016 only
+
+**Engineering agent:** Codex
+
+### Completed work
+
+- Fast-forward synchronized clean `main` at squash-merged WP-05 commit `f456935` and created `feat/market-context` after confirming no local or remote branch with that name existed.
+- Applied G0-DEC-004/005 and ADR-0003: local UK/UA hosts are fixed, while the unresolved Ukraine production domain remains environment-configurable and outside engineering approval.
+- Added the typed UK/UA market and locale contracts, a server-only explicit host allowlist and a trusted market-context resolver.
+- Added a narrow Next.js 16 `src/proxy.ts` for Host resolution, canonical alias redirects, spoofed-header replacement and safe unknown-host rejection.
+- Added exact UK `en-GB` and UA `uk-UA` root HTML language behavior through server-side revalidation of trusted proxy context.
+- Added a twelve-check market verifier and extended the server-boundary matrix to prove the market server API cannot enter a Client Component.
+- Stored [`S1-MARKET-001`](evidence/sprint-1/S1-MARKET-001.md) without modifying historical Sprint 1 evidence.
+
+### Verification evidence
+
+- Node `v24.18.0`, pnpm `11.13.0` and `pnpm install --frozen-lockfile`: passed; lockfile unchanged.
+- `pnpm verify:market`: passed twelve checks covering UK, UA, uppercase/trailing-dot normalization, local ports, canonical aliases, explicit preview policy, unknown/malformed hosts, spoofing resistance, locale mapping, server revalidation and immutable resolver configuration.
+- WP-04 `pnpm verify:env`: passed all ten checks.
+- WP-05 `pnpm verify:common-contracts`: passed all six checks.
+- `pnpm verify:server-boundary`: Server Component imports passed; environment, correlation, log-context and market server imports were independently rejected from Client Components.
+- `pnpm lint`, `pnpm typecheck` and the positive production build passed.
+- Built-server smoke passed with UK 200/`en-GB`, UA 200/`uk-UA` and unknown-host 404 without host/query disclosure.
+- Final whitespace, credential, environment-file, specification-change and Markdown-link scans are recorded in `S1-MARKET-001` after completion.
+
+### Corrections and internal review
+
+- Corrected native ESM import paths used by verification and isolated server modules.
+- Made identical local-host registration idempotent while preserving conflict rejection.
+- Removed forwarded-host metadata rather than only ignoring it for resolution.
+- Replaced the hard-coded root `en-GB` attribute with revalidated request-market locale.
+- Runtime smoke exposed that `request.nextUrl.host` is Next's internal listening origin under `next start`; the proxy now validates the actual incoming `Host` header against the allowlist.
+- No unresolved in-scope code, architecture, security or scope finding remains.
+
+### Status and next step
+
+FND-014 through FND-016 have implementation and verification evidence and await Founder/PR review before merge. WP-06 is complete. WP-07/FND-020 is the next integration-order package and remains outside this increment.
