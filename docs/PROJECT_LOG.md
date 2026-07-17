@@ -127,3 +127,45 @@ FND-001 through FND-004 have implementation and verification evidence and await 
 ### Status and next step
 
 FND-005 through FND-010 have implementation and verification evidence and await Founder review. No file was staged, committed or pushed. Later Sprint 1 tasks remain outside this increment.
+
+## 2026-07-17 — WP-04 environment contract
+
+**Authority:** Founder-controlled increment under G0-COND-001
+
+**Scope:** FND-011 and FND-012 only
+
+**Engineering agent:** Codex
+
+### Completed work
+
+- Confirmed the clean `chore/environment-contract` branch at merged foundation commit `d2b8617` before editing.
+- Preserved Node `24.18.0`, pnpm `11.13.0`, the root single-application layout and all existing dependency pins.
+- Added exact runtime dependency `zod@4.4.3`.
+- Added separate public and server environment parsers without a general barrel export.
+- Added an explicit six-name `NEXT_PUBLIC_*` allowlist; server-only names cannot appear in client output.
+- Added native URL/origin and host normalization supporting the approved `uk.infravolt.localhost` and `ua.infravolt.localhost` aliases.
+- Made UK and Ukraine public site URLs required in production while keeping future provider variables optional until their integrations exist.
+- Enforced the actual client/server contracts in Next.js production build and server phases without requiring a dev-only compiler at runtime.
+- Required explicit client parser/reader modes, omitted empty optional values from output and added plain/display-name mailbox validation.
+- Added names-only, classified `.env.example` documentation with safe local site origins and empty provider fields.
+- Added a narrow fixture verification command without introducing the WP-15 test framework early.
+- Stored [`S1-ENV-001`](evidence/sprint-1/S1-ENV-001.md).
+
+### Verification evidence
+
+- Node `v24.18.0` and pnpm `11.13.0`: passed.
+- `pnpm install` and `pnpm install --frozen-lockfile`: passed.
+- The initial environment matrix exposed absent server keys retained as `undefined`; final parsing omits both absent and empty-string optional values.
+- Review findings for production enforcement, empty optional output, permissive default mode and email semantics were corrected.
+- Internal review also replaced a runtime TypeScript-compilation preflight with native Next.js production build/server configuration validation.
+- Final `pnpm verify:env`: passed all ten checks covering requiredness, production reader behavior, redaction, URL origin/host/port rules, client allowlisting, empty optional values, email mailboxes and optional server configuration.
+- Negative production build/start checks failed for missing UK/UA URLs with name-only errors; malformed email build validation failed with a name-only error.
+- `pnpm lint`: passed.
+- `pnpm typecheck`: passed.
+- The first sandboxed build compiled but hit `spawn EPERM`; the identical authorised rerun completed successfully with safe process-local UK/UA origins.
+- `git diff --check`, specification-diff, credential-pattern, environment-file and client/server-name checks passed.
+- Only `.env.example` exists; real environment files remain ignored.
+
+### Status and next step
+
+FND-011 and FND-012 have implementation and verification evidence and await Founder/PR review before merge. FND-013 and all later work packages remain outside this increment.
