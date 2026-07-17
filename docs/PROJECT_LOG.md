@@ -208,3 +208,43 @@ FND-011 and FND-012 have implementation and verification evidence and await Foun
 ### Status and next step
 
 FND-013 has implementation and verification evidence and awaits Founder/PR review before merge. FND-014 and all later work remain outside this increment.
+
+## 2026-07-17 — WP-05 common contracts and log context
+
+**Authority:** Founder-authorised Sprint 1 continuation under G0-COND-001
+
+**Scope:** FND-018 and FND-019 only
+
+**Engineering agent:** Codex
+
+### Completed work
+
+- Fast-forward synchronized clean `main` at squash-merged FND-013 commit `31cf6cd` and created `chore/common-contracts` after confirming no local or remote branch with that name existed.
+- Added the small shared discriminated `Result<T>`/error pattern owned by FND-018 and a branded shared correlation-ID type.
+- Added server-only UUID v4 correlation generation and trusted-format resolution without user, company or market PII.
+- Added a runtime-validated, explicitly allowlisted safe log-context interface and the WP-05 redaction-policy placeholder without adding logging infrastructure.
+- Expanded the existing boundary verifier to prove separate client-import rejection for the environment, correlation and log-context server modules.
+- Added a six-check common-contract verifier without introducing the later WP-15 test framework.
+- Stored [`S1-ARCH-003`](evidence/sprint-1/S1-ARCH-003.md) without modifying historical Sprint 1 evidence.
+
+### Verification evidence
+
+- Node `v24.18.0`, pnpm `11.13.0` and `pnpm install --frozen-lockfile`: passed; lockfile unchanged.
+- `pnpm verify:common-contracts`: passed six checks for Result discrimination, UUID v4 format, trusted-format resolution, PII rejection, safe context allowlisting, name-only errors and the redaction placeholder.
+- WP-04 `pnpm verify:env`: passed all ten checks.
+- `pnpm verify:server-boundary`: the Server Component fixture passed; independent environment, correlation and log-context Client Component imports were rejected by Next.js.
+- `pnpm lint` and `pnpm typecheck`: passed.
+- Positive production build with safe process-local UK/UA localhost origins: passed.
+- Final whitespace, credential, environment-file, specification-change and Markdown-link scans are recorded in `S1-ARCH-003` after completion.
+
+### Corrections and internal review
+
+- The first common verifier run exposed a missing `.ts` extension required by Node's native TypeScript loader; the import was corrected and verification passed.
+- The first expanded isolated server fixture exposed a root-alias dependency; server utility type imports were made explicit and the full boundary matrix passed.
+- Runtime validation was added for all allowlisted log fields after review identified that compile-time unions alone were insufficient for JavaScript callers.
+- Independent negative fixtures replaced a combined fixture so an existing protected import cannot mask a missing boundary on another module.
+- No unresolved in-scope correctness or security finding remains.
+
+### Status and next step
+
+FND-018 and FND-019 have implementation and verification evidence and await Founder/PR review before merge. WP-05 is complete across `S1-ARCH-002` and `S1-ARCH-003`. WP-06/FND-014–016 is the next integration-order package; it remains outside this increment.
