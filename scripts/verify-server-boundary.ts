@@ -30,6 +30,7 @@ const correlationImport =
   "../../../../src/lib/observability/correlation-id.ts";
 const logContextImport =
   "../../../../src/lib/observability/log-context.ts";
+const marketServerImport = "../../../../src/modules/markets/server.ts";
 
 const serverFixture: Fixture = {
   id: "server",
@@ -38,10 +39,12 @@ const serverFixture: Fixture = {
     `import { parseServerEnvironment } from "${environmentImport}";`,
     `import { createCorrelationId } from "${correlationImport}";`,
     `import { createSafeLogContext } from "${logContextImport}";`,
+    `import { createMarketResolver } from "${marketServerImport}";`,
   ],
   statements: [
     "parseServerEnvironment({});",
     "createSafeLogContext(createCorrelationId());",
+    "void createMarketResolver;",
   ],
 };
 
@@ -65,6 +68,12 @@ const clientFixtures: readonly Fixture[] = [
     client: true,
     imports: [`import { createSafeLogContext } from "${logContextImport}";`],
     statements: ["void createSafeLogContext;"],
+  },
+  {
+    id: "client-market-server",
+    client: true,
+    imports: [`import { createMarketResolver } from "${marketServerImport}";`],
+    statements: ["void createMarketResolver;"],
   },
 ];
 
