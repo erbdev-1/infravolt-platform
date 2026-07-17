@@ -6,7 +6,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "env:compile": "tsc --noEmit false --incremental false --outDir .next/env-contract-check --rootDir . --module commonjs --moduleResolution node --target ES2022 --esModuleInterop true --skipLibCheck true src/config/env/url.ts src/config/env/validation.ts src/config/env/client.ts src/config/env/server.ts scripts/verify-environment-contract.ts",
+    "verify:env": "pnpm env:compile && node .next/env-contract-check/scripts/verify-environment-contract.js"
   },
   "engines": {
     "node": "24.x"
@@ -15,7 +17,8 @@
   "dependencies": {
     "next": "16.2.10",
     "react": "19.2.7",
-    "react-dom": "19.2.7"
+    "react-dom": "19.2.7",
+    "zod": "4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.3.3",
