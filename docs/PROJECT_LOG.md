@@ -169,3 +169,42 @@ FND-005 through FND-010 have implementation and verification evidence and await 
 ### Status and next step
 
 FND-011 and FND-012 have implementation and verification evidence and await Founder/PR review before merge. FND-013 and all later work packages remain outside this increment.
+
+## 2026-07-17 — WP-05 server-only boundary
+
+**Authority:** Founder-authorised Sprint 1 continuation under G0-COND-001
+
+**Scope:** FND-013 only
+
+**Engineering agent:** Codex
+
+### Completed work
+
+- Fast-forward synchronized clean `main` at squash-merged WP-04 commit `d56aca3` and verified its tree matched the reviewed WP-04 branch tip.
+- Created `chore/server-boundaries` only after confirming no local or remote branch with that name existed.
+- Added exact Next-supported dependency `server-only@0.0.1` and marked the server environment contract directly.
+- Preserved separate client/server contracts and avoided a general environment barrel.
+- Moved WP-04 production preflight execution out of `next.config.ts` into a Node 24 server-conditioned script so the poisoned module remains protected without requiring the TypeScript devDependency at production startup.
+- Added an isolated Next.js verifier proving a Server Component import succeeds and a Client Component import fails with the exact Next boundary error.
+- Stored [`S1-ARCH-002`](evidence/sprint-1/S1-ARCH-002.md) without modifying historical `S1-ARCH-001` or `S1-ENV-001` evidence.
+
+### Verification evidence
+
+- Node `v24.18.0` and pnpm `11.13.0`: preserved.
+- `pnpm install --frozen-lockfile`: passed.
+- WP-04 `pnpm verify:env`: passed all ten checks.
+- `pnpm verify:server-boundary`: valid server import passed; client import was rejected.
+- Missing UK build and missing UA start preflights failed with variable names only.
+- `pnpm lint` and `pnpm typecheck`: passed.
+- Positive production build with safe process-local UK/UA origins: passed.
+- `git diff --check`, credential-pattern, environment-file, specification-change, historical-evidence and client secret-name checks passed.
+
+### Internal review
+
+- Narrowed the negative verifier from a broad `server-only` text match to Next's exact Client Component rejection phrase.
+- Confirmed ignored verification fixtures are removed and no server remains listening.
+- No unresolved in-scope correctness or security finding remains.
+
+### Status and next step
+
+FND-013 has implementation and verification evidence and awaits Founder/PR review before merge. FND-014 and all later work remain outside this increment.
