@@ -4,9 +4,9 @@ import {
   CLIENT_ENVIRONMENT_VARIABLES,
   parseClientEnvironment,
   readClientEnvironment,
-} from "../src/config/env/client";
-import { parseServerEnvironment } from "../src/config/env/server";
-import { EnvironmentValidationError } from "../src/config/env/validation";
+} from "../src/config/env/client.ts";
+import { parseServerEnvironment } from "../src/config/env/server.ts";
+import { EnvironmentValidationError } from "../src/config/env/validation.ts";
 
 type Check = {
   readonly name: string;

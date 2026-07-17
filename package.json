@@ -3,12 +3,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "pnpm validate:env && next build",
+    "start": "pnpm validate:env && next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "env:compile": "tsc --noEmit false --incremental false --outDir .next/env-contract-check --rootDir . --module commonjs --moduleResolution node --target ES2022 --esModuleInterop true --skipLibCheck true src/config/env/url.ts src/config/env/validation.ts src/config/env/client.ts src/config/env/server.ts scripts/verify-environment-contract.ts",
-    "verify:env": "pnpm env:compile && node .next/env-contract-check/scripts/verify-environment-contract.js"
+    "validate:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --conditions=react-server --experimental-strip-types scripts/validate-production-environment.ts",
+    "verify:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --conditions=react-server --experimental-strip-types scripts/verify-environment-contract.ts",
+    "verify:server-boundary": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/verify-server-boundary.ts"
   },
   "engines": {
     "node": "24.x"
@@ -18,6 +19,7 @@
     "next": "16.2.10",
     "react": "19.2.7",
     "react-dom": "19.2.7",
+    "server-only": "0.0.1",
     "zod": "4.4.3"
   },
   "devDependencies": {

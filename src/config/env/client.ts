@@ -1,12 +1,12 @@
 import { z } from "zod";
 
-import { configuredUrlSchema } from "./url";
+import { configuredUrlSchema } from "./url.ts";
 import {
   EnvironmentValidationError,
   environmentVariableNames,
   omitUndefinedEnvironmentValues,
   type EnvironmentMode,
-} from "./validation";
+} from "./validation.ts";
 
 export const CLIENT_ENVIRONMENT_VARIABLES = [
   "NEXT_PUBLIC_SITE_URL_UK",
