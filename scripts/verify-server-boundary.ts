@@ -3,7 +3,12 @@ import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-type FixtureKind = "client" | "server";
+type Fixture = Readonly<{
+  id: string;
+  client: boolean;
+  imports: readonly string[];
+  statements: readonly string[];
+}>;
 
 const workspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const verificationRoot = join(
@@ -20,11 +25,52 @@ const nextCli = join(
   "next",
 );
 
-function writeFixture(kind: FixtureKind): string {
-  const fixtureRoot = join(verificationRoot, kind);
+const environmentImport = "../../../../src/config/env/server.ts";
+const correlationImport =
+  "../../../../src/lib/observability/correlation-id.ts";
+const logContextImport =
+  "../../../../src/lib/observability/log-context.ts";
+
+const serverFixture: Fixture = {
+  id: "server",
+  client: false,
+  imports: [
+    `import { parseServerEnvironment } from "${environmentImport}";`,
+    `import { createCorrelationId } from "${correlationImport}";`,
+    `import { createSafeLogContext } from "${logContextImport}";`,
+  ],
+  statements: [
+    "parseServerEnvironment({});",
+    "createSafeLogContext(createCorrelationId());",
+  ],
+};
+
+const clientFixtures: readonly Fixture[] = [
+  {
+    id: "client-environment",
+    client: true,
+    imports: [
+      `import { parseServerEnvironment } from "${environmentImport}";`,
+    ],
+    statements: ["void parseServerEnvironment;"],
+  },
+  {
+    id: "client-correlation",
+    client: true,
+    imports: [`import { createCorrelationId } from "${correlationImport}";`],
+    statements: ["void createCorrelationId;"],
+  },
+  {
+    id: "client-log-context",
+    client: true,
+    imports: [`import { createSafeLogContext } from "${logContextImport}";`],
+    statements: ["void createSafeLogContext;"],
+  },
+];
+
+function writeFixture(fixture: Fixture): string {
+  const fixtureRoot = join(verificationRoot, fixture.id);
   const appRoot = join(fixtureRoot, "app");
-  const serverImport =
-    '../../../../src/config/env/server.ts';
 
   mkdirSync(appRoot, { recursive: true });
   writeFileSync(
@@ -64,16 +110,16 @@ function writeFixture(kind: FixtureKind): string {
     ].join("\n"),
   );
 
-  const clientDirective = kind === "client" ? '"use client";\n\n' : "";
+  const clientDirective = fixture.client ? ['"use client";', ""] : [];
   writeFileSync(
     join(appRoot, "page.tsx"),
     [
-      clientDirective +
-        `import { parseServerEnvironment } from "${serverImport}";`,
+      ...clientDirective,
+      ...fixture.imports,
       "",
       "export default function Page() {",
-      "  parseServerEnvironment({});",
-      `  return <main><h1>${kind} boundary fixture</h1></main>;`,
+      ...fixture.statements.map((statement) => `  ${statement}`),
+      `  return <main><h1>${fixture.id} boundary fixture</h1></main>;`,
       "}",
       "",
     ].join("\n"),
@@ -82,8 +128,8 @@ function writeFixture(kind: FixtureKind): string {
   return fixtureRoot;
 }
 
-function buildFixture(kind: FixtureKind): ReturnType<typeof spawnSync> {
-  const fixtureRoot = writeFixture(kind);
+function buildFixture(fixture: Fixture): ReturnType<typeof spawnSync> {
+  const fixtureRoot = writeFixture(fixture);
 
   return spawnSync(process.execPath, [nextCli, "build"], {
     cwd: fixtureRoot,
@@ -99,25 +145,29 @@ function buildFixture(kind: FixtureKind): ReturnType<typeof spawnSync> {
 rmSync(verificationRoot, { force: true, recursive: true });
 
 try {
-  const serverBuild = buildFixture("server");
+  const serverBuild = buildFixture(serverFixture);
 
   if (serverBuild.status !== 0) {
     throw new Error("Server Component import verification failed unexpectedly.");
   }
 
-  console.log("PASS: Server Component can import server-only configuration.");
+  console.log("PASS: Server Component can import all server-only modules.");
 
-  const clientBuild = buildFixture("client");
-  const clientOutput = `${clientBuild.stdout ?? ""}\n${clientBuild.stderr ?? ""}`;
+  for (const fixture of clientFixtures) {
+    const clientBuild = buildFixture(fixture);
+    const clientOutput = `${clientBuild.stdout ?? ""}\n${clientBuild.stderr ?? ""}`;
 
-  if (
-    clientBuild.status === 0 ||
-    !/cannot be imported from a Client Component module/u.test(clientOutput)
-  ) {
-    throw new Error("Client Component import was not rejected by server-only.");
+    if (
+      clientBuild.status === 0 ||
+      !/cannot be imported from a Client Component module/u.test(clientOutput)
+    ) {
+      throw new Error(
+        `Client Component import was not rejected for fixture: ${fixture.id}`,
+      );
+    }
+
+    console.log(`PASS: ${fixture.id} import is rejected in Client Components.`);
   }
-
-  console.log("PASS: Client Component import of server-only configuration is rejected.");
 } finally {
   rmSync(verificationRoot, { force: true, recursive: true });
 }
