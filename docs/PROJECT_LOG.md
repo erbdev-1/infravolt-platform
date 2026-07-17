@@ -89,3 +89,41 @@ See [`governance/RAID_REGISTER.md`](governance/RAID_REGISTER.md). Material open 
 ### Status and next step
 
 FND-001 through FND-004 have implementation and verification evidence and await Founder review. No commit or push occurred. FND-005 and all application scaffolding remain outside the authorised scope.
+
+## 2026-07-17 — WP-03 Next.js application foundation
+
+**Authority:** Founder-controlled increment under G0-COND-001
+**Scope:** FND-005 through FND-010 only
+**Engineering agent:** Codex
+
+### Completed work
+
+- Confirmed the clean `chore/nextjs-foundation` branch at toolchain commit `04932f82592c3d9a58ce067929881c45e7540c7d` before editing.
+- Preserved Node `24.18.0`, pnpm `11.13.0`, `engines.node: 24.x` and `packageManager: pnpm@11.13.0`.
+- Added an exact-version Next.js `16.2.10`, React `19.2.7`, strict TypeScript `5.9.3`, ESLint 9 flat-config and Tailwind CSS 4 foundation.
+- Added the required `dev`, `build`, `start`, `lint` and `typecheck` scripts.
+- Established the root `src/` App Router layout, the prescribed public/auth/admin/portal route-group skeleton, the `@/*` alias and a minimal module-boundary convention.
+- Added one semantic public InfraVolt placeholder page; no feature, service, market-routing or production implementation was added.
+- Stored [`S1-ARCH-001`](evidence/sprint-1/S1-ARCH-001.md).
+
+### Dependency policy correction
+
+- The first `pnpm install` resolved the graph but exited with `ERR_PNPM_IGNORED_BUILDS` for `sharp@0.34.5` and `unrs-resolver@1.12.2` under pnpm 11's strict lifecycle-script policy.
+- Reviewed both packages in the resolved graph and added exact-version `allowBuilds` entries in `pnpm-workspace.yaml`.
+- The file declares no workspace packages and does not change the approved single-application architecture.
+- The second install passed; future unreviewed lifecycle-script packages remain blocked.
+
+### Verification evidence
+
+- Node `v24.18.0` and pnpm `11.13.0`: passed.
+- `pnpm install --frozen-lockfile`: passed.
+- Initial `pnpm lint`: passed with one warning in `postcss.config.mjs`; the anonymous default export was corrected in scope.
+- Final `pnpm lint`: passed with no warnings.
+- `pnpm typecheck`: passed.
+- `pnpm build`: passed with Next.js `16.2.10`; the public `/` placeholder was statically generated.
+- No Pages Router, `middleware.ts`, proxy, authentication, Supabase, database, API, form, admin feature, portal feature, analytics, Resend, Turnstile, Docker, environment file or deployment configuration was added.
+- Specifications `00` through `18` were not edited.
+
+### Status and next step
+
+FND-005 through FND-010 have implementation and verification evidence and await Founder review. No file was staged, committed or pushed. Later Sprint 1 tasks remain outside this increment.
