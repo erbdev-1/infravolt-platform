@@ -1,10 +1,12 @@
+import "server-only";
+
 import { z } from "zod";
 
 import {
   EnvironmentValidationError,
   environmentVariableNames,
   omitUndefinedEnvironmentValues,
-} from "./validation";
+} from "./validation.ts";
 
 export const SERVER_ENVIRONMENT_VARIABLES = [
   "SUPABASE_SECRET_KEY",
