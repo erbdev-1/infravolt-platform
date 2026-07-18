@@ -38,7 +38,7 @@ Founder-approved decisions are recorded in [`docs/governance/DECISION_REGISTER.m
 
 Current gate: **G0-COND-001 — Conditional Pass**.
 
-The gate authorises repository governance, documentation baseline, development-environment preparation, and Sprint 1 engineering-foundation work. It does not authorise production deployment, production credentials or customer data, Ukraine production launch, destructive database operations, production-domain purchase or final approval, or publication of unverified claims, certificates, licensed assets, or official Gersan-authorisation claims.
+The gate authorises repository governance, documentation baseline, development-environment preparation, and Sprint 1 engineering-foundation work. It does not authorise production deployment, production credentials or customer data, Ukraine production launch, destructive database operations, production-domain purchase or final approval, or publication of unverified claims, certificates, licensed assets, or officialauthorisation claims.
 
 No Next.js application or feature implementation exists yet. The next work requires review of this governance baseline and explicit approval before any commit or push.
 
@@ -56,6 +56,3 @@ Before engineering-foundation work begins, a workstation needs:
 
 Never commit secrets, real credentials, production data, private contracts, or unapproved licensed assets. Use documented placeholders and future committed `.env.example` files for variable names only.
 
-## Working in this repository
-
-Read [`AGENTS.md`](AGENTS.md) before making changes. Work uses protected `main` plus short-lived task branches; there is no `develop` branch. Commits and pushes require explicit approval.
