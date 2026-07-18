@@ -25,7 +25,7 @@
 |---|---|---|
 | DAT-001 | Root `supabase/config.toml` is local-only; the pinned CLI starts the Docker stack and `pnpm db:reset` succeeds. | Complete — pending review |
 | DAT-002 | `supabase/README.md` defines timestamped snake_case names, chronological ordering, one-concern migrations and forward-only correction after sharing. | Complete — pending review |
-| DAT-004 | Migration `20260718133937_foundation_schemas.sql` creates the approved `private` boundary. Effective PostgreSQL queries verify schema grants plus 48 default table-DML, sequence and function privilege denials across both application schemas and all three application roles. | Complete — pending review |
+| DAT-004 | Migration `20260718133937_foundation_schemas.sql` creates the approved `private` boundary. Effective PostgreSQL queries verify all 12 role/schema `USAGE`/`CREATE` combinations and all 66 future-object privilege combinations across both schemas and all three application roles, with `postgres` ownership verified. | Complete — pending review |
 | DAT-007 | `pnpm db:types` generates `src/types/database.generated.ts`; `pnpm db:types:check` detects drift without overwriting it. | Complete — pending review |
 | DAT-008 | `supabase/seed.sql` is deterministic and synthetic. Two clean resets prove execution; no business table or row was invented. | Complete — pending review |
 | DAT-010 | `pnpm db:verify` completes clean reset, migration, seed, schema/grant smoke, type drift, stop, restart, status and post-restart query checks. | Complete — pending review |
@@ -44,10 +44,12 @@
 - Docker `28.0.1`, Compose `v2.33.1-desktop.1`, Linux engine `28.0.1`.
 - Docker reported `name=seccomp,profile=unconfined`; this pre-existing security warning was recorded and not modified.
 - The first standard CLI start published `54321`–`54324` on all interfaces. Internal review rejected that state.
-- The effective Docker endpoint must be a local named pipe or Unix socket. A process-local remote `DOCKER_HOST` fixture was rejected before any Docker command, and TCP/SSH negative fixtures pass without disclosing endpoint values.
+- The effective Docker endpoint is resolved once, normalised and returned with an immutable child environment. That environment pins `DOCKER_HOST`, removes `DOCKER_CONTEXT` and Docker TLS-selection variables, and is used by every later Docker, Supabase, database-type and verifier child without mutating `process.env`.
+- Approved endpoints are the Windows `dockerDesktopLinuxEngine`/`docker_engine` named pipes, system Unix sockets at `/var/run/docker.sock` and `/run/docker.sock`, rootless `/run/user/<numeric-uid>/docker.sock`, and Docker Desktop user sockets below `/home/<user>/.docker/{run,desktop}` or `/Users/<user>/.docker/{run,desktop}`. Arbitrary `/tmp`, proxy, traversal-like, relative, TCP, SSH and malformed targets are rejected before Docker engine or Supabase lifecycle execution.
 - `pnpm db:start` now creates or validates the project-owned `infravolt-local` bridge with `com.infravolt.owner=local-supabase-foundation` and `com.docker.network.bridge.host_binding_ipv4=127.0.0.1`, then starts the stack with `--network-id infravolt-local`.
 - Existing networks fail closed when ownership, driver, loopback option or container membership is unexpected. The previously verified project-only bridge was stopped, confirmed empty, removed by exact name and recreated with ownership metadata.
-- Start, reset, status, type generation and the verifier inspect actual project labels, exact network membership, published bindings, running state and configured health checks. Negative fixtures prove rejection of foreign containers, restarting/unhealthy states and `0.0.0.0` publishing.
+- Start, reset, status, type generation and the verifier inspect actual project labels, exact network membership, published bindings, running state and configured health checks. Missing containers, created/restarting state and `starting` health are the only retryable convergence states. Unhealthy or malformed inspections, missing required health metadata, foreign ownership/network/name collisions and unsafe bindings fail immediately; REST alone may omit health metadata under its explicit image policy.
+- Readiness uses a real 30-second monotonic deadline. Every Docker child timeout and polling sleep is capped by the remaining budget; command timeout, deadline exhaustion and the secondary finite attempt guard have distinct errors.
 - Final inspection: driver `bridge`, owner label present, host binding `127.0.0.1`; published API, database, Studio and mail-capture ports all use `127.0.0.1`.
 - Start/status wrappers suppress local development keys. No key, password or connection string is recorded here.
 - `supabase/.temp/project-ref` is absent. No login, link, remote project ID, access token, remote database URL or production credential is required.
@@ -58,7 +60,7 @@ INF-06 makes `public` the application schema and approved Data API surface. It r
 
 The first migration is `supabase/migrations/20260718133937_foundation_schemas.sql`. The timestamp was generated once and preserved. It adds no table, extension, policy, storage bucket or function.
 
-Default privileges owned by `postgres` revoke table, sequence and function access from broad/browser roles in both application schemas. PostgreSQL's implicit global `PUBLIC` function-execution default is revoked before schema-scoped rules. A rolled-back probe performs 48 checks covering `SELECT`, `INSERT`, `UPDATE` and `DELETE`, all sequence privileges and function execution for `anon`, `authenticated` and `service_role` in both `public` and `private`.
+Default privileges owned by `postgres` revoke table, sequence and function access from broad/browser roles in both application schemas. PostgreSQL's implicit global `PUBLIC` function-execution default is revoked before schema-scoped rules. A self-check locks the expected roles, schemas and operation names. A rolled-back probe verifies 66 combinations: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, `REFERENCES` and `TRIGGER`; all sequence privileges; and function `EXECUTE` for `anon`, `authenticated` and `service_role` in both `public` and `private`. It also proves the probe objects and active default-privilege source are owned by `postgres`.
 
 Managed `auth` and `storage` schemas are untouched. No production RLS-completeness claim is made.
 
@@ -73,12 +75,13 @@ WP-11 owns no seedable business table, so `supabase/seed.sql` executes one const
 | Verification | Final redacted result |
 |---|---|
 | `pnpm install --frozen-lockfile` | Passed; lockfile already up to date. |
+| `pnpm verify:database-boundary` | Passed six focused groups for the socket allowlist, immutable endpoint/environment pinning, Docker/Supabase child inheritance, typed health policy, monotonic deadline and lifecycle cleanup diagnostics. |
 | `pnpm exec supabase --version` | `2.109.1`. |
 | Initial remediation `pnpm db:verify` | Failed at the first reset and completed failure cleanup. A focused rerun exposed Realtime's normal post-reset `starting` state; a bounded 30-second readiness convergence check was added without weakening persistent health failures. |
-| Final `pnpm db:verify` | Passed 18 control groups, including local-endpoint and unsafe-state negative fixtures. |
+| Final remediation `pnpm db:verify` | Passed 18 control groups against the pinned owned local endpoint, including two resets, privilege matrices, type drift, stop/restart and smoke query. |
 | Clean reset and seed, repeated twice | Passed; migration and `supabase/seed.sql` applied both times. |
-| Schema/grant smoke | Passed for `public`, `private`, browser-role denial and service-owned boundary. |
-| Default-privilege smoke | Passed 48 table-DML, sequence and function denials across both schemas and all application roles; transaction rolled back. |
+| Schema/grant smoke | Passed all 12 `USAGE`/`CREATE` combinations for three roles and two schemas. |
+| Default-privilege smoke | Passed all 66 table, sequence and function denials plus owner/source assertions; transaction rolled back. |
 | `pnpm db:types:check` | Passed; exact generated output matches committed file. |
 | Stop/start/status/post-restart query | Passed; all expected containers running, loopback-only bindings, database responsive. |
 | `pnpm verify:safe-states` | Passed 6 checks. |
@@ -110,6 +113,12 @@ WP-11 owns no seedable business table, so `supabase/seed.sql` executes one const
 10. The rolled-back default-privilege probe now covers 48 table, sequence and function privilege combinations across both schemas and all application roles.
 11. Type and verifier cleanup paths preserve the original failure while reporting cleanup failure safely.
 12. Strong credential-value patterns are checked across all tracked repository text rather than a selected WP-11 file subset.
+13. Endpoint validation now returns an immutable normalised target; every Docker and Supabase child uses its pinned `DOCKER_HOST` environment with `DOCKER_CONTEXT` removed, closing the post-validation redirect gap.
+14. Unix socket acceptance is an explicit documented allowlist; arbitrary forwarded, proxy, custom and traversal-like socket paths are rejected.
+15. Typed readiness errors restrict retries to documented convergence states. Ownership, network, binding, malformed-health and unhealthy failures are terminal on the first attempt.
+16. The readiness loop now enforces a monotonic overall deadline and bounds each child timeout and sleep by the remaining budget.
+17. Schema checks cover all 12 combinations, while the future-object matrix covers all 66 required operations and verifies the `postgres` owner/default-privilege source.
+18. Start/reset cleanup diagnostics name the originating lifecycle operation, preserve the original thrown error and attach cleanup failure only as secondary context.
 
 All actionable PostgreSQL, Supabase, TypeScript, database-security, migration/reproducibility and scope findings were corrected. The final internal review found no unresolved in-scope issue.
 
@@ -121,6 +130,7 @@ Created:
 - `scripts/local-docker.ts`
 - `scripts/local-supabase.ts`
 - `scripts/verify-database-foundation.ts`
+- `scripts/verify-local-docker-boundary.ts`
 - `src/types/database.generated.ts`
 - `supabase/.gitignore`
 - `supabase/README.md`
@@ -139,7 +149,7 @@ The only direct dependency added is exact development dependency `supabase@2.109
 
 ## Turkish explanatory comments
 
-New TypeScript and SQL comments explain the server/local process boundary, credential-output suppression, Windows/Git Bash-compatible pnpm execution, loopback fail-safe networking, reset/seed proof, temporary-file cleanup, drift false-positive prevention, schema grants, default privileges and PostgreSQL's global function-execution default. Identifiers and required CLI patterns remain in English.
+New Turkish TypeScript and SQL comments explain endpoint pinning and TOCTOU protection, the socket trust allowlist, terminal versus transient readiness, monotonic child budgets, credential-output suppression, loopback fail-safe networking, privilege-matrix completeness, cleanup-error precedence, temporary cleanup and drift false-positive prevention. Identifiers and required CLI patterns remain in English.
 
 ## Deferred work and residual decisions
 

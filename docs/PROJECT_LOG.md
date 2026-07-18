@@ -392,14 +392,19 @@ FND-020 has implementation and verification evidence and awaits Founder/PR revie
 - Established INF-06's `public` application/Data API schema and browser-denied `private` boundary with effective grant and default-privilege verification.
 - Added a deterministic no-business-data seed, generated local database types and an exact read-only drift check with temporary-file cleanup.
 - Added a shared fail-closed Docker boundary that restricts lifecycle and type generation to a local daemon, an owned loopback bridge, the expected project containers and verified running/health state.
+- Closed the final endpoint TOCTOU gap by returning one immutable normalised Docker target and pinning it into every Docker/Supabase child environment with `DOCKER_CONTEXT` removed.
+- Replaced generic Unix-socket acceptance with a documented system, rootless and Docker Desktop allowlist; proxy, `/tmp`, traversal-like, relative, TCP and SSH targets fail before engine use.
+- Added typed readiness convergence, a real 30-second monotonic deadline with per-child remaining-budget timeouts, terminal security-state handling and operation-specific cleanup diagnostics.
+- Completed all 12 schema privilege combinations and all 66 future table/sequence/function privilege combinations, including owner/default-privilege-source checks.
 - Added an 18-control reset/rebuild verifier and stored [`S1-DATA-001`](evidence/sprint-1/S1-DATA-001.md).
 
 ### Verification evidence
 
 - Node `v24.18.0`, pnpm `11.13.0`, Supabase CLI `2.109.1`, Docker `28.0.1` and Compose `v2.33.1-desktop.1` verified.
 - `pnpm install --frozen-lockfile`, final `pnpm db:verify`, `pnpm db:types` and `pnpm db:types:check` passed.
+- `pnpm verify:database-boundary` passed six focused groups covering endpoint allowlisting, immutable pinning, child environment inheritance, typed health, monotonic deadlines and start/reset cleanup precedence.
 - The first remediation verifier run failed at reset and completed failure cleanup. A focused rerun exposed Realtime's normal post-reset `starting` state; a bounded 30-second readiness convergence check corrected the race, and the full verifier then passed.
-- Two clean resets each applied the preserved foundation migration and deterministic seed; effective schema grants, the expanded 48-check future-object privilege matrix and post-restart smoke query passed.
+- Two clean resets each applied the preserved foundation migration and deterministic seed; all 12 schema combinations, the 66-combination future-object privilege matrix, owner/source assertions and post-restart smoke query passed.
 - All expected local containers restarted successfully; ports `54321`–`54324` are published only on `127.0.0.1` and credential-bearing CLI output is suppressed.
 - Existing safe-state, feature, environment, common-contract, market and server-boundary regressions passed.
 - `pnpm lint`, `pnpm typecheck` and the production build with safe process-local UK/UA origins passed.
@@ -414,6 +419,10 @@ FND-020 has implementation and verification evidence and awaits Founder/PR revie
 - Rejected remote Docker endpoints before lifecycle/type operations and verified the effective Docker Desktop named-pipe endpoint.
 - Recreated only the verified empty `infravolt-local` bridge with an ownership label; foreign containers and unexpected network membership now fail closed.
 - Expanded rolled-back default-privilege verification across both schemas, three application roles, table DML, sequences and functions.
+- Added `TRUNCATE`, `REFERENCES` and `TRIGGER`, explicit service-role/public and browser/private schema checks, and matrix-dimension self-checks without changing the already-correct migration.
+- Separated retryable startup convergence from terminal ownership, network, binding and health-policy failures; only REST's documented missing health metadata is accepted.
+- Bounded each readiness Docker child and poll sleep by a monotonic overall deadline, with deterministic fake-clock coverage and no real fixture delay.
+- Replaced generic startup cleanup wording with typed start/reset lifecycle diagnostics while preserving the original error over cleanup failure.
 - Preserved original verification/drift errors across cleanup failure and widened strong credential-pattern coverage to all tracked repository text.
 - Recorded the pre-existing Docker `seccomp` profile warning without changing system settings.
 - No unresolved in-scope PostgreSQL, Supabase, TypeScript, database-security, reproducibility or scope finding remains.
