@@ -391,25 +391,30 @@ FND-020 has implementation and verification evidence and awaits Founder/PR revie
 - Initialised deterministic root local configuration, timestamped migration ownership and a documented forward-only migration workflow.
 - Established INF-06's `public` application/Data API schema and browser-denied `private` boundary with effective grant and default-privilege verification.
 - Added a deterministic no-business-data seed, generated local database types and an exact read-only drift check with temporary-file cleanup.
-- Added redacted local lifecycle wrappers that enforce a loopback-only Docker bridge for start, reset, status and type generation.
+- Added a shared fail-closed Docker boundary that restricts lifecycle and type generation to a local daemon, an owned loopback bridge, the expected project containers and verified running/health state.
 - Added an 18-control reset/rebuild verifier and stored [`S1-DATA-001`](evidence/sprint-1/S1-DATA-001.md).
 
 ### Verification evidence
 
 - Node `v24.18.0`, pnpm `11.13.0`, Supabase CLI `2.109.1`, Docker `28.0.1` and Compose `v2.33.1-desktop.1` verified.
-- `pnpm install --frozen-lockfile`, `pnpm db:verify` and `pnpm db:types:check` passed.
-- Two clean resets each applied the preserved foundation migration and deterministic seed; effective schema grants, future-object defaults and post-restart smoke query passed.
+- `pnpm install --frozen-lockfile`, final `pnpm db:verify`, `pnpm db:types` and `pnpm db:types:check` passed.
+- The first remediation verifier run failed at reset and completed failure cleanup. A focused rerun exposed Realtime's normal post-reset `starting` state; a bounded 30-second readiness convergence check corrected the race, and the full verifier then passed.
+- Two clean resets each applied the preserved foundation migration and deterministic seed; effective schema grants, the expanded 48-check future-object privilege matrix and post-restart smoke query passed.
 - All expected local containers restarted successfully; ports `54321`–`54324` are published only on `127.0.0.1` and credential-bearing CLI output is suppressed.
 - Existing safe-state, feature, environment, common-contract, market and server-boundary regressions passed.
 - `pnpm lint`, `pnpm typecheck` and the production build with safe process-local UK/UA origins passed.
-- Whitespace, credential, environment-file, specification, historical-evidence, workflow, Markdown-link and out-of-scope scans passed.
+- Whitespace, repository-wide strong credential-value, local remote-endpoint, environment-file, specification, historical-evidence, workflow, Markdown-link and out-of-scope scans passed.
 
 ### Corrections and internal review
 
 - Replaced the CLI's all-interface default port publishing with a validated loopback-only Docker bridge.
 - Passed the same custom network ID to reset and type generation after the first reset exposed split-network DNS failure.
 - Revoked PostgreSQL's global implicit function-execution default after an effective ACL probe found schema-scoped revoke alone was insufficient.
-- Restricted type normalisation to line-ending differences and strengthened expected-container health checks.
+- Restricted type normalisation to line-ending differences and replaced the ineffective status-text health check with actual Docker state/health inspection plus negative fixtures.
+- Rejected remote Docker endpoints before lifecycle/type operations and verified the effective Docker Desktop named-pipe endpoint.
+- Recreated only the verified empty `infravolt-local` bridge with an ownership label; foreign containers and unexpected network membership now fail closed.
+- Expanded rolled-back default-privilege verification across both schemas, three application roles, table DML, sequences and functions.
+- Preserved original verification/drift errors across cleanup failure and widened strong credential-pattern coverage to all tracked repository text.
 - Recorded the pre-existing Docker `seccomp` profile warning without changing system settings.
 - No unresolved in-scope PostgreSQL, Supabase, TypeScript, database-security, reproducibility or scope finding remains.
 
