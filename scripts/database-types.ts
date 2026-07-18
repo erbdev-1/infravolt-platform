@@ -9,6 +9,12 @@ import {
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  assertLocalDockerEngine,
+  assertLocalSupabaseStack,
+  localNetworkName,
+  type CommandResult,
+} from "./local-docker.ts";
 
 const workspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const generatedTypesPath = join(
@@ -21,6 +27,28 @@ const generatedHeader =
   "// Bu dosya yerel Supabase şemasından üretilir; elle değiştirmek yerine `pnpm db:types` çalıştırın.\n\n";
 
 type Mode = "check" | "write";
+
+function runCommand(
+  executable: string,
+  args: readonly string[],
+  label: string,
+): CommandResult {
+  const result = spawnSync(executable, args, {
+    cwd: workspaceRoot,
+    encoding: "utf8",
+    env: process.env,
+    maxBuffer: 20 * 1024 * 1024,
+    shell: false,
+  });
+
+  assert.equal(result.error, undefined, `${label} süreci başlatılamadı.`);
+
+  return Object.freeze({
+    status: result.status ?? -1,
+    stderr: result.stderr,
+    stdout: result.stdout,
+  });
+}
 
 /**
  * Satır sonu kodlaması ve terminal newline sayısının sahte drift üretmesini önler.
@@ -40,8 +68,10 @@ function generateLocalTypes(): string {
   const pnpmEntry = process.env.npm_execpath;
 
   assert(pnpmEntry, "Bu komut pnpm package script üzerinden çalıştırılmalıdır.");
-
-  const result = spawnSync(
+  // Type üretimi Docker bağlantısını devraldığı için local endpoint ve güvenli stack önceden doğrulanır.
+  assertLocalDockerEngine(runCommand);
+  assertLocalSupabaseStack(runCommand);
+  const result = runCommand(
     process.execPath,
     [
       pnpmEntry,
@@ -52,15 +82,9 @@ function generateLocalTypes(): string {
       "typescript",
       "--local",
       "--network-id",
-      "infravolt-local",
+      localNetworkName,
     ],
-    {
-      cwd: workspaceRoot,
-      encoding: "utf8",
-      env: process.env,
-      maxBuffer: 20 * 1024 * 1024,
-      shell: false,
-    },
+    "Yerel database type üretimi",
   );
 
   // CLI hata çıktısı bağlantı bilgisi içerebileceği için yalnız güvenli durum bilgisi raporlanır.
@@ -69,7 +93,6 @@ function generateLocalTypes(): string {
     0,
     `Yerel database type üretimi başarısız oldu (exit ${result.status ?? "unknown"}).`,
   );
-  assert.equal(result.error, undefined, "Yerel database type süreci başlatılamadı.");
   assert(result.stdout.length > 0, "Yerel database type çıktısı boş olamaz.");
 
   return normalizeGeneratedTypes(`${generatedHeader}${result.stdout}`);
@@ -90,6 +113,7 @@ function run(mode: Mode): void {
 
   const temporaryRoot = mkdtempSync(join(tmpdir(), "infravolt-db-types-"));
   const temporaryPath = join(temporaryRoot, "database.generated.ts");
+  let comparisonError: unknown;
 
   try {
     writeFileSync(temporaryPath, generatedTypes, "utf8");
@@ -106,9 +130,24 @@ function run(mode: Mode): void {
       "Generated database types drifted; run `pnpm db:types`.",
     );
     console.log("Database type drift check passed.");
-  } finally {
+  } catch (error) {
+    comparisonError = error;
+  }
+
+  try {
     // Başarısız karşılaştırmada da şema çıktısının geçici diskte kalmasını engeller.
     rmSync(temporaryRoot, { force: true, recursive: true });
+  } catch {
+    if (comparisonError !== undefined) {
+      // Cleanup sorunu asıl drift veya okuma hatasını değiştirmeden ayrıca görünür kılınır.
+      console.error("Database type geçici dizini temizlenemedi; asıl doğrulama hatası korunuyor.");
+    } else {
+      throw new Error("Database type geçici dizini temizlenemedi.");
+    }
+  }
+
+  if (comparisonError !== undefined) {
+    throw comparisonError;
   }
 }
 

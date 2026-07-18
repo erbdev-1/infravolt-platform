@@ -7,12 +7,18 @@ import {
 } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-
-type CommandResult = Readonly<{
-  status: number;
-  stdout: string;
-  stderr: string;
-}>;
+import {
+  assertLocalDockerEndpoint,
+  assertLocalDockerEngine,
+  assertLocalSupabaseStack,
+  assertOwnedNetworkMetadata,
+  assertSupabaseContainerMetadata,
+  expectedSupabaseContainers,
+  localNetworkName,
+  type CommandResult,
+  type DockerContainerInspection,
+  type DockerNetworkInspection,
+} from "./local-docker.ts";
 
 type Check = Readonly<{
   name: string;
@@ -142,35 +148,6 @@ function queryDatabase(sql: string): string {
   return result.stdout.trim();
 }
 
-/** Yayınlanan local portların tüm ağ arayüzleri yerine yalnız loopback'e bağlı olduğunu doğrular. */
-function assertLocalBindings(): void {
-  const result = runCommand(
-    "docker",
-    ["ps", "--filter", "name=_infravolt$", "--format", "{{.Names}}|{{.Ports}}"],
-    "Local container binding inspection",
-  );
-
-  assertCommandPassed(result, "Local container binding inspection");
-  const expectedContainers = [
-    "supabase_auth_infravolt",
-    "supabase_db_infravolt",
-    "supabase_inbucket_infravolt",
-    "supabase_kong_infravolt",
-    "supabase_pg_meta_infravolt",
-    "supabase_realtime_infravolt",
-    "supabase_rest_infravolt",
-    "supabase_storage_infravolt",
-    "supabase_studio_infravolt",
-  ];
-
-  for (const container of expectedContainers) {
-    assert(result.stdout.includes(`${container}|`), `Expected local container is not running: ${container}`);
-  }
-
-  assert(!/(?:unhealthy|restarting|exited)/iu.test(result.stdout));
-  assert(!/(?:0\.0\.0\.0|\[::\]|:::):?\d/u.test(result.stdout));
-}
-
 /** Zorunlu local dosyaları, migration adlarını ve remote-link yokluğunu birlikte doğrular. */
 function assertRepositoryFoundation(): void {
   const requiredPaths = [
@@ -212,12 +189,88 @@ function assertPinnedCli(): void {
   assert.equal(result.stdout.trim(), expectedCliVersion);
 }
 
-/** Local Supabase'in ihtiyaç duyduğu erişilebilir Linux container engine sınırını doğrular. */
+/** Docker seçimlerinin local endpoint ve Linux engine sınırında kaldığını doğrular. */
 function assertDockerReady(): void {
-  const result = runCommand("docker", ["info", "--format", "{{.OSType}}"], "Docker engine");
+  assertLocalDockerEngine(runCommand);
+}
 
-  assertCommandPassed(result, "Docker engine");
-  assert.equal(result.stdout.trim(), "linux");
+/** Remote endpoint, yabancı network üyesi ve sağlıksız container fixture'larının fail-safe reddedildiğini kanıtlar. */
+function assertDockerBoundaryFixtures(): void {
+  assert.doesNotThrow(() => assertLocalDockerEndpoint("npipe:////./pipe/dockerDesktopLinuxEngine"));
+  assert.doesNotThrow(() => assertLocalDockerEndpoint("unix:///var/run/docker.sock"));
+  assert.throws(() => assertLocalDockerEndpoint("tcp://docker.example.test:2376"));
+  assert.throws(() => assertLocalDockerEndpoint("ssh://docker.example.test"));
+
+  const ownedNetwork: DockerNetworkInspection = {
+    Containers: Object.fromEntries(
+      expectedSupabaseContainers.map((name, index) => [String(index), { Name: name }]),
+    ),
+    Driver: "bridge",
+    Labels: { "com.infravolt.owner": "local-supabase-foundation" },
+    Name: localNetworkName,
+    Options: {
+      "com.docker.network.bridge.host_binding_ipv4": "127.0.0.1",
+    },
+  };
+
+  assert.doesNotThrow(() => assertOwnedNetworkMetadata(ownedNetwork, true));
+  assert.throws(() =>
+    assertOwnedNetworkMetadata(
+      {
+        ...ownedNetwork,
+        Containers: {
+          ...ownedNetwork.Containers,
+          foreign: { Name: "unrelated_container" },
+        },
+      },
+      false,
+    ),
+  );
+
+  const safeContainers: readonly DockerContainerInspection[] =
+    expectedSupabaseContainers.map((name) => ({
+      Config: { Labels: { "com.supabase.cli.project": "infravolt" } },
+      Name: `/${name}`,
+      NetworkSettings: {
+        Networks: { [localNetworkName]: {} },
+        Ports: { "5432/tcp": [{ HostIp: "127.0.0.1", HostPort: "54322" }] },
+      },
+      State: { Restarting: false, Running: true, Status: "running" },
+    }));
+
+  assert.doesNotThrow(() => assertSupabaseContainerMetadata(safeContainers));
+  assert.throws(() =>
+    assertSupabaseContainerMetadata([
+      { ...safeContainers[0], State: { Restarting: true, Running: true, Status: "restarting" } },
+      ...safeContainers.slice(1),
+    ]),
+  );
+  assert.throws(() =>
+    assertSupabaseContainerMetadata([
+      {
+        ...safeContainers[0],
+        State: {
+          Health: { Status: "unhealthy" },
+          Restarting: false,
+          Running: true,
+          Status: "running",
+        },
+      },
+      ...safeContainers.slice(1),
+    ]),
+  );
+  assert.throws(() =>
+    assertSupabaseContainerMetadata([
+      {
+        ...safeContainers[0],
+        NetworkSettings: {
+          Networks: { [localNetworkName]: {} },
+          Ports: { "5432/tcp": [{ HostIp: "0.0.0.0", HostPort: "54322" }] },
+        },
+      },
+      ...safeContainers.slice(1),
+    ]),
+  );
 }
 
 /**
@@ -258,24 +311,44 @@ function assertSchemasAndGrants(): void {
  * Böylece test kalıntısı bırakmadan gelecekteki nesnelerin browser rollerine açılmadığı kanıtlanır.
  */
 function assertDefaultPrivileges(): void {
+  const roles = ["anon", "authenticated", "service_role"];
+  const schemas = ["public", "private"];
+  const tablePrivileges = ["select", "insert", "update", "delete"];
+  const sequencePrivileges = ["usage", "select", "update"];
+  const checks = schemas.flatMap((schema) => [
+    ...roles.flatMap((role) =>
+      tablePrivileges.map(
+        (privilege) =>
+          `not has_table_privilege('${role}', '${schema}._infravolt_verify_table', '${privilege}')`,
+      ),
+    ),
+    ...roles.flatMap((role) =>
+      sequencePrivileges.map(
+        (privilege) =>
+          `not has_sequence_privilege('${role}', '${schema}._infravolt_verify_sequence', '${privilege}')`,
+      ),
+    ),
+    ...roles.map(
+      (role) =>
+        `not has_function_privilege('${role}', '${schema}._infravolt_verify_function()', 'execute')`,
+    ),
+  ]);
+
   assert.equal(
     queryDatabase(`
       begin;
-      create table public._infravolt_verify_public (id integer);
-      create table private._infravolt_verify_private (id integer);
+      create table public._infravolt_verify_table (id integer);
+      create table private._infravolt_verify_table (id integer);
       create sequence public._infravolt_verify_sequence;
+      create sequence private._infravolt_verify_sequence;
       create function public._infravolt_verify_function()
         returns integer language sql as 'select 1';
-      select
-        not has_table_privilege('anon', 'public._infravolt_verify_public', 'select'),
-        not has_table_privilege('authenticated', 'public._infravolt_verify_public', 'select'),
-        not has_table_privilege('service_role', 'public._infravolt_verify_public', 'select'),
-        not has_table_privilege('anon', 'private._infravolt_verify_private', 'select'),
-        not has_sequence_privilege('anon', 'public._infravolt_verify_sequence', 'usage'),
-        not has_function_privilege('anon', 'public._infravolt_verify_function()', 'execute');
+      create function private._infravolt_verify_function()
+        returns integer language sql as 'select 1';
+      select ${checks.join(",\n        ")};
       rollback;
     `),
-    "t|t|t|t|t|t",
+    checks.map(() => "t").join("|"),
   );
 }
 
@@ -291,12 +364,28 @@ function assertTypeDrift(): void {
   assert(!/ApplicationDto|BusinessDto|hand[- ]written/iu.test(generatedTypes));
 }
 
-/** Foundation dosyalarında gerçek credential ve production endpoint biçimlerini reddeder. */
+/** Tüm tracked repository metninde gerçek credential biçimlerini, local foundation'da remote endpointleri reddeder. */
 function assertNoRepositoryCredentials(): void {
-  const paths = [
-    join(workspaceRoot, "package.json"),
-    join(workspaceRoot, "pnpm-lock.yaml"),
+  const tracked = runCommand(
+    "git",
+    ["ls-files", "-z"],
+    "Tracked repository inventory",
+  );
+
+  assertCommandPassed(tracked, "Tracked repository inventory");
+  const trackedPaths = tracked.stdout.split("\0").filter(Boolean);
+  const trackedContent = trackedPaths
+    .map((path) => readFileSync(join(workspaceRoot, path), "utf8"))
+    .join("\n");
+
+  // Yalnız gerçek değer biçimleri aranır; değişken adları ve güvenlik açıklamaları yanlış pozitif sayılmaz.
+  assert(!/eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}/u.test(trackedContent));
+  assert(!/sb_(?:secret|publishable)_[A-Za-z0-9_-]{20,}/u.test(trackedContent));
+  assert(!/postgres(?:ql)?:\/\/[^\s"']+:[^\s"']+@/iu.test(trackedContent));
+
+  const localFoundationPaths = [
     join(workspaceRoot, "scripts", "database-types.ts"),
+    join(workspaceRoot, "scripts", "local-docker.ts"),
     join(workspaceRoot, "scripts", "local-supabase.ts"),
     join(workspaceRoot, "scripts", "verify-database-foundation.ts"),
     generatedTypesPath,
@@ -305,13 +394,11 @@ function assertNoRepositoryCredentials(): void {
     join(supabaseRoot, "seed.sql"),
     ...readdirSync(migrationsRoot).map((name) => join(migrationsRoot, name)),
   ];
-  const content = paths.map((path) => readFileSync(path, "utf8")).join("\n");
+  const localFoundationContent = localFoundationPaths
+    .map((path) => readFileSync(path, "utf8"))
+    .join("\n");
 
-  // Yalnız gerçek değer biçimleri aranır; güvenlik dokümantasyonundaki değişken adları yanlış pozitif sayılmaz.
-  assert(!/eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}/u.test(content));
-  assert(!/sb_(?:secret|publishable)_[A-Za-z0-9_-]{20,}/u.test(content));
-  assert(!/postgres(?:ql)?:\/\/[^\s"']+:[^\s"']+@/iu.test(content));
-  assert(!/supabase\.co|infravolt\.co\.uk|infravolt\.com\.ua/iu.test(content));
+  assert(!/supabase\.co|infravolt\.co\.uk|infravolt\.com\.ua/iu.test(localFoundationContent));
 }
 
 /** Restart sonrasında redacted status ile temel schema sorgusunun birlikte çalıştığını doğrular. */
@@ -331,9 +418,11 @@ const checks: readonly Check[] = [
   { name: "repository foundation", run: assertRepositoryFoundation },
   { name: "exact local CLI pin", run: assertPinnedCli },
   { name: "Docker Linux engine", run: assertDockerReady },
+  { name: "Docker fail-safe boundary fixtures", run: assertDockerBoundaryFixtures },
 ];
 
 let verificationSucceeded = false;
+let verificationError: unknown;
 
 try {
   for (const check of checks) {
@@ -343,8 +432,8 @@ try {
 
   const start = runPnpm(["db:start"], "Supabase local start");
   assertCommandPassed(start, "Supabase local start");
-  assertLocalBindings();
-  console.log("PASS local stack start and loopback bindings");
+  assertLocalSupabaseStack(runCommand);
+  console.log("PASS local stack ownership, health, network and loopback bindings");
 
   // İki temiz reset, migration ve seed sonucunun önceki local duruma bağlı olmadığını kanıtlar.
   resetAndAssertSeed();
@@ -363,15 +452,29 @@ try {
   assertCommandPassed(stop, "Supabase local stop");
   const restart = runPnpm(["db:start"], "Supabase local restart");
   assertCommandPassed(restart, "Supabase local restart");
-  assertLocalBindings();
+  assertLocalSupabaseStack(runCommand);
   assertPostRestartSmoke();
   console.log("PASS stop, restart, status and post-restart smoke query");
 
   verificationSucceeded = true;
   console.log("Database foundation verification passed (18 controls).");
+} catch (error) {
+  verificationError = error;
 } finally {
   if (!verificationSucceeded) {
-    // Yarım kalan doğrulama local container bırakmasın; cleanup hatası asıl güvenli hatayı maskelemez.
-    runPnpm(["db:stop"], "Supabase failure cleanup");
+    try {
+      const cleanup = runPnpm(["db:stop"], "Supabase failure cleanup");
+
+      if (cleanup.status !== 0) {
+        console.error("Supabase failure cleanup tamamlanamadı; asıl doğrulama hatası korunuyor.");
+      }
+    } catch {
+      // Cleanup başlatılamasa bile ilk güvenlik veya doğrulama hatası değiştirilmez.
+      console.error("Supabase failure cleanup başlatılamadı; asıl doğrulama hatası korunuyor.");
+    }
   }
+}
+
+if (verificationError !== undefined) {
+  throw verificationError;
 }
