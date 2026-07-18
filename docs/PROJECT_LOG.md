@@ -290,3 +290,46 @@ FND-018 and FND-019 have implementation and verification evidence and await Foun
 ### Status and next step
 
 FND-014 through FND-016 have implementation and verification evidence and await Founder/PR review before merge. WP-06 is complete. WP-07/FND-020 is the next integration-order package and remains outside this increment.
+
+## 2026-07-18 — WP-07 feature flag foundation
+
+**Authority:** Founder-controlled Sprint 1 increment under G0-COND-001
+
+**Scope:** FND-017 only
+
+**Engineering agent:** Codex
+
+### Scope reconciliation
+
+- INF-18 uses the label WP-07 for FND-020 global safe states, while the Founder-controlled task explicitly authorises WP-07 Feature Flag Foundation for FND-017.
+- Implemented FND-017 only under that narrower task authority. FND-020 global safe states remain unimplemented and are not claimed by this entry.
+
+### Completed work
+
+- Confirmed clean `feat/feature-flags` at merged main commit `3db6b5a` before editing, with Node `v24.18.0` and pnpm `11.13.0`.
+- Added one immutable, server-owned feature registry with derived literal flag types for `ukraineMarketEnabled`, `partnerPortalEnabled` and `productComparatorEnabled`.
+- Defaulted every flag to disabled, limited each flag to its documented market/release scope and recorded product ownership plus review milestones.
+- Added server-only resolution against the complete trusted WP-06 market context, code-only failures, strict override allowlisting and immutable results.
+- Added a ten-check feature verifier covering default-off behavior, unknown/invalid inputs, redaction, market restrictions, spoof resistance and immutability.
+- Expanded the isolated boundary matrix with independent Client Component rejection fixtures for the feature registry and resolver.
+- Stored [`S1-FEATURE-001`](evidence/sprint-1/S1-FEATURE-001.md) without modifying historical Sprint 1 evidence.
+
+### Verification evidence
+
+- Node `v24.18.0`, pnpm `11.13.0` and `pnpm install --frozen-lockfile`: passed; lockfile unchanged.
+- `pnpm verify:features`: passed ten checks.
+- Existing `pnpm verify:env`, `pnpm verify:common-contracts` and `pnpm verify:market`: passed ten, six and twelve checks respectively.
+- `pnpm verify:server-boundary`: the positive Server Component fixture passed; six independent Client Component imports, including both feature modules, were rejected.
+- `pnpm lint`, `pnpm typecheck` and the production build with safe process-local UK/UA localhost origins passed.
+- Whitespace, credential, environment-file, specification-change, historical-evidence, Markdown-link and out-of-scope scans passed.
+
+### Corrections and internal review
+
+- Replaced a market-code-only input with the full trusted market context and runtime market/locale/host/URL validation.
+- Restricted override fixtures to plain or null-prototype records before validation and freezing.
+- Confirmed flags are release controls, not permissions, and cannot bypass G0 restrictions.
+- No unresolved in-scope correctness or security finding remains.
+
+### Status and next step
+
+FND-017 has implementation and verification evidence and awaits Founder/PR review before merge. Calendar stale-flag review dates remain a Product Owner release-planning decision; release milestones are recorded without inventing dates. FND-020 global safe states and all later packages remain outside this increment.
