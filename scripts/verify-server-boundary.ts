@@ -31,6 +31,8 @@ const correlationImport =
 const logContextImport =
   "../../../../src/lib/observability/log-context.ts";
 const marketServerImport = "../../../../src/modules/markets/server.ts";
+const featureRegistryImport = "../../../../src/config/features/registry.ts";
+const featureServerImport = "../../../../src/config/features/server.ts";
 
 const serverFixture: Fixture = {
   id: "server",
@@ -40,11 +42,15 @@ const serverFixture: Fixture = {
     `import { createCorrelationId } from "${correlationImport}";`,
     `import { createSafeLogContext } from "${logContextImport}";`,
     `import { createMarketResolver } from "${marketServerImport}";`,
+    `import { FEATURE_FLAG_REGISTRY } from "${featureRegistryImport}";`,
+    `import { resolveFeatureFlags } from "${featureServerImport}";`,
   ],
   statements: [
     "parseServerEnvironment({});",
     "createSafeLogContext(createCorrelationId());",
     "void createMarketResolver;",
+    "void FEATURE_FLAG_REGISTRY;",
+    "void resolveFeatureFlags;",
   ],
 };
 
@@ -74,6 +80,20 @@ const clientFixtures: readonly Fixture[] = [
     client: true,
     imports: [`import { createMarketResolver } from "${marketServerImport}";`],
     statements: ["void createMarketResolver;"],
+  },
+  {
+    id: "client-feature-registry",
+    client: true,
+    imports: [
+      `import { FEATURE_FLAG_REGISTRY } from "${featureRegistryImport}";`,
+    ],
+    statements: ["void FEATURE_FLAG_REGISTRY;"],
+  },
+  {
+    id: "client-feature-server",
+    client: true,
+    imports: [`import { resolveFeatureFlags } from "${featureServerImport}";`],
+    statements: ["void resolveFeatureFlags;"],
   },
 ];
 
