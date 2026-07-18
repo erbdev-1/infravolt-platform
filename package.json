@@ -4,6 +4,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "pnpm validate:env && next build",
+    "db:reset": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/local-supabase.ts reset",
+    "db:start": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/local-supabase.ts start",
+    "db:status": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/local-supabase.ts status",
+    "db:stop": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/local-supabase.ts stop",
+    "db:types": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/database-types.ts write",
+    "db:types:check": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/database-types.ts check",
+    "db:verify": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/verify-database-foundation.ts",
     "start": "pnpm validate:env && next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -33,6 +40,7 @@
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.5",
     "eslint-config-next": "16.2.10",
+    "supabase": "2.109.1",
     "tailwindcss": "4.3.3",
     "typescript": "5.9.3"
   }
