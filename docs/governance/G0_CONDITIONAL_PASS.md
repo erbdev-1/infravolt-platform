@@ -7,7 +7,7 @@
 | Decision date | 2026-07-15 |
 | Authority | Founder |
 | Founder / Product Owner / interim Technical Owner | Erhan Baydi |
-| Engineering agent | Codex |
+| Engineering owner | Erhan Baydı |
 | Supersession | Active until replaced by a recorded Founder decision or later gate result |
 
 ## Purpose
@@ -37,7 +37,7 @@ G0-COND-001 does not authorise:
 - Destructive database operations.
 - Purchase or final approval of production domains.
 
-Written Gersan authorisation and rights evidence must be recorded before official-authorisation claims or restricted assets are published. Engineering agents must not substitute their judgement for legal, commercial, product-owner, or rights-holder approval.
+Written Gersan authorisation and rights evidence must be recorded before official-authorisation claims or restricted assets are published. Engineering owners and implementers must not substitute their judgement for legal, commercial, product-owner, or rights-holder approval.
 
 ## Binding conditions
 

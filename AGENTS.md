@@ -20,7 +20,17 @@ Specifications `00` through `18` are authoritative project documentation. Do not
 - Do not use production credentials, production customer data, or destructive database operations.
 - Do not add secrets, tokens, passwords, private keys, private contracts, or real credentials to files, logs, fixtures, commits, or messages.
 - Do not publish or imply official Gersan authorisation, or use restricted claims, certificates, product documents, images, logos, or other licensed assets, until written authorisation and rights evidence are recorded.
-- Codex and other engineering agents implement approved engineering work; they are not legal or commercial decision owners.
+- Engineering implementation remains accountable to the recorded engineering owner; legal and commercial decisions remain with their authorised owners.
+
+## Repository authorship and ownership
+
+- Persistent repository content describes work, decisions, verification, and accountable owners.
+- Tool or model assistance is not recorded in source, comments, commits, pull-request text, or documentation.
+- Use `Engineering owner: Erhan Baydı` for engineering ownership metadata.
+- Use `Review authority: Founder` unless an existing Founder authority or review field already records the same responsibility.
+- Do not add generated-by, assisted-by, or co-author trailers or metadata.
+- Leave Git author configuration unchanged.
+- Do not rewrite history to apply this policy retrospectively.
 
 ## Verification
 

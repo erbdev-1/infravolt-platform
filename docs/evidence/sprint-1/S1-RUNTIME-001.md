@@ -6,7 +6,7 @@
 | Work package | WP-02 — Runtime and Package Manager |
 | Backlog tasks | FND-003, FND-004 |
 | Authority | Founder decision under G0-COND-001 |
-| Engineering owner | Codex |
+| Engineering owner | Erhan Baydı |
 | Reviewer | Founder — pending review |
 | Status | Complete — pending Founder review |
 
@@ -33,7 +33,7 @@
 
 ## Selected side-by-side method
 
-`fnm` is used because its user-scoped storage preserves the existing Program Files Node installation and supports the repository `.node-version` pin. PowerShell persistence was not configured and no PowerShell profile was edited; each agent verification shell explicitly evaluated `fnm env`. The user later configured and verified persistent Git Bash activation as recorded below.
+`fnm` is used because its user-scoped storage preserves the existing Program Files Node installation and supports the repository `.node-version` pin. PowerShell persistence was not configured and no PowerShell profile was edited; each verification shell explicitly evaluated `fnm env`. The user later configured and verified persistent Git Bash activation as recorded below.
 
 ## Verified runtime
 

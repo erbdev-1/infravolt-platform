@@ -6,7 +6,7 @@
 | Work package | Founder-authorised WP-07 — Feature Flag Foundation |
 | Backlog task | FND-017 — Create feature-flag contract |
 | Authority | Founder-controlled Sprint 1 increment under G0-COND-001 |
-| Engineering owner | Codex |
+| Engineering owner | Erhan Baydı |
 | Reviewer | Founder — pending review |
 | Status | Complete — pending Founder review |
 

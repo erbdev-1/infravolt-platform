@@ -6,7 +6,7 @@
 | Work package | WP-06 — Trusted Host, Market and Locale |
 | Backlog tasks | FND-014, FND-015 and FND-016 |
 | Authority | Founder-authorised Sprint 1 continuation under G0-COND-001 |
-| Engineering owner | Codex |
+| Engineering owner | Erhan Baydı |
 | Reviewer | Founder — pending review |
 | Status | Complete — pending Founder review |
 
