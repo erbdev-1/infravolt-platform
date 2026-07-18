@@ -12,6 +12,7 @@
     "verify:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --conditions=react-server --experimental-strip-types scripts/verify-environment-contract.ts",
     "verify:features": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --conditions=react-server --experimental-strip-types scripts/verify-feature-flags.ts",
     "verify:market": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --conditions=react-server --experimental-strip-types scripts/verify-market-context.ts",
+    "verify:safe-states": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/verify-safe-states.ts",
     "verify:server-boundary": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/verify-server-boundary.ts"
   },
   "engines": {
