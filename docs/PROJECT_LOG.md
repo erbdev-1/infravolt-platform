@@ -333,3 +333,46 @@ FND-014 through FND-016 have implementation and verification evidence and await 
 ### Status and next step
 
 FND-017 has implementation and verification evidence and awaits Founder/PR review before merge. Calendar stale-flag review dates remain a Product Owner release-planning decision; release milestones are recorded without inventing dates. FND-020 global safe states and all later packages remain outside this increment.
+
+## 2026-07-18 — WP-07 global safe states
+
+**Authority:** Founder-authorised Sprint 1 continuation under G0-COND-001
+
+**Scope:** FND-020 only
+
+**Engineering owner:** Erhan Baydı
+
+### Naming clarification
+
+- Applied the binding INF-18 mapping of WP-07 to Global Safe States/FND-020.
+- Preserved the completed FND-017 feature-flag implementation and its historical local WP-07 evidence without modification.
+
+### Completed work
+
+- Added minimal root `loading`, `not-found`, route-error and global-error App Router states without design-system or branded product work.
+- Kept loading and not-found server-rendered; limited Client Components to the two framework-required error boundaries.
+- Added one semantic primary heading per state, a polite loading status, a safe relative homepage recovery link and keyboard-operable `type="button"` retries.
+- Prevented message, stack, cause, digest, serialized exceptions and raw error logging from entering user-facing output.
+- Preserved the trusted market/locale root layout and the proxy's redacted HTTP 404/no-store unknown-host behavior.
+- Omitted a correlation ID because no request-linked value reaches the client error-boundary props and a random browser value would not map to server logs.
+- Added a six-check focused verifier using actual route modules, AST callback checks and an isolated server-condition proxy/market regression.
+- Stored [`S1-ARCH-004`](evidence/sprint-1/S1-ARCH-004.md) as the next immutable supplement in the `S1-ARCH` evidence family.
+
+### Verification evidence
+
+- Node `v24.18.0`, pnpm `11.13.0` and `pnpm install --frozen-lockfile`: passed; lockfile unchanged.
+- `pnpm verify:safe-states`: passed six checks for semantic loading/not-found states, typed Client Component boundaries, complete document ownership, bounded retry, redaction and market/host regressions.
+- Existing feature, environment, common-contract, market and server-boundary regression suites passed.
+- `pnpm lint`, `pnpm typecheck` and the production build with safe process-local UK/UA origins passed.
+- Whitespace, credential, environment-file, specification, historical-evidence, lockfile, raw-error, Markdown-link and out-of-scope scans passed.
+
+### Corrections and internal review
+
+- Separated UI rendering from the `react-server` child verification after React 19 export conditions rejected server rendering in that condition.
+- Replaced the plain root anchor with Next.js `Link`, hardened runtime type guards and made the Link assertion independent of attribute order.
+- Confirmed default focus behavior remains available, no autofocus or animation was introduced and no raw exception data is consumed.
+- No unresolved in-scope correctness, accessibility or security finding remains.
+
+### Status and next step
+
+FND-020 has implementation and verification evidence and awaits Founder/PR review before merge. WP-08 and all later packages remain outside this increment.
