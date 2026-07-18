@@ -26,6 +26,7 @@ pnpm db:start
 pnpm db:reset
 pnpm db:types
 pnpm db:types:check
+pnpm verify:database-boundary
 pnpm db:verify
 pnpm db:stop
 ```
@@ -36,6 +37,17 @@ The seed currently executes one constant SQL probe because no WP-11 business tab
 
 CLI status output can contain local development credentials. Do not copy it into repository files, logs, screenshots or review reports.
 
-Lifecycle and type-generation commands first resolve the effective Docker endpoint. Local named pipes and Unix sockets are allowed; TCP and SSH endpoints are rejected before Docker or Supabase can act. This guard applies even when `DOCKER_HOST`, `DOCKER_CONTEXT` or the persisted current context changes Docker's target.
+Lifecycle and type-generation commands resolve the effective Docker endpoint once, normalise it and pin it into a dedicated immutable child environment as `DOCKER_HOST`. `DOCKER_CONTEXT` and Docker TLS-selection variables are removed from that environment, so a later parent-environment or active-context change cannot redirect Docker or Supabase after validation.
 
-`pnpm db:start` creates or verifies the project-owned `infravolt-local` Docker bridge with host bindings restricted to `127.0.0.1`, then passes it to the CLI through `--network-id`. An existing network must carry the InfraVolt ownership label and may contain only the expected project containers. Start, reset, status and type-generation readiness checks inspect the real container project labels, exact network membership, published host bindings, running state and configured health checks. Startup and reset allow at most 30 one-second health checks for normal container convergence; a persistent or unsafe state still fails closed. The wrapper suppresses credential-bearing start and status output.
+The supported local endpoint allowlist is intentionally narrow:
+
+- Windows named pipes `npipe:////./pipe/dockerDesktopLinuxEngine` and `npipe:////./pipe/docker_engine`;
+- system Unix sockets `unix:///var/run/docker.sock` and `unix:///run/docker.sock`;
+- rootless Unix sockets `unix:///run/user/<numeric-uid>/docker.sock`;
+- Docker Desktop user sockets `unix:///home/<user>/.docker/{run,desktop}/docker.sock` and `unix:///Users/<user>/.docker/{run,desktop}/docker.sock`.
+
+Arbitrary `/tmp` or proxy sockets, traversal-like paths, relative paths, TCP and SSH endpoints fail before any Docker engine command or Supabase lifecycle operation. `pnpm verify:database-boundary` exercises the endpoint, environment-pinning, health, deadline and cleanup policies without touching Docker.
+
+`pnpm db:start` creates or verifies the project-owned `infravolt-local` Docker bridge with host bindings restricted to `127.0.0.1`, then passes it to the CLI through `--network-id`. An existing network must carry the InfraVolt ownership label and may contain only the expected project containers. Start, reset, status and type-generation readiness checks inspect the real container project labels, exact network membership, published host bindings, running state and configured health checks.
+
+The readiness deadline is 30 monotonic seconds. Every Docker child receives the smaller of its own 10-second ceiling and the remaining overall budget, and polling sleep cannot exceed that budget. Only a missing expected container, a created/restarting container or a `starting` health check is retried. Unhealthy or malformed state, missing required health metadata, foreign ownership/network membership, a name collision, or a non-loopback binding fails immediately. Only the REST container may omit health metadata under its explicit image policy. Start/reset cleanup keeps the original lifecycle failure primary and attaches any cleanup failure as secondary diagnostic context. Credential-bearing child output remains suppressed.

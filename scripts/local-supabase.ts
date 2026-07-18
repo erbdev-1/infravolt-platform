@@ -1,160 +1,261 @@
 import { strict as assert } from "node:assert";
-import { spawnSync } from "node:child_process";
 import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import {
-  assertLocalDockerEngine,
+  assertCommandPassed,
   assertLocalSupabaseStack,
+  type CommandEnvironment,
+  createCommandRunner,
   ensureOwnedLoopbackNetwork,
   localNetworkName,
   type CommandResult,
+  type CommandRunner,
+  type MonotonicClock,
+  type ValidatedDockerTarget,
+  validateLocalDockerTarget,
   waitForLocalSupabaseStack,
 } from "./local-docker.ts";
 
-type Mode = "reset" | "start" | "status" | "stop";
+export type LocalSupabaseMode = "reset" | "start" | "status" | "stop";
+export type LifecycleOperation = "reset" | "start";
+
+type SafeLogger = Readonly<{
+  error: (message: string) => void;
+  log: (message: string) => void;
+}>;
+
+export type LocalSupabaseDependencies = Readonly<{
+  clock?: MonotonicClock;
+  environment?: CommandEnvironment;
+  logger?: SafeLogger;
+  runCommand?: CommandRunner;
+}>;
+
+type LifecycleError = Error & { cleanupFailure?: Error };
 
 const workspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const lifecycleTimeoutMilliseconds = 180_000;
+const statusTimeoutMilliseconds = 30_000;
+const stopTimeoutMilliseconds = 60_000;
 
-/**
- * Alt süreç çıktısını bellekte tutar; local CLI anahtarlarını terminale taşımamak için stdio miras alınmaz.
- */
-function runCommand(
-  executable: string,
+function runSupabase(
+  runCommand: CommandRunner,
+  target: ValidatedDockerTarget,
   args: readonly string[],
   label: string,
+  timeoutMilliseconds: number,
 ): CommandResult {
-  const result = spawnSync(executable, args, {
-    cwd: workspaceRoot,
-    encoding: "utf8",
-    env: process.env,
-    maxBuffer: 40 * 1024 * 1024,
-    shell: false,
-  });
-
-  assert.equal(result.error, undefined, `${label} süreci başlatılamadı.`);
-
-  return Object.freeze({
-    status: result.status ?? -1,
-    stderr: result.stderr,
-    stdout: result.stdout,
-  });
-}
-
-/**
- * Proje-local CLI kullanımını garanti eder ve global executable çözümlemesini devre dışı bırakır.
- */
-function runSupabase(args: readonly string[]): CommandResult {
-  const pnpmEntry = process.env.npm_execpath;
+  const pnpmEntry = target.environment.npm_execpath;
 
   assert(pnpmEntry, "Bu komut pnpm package script üzerinden çalıştırılmalıdır.");
 
   return runCommand(
     process.execPath,
     [pnpmEntry, "exec", "supabase", ...args],
-    "Supabase CLI",
+    label,
+    {
+      environment: target.environment,
+      timeoutMilliseconds,
+    },
   );
 }
 
-function stopAfterUnsafeLifecycle(error: unknown): never {
-  try {
-    const cleanup = runSupabase(["stop"]);
-
-    if (cleanup.status !== 0) {
-      console.error("Güvensiz local startup cleanup tamamlanamadı; asıl sınır hatası korunuyor.");
-    }
-  } catch {
-    // Cleanup başlatılamasa bile ilk network, binding veya health hatası değiştirilmez.
-    console.error("Güvensiz local startup cleanup başlatılamadı; asıl sınır hatası korunuyor.");
-  }
-
-  throw error;
+function attachCleanupFailure(primary: Error, cleanupFailure: Error): void {
+  // Cleanup tanısı ayrı tutulur; böylece operasyonun ilk güvenlik hatası stack ve kimliğini korur.
+  Object.defineProperty(primary, "cleanupFailure", {
+    configurable: true,
+    enumerable: false,
+    value: cleanupFailure,
+    writable: false,
+  });
 }
 
-/**
- * Local stack lifecycle komutlarını güvenli ağ ve redacted çıktı sözleşmesi altında yürütür.
- * Bu wrapper development ve ileride CI tarafından aynı davranışla çağrılabilir.
- */
-function run(mode: Mode): void {
-  // `--local` cloud projesini engeller; bu ek sınır Docker daemon'un da bu makinede olduğunu kanıtlar.
-  assertLocalDockerEngine(runCommand);
+export function getLifecycleCleanupFailure(error: Error): Error | undefined {
+  return (error as LifecycleError).cleanupFailure;
+}
+
+export function throwAfterLifecycleCleanup(
+  operation: LifecycleOperation,
+  originalError: unknown,
+  cleanup: () => CommandResult,
+  logger: Pick<SafeLogger, "error"> = console,
+): never {
+  const primaryError =
+    originalError instanceof Error
+      ? originalError
+      : new Error(`Supabase local ${operation} lifecycle başarısız oldu.`);
+  let cleanupFailure: Error | undefined;
+
+  try {
+    const result = cleanup();
+
+    if (result.timedOut) {
+      cleanupFailure = new Error(
+        `Supabase local ${operation} lifecycle cleanup zaman aşımına uğradı.`,
+      );
+    } else if (result.launchFailed) {
+      cleanupFailure = new Error(
+        `Supabase local ${operation} lifecycle cleanup başlatılamadı.`,
+      );
+    } else if (result.status !== 0) {
+      cleanupFailure = new Error(
+        `Supabase local ${operation} lifecycle cleanup başarısız oldu (exit ${result.status}).`,
+      );
+    }
+  } catch {
+    cleanupFailure = new Error(
+      `Supabase local ${operation} lifecycle cleanup başlatılamadı.`,
+    );
+  }
+
+  if (cleanupFailure) {
+    attachCleanupFailure(primaryError, cleanupFailure);
+    // Child çıktısı yazdırılmaz; yalnız operasyon etiketiyle güvenli ikincil tanı sağlanır.
+    logger.error(cleanupFailure.message);
+  }
+
+  throw primaryError;
+}
+
+function stopAfterUnsafeLifecycle(
+  operation: LifecycleOperation,
+  error: unknown,
+  runCommand: CommandRunner,
+  target: ValidatedDockerTarget,
+  logger: SafeLogger,
+): never {
+  return throwAfterLifecycleCleanup(
+    operation,
+    error,
+    () =>
+      runSupabase(
+        runCommand,
+        target,
+        ["stop"],
+        `Supabase local ${operation} cleanup`,
+        stopTimeoutMilliseconds,
+      ),
+    logger,
+  );
+}
+
+export function runLocalSupabase(
+  mode: LocalSupabaseMode,
+  dependencies: LocalSupabaseDependencies = {},
+): void {
+  const runCommand =
+    dependencies.runCommand ?? createCommandRunner(workspaceRoot);
+  const parentEnvironment = dependencies.environment ?? process.env;
+  const logger = dependencies.logger ?? console;
+  const target = validateLocalDockerTarget(runCommand, parentEnvironment);
+  const readinessOptions = dependencies.clock
+    ? { clock: dependencies.clock }
+    : undefined;
 
   if (mode === "reset") {
-    ensureOwnedLoopbackNetwork(runCommand);
-    waitForLocalSupabaseStack(runCommand);
-    const result = runSupabase([
-      "db",
-      "reset",
-      "--local",
-      "--network-id",
-      localNetworkName,
-    ]);
+    ensureOwnedLoopbackNetwork(runCommand, target);
+    waitForLocalSupabaseStack(runCommand, target, readinessOptions);
 
-    assert.equal(
-      result.status,
-      0,
-      `Supabase local reset failed (exit ${result.status}).`,
-    );
-    // Exit code tek başına seed aşamasının gerçekten çalıştığını kanıtlamadığı için güvenli sabit çıktı aranır.
-    assert.match(
-      `${result.stdout}\n${result.stderr}`,
-      /Seeding data from supabase[/\\]seed\.sql/u,
-    );
     try {
-      waitForLocalSupabaseStack(runCommand);
+      const result = runSupabase(
+        runCommand,
+        target,
+        ["db", "reset", "--local", "--network-id", localNetworkName],
+        "Supabase local reset",
+        lifecycleTimeoutMilliseconds,
+      );
+
+      assertCommandPassed(result, "Supabase local reset");
+      // Exit code seed aşamasının gerçekten çalıştığını kanıtlamadığı için güvenli sabit çıktı aranır.
+      assert.match(
+        `${result.stdout}\n${result.stderr}`,
+        /Seeding data from supabase[/\\]seed\.sql/u,
+      );
+      waitForLocalSupabaseStack(runCommand, target, readinessOptions);
     } catch (error) {
-      stopAfterUnsafeLifecycle(error);
+      stopAfterUnsafeLifecycle(
+        "reset",
+        error,
+        runCommand,
+        target,
+        logger,
+      );
     }
-    console.log("Supabase local database reset completed with migrations and seed.");
+
+    logger.log("Supabase local database reset completed with migrations and seed.");
     return;
   }
 
   if (mode === "start") {
-    ensureOwnedLoopbackNetwork(runCommand);
-    const result = runSupabase(["start", "--network-id", localNetworkName]);
+    ensureOwnedLoopbackNetwork(runCommand, target);
 
-    // Başlangıç çıktısındaki local development keys gereksiz terminal ve log sızıntısına karşı bastırılır.
-    assert.equal(
-      result.status,
-      0,
-      `Supabase local start failed (exit ${result.status}).`,
-    );
     try {
-      waitForLocalSupabaseStack(runCommand);
+      const result = runSupabase(
+        runCommand,
+        target,
+        ["start", "--network-id", localNetworkName],
+        "Supabase local start",
+        lifecycleTimeoutMilliseconds,
+      );
+
+      // Başlangıç çıktısındaki local development keys terminal ve log sızıntısına karşı bastırılır.
+      assertCommandPassed(result, "Supabase local start");
+      waitForLocalSupabaseStack(runCommand, target, readinessOptions);
     } catch (error) {
-      stopAfterUnsafeLifecycle(error);
+      stopAfterUnsafeLifecycle(
+        "start",
+        error,
+        runCommand,
+        target,
+        logger,
+      );
     }
-    console.log("Supabase local stack started on loopback-only bindings.");
+
+    logger.log("Supabase local stack started on loopback-only bindings.");
     return;
   }
 
   if (mode === "status") {
-    const result = runSupabase(["status", "--output", "json"]);
+    const result = runSupabase(
+      runCommand,
+      target,
+      ["status", "--output", "json"],
+      "Supabase local status",
+      statusTimeoutMilliseconds,
+    );
 
     // JSON durum çıktısı local anahtarlar içerdiği için yalnız readiness sonucu yayınlanır.
-    assert.equal(
-      result.status,
-      0,
-      `Supabase local status failed (exit ${result.status}).`,
-    );
-    assertLocalSupabaseStack(runCommand);
-    console.log("Supabase local stack is ready; sensitive status values suppressed.");
+    assertCommandPassed(result, "Supabase local status");
+    assertLocalSupabaseStack(runCommand, target);
+    logger.log("Supabase local stack is ready; sensitive status values suppressed.");
     return;
   }
 
-  const result = runSupabase(["stop"]);
-
-  assert.equal(
-    result.status,
-    0,
-    `Supabase local stop failed (exit ${result.status}).`,
+  const result = runSupabase(
+    runCommand,
+    target,
+    ["stop"],
+    "Supabase local stop",
+    stopTimeoutMilliseconds,
   );
-  console.log("Supabase local stack stopped.");
+
+  assertCommandPassed(result, "Supabase local stop");
+  logger.log("Supabase local stack stopped.");
 }
 
-const mode = process.argv[2];
+const entryPoint = process.argv[1]
+  ? pathToFileURL(resolve(process.argv[1])).href
+  : undefined;
 
-assert(
-  mode === "reset" || mode === "start" || mode === "status" || mode === "stop",
-  "Mode must be `reset`, `start`, `status` or `stop`.",
-);
-run(mode);
+if (entryPoint === import.meta.url) {
+  const mode = process.argv[2];
+
+  assert(
+    mode === "reset" ||
+      mode === "start" ||
+      mode === "status" ||
+      mode === "stop",
+    "Mode must be `reset`, `start`, `status` or `stop`.",
+  );
+  runLocalSupabase(mode);
+}

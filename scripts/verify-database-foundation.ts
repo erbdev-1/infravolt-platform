@@ -1,5 +1,4 @@
 import { strict as assert } from "node:assert";
-import { spawnSync } from "node:child_process";
 import {
   existsSync,
   readFileSync,
@@ -8,16 +7,12 @@ import {
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  assertLocalDockerEndpoint,
-  assertLocalDockerEngine,
+  assertCommandPassed,
   assertLocalSupabaseStack,
-  assertOwnedNetworkMetadata,
-  assertSupabaseContainerMetadata,
-  expectedSupabaseContainers,
-  localNetworkName,
+  createCommandRunner,
   type CommandResult,
-  type DockerContainerInspection,
-  type DockerNetworkInspection,
+  type ValidatedDockerTarget,
+  validateLocalDockerTarget,
 } from "./local-docker.ts";
 
 type Check = Readonly<{
@@ -37,54 +32,48 @@ const generatedTypesPath = join(
 const expectedCliVersion = "2.109.1";
 // UTC timestamp ve snake_case concern dışındaki adlar migration sırasını belirsizleştirebilir.
 const migrationNamePattern = /^\d{14}_[a-z0-9]+(?:_[a-z0-9]+)*\.sql$/u;
+const databaseRoles = Object.freeze(["anon", "authenticated", "service_role"]);
+const applicationSchemas = Object.freeze(["public", "private"]);
+const schemaPrivileges = Object.freeze(["usage", "create"]);
+const tablePrivileges = Object.freeze([
+  "select",
+  "insert",
+  "update",
+  "delete",
+  "truncate",
+  "references",
+  "trigger",
+]);
+const sequencePrivileges = Object.freeze(["usage", "select", "update"]);
+const functionPrivileges = Object.freeze(["execute"]);
+const defaultPrivilegeOwner = "postgres";
+const runCommand = createCommandRunner(workspaceRoot);
+let dockerTarget: ValidatedDockerTarget | undefined;
 
-/**
- * Alt süreci shell açmadan çalıştırır ve çıktıyı yalnız assertion amacıyla bellekte tutar.
- * Çağıran kod güvenli bir desen doğrulamadan stdout/stderr değerlerini yazdırmamalıdır.
- */
-function runCommand(
-  executable: string,
-  args: readonly string[],
-  label: string,
-): CommandResult {
-  const result = spawnSync(executable, args, {
-    cwd: workspaceRoot,
-    encoding: "utf8",
-    env: process.env,
-    maxBuffer: 40 * 1024 * 1024,
-    shell: false,
-  });
-
-  assert.equal(result.error, undefined, `${label} süreci başlatılamadı.`);
-
-  return Object.freeze({
-    status: result.status ?? -1,
-    stdout: result.stdout,
-    stderr: result.stderr,
-  });
+/** Endpoint doğrulaması tamamlanmadan hiçbir lifecycle veya database child komutunun çalışmasını engeller. */
+function requireDockerTarget(): ValidatedDockerTarget {
+  assert(dockerTarget, "Docker target must be validated before use.");
+  return dockerTarget;
 }
 
 /**
  * Repository'nin pnpm çalıştırıcısını kullanarak komut çağırır.
  * Bu yol global CLI veya Windows'a özgü PATH varsayımı oluşmasını önler.
  */
-function runPnpm(args: readonly string[], label: string): CommandResult {
-  const pnpmEntry = process.env.npm_execpath;
+function runPnpm(
+  args: readonly string[],
+  label: string,
+  timeoutMilliseconds = 180_000,
+): CommandResult {
+  const target = requireDockerTarget();
+  const pnpmEntry = target.environment.npm_execpath;
 
   assert(pnpmEntry, "Bu doğrulama pnpm package script üzerinden çalıştırılmalıdır.");
 
-  return runCommand(process.execPath, [pnpmEntry, ...args], label);
-}
-
-/**
- * CLI hata çıktısında yerel anahtar veya bağlantı metni bulunabileceği için başarısızlığı yalnız etiket ve exit code ile raporlar.
- */
-function assertCommandPassed(result: CommandResult, label: string): void {
-  assert.equal(
-    result.status,
-    0,
-    `${label} başarısız oldu (exit ${result.status}).`,
-  );
+  return runCommand(process.execPath, [pnpmEntry, ...args], label, {
+    environment: target.environment,
+    timeoutMilliseconds,
+  });
 }
 
 /** Proje-local Supabase binary'sini pnpm üzerinden ve global CLI'a düşmeden çağırır. */
@@ -107,6 +96,10 @@ function findDatabaseContainer(): string {
       "{{.ID}}",
     ],
     "Database container discovery",
+    {
+      environment: requireDockerTarget().environment,
+      timeoutMilliseconds: 10_000,
+    },
   );
 
   assertCommandPassed(result, "Database container discovery");
@@ -142,6 +135,10 @@ function queryDatabase(sql: string): string {
       sql,
     ],
     "Local database query",
+    {
+      environment: requireDockerTarget().environment,
+      timeoutMilliseconds: 30_000,
+    },
   );
 
   assertCommandPassed(result, "Local database query");
@@ -191,86 +188,7 @@ function assertPinnedCli(): void {
 
 /** Docker seçimlerinin local endpoint ve Linux engine sınırında kaldığını doğrular. */
 function assertDockerReady(): void {
-  assertLocalDockerEngine(runCommand);
-}
-
-/** Remote endpoint, yabancı network üyesi ve sağlıksız container fixture'larının fail-safe reddedildiğini kanıtlar. */
-function assertDockerBoundaryFixtures(): void {
-  assert.doesNotThrow(() => assertLocalDockerEndpoint("npipe:////./pipe/dockerDesktopLinuxEngine"));
-  assert.doesNotThrow(() => assertLocalDockerEndpoint("unix:///var/run/docker.sock"));
-  assert.throws(() => assertLocalDockerEndpoint("tcp://docker.example.test:2376"));
-  assert.throws(() => assertLocalDockerEndpoint("ssh://docker.example.test"));
-
-  const ownedNetwork: DockerNetworkInspection = {
-    Containers: Object.fromEntries(
-      expectedSupabaseContainers.map((name, index) => [String(index), { Name: name }]),
-    ),
-    Driver: "bridge",
-    Labels: { "com.infravolt.owner": "local-supabase-foundation" },
-    Name: localNetworkName,
-    Options: {
-      "com.docker.network.bridge.host_binding_ipv4": "127.0.0.1",
-    },
-  };
-
-  assert.doesNotThrow(() => assertOwnedNetworkMetadata(ownedNetwork, true));
-  assert.throws(() =>
-    assertOwnedNetworkMetadata(
-      {
-        ...ownedNetwork,
-        Containers: {
-          ...ownedNetwork.Containers,
-          foreign: { Name: "unrelated_container" },
-        },
-      },
-      false,
-    ),
-  );
-
-  const safeContainers: readonly DockerContainerInspection[] =
-    expectedSupabaseContainers.map((name) => ({
-      Config: { Labels: { "com.supabase.cli.project": "infravolt" } },
-      Name: `/${name}`,
-      NetworkSettings: {
-        Networks: { [localNetworkName]: {} },
-        Ports: { "5432/tcp": [{ HostIp: "127.0.0.1", HostPort: "54322" }] },
-      },
-      State: { Restarting: false, Running: true, Status: "running" },
-    }));
-
-  assert.doesNotThrow(() => assertSupabaseContainerMetadata(safeContainers));
-  assert.throws(() =>
-    assertSupabaseContainerMetadata([
-      { ...safeContainers[0], State: { Restarting: true, Running: true, Status: "restarting" } },
-      ...safeContainers.slice(1),
-    ]),
-  );
-  assert.throws(() =>
-    assertSupabaseContainerMetadata([
-      {
-        ...safeContainers[0],
-        State: {
-          Health: { Status: "unhealthy" },
-          Restarting: false,
-          Running: true,
-          Status: "running",
-        },
-      },
-      ...safeContainers.slice(1),
-    ]),
-  );
-  assert.throws(() =>
-    assertSupabaseContainerMetadata([
-      {
-        ...safeContainers[0],
-        NetworkSettings: {
-          Networks: { [localNetworkName]: {} },
-          Ports: { "5432/tcp": [{ HostIp: "0.0.0.0", HostPort: "54322" }] },
-        },
-      },
-      ...safeContainers.slice(1),
-    ]),
-  );
+  dockerTarget = validateLocalDockerTarget(runCommand, process.env);
 }
 
 /**
@@ -288,21 +206,55 @@ function resetAndAssertSeed(): void {
 
 /** INF-06 public/private sınırını effective PostgreSQL privileges üzerinden ölçer. */
 function assertSchemasAndGrants(): void {
+  const checks = applicationSchemas.flatMap((schema) => [
+    `to_regnamespace('${schema}') is not null`,
+    ...databaseRoles.flatMap((role) =>
+      schemaPrivileges.map((privilege) => {
+        const expected =
+          privilege === "usage" &&
+          (schema === "public" || role === "service_role");
+
+        return `${expected ? "" : "not "}has_schema_privilege('${role}', '${schema}', '${privilege}')`;
+      }),
+    ),
+  ]);
+
   assert.equal(
     queryDatabase(`
-      select
-        to_regnamespace('public') is not null,
-        to_regnamespace('private') is not null,
-        has_schema_privilege('anon', 'public', 'usage'),
-        has_schema_privilege('authenticated', 'public', 'usage'),
-        not has_schema_privilege('anon', 'public', 'create'),
-        not has_schema_privilege('authenticated', 'public', 'create'),
-        not has_schema_privilege('anon', 'private', 'usage'),
-        not has_schema_privilege('authenticated', 'private', 'usage'),
-        has_schema_privilege('service_role', 'private', 'usage'),
-        not has_schema_privilege('service_role', 'private', 'create');
+      select ${checks.join(",\n        ")};
     `),
-    "t|t|t|t|t|t|t|t|t|t",
+    checks.map(() => "t").join("|"),
+  );
+}
+
+function assertPrivilegeMatrixCompleteness(): void {
+  // Sabit beklenen kümeler, yeni bir düzenlemenin privilege boyutunu sessizce daraltmasını engeller.
+  assert.deepEqual(databaseRoles, ["anon", "authenticated", "service_role"]);
+  assert.deepEqual(applicationSchemas, ["public", "private"]);
+  assert.deepEqual(schemaPrivileges, ["usage", "create"]);
+  assert.deepEqual(tablePrivileges, [
+    "select",
+    "insert",
+    "update",
+    "delete",
+    "truncate",
+    "references",
+    "trigger",
+  ]);
+  assert.deepEqual(sequencePrivileges, ["usage", "select", "update"]);
+  assert.deepEqual(functionPrivileges, ["execute"]);
+  assert.equal(defaultPrivilegeOwner, "postgres");
+  assert.equal(
+    applicationSchemas.length * databaseRoles.length * schemaPrivileges.length,
+    12,
+  );
+  assert.equal(
+    applicationSchemas.length *
+      databaseRoles.length *
+      (tablePrivileges.length +
+        sequencePrivileges.length +
+        functionPrivileges.length),
+    66,
   );
 }
 
@@ -311,28 +263,37 @@ function assertSchemasAndGrants(): void {
  * Böylece test kalıntısı bırakmadan gelecekteki nesnelerin browser rollerine açılmadığı kanıtlanır.
  */
 function assertDefaultPrivileges(): void {
-  const roles = ["anon", "authenticated", "service_role"];
-  const schemas = ["public", "private"];
-  const tablePrivileges = ["select", "insert", "update", "delete"];
-  const sequencePrivileges = ["usage", "select", "update"];
-  const checks = schemas.flatMap((schema) => [
-    ...roles.flatMap((role) =>
+  assertPrivilegeMatrixCompleteness();
+  const privilegeChecks = applicationSchemas.flatMap((schema) => [
+    ...databaseRoles.flatMap((role) =>
       tablePrivileges.map(
         (privilege) =>
           `not has_table_privilege('${role}', '${schema}._infravolt_verify_table', '${privilege}')`,
       ),
     ),
-    ...roles.flatMap((role) =>
+    ...databaseRoles.flatMap((role) =>
       sequencePrivileges.map(
         (privilege) =>
           `not has_sequence_privilege('${role}', '${schema}._infravolt_verify_sequence', '${privilege}')`,
       ),
     ),
-    ...roles.map(
-      (role) =>
-        `not has_function_privilege('${role}', '${schema}._infravolt_verify_function()', 'execute')`,
+    ...databaseRoles.flatMap((role) =>
+      functionPrivileges.map(
+        (privilege) =>
+          `not has_function_privilege('${role}', '${schema}._infravolt_verify_function()', '${privilege}')`,
+      ),
     ),
   ]);
+  const ownerChecks = applicationSchemas.flatMap((schema) => [
+    `(select pg_get_userbyid(c.relowner) from pg_class c where c.oid = '${schema}._infravolt_verify_table'::regclass) = '${defaultPrivilegeOwner}'`,
+    `(select pg_get_userbyid(c.relowner) from pg_class c where c.oid = '${schema}._infravolt_verify_sequence'::regclass) = '${defaultPrivilegeOwner}'`,
+    `(select pg_get_userbyid(p.proowner) from pg_proc p where p.oid = '${schema}._infravolt_verify_function()'::regprocedure) = '${defaultPrivilegeOwner}'`,
+  ]);
+  const checks = [
+    `current_user = '${defaultPrivilegeOwner}'`,
+    ...ownerChecks,
+    ...privilegeChecks,
+  ];
 
   assert.equal(
     queryDatabase(`
@@ -370,6 +331,10 @@ function assertNoRepositoryCredentials(): void {
     "git",
     ["ls-files", "-z"],
     "Tracked repository inventory",
+    {
+      environment: requireDockerTarget().environment,
+      timeoutMilliseconds: 10_000,
+    },
   );
 
   assertCommandPassed(tracked, "Tracked repository inventory");
@@ -415,10 +380,9 @@ function assertPostRestartSmoke(): void {
 }
 
 const checks: readonly Check[] = [
+  { name: "Docker Linux engine and pinned endpoint", run: assertDockerReady },
   { name: "repository foundation", run: assertRepositoryFoundation },
   { name: "exact local CLI pin", run: assertPinnedCli },
-  { name: "Docker Linux engine", run: assertDockerReady },
-  { name: "Docker fail-safe boundary fixtures", run: assertDockerBoundaryFixtures },
 ];
 
 let verificationSucceeded = false;
@@ -432,7 +396,7 @@ try {
 
   const start = runPnpm(["db:start"], "Supabase local start");
   assertCommandPassed(start, "Supabase local start");
-  assertLocalSupabaseStack(runCommand);
+  assertLocalSupabaseStack(runCommand, requireDockerTarget());
   console.log("PASS local stack ownership, health, network and loopback bindings");
 
   // İki temiz reset, migration ve seed sonucunun önceki local duruma bağlı olmadığını kanıtlar.
@@ -452,7 +416,7 @@ try {
   assertCommandPassed(stop, "Supabase local stop");
   const restart = runPnpm(["db:start"], "Supabase local restart");
   assertCommandPassed(restart, "Supabase local restart");
-  assertLocalSupabaseStack(runCommand);
+  assertLocalSupabaseStack(runCommand, requireDockerTarget());
   assertPostRestartSmoke();
   console.log("PASS stop, restart, status and post-restart smoke query");
 

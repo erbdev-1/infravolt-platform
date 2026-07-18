@@ -1,5 +1,4 @@
 import { strict as assert } from "node:assert";
-import { spawnSync } from "node:child_process";
 import {
   mkdtempSync,
   readFileSync,
@@ -10,10 +9,13 @@ import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  assertLocalDockerEngine,
+  assertCommandPassed,
   assertLocalSupabaseStack,
+  createCommandRunner,
   localNetworkName,
-  type CommandResult,
+  type CommandRunner,
+  type ValidatedDockerTarget,
+  validateLocalDockerTarget,
 } from "./local-docker.ts";
 
 const workspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -27,28 +29,6 @@ const generatedHeader =
   "// Bu dosya yerel Supabase şemasından üretilir; elle değiştirmek yerine `pnpm db:types` çalıştırın.\n\n";
 
 type Mode = "check" | "write";
-
-function runCommand(
-  executable: string,
-  args: readonly string[],
-  label: string,
-): CommandResult {
-  const result = spawnSync(executable, args, {
-    cwd: workspaceRoot,
-    encoding: "utf8",
-    env: process.env,
-    maxBuffer: 20 * 1024 * 1024,
-    shell: false,
-  });
-
-  assert.equal(result.error, undefined, `${label} süreci başlatılamadı.`);
-
-  return Object.freeze({
-    status: result.status ?? -1,
-    stderr: result.stderr,
-    stdout: result.stdout,
-  });
-}
 
 /**
  * Satır sonu kodlaması ve terminal newline sayısının sahte drift üretmesini önler.
@@ -64,13 +44,15 @@ function normalizeGeneratedTypes(value: string): string {
  * Yerel CLI'ı repository'nin pnpm çalıştırıcısıyla çağırır.
  * `npm_execpath` kullanımı, Windows `.cmd` çözümlemesine shell açmadan uyumluluk sağlar.
  */
-function generateLocalTypes(): string {
-  const pnpmEntry = process.env.npm_execpath;
+function generateLocalTypes(
+  runCommand: CommandRunner,
+  target: ValidatedDockerTarget,
+): string {
+  const pnpmEntry = target.environment.npm_execpath;
 
   assert(pnpmEntry, "Bu komut pnpm package script üzerinden çalıştırılmalıdır.");
-  // Type üretimi Docker bağlantısını devraldığı için local endpoint ve güvenli stack önceden doğrulanır.
-  assertLocalDockerEngine(runCommand);
-  assertLocalSupabaseStack(runCommand);
+  // Doğrulanmış endpoint child environment'a sabitlenerek type üretiminde context yarışını engeller.
+  assertLocalSupabaseStack(runCommand, target);
   const result = runCommand(
     process.execPath,
     [
@@ -85,14 +67,14 @@ function generateLocalTypes(): string {
       localNetworkName,
     ],
     "Yerel database type üretimi",
+    {
+      environment: target.environment,
+      timeoutMilliseconds: 120_000,
+    },
   );
 
   // CLI hata çıktısı bağlantı bilgisi içerebileceği için yalnız güvenli durum bilgisi raporlanır.
-  assert.equal(
-    result.status,
-    0,
-    `Yerel database type üretimi başarısız oldu (exit ${result.status ?? "unknown"}).`,
-  );
+  assertCommandPassed(result, "Yerel database type üretimi");
   assert(result.stdout.length > 0, "Yerel database type çıktısı boş olamaz.");
 
   return normalizeGeneratedTypes(`${generatedHeader}${result.stdout}`);
@@ -103,7 +85,9 @@ function generateLocalTypes(): string {
  * Check modu committed dosyayı değiştirmez ve geçici veriyi her durumda temizler.
  */
 function run(mode: Mode): void {
-  const generatedTypes = generateLocalTypes();
+  const runCommand = createCommandRunner(workspaceRoot);
+  const target = validateLocalDockerTarget(runCommand, process.env);
+  const generatedTypes = generateLocalTypes(runCommand, target);
 
   if (mode === "write") {
     writeFileSync(generatedTypesPath, generatedTypes, "utf8");
