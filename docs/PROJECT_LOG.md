@@ -376,3 +376,43 @@ FND-017 has implementation and verification evidence and awaits Founder/PR revie
 ### Status and next step
 
 FND-020 has implementation and verification evidence and awaits Founder/PR review before merge. WP-08 and all later packages remain outside this increment.
+
+## 2026-07-18 — WP-11 local Supabase foundation
+
+**Authority:** Founder-authorised Sprint 1 increment under G0-COND-001
+
+**Scope:** DAT-001, DAT-002, DAT-004, DAT-007, DAT-008 and DAT-010
+
+**Engineering owner:** Erhan Baydı
+
+### Completed work
+
+- Pinned project-local stable Supabase CLI `2.109.1` exactly without adding a client library or broadening the lifecycle-script allowlist.
+- Initialised deterministic root local configuration, timestamped migration ownership and a documented forward-only migration workflow.
+- Established INF-06's `public` application/Data API schema and browser-denied `private` boundary with effective grant and default-privilege verification.
+- Added a deterministic no-business-data seed, generated local database types and an exact read-only drift check with temporary-file cleanup.
+- Added redacted local lifecycle wrappers that enforce a loopback-only Docker bridge for start, reset, status and type generation.
+- Added an 18-control reset/rebuild verifier and stored [`S1-DATA-001`](evidence/sprint-1/S1-DATA-001.md).
+
+### Verification evidence
+
+- Node `v24.18.0`, pnpm `11.13.0`, Supabase CLI `2.109.1`, Docker `28.0.1` and Compose `v2.33.1-desktop.1` verified.
+- `pnpm install --frozen-lockfile`, `pnpm db:verify` and `pnpm db:types:check` passed.
+- Two clean resets each applied the preserved foundation migration and deterministic seed; effective schema grants, future-object defaults and post-restart smoke query passed.
+- All expected local containers restarted successfully; ports `54321`–`54324` are published only on `127.0.0.1` and credential-bearing CLI output is suppressed.
+- Existing safe-state, feature, environment, common-contract, market and server-boundary regressions passed.
+- `pnpm lint`, `pnpm typecheck` and the production build with safe process-local UK/UA origins passed.
+- Whitespace, credential, environment-file, specification, historical-evidence, workflow, Markdown-link and out-of-scope scans passed.
+
+### Corrections and internal review
+
+- Replaced the CLI's all-interface default port publishing with a validated loopback-only Docker bridge.
+- Passed the same custom network ID to reset and type generation after the first reset exposed split-network DNS failure.
+- Revoked PostgreSQL's global implicit function-execution default after an effective ACL probe found schema-scoped revoke alone was insufficient.
+- Restricted type normalisation to line-ending differences and strengthened expected-container health checks.
+- Recorded the pre-existing Docker `seccomp` profile warning without changing system settings.
+- No unresolved in-scope PostgreSQL, Supabase, TypeScript, database-security, reproducibility or scope finding remains.
+
+### Status and next step
+
+WP-11's six authorised DAT tasks are complete and await Founder/PR review. Extensions, business tables, RLS policies, storage, remote projects, production credentials, CI workflow integration and WP-12/WP-13 remain outside this increment.
