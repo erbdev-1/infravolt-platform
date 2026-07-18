@@ -430,3 +430,45 @@ FND-020 has implementation and verification evidence and awaits Founder/PR revie
 ### Status and next step
 
 WP-11's six authorised DAT tasks are complete and await Founder/PR review. Extensions, business tables, RLS policies, storage, remote projects, production credentials, CI workflow integration and WP-12/WP-13 remain outside this increment.
+
+## 2026-07-18 — WP-15 test foundation
+
+**Authority:** Founder-authorised Sprint 1 increment under G0-COND-001 and the WP-15 binding resolutions
+
+**Scope:** QA-003, QA-004, QA-005, QA-008, QA-009 and the local runner portion of FND-023
+
+**Engineering owner:** Erhan Baydı
+
+### Completed work
+
+- Added exact Vitest `4.1.10`, React Testing Library and Playwright `1.61.1` development dependencies without broadening pnpm lifecycle approvals.
+- Established deterministic jsdom unit/component tests with native Vite 8 alias resolution, cleanup and deny-by-default `fetch`/XHR/WebSocket behavior.
+- Added semantic public-page and redacted route-error interaction tests plus the exact UK/UA locale unit contract.
+- Added bounded Chromium projects for the binding UK/UA local hosts and an untrusted-host negative project, with exact HTML language, visible structure and browser-error expectations.
+- Restricted browser HTTP/WebSocket access to the three controlled test hosts on the fixed local port and sanitized all 16 application environment variables before web-server execution.
+- Documented the user-centric selector policy and configured trace/screenshot-on-failure, video-off and count-only browser diagnostics.
+- Added a controlled intentional-failure verifier that proves trace, screenshot and diagnostic generation, bounded output, textual credential/PII scanning and unconditional cleanup.
+- Stored [`S1-BUILD-001`](evidence/sprint-1/S1-BUILD-001.md) without modifying historical evidence.
+
+### Verification evidence
+
+- Node `v24.18.0`, pnpm `11.13.0` and `pnpm install --frozen-lockfile`: passed.
+- `pnpm test`: three files and four Vitest/RTL tests passed.
+- `pnpm verify:test-artifacts`: expected child assertion exit `1` was verified; the parent verifier passed after finding one trace, one screenshot and one safe diagnostic attachment and cleaning all temporary proof material.
+- `pnpm test:e2e:smoke`: UK, UA and untrusted-host Chromium projects passed three tests.
+- Environment, common-contract, server-boundary, market, feature, safe-state and local-Docker boundary regressions passed.
+- `pnpm db:verify` passed 18 controls and `pnpm db:types:check` found no generated-type drift.
+- `pnpm lint`, `pnpm typecheck` and the production build with safe process-local UK/UA URLs passed.
+- Whitespace, Markdown-link, credential, environment-file, specification, dependency/lifecycle, artifact-ignore, out-of-scope and ownership-attribution scans passed.
+
+### Corrections and internal review
+
+- Removed redundant `vite-tsconfig-paths` after Vite 8 reported native path support and limited Vitest to one deterministic worker after the default Windows worker pool stalled.
+- Corrected child-process/Playwright env typing without weakening the sanitized inheritance boundary and removed an ESLint fixture-name false positive without disabling rules.
+- Distinguished Chromium's one expected unknown-host main-document 404 console event from unexpected errors instead of introducing a broad waiver.
+- Replaced filename-based diagnostic discovery with trace attachment metadata, separated textual evidence from binary/base64 frames and preserved strong credential/PII checks.
+- Narrowed E2E HTTP/WebSocket trust to exact local host, port and protocol; no unresolved in-scope correctness, security, accessibility, cleanup or scope finding remains.
+
+### Status and next step
+
+WP-15's local implementation is complete and awaits Founder/PR review. GitHub Actions, CI-pass evidence, CI artifact upload/retention and required checks remain explicitly owned by WP-08; WP-16 and later test/security scope was not started.

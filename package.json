@@ -13,6 +13,11 @@
     "db:verify": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/verify-database-foundation.ts",
     "start": "pnpm validate:env && next start",
     "lint": "eslint .",
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:smoke": "playwright test",
     "typecheck": "tsc --noEmit",
     "validate:env": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --conditions=react-server --experimental-strip-types scripts/validate-production-environment.ts",
     "verify:common-contracts": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --conditions=react-server --experimental-strip-types scripts/verify-common-contracts.ts",
@@ -21,7 +26,8 @@
     "verify:market": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --conditions=react-server --experimental-strip-types scripts/verify-market-context.ts",
     "verify:database-boundary": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/verify-local-docker-boundary.ts",
     "verify:safe-states": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/verify-safe-states.ts",
-    "verify:server-boundary": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/verify-server-boundary.ts"
+    "verify:server-boundary": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/verify-server-boundary.ts",
+    "verify:test-artifacts": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --experimental-strip-types scripts/verify-test-artifacts.ts"
   },
   "engines": {
     "node": "24.x"
@@ -35,14 +41,22 @@
     "zod": "4.4.3"
   },
   "devDependencies": {
+    "@playwright/test": "1.61.1",
     "@tailwindcss/postcss": "4.3.3",
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
+    "@testing-library/user-event": "14.6.1",
     "@types/node": "24.13.3",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.3",
     "eslint": "9.39.5",
     "eslint-config-next": "16.2.10",
+    "jsdom": "29.1.1",
     "supabase": "2.109.1",
     "tailwindcss": "4.3.3",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "4.1.10"
   }
 }
