@@ -6,7 +6,7 @@
 | Work package | WP-05 — Server Boundaries and Common Contracts |
 | Backlog task | FND-013 |
 | Authority | Founder-authorised Sprint 1 continuation under G0-COND-001 |
-| Engineering owner | Codex |
+| Engineering owner | Erhan Baydı |
 | Reviewer | Founder — pending review |
 | Status | Complete — pending Founder review |
 

@@ -6,7 +6,7 @@ This append-only log records material repository work, decisions applied, verifi
 
 **Authority:** G0-COND-001 — Conditional Pass, granted by Founder Erhan Baydi  
 **Scope:** Repository governance and documentation baseline only  
-**Engineering agent:** Codex
+**Engineering owner:** Erhan Baydı
 
 ### Completed work
 
@@ -49,7 +49,7 @@ See [`governance/RAID_REGISTER.md`](governance/RAID_REGISTER.md). Material open 
 
 **Authority:** Founder decision under G0-COND-001
 **Scope:** WP-01 and FND-001 through FND-004 only
-**Engineering agent:** Codex
+**Engineering owner:** Erhan Baydı
 
 ### Completed work
 
@@ -94,7 +94,7 @@ FND-001 through FND-004 have implementation and verification evidence and await 
 
 **Authority:** Founder-controlled increment under G0-COND-001
 **Scope:** FND-005 through FND-010 only
-**Engineering agent:** Codex
+**Engineering owner:** Erhan Baydı
 
 ### Completed work
 
@@ -134,7 +134,7 @@ FND-005 through FND-010 have implementation and verification evidence and await 
 
 **Scope:** FND-011 and FND-012 only
 
-**Engineering agent:** Codex
+**Engineering owner:** Erhan Baydı
 
 ### Completed work
 
@@ -176,7 +176,7 @@ FND-011 and FND-012 have implementation and verification evidence and await Foun
 
 **Scope:** FND-013 only
 
-**Engineering agent:** Codex
+**Engineering owner:** Erhan Baydı
 
 ### Completed work
 
@@ -215,7 +215,7 @@ FND-013 has implementation and verification evidence and awaits Founder/PR revie
 
 **Scope:** FND-018 and FND-019 only
 
-**Engineering agent:** Codex
+**Engineering owner:** Erhan Baydı
 
 ### Completed work
 
@@ -255,7 +255,7 @@ FND-018 and FND-019 have implementation and verification evidence and await Foun
 
 **Scope:** FND-014, FND-015 and FND-016 only
 
-**Engineering agent:** Codex
+**Engineering owner:** Erhan Baydı
 
 ### Completed work
 
@@ -297,7 +297,7 @@ FND-014 through FND-016 have implementation and verification evidence and await 
 
 **Scope:** FND-017 only
 
-**Engineering agent:** Codex
+**Engineering owner:** Erhan Baydı
 
 ### Scope reconciliation
 

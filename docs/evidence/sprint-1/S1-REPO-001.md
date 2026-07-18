@@ -6,7 +6,7 @@
 | Work package | WP-01 — Repository Baseline |
 | Backlog tasks | FND-001, FND-002 |
 | Authority | Founder decision under G0-COND-001 |
-| Engineering owner | Codex |
+| Engineering owner | Erhan Baydı |
 | Reviewer | Founder — pending review |
 | Status | Complete — pending Founder review |
 

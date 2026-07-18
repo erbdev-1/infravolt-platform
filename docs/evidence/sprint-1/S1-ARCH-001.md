@@ -6,7 +6,7 @@
 | Work package | WP-03 — Next.js Application Foundation |
 | Backlog tasks | FND-005 through FND-010 |
 | Authority | Founder-controlled increment under G0-COND-001 |
-| Engineering owner | Codex |
+| Engineering owner | Erhan Baydı |
 | Reviewer | Founder — pending review |
 | Status | Complete — pending Founder review |
 
