@@ -1,10 +1,25 @@
-import { siteConfig } from "@/lib/site";
+import type { Metadata } from "next";
+import { headers } from "next/headers";
 
-export default function HomePage() {
-  return (
-    <main>
-      <h1>{siteConfig.name}</h1>
-      <p>Engineering foundation for the UK and Ukraine application.</p>
-    </main>
-  );
+import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { HomePageView } from "@/modules/public-site/home-page";
+import { publicSiteContentForMarket } from "@/modules/public-site/content";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const marketContext = resolveTrustedMarketContext(await headers());
+  const content = publicSiteContentForMarket(marketContext.market);
+
+  return {
+    title: content.metadata.title,
+    description: content.metadata.description,
+    alternates: {
+      canonical: new URL("/", marketContext.publicSiteUrl),
+    },
+  };
+}
+
+export default async function HomePage() {
+  const marketContext = resolveTrustedMarketContext(await headers());
+
+  return <HomePageView market={marketContext.market} />;
 }

@@ -1,6 +1,20 @@
 import { expect, test } from "./fixtures/test";
 
-test("@uk public root renders the UK market foundation safely", async ({
+async function expectValidPageAnchors(page: import("@playwright/test").Page) {
+  const missingTargets = await page.locator('a[href^="#"]').evaluateAll(
+    (links) =>
+      links
+        .map((link) => link.getAttribute("href"))
+        .filter(
+          (href): href is string =>
+            href !== null && document.querySelector(href) === null,
+        ),
+  );
+
+  expect(missingTargets).toEqual([]);
+}
+
+test("@uk public root renders the UK market homepage safely", async ({
   browserDiagnostics,
   page,
 }) => {
@@ -9,15 +23,22 @@ test("@uk public root renders the UK market foundation safely", async ({
   expect(response?.status()).toBe(200);
   await expect(page.locator("html")).toHaveAttribute("lang", "en-GB");
   await expect(
-    page.getByRole("heading", { level: 1, name: "InfraVolt" }),
+    page.getByRole("heading", {
+      level: 1,
+      name: "Electrical infrastructure systems for projects that cannot afford uncertainty.",
+    }),
   ).toBeVisible();
-  await expect(page.getByRole("main")).toContainText(
-    "Engineering foundation for the UK and Ukraine application.",
+  await expect(
+    page.getByRole("link", { name: "Discuss a project" }).first(),
+  ).toHaveAttribute("href", "#contact");
+  await expect(page.locator("main")).not.toContainText(
+    /distributor|officially authorised|exclusive|certified partner|russia|kaliningrad|дистриб|росі|калінінград/iu,
   );
+  await expectValidPageAnchors(page);
   browserDiagnostics.assertClean();
 });
 
-test("@ua public root renders the Ukraine market foundation safely", async ({
+test("@ua public root renders the Ukraine market homepage safely", async ({
   browserDiagnostics,
   page,
 }) => {
@@ -26,11 +47,18 @@ test("@ua public root renders the Ukraine market foundation safely", async ({
   expect(response?.status()).toBe(200);
   await expect(page.locator("html")).toHaveAttribute("lang", "uk-UA");
   await expect(
-    page.getByRole("heading", { level: 1, name: "InfraVolt" }),
+    page.getByRole("heading", {
+      level: 1,
+      name: "Системи електричної інфраструктури для проєктів, у яких невизначеність неприпустима.",
+    }),
   ).toBeVisible();
-  await expect(page.getByRole("main")).toContainText(
-    "Engineering foundation for the UK and Ukraine application.",
+  await expect(
+    page.getByRole("link", { name: "Обговорити проєкт" }).first(),
+  ).toHaveAttribute("href", "#contact");
+  await expect(page.locator("main")).not.toContainText(
+    /distributor|officially authorised|exclusive|certified partner|russia|kaliningrad|дистриб|росі|калінінград/iu,
   );
+  await expectValidPageAnchors(page);
   browserDiagnostics.assertClean();
 });
 
