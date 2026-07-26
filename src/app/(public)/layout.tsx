@@ -1,7 +1,18 @@
-export default function PublicLayout({
+import { headers } from "next/headers";
+
+import { PublicSiteShell } from "@/components/public/public-site-shell";
+import { resolveTrustedMarketContext } from "@/modules/markets/server";
+
+export default async function PublicLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return children;
+  const marketContext = resolveTrustedMarketContext(await headers());
+
+  return (
+    <PublicSiteShell market={marketContext.market}>
+      {children}
+    </PublicSiteShell>
+  );
 }
