@@ -514,3 +514,44 @@ WP-15's local implementation is complete and awaits Founder/PR review. GitHub Ac
 ### Status and next step
 
 WP-08 implementation and local-equivalent verification are complete. GitHub-hosted workflow execution remains pending until the branch/PR runs, and no green hosted check is claimed. Required-check/branch-protection administration remains WP-14; the dependency-response and secret-rotation runbooks remain WP-16.
+
+## 2026-07-26 — First visible public-site vertical slice
+
+**Authority:** Founder-authorised bounded public-site increment under G0-COND-001
+
+**Scope:** Homepage-required portions of DSG-002–005, DSG-007, DSG-011, DSG-014, DSG-021, DSG-022, DSG-024, DSG-029; WEB-001–005, WEB-007, WEB-011, WEB-019, WEB-042; SEO-002; CNT-013, CNT-017, UA-012 and UA-021
+
+**Engineering owner:** Erhan Baydı
+
+### Completed work
+
+- Replaced the public placeholder with a polished, responsive, server-rendered B2B electrical-infrastructure homepage for the existing trusted UK and Ukraine hosts.
+- Added a typed two-market content contract with equivalent required sections, professional English/Ukrainian copy and market-aware title, description and canonical metadata.
+- Added a reusable public shell, technical CSS-led brand treatment, desktop anchor navigation, keyboard-operable mobile navigation, skip link and market-aware footer.
+- Added the complete homepage sequence: hero, seven approved product systems, six project environments, four-step support pathway, neutral Gersan systems section and final project CTA.
+- Kept all new presentation server-rendered except the isolated mobile-menu Client Component.
+- Added Tailwind 4-compatible foundation tokens, local fonts, responsive containers, controlled radius/elevation, visible focus treatment and reduced-motion behavior.
+- Used no external or restricted media because no asset with verified publication authority exists in the repository.
+- Updated focused Vitest/RTL and Playwright coverage for UK/UA content, one `h1`, navigation, CTA, mobile-menu state, prohibited wording, valid anchors and the existing unknown-host boundary.
+- Stored [`S2-UI-001`](evidence/sprint-2/S2-UI-001.md) as the first sequential Sprint 2 UI evidence record.
+
+### Verification evidence
+
+- Node `v24.18.0`, pnpm `11.13.0` and `pnpm install --frozen-lockfile`: passed.
+- All existing `verify:*` scripts passed, including environment, market, server/client, feature, safe-state, CI/dependency, credential, local-Docker and test-artifact regressions.
+- `pnpm test` passed three files/six tests; `pnpm lint`, `pnpm typecheck`, the safe production build and all three Playwright smoke projects passed.
+- `pnpm audit --audit-level high` reported no known vulnerabilities.
+- UK and UA full-page screenshots at 375, 768 and 1440 pixels plus both open mobile menus were inspected and removed; final overflow checks passed at every required viewport.
+- Whitespace, credential, environment-file, specification, Markdown-link, unsupported-claim, prohibited-market, dead-anchor, Client Component and asset scans passed.
+
+### Corrections and internal review
+
+- The first 375-pixel review exposed the desktop CTA through an equal-specificity CSS cascade rule, producing horizontal header overflow; the selector was corrected and all required market/viewport combinations passed on rerun.
+- Added an explicit open-menu icon state and preserved reversible scroll locking, Escape close and focus return.
+- Confirmed one typed source owns each market's copy, only verified fragments are linked and no unsupported distributor, authorisation, certification, territory, project or contact claim is present.
+- Confirmed no dependency, lockfile, specification, provider, database, authentication, analytics, deployment or production configuration changed.
+- No unresolved in-scope correctness, accessibility, security, visual or responsive finding remains.
+
+### Status and next step
+
+The Founder can inspect the UK and Ukrainian homepage locally. This bounded slice awaits Founder/PR review; broader backlog completion still requires product/sales content approval, native Ukrainian review, verified disclosures/contact routes, approved media rights and later release-gate evidence.
