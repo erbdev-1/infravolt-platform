@@ -16,6 +16,8 @@ const proofRoot = path.join(root, "test-results", "artifact-proof");
 const fixtureDirectory = path.join(proofRoot, "specs");
 const outputDirectory = path.join(proofRoot, "output");
 const configPath = path.join(proofRoot, "playwright.config.ts");
+// Windows bsdtar ZIP okuyabilir; Ubuntu GNU tar okuyamadığı için POSIX runner'larda unzip kullanılır.
+const useWindowsBsdtar = process.platform === "win32";
 const fixturePath = path.join(
   fixtureDirectory,
   "intentional-artifact-failure.spec.ts",
@@ -203,13 +205,19 @@ function isSafeBrowserDiagnostic(content: Buffer): boolean {
 }
 
 function readArchiveEntry(archive: string, entry: string): Buffer {
-  const result = spawnSync("tar", ["-xOf", archive, entry], {
-    encoding: "buffer",
-    env: createSafeTestProcessEnvironment(),
-    maxBuffer: 25 * 1024 * 1024,
-    shell: false,
-    timeout: 15_000,
-  });
+  const result = spawnSync(
+    useWindowsBsdtar ? "tar" : "unzip",
+    useWindowsBsdtar
+      ? ["-xOf", archive, entry]
+      : ["-p", archive, entry],
+    {
+      encoding: "buffer",
+      env: createSafeTestProcessEnvironment(),
+      maxBuffer: 25 * 1024 * 1024,
+      shell: false,
+      timeout: 15_000,
+    },
+  );
 
   if (result.error || result.status !== 0 || !result.stdout) {
     throw new Error("Trace archive could not be inspected safely");
@@ -219,13 +227,17 @@ function readArchiveEntry(archive: string, entry: string): Buffer {
 }
 
 function listArchiveEntries(archive: string): readonly string[] {
-  const result = spawnSync("tar", ["-tf", archive], {
-    encoding: "utf8",
-    env: createSafeTestProcessEnvironment(),
-    maxBuffer: 2 * 1024 * 1024,
-    shell: false,
-    timeout: 15_000,
-  });
+  const result = spawnSync(
+    useWindowsBsdtar ? "tar" : "unzip",
+    useWindowsBsdtar ? ["-tf", archive] : ["-Z1", archive],
+    {
+      encoding: "utf8",
+      env: createSafeTestProcessEnvironment(),
+      maxBuffer: 2 * 1024 * 1024,
+      shell: false,
+      timeout: 15_000,
+    },
+  );
 
   if (result.error || result.status !== 0) {
     throw new Error("Trace archive index could not be inspected safely");

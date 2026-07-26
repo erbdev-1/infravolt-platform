@@ -472,3 +472,45 @@ WP-11's six authorised DAT tasks are complete and await Founder/PR review. Exten
 ### Status and next step
 
 WP-15's local implementation is complete and awaits Founder/PR review. GitHub Actions, CI-pass evidence, CI artifact upload/retention and required checks remain explicitly owned by WP-08; WP-16 and later test/security scope was not started.
+
+## 2026-07-26 — WP-08 CI and supply-chain baseline
+
+**Authority:** Founder-authorised Sprint 1 increment under G0-COND-001, including the controlled dependency-security remediation
+
+**Scope:** FND-021, FND-022, FND-023, FND-024 and FND-025
+
+**Engineering owner:** Erhan Baydı
+
+### Completed work
+
+- Added a least-privilege GitHub Actions workflow for pull requests targeting `main` and pushes to `main`, using immutable action SHAs, exact Node `24.18.0`/pnpm `11.13.0`, frozen installs, bounded timeouts and same-ref concurrency cancellation.
+- Added dependency-ordered quality, Chromium smoke and deterministic local Supabase jobs without production secrets, remote providers, deployment or an unnecessary runtime/OS matrix.
+- Reused WP-15's Vitest/RTL/Playwright foundation, restricted failure uploads to bounded ZIP/PNG/JSON evidence for three days and retained unconditional database cleanup.
+- Added deterministic workflow/dependency-policy verifiers and a fail-closed credential scanner covering tracked/untracked non-ignored text, reachable commit trees and commit messages without printing matched values.
+- Remediated the audit findings through Next.js `16.2.11`, Sharp `0.35.0`, PostCSS `8.5.18`, ESLint `10.8.0`, one secure `minimatch@10.2.5 > brace-expansion@5.0.8` path and narrowly scoped exact overrides/peer allowances.
+- Added the official exact `@eslint/compat@2.1.0` layer only after reproducing a legacy Next-owned plugin API failure; preserved the active Next.js, React, Hooks, TypeScript, import and accessibility rule families.
+- Stored [`S1-CI-001`](evidence/sprint-1/S1-CI-001.md) after completing local-equivalent verification.
+
+### Verification evidence
+
+- `pnpm install --frozen-lockfile`, `pnpm verify:ci-workflow`, `pnpm verify:dependencies` and `pnpm peers check` passed.
+- `pnpm audit --audit-level high` exited `0` with no known vulnerabilities; direct packages remain exact and the build-script allowlist remains two exact packages.
+- The clean project passed ESLint; a temporary ignored negative fixture exited `1` for the expected Next.js, React, Hooks, TypeScript, import and accessibility rules and was removed.
+- `pnpm verify:credentials` proved its synthetic detector and passed 114 repository text files plus 39 reachable commit trees without printing values.
+- All existing environment, server-boundary, common, market, feature, safe-state, local-Docker and artifact verifiers passed.
+- `pnpm test` passed three files/four tests; `pnpm typecheck`, the safe production build and all three Playwright smoke projects passed.
+- `pnpm db:verify` passed 18 controls, `pnpm db:types:check` found no drift and the local stack was stopped by the bounded cleanup.
+- Whitespace, relative Markdown-link, environment-file, specification-change, application-source, dependency/lifecycle and generated-artifact checks passed.
+
+### Corrections and internal review
+
+- Moved pnpm overrides from unsupported manifest placement into the root workspace policy and removed an invalid generated build-approval placeholder.
+- Rejected the incompatible attempt to force `brace-expansion@5` beneath legacy `minimatch@3`; upgraded ESLint and narrowed each plugin parent to the secure compatible path instead.
+- Added the official compatibility layer only after reproducing the legacy rule-context crash, then proved positive lint and negative rule execution without suppressing rules.
+- Expanded credential verification to commit messages as well as worktree and commit-tree content; scanner failures remain redacted and fail closed.
+- Confirmed immutable actions, shallow/full checkout intent, read-only permissions, synthetic build origins, local-only Docker, bounded artifacts and cleanup behavior.
+- No unresolved in-scope correctness, security, supply-chain, Linux/Windows portability or scope issue remains.
+
+### Status and next step
+
+WP-08 implementation and local-equivalent verification are complete. GitHub-hosted workflow execution remains pending until the branch/PR runs, and no green hosted check is claimed. Required-check/branch-protection administration remains WP-14; the dependency-response and secret-rotation runbooks remain WP-16.
