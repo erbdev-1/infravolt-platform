@@ -1,0 +1,197 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+# PR kodu güvenilir kabul edilmediği için workflow yalnız repository okuma izniyle çalışır.
+permissions:
+  contents: read
+
+# Aynı ref için eski koşuyu iptal etmek runner süresini sınırlar; farklı PR'lar birbirini etkilemez.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CI: "true"
+  NEXT_TELEMETRY_DISABLED: "1"
+  NODE_VERSION: "24.18.0"
+  PNPM_VERSION: "11.13.0"
+  TZ: UTC
+
+jobs:
+  quality:
+    name: Quality gates
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          # FND-025 geçmiş taraması sığ clone ile sessizce daralmamalıdır.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@d15e628ca66d93ee5f352c71671a7bc6a97af5c9 # v6.0.8
+        with:
+          version: 11.13.0
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 24.18.0
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Verify runtime contract
+        run: |
+          test "$(node --version)" = "v24.18.0"
+          test "$(pnpm --version)" = "11.13.0"
+
+      - name: Install frozen dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify CI workflow policy
+        run: pnpm verify:ci-workflow
+
+      - name: Verify dependency policy
+        run: pnpm verify:dependencies
+
+      - name: Check dependency advisories
+        run: pnpm audit --audit-level high
+
+      - name: Scan repository and history for credentials
+        run: pnpm verify:credentials
+
+      - name: Verify environment contract
+        run: pnpm verify:env
+
+      - name: Verify server boundary
+        run: pnpm verify:server-boundary
+
+      - name: Verify common contracts
+        run: pnpm verify:common-contracts
+
+      - name: Verify market context
+        run: pnpm verify:market
+
+      - name: Verify feature flags
+        run: pnpm verify:features
+
+      - name: Verify global safe states
+        run: pnpm verify:safe-states
+
+      - name: Verify local Docker boundary
+        run: pnpm verify:database-boundary
+
+      - name: Check strict TypeScript
+        run: pnpm typecheck
+
+      - name: Check ESLint
+        run: pnpm lint
+
+      - name: Run unit and component tests
+        run: pnpm test
+
+      - name: Build production application
+        run: pnpm build
+        env:
+          # Build yalnız sentetik localhost originleriyle environment sözleşmesini kanıtlar.
+          NEXT_PUBLIC_SITE_URL_UA: http://ua.infravolt.localhost:3000
+          NEXT_PUBLIC_SITE_URL_UK: http://uk.infravolt.localhost:3000
+
+  browser-smoke:
+    name: Browser smoke
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@d15e628ca66d93ee5f352c71671a7bc6a97af5c9 # v6.0.8
+        with:
+          version: 11.13.0
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 24.18.0
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install frozen dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install pinned Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Verify controlled failure artifacts
+        run: pnpm verify:test-artifacts
+
+      - name: Run UK, UA and unknown-host smoke
+        run: pnpm test:e2e:smoke
+
+      - name: Upload bounded failure evidence
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          # Ham loglar yerine yalnız WP-15'in sınırlandırılmış trace, screenshot ve JSON ekleri yüklenir.
+          name: playwright-failure-${{ github.run_id }}
+          path: |
+            test-results/playwright/**/*.zip
+            test-results/playwright/**/*.png
+            test-results/playwright/**/*.json
+          if-no-files-found: ignore
+          retention-days: 3
+
+  database:
+    name: Local database foundation
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      # Lifecycle scripti ayrıca doğrular; explicit socket CI'da remote Docker context seçimini engeller.
+      DOCKER_HOST: unix:///var/run/docker.sock
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@d15e628ca66d93ee5f352c71671a7bc6a97af5c9 # v6.0.8
+        with:
+          version: 11.13.0
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 24.18.0
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install frozen dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify deterministic local Supabase foundation
+        run: pnpm db:verify
+
+      - name: Stop local Supabase
+        if: always()
+        # Ayrı always adımı ilk doğrulama hatasını korurken runner kaynaklarını koşulsuz temizler.
+        run: pnpm db:stop
