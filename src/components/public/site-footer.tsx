@@ -14,26 +14,47 @@ export function SiteFooter({ content }: SiteFooterProps) {
         <div className="site-footer__brand">
           <BrandMark descriptor={content.brandDescriptor} inverse />
           <p>{content.footerDescription}</p>
+          {content.relationshipLabel ? (
+            <p className="site-footer__relationship">
+              {content.relationshipLabel}
+            </p>
+          ) : null}
         </div>
         <div>
-          <p className="site-footer__label">{content.footerSystemsLabel}</p>
-          <nav aria-label={content.footerSystemsLabel}>
-            {content.navigation.map((item) => (
-              <a href={item.href} key={item.href}>
+          <p className="site-footer__label">{content.footerProductLabel}</p>
+          <nav aria-label={content.footerProductLabel}>
+            {content.footerProducts.map((item) => (
+              <a href={item.href} key={`${item.href}-${item.label}`}>
                 {item.label}
               </a>
             ))}
           </nav>
         </div>
         <div>
-          <p className="site-footer__label">{content.footerMarketLabel}</p>
-          <p>{content.marketName}</p>
-          <p>{content.localeName}</p>
+          <p className="site-footer__label">{content.footerResourceLabel}</p>
+          <nav aria-label={content.footerResourceLabel}>
+            {content.footerResources.map((item) => (
+              <a href={item.href} key={`${item.href}-${item.label}`}>
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+        <div id="footer-company">
+          <p className="site-footer__label">{content.footerCompanyLabel}</p>
+          <nav aria-label={content.footerCompanyLabel}>
+            {content.footerCompany.map((item) => (
+              <a href={item.href} key={`${item.href}-${item.label}`}>
+                {item.label}
+              </a>
+            ))}
+          </nav>
         </div>
       </Container>
-      <Container className="site-footer__legal" size="wide">
+      <Container className="site-footer__market" size="wide">
         <p>
-          © {new Date().getFullYear()} {content.footerRights}
+          {content.footerMarketLabel}: {content.marketName} ·{" "}
+          {content.localeName}
         </p>
       </Container>
     </footer>

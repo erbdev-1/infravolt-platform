@@ -25,14 +25,28 @@ test("@uk public root renders the UK market homepage safely", async ({
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Electrical infrastructure systems for projects that cannot afford uncertainty.",
+      name: "Electrical infrastructure systems for demanding projects.",
     }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Discuss a project" }).first(),
-  ).toHaveAttribute("href", "#contact");
+    page.getByRole("link", { name: "Explore Product Systems" }).first(),
+  ).toHaveAttribute("href", "#product-systems");
+  await expect(
+    page.getByText("Official UK Representative").first(),
+  ).toBeVisible();
+  await expect(page.locator("#product-systems article")).toHaveCount(8);
+  await expect(page.locator("#industries article")).toHaveCount(8);
+
+  const disclosureLink = page.getByRole("link", {
+    name: "View Official Disclosures on the external KAP website",
+  });
+  await expect(disclosureLink).toHaveAttribute("target", "_blank");
+  await expect(disclosureLink).toHaveAttribute(
+    "rel",
+    "noopener noreferrer",
+  );
   await expect(page.locator("main")).not.toContainText(
-    /distributor|officially authorised|exclusive|certified partner|russia|kaliningrad|дистриб|росі|калінінград/iu,
+    /\b(?:exclusive distributor|officially authorised distributor|certified partner|russia|kaliningrad|GOST|EAC|UKCA|RoHS)\b|дистриб|росі|калінінград/iu,
   );
   await expectValidPageAnchors(page);
   browserDiagnostics.assertClean();
@@ -49,14 +63,17 @@ test("@ua public root renders the Ukraine market homepage safely", async ({
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Системи електричної інфраструктури для проєктів, у яких невизначеність неприпустима.",
+      name: "Системи електричної інфраструктури для складних проєктів.",
     }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Обговорити проєкт" }).first(),
-  ).toHaveAttribute("href", "#contact");
+    page.getByRole("link", { name: "Оглянути системи продукції" }).first(),
+  ).toHaveAttribute("href", "#product-systems");
+  await expect(page.getByText("Official UK Representative")).toHaveCount(0);
+  await expect(page.locator("#product-systems article")).toHaveCount(8);
+  await expect(page.locator("#industries article")).toHaveCount(8);
   await expect(page.locator("main")).not.toContainText(
-    /distributor|officially authorised|exclusive|certified partner|russia|kaliningrad|дистриб|росі|калінінград/iu,
+    /\b(?:exclusive distributor|officially authorised distributor|certified partner|russia|kaliningrad|GOST|EAC|UKCA|RoHS)\b|дистриб|росі|калінінград/iu,
   );
   await expectValidPageAnchors(page);
   browserDiagnostics.assertClean();

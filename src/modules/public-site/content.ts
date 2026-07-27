@@ -1,8 +1,19 @@
+import type {
+  CapabilityId,
+  IndustryId,
+  ProductId,
+} from "@/modules/public-site/assets";
 import type { MarketCode } from "@/modules/markets/types";
 
-type NavigationItem = Readonly<{
+type AnchorLink = Readonly<{
   href: `#${string}`;
   label: string;
+}>;
+
+type ExternalLink = Readonly<{
+  href: `https://${string}`;
+  label: string;
+  accessibleLabel: string;
 }>;
 
 type ContentCard = Readonly<{
@@ -10,28 +21,66 @@ type ContentCard = Readonly<{
   description: string;
 }>;
 
-type ProcessStep = ContentCard;
+type CapabilityItem = Readonly<{
+  id: CapabilityId;
+  title: string;
+}>;
 
-type SevenSystems = readonly [
-  ContentCard,
-  ContentCard,
-  ContentCard,
-  ContentCard,
-  ContentCard,
-  ContentCard,
-  ContentCard,
+type ProductItem = ContentCard &
+  Readonly<{
+    id: ProductId;
+    imageAlt: string;
+  }>;
+
+type IndustryItem = ContentCard &
+  Readonly<{
+    id: IndustryId;
+    imageAlt: string;
+  }>;
+
+type Navigation = readonly [
+  AnchorLink,
+  AnchorLink,
+  AnchorLink,
+  AnchorLink,
+  AnchorLink,
+  AnchorLink,
+  AnchorLink,
+  AnchorLink,
 ];
 
-type SixSectors = readonly [
-  ContentCard,
-  ContentCard,
-  ContentCard,
-  ContentCard,
-  ContentCard,
-  ContentCard,
+type FourCapabilities = readonly [
+  CapabilityItem,
+  CapabilityItem,
+  CapabilityItem,
+  CapabilityItem,
 ];
 
-type FourSteps = readonly [ProcessStep, ProcessStep, ProcessStep, ProcessStep];
+type SixProducts = readonly [
+  ProductItem,
+  ProductItem,
+  ProductItem,
+  ProductItem,
+  ProductItem,
+  ProductItem,
+];
+
+type EightIndustries = readonly [
+  IndustryItem,
+  IndustryItem,
+  IndustryItem,
+  IndustryItem,
+  IndustryItem,
+  IndustryItem,
+  IndustryItem,
+  IndustryItem,
+];
+
+type FourSteps = readonly [ContentCard, ContentCard, ContentCard, ContentCard];
+
+type ThreeFacts = readonly [ContentCard, ContentCard, ContentCard];
+
+type FiveDocumentTypes = readonly [string, string, string, string, string];
 
 export type PublicSiteContent = Readonly<{
   metadata: Readonly<{
@@ -39,7 +88,6 @@ export type PublicSiteContent = Readonly<{
     description: string;
   }>;
   shell: Readonly<{
-    skipLink: string;
     navigationLabel: string;
     mobileNavigationLabel: string;
     openMenuLabel: string;
@@ -47,36 +95,50 @@ export type PublicSiteContent = Readonly<{
     marketLabel: string;
     marketName: string;
     localeName: string;
-    utilityMessage: string;
     brandDescriptor: string;
-    navigation: readonly NavigationItem[];
-    headerCta: NavigationItem;
+    relationshipLabel?: string;
+    navigation: Navigation;
     footerDescription: string;
-    footerSystemsLabel: string;
+    footerProductLabel: string;
+    footerResourceLabel: string;
+    footerCompanyLabel: string;
+    footerProducts: readonly AnchorLink[];
+    footerResources: readonly AnchorLink[];
+    footerCompany: readonly AnchorLink[];
     footerMarketLabel: string;
-    footerRights: string;
   }>;
   hero: Readonly<{
     eyebrow: string;
     title: string;
     description: string;
-    primaryAction: NavigationItem;
-    secondaryAction: NavigationItem;
-    diagramEyebrow: string;
-    diagramTitle: string;
-    diagramItems: readonly [string, string, string];
+    relationshipLabel?: string;
+    primaryAction: AnchorLink;
+    secondaryAction: AnchorLink;
+    videoLabel: string;
+    playLabel: string;
+    pauseLabel: string;
+    fallback: string;
   }>;
-  systems: Readonly<{
+  capabilities: FourCapabilities;
+  products: Readonly<{
     eyebrow: string;
     title: string;
     introduction: string;
-    items: SevenSystems;
+    items: SixProducts;
   }>;
-  sectors: Readonly<{
+  industries: Readonly<{
     eyebrow: string;
     title: string;
     introduction: string;
-    items: SixSectors;
+    imageDisclosure: string;
+    items: EightIndustries;
+  }>;
+  applicationMap: Readonly<{
+    eyebrow: string;
+    title: string;
+    description: string;
+    connections: readonly [string, string, string];
+    action: AnchorLink;
   }>;
   support: Readonly<{
     eyebrow: string;
@@ -88,366 +150,677 @@ export type PublicSiteContent = Readonly<{
     eyebrow: string;
     title: string;
     description: string;
-    assurance: string;
-    visualLabel: string;
+    mediaOwnership: string;
+    videoLabel: string;
+    playLabel: string;
+    pauseLabel: string;
+    fallback: string;
+    facts: ThreeFacts;
+    listingLabel: string;
+    listingStatement: string;
+    internalAction: AnchorLink;
+    externalAction: ExternalLink;
+  }>;
+  technicalDocuments: Readonly<{
+    eyebrow: string;
+    title: string;
+    description: string;
+    items: FiveDocumentTypes;
+    action: AnchorLink;
   }>;
   contact: Readonly<{
     eyebrow: string;
     title: string;
     description: string;
-    primaryAction: NavigationItem;
-    secondaryAction: NavigationItem;
+    primaryAction: AnchorLink;
+    secondaryAction: AnchorLink;
+  }>;
+  certifications: Readonly<{
+    title: string;
+    description: string;
+    markLabelSuffix: string;
+    scopeNote: string;
   }>;
 }>;
 
-// Sabit sözleşme, iki markette aynı zorunlu section ve item sayılarını derleme anında korur.
+// Sabit tuple sözleşmeleri, iki markette zorunlu bölüm ve öğe paritesini derleme anında korur.
 export const PUBLIC_SITE_CONTENT = {
   uk: {
     metadata: {
-      title: "Electrical infrastructure systems | InfraVolt",
+      title: "Electrical infrastructure systems and project supply | InfraVolt",
       description:
-        "Electrical infrastructure product systems, technical coordination and project supply support for UK projects.",
+        "Gersan electrical infrastructure systems, technical documentation and project-support coordination for the UK market.",
     },
     shell: {
-      skipLink: "Skip to main content",
       navigationLabel: "Primary navigation",
       mobileNavigationLabel: "Mobile navigation",
       openMenuLabel: "Open navigation menu",
       closeMenuLabel: "Close navigation menu",
-      marketLabel: "Current market",
+      marketLabel: "Market",
       marketName: "United Kingdom",
-      localeName: "English",
-      utilityMessage:
-        "Electrical infrastructure systems for demanding project environments",
+      localeName: "en-GB",
       brandDescriptor: "Electrical infrastructure",
+      relationshipLabel: "Official UK Representative",
       navigation: [
-        { href: "#systems", label: "Product systems" },
-        { href: "#sectors", label: "Sectors" },
-        { href: "#support", label: "Project support" },
-        { href: "#manufacturer", label: "Gersan systems" },
+        { href: "#top", label: "Home" },
+        { href: "#about-gersan", label: "About" },
+        { href: "#product-systems", label: "Gersan Products" },
+        { href: "#industries", label: "Industries" },
+        { href: "#technical-documents", label: "Technical Documents" },
+        { href: "#contact", label: "Dealer / Trade Account" },
+        { href: "#project-support", label: "Project Support" },
+        { href: "#contact", label: "Contact" },
       ],
-      headerCta: { href: "#contact", label: "Discuss a project" },
       footerDescription:
-        "A focused route to electrical infrastructure systems, technical information and coordinated project supply.",
-      footerSystemsLabel: "Explore",
-      footerMarketLabel: "Market",
-      footerRights: "InfraVolt. Project-owned content.",
+        "Electrical infrastructure systems, technical documentation and coordinated project-supply support for the UK market.",
+      footerProductLabel: "Product Systems",
+      footerResourceLabel: "Project Resources",
+      footerCompanyLabel: "Company",
+      footerProducts: [
+        { href: "#product-systems", label: "Busbar Systems" },
+        { href: "#product-systems", label: "Cable Management" },
+        {
+          href: "#product-systems",
+          label: "Earthing & Lightning Protection",
+        },
+        { href: "#product-systems", label: "Distribution Systems" },
+      ],
+      footerResources: [
+        { href: "#industries", label: "Industries" },
+        { href: "#technical-documents", label: "Technical Documents" },
+        { href: "#project-support", label: "Project Support" },
+        { href: "#contact", label: "Dealer / Trade Account" },
+      ],
+      footerCompany: [
+        { href: "#about-gersan", label: "About" },
+        { href: "#contact", label: "Contact" },
+      ],
+      footerMarketLabel: "Serving",
     },
     hero: {
-      eyebrow: "Electrical infrastructure · Project supply",
-      title:
-        "Electrical infrastructure systems for projects that cannot afford uncertainty.",
+      eyebrow: "Electrical infrastructure • Project supply",
+      title: "Electrical infrastructure systems for demanding projects.",
       description:
-        "InfraVolt helps project teams navigate system selection, coordinate technical information and prepare electrical infrastructure requirements for a clear commercial response.",
-      primaryAction: { href: "#systems", label: "Explore product systems" },
-      secondaryAction: { href: "#contact", label: "Request project support" },
-      diagramEyebrow: "Project pathway",
-      diagramTitle: "From requirements to a coordinated response",
-      diagramItems: [
-        "System selection",
-        "Technical coordination",
-        "Project supply",
-      ],
+        "InfraVolt supplies Gersan busbar, cable management, earthing, distribution and project-support solutions for the UK market.",
+      relationshipLabel: "Official UK Representative",
+      primaryAction: {
+        href: "#product-systems",
+        label: "Explore Product Systems",
+      },
+      secondaryAction: {
+        href: "#project-support",
+        label: "Request Project Support",
+      },
+      videoLabel: "Gersan electrical infrastructure manufacturing overview",
+      playLabel: "Play homepage video",
+      pauseLabel: "Pause homepage video",
+      fallback:
+        "The manufacturing overview video is unavailable. The poster image remains visible.",
     },
-    systems: {
+    capabilities: [
+      { id: "documentation", title: "Technical Documentation" },
+      { id: "project-support", title: "Project Support" },
+      { id: "specification", title: "Specification Assistance" },
+      { id: "market", title: "UK Market Coverage" },
+    ],
+    products: {
       eyebrow: "Product systems",
-      title: "A connected view of electrical infrastructure",
+      title: "Electrical infrastructure, organised around the project",
       introduction:
-        "Explore the high-level system families intended for the InfraVolt catalogue. Technical specifications and availability will be published only from verified product sources.",
+        "Explore the principal system families available for project review. Detailed performance, compliance and availability information remains controlled by verified product documentation.",
       items: [
         {
+          id: "busbar",
           title: "Busbar Systems",
           description:
-            "Structured power distribution routes for commercial, industrial and infrastructure environments.",
+            "Structured power-distribution systems for commercial, industrial and infrastructure environments.",
+          imageAlt: "Gersan busbar trunking system product view",
         },
         {
-          title: "Cable Support Systems",
+          id: "cable-management",
+          title: "Cable Tray & Ladder Systems",
           description:
-            "Cable tray, ladder and support-system families for coordinated electrical routes.",
+            "Cable-management routes for coordinated power, control and data installations.",
+          imageAlt: "Gersan cable tray system product view",
         },
         {
-          title: "Distribution Panels",
+          id: "earthing-lightning",
+          title: "Earthing & Lightning Protection",
           description:
-            "Panel-system categories for organised electrical distribution requirements.",
+            "System families for planned earthing, bonding and lightning-protection requirements.",
+          imageAlt: "Earthing and bonding system components",
         },
         {
-          title: "Earthing and Lightning Protection",
-          description:
-            "System families supporting planned earthing and lightning-protection routes.",
-        },
-        {
+          id: "underfloor",
           title: "Underfloor Systems",
           description:
-            "Flexible service-distribution approaches for modern occupied spaces.",
+            "Flexible service-distribution pathways for modern occupied spaces.",
+          imageAlt:
+            "Representative support-system components for underfloor service routes",
         },
         {
-          title: "Lighting Busbar and Industrial Lighting",
+          id: "led-bus lighting",
+          title: "Lighting & Automation Systems",
           description:
-            "Electrical distribution and lighting-system categories for industrial settings.",
+            "LED-BUS lighting distribution and G-BUS automation for switching, dimming, scheduling and intelligent control.",
+          imageAlt: "Lighting busbar and luminaire product view",
         },
         {
-          title: "EV Charging Infrastructure",
+          id: "ev-charging",
+          title: "EV Charging Systems",
           description:
-            "Infrastructure categories for coordinated electric-vehicle charging projects.",
+            "AC and DC electric vehicle charging solutions for commercial, residential and infrastructure projects.",
+          imageAlt: "Gersan electric vehicle charging systems",
         },
       ],
     },
-    sectors: {
-      eyebrow: "Project environments",
-      title: "Built around the way infrastructure projects are specified",
+    industries: {
+      eyebrow: "Industries we serve",
+      title: "Infrastructure systems shaped by the operating environment",
       introduction:
-        "Different environments place different demands on routing, coordination and delivery. InfraVolt organises system discovery around the project context.",
+        "Each project environment brings different routing, continuity, access and documentation needs. These sector views help frame the right system conversation.",
+      imageDisclosure:
+        "Illustrative application view — not an InfraVolt project photograph.",
       items: [
         {
-          title: "Commercial Buildings",
-          description:
-            "Coordinated electrical routes for workplaces, mixed-use and high-occupancy buildings.",
-        },
-        {
+          id: "data-centres",
           title: "Data Centres",
           description:
-            "System discovery for dense, continuity-focused technical environments.",
+            "System coordination for dense, continuity-focused technical environments.",
+          imageAlt:
+            "Illustrative data-centre server hall showing electrical service routes",
         },
         {
+          id: "commercial-buildings",
+          title: "Commercial Buildings",
+          description:
+            "Adaptable electrical pathways for workplaces and mixed-use buildings.",
+          imageAlt:
+            "Illustrative commercial office floor showing electrical service routes",
+        },
+        {
+          id: "industrial-facilities",
           title: "Industrial Facilities",
           description:
-            "Infrastructure categories for production, logistics and process environments.",
+            "Robust routing and distribution contexts for production environments.",
+          imageAlt:
+            "Illustrative industrial production line showing electrical infrastructure",
         },
         {
-          title: "Transport and Infrastructure",
+          id: "infrastructure-utilities",
+          title: "Infrastructure & Utilities",
           description:
-            "Project contexts spanning terminals, rail, public assets and connected infrastructure.",
+            "Coordinated system contexts for essential services and public assets.",
+          imageAlt:
+            "Illustrative utilities pumping station showing electrical systems",
         },
         {
-          title: "Energy and Utilities",
+          id: "renewable-energy",
+          title: "Renewable Energy",
           description:
-            "Electrical-system pathways for energy and essential-service environments.",
+            "Electrical protection and routing contexts for renewable installations.",
+          imageAlt:
+            "Illustrative solar installation with electrical enclosure and cable routes",
         },
         {
-          title: "Healthcare and Education",
+          id: "healthcare",
+          title: "Healthcare",
           description:
-            "Clear system coordination for complex public and institutional buildings.",
+            "Clear infrastructure coordination for complex clinical environments.",
+          imageAlt:
+            "Illustrative healthcare ward showing electrical distribution routes",
+        },
+        {
+          id: "transport-infrastructure",
+          title: "Transport Infrastructure",
+          description:
+            "System discovery for terminals and connected transport environments.",
+          imageAlt:
+            "Illustrative airport public concourse showing electrical service routes",
+        },
+        {
+          id: "education-public-sector",
+          title: "Education & Public Sector",
+          description:
+            "Adaptable electrical pathways for institutional and civic buildings.",
+          imageAlt:
+            "Illustrative education library showing electrical service routes",
         },
       ],
     },
+    applicationMap: {
+      eyebrow: "Application map",
+      title: "Connect each project zone to suitable system families",
+      description:
+        "Application mapping brings the building environment, electrical routes and relevant product-system families into one structured project view.",
+      connections: [
+        "Select the project environment",
+        "Review critical electrical zones",
+        "Identify systems for detailed evaluation",
+      ],
+      action: { href: "#industries", label: "Explore Applications" },
+    },
     support: {
-      eyebrow: "Technical and project support",
-      title: "A clear route from project need to commercial response",
+      eyebrow: "Technical project support",
+      title: "A structured pathway from requirement to supply planning",
       introduction:
-        "The support process is designed to keep requirements, system options and technical information connected without implying design approval or certification services.",
+        "InfraVolt coordinates product selection and technical information without implying regulated design approval, certification or installation services.",
       steps: [
         {
-          title: "Share project requirements",
+          title: "Understand project requirements",
           description:
-            "Outline the environment, programme and electrical infrastructure need.",
+            "Establish the environment, programme and electrical infrastructure brief.",
         },
         {
-          title: "Review system options",
+          title: "Select suitable product systems",
           description:
-            "Identify relevant product-system families for further evaluation.",
+            "Identify relevant system families for technical and commercial review.",
         },
         {
-          title: "Coordinate technical information",
+          title: "Coordinate technical documentation",
           description:
-            "Bring the available technical material into a structured project conversation.",
+            "Bring available product information into a controlled project process.",
         },
         {
-          title: "Prepare a commercial response",
+          title: "Support quotation and supply planning",
           description:
-            "Develop a clear supply response against the confirmed project scope.",
+            "Prepare the confirmed scope for a clear commercial response.",
         },
       ],
     },
     manufacturer: {
-      eyebrow: "Manufacturer systems",
-      title: "Gersan electrical infrastructure systems",
+      eyebrow: "Manufacturing partner",
+      title: "Established manufacturing capability behind every system",
       description:
-        "The future InfraVolt catalogue is intended to present relevant Gersan electrical infrastructure system families in a clear, project-focused structure.",
-      assurance:
-        "Product details, documents, claims and media will appear only after their source, applicability and publication rights have been verified.",
-      visualLabel: "Structured system information",
+        "For more than 45 years, Gersan has developed electrical infrastructure systems and materials designed to carry, connect and protect electrical conductors across demanding applications.",
+      mediaOwnership:
+        "Factory facilities, production footage and manufacturing capabilities shown here belong to Gersan Elektrik Ticaret ve Sanayi A.Ş., not InfraVolt.",
+      videoLabel: "Gersan factory and production overview",
+      playLabel: "Play Gersan manufacturing video",
+      pauseLabel: "Pause Gersan manufacturing video",
+      fallback:
+        "The Gersan manufacturing video is unavailable. The poster image remains visible.",
+      facts: [
+        {
+          title: "45+ Years",
+          description: "Electrical systems manufacturing experience",
+        },
+        {
+          title: "Borsa İstanbul",
+          description: "Publicly listed as GEREL",
+        },
+        {
+          title: "Certified Operations",
+          description: "ISO 9001 • ISO 14001 • ISO 45001",
+        },
+      ],
+      listingLabel: "Publicly listed industrial manufacturer",
+      listingStatement:
+        "Gersan Elektrik Ticaret ve Sanayi A.Ş. is listed on Borsa İstanbul under the ticker GEREL.",
+      internalAction: { href: "#product-systems", label: "Explore Gersan" },
+      externalAction: {
+        href: "https://kap.org.tr/tr/sirket-finansal-bilgileri/964-gersan-elektrik-ticaret-ve-sanayi-a-s",
+        label: "View Official Disclosures",
+        accessibleLabel:
+          "View official Gersan disclosures on the external KAP website (opens in a new tab)",
+      },
+    },
+    technicalDocuments: {
+      eyebrow: "Controlled document support",
+      title: "Technical information aligned to the project",
+      description:
+        "Project-specific technical material is provided through a controlled document process so that source, applicability and version can be checked.",
+      items: [
+        "Datasheets",
+        "Product certificates",
+        "Test documentation",
+        "Installation guidance",
+        "BIM / CAD resources",
+      ],
+      action: {
+        href: "#contact",
+        label: "Request Technical Documentation",
+      },
     },
     contact: {
-      eyebrow: "Start with the project",
-      title: "Bring clarity to your next infrastructure requirement.",
+      eyebrow: "Project enquiry",
+      title: "Planning an electrical infrastructure project?",
       description:
-        "Review the project-support pathway and the system families relevant to your brief. A dedicated enquiry workflow will follow in its authorised delivery increment.",
-      primaryAction: { href: "#support", label: "Review the support process" },
-      secondaryAction: { href: "#systems", label: "Explore product systems" },
+        "Share your system requirements, project stage and documentation needs with the InfraVolt team.",
+      primaryAction: {
+        href: "#project-support",
+        label: "Request Project Support",
+      },
+      secondaryAction: {
+        href: "#footer-company",
+        label: "Contact InfraVolt",
+      },
+    },
+    certifications: {
+      title: "Quality you can rely on",
+      description:
+        "Selected Gersan systems are supported by verified manufacturer and product documentation.",
+      markLabelSuffix: "Gersan manufacturer or relevant product documentation",
+      scopeNote:
+        "Applicability varies by system. LOVAG–ACAE applies only to relevant tested Gersan busbar ranges.",
     },
   },
   ua: {
     metadata: {
-      title: "Системи електричної інфраструктури | InfraVolt",
+      title:
+        "Системи електричної інфраструктури та проєктне постачання | InfraVolt",
       description:
-        "Системи електричної інфраструктури, координація технічної інформації та підтримка проєктного постачання для України.",
+        "Системи електричної інфраструктури Gersan, технічна документація та підтримка проєктного постачання для України.",
     },
     shell: {
-      skipLink: "Перейти до основного вмісту",
       navigationLabel: "Основна навігація",
       mobileNavigationLabel: "Мобільна навігація",
       openMenuLabel: "Відкрити навігаційне меню",
       closeMenuLabel: "Закрити навігаційне меню",
-      marketLabel: "Поточний ринок",
+      marketLabel: "Ринок",
       marketName: "Україна",
-      localeName: "Українська",
-      utilityMessage:
-        "Системи електричної інфраструктури для вимогливих проєктних середовищ",
+      localeName: "uk-UA",
       brandDescriptor: "Електрична інфраструктура",
       navigation: [
-        { href: "#systems", label: "Системи продукції" },
-        { href: "#sectors", label: "Галузі" },
-        { href: "#support", label: "Підтримка проєктів" },
-        { href: "#manufacturer", label: "Системи Gersan" },
+        { href: "#top", label: "Головна" },
+        { href: "#about-gersan", label: "Про Gersan" },
+        { href: "#product-systems", label: "Продукція Gersan" },
+        { href: "#industries", label: "Галузі" },
+        { href: "#technical-documents", label: "Технічні документи" },
+        { href: "#contact", label: "Дилерам / Торговий акаунт" },
+        { href: "#project-support", label: "Підтримка проєктів" },
+        { href: "#contact", label: "Контакти" },
       ],
-      headerCta: { href: "#contact", label: "Обговорити проєкт" },
       footerDescription:
-        "Зрозумілий шлях до систем електричної інфраструктури, технічної інформації та узгодженого проєктного постачання.",
-      footerSystemsLabel: "Огляд",
+        "Системи електричної інфраструктури, технічна документація та узгоджена підтримка проєктного постачання для України.",
+      footerProductLabel: "Системи продукції",
+      footerResourceLabel: "Ресурси для проєктів",
+      footerCompanyLabel: "Компанія",
+      footerProducts: [
+        { href: "#product-systems", label: "Шинопровідні системи" },
+        { href: "#product-systems", label: "Кабельні траси" },
+        {
+          href: "#product-systems",
+          label: "Заземлення та блискавкозахист",
+        },
+        { href: "#product-systems", label: "Системи розподілу" },
+      ],
+      footerResources: [
+        { href: "#industries", label: "Галузі" },
+        { href: "#technical-documents", label: "Технічні документи" },
+        { href: "#project-support", label: "Підтримка проєктів" },
+        { href: "#contact", label: "Дилерам / Торговий акаунт" },
+      ],
+      footerCompany: [
+        { href: "#about-gersan", label: "Про Gersan" },
+        { href: "#contact", label: "Контакти" },
+      ],
       footerMarketLabel: "Ринок",
-      footerRights: "InfraVolt. Вміст належить проєкту.",
     },
     hero: {
-      eyebrow: "Електрична інфраструктура · Проєктне постачання",
-      title:
-        "Системи електричної інфраструктури для проєктів, у яких невизначеність неприпустима.",
+      eyebrow: "Електрична інфраструктура • Проєктне постачання",
+      title: "Системи електричної інфраструктури для складних проєктів.",
       description:
-        "InfraVolt допомагає проєктним командам орієнтуватися у виборі систем, узгоджувати технічну інформацію та формувати вимоги до електричної інфраструктури для чіткої комерційної відповіді.",
-      primaryAction: { href: "#systems", label: "Оглянути системи продукції" },
-      secondaryAction: { href: "#contact", label: "Запросити підтримку проєкту" },
-      diagramEyebrow: "Шлях проєкту",
-      diagramTitle: "Від вимог до узгодженої відповіді",
-      diagramItems: [
-        "Вибір систем",
-        "Технічна координація",
-        "Проєктне постачання",
-      ],
+        "InfraVolt допомагає проєктним командам в Україні добирати шинопровідні системи Gersan, кабельні траси, рішення для заземлення, розподілу електроенергії та технічної підтримки.",
+      primaryAction: {
+        href: "#product-systems",
+        label: "Оглянути системи продукції",
+      },
+      secondaryAction: {
+        href: "#project-support",
+        label: "Запросити підтримку проєкту",
+      },
+      videoLabel: "Огляд виробництва систем електричної інфраструктури Gersan",
+      playLabel: "Відтворити відео на головній сторінці",
+      pauseLabel: "Призупинити відео на головній сторінці",
+      fallback:
+        "Відео про виробництво недоступне. Зображення постера залишається видимим.",
     },
-    systems: {
+    capabilities: [
+      { id: "documentation", title: "Технічна документація" },
+      { id: "project-support", title: "Підтримка проєктів" },
+      { id: "specification", title: "Підтримка специфікацій" },
+      { id: "market", title: "Орієнтація на українські проєкти" },
+    ],
+    products: {
       eyebrow: "Системи продукції",
-      title: "Цілісний погляд на електричну інфраструктуру",
+      title: "Електрична інфраструктура в контексті проєкту",
       introduction:
-        "Ознайомтеся з основними групами систем, запланованими для каталогу InfraVolt. Технічні характеристики та доступність публікуватимуться лише на основі перевірених джерел.",
+        "Ознайомтеся з основними групами систем для проєктного опрацювання. Детальні дані про характеристики, відповідність і доступність надаються лише з перевіреної документації.",
       items: [
         {
+          id: "busbar",
           title: "Шинопровідні системи",
           description:
-            "Структуровані рішення для розподілу електроенергії у комерційних, промислових та інфраструктурних середовищах.",
+            "Структурований розподіл електроенергії для комерційних, промислових та інфраструктурних об’єктів.",
+          imageAlt: "Вигляд шинопровідної системи Gersan",
         },
         {
-          title: "Системи кабельних трас",
+          id: "cable-management",
+          title: "Кабельні лотки та драбини",
           description:
-            "Групи кабельних лотків, драбин і опор для узгодженого прокладання електричних мереж.",
+            "Кабельні траси для узгодженого прокладання силових, контрольних та інформаційних мереж.",
+          imageAlt: "Вигляд кабельного лотка Gersan",
         },
         {
-          title: "Розподільні щити",
-          description:
-            "Категорії щитових систем для організованих потреб розподілу електроенергії.",
-        },
-        {
+          id: "earthing-lightning",
           title: "Заземлення та блискавкозахист",
           description:
-            "Групи систем для запланованих контурів заземлення та блискавкозахисту.",
+            "Групи систем для запланованих контурів заземлення, зрівнювання потенціалів і блискавкозахисту.",
+          imageAlt: "Компоненти системи заземлення та зрівнювання потенціалів",
         },
         {
+          id: "underfloor",
           title: "Підпідлогові системи",
           description:
-            "Гнучкі підходи до розподілу інженерних мереж у сучасних приміщеннях.",
+            "Гнучкі шляхи розподілу інженерних мереж у сучасних приміщеннях.",
+          imageAlt:
+            "Приклад опорних компонентів для підпідлогових інженерних трас",
         },
         {
-          title: "Освітлювальні шинопроводи та промислове освітлення",
+          id: "led-bus lighting",
+          title: "Системи освітлення та автоматизації",
           description:
-            "Категорії систем електророзподілу та освітлення для промислових середовищ.",
+            "Системи LED-BUS та автоматизація G-BUS для керування, димування, планування й інтелектуального контролю освітлення.",
+          imageAlt: "Вигляд освітлювального шинопроводу та світильника",
         },
         {
-          title: "Інфраструктура заряджання електромобілів",
+          id: "ev-charging",
+          title: "Системи заряджання електромобілів",
           description:
-            "Категорії інфраструктури для узгоджених проєктів заряджання електромобілів.",
+            "Рішення для заряджання електромобілів змінним і постійним струмом для комерційних, житлових та інфраструктурних проєктів.",
+          imageAlt: "Системи заряджання електромобілів Gersan",
         },
       ],
     },
-    sectors: {
-      eyebrow: "Проєктні середовища",
-      title: "Відповідно до логіки проєктування інфраструктурних об’єктів",
+    industries: {
+      eyebrow: "Галузі застосування",
+      title: "Системи відповідно до умов експлуатації об’єкта",
       introduction:
-        "Кожне середовище має власні вимоги до прокладання мереж, координації та постачання. InfraVolt організовує пошук систем навколо контексту проєкту.",
+        "Кожне проєктне середовище має власні вимоги до прокладання мереж, безперервності, доступу й документації. Галузеві приклади допомагають визначити контекст систем.",
+      imageDisclosure:
+        "Ілюстративне зображення застосування — не фотографія проєкту InfraVolt.",
       items: [
         {
-          title: "Комерційні будівлі",
-          description:
-            "Узгоджені електричні мережі для офісних, багатофункціональних і завантажених будівель.",
-        },
-        {
+          id: "data-centres",
           title: "Центри обробки даних",
           description:
-            "Пошук систем для щільних технічних середовищ із фокусом на безперервності.",
+            "Координація систем для щільних технічних середовищ із фокусом на безперервності.",
+          imageAlt:
+            "Ілюстративний серверний зал із маршрутами інженерних мереж",
         },
         {
+          id: "commercial-buildings",
+          title: "Комерційні будівлі",
+          description:
+            "Адаптивні електричні траси для офісних і багатофункціональних будівель.",
+          imageAlt:
+            "Ілюстративний офісний поверх із маршрутами інженерних мереж",
+        },
+        {
+          id: "industrial-facilities",
           title: "Промислові об’єкти",
           description:
-            "Категорії інфраструктури для виробничих, логістичних і технологічних середовищ.",
+            "Контексти прокладання мереж і розподілу електроенергії у виробничих середовищах.",
+          imageAlt:
+            "Ілюстративна виробнича лінія з електричною інфраструктурою",
         },
         {
-          title: "Транспорт та інфраструктура",
+          id: "infrastructure-utilities",
+          title: "Інфраструктура та комунальні об’єкти",
           description:
-            "Контексти проєктів для терміналів, залізниці, громадських і пов’язаних інфраструктурних об’єктів.",
+            "Узгоджені системні контексти для критичних сервісів і громадських активів.",
+          imageAlt: "Ілюстративна насосна станція з електричними системами",
         },
         {
-          title: "Енергетика та комунальна інфраструктура",
+          id: "renewable-energy",
+          title: "Відновлювана енергетика",
           description:
-            "Шляхи вибору електричних систем для енергетики та критично важливих сервісів.",
+            "Контексти електричного захисту й прокладання мереж для відновлюваної енергетики.",
+          imageAlt:
+            "Ілюстративна сонячна установка з електричною шафою та кабельними трасами",
         },
         {
-          title: "Охорона здоров’я та освіта",
+          id: "healthcare",
+          title: "Охорона здоров’я",
           description:
-            "Чітка координація систем для складних громадських та інституційних будівель.",
+            "Чітка координація інфраструктури для складних клінічних середовищ.",
+          imageAlt:
+            "Ілюстративна лікарняна палата з маршрутами електричних мереж",
+        },
+        {
+          id: "transport-infrastructure",
+          title: "Транспортна інфраструктура",
+          description:
+            "Пошук систем для терміналів і пов’язаних транспортних середовищ.",
+          imageAlt:
+            "Ілюстративний пасажирський простір аеропорту з інженерними мережами",
+        },
+        {
+          id: "education-public-sector",
+          title: "Освіта та громадський сектор",
+          description:
+            "Адаптивні електричні шляхи для освітніх і громадських будівель.",
+          imageAlt: "Ілюстративна бібліотека з маршрутами інженерних мереж",
         },
       ],
     },
+    applicationMap: {
+      eyebrow: "Карта застосувань",
+      title: "Поєднайте зони проєкту з відповідними групами систем",
+      description:
+        "Карта застосувань об’єднує середовище будівлі, маршрути електричних мереж і відповідні групи продукції в одному структурованому огляді.",
+      connections: [
+        "Оберіть проєктне середовище",
+        "Перегляньте критичні електричні зони",
+        "Визначте системи для детального опрацювання",
+      ],
+      action: { href: "#industries", label: "Оглянути застосування" },
+    },
     support: {
-      eyebrow: "Технічна та проєктна підтримка",
-      title: "Зрозумілий шлях від потреби проєкту до комерційної відповіді",
+      eyebrow: "Технічна підтримка проєктів",
+      title: "Структурований шлях від вимог до планування постачання",
       introduction:
-        "Процес підтримки поєднує вимоги, варіанти систем і технічну інформацію, не створюючи враження надання послуг із затвердження проєкту чи сертифікації.",
+        "InfraVolt координує вибір продукції та технічну інформацію, не створюючи враження надання регульованих послуг із затвердження проєкту, сертифікації чи монтажу.",
       steps: [
         {
-          title: "Поділіться вимогами проєкту",
+          title: "Зрозуміти вимоги проєкту",
           description:
-            "Окресліть середовище, графік і потреби електричної інфраструктури.",
+            "Визначити середовище, програму та потреби електричної інфраструктури.",
         },
         {
-          title: "Розгляньте варіанти систем",
+          title: "Обрати відповідні системи",
           description:
-            "Визначте відповідні групи систем продукції для подальшого опрацювання.",
+            "Відібрати групи систем для технічного й комерційного опрацювання.",
         },
         {
-          title: "Узгодьте технічну інформацію",
+          title: "Узгодити технічну документацію",
           description:
-            "Структуруйте доступні технічні матеріали для предметного обговорення проєкту.",
+            "Організувати доступну інформацію про продукцію в контрольованому проєктному процесі.",
         },
         {
-          title: "Підготуйте комерційну відповідь",
+          title: "Підтримати планування пропозиції та постачання",
           description:
-            "Сформуйте чітку пропозицію постачання відповідно до підтвердженого обсягу проєкту.",
+            "Підготувати підтверджений обсяг для чіткої комерційної відповіді.",
         },
       ],
     },
     manufacturer: {
-      eyebrow: "Системи виробника",
-      title: "Системи електричної інфраструктури Gersan",
+      eyebrow: "Виробничий партнер",
+      title: "Перевірені виробничі можливості для кожної системи",
       description:
-        "Майбутній каталог InfraVolt має представити відповідні групи систем електричної інфраструктури Gersan у зрозумілій структурі, орієнтованій на потреби проєкту.",
-      assurance:
-        "Деталі продукції, документи, твердження та медіа з’являться лише після перевірки джерел, застосовності та прав на публікацію.",
-      visualLabel: "Структурована інформація про системи",
+        "Понад 45 років Gersan розробляє системи та матеріали електричної інфраструктури для передавання, з’єднання й захисту електричних провідників у складних сферах застосування.",
+      mediaOwnership:
+        "Показані виробничі об’єкти, кадри та можливості належать Gersan Elektrik Ticaret ve Sanayi A.Ş., а не InfraVolt.",
+      videoLabel: "Огляд виробничих об’єктів і процесів Gersan",
+      playLabel: "Відтворити відео про виробництво Gersan",
+      pauseLabel: "Призупинити відео про виробництво Gersan",
+      fallback:
+        "Відео про виробництво Gersan недоступне. Зображення постера залишається видимим.",
+      facts: [
+        {
+          title: "45+ років",
+          description: "Досвід виробництва електричних систем",
+        },
+        {
+          title: "Borsa İstanbul",
+          description: "Публічна компанія з тикером GEREL",
+        },
+        {
+          title: "Сертифіковані операції",
+          description: "ISO 9001 • ISO 14001 • ISO 45001",
+        },
+      ],
+      listingLabel: "Публічна промислова компанія",
+      listingStatement:
+        "Gersan Elektrik Ticaret ve Sanayi A.Ş. котирується на Borsa İstanbul під тикером GEREL.",
+      internalAction: { href: "#product-systems", label: "Оглянути Gersan" },
+      externalAction: {
+        href: "https://kap.org.tr/tr/sirket-finansal-bilgileri/964-gersan-elektrik-ticaret-ve-sanayi-a-s",
+        label: "Офіційні розкриття",
+        accessibleLabel:
+          "Переглянути офіційні розкриття Gersan на зовнішньому сайті KAP (відкриється в новій вкладці)",
+      },
+    },
+    technicalDocuments: {
+      eyebrow: "Контрольована технічна підтримка",
+      title: "Технічна інформація відповідно до потреб проєкту",
+      description:
+        "Матеріали для конкретного проєкту надаються через контрольований процес, щоб перевірити джерело, застосовність і версію документа.",
+      items: [
+        "Технічні паспорти",
+        "Сертифікати продукції",
+        "Протоколи випробувань",
+        "Настанови з монтажу",
+        "Ресурси BIM / CAD",
+      ],
+      action: {
+        href: "#contact",
+        label: "Запросити технічну документацію",
+      },
     },
     contact: {
-      eyebrow: "Почніть із проєкту",
-      title: "Додайте ясності наступній інфраструктурній вимозі.",
+      eyebrow: "Проєктний запит",
+      title: "Плануєте проєкт електричної інфраструктури?",
       description:
-        "Ознайомтеся зі шляхом проєктної підтримки та групами систем, що відповідають вашому запиту. Окремий процес звернення буде реалізовано у відповідному авторизованому етапі.",
-      primaryAction: { href: "#support", label: "Переглянути процес підтримки" },
-      secondaryAction: { href: "#systems", label: "Оглянути системи продукції" },
+        "Повідомте команді InfraVolt про потрібні системи, стадію проєкту та вимоги до документації.",
+      primaryAction: {
+        href: "#project-support",
+        label: "Запросити підтримку проєкту",
+      },
+      secondaryAction: {
+        href: "#footer-company",
+        label: "Зв’язатися з InfraVolt",
+      },
+    },
+    certifications: {
+      title: "Якість, на яку можна покластися",
+      description:
+        "Окремі системи Gersan підтверджені документацією виробника та продукції.",
+      markLabelSuffix:
+        "документація виробника Gersan або відповідної продукції",
+      scopeNote:
+        "Застосовність залежить від системи. LOVAG–ACAE стосується лише відповідних випробуваних шинопровідних систем Gersan.",
     },
   },
 } as const satisfies Readonly<Record<MarketCode, PublicSiteContent>>;

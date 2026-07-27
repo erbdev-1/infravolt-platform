@@ -2,8 +2,6 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 
-import { LinkButton } from "@/components/ui/link-button";
-
 import type { PublicSiteContent } from "@/modules/public-site/content";
 
 type MobileNavigationProps = Readonly<{
@@ -22,7 +20,7 @@ export function MobileNavigation({ content }: MobileNavigationProps) {
     }
 
     const previousOverflow = document.body.style.overflow;
-    const mediaQuery = window.matchMedia("(min-width: 64rem)");
+    const mediaQuery = window.matchMedia("(min-width: 80rem)");
 
     document.body.style.overflow = "hidden";
     firstLinkRef.current?.focus();
@@ -77,7 +75,7 @@ export function MobileNavigation({ content }: MobileNavigationProps) {
             {content.navigation.map((item, index) => (
               <a
                 href={item.href}
-                key={item.href}
+                key={`${item.href}-${item.label}`}
                 onClick={() => setIsOpen(false)}
                 ref={index === 0 ? firstLinkRef : undefined}
               >
@@ -85,13 +83,16 @@ export function MobileNavigation({ content }: MobileNavigationProps) {
               </a>
             ))}
           </nav>
-          <LinkButton
-            href={content.headerCta.href}
-            onClick={() => setIsOpen(false)}
-            variant="accent"
-          >
-            {content.headerCta.label}
-          </LinkButton>
+          <div className="mobile-navigation__market">
+            <span>{content.marketLabel}</span>
+            <strong>{content.marketName}</strong>
+            <small>{content.localeName}</small>
+          </div>
+          {content.relationshipLabel ? (
+            <p className="mobile-navigation__relationship">
+              {content.relationshipLabel}
+            </p>
+          ) : null}
         </div>
       ) : null}
     </div>

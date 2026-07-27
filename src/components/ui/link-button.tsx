@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react";
 
 type LinkButtonProps = ComponentPropsWithoutRef<"a"> & {
-  variant?: "primary" | "secondary" | "accent";
+  variant?: "primary" | "secondary" | "accent" | "light-outline";
 };
 
 export function LinkButton({

@@ -16,9 +16,6 @@ export function PublicSiteShell({ children, market }: PublicSiteShellProps) {
 
   return (
     <>
-      <a className="skip-link" href="#main-content">
-        {content.shell.skipLink}
-      </a>
       <div id="top">
         <SiteHeader content={content.shell} />
         {children}
