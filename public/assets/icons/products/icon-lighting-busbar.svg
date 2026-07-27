@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title>Lighting Busbar Systems</title>
+  <defs>
+    <style>
+      .bg { fill: #071A33; }
+      .accent { fill: #D71920; }
+      .line { fill: none; stroke: #FFFFFF; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #FFFFFF; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+      .redline { fill: none; stroke: #D71920; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .fillwhite { fill: #FFFFFF; }
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="128" height="128" rx="24"/>
+  <circle class="accent" cx="100" cy="28" r="10"/>
+
+  <rect class="line" x="24" y="36" width="80" height="18" rx="5"/>
+  <path class="thin" d="M40 54v20M64 54v20M88 54v20"/>
+  <path class="line" d="M34 82h12M58 82h12M82 82h12"/>
+  <path class="redline" d="M64 18v12M43 22l6 10M85 22l-6 10"/>
+
+</svg>

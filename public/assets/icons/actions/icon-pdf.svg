@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title>PDF Document</title>
+  <defs>
+    <style>
+      .bg { fill: #071A33; }
+      .accent { fill: #D71920; }
+      .line { fill: none; stroke: #FFFFFF; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #FFFFFF; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+      .redline { fill: none; stroke: #D71920; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .fillwhite { fill: #FFFFFF; }
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="128" height="128" rx="24"/>
+  <circle class="accent" cx="100" cy="28" r="10"/>
+
+  <path class="line" d="M38 20h38l20 20v68H38V20Z"/>
+  <path class="thin" d="M76 20v22h20"/>
+  <path class="redline" d="M32 74h64"/>
+  <text x="40" y="66" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">PDF</text>
+
+</svg>

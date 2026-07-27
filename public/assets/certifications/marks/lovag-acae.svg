@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" role="img" aria-labelledby="title description">
+  <title id="title">LOVAG ACAE</title>
+  <desc id="description">LOVAG ACAE busbar testing documentation typographic mark</desc>
+  <rect x="2" y="6" width="256" height="52" rx="4" fill="none" stroke="#566A80"/>
+  <text x="18" y="39" fill="#F4F7FA" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="1.5">LOVAG</text>
+  <path d="M132 17v30" stroke="#D71920" stroke-width="3"/>
+  <text x="151" y="39" fill="#F4F7FA" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="1.5">ACAE</text>
+</svg>

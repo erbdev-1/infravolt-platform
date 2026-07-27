@@ -67,11 +67,20 @@ export default defineConfig({
 const fixtureSource = `
 import { expect, test } from "../../../tests/e2e/fixtures/test";
 
-test("expected artifact assertion failure", async ({ browserDiagnostics, page }) => {
-  await page.goto("/");
+test("expected artifact assertion failure", async ({
+  browserDiagnostics,
+  page,
+}) => {
+  await page.setContent(
+    '<!doctype html><html lang="en-GB"><body><main><h1>Artifact fixture</h1></main></body></html>',
+  );
+
   browserDiagnostics.assertClean();
+
   await expect(
-    page.getByRole("heading", { name: "EXPECTED_ARTIFACT_ASSERTION" }),
+    page.getByRole("heading", {
+      name: "EXPECTED_ARTIFACT_ASSERTION",
+    }),
   ).toBeVisible();
 });
 `;
@@ -207,9 +216,7 @@ function isSafeBrowserDiagnostic(content: Buffer): boolean {
 function readArchiveEntry(archive: string, entry: string): Buffer {
   const result = spawnSync(
     useWindowsBsdtar ? "tar" : "unzip",
-    useWindowsBsdtar
-      ? ["-xOf", archive, entry]
-      : ["-p", archive, entry],
+    useWindowsBsdtar ? ["-xOf", archive, entry] : ["-p", archive, entry],
     {
       encoding: "buffer",
       env: createSafeTestProcessEnvironment(),
@@ -250,37 +257,68 @@ function listArchiveEntries(archive: string): readonly string[] {
 }
 
 function readDiagnosticAttachments(traceFile: string): readonly Buffer[] {
-  const events = readArchiveEntry(traceFile, "test.trace")
-    .toString("utf8")
-    .split(/\r?\n/u)
-    .filter(Boolean);
+  const archiveEntries = listArchiveEntries(traceFile);
+  const traceEntries = archiveEntries.filter((entry) =>
+    entry.endsWith(".trace"),
+  );
   const diagnostics: Buffer[] = [];
+  const processedAttachments = new Set<string>();
 
-  for (const eventText of events) {
-    const event: unknown = JSON.parse(eventText);
+  for (const traceEntry of traceEntries) {
+    const events = readArchiveEntry(traceFile, traceEntry)
+      .toString("utf8")
+      .split(/\r?\n/u)
+      .filter(Boolean);
 
-    if (typeof event !== "object" || event === null) {
-      continue;
-    }
+    for (const eventText of events) {
+      let event: unknown;
 
-    const attachments = Reflect.get(event, "attachments");
-
-    if (!Array.isArray(attachments)) {
-      continue;
-    }
-
-    for (const attachment of attachments) {
-      if (typeof attachment !== "object" || attachment === null) {
+      try {
+        event = JSON.parse(eventText);
+      } catch {
         continue;
       }
 
-      const name = Reflect.get(attachment, "name");
-      const sha1 = Reflect.get(attachment, "sha1");
+      if (typeof event !== "object" || event === null) {
+        continue;
+      }
 
-      if (name === "browser-diagnostics" && typeof sha1 === "string") {
-        diagnostics.push(
-          readArchiveEntry(traceFile, `resources/${path.basename(sha1)}`),
+      const attachments = Reflect.get(event, "attachments");
+
+      if (!Array.isArray(attachments)) {
+        continue;
+      }
+
+      for (const attachment of attachments) {
+        if (typeof attachment !== "object" || attachment === null) {
+          continue;
+        }
+
+        const name = Reflect.get(attachment, "name");
+        const sha1 = Reflect.get(attachment, "sha1");
+
+        if (
+          name !== "browser-diagnostics" ||
+          typeof sha1 !== "string" ||
+          processedAttachments.has(sha1)
+        ) {
+          continue;
+        }
+
+        const resourceEntry = archiveEntries.find(
+          (entry) =>
+            entry.includes("resources/") &&
+            path.basename(entry) === path.basename(sha1),
         );
+
+        if (!resourceEntry) {
+          throw new Error(
+            "Browser diagnostic attachment was not found in the trace archive",
+          );
+        }
+
+        processedAttachments.add(sha1);
+        diagnostics.push(readArchiveEntry(traceFile, resourceEntry));
       }
     }
   }
@@ -319,11 +357,20 @@ async function verifyArtifacts(): Promise<void> {
     !output.includes("EXPECTED_ARTIFACT_ASSERTION") ||
     !output.includes("toBeVisible")
   ) {
-    throw new Error("Artifact fixture did not fail for the expected assertion");
+    throw new Error(
+      [
+        "Artifact fixture did not fail for the expected assertion",
+        `Exit status: ${String(result.status)}`,
+        "Playwright output:",
+        output.slice(-4000),
+      ].join("\n"),
+    );
   }
 
   const files = await collectFiles(outputDirectory);
-  const traceFiles = files.filter((file) => path.basename(file) === "trace.zip");
+  const traceFiles = files.filter(
+    (file) => path.basename(file) === "trace.zip",
+  );
   const screenshots = files.filter((file) => file.endsWith(".png"));
   const diagnosticAttachments = traceFiles.flatMap((traceFile) =>
     readDiagnosticAttachments(traceFile),
@@ -395,7 +442,9 @@ try {
   await verifyArtifacts();
 } catch (error) {
   primaryFailure =
-    error instanceof Error ? error : new Error("Unknown artifact verification failure");
+    error instanceof Error
+      ? error
+      : new Error("Unknown artifact verification failure");
 }
 
 try {
@@ -403,10 +452,14 @@ try {
   await rm(proofRoot, { force: true, recursive: true });
 } catch (error) {
   const cleanupFailure =
-    error instanceof Error ? error : new Error("Unknown artifact cleanup failure");
+    error instanceof Error
+      ? error
+      : new Error("Unknown artifact cleanup failure");
 
   if (primaryFailure) {
-    console.error("Artifact cleanup also failed after the primary verification failure.");
+    console.error(
+      "Artifact cleanup also failed after the primary verification failure.",
+    );
   } else {
     primaryFailure = cleanupFailure;
   }

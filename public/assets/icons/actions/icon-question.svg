@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title>Ask Technical Question</title>
+  <defs>
+    <style>
+      .bg { fill: #071A33; }
+      .accent { fill: #D71920; }
+      .line { fill: none; stroke: #FFFFFF; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #FFFFFF; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+      .redline { fill: none; stroke: #D71920; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .fillwhite { fill: #FFFFFF; }
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="128" height="128" rx="24"/>
+  <circle class="accent" cx="100" cy="28" r="10"/>
+
+  <circle class="line" cx="64" cy="64" r="40"/>
+  <path class="line" d="M52 52c2-10 10-16 20-13 8 2 13 9 11 17-2 9-11 12-16 18-2 2-3 5-3 9"/>
+  <circle class="accent" cx="64" cy="94" r="5"/>
+
+</svg>
