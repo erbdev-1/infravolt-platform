@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title>Request Quote</title>
+  <defs>
+    <style>
+      .bg { fill: #071A33; }
+      .accent { fill: #D71920; }
+      .line { fill: none; stroke: #FFFFFF; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #FFFFFF; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+      .redline { fill: none; stroke: #D71920; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .fillwhite { fill: #FFFFFF; }
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="128" height="128" rx="24"/>
+  <circle class="accent" cx="100" cy="28" r="10"/>
+
+  <path class="line" d="M34 22h56l14 14v70H34V22Z"/>
+  <path class="thin" d="M90 22v18h14"/>
+  <path class="thin" d="M46 48h36M46 62h42M46 76h24"/>
+  <path class="redline" d="M50 94h28"/>
+  <path class="redline" d="M62 86v16"/>
+
+</svg>

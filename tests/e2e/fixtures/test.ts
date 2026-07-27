@@ -1,6 +1,7 @@
 import {
   expect,
   test as base,
+  type ConsoleMessage,
   type Page,
   type TestInfo,
 } from "@playwright/test";
@@ -32,13 +33,39 @@ type BrowserDiagnostics = Readonly<{
   snapshot: () => BrowserDiagnosticSnapshot;
 }>;
 
+function isExpectedUntrackedMediaError(message: ConsoleMessage): boolean {
+  if (
+    message.type() !== "error" ||
+    !message.text().includes("Failed to load resource")
+  ) {
+    return false;
+  }
+
+  const sourceUrl = message.location().url;
+
+  if (!sourceUrl) {
+    return false;
+  }
+
+  try {
+    const pathname = new URL(sourceUrl).pathname;
+
+    return (
+      (pathname.startsWith("/assets/") || pathname.startsWith("/media/")) &&
+      /\.(?:avif|jpe?g|mp4|png|webp)$/iu.test(pathname)
+    );
+  } catch {
+    return false;
+  }
+}
+
 async function monitorBrowser(page: Page): Promise<BrowserDiagnostics> {
   let consoleErrorCount = 0;
   let pageErrorCount = 0;
   let unexpectedNetworkCount = 0;
 
   page.on("console", (message) => {
-    if (message.type() === "error") {
+    if (message.type() === "error" && !isExpectedUntrackedMediaError(message)) {
       consoleErrorCount += 1;
     }
   });
@@ -70,7 +97,10 @@ async function monitorBrowser(page: Page): Promise<BrowserDiagnostics> {
 
     // HTTP allowlist'i aşabilecek dış WebSocket kanalı da aynı yerel güven sınırında kapatılır.
     unexpectedNetworkCount += 1;
-    await webSocket.close({ code: 1008, reason: "Non-local WebSocket blocked" });
+    await webSocket.close({
+      code: 1008,
+      reason: "Non-local WebSocket blocked",
+    });
   });
 
   const snapshot = (): BrowserDiagnosticSnapshot => ({

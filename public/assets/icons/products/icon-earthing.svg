@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title>Earthing and Bonding Systems</title>
+  <defs>
+    <style>
+      .bg { fill: #071A33; }
+      .accent { fill: #D71920; }
+      .line { fill: none; stroke: #FFFFFF; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #FFFFFF; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+      .redline { fill: none; stroke: #D71920; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .fillwhite { fill: #FFFFFF; }
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="128" height="128" rx="24"/>
+  <circle class="accent" cx="100" cy="28" r="10"/>
+
+  <path class="line" d="M64 24v44"/>
+  <path class="line" d="M38 68h52"/>
+  <path class="line" d="M46 82h36"/>
+  <path class="line" d="M54 96h20"/>
+  <path class="redline" d="M88 26l-14 18h16L76 64"/>
+
+</svg>

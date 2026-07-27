@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 64" role="img" aria-labelledby="title description">
+  <title id="title">IEC</title>
+  <desc id="description">IEC standards typographic mark</desc>
+  <g fill="none" stroke="#AAB6C4" stroke-width="1.5">
+    <circle cx="31" cy="32" r="22"/>
+    <path d="M9 32h44M31 10c9 7 13 14 13 22s-4 15-13 22M31 10c-9 7-13 14-13 22s4 15 13 22"/>
+  </g>
+  <text x="66" y="42" fill="#F4F7FA" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" letter-spacing="2">IEC</text>
+</svg>

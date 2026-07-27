@@ -60,6 +60,13 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
+# Large raster and video assets stay outside Git
+/public/assets/**/*.mp4
+/public/assets/**/*.webp
+/public/assets/**/*.jpg
+/public/assets/**/*.jpeg
+/public/assets/**/*.avif
+/public/assets/**/*.png
 
-# Local asset files
-/public/assets/
+# Small brand logo remains version-controlled
+!/public/assets/brand/gersan-logo.png

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title>EV Charging Infrastructure</title>
+  <defs>
+    <style>
+      .bg { fill: #071A33; }
+      .accent { fill: #D71920; }
+      .line { fill: none; stroke: #FFFFFF; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #FFFFFF; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+      .redline { fill: none; stroke: #D71920; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .fillwhite { fill: #FFFFFF; }
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="128" height="128" rx="24"/>
+  <circle class="accent" cx="100" cy="28" r="10"/>
+
+  <rect class="line" x="36" y="24" width="42" height="82" rx="7"/>
+  <rect class="thin" x="46" y="36" width="22" height="18" rx="3"/>
+  <path class="redline" d="M58 64 50 78h10l-4 14 14-22H60l-2-6Z"/>
+  <path class="line" d="M78 48h10c8 0 14 6 14 14v22c0 7 5 12 12 12"/>
+  <circle class="thin" cx="114" cy="96" r="6"/>
+
+</svg>

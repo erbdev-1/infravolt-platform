@@ -1,3 +1,12 @@
+const ASSET_BASE_URL = (process.env.NEXT_PUBLIC_ASSET_BASE_URL ?? "").replace(
+  /\/$/u,
+  "",
+);
+
+function mediaAsset(path: `/${string}`): string {
+  return `${ASSET_BASE_URL}${path}`;
+}
+
 export type ProductId =
   | "busbar"
   | "cable-management"
@@ -33,13 +42,17 @@ type IndustryAsset = Readonly<{
 
 export const MEDIA_ASSETS = Object.freeze({
   hero: {
-    video: "/assets/media/home/infravolt-home-hero-00-20-final.mp4",
-    poster: "/assets/media/home/infravolt-home-hero-poster.webp",
+    video: mediaAsset("/media/home/infravolt-home-hero-00-20-final.mp4"),
+    poster: mediaAsset("/media/home/infravolt-home-hero-poster.webp"),
   },
+
   aboutGersan: {
-    video:
-      "/assets/media/about-gersan/infravolt-about-gersan-00-25-to-01-15-final.mp4",
-    poster: "/assets/media/about-gersan/infravolt-about-gersan-poster.webp",
+    video: mediaAsset(
+      "/media/about-gersan/infravolt-about-gersan-00-25-to-01-15-final.mp4",
+    ),
+    poster: mediaAsset(
+      "/media/about-gersan/infravolt-about-gersan-poster.webp",
+    ),
   },
 } as const);
 
