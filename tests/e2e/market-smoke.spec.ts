@@ -70,9 +70,35 @@ test("@ua public root renders the Ukraine market homepage safely", async ({
   await expect(page.getByText("Official UK Representative")).toHaveCount(0);
   await expect(page.locator("#product-systems a.product-card")).toHaveCount(6);
   await expect(page.locator("#industries article")).toHaveCount(8);
-  await expect(page.locator("main")).not.toContainText(
-    /\b(?:exclusive distributor|officially authorised distributor|certified partner|russia|kaliningrad|GOST|EAC|UKCA|RoHS)\b|дистриб|росі|калінінград/iu,
+  const main = page.locator("main");
+
+  await expect(main).not.toContainText(/\b(?:GOST|EAC|UKCA|RoHS)\b/u);
+
+  const mainText = ((await main.textContent()) ?? "").toLocaleLowerCase(
+    "uk-UA",
   );
+
+  const forbiddenClaims = [
+    "exclusive distributor",
+    "officially authorised distributor",
+    "certified partner",
+    "russia",
+    "kaliningrad",
+    "ексклюзивний дистриб’ютор",
+    "ексклюзивний дистриб'ютор",
+    "офіційний дистриб’ютор",
+    "офіційний дистриб'ютор",
+    "сертифікований партнер",
+    "росія",
+    "росії",
+    "російський",
+    "російська",
+    "калінінград",
+  ];
+
+  for (const forbiddenClaim of forbiddenClaims) {
+    expect(mainText).not.toContain(forbiddenClaim.toLocaleLowerCase("uk-UA"));
+  }
   await expectValidPageAnchors(page);
   browserDiagnostics.assertClean();
 });

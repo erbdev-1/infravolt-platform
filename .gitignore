@@ -70,3 +70,6 @@ $RECYCLE.BIN/
 
 # Small brand logo remains version-controlled
 !/public/assets/brand/gersan-logo.png
+
+# Local catalogue extraction source files
+catalog-source/

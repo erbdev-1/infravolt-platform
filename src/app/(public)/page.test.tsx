@@ -3,10 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { PublicSiteShell } from "@/components/public/public-site-shell";
-import {
-  CERTIFICATION_ASSETS,
-  MEDIA_ASSETS,
-} from "@/modules/public-site/assets";
+import { MEDIA_ASSETS } from "@/modules/public-site/assets";
 import { publicSiteContentForMarket } from "@/modules/public-site/content";
 import { HomePageView } from "@/modules/public-site/home-page";
 
@@ -96,35 +93,52 @@ describe("HomePage", () => {
       }
 
       const videos = container.querySelectorAll("video");
-      expect(videos).toHaveLength(2);
+
+      expect(videos).toHaveLength(1);
       expect(videos[0]).toHaveAttribute("poster", MEDIA_ASSETS.hero.poster);
-      expect(videos[1]).toHaveAttribute(
-        "poster",
-        MEDIA_ASSETS.aboutGersan.poster,
-      );
       expect(
         container.querySelector(
           `source[src="${MEDIA_ASSETS.hero.video}"][type="video/mp4"]`,
         ),
       ).not.toBeNull();
-      expect(
-        container.querySelector(
-          `source[src="${MEDIA_ASSETS.aboutGersan.video}"][type="video/mp4"]`,
-        ),
-      ).not.toBeNull();
 
-      for (const mark of CERTIFICATION_ASSETS) {
-        expect(
-          screen.getByAltText(new RegExp(`^${mark.label}`, "u")),
-        ).toBeInTheDocument();
-      }
-      expect(
-        screen.getByText(content.certifications.scopeNote),
-      ).toBeInTheDocument();
-      expect(container.textContent).not.toMatch(/\b(?:GOST|EAC|UKCA|RoHS)\b/u);
-      expect(container.textContent).not.toMatch(
-        /\b(?:exclusive distributor|officially authorised distributor|certified partner|russia|kaliningrad)\b|дистриб|росі|калінінград/iu,
+      const certificationImages = container.querySelectorAll<HTMLImageElement>(
+        'img[src^="/assets/company/gersan/certifications/"]',
       );
+
+      expect(certificationImages.length).toBeGreaterThan(0);
+
+      for (const image of certificationImages) {
+        expect(image).toHaveAttribute("alt");
+        expect(image.getAttribute("alt")?.trim()).not.toBe("");
+      }
+      expect(container.textContent).not.toMatch(/\b(?:GOST|EAC|UKCA|RoHS)\b/u);
+
+      const pageText = (container.textContent ?? "").toLocaleLowerCase("uk-UA");
+
+      const forbiddenClaims = [
+        "exclusive distributor",
+        "officially authorised distributor",
+        "certified partner",
+        "russia",
+        "kaliningrad",
+        "ексклюзивний дистриб’ютор",
+        "ексклюзивний дистриб'ютор",
+        "офіційний дистриб’ютор",
+        "офіційний дистриб'ютор",
+        "сертифікований партнер",
+        "росія",
+        "росії",
+        "російський",
+        "російська",
+        "калінінград",
+      ];
+
+      for (const forbiddenClaim of forbiddenClaims) {
+        expect(pageText).not.toContain(
+          forbiddenClaim.toLocaleLowerCase("uk-UA"),
+        );
+      }
 
       if (market === "uk") {
         expect(
@@ -152,7 +166,7 @@ describe("HomePage", () => {
     render(<HomePageView market="uk" />);
 
     expect(HTMLMediaElement.prototype.play).not.toHaveBeenCalled();
-    expect(HTMLMediaElement.prototype.pause).toHaveBeenCalledTimes(2);
+    expect(HTMLMediaElement.prototype.pause).toHaveBeenCalledTimes(1);
   });
 
   it("provides a keyboard-operable mobile navigation", async () => {

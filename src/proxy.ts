@@ -42,14 +42,13 @@ export function proxy(request: NextRequest): NextResponse {
 
   return NextResponse.next({
     request: {
-      headers: createTrustedMarketHeaders(
-        request.headers,
-        resolution.context,
-      ),
+      headers: createTrustedMarketHeaders(request.headers, resolution.context),
     },
   });
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|assets(?:/|$)|images(?:/|$)|downloads(?:/|$)|favicon.ico|robots.txt|sitemap.xml).*)",
+  ],
 };
