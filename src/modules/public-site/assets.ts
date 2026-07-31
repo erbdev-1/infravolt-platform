@@ -42,17 +42,27 @@ type IndustryAsset = Readonly<{
 
 export const MEDIA_ASSETS = Object.freeze({
   hero: {
-    video: mediaAsset("/media/home/infravolt-home-hero-00-20-final.mp4"),
-    poster: mediaAsset("/media/home/infravolt-home-hero-poster.webp"),
+    video: mediaAsset("/assets/media/home/infravolt-home-hero-00-20-final.mp4"),
+    poster: mediaAsset("/assets/media/home/infravolt-home-hero-poster.webp"),
   },
 
   aboutGersan: {
     video: mediaAsset(
-      "/media/about-gersan/infravolt-about-gersan-00-25-to-01-15-final.mp4",
+      "/assets/media/about-gersan/infravolt-about-gersan-00-25-to-01-15-final.mp4",
     ),
     poster: mediaAsset(
-      "/media/about-gersan/infravolt-about-gersan-poster.webp",
+      "/assets/media/about-gersan/infravolt-about-gersan-poster.webp",
     ),
+  },
+} as const);
+
+export const COMPANY_ASSETS = Object.freeze({
+  showroom: {
+    image: "/assets/company/showroom/uk-showroom-technical-demo.webp",
+  },
+
+  warehouse: {
+    image: "/assets/company/warehouse/hts-warehouse-exterior.webp",
   },
 } as const);
 
@@ -98,36 +108,63 @@ export const PRODUCT_ASSETS = Object.freeze({
 
 export const INDUSTRY_ASSETS = Object.freeze({
   "data-centres": {
-    image: "/assets/industries/data-centres/zones/data-centre-server-hall.webp",
+    image: "/assets/industries/cards/data-centres.webp",
   },
   "commercial-buildings": {
-    image:
-      "/assets/industries/commercial-buildings/zones/commercial-building-office-floor.webp",
+    image: "/assets/industries/cards/commercial-buildings.webp",
   },
   "industrial-facilities": {
-    image:
-      "/assets/industries/industrial-facilities/zones/industrial-production-line.webp",
+    image: "/assets/industries/cards/industrial-facilities.webp",
   },
   "infrastructure-utilities": {
-    image:
-      "/assets/industries/infrastructure-utilities/zones/infrastructure-pumping-station.webp",
+    image: "/assets/industries/cards/infrastructure-utilities.webp",
   },
   "renewable-energy": {
-    image:
-      "/assets/industries/renewable-energy/zones/solar-array-electrical-enclosure.webp",
+    image: "/assets/industries/cards/renewable-energy.webp",
   },
   healthcare: {
-    image: "/assets/industries/healthcare/zones/healthcare-patient-ward.webp",
+    image: "/assets/industries/cards/healthcare.webp",
   },
   "transport-infrastructure": {
-    image:
-      "/assets/industries/transport-infrastructure/airport/zones/airport-terminal-building-zone.webp",
+    image: "/assets/industries/cards/transport-infrastructure.webp",
   },
   "education-public-sector": {
-    image:
-      "/assets/industries/education-public-sector/zones/education-library.webp",
+    image: "/assets/industries/cards/education-public-sector.webp",
   },
 } as const satisfies Readonly<Record<IndustryId, IndustryAsset>>);
+
+export const GERSAN_COMPANY_ASSETS = Object.freeze({
+  factoryExterior: "/assets/company/gersan/gersan-factory-exterior.webp",
+} as const);
+
+export const TECHNICAL_RESOURCE_ICONS = Object.freeze({
+  datasheets: "/assets/icons/technical-resources/icon-datasheets.svg",
+
+  certificatesTests:
+    "/assets/icons/technical-resources/icon-certificates-tests.svg",
+
+  installationGuidance:
+    "/assets/icons/technical-resources/icon-installation-guidance.svg",
+
+  bimCad: "/assets/icons/technical-resources/icon-bim-cad.svg",
+
+  specificationSupport:
+    "/assets/icons/technical-resources/icon-specification-support.svg",
+} as const);
+
+export const GERSAN_QUALITY_ASSETS = Object.freeze({
+  lovag: "/assets/company/gersan/certifications/lovag.svg",
+  asta: "/assets/company/gersan/certifications/asta.svg",
+  cesi: "/assets/company/gersan/certifications/cesi.svg",
+  iphBerlin: "/assets/company/gersan/certifications/iph-berlin.svg",
+  kema: "/assets/company/gersan/certifications/kema.svg",
+  tse: "/assets/company/gersan/certifications/tse.svg",
+  ce: "/assets/company/gersan/certifications/ce.svg",
+  ul: "/assets/company/gersan/certifications/ul.svg",
+  tuv: "/assets/company/gersan/certifications/tuv.svg",
+  isoManagementSystems:
+    "/assets/company/gersan/certifications/iso-management-systems.svg",
+} as const);
 
 export const CERTIFICATION_ASSETS = Object.freeze([
   {

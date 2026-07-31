@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import { InfraVoltLogo } from "@/components/brand/infravolt-logo";
 import { MobileNavigation } from "@/components/public/mobile-navigation";
@@ -12,12 +13,29 @@ type SiteHeaderProps = Readonly<{
   content: PublicSiteContent["shell"];
 }>;
 
+function splitNavigationHref(href: string) {
+  const hashIndex = href.indexOf("#");
+
+  if (hashIndex < 0) {
+    return {
+      path: href,
+      hash: "",
+    };
+  }
+
+  return {
+    path: href.slice(0, hashIndex) || "/",
+    hash: href.slice(hashIndex),
+  };
+}
+
 export function SiteHeader({ content }: SiteHeaderProps) {
-  const [activeHref, setActiveHref] = useState("#top");
+  const pathname = usePathname();
+  const [activeHash, setActiveHash] = useState("#top");
 
   useEffect(() => {
     const updateActiveLink = () => {
-      setActiveHref(window.location.hash || "#top");
+      setActiveHash(window.location.hash || "#top");
     };
 
     updateActiveLink();
@@ -52,12 +70,16 @@ export function SiteHeader({ content }: SiteHeaderProps) {
         >
           {content.navigation.map((item) => {
             const isDealer = item.label === "Dealer / Trade Account";
-            const isContact = item.label === "Contact";
+            const isContact =
+              item.label === "Contact" || item.label === "Контакти";
 
             const label = isDealer ? "References" : item.label;
             const href = isDealer ? "/references" : item.href;
+            const target = splitNavigationHref(href);
 
-            const isActive = activeHref === href;
+            const isActive = target.hash
+              ? pathname === target.path && activeHash === target.hash
+              : pathname === target.path;
 
             const className = [
               isActive ? "desktop-navigation__active" : "",
@@ -72,8 +94,8 @@ export function SiteHeader({ content }: SiteHeaderProps) {
                 href={href}
                 key={`${href}-${label}`}
                 onClick={() => {
-                  if (href.startsWith("#")) {
-                    setActiveHref(href);
+                  if (target.hash) {
+                    setActiveHash(target.hash);
                   }
                 }}
               >

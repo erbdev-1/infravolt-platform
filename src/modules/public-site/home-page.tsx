@@ -2,12 +2,15 @@ import Image from "next/image";
 
 import { AccessibleVideo } from "@/components/public/accessible-video";
 import type { ProductId } from "@/modules/public-site/assets";
+import { applicationScenes } from "@/modules/application-map/data-centre";
+import { UKSupportPreview } from "@/components/public/uk-support-preview";
+import { TechnicalResourcesPreview } from "@/components/public/technical-resources-preview";
+import { GersanManufacturerPreview } from "@/components/public/gersan-manufacturer-preview";
 import { Container } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/link-button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Section } from "@/components/ui/section";
 import {
-  CERTIFICATION_ASSETS,
   INDUSTRY_ASSETS,
   MEDIA_ASSETS,
   PRODUCT_ASSETS,
@@ -28,6 +31,8 @@ const PRODUCT_PAGE_HREFS = {
   "led-bus lighting": "/products/lighting-busbar",
   "ev-charging": "/products/ev-charging",
 } as const satisfies Readonly<Record<ProductId, string>>;
+
+const FEATURED_APPLICATION_SCENE = applicationScenes[0];
 
 const HERO_BADGES = [
   {
@@ -256,20 +261,33 @@ export function HomePageView({ market }: HomePageViewProps) {
           <div className="industry-grid">
             {content.industries.items.map((item) => (
               <article className="industry-card" key={item.id}>
-                <div className="industry-card__media">
-                  <Image
-                    alt={item.imageAlt}
-                    fill
-                    sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
-                    src={INDUSTRY_ASSETS[item.id].image}
-                    unoptimized
-                  />
-                </div>
-                <div className="industry-card__content">
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  <small>{content.industries.imageDisclosure}</small>
-                </div>
+                <a
+                  aria-label={`${content.industries.actionLabel}: ${item.title}`}
+                  className="industry-card__link"
+                  href="#application-map"
+                >
+                  <div className="industry-card__media">
+                    <Image
+                      alt={item.imageAlt}
+                      fill
+                      sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
+                      src={INDUSTRY_ASSETS[item.id].image}
+                      unoptimized
+                    />
+                  </div>
+
+                  <div className="industry-card__content">
+                    <div className="industry-card__copy">
+                      <h3>{item.title}</h3>
+                      <p>{item.description}</p>
+                    </div>
+
+                    <span aria-hidden="true" className="industry-card__action">
+                      <span>{content.industries.actionLabel}</span>
+                      <span className="industry-card__arrow">→</span>
+                    </span>
+                  </div>
+                </a>
               </article>
             ))}
           </div>
@@ -281,139 +299,110 @@ export function HomePageView({ market }: HomePageViewProps) {
         id="application-map"
         tone="white"
       >
-        <Container className="application-grid" size="wide">
-          <div className="application-copy">
+        <Container className="application-feature__grid" size="wide">
+          <div className="application-feature__copy">
             <SectionHeading
               eyebrow={content.applicationMap.eyebrow}
               introduction={content.applicationMap.description}
               title={content.applicationMap.title}
             />
-            <ol>
-              {content.applicationMap.connections.map((item, index) => (
+
+            <ul className="application-feature__steps">
+              {content.applicationMap.connections.map((item) => (
                 <li key={item}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  {item}
+                  <span
+                    aria-hidden="true"
+                    className="application-feature__step-marker"
+                  />
+                  <span>{item}</span>
                 </li>
               ))}
-            </ol>
-            <LinkButton href={content.applicationMap.action.href}>
-              {content.applicationMap.action.label}
+            </ul>
+
+            <LinkButton
+              className="application-feature__button"
+              href={content.applicationMap.action.href}
+            >
+              <span>{content.applicationMap.action.label}</span>
+              <span aria-hidden="true">→</span>
             </LinkButton>
           </div>
-          <div aria-hidden="true" className="application-visual">
-            {content.industries.items.slice(0, 3).map((item, index) => (
+
+          <a
+            aria-label={content.applicationMap.action.label}
+            className="application-preview"
+            href={content.applicationMap.action.href}
+          >
+            <div className="application-preview__toolbar">
+              <strong>{content.applicationMap.previewTitle}</strong>
+              <span>{content.applicationMap.previewZones[0]}</span>
+            </div>
+
+            <div className="application-preview__scene">
+              <Image
+                alt={content.applicationMap.previewTitle}
+                fill
+                sizes="(min-width: 1024px) 55vw, 100vw"
+                src={FEATURED_APPLICATION_SCENE.image}
+                unoptimized
+              />
+
               <div
-                className={`application-visual__image application-visual__image--${index + 1}`}
-                key={item.id}
-              >
-                <Image
-                  alt=""
-                  fill
-                  sizes="(min-width: 768px) 24vw, 70vw"
-                  src={INDUSTRY_ASSETS[item.id].image}
-                  unoptimized
-                />
+                aria-hidden="true"
+                className="application-preview__overlay"
+              />
+
+              {FEATURED_APPLICATION_SCENE.hotspots
+                .slice(0, 4)
+                .map((hotspot) => (
+                  <span
+                    aria-hidden="true"
+                    className="application-preview__hotspot"
+                    key={hotspot.id}
+                    style={{
+                      left: `${hotspot.x}%`,
+                      top: `${hotspot.y}%`,
+                    }}
+                  >
+                    <span className="application-preview__hotspot-dot" />
+
+                    <span className="application-preview__hotspot-label">
+                      {hotspot.label}
+                    </span>
+                  </span>
+                ))}
+            </div>
+
+            <div className="application-preview__footer">
+              <div aria-hidden="true" className="application-preview__zones">
+                {content.applicationMap.previewZones.map((zone, index) => (
+                  <span
+                    className={
+                      index === 0
+                        ? "application-preview__zone application-preview__zone--active"
+                        : "application-preview__zone"
+                    }
+                    key={zone}
+                  >
+                    {zone}
+                  </span>
+                ))}
               </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
 
-      <Section className="support-section" id="project-support" tone="navy">
-        <Container size="wide">
-          <SectionHeading
-            eyebrow={content.support.eyebrow}
-            introduction={content.support.introduction}
-            title={content.support.title}
-          />
-          <ol className="process-grid">
-            {content.support.steps.map((step, index) => (
-              <li key={step.title}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </Section>
-
-      <Section className="manufacturer-section" id="about-gersan" tone="white">
-        <Container className="manufacturer-grid" size="wide">
-          <div className="manufacturer-media">
-            <AccessibleVideo
-              fallback={content.manufacturer.fallback}
-              label={content.manufacturer.videoLabel}
-              pauseLabel={content.manufacturer.pauseLabel}
-              playLabel={content.manufacturer.playLabel}
-              poster={MEDIA_ASSETS.aboutGersan.poster}
-              source={MEDIA_ASSETS.aboutGersan.video}
-            />
-            <p>{content.manufacturer.mediaOwnership}</p>
-          </div>
-          <div className="manufacturer-content">
-            <p className="eyebrow">{content.manufacturer.eyebrow}</p>
-            <h2>{content.manufacturer.title}</h2>
-            <p className="manufacturer-content__introduction">
-              {content.manufacturer.description}
-            </p>
-            <dl className="corporate-facts">
-              {content.manufacturer.facts.map((fact) => (
-                <div key={fact.title}>
-                  <dt>{fact.title}</dt>
-                  <dd>{fact.description}</dd>
-                </div>
-              ))}
-            </dl>
-            <div className="listing-statement">
-              <strong>{content.manufacturer.listingLabel}</strong>
-              <p>{content.manufacturer.listingStatement}</p>
+              <span className="application-preview__action">
+                <span>{content.applicationMap.action.label}</span>
+                <span aria-hidden="true">→</span>
+              </span>
             </div>
-            <div className="button-group">
-              <LinkButton href={content.manufacturer.internalAction.href}>
-                {content.manufacturer.internalAction.label}
-              </LinkButton>
-              <a
-                aria-label={content.manufacturer.externalAction.accessibleLabel}
-                className="button-link button-link--external"
-                href={content.manufacturer.externalAction.href}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {content.manufacturer.externalAction.label}
-                <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </div>
+          </a>
         </Container>
       </Section>
 
-      <Section
-        className="technical-documents-section"
-        id="technical-documents"
-        tone="muted"
-      >
-        <Container className="technical-documents-grid" size="wide">
-          <div>
-            <SectionHeading
-              eyebrow={content.technicalDocuments.eyebrow}
-              introduction={content.technicalDocuments.description}
-              title={content.technicalDocuments.title}
-            />
-            <LinkButton href={content.technicalDocuments.action.href}>
-              {content.technicalDocuments.action.label}
-            </LinkButton>
-          </div>
-          <ul>
-            {content.technicalDocuments.items.map((item, index) => (
-              <li key={item}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </Section>
+      <UKSupportPreview content={content.support} />
+
+      <GersanManufacturerPreview content={content.manufacturer} />
+
+      <TechnicalResourcesPreview content={content.technicalDocuments} />
 
       <section className="contact-section" id="contact">
         <Container className="contact-section__inner" size="wide">
@@ -436,35 +425,6 @@ export function HomePageView({ market }: HomePageViewProps) {
               {content.contact.secondaryAction.label}
             </LinkButton>
           </div>
-        </Container>
-      </section>
-
-      <section
-        aria-labelledby="certification-heading"
-        className="certification-strip"
-      >
-        <Container className="certification-strip__inner" size="wide">
-          <div className="certification-strip__copy">
-            <h2 id="certification-heading">{content.certifications.title}</h2>
-            <p>{content.certifications.description}</p>
-          </div>
-          <div className="certification-strip__marks">
-            {/* İşaretler InfraVolt sertifikası değildir; kapsam notu ürünlere toplu uygunluk atfedilmesini önler. */}
-            {CERTIFICATION_ASSETS.map((mark) => (
-              <div className="certification-mark" key={mark.label}>
-                <Image
-                  alt={`${mark.label} — ${content.certifications.markLabelSuffix}`}
-                  fill
-                  sizes="180px"
-                  src={mark.image}
-                  unoptimized
-                />
-              </div>
-            ))}
-          </div>
-          <p className="certification-strip__scope">
-            {content.certifications.scopeNote}
-          </p>
         </Container>
       </section>
     </main>

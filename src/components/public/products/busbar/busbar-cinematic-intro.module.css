@@ -1,0 +1,284 @@
+.intro {
+  animation: introExit 900ms cubic-bezier(0.76, 0, 0.24, 1) 2500ms forwards;
+  background: #010713;
+  inset: 0;
+  overflow: hidden;
+  position: fixed;
+  z-index: 99999;
+}
+
+.image {
+  animation: cinematicCamera 3400ms cubic-bezier(0.16, 0.8, 0.24, 1) forwards;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.11);
+}
+
+.darkLayer {
+  background:
+    radial-gradient(
+      circle at 68% 56%,
+      transparent 18%,
+      rgb(1 7 19 / 10%) 48%,
+      rgb(1 6 17 / 48%) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgb(1 8 21 / 62%) 0%,
+      rgb(1 8 21 / 22%) 36%,
+      transparent 69%
+    ),
+    linear-gradient(0deg, rgb(1 5 14 / 36%) 0%, transparent 45%);
+  inset: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+.energySweepPrimary {
+  inset: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 3;
+}
+
+.energySweepPrimary::before {
+  animation: primarySweep 1650ms cubic-bezier(0.18, 0.72, 0.26, 1) 250ms
+    forwards;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(0 105 255 / 0%) 18%,
+    rgb(12 128 255 / 24%) 37%,
+    rgb(96 202 255 / 95%) 49%,
+    rgb(223 249 255 / 100%) 50%,
+    rgb(28 151 255 / 55%) 54%,
+    transparent 76%
+  );
+  content: "";
+  filter: blur(10px);
+  height: 150%;
+  left: -65%;
+  opacity: 0;
+  position: absolute;
+  top: -25%;
+  transform: rotate(-8deg);
+  width: 54%;
+}
+
+.energySweepSecondary {
+  inset: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 4;
+}
+
+.energySweepSecondary::before {
+  animation: secondarySweep 1200ms ease-out 950ms forwards;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(32 155 255 / 15%),
+    rgb(116 216 255 / 72%),
+    transparent
+  );
+  content: "";
+  filter: blur(18px);
+  height: 9rem;
+  left: -50%;
+  opacity: 0;
+  position: absolute;
+  top: 58%;
+  transform: rotate(-7deg);
+  width: 65%;
+}
+
+.energyPulse {
+  animation: energyPulse 2200ms ease-out 350ms forwards;
+  background:
+    radial-gradient(
+      circle at 60% 62%,
+      rgb(84 191 255 / 32%) 0%,
+      rgb(0 119 255 / 10%) 24%,
+      transparent 55%
+    ),
+    linear-gradient(
+      118deg,
+      transparent 34%,
+      rgb(24 141 255 / 0%) 43%,
+      rgb(74 182 255 / 22%) 51%,
+      transparent 64%
+    );
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+  z-index: 5;
+}
+
+.brand {
+  animation: brandReveal 1800ms cubic-bezier(0.18, 0.75, 0.24, 1) forwards;
+  bottom: clamp(2rem, 6vw, 5rem);
+  display: grid;
+  gap: 0.55rem;
+  left: clamp(1.5rem, 6vw, 6rem);
+  position: absolute;
+  z-index: 6;
+}
+
+.brand span {
+  color: rgb(255 255 255 / 65%);
+  font-size: clamp(0.68rem, 1vw, 0.82rem);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.brand strong {
+  color: #ffffff;
+  font-size: clamp(2rem, 4.4vw, 4.8rem);
+  font-weight: 750;
+  letter-spacing: -0.055em;
+  line-height: 0.94;
+  text-shadow: 0 0.5rem 2rem rgb(0 0 0 / 28%);
+}
+
+.brandLine {
+  animation: brandLine 1200ms cubic-bezier(0.2, 0.8, 0.25, 1) 650ms forwards;
+  background: linear-gradient(90deg, #2d9fff, #9de7ff, transparent);
+  height: 2px;
+  margin-top: 0.5rem;
+  transform: scaleX(0);
+  transform-origin: left;
+  width: min(18rem, 65vw);
+}
+
+@keyframes cinematicCamera {
+  0% {
+    filter: blur(12px) brightness(0.72);
+    opacity: 0;
+    transform: scale(1.14);
+  }
+
+  18% {
+    filter: blur(0) brightness(0.88);
+    opacity: 1;
+  }
+
+  72% {
+    filter: blur(0) brightness(1.03);
+    opacity: 1;
+    transform: scale(1.035);
+  }
+
+  100% {
+    filter: blur(3px) brightness(0.8);
+    opacity: 1;
+    transform: scale(1.015);
+  }
+}
+
+@keyframes primarySweep {
+  0% {
+    left: -65%;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 0.9;
+  }
+
+  100% {
+    left: 125%;
+    opacity: 0;
+  }
+}
+
+@keyframes secondarySweep {
+  0% {
+    left: -55%;
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0.85;
+  }
+
+  100% {
+    left: 115%;
+    opacity: 0;
+  }
+}
+
+@keyframes energyPulse {
+  0%,
+  20% {
+    opacity: 0;
+  }
+
+  48% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.18;
+  }
+}
+
+@keyframes brandReveal {
+  0%,
+  18% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  62%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes brandLine {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes introExit {
+  0% {
+    filter: blur(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  55% {
+    opacity: 0.92;
+  }
+
+  100% {
+    filter: blur(12px);
+    opacity: 0;
+    transform: scale(1.045);
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 700px) {
+  .image {
+    object-position: 65% center;
+  }
+
+  .brand {
+    bottom: 2rem;
+    left: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+  }
+}
