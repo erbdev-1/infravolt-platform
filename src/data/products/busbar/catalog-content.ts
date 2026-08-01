@@ -14,10 +14,10 @@ export type BusbarApplicationId =
 export type BusbarSystemSlug =
   | "gnl-lighting-busbar"
   | "gl-lighting-busbar"
-  | "gm-medium-power-busbar"
-  | "ggd-power-busbar"
-  | "gs-super-compact"
-  | "gr-cast-resin";
+  | "gm-low-power-busbar"
+  | "ggd-medium-power-busbar"
+  | "gs-compact-high-power-busbar"
+  | "gr-resin-busbar";
 
 type CategoryCopy = Readonly<{
   label: string;
@@ -264,33 +264,33 @@ export const BUSBAR_CATALOG_CONTENT = {
         conductorLabel: "Aluminium or copper",
         imageAlt: "Gersan GL lighting busbar system",
       },
-      "gm-medium-power-busbar": {
-        name: "GM Medium Power Busbar",
+      "gm-low-power-busbar": {
+        name: "GM Low Power Busbar",
         description:
-          "Low and medium-power busbar system for distributing electrical power across commercial and industrial facilities.",
+          "Low power busbar system for distributing electrical power across commercial and industrial facilities.",
         conductorLabel: "Aluminium or copper",
-        imageAlt: "Gersan GM medium power busbar system",
+        imageAlt: "Gersan GM low power busbar system",
       },
-      "ggd-power-busbar": {
-        name: "GGD Power Busbar",
+      "ggd-medium-power-busbar": {
+        name: "GGD Medium Power Busbar",
         description:
-          "Modular power distribution system with extensive feed, elbow, offset, expansion and tap-off options.",
+          "Modular medium-power distribution system with extensive feed, elbow, offset, expansion and tap-off options.",
         conductorLabel: "Aluminium or copper",
-        imageAlt: "Gersan GGD modular power busbar system",
+        imageAlt: "Gersan GGD medium power busbar system",
       },
-      "gs-super-compact": {
-        name: "GS Super Compact",
+      "gs-compact-high-power-busbar": {
+        name: "GS Compact High Power Busbar",
         description:
           "Compact high-current busbar system for major infrastructure, transformer and switchboard connections.",
         conductorLabel: "Aluminium or copper",
-        imageAlt: "Gersan GS Super Compact busbar system",
+        imageAlt: "Gersan GS compact high power busbar system",
       },
-      "gr-cast-resin": {
-        name: "GR Cast Resin Busbar",
+      "gr-resin-busbar": {
+        name: "GR Resin Busbar",
         description:
-          "IP68 cast-resin insulated busbar system developed for humid, saline and demanding operating environments.",
+          "IP68 resin-insulated busbar system developed for humid, saline and demanding operating environments.",
         conductorLabel: "Aluminium or copper",
-        imageAlt: "Gersan GR cast resin busbar system",
+        imageAlt: "Gersan GR resin busbar system",
       },
     },
   },
@@ -449,33 +449,33 @@ export const BUSBAR_CATALOG_CONTENT = {
         conductorLabel: "Алюміній або мідь",
         imageAlt: "Освітлювальна шинопровідна система Gersan GL",
       },
-      "gm-medium-power-busbar": {
-        name: "Шинопровід середньої потужності GM",
+      "gm-low-power-busbar": {
+        name: "Шинопровід низької потужності GM",
         description:
-          "Система малої та середньої потужності для розподілу електроенергії в комерційних і промислових об’єктах.",
+          "Система низької потужності для розподілу електроенергії в комерційних і промислових об’єктах.",
         conductorLabel: "Алюміній або мідь",
-        imageAlt: "Шинопровідна система середньої потужності Gersan GM",
+        imageAlt: "Шинопровідна система низької потужності Gersan GM",
       },
-      "ggd-power-busbar": {
-        name: "Силовий шинопровід GGD",
+      "ggd-medium-power-busbar": {
+        name: "Шинопровід середньої потужності GGD",
         description:
-          "Модульна система розподілу електроенергії з широким вибором ввідних, кутових, зміщувальних, компенсаційних і відгалужувальних компонентів.",
+          "Модульна система розподілу електроенергії середньої потужності з широким вибором ввідних, кутових, зміщувальних, компенсаційних і відгалужувальних компонентів.",
         conductorLabel: "Алюміній або мідь",
-        imageAlt: "Модульна силова шинопровідна система Gersan GGD",
+        imageAlt: "Модульна шинопровідна система середньої потужності Gersan GGD",
       },
-      "gs-super-compact": {
-        name: "GS Super Compact",
+      "gs-compact-high-power-busbar": {
+        name: "Компактний шинопровід високої потужності GS",
         description:
           "Компактна високострумова система для інфраструктурних об’єктів, трансформаторних і щитових підключень.",
         conductorLabel: "Алюміній або мідь",
-        imageAlt: "Компактна шинопровідна система Gersan GS Super Compact",
+        imageAlt: "Компактна шинопровідна система високої потужності Gersan GS",
       },
-      "gr-cast-resin": {
-        name: "Шинопровід GR з литою ізоляцією",
+      "gr-resin-busbar": {
+        name: "Шинопровід GR зі смоляною ізоляцією",
         description:
-          "Шинопровідна система IP68 з литою ізоляцією для вологих, солоних та інших складних умов експлуатації.",
+          "Шинопровідна система IP68 зі смоляною ізоляцією для вологих, солоних та інших складних умов експлуатації.",
         conductorLabel: "Алюміній або мідь",
-        imageAlt: "Шинопровідна система Gersan GR з литою ізоляцією",
+        imageAlt: "Шинопровідна система Gersan GR зі смоляною ізоляцією",
       },
     },
   },
