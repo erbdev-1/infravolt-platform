@@ -155,6 +155,13 @@ export function BusbarCatalogPage({
           <span>{content.breadcrumbs.current}</span>
         </div>
 
+        <div className={styles.backNav}>
+          <Link className={styles.backButton} href="/">
+            <span aria-hidden="true">←</span>
+            {content.breadcrumbs.back}
+          </Link>
+        </div>
+
         <section className={styles.hero}>
           <div className={styles.heroContent}>
             <div className={styles.manufacturerLockup}>
