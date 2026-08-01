@@ -1,24 +1,78 @@
-import Image from "next/image";
+// verify-safe-states.ts bu dosyayı düz TypeScript transpile + require ile
+// çalıştırır (Next.js/webpack pipeline'ı olmadan), bu yüzden CSS Module veya
+// next/image gibi bundler'a bağımlı import'lar burada kullanılamaz.
+const LOADING_STYLES = `
+.infravolt-loading-screen {
+  align-items: center;
+  background: #f5f7fa;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  inset: 0;
+  justify-content: center;
+  position: fixed;
+}
 
-import styles from "./loading.module.css";
+.infravolt-loading-heading {
+  clip: rect(0 0 0 0);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+.infravolt-loading-logo {
+  animation: infravolt-loading-pulse 1600ms ease-in-out infinite;
+  height: auto;
+  width: clamp(9rem, 22vw, 14rem);
+}
+
+.infravolt-loading-screen p[role="status"] {
+  color: #041a35;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  opacity: 0.55;
+  text-transform: uppercase;
+}
+
+@keyframes infravolt-loading-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.55;
+    transform: scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .infravolt-loading-logo {
+    animation: none;
+  }
+}
+`;
 
 export default function Loading() {
   return (
     // Onaylı çeviri olmadan locale içeriği uydurmamak için fallback metnin gerçek dili belirtilir.
-    <main aria-busy="true" className={styles.screen} lang="en-GB">
-      <Image
+    <main aria-busy="true" className="infravolt-loading-screen" lang="en-GB">
+      <style>{LOADING_STYLES}</style>
+
+      <h1 className="infravolt-loading-heading">Loading</h1>
+
+      <img
         alt="InfraVolt"
-        className={styles.logo}
+        className="infravolt-loading-logo"
         height={235}
-        priority
         src="/assets/brand/infravolt-wordmark-primary.webp"
-        unoptimized
         width={1040}
       />
 
-      <p className={styles.status} role="status">
-        Please wait while the page is prepared.
-      </p>
+      <p role="status">Please wait while the page is prepared.</p>
     </main>
   );
 }
