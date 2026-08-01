@@ -11,11 +11,31 @@ export type BusbarSpecRow = Readonly<{
 }>;
 
 export type BusbarSystemDetailFacts = readonly [
-  Readonly<{ value: string; label: string }>,
-  Readonly<{ value: string; label: string }>,
-  Readonly<{ value: string; label: string }>,
-  Readonly<{ value: string; label: string }>,
+  Readonly<{
+    value: string;
+    label: string;
+  }>,
+  Readonly<{
+    value: string;
+    label: string;
+  }>,
+  Readonly<{
+    value: string;
+    label: string;
+  }>,
+  Readonly<{
+    value: string;
+    label: string;
+  }>,
 ];
+
+export type BusbarSystemApplication = Readonly<{
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+}>;
 
 export type BusbarSystemComponent = Readonly<{
   slug: string;
@@ -29,7 +49,9 @@ export type BusbarSystemComponent = Readonly<{
 export type BusbarHeroImage = Readonly<{
   image: string;
   imageAlt: string;
-  accentGlow?: boolean;
+  label?: string;
+  fit?: "contain" | "cover";
+  crop?: "default" | "tight";
 }>;
 
 export type BusbarDocument = Readonly<{
@@ -44,22 +66,40 @@ export type BusbarSystemDetail = Readonly<{
   slug: BusbarSystemSlug;
   categoryEyebrow: string;
   heroDescription: string;
+
+  heroFeatureImage: string;
+  heroFeatureImageAlt: string;
+
   heroImages: readonly BusbarHeroImage[];
   heroPreviousLabel: string;
   heroNextLabel: string;
+  heroGalleryLabel: string;
+  heroFullscreenLabel: string;
+  heroCloseLabel: string;
+
   facts: BusbarSystemDetailFacts;
+
   overviewEyebrow: string;
   overviewHighlights: readonly string[];
+
+  applicationsEyebrow: string;
+  applicationsHeading: string;
+  applicationsDescription: string;
+  applications: readonly BusbarSystemApplication[];
+
   technicalDataEyebrow: string;
   technicalDataHeading: string;
   parameterHeading: string;
   specColumns: readonly BusbarSpecColumn[];
   specRows: readonly BusbarSpecRow[];
+
   componentsEyebrow: string;
   componentsHeadingPrefix: string;
   components: readonly BusbarSystemComponent[];
+
   documentsTabLabel: string;
   documents: readonly BusbarDocument[];
+
   requestQuoteHref: string;
   requestDocumentationHref: string;
 }>;

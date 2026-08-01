@@ -1,157 +1,234 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
 
 import type { BusbarHeroImage } from "@/data/products/busbar/series/types";
 
 import styles from "./busbar-system-detail-page.module.css";
 
-const AUTOPLAY_INTERVAL_MS = 3000;
-
 export function BusbarHeroCarousel({
   images,
   previousLabel,
   nextLabel,
+  galleryLabel,
+  fullscreenLabel,
+  closeLabel,
 }: Readonly<{
   images: readonly BusbarHeroImage[];
   previousLabel: string;
   nextLabel: string;
+  galleryLabel: string;
+  fullscreenLabel: string;
+  closeLabel: string;
 }>) {
   const [index, setIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  useEffect(() => {
-    if (images.length <= 1 || isPaused) {
-      return;
-    }
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
-
-    const id = window.setInterval(() => {
-      setIndex((current) => (current + 1) % images.length);
-    }, AUTOPLAY_INTERVAL_MS);
-
-    return () => window.clearInterval(id);
-  }, [images.length, isPaused]);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   if (images.length === 0) {
     return null;
   }
 
+  const activeIndex = index % images.length;
+  const activeImage = images[activeIndex]!;
+  const activeLabel = activeImage.label ?? `${galleryLabel} ${activeIndex + 1}`;
+  const activeImageFit = activeImage.fit ?? "contain";
+
   function goTo(nextIndex: number) {
-    setIndex((nextIndex + images.length) % images.length);
+    const normalizedIndex =
+      ((nextIndex % images.length) + images.length) % images.length;
+
+    setIndex(normalizedIndex);
+  }
+
+  function openFullscreen() {
+    dialogRef.current?.showModal();
+  }
+
+  function closeFullscreen() {
+    dialogRef.current?.close();
+  }
+
+  function handleGalleryKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      goTo(activeIndex - 1);
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      goTo(activeIndex + 1);
+    }
+  }
+
+  function handleDialogBackdropClick(event: MouseEvent<HTMLDialogElement>) {
+    if (event.target === event.currentTarget) {
+      closeFullscreen();
+    }
   }
 
   return (
-    <div
-      className={styles.heroCarousel}
-      onBlur={() => setIsPaused(false)}
-      onFocus={() => setIsPaused(true)}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {images.map((image, slideIndex) => (
+    <>
+      <div
+        aria-label={galleryLabel}
+        className={styles.productGallery}
+        onKeyDown={handleGalleryKeyDown}
+        role="region"
+      >
         <div
-          className={
-            slideIndex === index
-              ? styles.heroCarouselSlideActive
-              : styles.heroCarouselSlide
-          }
-          key={image.image}
+          aria-label={`${galleryLabel} thumbnails`}
+          className={styles.galleryRail}
         >
-          {image.accentGlow ? (
-            // Product hero shot: static image with CSS-only energy light trails.
-            <div className={styles.gnlHeroVisual}>
-              {/* Layer 2: large soft ambient background glow */}
-              <div
-                aria-hidden="true"
-                className={`${styles.gnlEnergyGlow} ${styles.gnlEnergyGlowBlue}`}
-              />
-              <div
-                aria-hidden="true"
-                className={`${styles.gnlEnergyGlow} ${styles.gnlEnergyGlowOrange}`}
-              />
+          {images.map((image, thumbnailIndex) => {
+            const isActive = thumbnailIndex === activeIndex;
+            const thumbnailLabel =
+              image.label ?? `${galleryLabel} ${thumbnailIndex + 1}`;
 
-              {/* Layer 3: main animated light trails (orbit + sweep) */}
-              <div
-                aria-hidden="true"
-                className={`${styles.gnlEnergyLayer} ${styles.gnlEnergyLayerBlue}`}
-              />
-              <div
-                aria-hidden="true"
-                className={`${styles.gnlEnergyLayer} ${styles.gnlEnergyLayerOrange}`}
-              />
-
-              {/* Layer 4: the product itself — always static, always sharp */}
-              <div className={styles.gnlProductImageWrap}>
-                <Image
-                  alt={image.imageAlt}
-                  className={styles.gnlProductImage}
-                  fill
-                  priority={slideIndex === 0}
-                  sizes="(min-width: 900px) 45vw, 100vw"
-                  src={image.image}
-                />
-              </div>
-            </div>
-          ) : (
-            <div className={styles.heroCarouselImageWrap}>
-              <Image
-                alt={image.imageAlt}
-                className={styles.heroImage}
-                fill
-                priority={slideIndex === 0}
-                sizes="(min-width: 900px) 45vw, 100vw"
-                src={image.image}
-              />
-            </div>
-          )}
-        </div>
-      ))}
-
-      <div className={styles.heroCarouselOverlay} />
-
-      {images.length > 1 ? (
-        <>
-          <button
-            aria-label={previousLabel}
-            className={`${styles.heroCarouselControl} ${styles.heroCarouselPrevious}`}
-            onClick={() => goTo(index - 1)}
-            type="button"
-          >
-            <span aria-hidden="true">‹</span>
-          </button>
-
-          <button
-            aria-label={nextLabel}
-            className={`${styles.heroCarouselControl} ${styles.heroCarouselNext}`}
-            onClick={() => goTo(index + 1)}
-            type="button"
-          >
-            <span aria-hidden="true">›</span>
-          </button>
-
-          <div className={styles.heroCarouselDots}>
-            {images.map((image, dotIndex) => (
+            return (
               <button
-                aria-current={dotIndex === index}
-                aria-label={`${dotIndex + 1}`}
+                aria-label={`${thumbnailLabel}, ${thumbnailIndex + 1} / ${
+                  images.length
+                }`}
+                aria-pressed={isActive}
                 className={
-                  dotIndex === index
-                    ? styles.heroCarouselDotActive
-                    : styles.heroCarouselDot
+                  isActive
+                    ? styles.galleryThumbnailActive
+                    : styles.galleryThumbnail
                 }
                 key={image.image}
-                onClick={() => goTo(dotIndex)}
+                onClick={() => goTo(thumbnailIndex)}
                 type="button"
+              >
+                <span className={styles.galleryThumbnailImageWrap}>
+                  <Image
+                    alt=""
+                    className={styles.galleryThumbnailImage}
+                    fill
+                    sizes="96px"
+                    src={image.image}
+                  />
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className={styles.galleryViewport}>
+          <div className={styles.galleryStage}>
+            <div className={styles.galleryImageWrap} key={activeImage.image}>
+              <Image
+                alt={activeImage.imageAlt}
+                className={`${styles.galleryImage} ${
+                  activeImageFit === "cover"
+                    ? styles.galleryImageCover
+                    : styles.galleryImageContain
+                }`}
+                fill
+                priority={activeIndex === 0}
+                sizes="(min-width: 1000px) 48vw, 100vw"
+                src={activeImage.image}
               />
-            ))}
+            </div>
           </div>
-        </>
-      ) : null}
-    </div>
+          <div className={styles.galleryImageOverlay}>
+            <strong>{activeLabel}</strong>
+
+            <button
+              aria-label={fullscreenLabel}
+              className={styles.galleryFullscreenOverlay}
+              onClick={openFullscreen}
+              type="button"
+            >
+              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24">
+                <path
+                  d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.7"
+                />
+              </svg>
+
+              <span>{fullscreenLabel}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <dialog
+        aria-label={activeLabel}
+        className={styles.galleryDialog}
+        onClick={handleDialogBackdropClick}
+        ref={dialogRef}
+      >
+        <div className={styles.galleryDialogInner}>
+          <div className={styles.galleryDialogTopbar}>
+            <div>
+              <strong>{activeLabel}</strong>
+              <span>
+                {String(activeIndex + 1).padStart(2, "0")} /{" "}
+                {String(images.length).padStart(2, "0")}
+              </span>
+            </div>
+
+            <button
+              aria-label={closeLabel}
+              className={styles.galleryDialogClose}
+              onClick={closeFullscreen}
+              type="button"
+            >
+              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24">
+                <path
+                  d="m6 6 12 12M18 6 6 18"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeWidth="1.8"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div className={styles.galleryDialogImageWrap}>
+            <Image
+              alt={activeImage.imageAlt}
+              className={`${styles.galleryDialogImage} ${
+                activeImageFit === "cover"
+                  ? styles.galleryDialogImageCover
+                  : styles.galleryDialogImageContain
+              } ${
+                activeImage.crop === "tight"
+                  ? styles.galleryDialogImageTightCrop
+                  : ""
+              }`}
+              fill
+              sizes="100vw"
+              src={activeImage.image}
+            />
+          </div>
+
+          {images.length > 1 ? (
+            <>
+              <button
+                aria-label={previousLabel}
+                className={`${styles.galleryDialogControl} ${styles.galleryDialogPrevious}`}
+                onClick={() => goTo(activeIndex - 1)}
+                type="button"
+              >
+                ‹
+              </button>
+
+              <button
+                aria-label={nextLabel}
+                className={`${styles.galleryDialogControl} ${styles.galleryDialogNext}`}
+                onClick={() => goTo(activeIndex + 1)}
+                type="button"
+              >
+                ›
+              </button>
+            </>
+          ) : null}
+        </div>
+      </dialog>
+    </>
   );
 }
