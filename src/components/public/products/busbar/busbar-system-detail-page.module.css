@@ -48,6 +48,41 @@
   color: var(--busbar-accent);
 }
 
+.backNav {
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem) 0;
+}
+
+.backButton {
+  align-items: center;
+  background: var(--busbar-accent);
+  border: 1px solid var(--busbar-accent);
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.backButton:hover {
+  background: var(--busbar-accent-dark);
+  border-color: var(--busbar-accent-dark);
+  transform: translateY(-2px);
+}
+
+.backButton:focus-visible {
+  outline: 3px solid rgb(217 35 50 / 30%);
+  outline-offset: 3px;
+}
+
 /* =========================================================
    03. HERO LAYOUT
    ========================================================= */

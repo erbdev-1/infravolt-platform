@@ -46,6 +46,7 @@ export type BusbarCatalogContent = Readonly<{
     home: string;
     products: string;
     current: string;
+    back: string;
   }>;
   hero: Readonly<{
     eyebrow: string;
@@ -121,6 +122,7 @@ export const BUSBAR_CATALOG_CONTENT = {
       home: "Home",
       products: "Products",
       current: "Busbar Systems",
+      back: "Back",
     },
     hero: {
       eyebrow: "",
@@ -304,6 +306,7 @@ export const BUSBAR_CATALOG_CONTENT = {
       home: "Головна",
       products: "Продукція",
       current: "Шинопровідні системи",
+      back: "Назад",
     },
     hero: {
       eyebrow: "",
