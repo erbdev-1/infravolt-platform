@@ -87,12 +87,22 @@
   width: clamp(8.75rem, 12vw, 10.5rem);
 }
 
+.supportBrandRow {
+  align-items: center;
+  display: flex;
+  gap: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.supportBrandRow .eyebrow {
+  margin: 0;
+}
+
 .supportBrand {
   align-items: center;
   background: #ffffff;
   border-radius: 0.4rem;
   display: inline-flex;
-  margin-bottom: 1.25rem;
   padding: 0.5rem 0.75rem;
 }
 
@@ -478,7 +488,7 @@
 }
 
 .resultsHeading h2 {
-  color: var(--busbar-navy);
+  color: var(--busbar-accent);
   font-size: clamp(2.1rem, 4vw, 3.5rem);
   letter-spacing: -0.045em;
   line-height: 1;
@@ -685,11 +695,11 @@
 
 .applicationsHeading h2 {
   color: var(--busbar-navy);
-  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-size: clamp(1.6rem, 2.6vw, 3.2rem);
   letter-spacing: -0.045em;
   line-height: 1;
   margin: 0;
-  max-width: 42rem;
+  white-space: nowrap;
 }
 
 .applicationsHeading > p {

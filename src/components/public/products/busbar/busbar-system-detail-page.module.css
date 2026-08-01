@@ -1,0 +1,1205 @@
+/* =========================================================
+   01. PAGE THEME & DESIGN TOKENS
+   (identical token values to busbar-catalog-page.module.css)
+   ========================================================= */
+
+.page {
+  --busbar-accent: #d92332;
+  --busbar-accent-dark: #a91624;
+  --busbar-accent-soft: #fff3f4;
+  --busbar-navy: #061a35;
+  --busbar-ink: #102033;
+  --busbar-muted: #66758a;
+  --busbar-border: #dce2e8;
+  --busbar-surface: #f5f7f9;
+
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    var(--busbar-surface) 54%,
+    #ffffff 100%
+  );
+  color: var(--busbar-ink);
+  min-height: 100vh;
+}
+
+/* =========================================================
+   02. BREADCRUMBS
+   ========================================================= */
+
+.breadcrumbs {
+  align-items: center;
+  border-bottom: 1px solid rgb(6 26 53 / 9%);
+  color: #607087;
+  display: flex;
+  font-size: 0.82rem;
+  gap: 0.65rem;
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem);
+}
+
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--busbar-accent);
+}
+
+/* =========================================================
+   03. HERO LAYOUT
+   ========================================================= */
+
+.hero {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: minmax(0, 0.9fr) minmax(24rem, 1fr);
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 2.5rem clamp(1.25rem, 4vw, 4rem) 0;
+}
+
+.heroContent {
+  align-self: center;
+  max-width: 34rem;
+}
+
+.eyebrow {
+  color: var(--busbar-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  color: var(--busbar-navy);
+  font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  margin: 0;
+}
+
+.heroDescription {
+  color: #53657d;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  margin: 1.5rem 0 0;
+  max-width: 34rem;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  align-items: center;
+  border-radius: 0.45rem;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.3rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.primaryButton {
+  background: var(--busbar-navy);
+  border: 1px solid var(--busbar-navy);
+  color: #ffffff;
+}
+
+.secondaryButton {
+  background: #ffffff;
+  border: 1px solid rgb(6 26 53 / 35%);
+  color: var(--busbar-navy);
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-2px);
+}
+
+.primaryButton:hover {
+  background: #0b2b51;
+  border-color: #0b2b51;
+}
+
+.secondaryButton:hover {
+  border-color: var(--busbar-accent);
+  color: var(--busbar-accent);
+}
+
+/* =========================================================
+   04. HERO PRODUCT VISUAL / CAROUSEL
+   ========================================================= */
+
+.heroVisual {
+  background: radial-gradient(circle at 30% 20%, #12283f 0%, #061a35 70%);
+  border: 1px solid var(--busbar-border);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 1.5rem 3rem rgb(6 26 53 / 18%),
+    inset 0 0 0 1px rgb(255 255 255 / 4%);
+  min-height: 24rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.heroCarousel {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.heroCarouselSlide,
+.heroCarouselSlideActive {
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 900ms ease;
+  z-index: 0;
+}
+
+.heroCarouselSlideActive {
+  opacity: 1;
+  z-index: 1;
+}
+
+.heroCarouselImageWrap {
+  animation: heroKenBurns 9s ease-out forwards;
+  inset: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+@keyframes heroKenBurns {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.heroCarouselOverlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgb(6 26 53 / 0%) 55%,
+      rgb(6 26 53 / 45%) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgb(6 26 53 / 18%) 0%,
+      transparent 25%,
+      transparent 75%,
+      rgb(6 26 53 / 18%) 100%
+    );
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.heroCarouselControl {
+  align-items: center;
+  background: rgb(255 255 255 / 80%);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgb(255 255 255 / 40%);
+  border-radius: 50%;
+  color: var(--busbar-navy);
+  cursor: pointer;
+  display: flex;
+  font-size: 1.2rem;
+  height: 2.4rem;
+  justify-content: center;
+  line-height: 1;
+  opacity: 0.4;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    opacity 220ms ease;
+  width: 2.4rem;
+  z-index: 3;
+}
+
+.heroCarousel:hover .heroCarouselControl,
+.heroCarousel:focus-within .heroCarouselControl {
+  opacity: 1;
+}
+
+.heroCarouselControl:hover {
+  background: var(--busbar-navy);
+  color: #ffffff;
+}
+
+.heroCarouselPrevious {
+  left: 1rem;
+}
+
+.heroCarouselNext {
+  right: 1rem;
+}
+
+.heroCarouselDots {
+  bottom: 1.1rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.heroCarouselDot,
+.heroCarouselDotActive {
+  background: rgb(6 26 53 / 25%);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 0.55rem;
+  padding: 0;
+  transition: background-color 180ms ease, width 180ms ease;
+  width: 0.55rem;
+}
+
+.heroCarouselDotActive {
+  background: var(--busbar-navy);
+  border-radius: 0.3rem;
+  width: 1.4rem;
+}
+
+/* =========================================================
+   04B. GNL ENERGY LIGHT-TRAIL EFFECT (CSS-only)
+   Applied only to the product-shot slide(s) flagged accentGlow.
+   Product stays fully static; only the surrounding light
+   layers animate. All layers are decorative (aria-hidden,
+   pointer-events: none) and sit strictly behind the product.
+   ========================================================= */
+
+.gnlHeroVisual {
+  --gnl-blue: #27a8ff;
+  --gnl-blue-soft: #7fd5ff;
+  --gnl-orange: #ff9d2e;
+  --gnl-orange-soft: #ffc46b;
+  --gnl-animation-speed: 1;
+  --gnl-glow-strength: 1;
+  --gnl-trail-opacity: 0.7;
+  --gnl-trail-blur: 14px;
+
+  /* Layer 1: card background — soft light-grey, matches carousel radius */
+  background: linear-gradient(145deg, #ffffff 0%, #eef1f4 55%, #e3e9ee 100%);
+  border-radius: 0.75rem;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+/* Layer 2: large soft ambient background glow (slow breathing) */
+.gnlEnergyGlow {
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: calc(0.3 * var(--gnl-glow-strength));
+  pointer-events: none;
+  position: absolute;
+  will-change: transform, opacity;
+  z-index: 1;
+}
+
+.gnlEnergyGlowBlue {
+  animation: gnlEnergyGlow 14s ease-in-out infinite;
+  animation-delay: -4s;
+  background: radial-gradient(circle, var(--gnl-blue-soft) 0%, transparent 72%);
+  height: 65%;
+  left: -15%;
+  top: -12%;
+  width: 65%;
+}
+
+.gnlEnergyGlowOrange {
+  animation: gnlEnergyGlow 16s ease-in-out infinite;
+  animation-delay: -9s;
+  background: radial-gradient(circle, var(--gnl-orange-soft) 0%, transparent 72%);
+  bottom: -14%;
+  height: 60%;
+  right: -12%;
+  width: 60%;
+}
+
+@keyframes gnlEnergyGlow {
+  0%,
+  100% {
+    opacity: calc(0.3 * var(--gnl-glow-strength));
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    opacity: calc(0.48 * var(--gnl-glow-strength));
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+}
+
+/* Layer 3: main animated light trails — thin rings, partially masked
+   into arcs, rotated/swept around the product for an orbit feel. */
+.gnlEnergyLayer {
+  border-radius: 50%;
+  pointer-events: none;
+  position: absolute;
+  will-change: transform;
+  z-index: 2;
+}
+
+.gnlEnergyLayerBlue {
+  animation: gnlBlueOrbit calc(8s / var(--gnl-animation-speed)) linear infinite;
+  animation-delay: -2.4s;
+  height: 135%;
+  left: -22%;
+  top: -18%;
+  width: 135%;
+}
+
+.gnlEnergyLayerBlue::before,
+.gnlEnergyLayerBlue::after {
+  border-radius: 50%;
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.gnlEnergyLayerBlue::before {
+  /* Sharp inner trail line */
+  animation: gnlLightPulse 5s ease-in-out infinite;
+  animation-delay: -1.2s;
+  border: 3px solid var(--gnl-blue);
+  box-shadow:
+    0 0 10px var(--gnl-blue),
+    0 0 24px 4px var(--gnl-blue-soft);
+  filter: blur(1px);
+  mask-image: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    black 10deg,
+    black 58deg,
+    transparent 82deg,
+    transparent 360deg
+  );
+  -webkit-mask-image: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    black 10deg,
+    black 58deg,
+    transparent 82deg,
+    transparent 360deg
+  );
+  opacity: var(--gnl-trail-opacity);
+}
+
+.gnlEnergyLayerBlue::after {
+  /* Soft ambient halo around the same arc */
+  border: 10px solid var(--gnl-blue-soft);
+  filter: blur(var(--gnl-trail-blur));
+  mask-image: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    black 6deg,
+    black 62deg,
+    transparent 86deg,
+    transparent 360deg
+  );
+  -webkit-mask-image: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    black 6deg,
+    black 62deg,
+    transparent 86deg,
+    transparent 360deg
+  );
+  opacity: calc(var(--gnl-trail-opacity) * 0.55);
+}
+
+.gnlEnergyLayerOrange {
+  animation: gnlOrangeSweep calc(10s / var(--gnl-animation-speed)) ease-in-out
+    infinite;
+  animation-delay: -5s;
+  bottom: -28%;
+  height: 95%;
+  left: -28%;
+  width: 155%;
+}
+
+.gnlEnergyLayerOrange::before,
+.gnlEnergyLayerOrange::after {
+  border-radius: 50%;
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.gnlEnergyLayerOrange::before {
+  animation: gnlLightPulse 6s ease-in-out infinite;
+  animation-delay: -3s;
+  border: 3px solid var(--gnl-orange);
+  box-shadow:
+    0 0 10px var(--gnl-orange),
+    0 0 24px 4px var(--gnl-orange-soft);
+  filter: blur(1px);
+  mask-image: conic-gradient(
+    from 180deg,
+    transparent 0deg,
+    black 12deg,
+    black 62deg,
+    transparent 88deg,
+    transparent 360deg
+  );
+  -webkit-mask-image: conic-gradient(
+    from 180deg,
+    transparent 0deg,
+    black 12deg,
+    black 62deg,
+    transparent 88deg,
+    transparent 360deg
+  );
+  opacity: var(--gnl-trail-opacity);
+}
+
+.gnlEnergyLayerOrange::after {
+  animation: gnlLightFlow 9s ease-in-out infinite;
+  border: 10px solid var(--gnl-orange-soft);
+  filter: blur(var(--gnl-trail-blur));
+  mask-image: conic-gradient(
+    from 180deg,
+    transparent 0deg,
+    black 8deg,
+    black 66deg,
+    transparent 92deg,
+    transparent 360deg
+  );
+  -webkit-mask-image: conic-gradient(
+    from 180deg,
+    transparent 0deg,
+    black 8deg,
+    black 66deg,
+    transparent 92deg,
+    transparent 360deg
+  );
+  opacity: calc(var(--gnl-trail-opacity) * 0.55);
+}
+
+/* Orbit motion: the blue ring slowly rotates around the product,
+   with a very slight breathing scale. Product itself never moves. */
+@keyframes gnlBlueOrbit {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: translate3d(0, 0, 0) rotate(180deg) scale(1.03);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotate(360deg) scale(1);
+  }
+}
+
+/* Sweep motion: the orange arc drifts lower-left to lower-right and
+   back, appearing to flow beneath the product, looping seamlessly. */
+@keyframes gnlOrangeSweep {
+  0% {
+    transform: translate3d(-4%, 3%, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(4%, -2%, 0) rotate(10deg);
+  }
+
+  100% {
+    transform: translate3d(-4%, 3%, 0) rotate(0deg);
+  }
+}
+
+/* Light flow: gentle scale/opacity drift standing in for a travelling
+   highlight along the outer halo (kept transform/opacity only for
+   performance rather than animating background-position). */
+@keyframes gnlLightFlow {
+  0%,
+  100% {
+    opacity: calc(var(--gnl-trail-opacity) * 0.55);
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: calc(var(--gnl-trail-opacity) * 0.8);
+    transform: scale(1.015);
+  }
+}
+
+/* Light pulse: small brightness breathing on the sharp core line —
+   never disappears completely. */
+@keyframes gnlLightPulse {
+  0%,
+  100% {
+    opacity: var(--gnl-trail-opacity);
+  }
+
+  50% {
+    opacity: calc(var(--gnl-trail-opacity) * 1.2);
+  }
+}
+
+/* Pause decorative layers on slides that are not currently active
+   (cheap no-op while off-screen; resumes instantly on return). */
+.heroCarouselSlide .gnlEnergyGlow,
+.heroCarouselSlide .gnlEnergyLayerBlue,
+.heroCarouselSlide .gnlEnergyLayerOrange,
+.heroCarouselSlide .gnlEnergyLayerBlue::before,
+.heroCarouselSlide .gnlEnergyLayerBlue::after,
+.heroCarouselSlide .gnlEnergyLayerOrange::before,
+.heroCarouselSlide .gnlEnergyLayerOrange::after {
+  animation-play-state: paused;
+}
+
+/* Layer 4: the product — always static, always sharp, always on top
+   of every decorative light layer. */
+.gnlProductImageWrap {
+  inset: 0;
+  position: absolute;
+  z-index: 3;
+}
+
+.gnlProductImage {
+  object-fit: contain;
+  object-position: center;
+  padding: 2.75rem;
+}
+
+/* =========================================================
+   05. TECHNICAL FACT STRIP
+   ========================================================= */
+
+.factStrip {
+  background: #ffffff;
+  border: 1px solid rgb(6 26 53 / 10%);
+  border-radius: 0.7rem;
+  box-shadow: 0 1rem 3rem rgb(6 26 53 / 7%);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 2.5rem auto 0;
+  max-width: min(1400px, calc(100% - 2.5rem));
+}
+
+.factStrip article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 7rem;
+  padding: 1.55rem 1.8rem;
+}
+
+.factStrip article + article {
+  border-left: 1px solid rgb(6 26 53 / 9%);
+}
+
+.factStrip strong {
+  color: var(--busbar-navy);
+  font-size: 1rem;
+}
+
+.factStrip span {
+  color: #68778c;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   06. TABS
+   ========================================================= */
+
+.tabsSection {
+  margin: 2.5rem auto 0;
+  max-width: 1600px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.tabList {
+  border-bottom: 1px solid var(--busbar-border);
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+}
+
+.tabButton,
+.tabButtonActive {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--busbar-muted);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 1.1rem 0.1rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tabButtonActive {
+  border-bottom-color: var(--busbar-accent);
+  color: var(--busbar-accent);
+}
+
+.tabPanel {
+  padding: 2.5rem 0 4.5rem;
+}
+
+.tabPanel h2 {
+  color: var(--busbar-navy);
+  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+  letter-spacing: -0.03em;
+  margin: 0 0 2rem;
+}
+
+/* =========================================================
+   07. OVERVIEW
+   ========================================================= */
+
+.overviewLayout {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.overviewDescription {
+  color: #3d4f65;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 46rem;
+}
+
+.highlightList {
+  display: grid;
+  gap: 0.9rem 2.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.highlightList li {
+  color: var(--busbar-ink);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  padding-left: 1.75rem;
+  position: relative;
+}
+
+.highlightList li::before {
+  color: var(--busbar-accent);
+  content: "✓";
+  font-weight: 800;
+  left: 0;
+  position: absolute;
+}
+
+/* =========================================================
+   08. TECHNICAL DATA TABLE
+   ========================================================= */
+
+.tableWrapper {
+  background: #ffffff;
+  border: 1px solid var(--busbar-border);
+  border-radius: 0.7rem;
+  overflow-x: auto;
+}
+
+.specTable {
+  border-collapse: collapse;
+  min-width: 32rem;
+  width: 100%;
+}
+
+.specTable th,
+.specTable td {
+  padding: 0.9rem 1.25rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.specTable thead th {
+  background: var(--busbar-surface);
+  color: var(--busbar-navy);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.specTable tbody th {
+  color: var(--busbar-ink);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.specTable tbody td {
+  color: #4c5d73;
+  font-size: 0.86rem;
+}
+
+.specTable tbody tr + tr th,
+.specTable tbody tr + tr td {
+  border-top: 1px solid var(--busbar-border);
+}
+
+/* =========================================================
+   09. COMPONENTS GRID
+   ========================================================= */
+
+.componentsGrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.componentCard {
+  background: #ffffff;
+  border: 1px solid var(--busbar-border);
+  border-radius: 0.75rem;
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  overflow: hidden;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.componentCard:hover {
+  border-color: rgb(217 35 50 / 30%);
+  box-shadow: 0 1rem 2.4rem rgb(6 26 53 / 10%);
+  transform: translateY(-3px);
+}
+
+.componentVisual {
+  background: var(--busbar-surface);
+  min-height: 9rem;
+  position: relative;
+}
+
+.componentContent {
+  padding: 1.1rem 1.25rem;
+}
+
+.componentOrderCode {
+  color: var(--busbar-accent-dark);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.componentContent h3 {
+  color: var(--busbar-navy);
+  font-size: 1rem;
+  letter-spacing: -0.015em;
+  margin: 0.4rem 0 0;
+}
+
+.componentContent p {
+  color: #68778c;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  margin: 0.55rem 0 0;
+}
+
+/* =========================================================
+   10B. DOCUMENT CARDS
+   ========================================================= */
+
+.documentsGrid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.documentCard {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--busbar-border);
+  border-radius: 0.75rem;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+  padding: 1.5rem;
+}
+
+.documentIcon {
+  align-items: center;
+  background: var(--busbar-accent-soft);
+  border-radius: 0.6rem;
+  color: var(--busbar-accent);
+  display: flex;
+  height: 3.5rem;
+  justify-content: center;
+  width: 3.5rem;
+}
+
+.documentContent h3 {
+  color: var(--busbar-navy);
+  font-size: 1.02rem;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.documentContent p {
+  color: #56677d;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin: 0.5rem 0 0;
+}
+
+.documentFileLabel {
+  color: #4c5d73;
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+}
+
+.documentAction {
+  align-items: center;
+  background: var(--busbar-navy);
+  border-radius: 0.45rem;
+  color: #ffffff;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 0.85rem;
+  font-weight: 800;
+  gap: 0.6rem;
+  justify-content: center;
+  min-height: 3.1rem;
+  min-width: 13rem;
+  padding: 0.8rem 1.3rem;
+  text-decoration: none;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.documentAction:hover {
+  background: #1c4a7c;
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   11. DOCUMENTATION CTA
+   ========================================================= */
+
+.documentation {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--busbar-border);
+  border-radius: 0.7rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  padding: 2rem clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.documentationDescription {
+  color: #53657d;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+  max-width: 34rem;
+}
+
+.documentationAction {
+  align-items: center;
+  background: var(--busbar-navy);
+  border-radius: 0.45rem;
+  color: #ffffff;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 0.85rem;
+  font-weight: 800;
+  gap: 0.6rem;
+  justify-content: center;
+  min-height: 3.1rem;
+  min-width: 13rem;
+  padding: 0.8rem 1.3rem;
+  text-decoration: none;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.documentationAction:hover {
+  background: #1c4a7c;
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   12. PROJECT SUPPORT CTA
+   ========================================================= */
+
+.projectSupport {
+  align-items: center;
+  background:
+    radial-gradient(circle at 78% 25%, rgb(31 83 132 / 30%), transparent 32%),
+    var(--busbar-navy);
+  border-radius: 0.7rem;
+  color: #ffffff;
+  display: flex;
+  gap: 3rem;
+  justify-content: space-between;
+  margin: 4.5rem auto 4rem;
+  max-width: min(1480px, calc(100% - 2.5rem));
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.projectSupport h2 {
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 0.5rem 0 0;
+}
+
+.projectSupport p:not(.eyebrow) {
+  color: #c5d0df;
+  line-height: 1.65;
+  margin: 1rem 0 0;
+  max-width: 44rem;
+}
+
+.projectSupport > a {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 0.45rem;
+  color: var(--busbar-navy);
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+  font-weight: 800;
+  gap: 0.7rem;
+  min-height: 3.4rem;
+  padding: 0.8rem 1.4rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.projectSupport > a span {
+  color: var(--busbar-accent);
+}
+
+.projectSupport > a:hover {
+  background: var(--busbar-accent-soft);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   13. ACCESSIBILITY & FOCUS STATES
+   ========================================================= */
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.heroCarouselControl:focus-visible,
+.heroCarouselDot:focus-visible,
+.heroCarouselDotActive:focus-visible,
+.tabButton:focus-visible,
+.tabButtonActive:focus-visible,
+.documentAction:focus-visible,
+.documentationAction:focus-visible,
+.projectSupport > a:focus-visible {
+  outline: 3px solid rgb(217 35 50 / 30%);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   14. RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 2rem;
+  }
+
+  .heroVisual {
+    min-height: 20rem;
+    order: -1;
+  }
+
+  .gnlEnergyGlow {
+    filter: blur(32px);
+  }
+
+  .gnlEnergyLayerBlue::after,
+  .gnlEnergyLayerOrange::after {
+    filter: blur(calc(var(--gnl-trail-blur) * 0.7));
+  }
+
+  .factStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .factStrip article:nth-child(3) {
+    border-left: 0;
+    border-top: 1px solid rgb(6 26 53 / 9%);
+  }
+
+  .factStrip article:nth-child(4) {
+    border-top: 1px solid rgb(6 26 53 / 9%);
+  }
+
+  .componentsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .documentCard {
+    grid-template-columns: 1fr;
+  }
+
+  .documentation,
+  .projectSupport {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* =========================================================
+   15. RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 620px) {
+  .breadcrumbs {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .heroActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+
+  .factStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .factStrip article + article,
+  .factStrip article:nth-child(3),
+  .factStrip article:nth-child(4) {
+    border-left: 0;
+    border-top: 1px solid rgb(6 26 53 / 9%);
+  }
+
+  .componentCard {
+    grid-template-columns: 1fr;
+  }
+
+  .componentVisual {
+    min-height: 10rem;
+  }
+
+  .highlightList {
+    grid-template-columns: 1fr;
+  }
+
+  /* Mobile: keep just one blue + one orange trail, drop the ambient
+     glow layers and heavy blur to stay cheap on small devices. */
+  .gnlEnergyGlow {
+    display: none;
+  }
+
+  .gnlEnergyLayerBlue::after,
+  .gnlEnergyLayerOrange::after {
+    filter: blur(calc(var(--gnl-trail-blur) * 0.5));
+  }
+
+  .gnlEnergyLayerBlue {
+    animation-duration: calc(10s / var(--gnl-animation-speed));
+  }
+
+  .gnlEnergyLayerOrange {
+    animation-duration: calc(12s / var(--gnl-animation-speed));
+  }
+
+  .gnlProductImage {
+    padding: 1.75rem;
+  }
+
+  .documentAction,
+  .documentationAction,
+  .projectSupport > a {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   16. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryButton,
+  .secondaryButton,
+  .componentCard,
+  .documentAction,
+  .documentationAction,
+  .heroCarouselControl,
+  .heroCarouselDot,
+  .heroCarouselDotActive,
+  .heroCarouselSlide,
+  .heroCarouselSlideActive,
+  .projectSupport > a {
+    transition: none;
+  }
+
+  .heroCarouselImageWrap {
+    animation: none;
+  }
+
+  /* Keep the light effect as a static decorative glow rather than
+     hiding it — the product stays fully visible either way. */
+  .gnlEnergyGlow,
+  .gnlEnergyLayerBlue,
+  .gnlEnergyLayerOrange,
+  .gnlEnergyLayerBlue::before,
+  .gnlEnergyLayerBlue::after,
+  .gnlEnergyLayerOrange::before,
+  .gnlEnergyLayerOrange::after {
+    animation: none;
+  }
+}
