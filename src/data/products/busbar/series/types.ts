@@ -1,0 +1,69 @@
+import type { BusbarSystemSlug } from "../catalog-content";
+
+export type BusbarSpecColumn = Readonly<{
+  id: string;
+  label: string;
+}>;
+
+export type BusbarSpecRow = Readonly<{
+  parameter: string;
+  values: Readonly<Record<string, string>>;
+}>;
+
+export type BusbarSystemDetailFacts = readonly [
+  Readonly<{ value: string; label: string }>,
+  Readonly<{ value: string; label: string }>,
+  Readonly<{ value: string; label: string }>,
+  Readonly<{ value: string; label: string }>,
+];
+
+export type BusbarSystemComponent = Readonly<{
+  slug: string;
+  name: string;
+  orderCode: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+}>;
+
+export type BusbarHeroImage = Readonly<{
+  image: string;
+  imageAlt: string;
+  accentGlow?: boolean;
+}>;
+
+export type BusbarDocument = Readonly<{
+  title: string;
+  description: string;
+  fileLabel: string;
+  href: string;
+  downloadLabel: string;
+}>;
+
+export type BusbarSystemDetail = Readonly<{
+  slug: BusbarSystemSlug;
+  categoryEyebrow: string;
+  heroDescription: string;
+  heroImages: readonly BusbarHeroImage[];
+  heroPreviousLabel: string;
+  heroNextLabel: string;
+  facts: BusbarSystemDetailFacts;
+  overviewEyebrow: string;
+  overviewHighlights: readonly string[];
+  technicalDataEyebrow: string;
+  technicalDataHeading: string;
+  parameterHeading: string;
+  specColumns: readonly BusbarSpecColumn[];
+  specRows: readonly BusbarSpecRow[];
+  componentsEyebrow: string;
+  componentsHeadingPrefix: string;
+  components: readonly BusbarSystemComponent[];
+  documentsTabLabel: string;
+  documents: readonly BusbarDocument[];
+  requestQuoteHref: string;
+  requestDocumentationHref: string;
+}>;
+
+export type BusbarSystemDetailByMarket = Readonly<
+  Record<"uk" | "ua", BusbarSystemDetail>
+>;

@@ -456,17 +456,19 @@ export function BusbarCatalogPage({
 
         <section className={styles.projectSupport}>
           <div>
-            <div className={styles.supportBrand}>
-              <Image
-                alt="InfraVolt"
-                className={styles.infravoltWordmark}
-                height={30}
-                src="/assets/brand/infravolt-wordmark-primary.webp"
-                width={154}
-              />
-            </div>
+            <div className={styles.supportBrandRow}>
+              <div className={styles.supportBrand}>
+                <Image
+                  alt="InfraVolt"
+                  className={styles.infravoltWordmark}
+                  height={30}
+                  src="/assets/brand/infravolt-wordmark-primary.webp"
+                  width={154}
+                />
+              </div>
 
-            <p className={styles.eyebrow}>{content.projectSupport.eyebrow}</p>
+              <p className={styles.eyebrow}>{content.projectSupport.eyebrow}</p>
+            </div>
 
             <h2>{content.projectSupport.title}</h2>
 
