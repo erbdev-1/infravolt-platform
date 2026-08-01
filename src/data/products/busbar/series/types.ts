@@ -10,6 +10,13 @@ export type BusbarSpecRow = Readonly<{
   values: Readonly<Record<string, string>>;
 }>;
 
+export type BusbarSpecVariant = Readonly<{
+  id: string;
+  label: string;
+  columns: readonly BusbarSpecColumn[];
+  rows: readonly BusbarSpecRow[];
+}>;
+
 export type BusbarSystemDetailFacts = readonly [
   Readonly<{
     value: string;
@@ -90,8 +97,12 @@ export type BusbarSystemDetail = Readonly<{
   technicalDataEyebrow: string;
   technicalDataHeading: string;
   parameterHeading: string;
-  specColumns: readonly BusbarSpecColumn[];
-  specRows: readonly BusbarSpecRow[];
+  // Single-table series (GNL, GL, GM) provide specColumns/specRows directly.
+  // Series with multiple conductor variants that need separate current
+  // ranges/cross-sections (e.g. GGD-A vs GGD-C) provide specVariants instead.
+  specColumns?: readonly BusbarSpecColumn[];
+  specRows?: readonly BusbarSpecRow[];
+  specVariants?: readonly BusbarSpecVariant[];
 
   componentsEyebrow: string;
   componentsHeadingPrefix: string;

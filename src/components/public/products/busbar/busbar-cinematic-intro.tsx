@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import styles from "./busbar-cinematic-intro.module.css";
 
 const INTRO_STORAGE_KEY = "infravolt:busbar-intro-seen";
-const INTRO_DURATION_MS = 3400;
+const INTRO_DURATION_MS = 5000; // was 3400ms — held longer before exit
 
 export function BusbarCinematicIntro() {
   const [isVisible, setIsVisible] = useState(true);
