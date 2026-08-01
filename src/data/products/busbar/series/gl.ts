@@ -19,16 +19,34 @@ export const GL_SYSTEM_DETAIL = {
     heroFeatureImageAlt: "GL lighting busbar system main product view",
     heroImages: [
       {
-        image: `${IMAGE_BASE}/card/gl-main-product.webp`,
+        image: `${IMAGE_BASE}/applications/gl-main-product-01.webp`,
         imageAlt: "GL lighting busbar system",
         label: "GL busbar system",
         fit: "cover",
       },
       {
-        image: `${IMAGE_BASE}/applications/gl-industrial-application.webp`,
+        image: `${IMAGE_BASE}/applications/gl-main-product-02.webp`,
+        imageAlt: "GL lighting busbar system detail view",
+        label: "GL busbar detail",
+        fit: "cover",
+      },
+      {
+        image: `${IMAGE_BASE}/applications/gl-industrial-application-01.webp`,
         imageAlt: "GL lighting busbar installed in an industrial facility",
         label: "Industrial installation",
         fit: "cover",
+      },
+      {
+        image: `${IMAGE_BASE}/applications/gl-application-installation-.png`,
+        imageAlt: "GL lighting busbar installation",
+        label: "Installation",
+        fit: "cover",
+      },
+      {
+        image: `${IMAGE_BASE}/applications/gl-system-overview-drawing.png`,
+        imageAlt: "GL busbar system overview drawing",
+        label: "System overview",
+        fit: "contain",
       },
     ],
     heroPreviousLabel: "Previous image",
@@ -315,6 +333,14 @@ export const GL_SYSTEM_DETAIL = {
         href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
         downloadLabel: "Download catalogue",
       },
+      {
+        title: "GL Installation Guide",
+        description:
+          "Quick reference for joining two GL busbar elements: alignment, M5 fixing and joint set, and closing the IP55 joint cover.",
+        fileLabel: "PDF",
+        href: `${IMAGE_BASE}/installation/GL_Busbar_Installation_Guide.pdf`,
+        downloadLabel: "Download installation guide",
+      },
     ],
     requestQuoteHref: "/uk-support?product=gl-lighting-busbar",
     requestDocumentationHref: "/#technical-documents",
@@ -329,16 +355,34 @@ export const GL_SYSTEM_DETAIL = {
       "Освітлювальна шинопровідна система GL — вигляд основного продукту",
     heroImages: [
       {
-        image: `${IMAGE_BASE}/card/gl-main-product.webp`,
+        image: `${IMAGE_BASE}/applications/gl-main-product-01.webp`,
         imageAlt: "Освітлювальна шинопровідна система GL",
         label: "Шинопровідна система GL",
         fit: "cover",
       },
       {
-        image: `${IMAGE_BASE}/applications/gl-industrial-application.webp`,
+        image: `${IMAGE_BASE}/applications/gl-main-product-02.webp`,
+        imageAlt: "Детальний вигляд шинопроводу GL",
+        label: "Деталь шинопроводу GL",
+        fit: "cover",
+      },
+      {
+        image: `${IMAGE_BASE}/applications/gl-industrial-application-01.webp`,
         imageAlt: "Шинопровід GL у промисловому приміщенні",
         label: "Промисловий монтаж",
         fit: "cover",
+      },
+      {
+        image: `${IMAGE_BASE}/applications/gl-application-installation-.png`,
+        imageAlt: "Монтаж шинопроводу GL",
+        label: "Монтаж",
+        fit: "cover",
+      },
+      {
+        image: `${IMAGE_BASE}/applications/gl-system-overview-drawing.png`,
+        imageAlt: "Загальна схема системи шинопроводу GL",
+        label: "Схема системи",
+        fit: "contain",
       },
     ],
     heroPreviousLabel: "Попереднє зображення",
@@ -637,6 +681,14 @@ export const GL_SYSTEM_DETAIL = {
         fileLabel: "PDF · 25.1 МБ",
         href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
         downloadLabel: "Завантажити каталог",
+      },
+      {
+        title: "Інструкція з монтажу GL",
+        description:
+          "Короткий довідник із з'єднання двох елементів шинопроводу GL: вирівнювання, кріплення M5 з комплектом з'єднання та закриття кришки IP55.",
+        fileLabel: "PDF",
+        href: `${IMAGE_BASE}/installation/GL_Busbar_Installation_Guide.pdf`,
+        downloadLabel: "Завантажити інструкцію з монтажу",
       },
     ],
     requestQuoteHref: "/uk-support?product=gl-lighting-busbar",
