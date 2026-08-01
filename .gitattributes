@@ -1,0 +1,9 @@
+
+# Binary assets
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.mp4 binary
