@@ -778,11 +778,20 @@
   width: 100%;
 }
 
+.specTable thead th:not(:first-child),
+.specTable tbody td {
+  padding: 0.9rem 0.75rem;
+}
+
 .specTable th,
 .specTable td {
   padding: 0.9rem 1.25rem;
   text-align: left;
   white-space: nowrap;
+}
+
+.specTable tbody td {
+  white-space: normal;
 }
 
 .specTable thead th {
