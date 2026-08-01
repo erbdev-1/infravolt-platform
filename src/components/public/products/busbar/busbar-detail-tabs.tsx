@@ -30,7 +30,17 @@ export function BusbarDetailTabs({
   documentsActionLabel: string;
 }>) {
   const [activeTab, setActiveTab] = useState<TabId>("overview");
+  const [activeSpecVariant, setActiveSpecVariant] = useState(
+    detail.specVariants?.[0]?.id,
+  );
   const baseId = useId();
+
+  const specColumns =
+    detail.specVariants?.find((variant) => variant.id === activeSpecVariant)
+      ?.columns ?? detail.specColumns ?? [];
+  const specRows =
+    detail.specVariants?.find((variant) => variant.id === activeSpecVariant)
+      ?.rows ?? detail.specRows ?? [];
 
   const tabs: readonly Readonly<{ id: TabId; label: string }>[] = [
     { id: "overview", label: detail.overviewEyebrow },
@@ -104,12 +114,37 @@ export function BusbarDetailTabs({
       >
         <h2>{detail.technicalDataHeading}</h2>
 
+        {detail.specVariants && detail.specVariants.length > 1 ? (
+          <div className={styles.specVariantToggle} role="tablist">
+            {detail.specVariants.map((variant) => {
+              const selected = variant.id === activeSpecVariant;
+
+              return (
+                <button
+                  aria-selected={selected}
+                  className={
+                    selected
+                      ? styles.specVariantButtonActive
+                      : styles.specVariantButton
+                  }
+                  key={variant.id}
+                  onClick={() => setActiveSpecVariant(variant.id)}
+                  role="tab"
+                  type="button"
+                >
+                  {variant.label}
+                </button>
+              );
+            })}
+          </div>
+        ) : null}
+
         <div className={styles.tableWrapper}>
           <table className={styles.specTable}>
             <thead>
               <tr>
                 <th scope="col">{detail.parameterHeading}</th>
-                {detail.specColumns.map((column) => (
+                {specColumns.map((column) => (
                   <th key={column.id} scope="col">
                     {column.label}
                   </th>
@@ -118,10 +153,10 @@ export function BusbarDetailTabs({
             </thead>
 
             <tbody>
-              {detail.specRows.map((row) => (
+              {specRows.map((row) => (
                 <tr key={row.parameter}>
                   <th scope="row">{row.parameter}</th>
-                  {detail.specColumns.map((column) => (
+                  {specColumns.map((column) => (
                     <td key={column.id}>{row.values[column.id]}</td>
                   ))}
                 </tr>

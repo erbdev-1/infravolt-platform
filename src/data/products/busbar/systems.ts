@@ -72,7 +72,7 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
     conductorLabel: "Aluminium or copper",
     ipRating: "IP55",
     applications: ["Factories", "Warehouses", "Commercial buildings"],
-    image: "/assets/products/busbar/gl/card/gl-main-product.webp",
+    image: "/assets/products/busbar/gl/applications/gl-main-product-01.webp",
     imageAlt: "Gersan GL lighting busbar installation",
   },
   {
@@ -97,8 +97,8 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
     imageAlt: "Gersan GM medium power busbar installation",
   },
   {
-    slug: "ggd-power-busbar",
-    name: "GGD Power Busbar",
+    slug: "ggd-medium-power-busbar",
+    name: "GGD Medium Power Busbar",
     shortName: "GGD",
     category: "power-distribution",
     description:

@@ -1,5 +1,5 @@
 .intro {
-  animation: introExit 900ms cubic-bezier(0.76, 0, 0.24, 1) 2500ms forwards;
+  animation: introExit 900ms cubic-bezier(0.76, 0, 0.24, 1) 4100ms forwards;
   background: #010713;
   inset: 0;
   overflow: hidden;
@@ -272,7 +272,7 @@
   }
 
   .brand {
-    bottom: 2rem;
+    bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
     left: 1.25rem;
   }
 }

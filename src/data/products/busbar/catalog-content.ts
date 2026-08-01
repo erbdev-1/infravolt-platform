@@ -15,7 +15,7 @@ export type BusbarSystemSlug =
   | "gnl-lighting-busbar"
   | "gl-lighting-busbar"
   | "gm-medium-power-busbar"
-  | "ggd-power-busbar"
+  | "ggd-medium-power-busbar"
   | "gs-super-compact"
   | "gr-cast-resin";
 
@@ -271,12 +271,12 @@ export const BUSBAR_CATALOG_CONTENT = {
         conductorLabel: "Aluminium or copper",
         imageAlt: "Gersan GM medium power busbar system",
       },
-      "ggd-power-busbar": {
-        name: "GGD Power Busbar",
+      "ggd-medium-power-busbar": {
+        name: "GGD Medium Power Busbar",
         description:
-          "Modular power distribution system with extensive feed, elbow, offset, expansion and tap-off options.",
+          "Modular medium-power distribution system with extensive feed, elbow, offset, expansion and tap-off options.",
         conductorLabel: "Aluminium or copper",
-        imageAlt: "Gersan GGD modular power busbar system",
+        imageAlt: "Gersan GGD medium power busbar system",
       },
       "gs-super-compact": {
         name: "GS Super Compact",
@@ -456,12 +456,12 @@ export const BUSBAR_CATALOG_CONTENT = {
         conductorLabel: "Алюміній або мідь",
         imageAlt: "Шинопровідна система середньої потужності Gersan GM",
       },
-      "ggd-power-busbar": {
-        name: "Силовий шинопровід GGD",
+      "ggd-medium-power-busbar": {
+        name: "Шинопровід середньої потужності GGD",
         description:
-          "Модульна система розподілу електроенергії з широким вибором ввідних, кутових, зміщувальних, компенсаційних і відгалужувальних компонентів.",
+          "Модульна система розподілу електроенергії середньої потужності з широким вибором ввідних, кутових, зміщувальних, компенсаційних і відгалужувальних компонентів.",
         conductorLabel: "Алюміній або мідь",
-        imageAlt: "Модульна силова шинопровідна система Gersan GGD",
+        imageAlt: "Модульна шинопровідна система середньої потужності Gersan GGD",
       },
       "gs-super-compact": {
         name: "GS Super Compact",
