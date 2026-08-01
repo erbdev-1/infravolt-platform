@@ -76,12 +76,12 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
     imageAlt: "Gersan GL lighting busbar installation",
   },
   {
-    slug: "gm-medium-power-busbar",
-    name: "GM Medium Power Busbar",
+    slug: "gm-low-power-busbar",
+    name: "GM Low Power Busbar",
     shortName: "GM",
     category: "power-distribution",
     description:
-      "Low and medium-power busbar system for distributing electrical power across commercial and industrial facilities.",
+      "Low power busbar system for distributing electrical power across commercial and industrial facilities.",
     currentMin: 100,
     currentMax: 400,
     currentLabel: "100–400 A",
@@ -94,7 +94,7 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
       "Distribution networks",
     ],
     image: "/assets/products/busbar/gm/card/gm-main-product.webp",
-    imageAlt: "Gersan GM medium power busbar installation",
+    imageAlt: "Gersan GM low power busbar system",
   },
   {
     slug: "ggd-medium-power-busbar",
@@ -102,7 +102,7 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
     shortName: "GGD",
     category: "power-distribution",
     description:
-      "Modular power distribution system with extensive feed, elbow, offset, expansion and tap-off options.",
+      "Medium-power busbar system with extensive feed, elbow, offset, expansion and tap-off options.",
     currentMin: 160,
     currentMax: 1000,
     currentLabel: "160–1000 A",
@@ -115,7 +115,7 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
       "Vertical rising mains",
     ],
     image: "/assets/products/busbar/ggd/card/ggd-main-product.webp",
-    imageAlt: "Gersan GGD modular power busbar system",
+    imageAlt: "Gersan GGD medium power busbar system",
     featured: true,
   },
   {
