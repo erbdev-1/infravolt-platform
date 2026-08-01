@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useId, useState } from "react";
 
+import { BusbarHeroCarousel } from "./busbar-hero-carousel";
+
 import type { BusbarSystemDetail } from "@/data/products/busbar/series/types";
 
 import styles from "./busbar-system-detail-page.module.css";
@@ -67,16 +69,29 @@ export function BusbarDetailTabs({
         id={`${baseId}-panel-overview`}
         role="tabpanel"
       >
-        <h2>{systemName}</h2>
-
         <div className={styles.overviewLayout}>
-          <p className={styles.overviewDescription}>{systemDescription}</p>
+          <div className={styles.overviewCarousel}>
+            <BusbarHeroCarousel
+              closeLabel={detail.heroCloseLabel}
+              fullscreenLabel={detail.heroFullscreenLabel}
+              galleryLabel={detail.heroGalleryLabel}
+              images={detail.heroImages}
+              nextLabel={detail.heroNextLabel}
+              previousLabel={detail.heroPreviousLabel}
+            />
+          </div>
 
-          <ul className={styles.highlightList}>
-            {detail.overviewHighlights.map((highlight) => (
-              <li key={highlight}>{highlight}</li>
-            ))}
-          </ul>
+          <div className={styles.overviewContent}>
+            <h2>{systemName}</h2>
+
+            <p className={styles.overviewDescription}>{systemDescription}</p>
+
+            <ul className={styles.highlightList}>
+              {detail.overviewHighlights.map((highlight) => (
+                <li key={highlight}>{highlight}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 

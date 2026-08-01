@@ -6,6 +6,7 @@ const SPEC_COLUMNS = [
 ] as const;
 
 const IMAGE_BASE = "/assets/products/busbar/gnl";
+const APPLICATION_IMAGE_BASE = "/assets/products/busbar/applications";
 
 export const GNL_SYSTEM_DETAIL = {
   uk: {
@@ -13,32 +14,51 @@ export const GNL_SYSTEM_DETAIL = {
     categoryEyebrow: "Lighting Busbar System",
     heroDescription:
       "GNL is a 25 A and 40 A lighting busbar trunking system for energising lighting circuits and raised-floor supply points, built from 3 m aluminium-housing elements with copper conductors and silver-plated contacts.",
+    heroFeatureImage: `${IMAGE_BASE}/products/gnl-hero-energy-transparent.webp`,
+
+    heroFeatureImageAlt:
+      "GNL lighting busbar with blue and orange energy trails",
     heroImages: [
       {
-        accentGlow: true,
         image: `${IMAGE_BASE}/products/gnl-standard-length-element-dali.png`,
         imageAlt: "GNL lighting busbar DALI standard length element",
+        label: "DALI standard element",
+        fit: "cover",
       },
       {
-        accentGlow: true,
         image: `${IMAGE_BASE}/products/gnl-standard-length-element-pnpe.png`,
         imageAlt: "GNL lighting busbar standard length element",
+        label: "Standard busbar element",
+        fit: "cover",
       },
       {
         image: `${IMAGE_BASE}/products/gnl-application-installation-01.png`,
-        imageAlt: "GNL lighting busbar installed above racking with cable trays",
+        imageAlt:
+          "GNL lighting busbar installed above warehouse storage racking",
+        label: "Warehouse installation",
+        fit: "cover",
       },
       {
         image: `${IMAGE_BASE}/products/gnl-application-installation-02.png`,
-        imageAlt: "GNL lighting busbar installed in a high-ceiling industrial facility",
+        imageAlt:
+          "GNL lighting busbar installed inside a high-ceiling industrial facility",
+        label: "Industrial installation",
+        fit: "cover",
       },
       {
-        image: `${IMAGE_BASE}/products/gnl-busbar-cutaway-drawing-hero.png`,
-        imageAlt: "GNL lighting busbar cutaway drawing showing internal conductor layout",
+        image: `${IMAGE_BASE}/products/gnl-application-installation-03.png`,
+        imageAlt:
+          "GNL lighting busbar used in a commercial lighting application",
+        label: "Commercial application",
+        fit: "cover",
+        crop: "tight",
       },
     ],
     heroPreviousLabel: "Previous image",
     heroNextLabel: "Next image",
+    heroGalleryLabel: "GNL product gallery",
+    heroFullscreenLabel: "View full screen",
+    heroCloseLabel: "Close full-screen image",
     facts: [
       { value: "25–40 A", label: "Current rating" },
       { value: "IP55", label: "Protection degree" },
@@ -54,6 +74,40 @@ export const GNL_SYSTEM_DETAIL = {
       "Modular, tight-fitting joint system with IP55-protected joints and a dedicated joint cover",
       "Wide range of accessories, full international certification and CE marking",
       "Recommended support hanger spacing of 1500–2000 mm",
+    ],
+    applicationsEyebrow: "Applications",
+    applicationsHeading: "Where GNL is used",
+    applicationsDescription:
+      "GNL provides flexible, continuous lighting distribution where luminaires need to be positioned, moved or extended along the busbar run.",
+
+    applications: [
+      {
+        slug: "warehouses-logistics",
+        title: "Warehouses & logistics",
+        description:
+          "Continuous lighting distribution above storage aisles, picking areas and logistics operations.",
+        image: `${APPLICATION_IMAGE_BASE}/busbar-application-warehouse.webp`,
+        imageAlt:
+          "Industrial warehouse with continuous overhead lighting above storage and logistics areas",
+      },
+      {
+        slug: "industrial-facilities",
+        title: "Industrial facilities & workshops",
+        description:
+          "Flexible lighting connections for production areas, workshops and high-ceiling industrial spaces.",
+        image: `${APPLICATION_IMAGE_BASE}/busbar-application-manufacturing.webp`,
+        imageAlt:
+          "Manufacturing facility with continuous lighting above production machinery",
+      },
+      {
+        slug: "commercial-buildings",
+        title: "Retail & commercial buildings",
+        description:
+          "Adaptable lighting distribution for supermarkets, showrooms, retail units and commercial interiors.",
+        image: `${APPLICATION_IMAGE_BASE}/busbar-application-retail.webp`,
+        imageAlt:
+          "Retail interior with adaptable overhead lighting distribution",
+      },
     ],
     technicalDataEyebrow: "Technical data",
     technicalDataHeading: "Ratings & specification",
@@ -214,7 +268,8 @@ export const GNL_SYSTEM_DETAIL = {
         slug: "fixture-fixing-hanger",
         name: "Lighting Fixture Fixing Hanger",
         orderCode: "GNL SSU1 / SSU2",
-        description: "Hanger for fixing lighting fixtures to the busbar system.",
+        description:
+          "Hanger for fixing lighting fixtures to the busbar system.",
         image: `${IMAGE_BASE}/components/gnl-fixture-fixing-hanger-ssu2.webp`,
         imageAlt: "GNL lighting fixture fixing hanger",
       },
@@ -255,35 +310,47 @@ export const GNL_SYSTEM_DETAIL = {
     categoryEyebrow: "Освітлювальна шинопровідна система",
     heroDescription:
       "GNL — освітлювальна шинопровідна система на 25 А та 40 А для живлення освітлювальних кіл і точок підключення в фальшпідлогах. Виготовляється з 3-метрових елементів в алюмінієвому корпусі з мідними провідниками та посрібленими контактами.",
+    heroFeatureImage: `${IMAGE_BASE}/products/gnl-hero-energy-transparent.webp`,
+    heroFeatureImageAlt:
+      "Освітлювальна шинопровідна система GNL із синіми та помаранчевими світловими лініями",
     heroImages: [
       {
-        accentGlow: true,
         image: `${IMAGE_BASE}/products/gnl-standard-length-element-dali.png`,
         imageAlt: "Стандартний елемент шинопроводу GNL, варіант DALI",
+        label: "Стандартний елемент DALI",
+        fit: "cover",
       },
       {
-        accentGlow: true,
         image: `${IMAGE_BASE}/products/gnl-standard-length-element-pnpe.png`,
         imageAlt: "Стандартний елемент шинопроводу GNL",
+        label: "Стандартний елемент шинопроводу",
+        fit: "cover",
       },
       {
         image: `${IMAGE_BASE}/products/gnl-application-installation-01.png`,
-        imageAlt:
-          "Освітлювальна шинопровідна система GNL над стелажами з кабельними лотками",
+        imageAlt: "Освітлювальний шинопровід GNL над складськими стелажами",
+        label: "Монтаж на складі",
+        fit: "cover",
       },
       {
         image: `${IMAGE_BASE}/products/gnl-application-installation-02.png`,
-        imageAlt:
-          "Освітлювальна шинопровідна система GNL, встановлена на промисловому об'єкті з високими стелями",
+        imageAlt: "Освітлювальний шинопровід GNL у промисловому приміщенні",
+        label: "Промисловий монтаж",
+        fit: "cover",
       },
       {
-        image: `${IMAGE_BASE}/products/gnl-busbar-cutaway-drawing-hero.png`,
-        imageAlt:
-          "Креслення в розрізі шинопроводу GNL з внутрішнім розташуванням провідників",
+        image: `${IMAGE_BASE}/products/gnl-application-installation-03.png`,
+        imageAlt: "Шинопровід GNL у комерційній системі освітлення",
+        label: "Комерційне застосування",
+        fit: "cover",
+        crop: "tight",
       },
     ],
     heroPreviousLabel: "Попереднє зображення",
     heroNextLabel: "Наступне зображення",
+    heroGalleryLabel: "Галерея продукції GNL",
+    heroFullscreenLabel: "Переглянути на весь екран",
+    heroCloseLabel: "Закрити повноекранне зображення",
     facts: [
       { value: "25–40 А", label: "Номінальний струм" },
       { value: "IP55", label: "Ступінь захисту" },
@@ -299,6 +366,40 @@ export const GNL_SYSTEM_DETAIL = {
       "Модульна, щільна система з'єднання із захистом IP55 та спеціальною кришкою з'єднання",
       "Широкий асортимент аксесуарів, повна міжнародна сертифікація та маркування CE",
       "Рекомендована відстань між опорними підвісами — 1500–2000 мм",
+    ],
+    applicationsEyebrow: "Застосування",
+    applicationsHeading: "Де використовується GNL",
+    applicationsDescription:
+      "GNL забезпечує гнучкий безперервний розподіл живлення освітлення там, де світильники необхідно встановлювати, переміщувати або додавати вздовж лінії шинопроводу.",
+
+    applications: [
+      {
+        slug: "warehouses-logistics",
+        title: "Склади та логістичні центри",
+        description:
+          "Безперервний розподіл живлення освітлення над складськими проходами, зонами комплектування та логістичними ділянками.",
+        image: `${APPLICATION_IMAGE_BASE}/busbar-application-warehouse.webp`,
+        imageAlt:
+          "Промисловий склад із безперервним освітленням над стелажами та логістичними зонами",
+      },
+      {
+        slug: "industrial-facilities",
+        title: "Промислові об’єкти та майстерні",
+        description:
+          "Гнучке підключення освітлення у виробничих зонах, майстернях та промислових приміщеннях із високими стелями.",
+        image: `${APPLICATION_IMAGE_BASE}/busbar-application-manufacturing.webp`,
+        imageAlt:
+          "Виробниче приміщення з безперервним освітленням над обладнанням",
+      },
+      {
+        slug: "commercial-buildings",
+        title: "Торговельні та комерційні приміщення",
+        description:
+          "Адаптивний розподіл живлення освітлення для супермаркетів, шоурумів, магазинів і комерційних інтер’єрів.",
+        image: `${APPLICATION_IMAGE_BASE}/busbar-application-retail.webp`,
+        imageAlt:
+          "Торговельне приміщення з адаптивною системою стельового освітлення",
+      },
     ],
     technicalDataEyebrow: "Технічні дані",
     technicalDataHeading: "Параметри та характеристики",
@@ -442,7 +543,8 @@ export const GNL_SYSTEM_DETAIL = {
         slug: "end-cap",
         name: "Заглушка",
         orderCode: "GNL EC40 / EC41",
-        description: "Закриває відкритий кінець ввідного елемента в кінці лінії.",
+        description:
+          "Закриває відкритий кінець ввідного елемента в кінці лінії.",
         image: `${IMAGE_BASE}/components/gnl-end-cap.webp`,
         imageAlt: "Заглушка GNL",
       },
@@ -459,7 +561,8 @@ export const GNL_SYSTEM_DETAIL = {
         slug: "fixture-fixing-hanger",
         name: "Підвіс для кріплення світильника",
         orderCode: "GNL SSU1 / SSU2",
-        description: "Підвіс для кріплення світильників до системи шинопроводу.",
+        description:
+          "Підвіс для кріплення світильників до системи шинопроводу.",
         image: `${IMAGE_BASE}/components/gnl-fixture-fixing-hanger-ssu2.webp`,
         imageAlt: "Підвіс GNL для кріплення світильника",
       },

@@ -4,12 +4,13 @@ import {
   busbarCatalogContentForMarket,
   type BusbarSystemSlug,
 } from "@/data/products/busbar/catalog-content";
-import type { BusbarSystem } from "@/data/products/busbar/types";
 import type { BusbarSystemDetail } from "@/data/products/busbar/series/types";
+import type { BusbarSystem } from "@/data/products/busbar/types";
 import type { MarketCode } from "@/modules/markets/types";
 
+import { BusbarApplicationsSection } from "./busbar-applications-section";
 import { BusbarDetailTabs } from "./busbar-detail-tabs";
-import { BusbarHeroCarousel } from "./busbar-hero-carousel";
+import { BusbarProductHeroVisual } from "./busbar-product-hero-visual";
 import styles from "./busbar-system-detail-page.module.css";
 
 export function BusbarSystemDetailPage({
@@ -23,7 +24,7 @@ export function BusbarSystemDetailPage({
 }>) {
   const content = busbarCatalogContentForMarket(market);
   const systemCopy = content.systems[system.slug as BusbarSystemSlug];
-
+  const heroFeatureImage = detail.heroImages[0];
   return (
     <main className={styles.page}>
       <div className={styles.breadcrumbs}>
@@ -43,7 +44,10 @@ export function BusbarSystemDetailPage({
           <p className={styles.heroDescription}>{detail.heroDescription}</p>
 
           <div className={styles.heroActions}>
-            <Link className={styles.primaryButton} href={detail.requestQuoteHref}>
+            <Link
+              className={styles.primaryButton}
+              href={detail.requestQuoteHref}
+            >
               {content.projectSupport.action}
             </Link>
 
@@ -56,13 +60,15 @@ export function BusbarSystemDetailPage({
           </div>
         </div>
 
-        <div className={styles.heroVisual}>
-          <BusbarHeroCarousel
-            images={detail.heroImages}
-            nextLabel={detail.heroNextLabel}
-            previousLabel={detail.heroPreviousLabel}
-          />
-        </div>
+        {heroFeatureImage ? (
+          <div className={styles.heroVisual}>
+            <BusbarProductHeroVisual
+              image={detail.heroFeatureImage}
+              imageAlt={detail.heroFeatureImageAlt}
+              priority
+            />
+          </div>
+        ) : null}
       </section>
 
       <section aria-label={systemCopy.name} className={styles.factStrip}>
@@ -83,6 +89,8 @@ export function BusbarSystemDetailPage({
         systemDescription={systemCopy.description}
         systemName={systemCopy.name}
       />
+
+      <BusbarApplicationsSection detail={detail} />
 
       <section className={styles.projectSupport}>
         <div>
