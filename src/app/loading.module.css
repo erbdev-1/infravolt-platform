@@ -1,0 +1,45 @@
+.screen {
+  align-items: center;
+  background: var(--color-infravolt-surface, #f5f7fa);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  inset: 0;
+  justify-content: center;
+  position: fixed;
+  z-index: 9999;
+}
+
+.logo {
+  animation: loadingPulse 1600ms ease-in-out infinite;
+  height: auto;
+  width: clamp(9rem, 22vw, 14rem);
+}
+
+.status {
+  color: var(--color-infravolt-navy, #041a35);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  opacity: 0.55;
+  text-transform: uppercase;
+}
+
+@keyframes loadingPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.55;
+    transform: scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo {
+    animation: none;
+  }
+}
