@@ -14,7 +14,7 @@ export type BusbarApplicationId =
 export type BusbarSystemSlug =
   | "gnl-lighting-busbar"
   | "gl-lighting-busbar"
-  | "gm-medium-power-busbar"
+  | "gm-low-power-busbar"
   | "ggd-medium-power-busbar"
   | "gs-super-compact"
   | "gr-cast-resin";
@@ -266,12 +266,12 @@ export const BUSBAR_CATALOG_CONTENT = {
         conductorLabel: "Aluminium or copper",
         imageAlt: "Gersan GL lighting busbar system",
       },
-      "gm-medium-power-busbar": {
-        name: "GM Medium Power Busbar",
+      "gm-low-power-busbar": {
+        name: "GM Low Power Busbar",
         description:
-          "Low and medium-power busbar system for distributing electrical power across commercial and industrial facilities.",
+          "Low power busbar system for distributing electrical power across commercial and industrial facilities.",
         conductorLabel: "Aluminium or copper",
-        imageAlt: "Gersan GM medium power busbar system",
+        imageAlt: "Gersan GM low power busbar system",
       },
       "ggd-medium-power-busbar": {
         name: "GGD Medium Power Busbar",
@@ -452,12 +452,12 @@ export const BUSBAR_CATALOG_CONTENT = {
         conductorLabel: "Алюміній або мідь",
         imageAlt: "Освітлювальна шинопровідна система Gersan GL",
       },
-      "gm-medium-power-busbar": {
-        name: "Шинопровід середньої потужності GM",
+      "gm-low-power-busbar": {
+        name: "Шинопровід низької потужності GM",
         description:
-          "Система малої та середньої потужності для розподілу електроенергії в комерційних і промислових об’єктах.",
+          "Система низької потужності для розподілу електроенергії в комерційних і промислових об’єктах.",
         conductorLabel: "Алюміній або мідь",
-        imageAlt: "Шинопровідна система середньої потужності Gersan GM",
+        imageAlt: "Шинопровідна система низької потужності Gersan GM",
       },
       "ggd-medium-power-busbar": {
         name: "Шинопровід середньої потужності GGD",
@@ -471,7 +471,7 @@ export const BUSBAR_CATALOG_CONTENT = {
         description:
           "Компактна високострумова система для інфраструктурних об’єктів, трансформаторних і щитових підключень.",
         conductorLabel: "Алюміній або мідь",
-        imageAlt: "Компактна шинопровідна система Gersan GS Super Compact",
+        imageAlt: "Шинопровідна система Gersan GS Super Compact",
       },
       "gr-cast-resin": {
         name: "Шинопровід GR з литою ізоляцією",
