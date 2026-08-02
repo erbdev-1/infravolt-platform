@@ -74,6 +74,15 @@ export function BusbarSystemDetailPage({
               imageAlt={detail.heroFeatureImageAlt}
               priority
             />
+
+            {detail.heroBadge ? (
+              <div aria-hidden="true" className={styles.heroBadge}>
+                <span className={styles.heroBadgeRing}>
+                  <strong>{detail.heroBadge}</strong>
+                  <small>Protection Rating</small>
+                </span>
+              </div>
+            ) : null}
           </div>
         ) : null}
       </section>

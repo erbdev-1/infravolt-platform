@@ -76,6 +76,8 @@ export type BusbarSystemDetail = Readonly<{
 
   heroFeatureImage: string;
   heroFeatureImageAlt: string;
+  // Optional certification-style seal shown over the hero visual (e.g. "IP68").
+  heroBadge?: string;
 
   heroImages: readonly BusbarHeroImage[];
   heroPreviousLabel: string;
