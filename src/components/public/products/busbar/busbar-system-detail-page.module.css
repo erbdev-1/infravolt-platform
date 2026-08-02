@@ -193,6 +193,50 @@
   width: 100%;
 }
 
+.heroBadge {
+  left: clamp(-1rem, -2vw, 0rem);
+  position: absolute;
+  top: 22%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
+.heroBadgeRing {
+  align-items: center;
+  background: var(--busbar-navy);
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 3px var(--busbar-accent),
+    0 0.75rem 1.75rem rgb(6 26 53 / 35%);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  height: clamp(5rem, 9vw, 6.5rem);
+  justify-content: center;
+  outline: 2px dashed rgb(255 255 255 / 55%);
+  outline-offset: -8px;
+  transform: rotate(-8deg);
+  width: clamp(5rem, 9vw, 6.5rem);
+}
+
+.heroBadgeRing strong {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.heroBadgeRing small {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
 .heroImage {
   filter: contrast(1.025) saturate(0.98);
   object-fit: cover;

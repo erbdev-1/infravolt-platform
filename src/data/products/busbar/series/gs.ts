@@ -27,9 +27,10 @@ export const GS_SYSTEM_DETAIL = {
       "GS Super Compact is a 400 A to 6300 A high-current busbar trunking system for major infrastructure, transformer and switchboard connections, available in aluminium (GSA) and copper (GSC) conductor variants, with bolt-on and plug-in joint options and a dedicated range of transformer and panel connection accessories.",
     heroFeatureImage: `${IMAGE_BASE}/card/gs-main-transparent-product.webp`,
     heroFeatureImageAlt: "GS Super Compact busbar system main product view",
+    heroBadge: "IP68",
     heroImages: [
       {
-        image: `${IMAGE_BASE}/applications/gs-transformer-installation.webp`,
+        image: `${IMAGE_BASE}/applications/gs-transformer-overhead-buswork.webp`,
         imageAlt: "GS Super Compact busbar connected to a cast-resin transformer",
         label: "Transformer connection",
         fit: "cover",
@@ -42,21 +43,28 @@ export const GS_SYSTEM_DETAIL = {
         fit: "cover",
       },
       {
+        image: `${IMAGE_BASE}/applications/gs-industrial-overhead-installation-01.webp`,
+        imageAlt:
+          "GS Super Compact busbar installed overhead in an industrial facility, crane rail view",
+        label: "Overhead installation",
+        fit: "cover",
+      },
+      {
         image: `${IMAGE_BASE}/applications/gs-non-standard-length-plug-in.webp`,
         imageAlt: "GS Super Compact non-standard length plug-in element cutaway",
         label: "Non-standard length element",
         fit: "cover",
       },
       {
-        image: `${IMAGE_BASE}/applications/gs-mechanical-dilatation-element.webp`,
-        imageAlt: "GS Super Compact mechanical dilatation element",
-        label: "Mechanical dilatation element",
+        image: `${IMAGE_BASE}/applications/gs-copper-busbar-assembly-cutaway.webp`,
+        imageAlt: "GS Super Compact copper busbar assembly, cutaway view of the conductor stack",
+        label: "Conductor assembly",
         fit: "cover",
       },
       {
-        image: `${IMAGE_BASE}/applications/gs-vertical-expansion-detail.webp`,
-        imageAlt: "GS Super Compact vertical expansion element, internal detail",
-        label: "Vertical expansion element",
+        image: `${IMAGE_BASE}/applications/gs-utility-yard-electrical-busway.webp`,
+        imageAlt: "GS Super Compact overhead busway at an outdoor electrical utility yard",
+        label: "Utility yard installation",
         fit: "cover",
       },
     ],
@@ -110,7 +118,7 @@ export const GS_SYSTEM_DETAIL = {
         title: "Critical infrastructure",
         description:
           "Direct transformer and switchboard connections for mission-critical power infrastructure.",
-        image: `${IMAGE_BASE}/applications/gs-transformer-installation.webp`,
+        image: `${IMAGE_BASE}/applications/gs-transformer-overhead-buswork.webp`,
         imageAlt: "GS Super Compact busbar connected to a cast-resin transformer",
       },
       {
@@ -118,8 +126,8 @@ export const GS_SYSTEM_DETAIL = {
         title: "Infrastructure & Utilities",
         description:
           "High-current distribution for utility plants, pumping stations and generation facilities.",
-        image: "/assets/industries/cards/infrastructure-utilities.webp",
-        imageAlt: "Industrial utility plant with pumps and piping",
+        image: `${IMAGE_BASE}/applications/gs-utility-yard-electrical-busway.webp`,
+        imageAlt: "GS Super Compact overhead busway at an outdoor electrical utility yard",
       },
       {
         slug: "transport-infrastructure",
@@ -1265,9 +1273,10 @@ export const GS_SYSTEM_DETAIL = {
       "GS Super Compact — шинопровідна система на 400–6300 А для потужної інфраструктури, підключення трансформаторів і розподільних щитів. Доступна у варіантах з алюмінієвими (GSA) або мідними (GSC) провідниками, з болтовим (bolt-on) та штепсельним (plug-in) з'єднанням, а також спеціальним асортиментом аксесуарів для підключення до трансформаторів і панелей.",
     heroFeatureImage: `${IMAGE_BASE}/card/gs-main-transparent-product.webp`,
     heroFeatureImageAlt: "Шинопровідна система GS Super Compact — вигляд основного продукту",
+    heroBadge: "IP68",
     heroImages: [
       {
-        image: `${IMAGE_BASE}/applications/gs-transformer-installation.webp`,
+        image: `${IMAGE_BASE}/applications/gs-transformer-overhead-buswork.webp`,
         imageAlt: "Шинопровід GS Super Compact, підключений до трансформатора з литою ізоляцією",
         label: "Підключення трансформатора",
         fit: "cover",
@@ -1279,21 +1288,28 @@ export const GS_SYSTEM_DETAIL = {
         fit: "cover",
       },
       {
+        image: `${IMAGE_BASE}/applications/gs-industrial-overhead-installation-01.webp`,
+        imageAlt:
+          "Шинопровід GS Super Compact, змонтований під стелею промислового об'єкта, вид з підкрановою колією",
+        label: "Стельовий монтаж",
+        fit: "cover",
+      },
+      {
         image: `${IMAGE_BASE}/applications/gs-non-standard-length-plug-in.webp`,
         imageAlt: "Розріз ара боу штепсельного елемента GS Super Compact",
         label: "Ара боу елемент",
         fit: "cover",
       },
       {
-        image: `${IMAGE_BASE}/applications/gs-mechanical-dilatation-element.webp`,
-        imageAlt: "Механічний дилатаційний елемент GS Super Compact",
-        label: "Механічний дилатаційний елемент",
+        image: `${IMAGE_BASE}/applications/gs-copper-busbar-assembly-cutaway.webp`,
+        imageAlt: "Мідний шинопровід GS Super Compact, розріз пакета провідників",
+        label: "Провідникова збірка",
         fit: "cover",
       },
       {
-        image: `${IMAGE_BASE}/applications/gs-vertical-expansion-detail.webp`,
-        imageAlt: "Вертикальний компенсаційний елемент GS Super Compact, внутрішня будова",
-        label: "Вертикальний компенсаційний елемент",
+        image: `${IMAGE_BASE}/applications/gs-utility-yard-electrical-busway.webp`,
+        imageAlt: "Шинопровід GS Super Compact на відкритому комунальному електротехнічному майданчику",
+        label: "Монтаж на комунальному майданчику",
         fit: "cover",
       },
     ],
@@ -1346,7 +1362,7 @@ export const GS_SYSTEM_DETAIL = {
         title: "Критична інфраструктура",
         description:
           "Пряме підключення до трансформаторів та розподільних щитів для критично важливої інфраструктури живлення.",
-        image: `${IMAGE_BASE}/applications/gs-transformer-installation.webp`,
+        image: `${IMAGE_BASE}/applications/gs-transformer-overhead-buswork.webp`,
         imageAlt: "Шинопровід GS Super Compact, підключений до трансформатора з литою ізоляцією",
       },
       {
@@ -1354,8 +1370,8 @@ export const GS_SYSTEM_DETAIL = {
         title: "Інфраструктура та комунальне господарство",
         description:
           "Розподіл потужного струму для комунальних об'єктів, насосних станцій та генеруючих потужностей.",
-        image: "/assets/industries/cards/infrastructure-utilities.webp",
-        imageAlt: "Промисловий об'єкт комунального господарства з насосами та трубопроводами",
+        image: `${IMAGE_BASE}/applications/gs-utility-yard-electrical-busway.webp`,
+        imageAlt: "Шинопровід GS Super Compact на відкритому комунальному електротехнічному майданчику",
       },
       {
         slug: "transport-infrastructure",
