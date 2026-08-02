@@ -11,6 +11,7 @@ import type { MarketCode } from "@/modules/markets/types";
 import { BusbarApplicationsSection } from "./busbar-applications-section";
 import { BusbarDetailTabs } from "./busbar-detail-tabs";
 import { BusbarProductHeroVisual } from "./busbar-product-hero-visual";
+import { BusbarSmartAutomationSection } from "./busbar-smart-automation-section";
 import styles from "./busbar-system-detail-page.module.css";
 
 export function BusbarSystemDetailPage({
@@ -105,6 +106,8 @@ export function BusbarSystemDetailPage({
         systemDescription={systemCopy.description}
         systemName={systemCopy.name}
       />
+
+      <BusbarSmartAutomationSection detail={detail} />
 
       <BusbarApplicationsSection detail={detail} />
 

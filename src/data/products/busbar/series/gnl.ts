@@ -122,6 +122,35 @@ export const GNL_SYSTEM_DETAIL = {
         imageAlt: "Hospital corridor with continuous ceiling lighting",
       },
     ],
+    smartAutomation: {
+      eyebrow: "SMART AUTOMATION",
+      heading: "Monitor and control your busbar network with G-BUS",
+      description:
+        "G-BUS is Gersan's automation and monitoring layer for compatible busbar systems—bringing visibility, control and intelligence to your power distribution network.",
+      compatibilityLine: "Compatible with selected GNL, GL, GGD and GS systems",
+      features: [
+        {
+          title: "No separate data cabling",
+          description:
+            "Uses the busbar itself for data communication—fast installation with lower complexity.",
+        },
+        {
+          title: "Remote monitoring & control",
+          description:
+            "Secure access from anywhere to monitor status, receive alerts and operate with confidence.",
+        },
+        {
+          title: "Measurements, switching and scheduling",
+          description:
+            "Track key electrical parameters, automate switching and schedule operations with ease.",
+        },
+      ],
+      image: "/assets/products/g-bus/g-bus-smart-rail-dashboard.webp",
+      imageAlt:
+        "G-BUS automation dashboard overlay on a Gersan busbar with receiver modules",
+      primaryActionLabel: "Explore G-BUS Automation",
+      primaryActionHref: "/products/g-bus",
+    },
     technicalDataEyebrow: "Technical data",
     technicalDataHeading: "Ratings & specification",
     parameterHeading: "Parameter",
@@ -428,6 +457,35 @@ export const GNL_SYSTEM_DETAIL = {
         imageAlt: "Лікарняний коридор з безперервним стельовим освітленням",
       },
     ],
+    smartAutomation: {
+      eyebrow: "РОЗУМНА АВТОМАТИЗАЦІЯ",
+      heading: "Моніторинг і керування шинопроводом за допомогою G-BUS",
+      description:
+        "G-BUS — це рівень автоматизації та моніторингу Gersan для сумісних шинопровідних систем, що надає видимість, керування та інтелектуальні можливості вашій мережі розподілу живлення.",
+      compatibilityLine: "Сумісно з обраними системами GNL, GL, GGD та GS",
+      features: [
+        {
+          title: "Без окремого кабелю передачі даних",
+          description:
+            "Використовує сам шинопровід для передачі даних — швидкий монтаж і менша складність.",
+        },
+        {
+          title: "Віддалений моніторинг і керування",
+          description:
+            "Безпечний доступ звідусіль для контролю стану, отримання сповіщень та впевненого керування.",
+        },
+        {
+          title: "Вимірювання, перемикання та планування",
+          description:
+            "Відстежуйте ключові електричні параметри, автоматизуйте перемикання та плануйте операції.",
+        },
+      ],
+      image: "/assets/products/g-bus/g-bus-smart-rail-dashboard.webp",
+      imageAlt:
+        "Панель автоматизації G-BUS поверх шинопроводу Gersan з приймальними модулями",
+      primaryActionLabel: "Дізнатися про G-BUS Automation",
+      primaryActionHref: "/products/g-bus",
+    },
     technicalDataEyebrow: "Технічні дані",
     technicalDataHeading: "Параметри та характеристики",
     parameterHeading: "Параметр",
