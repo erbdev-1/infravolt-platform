@@ -4,6 +4,7 @@ import type { BusbarSystemSlug } from "../catalog-content";
 import { GGD_SYSTEM_DETAIL } from "./ggd";
 import { GL_SYSTEM_DETAIL } from "./gl";
 import { GNL_SYSTEM_DETAIL } from "./gnl";
+import { GS_SYSTEM_DETAIL } from "./gs";
 import type { BusbarSystemDetail, BusbarSystemDetailByMarket } from "./types";
 
 const BUSBAR_SERIES_DETAIL: Partial<
@@ -12,6 +13,7 @@ const BUSBAR_SERIES_DETAIL: Partial<
   "gnl-lighting-busbar": GNL_SYSTEM_DETAIL,
   "gl-lighting-busbar": GL_SYSTEM_DETAIL,
   "ggd-medium-power-busbar": GGD_SYSTEM_DETAIL,
+  "gs-super-compact": GS_SYSTEM_DETAIL,
 };
 
 export function getBusbarSystemDetail(

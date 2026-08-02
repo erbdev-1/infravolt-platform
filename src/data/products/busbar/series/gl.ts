@@ -7,7 +7,6 @@ const SPEC_COLUMNS = [
 ] as const;
 
 const IMAGE_BASE = "/assets/products/busbar/gl";
-const APPLICATION_IMAGE_BASE = "/assets/products/busbar/applications";
 
 export const GL_SYSTEM_DETAIL = {
   uk: {
@@ -77,31 +76,45 @@ export const GL_SYSTEM_DETAIL = {
       "GL provides flexible, continuous lighting distribution for industrial and commercial environments where higher current ratings and a choice of conductor material are required.",
     applications: [
       {
-        slug: "industrial-facilities",
-        title: "Industrial facilities & workshops",
+        slug: "retail-supermarkets",
+        title: "Retail & Supermarkets",
         description:
-          "Flexible lighting connections for production areas, workshops and high-ceiling industrial spaces requiring 40–100 A capacity.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-manufacturing.webp`,
-        imageAlt:
-          "Manufacturing facility with continuous lighting above production machinery",
+          "Adaptable lighting distribution for supermarkets, showrooms and retail units.",
+        image: "/assets/products/busbar/applications/busbar-application-retail.webp",
+        imageAlt: "Retail interior with adaptable overhead lighting distribution",
       },
       {
         slug: "warehouses-logistics",
-        title: "Warehouses & logistics",
+        title: "Warehouses & Logistics",
         description:
           "Continuous lighting distribution above storage aisles, picking areas and logistics operations.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-warehouse.webp`,
+        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
         imageAlt:
           "Industrial warehouse with continuous overhead lighting above storage and logistics areas",
       },
       {
         slug: "commercial-buildings",
-        title: "Retail & commercial buildings",
+        title: "Commercial Buildings",
         description:
-          "Adaptable lighting distribution for supermarkets, showrooms, retail units and commercial interiors.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-retail.webp`,
-        imageAlt:
-          "Retail interior with adaptable overhead lighting distribution",
+          "Adaptable lighting distribution for offices, retail units and mixed-use commercial interiors.",
+        image: "/assets/industries/cards/commercial-buildings.webp",
+        imageAlt: "Illuminated commercial office towers at dusk",
+      },
+      {
+        slug: "industrial-facilities",
+        title: "Industrial Facilities",
+        description:
+          "Flexible lighting connections for production areas, workshops and high-ceiling industrial spaces requiring 40–100 A capacity.",
+        image: "/assets/industries/cards/industrial-facilities.webp",
+        imageAlt: "Industrial production facility interior",
+      },
+      {
+        slug: "education-public-sector",
+        title: "Education & Public Sector",
+        description:
+          "Continuous, low-maintenance lighting distribution for institutional and civic buildings.",
+        image: "/assets/industries/cards/education-public-sector.webp",
+        imageAlt: "University building lighting distribution context",
       },
     ],
     technicalDataEyebrow: "Technical data",
@@ -413,31 +426,45 @@ export const GL_SYSTEM_DETAIL = {
       "GL забезпечує гнучкий безперервний розподіл живлення освітлення для промислових і комерційних середовищ, де потрібні вищі номінальні струми та вибір матеріалу провідника.",
     applications: [
       {
-        slug: "industrial-facilities",
-        title: "Промислові об'єкти та майстерні",
+        slug: "retail-supermarkets",
+        title: "Роздрібна торгівля та супермаркети",
         description:
-          "Гнучке підключення освітлення у виробничих зонах, майстернях та промислових приміщеннях із потужністю 40–100 А.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-manufacturing.webp`,
-        imageAlt:
-          "Виробниче приміщення з безперервним освітленням над обладнанням",
+          "Адаптивний розподіл освітлення для супермаркетів, шоурумів та торговельних приміщень.",
+        image: "/assets/products/busbar/applications/busbar-application-retail.webp",
+        imageAlt: "Торговельне приміщення з адаптивною системою стельового освітлення",
       },
       {
         slug: "warehouses-logistics",
         title: "Склади та логістичні центри",
         description:
-          "Безперервний розподіл живлення освітлення над складськими проходами, зонами комплектування та логістичними ділянками.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-warehouse.webp`,
+          "Безперервний розподіл освітлення над складськими проходами, зонами комплектування та логістичними ділянками.",
+        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
         imageAlt:
           "Промисловий склад із безперервним освітленням над стелажами та логістичними зонами",
       },
       {
         slug: "commercial-buildings",
-        title: "Торговельні та комерційні приміщення",
+        title: "Комерційні будівлі",
         description:
-          "Адаптивний розподіл живлення освітлення для супермаркетів, шоурумів, магазинів і комерційних інтер'єрів.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-retail.webp`,
-        imageAlt:
-          "Торговельне приміщення з адаптивною системою стельового освітлення",
+          "Адаптивний розподіл освітлення для офісів, торговельних приміщень та багатофункціональних комерційних об'єктів.",
+        image: "/assets/industries/cards/commercial-buildings.webp",
+        imageAlt: "Освітлені комерційні офісні вежі в сутінках",
+      },
+      {
+        slug: "industrial-facilities",
+        title: "Промислові об'єкти",
+        description:
+          "Гнучке підключення освітлення у виробничих зонах, майстернях та промислових приміщеннях із потужністю 40–100 А.",
+        image: "/assets/industries/cards/industrial-facilities.webp",
+        imageAlt: "Інтер'єр промислового виробничого об'єкта",
+      },
+      {
+        slug: "education-public-sector",
+        title: "Освіта та державний сектор",
+        description:
+          "Безперервний, невибагливий до обслуговування розподіл освітлення для навчальних та громадських будівель.",
+        image: "/assets/industries/cards/education-public-sector.webp",
+        imageAlt: "Університетська будівля — контекст розподілу освітлення",
       },
     ],
     technicalDataEyebrow: "Технічні дані",

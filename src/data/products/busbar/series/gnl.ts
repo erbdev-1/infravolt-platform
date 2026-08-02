@@ -6,7 +6,6 @@ const SPEC_COLUMNS = [
 ] as const;
 
 const IMAGE_BASE = "/assets/products/busbar/gnl";
-const APPLICATION_IMAGE_BASE = "/assets/products/busbar/applications";
 
 export const GNL_SYSTEM_DETAIL = {
   uk: {
@@ -82,31 +81,45 @@ export const GNL_SYSTEM_DETAIL = {
 
     applications: [
       {
+        slug: "retail-supermarkets",
+        title: "Retail & Supermarkets",
+        description:
+          "Continuous fixture-connection lighting for supermarkets, showrooms and retail units.",
+        image: "/assets/products/busbar/applications/busbar-application-retail.webp",
+        imageAlt: "Retail interior with adaptable overhead lighting distribution",
+      },
+      {
         slug: "warehouses-logistics",
-        title: "Warehouses & logistics",
+        title: "Warehouses & Logistics",
         description:
           "Continuous lighting distribution above storage aisles, picking areas and logistics operations.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-warehouse.webp`,
+        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
         imageAlt:
           "Industrial warehouse with continuous overhead lighting above storage and logistics areas",
       },
       {
-        slug: "industrial-facilities",
-        title: "Industrial facilities & workshops",
+        slug: "commercial-buildings",
+        title: "Commercial Buildings",
         description:
-          "Flexible lighting connections for production areas, workshops and high-ceiling industrial spaces.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-manufacturing.webp`,
-        imageAlt:
-          "Manufacturing facility with continuous lighting above production machinery",
+          "Adaptable lighting distribution for offices, retail units and mixed-use commercial interiors.",
+        image: "/assets/industries/cards/commercial-buildings.webp",
+        imageAlt: "Illuminated commercial office towers at dusk",
       },
       {
-        slug: "commercial-buildings",
-        title: "Retail & commercial buildings",
+        slug: "education-public-sector",
+        title: "Education & Public Sector",
         description:
-          "Adaptable lighting distribution for supermarkets, showrooms, retail units and commercial interiors.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-retail.webp`,
-        imageAlt:
-          "Retail interior with adaptable overhead lighting distribution",
+          "Continuous, low-maintenance lighting distribution for institutional and civic buildings.",
+        image: "/assets/industries/cards/education-public-sector.webp",
+        imageAlt: "University building lighting distribution context",
+      },
+      {
+        slug: "healthcare",
+        title: "Healthcare",
+        description:
+          "Reliable overhead lighting distribution for wards, corridors and clinical environments.",
+        image: "/assets/industries/cards/healthcare.webp",
+        imageAlt: "Hospital corridor with continuous ceiling lighting",
       },
     ],
     technicalDataEyebrow: "Technical data",
@@ -374,31 +387,45 @@ export const GNL_SYSTEM_DETAIL = {
 
     applications: [
       {
+        slug: "retail-supermarkets",
+        title: "Роздрібна торгівля та супермаркети",
+        description:
+          "Безперервне освітлення з підключенням світильників для супермаркетів, шоурумів та торговельних приміщень.",
+        image: "/assets/products/busbar/applications/busbar-application-retail.webp",
+        imageAlt: "Торговельне приміщення з адаптивною системою стельового освітлення",
+      },
+      {
         slug: "warehouses-logistics",
         title: "Склади та логістичні центри",
         description:
-          "Безперервний розподіл живлення освітлення над складськими проходами, зонами комплектування та логістичними ділянками.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-warehouse.webp`,
+          "Безперервний розподіл освітлення над складськими проходами, зонами комплектування та логістичними ділянками.",
+        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
         imageAlt:
           "Промисловий склад із безперервним освітленням над стелажами та логістичними зонами",
       },
       {
-        slug: "industrial-facilities",
-        title: "Промислові об’єкти та майстерні",
+        slug: "commercial-buildings",
+        title: "Комерційні будівлі",
         description:
-          "Гнучке підключення освітлення у виробничих зонах, майстернях та промислових приміщеннях із високими стелями.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-manufacturing.webp`,
-        imageAlt:
-          "Виробниче приміщення з безперервним освітленням над обладнанням",
+          "Адаптивний розподіл освітлення для офісів, торговельних приміщень та багатофункціональних комерційних об'єктів.",
+        image: "/assets/industries/cards/commercial-buildings.webp",
+        imageAlt: "Освітлені комерційні офісні вежі в сутінках",
       },
       {
-        slug: "commercial-buildings",
-        title: "Торговельні та комерційні приміщення",
+        slug: "education-public-sector",
+        title: "Освіта та державний сектор",
         description:
-          "Адаптивний розподіл живлення освітлення для супермаркетів, шоурумів, магазинів і комерційних інтер’єрів.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-retail.webp`,
-        imageAlt:
-          "Торговельне приміщення з адаптивною системою стельового освітлення",
+          "Безперервний, невибагливий до обслуговування розподіл освітлення для навчальних та громадських будівель.",
+        image: "/assets/industries/cards/education-public-sector.webp",
+        imageAlt: "Університетська будівля — контекст розподілу освітлення",
+      },
+      {
+        slug: "healthcare",
+        title: "Охорона здоров'я",
+        description:
+          "Надійний розподіл стельового освітлення для палат, коридорів та клінічних приміщень.",
+        image: "/assets/industries/cards/healthcare.webp",
+        imageAlt: "Лікарняний коридор з безперервним стельовим освітленням",
       },
     ],
     technicalDataEyebrow: "Технічні дані",
