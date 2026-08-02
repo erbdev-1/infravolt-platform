@@ -69,6 +69,30 @@ export type BusbarDocument = Readonly<{
   downloadLabel: string;
 }>;
 
+export type BusbarSmartAutomationFeature = Readonly<{
+  title: string;
+  description: string;
+}>;
+
+// Optional G-BUS cross-sell section shown between Applications and the
+// Engineering support CTA, only for series G-BUS is compatible with
+// (GNL, GL, GGD, GS per the G-BUS catalogue).
+export type BusbarSmartAutomationSection = Readonly<{
+  eyebrow: string;
+  heading: string;
+  description: string;
+  compatibilityLine: string;
+  features: readonly [
+    BusbarSmartAutomationFeature,
+    BusbarSmartAutomationFeature,
+    BusbarSmartAutomationFeature,
+  ];
+  image: string;
+  imageAlt: string;
+  primaryActionLabel: string;
+  primaryActionHref: string;
+}>;
+
 export type BusbarSystemDetail = Readonly<{
   slug: BusbarSystemSlug;
   categoryEyebrow: string;
@@ -95,6 +119,8 @@ export type BusbarSystemDetail = Readonly<{
   applicationsHeading: string;
   applicationsDescription: string;
   applications: readonly BusbarSystemApplication[];
+
+  smartAutomation?: BusbarSmartAutomationSection;
 
   technicalDataEyebrow: string;
   technicalDataHeading: string;

@@ -523,8 +523,8 @@
 }
 
 .resultsHeading h2 {
-  color: var(--busbar-accent);
-  font-size: clamp(2.1rem, 4vw, 3.5rem);
+  color: var(--busbar-navy);
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
   letter-spacing: -0.045em;
   line-height: 1;
   margin: 0;
