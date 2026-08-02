@@ -1,7 +1,6 @@
 import type { BusbarSystemDetailByMarket } from "./types";
 
 const IMAGE_BASE = "/assets/products/busbar/ggd";
-const APPLICATION_IMAGE_BASE = "/assets/products/busbar/applications";
 
 const SPEC_COLUMNS_GGDA = [
   { id: "c160", label: "160A" },
@@ -97,55 +96,68 @@ export const GGD_SYSTEM_DETAIL = {
     applications: [
       {
         slug: "data-centres",
-        title: "Data centres",
+        title: "Data Centres",
         description:
           "Reliable, high-current power distribution up to 1000 A for data centre server halls.",
         image: "/assets/industries/cards/data-centres.webp",
         imageAlt: "Data centre server room with rows of server racks",
       },
       {
-        slug: "critical-infrastructure",
-        title: "Critical infrastructure",
+        slug: "infrastructure-utilities",
+        title: "Infrastructure & Utilities",
         description:
-          "Robust power distribution for utility plants and other mission-critical facilities.",
+          "Robust power distribution for utility plants and other essential-service facilities.",
         image: "/assets/industries/cards/infrastructure-utilities.webp",
         imageAlt: "Industrial utility plant with pumps and piping",
       },
       {
         slug: "industrial-facilities",
-        title: "Industrial facilities & workshops",
+        title: "Industrial Facilities",
         description:
-          "High-current power distribution for production areas, workshops and high-ceiling industrial spaces requiring up to 1000 A capacity.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-manufacturing.webp`,
-        imageAlt:
-          "Manufacturing facility with continuous lighting above production machinery",
+          "High-current power distribution for production areas and high-ceiling industrial spaces requiring up to 1000 A capacity.",
+        image: "/assets/industries/cards/industrial-facilities.webp",
+        imageAlt: "Industrial production facility interior",
+      },
+      {
+        slug: "commercial-buildings",
+        title: "Commercial Buildings",
+        description:
+          "Adaptable power distribution for offices, retail units and mixed-use commercial interiors.",
+        image: "/assets/industries/cards/commercial-buildings.webp",
+        imageAlt: "Illuminated commercial office towers at dusk",
       },
       {
         slug: "warehouses-logistics",
-        title: "Warehouses & logistics",
+        title: "Warehouses & Logistics",
         description:
           "Continuous power distribution above storage aisles, picking areas and logistics operations.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-warehouse.webp`,
+        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
         imageAlt:
           "Industrial warehouse with continuous overhead lighting above storage and logistics areas",
       },
       {
-        slug: "commercial-buildings",
-        title: "Retail & commercial buildings",
-        description:
-          "Adaptable power distribution for supermarkets, showrooms, retail units and commercial interiors.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-retail.webp`,
-        imageAlt:
-          "Retail interior with adaptable overhead power and lighting distribution",
-      },
-      {
         slug: "parking-structures",
-        title: "Parking structures",
+        title: "Parking Structures",
         description:
           "Robust power distribution for lighting, EV charging and ventilation infrastructure in parking facilities.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-parking.webp`,
-        imageAlt:
-          "Parking structure with overhead lighting and power distribution",
+        image: "/assets/products/busbar/applications/busbar-application-parking.webp",
+        imageAlt: "Parking structure with overhead lighting and power distribution",
+      },
+      {
+        slug: "healthcare",
+        title: "Healthcare",
+        description:
+          "Resilient power distribution for wards, plant rooms and clinical support areas.",
+        image: "/assets/industries/cards/healthcare.webp",
+        imageAlt: "Hospital corridor with continuous ceiling lighting",
+      },
+      {
+        slug: "transport-infrastructure",
+        title: "Transport Infrastructure",
+        description:
+          "Power distribution for airports, rail stations and other major transport hubs.",
+        image: "/assets/industries/cards/transport-infrastructure.webp",
+        imageAlt: "Airport terminal and transit infrastructure at night",
       },
     ],
     technicalDataEyebrow: "Technical data",
@@ -1061,46 +1073,60 @@ export const GGD_SYSTEM_DETAIL = {
         imageAlt: "Серверна зала дата-центру з рядами серверних стійок",
       },
       {
-        slug: "critical-infrastructure",
-        title: "Критична інфраструктура",
+        slug: "infrastructure-utilities",
+        title: "Інфраструктура та комунальне господарство",
         description:
-          "Надійний розподіл живлення для об'єктів комунального господарства та іншої критичної інфраструктури.",
+          "Надійний розподіл живлення для об'єктів комунального господарства та інших об'єктів життєзабезпечення.",
         image: "/assets/industries/cards/infrastructure-utilities.webp",
         imageAlt: "Промисловий об'єкт комунального господарства з насосами та трубопроводами",
       },
       {
         slug: "industrial-facilities",
-        title: "Промислові об'єкти та майстерні",
+        title: "Промислові об'єкти",
         description:
-          "Розподіл потужного струму для виробничих зон, майстерень та промислових приміщень з ємністю до 1000 А.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-manufacturing.webp`,
-        imageAlt:
-          "Виробниче приміщення з безперервним освітленням над обладнанням",
+          "Розподіл потужного струму для виробничих зон та промислових приміщень з ємністю до 1000 А.",
+        image: "/assets/industries/cards/industrial-facilities.webp",
+        imageAlt: "Інтер'єр промислового виробничого об'єкта",
+      },
+      {
+        slug: "commercial-buildings",
+        title: "Комерційні будівлі",
+        description:
+          "Адаптивний розподіл живлення для офісів, торговельних приміщень та багатофункціональних комерційних об'єктів.",
+        image: "/assets/industries/cards/commercial-buildings.webp",
+        imageAlt: "Освітлені комерційні офісні вежі в сутінках",
       },
       {
         slug: "warehouses-logistics",
         title: "Склади та логістичні центри",
         description:
           "Безперервний розподіл живлення над складськими проходами та логістичними ділянками.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-warehouse.webp`,
+        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
         imageAlt: "Промисловий склад із безперервним освітленням над стелажами",
-      },
-      {
-        slug: "commercial-buildings",
-        title: "Торговельні та комерційні приміщення",
-        description:
-          "Адаптивний розподіл живлення для супермаркетів, шоурумів та комерційних інтер'єрів.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-retail.webp`,
-        imageAlt:
-          "Торговельне приміщення з адаптивною системою розподілу живлення",
       },
       {
         slug: "parking-structures",
         title: "Паркінги",
         description:
           "Надійний розподіл живлення для освітлення, зарядки електромобілів та вентиляції в паркінгах.",
-        image: `${APPLICATION_IMAGE_BASE}/busbar-application-parking.webp`,
+        image: "/assets/products/busbar/applications/busbar-application-parking.webp",
         imageAlt: "Паркінг з надстельовим освітленням та розподілом живлення",
+      },
+      {
+        slug: "healthcare",
+        title: "Охорона здоров'я",
+        description:
+          "Надійний розподіл живлення для палат, технічних приміщень та клінічних допоміжних зон.",
+        image: "/assets/industries/cards/healthcare.webp",
+        imageAlt: "Лікарняний коридор з безперервним стельовим освітленням",
+      },
+      {
+        slug: "transport-infrastructure",
+        title: "Транспортна інфраструктура",
+        description:
+          "Розподіл живлення для аеропортів, залізничних станцій та інших великих транспортних вузлів.",
+        image: "/assets/industries/cards/transport-infrastructure.webp",
+        imageAlt: "Термінал аеропорту та транспортна інфраструктура вночі",
       },
     ],
     technicalDataEyebrow: "Технічні дані",
