@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { AccessibleVideo } from "@/components/public/accessible-video";
 import type { ProductId } from "@/modules/public-site/assets";
-import { applicationScenes } from "@/modules/application-map/data-centre";
+import { DATA_CENTRE_APPLICATION_MAP } from "@/modules/application-map/data-centre";
 import { UKSupportPreview } from "@/components/public/uk-support-preview";
 import { TechnicalResourcesPreview } from "@/components/public/technical-resources-preview";
 import { GersanManufacturerPreview } from "@/components/public/gersan-manufacturer-preview";
@@ -32,7 +32,7 @@ const PRODUCT_PAGE_HREFS = {
   "ev-charging": "/products/ev-charging",
 } as const satisfies Readonly<Record<ProductId, string>>;
 
-const FEATURED_APPLICATION_SCENE = applicationScenes[0];
+const FEATURED_APPLICATION_SCENE = DATA_CENTRE_APPLICATION_MAP.overview;
 
 const HERO_BADGES = [
   {
@@ -340,7 +340,7 @@ export function HomePageView({ market }: HomePageViewProps) {
 
             <div className="application-preview__scene">
               <Image
-                alt={content.applicationMap.previewTitle}
+                alt={FEATURED_APPLICATION_SCENE.imageAlt[market]}
                 fill
                 sizes="(min-width: 1024px) 55vw, 100vw"
                 src={FEATURED_APPLICATION_SCENE.image}
@@ -367,7 +367,7 @@ export function HomePageView({ market }: HomePageViewProps) {
                     <span className="application-preview__hotspot-dot" />
 
                     <span className="application-preview__hotspot-label">
-                      {hotspot.label}
+                      {hotspot.accessibleLabel[market]}
                     </span>
                   </span>
                 ))}
