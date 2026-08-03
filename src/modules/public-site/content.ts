@@ -463,7 +463,7 @@ export const PUBLIC_SITE_CONTENT = {
         "Request technical support",
       ],
       action: {
-        href: "/applications/data-centres",
+        href: "/application-map",
         label: "Open Data Centre Application Map",
       },
     },
@@ -896,7 +896,7 @@ export const PUBLIC_SITE_CONTENT = {
         "Запросіть технічну підтримку",
       ],
       action: {
-        href: "/applications/data-centres",
+        href: "/application-map",
         label: "Відкрити карту центру обробки даних",
       },
     },
