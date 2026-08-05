@@ -6,11 +6,12 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 import { productFamilyIcon } from "@/modules/application-map/assets";
 import type { ApplicationMapPageContent } from "@/modules/application-map/content";
-import type { ResolvedDataCentreApplicationMap } from "@/modules/application-map/resolve";
-import type { ProductFamilyId, ZoneId } from "@/modules/application-map/types";
+import type { ResolvedApplicationMap } from "@/modules/application-map/resolve";
+import type { ProductFamilyId } from "@/modules/application-map/types";
 
 import { ApplicationHotspot } from "./application-hotspot";
 import { ApplicationNavigation, type NavigationItem } from "./application-navigation";
+import { ApplicationProductChooser } from "./application-product-chooser";
 import { ApplicationProductPanel } from "./application-product-panel";
 import {
   ApplicationSceneView,
@@ -22,9 +23,21 @@ import {
 } from "./application-zone-strip";
 import styles from "./data-centre-application-map.module.css";
 
+// Bölge kimliği (zone id) sektöre göre değişir (Data Centre, Healthcare,
+// ...); bu bileşen belirli bir sektöre bağlı olmadığı için düz string
+// olarak ele alır — map, hangi sektörün ResolvedApplicationMap<TZoneId>'i
+// olursa olsun buraya geçirilebilir (TZoneId her zaman string'in alt
+// tipidir).
 type DataCentreApplicationMapProps = Readonly<{
-  map: ResolvedDataCentreApplicationMap;
+  map: ResolvedApplicationMap<string>;
   content: ApplicationMapPageContent;
+  // "cover" (varsayılan): mevcut Data Centre davranışı — sahne yükseklik
+  // tabanlıdır, görsel kırpılarak doldurur, galeri sahnenin ALT KENARINA
+  // biner. "contain": görselin tam 16:9 oranı korunur, hiç kırpılmaz,
+  // sahne kendi doğal oranına göre boyutlanır, kullanılmayan alan koyu
+  // zeminle doldurulur, galeri sahnenin ALTINA (normal akışta, binmeden)
+  // yerleşir. Yalnız masaüstünde etkilidir — mobil/tam ekran değişmez.
+  overviewImageFit?: "cover" | "contain";
 }>;
 
 // Fullscreen desteği tarayıcı ömrü boyunca değişmez; harici bir "store" gibi
@@ -103,10 +116,18 @@ function markZoneHintSeen() {
 export function DataCentreApplicationMap({
   map,
   content,
+  overviewImageFit = "cover",
 }: DataCentreApplicationMapProps) {
-  const [activeZoneId, setActiveZoneId] = useState<ZoneId | null>(null);
+  const [activeZoneId, setActiveZoneId] = useState<string | null>(null);
   const [activeProductFamilyId, setActiveProductFamilyId] =
     useState<ProductFamilyId | null>(null);
+  // Aile seçimi (activeProductFamilyId) TEK BAŞINA hangi somut ürünün
+  // gösterileceğini belirlemeye yetmez: bir zone'da aynı aileye (ör.
+  // "busbar") ait BİRDEN FAZLA hotspot olabilir (ör. GGD + GNL). Bu yüzden
+  // gösterilecek hotspot ayrı bir state ile, id üzerinden takip edilir.
+  // Sol seçiciden tıklanıp o ailede birden fazla hotspot varsa bu null
+  // kalır ve seçim listesi (ApplicationProductChooser) gösterilir.
+  const [activeHotspotId, setActiveHotspotId] = useState<string | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const hintDismissed = useSyncExternalStore(
@@ -148,16 +169,32 @@ export function DataCentreApplicationMap({
       )
     : map.productFamilies;
 
-  const activeHotspot =
+  const matchingHotspotsForFamily =
     activeZone && activeProductFamilyId
-      ? (activeZone.hotspots.find(
+      ? activeZone.hotspots.filter(
           (hotspot) => hotspot.productFamilyId === activeProductFamilyId,
-        ) ?? null)
+        )
+      : [];
+
+  const activeHotspot = activeHotspotId
+    ? (matchingHotspotsForFamily.find(
+        (hotspot) => hotspot.id === activeHotspotId,
+      ) ?? null)
+    : matchingHotspotsForFamily.length === 1
+      ? matchingHotspotsForFamily[0]!
       : null;
 
   const activeProductFamily = activeProductFamilyId
     ? (familyById.get(activeProductFamilyId) ?? null)
     : null;
+
+  // Aynı ailede birden fazla hotspot var ama henüz hiçbiri seçilmediyse
+  // (sol seçiciden yeni tıklandı), tam ürün paneli yerine seçim listesi
+  // gösterilir.
+  const showProductChooser =
+    Boolean(activeProductFamily) &&
+    !activeHotspot &&
+    matchingHotspotsForFamily.length > 1;
 
   // İlk-ziyaret ipucu: bölgede henüz ürün seçilmemiş ve ipucu bu oturumda
   // kapatılmamışsa, o bölgenin ilk uygun ürün ailesi ve ona karşılık gelen
@@ -215,14 +252,16 @@ export function DataCentreApplicationMap({
     })),
   ];
 
-  function selectZone(zoneId: ZoneId) {
+  function selectZone(zoneId: string) {
     setActiveZoneId(zoneId);
     setActiveProductFamilyId(null);
+    setActiveHotspotId(null);
   }
 
   function backToOverview() {
     setActiveZoneId(null);
     setActiveProductFamilyId(null);
+    setActiveHotspotId(null);
   }
 
   // Bir galeri kartı (bölge veya "Overview") seçildiğinde sahneyi görünür
@@ -270,8 +309,8 @@ export function DataCentreApplicationMap({
       return;
     }
 
-    if (zoneById.has(id as ZoneId)) {
-      selectZone(id as ZoneId);
+    if (zoneById.has(id)) {
+      selectZone(id);
       scrollStageIntoView();
     }
   }
@@ -281,7 +320,10 @@ export function DataCentreApplicationMap({
       const hotspot = activeZone.hotspots.find((item) => item.id === id);
 
       if (hotspot) {
+        // Bir hotspot'a doğrudan tıklamak, o ailede başka hotspot da olsa,
+        // her zaman TAM OLARAK o somut ürünü açar (seçim listesi atlanır).
         setActiveProductFamilyId(hotspot.productFamilyId);
+        setActiveHotspotId(hotspot.id);
         markZoneHintSeen();
       }
 
@@ -307,13 +349,26 @@ export function DataCentreApplicationMap({
     );
 
     if (isApproved) {
+      const matches = activeZone.hotspots.filter(
+        (hotspot) => hotspot.productFamilyId === id,
+      );
+
       setActiveProductFamilyId(id as ProductFamilyId);
+      // Bu ailede tek hotspot varsa doğrudan onu aç; birden fazlaysa
+      // seçim listesi gösterilsin diye null bırak (bkz. showProductChooser).
+      setActiveHotspotId(matches.length === 1 ? matches[0]!.id : null);
       markZoneHintSeen();
     }
   }
 
+  function handleProductChoose(hotspotId: string) {
+    setActiveHotspotId(hotspotId);
+    markZoneHintSeen();
+  }
+
   function closePanel() {
     setActiveProductFamilyId(null);
+    setActiveHotspotId(null);
   }
 
   // Reset View, fullscreen modundan bilerek çıkmaz; yalnız sahneyi ve
@@ -472,18 +527,42 @@ export function DataCentreApplicationMap({
 
                 {activeProductFamily && activeHotspot ? (
                   <ApplicationProductPanel
-                    actions={activeProductFamily.actions}
-                    applicationPoints={activeProductFamily.applicationPoints}
-                    benefits={activeProductFamily.benefits}
+                    actions={activeHotspot.actions ?? activeProductFamily.actions}
+                    applicationPoints={
+                      activeHotspot.applicationPoints ??
+                      activeProductFamily.applicationPoints
+                    }
+                    benefits={
+                      activeHotspot.benefits ?? activeProductFamily.benefits
+                    }
                     icon={productFamilyIcon(activeProductFamily.id)}
-                    image={activeProductFamily.image}
-                    imageAlt={activeProductFamily.imageAlt}
+                    image={activeHotspot.image ?? activeProductFamily.image}
+                    imageAlt={
+                      activeHotspot.imageAlt ?? activeProductFamily.imageAlt
+                    }
                     labels={content.panel}
-                    name={activeProductFamily.name}
+                    name={activeHotspot.name ?? activeProductFamily.name}
                     number={activeProductFamily.number}
                     onClose={closePanel}
                     restoreFocusId={restoreFocusId}
                     usedHereFor={activeHotspot.usedHereFor}
+                  />
+                ) : null}
+
+                {activeProductFamily && showProductChooser ? (
+                  <ApplicationProductChooser
+                    choices={matchingHotspotsForFamily.map((hotspot) => ({
+                      id: hotspot.id,
+                      name: hotspot.name ?? activeProductFamily.name,
+                      usedHereFor: hotspot.usedHereFor,
+                    }))}
+                    chooseProductHeading={content.panel.chooseProductHeading}
+                    closeLabel={content.panel.closeLabel}
+                    familyName={activeProductFamily.name}
+                    number={activeProductFamily.number}
+                    onChoose={handleProductChoose}
+                    onClose={closePanel}
+                    restoreFocusId={restoreFocusId}
                   />
                 ) : null}
               </div>
@@ -502,100 +581,143 @@ export function DataCentreApplicationMap({
             </div>
           </>
         ) : (
-          /* .overviewStageGroup: masaüstü/yatayda konum:relative referans
-             kutusu (sceneControls/gallerySection üzerine mutlak biner);
-             dikey mobilde (15. bölüm) ikisi de normal akışa döner —
-             sceneControls .stageVisual'ın ÜSTÜNDE, gallerySection ise
-             ALTINDA ayrı satırlar olur, artık görseli kaplamazlar. */
-          <div className={styles.overviewStageGroup}>
-            <div className={styles.sceneControls}>
-              <button
-                className={styles.sceneControlButton}
-                disabled={!activeProductFamilyId}
-                onClick={resetView}
-                type="button"
-              >
-                {content.resetViewLabel}
-              </button>
-
-              {fullscreenSupported ? (
+          <>
+            {/* .overviewStageGroup: masaüstü/yatayda konum:relative referans
+               kutusu (sceneControls, ve "cover" modunda gallerySection de,
+               üzerine mutlak biner); dikey mobilde (15. bölüm) sceneControls
+               normal akışa döner. "contain" modunda (bkz. overviewImageFit
+               prop'u) galeri bu grubun DIŞINA, ayrı bir bölüme taşınır —
+               görselin üzerine binmeden, altına yerleşir. */}
+            <div className={styles.overviewStageGroup}>
+              <div className={styles.sceneControls}>
                 <button
                   className={styles.sceneControlButton}
-                  onClick={toggleFullscreen}
+                  disabled={!activeProductFamilyId}
+                  onClick={resetView}
                   type="button"
                 >
-                  {isFullscreen
-                    ? content.exitFullscreenLabel
-                    : content.fullscreenLabel}
+                  {content.resetViewLabel}
                 </button>
+
+                {fullscreenSupported ? (
+                  <button
+                    className={styles.sceneControlButton}
+                    onClick={toggleFullscreen}
+                    type="button"
+                  >
+                    {isFullscreen
+                      ? content.exitFullscreenLabel
+                      : content.fullscreenLabel}
+                  </button>
+                ) : null}
+              </div>
+
+              {/* .stageVisual, arka plan fotoğrafı, okunabilirlik overlay'i
+                 ve overview hotspot katmanının bindirildiği TEK sınırlı
+                 sahne kutusudur. "cover" modunda yüksekliği sabit bir
+                 clamp() ile belirlenir (mevcut Data Centre davranışı);
+                 "contain" modunda kendi doğal 16:9 oranına göre boyutlanır
+                 (bkz. .stageVisualContain), görsel hiç kırpılmaz. */}
+              <div
+                className={
+                  overviewImageFit === "contain"
+                    ? `${styles.stageVisual} ${styles.stageVisualContain}`
+                    : styles.stageVisual
+                }
+              >
+                <div className={styles.backgroundLayer}>
+                  <Image
+                    alt={map.overview.imageAlt}
+                    className={
+                      overviewImageFit === "contain"
+                        ? `${styles.backgroundImage} ${styles.backgroundImageContain}`
+                        : styles.backgroundImage
+                    }
+                    fill
+                    priority
+                    sizes="100vw"
+                    src={map.overview.image}
+                  />
+                </div>
+
+                <div className={styles.readabilityScrim} />
+
+                {/* Overview modunda ayrı bir ön-plan görseli yok; hotspot'lar
+                    doğrudan arka plan katmanıyla aynı sınırlar üzerine biner.
+                    Numaranın yanında bölge adı da görünür etiket olarak
+                    gösterilir (ör. "1 Main Electrical Room") — kullanıcı
+                    hangi numaranın hangi oda olduğunu tıklamadan görebilsin. */}
+                <div className={styles.overviewHotspots}>
+                  {sceneHotspots.map((hotspot) => (
+                    <ApplicationHotspot
+                      active={false}
+                      id={`app-map-hotspot-${hotspot.id}`}
+                      key={hotspot.id}
+                      label={hotspot.label}
+                      number={hotspot.number}
+                      onSelect={() => handleSceneHotspotSelect(hotspot.id)}
+                      x={hotspot.x}
+                      y={hotspot.y}
+                    />
+                  ))}
+
+                  {sceneHotspots.map((hotspot) => (
+                    <span
+                      aria-hidden="true"
+                      className={styles.hotspotLabel}
+                      key={`${hotspot.id}-label`}
+                      style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
+                    >
+                      {hotspot.label}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Marka logosu yalnız gerçek tam ekran modunda görünür;
+                    global header görünürken burada tekrar göstermek
+                    yinelenmiş marka izlenimi yaratır. */}
+                {isFullscreen ? (
+                  <Link
+                    aria-label={content.brandMarkLabel}
+                    className={styles.brandMark}
+                    href="/"
+                  >
+                    <Image
+                      alt=""
+                      aria-hidden="true"
+                      height={235}
+                      src="/assets/brand/infravolt-wordmark-transparent.webp"
+                      width={1040}
+                    />
+                  </Link>
+                ) : null}
+              </div>
+
+              {overviewImageFit === "cover" ? (
+                <div className={styles.gallerySection}>
+                  <ApplicationZoneStrip
+                    items={zoneStripItems}
+                    label={content.zoneNavigationLabel}
+                    nextLabel={content.zoneNextLabel}
+                    onSelect={handleZoneStripSelect}
+                    previousLabel={content.zonePreviousLabel}
+                  />
+                </div>
               ) : null}
             </div>
 
-            {/* .stageVisual, arka plan fotoğrafı, okunabilirlik overlay'i
-               ve overview hotspot katmanının bindirildiği TEK sınırlı
-               sahne kutusudur. Yüksekliği sabit bir clamp() ile
-               belirlenir. */}
-            <div className={styles.stageVisual}>
-              <div className={styles.backgroundLayer}>
-                <Image
-                  alt={map.overview.imageAlt}
-                  className={styles.backgroundImage}
-                  fill
-                  priority
-                  sizes="100vw"
-                  src={map.overview.image}
+            {overviewImageFit === "contain" ? (
+              <div className={styles.zoneGallerySection}>
+                <ApplicationZoneStrip
+                  items={zoneStripItems}
+                  label={content.zoneNavigationLabel}
+                  nextLabel={content.zoneNextLabel}
+                  onSelect={handleZoneStripSelect}
+                  previousLabel={content.zonePreviousLabel}
                 />
               </div>
-
-              <div className={styles.readabilityScrim} />
-
-              {/* Overview modunda ayrı bir ön-plan görseli yok; hotspot'lar
-                  doğrudan arka plan katmanıyla aynı sınırlar üzerine biner. */}
-              <div className={styles.overviewHotspots}>
-                {sceneHotspots.map((hotspot) => (
-                  <ApplicationHotspot
-                    active={false}
-                    id={`app-map-hotspot-${hotspot.id}`}
-                    key={hotspot.id}
-                    label={hotspot.label}
-                    number={hotspot.number}
-                    onSelect={() => handleSceneHotspotSelect(hotspot.id)}
-                    x={hotspot.x}
-                    y={hotspot.y}
-                  />
-                ))}
-              </div>
-
-              {/* Marka logosu yalnız gerçek tam ekran modunda görünür;
-                  global header görünürken burada tekrar göstermek
-                  yinelenmiş marka izlenimi yaratır. */}
-              {isFullscreen ? (
-                <Link
-                  aria-label={content.brandMarkLabel}
-                  className={styles.brandMark}
-                  href="/"
-                >
-                  <Image
-                    alt=""
-                    aria-hidden="true"
-                    height={235}
-                    src="/assets/brand/infravolt-wordmark-transparent.webp"
-                    width={1040}
-                  />
-                </Link>
-              ) : null}
-            </div>
-
-            <div className={styles.gallerySection}>
-              <ApplicationZoneStrip
-                items={zoneStripItems}
-                label={content.zoneNavigationLabel}
-                nextLabel={content.zoneNextLabel}
-                onSelect={handleZoneStripSelect}
-                previousLabel={content.zonePreviousLabel}
-              />
-            </div>
-          </div>
+            ) : null}
+          </>
         )}
       </div>
     </div>

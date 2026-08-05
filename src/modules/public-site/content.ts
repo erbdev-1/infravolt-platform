@@ -56,6 +56,10 @@ type IndustryItem = ContentCard &
   Readonly<{
     id: IndustryId;
     imageAlt: string;
+    // Kendi Application Map sayfası henüz yayında olmayan sektörler
+    // "#application-map" ile aynı sayfadaki Featured Application Map
+    // bölümüne düşer (kırık link yerine mevcut, çalışan bir hedef).
+    href: `#${string}` | `/${string}`;
   }>;
 
 type Navigation = readonly [
@@ -391,6 +395,7 @@ export const PUBLIC_SITE_CONTENT = {
             "System coordination for dense, continuity-focused technical environments.",
           imageAlt:
             "Illustrative data-centre server hall showing electrical service routes",
+          href: "#application-map",
         },
         {
           id: "commercial-buildings",
@@ -399,6 +404,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Adaptable electrical pathways for workplaces and mixed-use buildings.",
           imageAlt:
             "Illustrative commercial office floor showing electrical service routes",
+          href: "#application-map",
         },
         {
           id: "industrial-facilities",
@@ -407,6 +413,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Robust routing and distribution contexts for production environments.",
           imageAlt:
             "Illustrative industrial production line showing electrical infrastructure",
+          href: "/application-map/industrial-facility",
         },
         {
           id: "infrastructure-utilities",
@@ -415,6 +422,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Coordinated system contexts for essential services and public assets.",
           imageAlt:
             "Illustrative utilities pumping station showing electrical systems",
+          href: "#application-map",
         },
         {
           id: "renewable-energy",
@@ -423,6 +431,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Electrical protection and routing contexts for renewable installations.",
           imageAlt:
             "Illustrative solar installation with electrical enclosure and cable routes",
+          href: "#application-map",
         },
         {
           id: "healthcare",
@@ -431,6 +440,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Clear infrastructure coordination for complex clinical environments.",
           imageAlt:
             "Illustrative healthcare ward showing electrical distribution routes",
+          href: "/application-map/healthcare",
         },
         {
           id: "transport-infrastructure",
@@ -439,6 +449,7 @@ export const PUBLIC_SITE_CONTENT = {
             "System discovery for terminals and connected transport environments.",
           imageAlt:
             "Illustrative airport public concourse showing electrical service routes",
+          href: "#application-map",
         },
         {
           id: "education-public-sector",
@@ -447,6 +458,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Adaptable electrical pathways for institutional and civic buildings.",
           imageAlt:
             "Illustrative education library showing electrical service routes",
+          href: "/application-map/education-public-sector",
         },
       ],
     },
@@ -825,6 +837,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Координація систем для щільних технічних середовищ із фокусом на безперервності.",
           imageAlt:
             "Ілюстративний серверний зал із маршрутами інженерних мереж",
+          href: "#application-map",
         },
         {
           id: "commercial-buildings",
@@ -833,6 +846,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Адаптивні електричні траси для офісних і багатофункціональних будівель.",
           imageAlt:
             "Ілюстративний офісний поверх із маршрутами інженерних мереж",
+          href: "#application-map",
         },
         {
           id: "industrial-facilities",
@@ -841,6 +855,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Контексти прокладання мереж і розподілу електроенергії у виробничих середовищах.",
           imageAlt:
             "Ілюстративна виробнича лінія з електричною інфраструктурою",
+          href: "/application-map/industrial-facility",
         },
         {
           id: "infrastructure-utilities",
@@ -848,6 +863,7 @@ export const PUBLIC_SITE_CONTENT = {
           description:
             "Узгоджені системні контексти для критичних сервісів і громадських активів.",
           imageAlt: "Ілюстративна насосна станція з електричними системами",
+          href: "#application-map",
         },
         {
           id: "renewable-energy",
@@ -856,6 +872,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Контексти електричного захисту й прокладання мереж для відновлюваної енергетики.",
           imageAlt:
             "Ілюстративна сонячна установка з електричною шафою та кабельними трасами",
+          href: "#application-map",
         },
         {
           id: "healthcare",
@@ -864,6 +881,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Чітка координація інфраструктури для складних клінічних середовищ.",
           imageAlt:
             "Ілюстративна лікарняна палата з маршрутами електричних мереж",
+          href: "/application-map/healthcare",
         },
         {
           id: "transport-infrastructure",
@@ -872,6 +890,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Пошук систем для терміналів і пов’язаних транспортних середовищ.",
           imageAlt:
             "Ілюстративний пасажирський простір аеропорту з інженерними мережами",
+          href: "#application-map",
         },
         {
           id: "education-public-sector",
@@ -879,6 +898,7 @@ export const PUBLIC_SITE_CONTENT = {
           description:
             "Адаптивні електричні шляхи для освітніх і громадських будівель.",
           imageAlt: "Ілюстративна бібліотека з маршрутами інженерних мереж",
+          href: "/application-map/education-public-sector",
         },
       ],
     },

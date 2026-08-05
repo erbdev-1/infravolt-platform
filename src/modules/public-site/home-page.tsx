@@ -264,7 +264,7 @@ export function HomePageView({ market }: HomePageViewProps) {
                 <a
                   aria-label={`${content.industries.actionLabel}: ${item.title}`}
                   className="industry-card__link"
-                  href="#application-map"
+                  href={item.href}
                 >
                   <div className="industry-card__media">
                     <Image

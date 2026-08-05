@@ -1,6 +1,6 @@
 import { PRODUCT_FAMILY_IDS, ZONE_IDS } from "./types";
 
-import type { DataCentreApplicationMap } from "./types";
+import type { ApplicationMap, DataCentreApplicationMap } from "./types";
 
 const KNOWN_ROUTE_PREFIXES = ["/products/", "/uk-support", "/application-map"];
 
@@ -15,9 +15,11 @@ function isSafeActionHref(href: string): boolean {
 // Statik Application Map verisini derleme zamanı tipinin ötesinde denetler.
 // Burada yakalanan bir hata, yanlışlıkla eklenmiş bir ürün ailesini, bozuk
 // bir hotspot koordinatını veya kırık bir aksiyon linkini üretime çıkmadan
-// önce ortaya çıkarır.
-export function validateDataCentreApplicationMap(
-  map: DataCentreApplicationMap,
+// önce ortaya çıkarır. Sektörden bağımsızdır — geçerli bölge kimlikleri
+// çağıran taraftan (zoneIds) gelir.
+export function validateApplicationMap<TZoneId extends string>(
+  map: ApplicationMap<TZoneId>,
+  zoneIds: readonly TZoneId[],
 ): readonly string[] {
   const errors: string[] = [];
 
@@ -40,14 +42,14 @@ export function validateDataCentreApplicationMap(
     }
   }
 
-  const zoneIds = map.zones.map((zone) => zone.id);
-  const uniqueZoneIds = new Set(zoneIds);
-  if (uniqueZoneIds.size !== zoneIds.length) {
+  const actualZoneIds = map.zones.map((zone) => zone.id);
+  const uniqueZoneIds = new Set(actualZoneIds);
+  if (uniqueZoneIds.size !== actualZoneIds.length) {
     errors.push("Duplicate zone IDs detected.");
   }
 
-  for (const id of zoneIds) {
-    if (!(ZONE_IDS as readonly string[]).includes(id)) {
+  for (const id of actualZoneIds) {
+    if (!(zoneIds as readonly string[]).includes(id)) {
       errors.push(`Unsupported zone ID present: "${id}".`);
     }
   }
@@ -95,16 +97,6 @@ export function validateDataCentreApplicationMap(
         errors.push(`Hotspot "${hotspot.id}" is missing UK or UA usage text.`);
       }
     }
-
-    // EV Charging yalnız Parking & EV Services bölgesinde onaylanabilir.
-    if (
-      zone.id !== "parking-ev-services" &&
-      zone.approvedProductFamilyIds.includes("ev-charging")
-    ) {
-      errors.push(
-        `EV Charging Systems must only appear in "parking-ev-services", found in "${zone.id}".`,
-      );
-    }
   }
 
   for (const hotspot of map.overview.hotspots) {
@@ -134,6 +126,28 @@ export function validateDataCentreApplicationMap(
           );
         }
       }
+    }
+  }
+
+  return errors;
+}
+
+// Data Centre'ye özgü sarmalayıcı: genel doğrulamaya ek olarak, yalnız bu
+// sektörde geçerli olan "EV Charging yalnız Parking & EV Services'te
+// onaylanabilir" kuralını uygular.
+export function validateDataCentreApplicationMap(
+  map: DataCentreApplicationMap,
+): readonly string[] {
+  const errors = [...validateApplicationMap(map, ZONE_IDS)];
+
+  for (const zone of map.zones) {
+    if (
+      zone.id !== "parking-ev-services" &&
+      zone.approvedProductFamilyIds.includes("ev-charging")
+    ) {
+      errors.push(
+        `EV Charging Systems must only appear in "parking-ev-services", found in "${zone.id}".`,
+      );
     }
   }
 

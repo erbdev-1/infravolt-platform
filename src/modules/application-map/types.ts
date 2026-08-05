@@ -38,6 +38,11 @@ export type ZoneId = (typeof ZONE_IDS)[number];
 
 export type SceneId = "overview" | ZoneId;
 
+// Aşağıdaki tipler TZoneId üzerinde geneldir — Data Centre dışındaki
+// sektörler (ör. Healthcare) kendi bölge kimlik union'larını geçirerek
+// aynı modeli yeniden kullanır. Varsayılan tip parametresi sayesinde mevcut
+// Data Centre kullanım noktaları (tip argümanı vermeden `Zone`, `Overview`
+// vb.) değişmeden çalışmaya devam eder.
 export type ProductAction = Readonly<{
   label: string;
   href: string;
@@ -75,10 +80,31 @@ export type Hotspot = Readonly<{
   // Bölgeye özel "Used here for" açıklaması — aynı ürün ailesi farklı
   // bölgelerde farklı şekilde kullanılabildiği için sabit değil.
   usedHereFor: Readonly<Record<MarketCode, string>>;
+  // Nadir durum: aynı ürün ailesi numarası (ör. "Busbar Systems") farklı
+  // bölgelerde farklı somut ürünü temsil edebilir (ör. GS Super Compact
+  // vs GL Lighting Busbar). Bu alanlar verilirse panel, aile seviyesindeki
+  // varsayılan görsel/CTA'lar yerine bunları kullanır; verilmezse aile
+  // içeriği değişmeden kullanılmaya devam eder (geriye dönük uyumlu).
+  imageOverride?: string;
+  imageAltOverride?: Readonly<Record<MarketCode, string>>;
+  actionsOverride?: Readonly<Record<MarketCode, readonly ProductAction[]>>;
+  // Aile seviyesindeki applicationPoints/benefits de birden fazla somut
+  // ürünü aynı aile numarası altında barındıran zone'larda (ör. Busbar
+  // Systems altında GGD/GS/GR/GNL) yanıltıcı olabilir — bu iki alan
+  // verilirse panel bunları, verilmezse aile içeriğini kullanır.
+  applicationPointsOverride?: Readonly<Record<MarketCode, readonly string[]>>;
+  benefitsOverride?: Readonly<Record<MarketCode, readonly string[]>>;
+  // Panel başlığını (H2) aile adı yerine somut ürün adıyla değiştirir (ör.
+  // "GGD Medium Power Busbar"). Sol seçici/hotspot etiketi HER ZAMAN aile
+  // adını ("Busbar Systems") kullanmaya devam eder — bu yalnız panel AÇILDIKTAN
+  // sonraki başlığı etkiler. Bir zone'da aynı aileye ait BİRDEN FAZLA hotspot
+  // varsa (ör. GGD + GNL busbar), seçim listesindeki her satırın etiketi de
+  // buradan gelir.
+  nameOverride?: Readonly<Record<MarketCode, string>>;
 }>;
 
-export type Zone = Readonly<{
-  id: ZoneId;
+export type Zone<TZoneId extends string = ZoneId> = Readonly<{
+  id: TZoneId;
   number: number;
   image: string;
   imageAlt: Readonly<Record<MarketCode, string>>;
@@ -88,22 +114,27 @@ export type Zone = Readonly<{
   hotspots: readonly Hotspot[];
 }>;
 
-export type OverviewHotspot = Readonly<{
+export type OverviewHotspot<TZoneId extends string = ZoneId> = Readonly<{
   id: string;
-  zoneId: ZoneId;
+  zoneId: TZoneId;
   x: number;
   y: number;
   accessibleLabel: Readonly<Record<MarketCode, string>>;
 }>;
 
-export type Overview = Readonly<{
+export type Overview<TZoneId extends string = ZoneId> = Readonly<{
   image: string;
   imageAlt: Readonly<Record<MarketCode, string>>;
-  hotspots: readonly OverviewHotspot[];
+  hotspots: readonly OverviewHotspot<TZoneId>[];
 }>;
 
-export type DataCentreApplicationMap = Readonly<{
-  overview: Overview;
-  zones: readonly Zone[];
+// Sektörden bağımsız temel harita şekli — her sektör kendi TZoneId'siyle
+// bunu somutlaştırır (bkz. healthcare.ts).
+export type ApplicationMap<TZoneId extends string = ZoneId> = Readonly<{
+  overview: Overview<TZoneId>;
+  zones: readonly Zone<TZoneId>[];
   productFamilies: readonly ProductFamily[];
 }>;
+
+// Geriye dönük uyumluluk için korunan, Data Centre'ye özgü isim.
+export type DataCentreApplicationMap = ApplicationMap<ZoneId>;

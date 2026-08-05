@@ -108,6 +108,33 @@
   width: 100%;
 }
 
+/* overviewImageFit="contain" (bkz. bileşen prop'u) — yalnız masaüstünde
+   (≥861px) devreye girer; mobil zaten kendi 16:9 aspect-ratio kuralına
+   sahiptir (15. bölüm), tam ekran kendi kurallarını korur (13. bölüm).
+   Görsel hiç kırpılmaz/germe olmaz; kullanılmayan alan mevcut koyu
+   "gunmetal" degrade zeminiyle doldurulur (bkz. .sceneFrame ile aynı ton). */
+.stageVisualContain {
+  background: radial-gradient(
+    circle at 50% 45%,
+    #26313f 0%,
+    #161f2a 55%,
+    #0a0f16 100%
+  );
+}
+
+.backgroundImageContain {
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (min-width: 861px) {
+  .stageVisualContain {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 0;
+  }
+}
+
 .backgroundLayer {
   inset: 0;
   position: absolute;
@@ -276,6 +303,29 @@
   50% {
     box-shadow: 0 0 0 0.5rem rgb(217 35 50 / 0%);
   }
+}
+
+/* Overview hotspot'unun numarasının hemen altında bölge adını gösteren
+   dekoratif etiket (aria-hidden — erişilebilir isim zaten hotspot
+   butonunun kendisinde). Tıklamayı engellememesi için pointer-events:none;
+   z-index, okunabilirlik overlay'inin (readabilityScrim, z-index:3)
+   üzerinde kalacak şekilde ayarlanır. */
+.hotspotLabel {
+  background: rgb(6 20 40 / 82%);
+  border-radius: 0.3rem;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  max-width: 9rem;
+  overflow: hidden;
+  padding: 0.2rem 0.5rem;
+  pointer-events: none;
+  position: absolute;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 50%);
+  transform: translate(-50%, 1.4rem);
+  white-space: nowrap;
+  z-index: 4;
 }
 
 /* =========================================================
@@ -868,6 +918,43 @@
   padding-top: 0.25rem;
 }
 
+/* Bir zone'da aynı ürün ailesine ait birden fazla somut ürün olduğunda
+   (ör. Busbar Systems altında GGD + GNL) açılan seçim listesi — bkz.
+   ApplicationProductChooser. */
+.panelChoiceList {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.panelChoiceButton {
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.75rem 0.9rem;
+  text-align: left;
+  transition: background-color 180ms ease;
+}
+
+.panelChoiceButton:hover {
+  background: rgb(255 255 255 / 10%);
+}
+
+.panelChoiceName {
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.panelChoiceDescription {
+  color: #dbe3ee;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
 .panelAction {
   border: 1px solid rgb(255 255 255 / 20%);
   border-radius: 0.5rem;
@@ -906,7 +993,8 @@
 .sceneControlButton:focus-visible,
 .backControl:focus-visible,
 .panelClose:focus-visible,
-.panelAction:focus-visible {
+.panelAction:focus-visible,
+.panelChoiceButton:focus-visible {
   outline: 3px solid #ffffff;
   outline-offset: 2px;
 }

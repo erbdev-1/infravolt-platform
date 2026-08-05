@@ -38,6 +38,10 @@ export type ApplicationMapPageContent = Readonly<{
     applicationPointsHeading: string;
     benefitsHeading: string;
     closeLabel: string;
+    // Bir zone'da aynı ürün ailesine ait birden fazla somut ürün varsa
+    // (ör. Busbar Systems altında GGD + GNL), sol seçiciden açılan seçim
+    // listesinin üst başlığı.
+    chooseProductHeading: string;
   }>;
 }>;
 
@@ -74,6 +78,7 @@ const APPLICATION_MAP_CONTENT = {
       applicationPointsHeading: "Application points",
       benefitsHeading: "Key benefits",
       closeLabel: "Close product information",
+      chooseProductHeading: "Available systems in this zone",
     },
   },
   ua: {
@@ -108,6 +113,7 @@ const APPLICATION_MAP_CONTENT = {
       applicationPointsHeading: "Точки застосування",
       benefitsHeading: "Основні переваги",
       closeLabel: "Закрити інформацію про продукт",
+      chooseProductHeading: "Доступні системи в цій зоні",
     },
   },
 } as const satisfies Readonly<Record<MarketCode, ApplicationMapPageContent>>;
