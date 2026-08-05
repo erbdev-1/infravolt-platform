@@ -1,6 +1,7 @@
 import type { MarketCode } from "@/modules/markets/types";
 
 import type {
+  ApplicationMap,
   DataCentreApplicationMap,
   ProductAction,
   ProductFamilyId,
@@ -14,10 +15,18 @@ export type ResolvedHotspot = Readonly<{
   y: number;
   label: string;
   usedHereFor: string;
+  // Bkz. types.ts Hotspot.imageOverride/actionsOverride/nameOverride —
+  // belirtilmişse panel bunları, belirtilmemişse aile içeriğini kullanır.
+  image?: string;
+  imageAlt?: string;
+  actions?: readonly ProductAction[];
+  applicationPoints?: readonly string[];
+  benefits?: readonly string[];
+  name?: string;
 }>;
 
-export type ResolvedZone = Readonly<{
-  id: ZoneId;
+export type ResolvedZone<TZoneId extends string = ZoneId> = Readonly<{
+  id: TZoneId;
   number: number;
   name: string;
   image: string;
@@ -26,13 +35,14 @@ export type ResolvedZone = Readonly<{
   hotspots: readonly ResolvedHotspot[];
 }>;
 
-export type ResolvedOverviewHotspot = Readonly<{
-  id: string;
-  zoneId: ZoneId;
-  x: number;
-  y: number;
-  label: string;
-}>;
+export type ResolvedOverviewHotspot<TZoneId extends string = ZoneId> =
+  Readonly<{
+    id: string;
+    zoneId: TZoneId;
+    x: number;
+    y: number;
+    label: string;
+  }>;
 
 export type ResolvedProductFamily = Readonly<{
   id: ProductFamilyId;
@@ -45,23 +55,29 @@ export type ResolvedProductFamily = Readonly<{
   imageAlt?: string;
 }>;
 
-export type ResolvedDataCentreApplicationMap = Readonly<{
-  overview: Readonly<{
-    image: string;
-    imageAlt: string;
-    hotspots: readonly ResolvedOverviewHotspot[];
+// Sektörden bağımsız çözümlenmiş harita şekli.
+export type ResolvedApplicationMap<TZoneId extends string = ZoneId> =
+  Readonly<{
+    overview: Readonly<{
+      image: string;
+      imageAlt: string;
+      hotspots: readonly ResolvedOverviewHotspot<TZoneId>[];
+    }>;
+    zones: readonly ResolvedZone<TZoneId>[];
+    productFamilies: readonly ResolvedProductFamily[];
   }>;
-  zones: readonly ResolvedZone[];
-  productFamilies: readonly ResolvedProductFamily[];
-}>;
+
+// Geriye dönük uyumluluk için korunan, Data Centre'ye özgü isim.
+export type ResolvedDataCentreApplicationMap = ResolvedApplicationMap<ZoneId>;
 
 // İki dilli statik veriyi tek pazara indirger. Saf bir veri dönüşümüdür,
 // "server-only" bağımlılığı taşımaz; bu yüzden hem sayfa (server) bileşeninde
-// hem gerekirse testlerde güvenle çağrılabilir.
-export function resolveDataCentreApplicationMap(
-  map: DataCentreApplicationMap,
+// hem gerekirse testlerde güvenle çağrılabilir. Sektörden bağımsızdır —
+// Data Centre dışındaki sektörler (ör. Healthcare) de bunu doğrudan kullanır.
+export function resolveApplicationMap<TZoneId extends string>(
+  map: ApplicationMap<TZoneId>,
   market: MarketCode,
-): ResolvedDataCentreApplicationMap {
+): ResolvedApplicationMap<TZoneId> {
   return {
     overview: {
       image: map.overview.image,
@@ -88,6 +104,12 @@ export function resolveDataCentreApplicationMap(
         y: hotspot.y,
         label: hotspot.accessibleLabel[market],
         usedHereFor: hotspot.usedHereFor[market],
+        image: hotspot.imageOverride,
+        imageAlt: hotspot.imageAltOverride?.[market],
+        actions: hotspot.actionsOverride?.[market],
+        applicationPoints: hotspot.applicationPointsOverride?.[market],
+        benefits: hotspot.benefitsOverride?.[market],
+        name: hotspot.nameOverride?.[market],
       })),
     })),
     productFamilies: map.productFamilies.map((family) => ({
@@ -101,4 +123,11 @@ export function resolveDataCentreApplicationMap(
       imageAlt: family.content[market].imageAlt,
     })),
   };
+}
+
+export function resolveDataCentreApplicationMap(
+  map: DataCentreApplicationMap,
+  market: MarketCode,
+): ResolvedDataCentreApplicationMap {
+  return resolveApplicationMap(map, market);
 }
