@@ -405,6 +405,7 @@ export const PUBLIC_SITE_CONTENT = {
           imageAlt:
             "Illustrative commercial office floor showing electrical service routes",
           href: "/application-map/commercial-building",
+          href: "#application-map",
         },
         {
           id: "industrial-facilities",
@@ -423,6 +424,7 @@ export const PUBLIC_SITE_CONTENT = {
           imageAlt:
             "Illustrative utilities pumping station showing electrical systems",
           href: "/application-map/infrastructure-utilities",
+          href: "#application-map",
         },
         {
           id: "renewable-energy",
@@ -432,6 +434,7 @@ export const PUBLIC_SITE_CONTENT = {
           imageAlt:
             "Illustrative solar installation with electrical enclosure and cable routes",
           href: "/application-map/renewable-energy",
+          href: "#application-map",
         },
         {
           id: "healthcare",
@@ -450,6 +453,7 @@ export const PUBLIC_SITE_CONTENT = {
           imageAlt:
             "Illustrative airport public concourse showing electrical service routes",
           href: "/application-map/transport-infrastructure",
+          href: "#application-map",
         },
         {
           id: "education-public-sector",
@@ -847,6 +851,7 @@ export const PUBLIC_SITE_CONTENT = {
           imageAlt:
             "Ілюстративний офісний поверх із маршрутами інженерних мереж",
           href: "/application-map/commercial-building",
+          href: "#application-map",
         },
         {
           id: "industrial-facilities",
@@ -864,6 +869,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Узгоджені системні контексти для критичних сервісів і громадських активів.",
           imageAlt: "Ілюстративна насосна станція з електричними системами",
           href: "/application-map/infrastructure-utilities",
+          href: "#application-map",
         },
         {
           id: "renewable-energy",
@@ -873,6 +879,7 @@ export const PUBLIC_SITE_CONTENT = {
           imageAlt:
             "Ілюстративна сонячна установка з електричною шафою та кабельними трасами",
           href: "/application-map/renewable-energy",
+          href: "#application-map",
         },
         {
           id: "healthcare",
@@ -891,6 +898,7 @@ export const PUBLIC_SITE_CONTENT = {
           imageAlt:
             "Ілюстративний пасажирський простір аеропорту з інженерними мережами",
           href: "/application-map/transport-infrastructure",
+          href: "#application-map",
         },
         {
           id: "education-public-sector",
