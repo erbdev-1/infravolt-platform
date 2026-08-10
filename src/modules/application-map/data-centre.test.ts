@@ -24,11 +24,11 @@ describe("DATA_CENTRE_APPLICATION_MAP", () => {
     expect(ids).toEqual([...PRODUCT_FAMILY_IDS]);
   });
 
-  it("defines exactly the seven canonical zones", () => {
+  it("defines exactly the eight canonical zones", () => {
     const ids = DATA_CENTRE_APPLICATION_MAP.zones.map((zone) => zone.id);
 
     expect(new Set(ids)).toEqual(new Set(ZONE_IDS));
-    expect(ids).toHaveLength(7);
+    expect(ids).toHaveLength(8);
   });
 
   it("only approves EV Charging Systems for the Parking & EV Services zone", () => {

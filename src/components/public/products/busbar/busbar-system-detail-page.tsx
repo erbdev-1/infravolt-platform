@@ -74,6 +74,7 @@ export function BusbarSystemDetailPage({
               image={detail.heroFeatureImage}
               imageAlt={detail.heroFeatureImageAlt}
               priority
+              slug={system.slug as BusbarSystemSlug}
             />
 
             {detail.heroBadge ? (

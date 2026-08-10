@@ -1,0 +1,221 @@
+/* =========================================================
+   TECHNICAL SNAPSHOT STRIP — product specification summary cards
+   Reused as-is on the hub page and all 8 category detail pages (see
+   earthing-lightning-hub-page.tsx / earthing-category-detail-page.tsx).
+   Relies on the --earthing-* custom properties declared on the host
+   page's own `.page` root (earthing-*-page.module.css) — this module
+   doesn't redeclare them, it just inherits through the DOM.
+
+   Each item is its own separated, elevated card (not a fused strip) —
+   deliberately mirrors a datasheet's spec-card language: accent top edge,
+   icon + label header on a divider, then either a single bold stat or a
+   strict 2-column grid of values. Cards live independently in a CSS grid
+   so removing the old shared strip surface/border-left seams doesn't
+   require re-plumbing anything downstream. Matches the pattern proven on
+   the cable-management line (see cable-management-page.module.css)
+   restyled with --earthing-* tokens. */
+
+.strip {
+  /* ~56px above (gap from hero), ~80px below — collapses against the
+     next section's own top margin (.pathways / .families, both 4.5rem)
+     to land inside the 72-88px range the design brief asks for. */
+  margin: 3.5rem auto 5rem;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Centred, top-aligned — not vertically centred as a block. Every cell
+   starts its header row at the same offset (fixed padding, no
+   content-based centring), so icon+label rows across all four cells sit
+   on one line regardless of how many lines the value below takes. */
+.cell {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.9rem;
+  box-shadow: var(--earthing-shadow-idle), 0 0.85rem 2.25rem rgb(6 26 53 / 6%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 8.5rem;
+  overflow: hidden;
+  padding: 1.5rem 1.375rem 1.625rem; /* 24px / 22px / 26px */
+  position: relative;
+  text-align: center;
+}
+
+/* Accent top edge — the one colour cue that reads as "this is a
+   spec card", echoed nowhere else on the card so it stays a quiet marker
+   rather than competing with the icon badge. */
+.cell::before {
+  background: var(--earthing-accent);
+  content: "";
+  height: 3px;
+  inset: 0 0 auto;
+  position: absolute;
+}
+
+/* Icon + label as one compact heading, sat on its own divider so the
+   value area below reads as a distinct block — see
+   technical-snapshot-strip.tsx. */
+.header {
+  align-items: center;
+  border-bottom: 1px solid var(--earthing-border);
+  display: flex;
+  gap: 0.5rem; /* 8px */
+  justify-content: center;
+  padding-bottom: 0.75rem;
+  width: 100%;
+}
+
+/* Circular badge, not a bare line icon floating next to the label — the
+   same accent-soft/accent-light treatment already used for .principleIcon
+   on the hub page (see earthing-lightning-hub-page.module.css), so the
+   icon language reads as one deliberate system rather than two different
+   treatments on the same site. */
+.iconBadge {
+  align-items: center;
+  background: var(--earthing-accent-soft);
+  border: 1px solid var(--earthing-accent-light);
+  border-radius: 50%;
+  display: inline-flex;
+  flex-shrink: 0;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+
+.icon {
+  color: var(--earthing-accent);
+  flex-shrink: 0;
+  height: 1.05rem;
+  width: 1.05rem;
+}
+
+.headerLabel {
+  color: var(--earthing-navy);
+  font-size: 0.75rem; /* 12px */
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  /* Title Case as authored in content.ts (e.g. "Applicable Standards")
+     — no text-transform here, unlike the old bottom-label style. */
+}
+
+/* Single-stat values only — multi-value items switch to .valueList below
+   instead of stacking centred lines here. */
+.value {
+  align-items: center;
+  color: var(--earthing-navy);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  justify-content: center;
+  margin-top: 1rem; /* header now carries its own divider padding-bottom */
+  min-height: 3.375rem; /* floor only — taller notes grow beyond this */
+  text-align: center;
+}
+
+.valueLine {
+  font-size: 1.0625rem; /* 17px desktop */
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+/* Multi-item values (3+ standards, 5 materials, etc.) — a strict 2-column
+   grid. Every value keeps its own grid cell regardless of how long its
+   text is; a long value wraps inside its own cell instead of
+   pushing/reordering into the opposite column, so rows and columns always
+   stay visually aligned. */
+.valueList {
+  align-items: start;
+  align-self: stretch; /* takes the cell's full width, same as .header */
+  column-gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1rem;
+  row-gap: 10px;
+  text-align: left;
+}
+
+.valueListLine {
+  align-items: flex-start;
+  color: var(--earthing-navy);
+  display: flex;
+  font-size: 0.8125rem; /* 13px desktop */
+  font-weight: 600;
+  gap: 0.4rem;
+  line-height: 1.4;
+}
+
+.valueListLine::before {
+  background: var(--earthing-accent);
+  border-radius: 1px;
+  content: "";
+  flex-shrink: 0;
+  height: 0.35rem;
+  margin-top: 0.45em;
+  width: 0.35rem;
+}
+
+.note {
+  color: var(--earthing-muted);
+  font-size: 0.75rem; /* 12px */
+  font-weight: 500;
+  line-height: 1.4;
+  margin-top: 0.625rem; /* 10px — kept visually separate from the value list */
+  text-align: center;
+}
+
+.tooltip {
+  color: var(--earthing-muted);
+  font-size: 0.72rem;
+  font-style: italic;
+  line-height: 1.4;
+  margin-top: 0.3rem;
+  text-align: center;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .value {
+    min-height: 3.125rem; /* ~50px, still within the 52-58px range's lower edge */
+  }
+
+  .valueLine {
+    font-size: 0.9375rem; /* 15px, tablet + mobile */
+  }
+
+  .valueListLine {
+    font-size: 0.78125rem; /* ~12.5px, tablet + mobile */
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cell {
+    min-height: 0;
+    padding: 1.25rem 1.5rem 1.5rem; /* ~20px / 24px / 24px */
+  }
+
+  /* Natural height on mobile — single column means no row of neighbours
+     to stay aligned with, so the fixed reservation that keeps desktop/
+     tablet values level is unnecessary height here. */
+  .value {
+    min-height: 0;
+  }
+}

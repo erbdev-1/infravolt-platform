@@ -267,14 +267,14 @@ export const PUBLIC_SITE_CONTENT = {
       brandDescriptor: "Electrical infrastructure",
       relationshipLabel: "Official UK Representative",
       navigation: [
-        { href: "#top", label: "Home" },
-        { href: "#about-gersan", label: "About" },
-        { href: "#product-systems", label: "Gersan Products" },
-        { href: "#industries", label: "Industries" },
+        { href: "/#top", label: "Home" },
+        { href: "/#about-gersan", label: "About" },
+        { href: "/#product-systems", label: "Gersan Products" },
+        { href: "/#industries", label: "Industries" },
         { href: "/uk-support", label: "UK Support" },
-        { href: "#contact", label: "Dealer / Trade Account" },
-        { href: "#technical-documents", label: "Resources" },
-        { href: "#contact", label: "Contact" },
+        { href: "/#contact", label: "Dealer / Trade Account" },
+        { href: "/#technical-documents", label: "Resources" },
+        { href: "/#contact", label: "Contact" },
       ],
       footerDescription:
         "Electrical infrastructure systems, technical documentation and coordinated project-supply support for the UK market.",
@@ -404,7 +404,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Adaptable electrical pathways for workplaces and mixed-use buildings.",
           imageAlt:
             "Illustrative commercial office floor showing electrical service routes",
-          href: "#application-map",
+          href: "/application-map/commercial-building",
         },
         {
           id: "industrial-facilities",
@@ -422,7 +422,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Coordinated system contexts for essential services and public assets.",
           imageAlt:
             "Illustrative utilities pumping station showing electrical systems",
-          href: "#application-map",
+          href: "/application-map/infrastructure-utilities",
         },
         {
           id: "renewable-energy",
@@ -431,7 +431,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Electrical protection and routing contexts for renewable installations.",
           imageAlt:
             "Illustrative solar installation with electrical enclosure and cable routes",
-          href: "#application-map",
+          href: "/application-map/renewable-energy",
         },
         {
           id: "healthcare",
@@ -449,7 +449,7 @@ export const PUBLIC_SITE_CONTENT = {
             "System discovery for terminals and connected transport environments.",
           imageAlt:
             "Illustrative airport public concourse showing electrical service routes",
-          href: "#application-map",
+          href: "/application-map/transport-infrastructure",
         },
         {
           id: "education-public-sector",
@@ -710,14 +710,14 @@ export const PUBLIC_SITE_CONTENT = {
       localeName: "uk-UA",
       brandDescriptor: "Електрична інфраструктура",
       navigation: [
-        { href: "#top", label: "Головна" },
-        { href: "#about-gersan", label: "Про Gersan" },
-        { href: "#product-systems", label: "Продукція Gersan" },
-        { href: "#industries", label: "Галузі" },
+        { href: "/#top", label: "Головна" },
+        { href: "/#about-gersan", label: "Про Gersan" },
+        { href: "/#product-systems", label: "Продукція Gersan" },
+        { href: "/#industries", label: "Галузі" },
         { href: "/uk-support", label: "Підтримка у Великій Британії" },
-        { href: "#contact", label: "Дилерам / Торговий акаунт" },
-        { href: "#technical-documents", label: "Ресурси" },
-        { href: "#contact", label: "Контакти" },
+        { href: "/#contact", label: "Дилерам / Торговий акаунт" },
+        { href: "/#technical-documents", label: "Ресурси" },
+        { href: "/#contact", label: "Контакти" },
       ],
       footerDescription:
         "Системи електричної інфраструктури, технічна документація та узгоджена підтримка проєктного постачання для України.",
@@ -846,7 +846,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Адаптивні електричні траси для офісних і багатофункціональних будівель.",
           imageAlt:
             "Ілюстративний офісний поверх із маршрутами інженерних мереж",
-          href: "#application-map",
+          href: "/application-map/commercial-building",
         },
         {
           id: "industrial-facilities",
@@ -863,7 +863,7 @@ export const PUBLIC_SITE_CONTENT = {
           description:
             "Узгоджені системні контексти для критичних сервісів і громадських активів.",
           imageAlt: "Ілюстративна насосна станція з електричними системами",
-          href: "#application-map",
+          href: "/application-map/infrastructure-utilities",
         },
         {
           id: "renewable-energy",
@@ -872,7 +872,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Контексти електричного захисту й прокладання мереж для відновлюваної енергетики.",
           imageAlt:
             "Ілюстративна сонячна установка з електричною шафою та кабельними трасами",
-          href: "#application-map",
+          href: "/application-map/renewable-energy",
         },
         {
           id: "healthcare",
@@ -890,7 +890,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Пошук систем для терміналів і пов’язаних транспортних середовищ.",
           imageAlt:
             "Ілюстративний пасажирський простір аеропорту з інженерними мережами",
-          href: "#application-map",
+          href: "/application-map/transport-infrastructure",
         },
         {
           id: "education-public-sector",

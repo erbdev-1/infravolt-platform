@@ -3,24 +3,36 @@
 import Image from "next/image";
 import type { PointerEvent } from "react";
 
+import type { BusbarSystemSlug } from "@/data/products/busbar/catalog-content";
+
+import { BusbarHeroEffects } from "./busbar-hero-effects";
 import styles from "./busbar-product-hero-visual.module.css";
 
 type BusbarProductHeroVisualProps = Readonly<{
   image: string;
   imageAlt: string;
+  slug: BusbarSystemSlug;
   priority?: boolean;
 }>;
 
 const MAX_SHIFT_X = 10;
 const MAX_SHIFT_Y = 6;
 
+function canParallax(): boolean {
+  return (
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
 export function BusbarProductHeroVisual({
   image,
   imageAlt,
+  slug,
   priority = false,
 }: BusbarProductHeroVisualProps) {
   function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
-    if (event.pointerType !== "mouse") {
+    if (event.pointerType !== "mouse" || !canParallax()) {
       return;
     }
 
@@ -45,6 +57,8 @@ export function BusbarProductHeroVisual({
       onPointerLeave={handlePointerLeave}
       onPointerMove={handlePointerMove}
     >
+      <div aria-hidden="true" className={styles.glow} />
+
       <div className={styles.motion}>
         <div className={styles.float}>
           <Image
@@ -55,6 +69,9 @@ export function BusbarProductHeroVisual({
             sizes="(min-width: 1000px) 55vw, 100vw"
             src={image}
           />
+
+          <span aria-hidden="true" className={styles.sweep} />
+          <BusbarHeroEffects slug={slug} />
         </div>
       </div>
     </div>

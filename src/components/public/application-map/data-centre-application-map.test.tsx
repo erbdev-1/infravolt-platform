@@ -45,7 +45,7 @@ async function clickZone(user: ReturnType<typeof userEvent.setup>, name: RegExp)
 }
 
 describe("DataCentreApplicationMap", () => {
-  it("renders a single page-level heading, a Back to Application Maps link and all seven zones plus Overview", () => {
+  it("renders a single page-level heading, a Back to Application Maps link and all eight zones plus Overview", () => {
     renderMap("uk");
 
     expect(
@@ -58,12 +58,13 @@ describe("DataCentreApplicationMap", () => {
     const zoneNav = getZoneNav();
     const zoneNames = [
       "Overview",
-      "Main Electrical Room",
-      "Server Hall",
-      "Raised Floor Services",
-      "Mechanical / Electrical Plant Room",
-      "Rooftop Cooling & Electrical",
-      "External Utility Area",
+      "Main Electrical / UPS Room",
+      "Data Hall",
+      "Electrical Riser / Floor Distribution",
+      "Generator / Resilient Power Hall",
+      "Cooling Plant / Pump Room",
+      "NOC / Control Room",
+      "Utility Intake & Transformer Interface",
       "Parking & EV Services",
     ];
 
@@ -124,11 +125,11 @@ describe("DataCentreApplicationMap", () => {
     const user = userEvent.setup();
     renderMap("uk");
 
-    await clickZone(user, /Main Electrical Room/);
+    await clickZone(user, /Main Electrical/);
 
     expect(
       screen.getByAltText(
-        "Main electrical room with switchgear, overhead cable containment and busbar trunking",
+        "Main electrical / UPS room with overhead busbar trunking, cable ladder and a copper earthing bar",
       ),
     ).toBeInTheDocument();
 
@@ -145,7 +146,7 @@ describe("DataCentreApplicationMap", () => {
     const user = userEvent.setup();
     renderMap("uk");
 
-    await clickZone(user, /Main Electrical Room/);
+    await clickZone(user, /Main Electrical/);
     await user.click(
       screen.getByRole("button", {
         name: "Busbar Systems, overhead distribution run",
@@ -156,7 +157,7 @@ describe("DataCentreApplicationMap", () => {
 
     expect(
       within(dialog).getByText(
-        "Distributing incoming power from switchgear to downstream distribution equipment within the main electrical room.",
+        "Distributing incoming power from switchgear to downstream distribution and UPS equipment within the main electrical room.",
       ),
     ).toBeInTheDocument();
 
@@ -167,11 +168,11 @@ describe("DataCentreApplicationMap", () => {
     ).toHaveAttribute("aria-pressed", "true");
   });
 
-  it("renders the Busbar product panel media using the existing transparent product asset with contain sizing", async () => {
+  it("renders the Busbar product panel media using the zone-specific product asset with contain sizing", async () => {
     const user = userEvent.setup();
     renderMap("uk");
 
-    await clickZone(user, /Main Electrical Room/);
+    await clickZone(user, /Main Electrical/);
     await user.click(
       screen.getByRole("button", {
         name: "Busbar Systems, overhead distribution run",
@@ -180,12 +181,12 @@ describe("DataCentreApplicationMap", () => {
 
     const dialog = screen.getByRole("dialog", { name: "Busbar Systems" });
     const media = within(dialog).getByAltText(
-      "GS Super Compact busbar system main product view",
+      "GGD medium power busbar system cutaway view",
     );
 
     expect(media).toHaveAttribute(
       "src",
-      expect.stringContaining("gs-main-transparent-product.webp"),
+      expect.stringContaining("ggd-main-transparent-product.webp"),
     );
     expect(media.className).toMatch(/panelMediaImage/);
   });
@@ -194,7 +195,7 @@ describe("DataCentreApplicationMap", () => {
     const user = userEvent.setup();
     renderMap("uk");
 
-    await clickZone(user, /Server Hall/);
+    await clickZone(user, /Data Hall/);
 
     const productNav = getProductNav();
 
@@ -214,7 +215,7 @@ describe("DataCentreApplicationMap", () => {
     const user = userEvent.setup();
     renderMap("uk");
 
-    await clickZone(user, /Server Hall/);
+    await clickZone(user, /Data Hall/);
     await user.click(
       screen.getByRole("button", { name: "LED Systems, aisle lighting" }),
     );
@@ -227,7 +228,7 @@ describe("DataCentreApplicationMap", () => {
     const user = userEvent.setup();
     renderMap("uk");
 
-    await clickZone(user, /Server Hall/);
+    await clickZone(user, /Data Hall/);
     await user.click(
       screen.getByRole("button", { name: "LED Systems, aisle lighting" }),
     );
@@ -239,7 +240,7 @@ describe("DataCentreApplicationMap", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     expect(
       screen.getByAltText(
-        "Conceptual cutaway view of a Data Centre showing electrical, mechanical, server and external service areas",
+        "Aerial night view of a Data Centre campus showing the substation, main building, generator hall and EV charging area",
       ),
     ).toBeInTheDocument();
   });
@@ -248,7 +249,7 @@ describe("DataCentreApplicationMap", () => {
     const user = userEvent.setup();
     renderMap("uk");
 
-    await clickZone(user, /Main Electrical Room/);
+    await clickZone(user, /Main Electrical/);
     await user.click(
       screen.getByRole("button", {
         name: "Busbar Systems, overhead distribution run",
@@ -262,7 +263,7 @@ describe("DataCentreApplicationMap", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     expect(
       screen.getByAltText(
-        "Conceptual cutaway view of a Data Centre showing electrical, mechanical, server and external service areas",
+        "Aerial night view of a Data Centre campus showing the substation, main building, generator hall and EV charging area",
       ),
     ).toBeInTheDocument();
   });
@@ -349,7 +350,7 @@ describe("DataCentreApplicationMap", () => {
     ).toBeInTheDocument();
 
     await clickZone(user, /^Overview$/);
-    await clickZone(user, /Main Electrical Room/);
+    await clickZone(user, /Main Electrical/);
 
     expect(
       within(getProductNav()).queryByText("EV Charging Systems"),
@@ -376,7 +377,7 @@ describe("DataCentreApplicationMap", () => {
     const user = userEvent.setup();
     renderMap("uk");
 
-    await clickZone(user, /Main Electrical Room/);
+    await clickZone(user, /Main Electrical/);
     await user.click(
       screen.getByRole("button", {
         name: "Busbar Systems, overhead distribution run",
@@ -405,7 +406,7 @@ describe("DataCentreApplicationMap", () => {
     const user = userEvent.setup();
     renderMap("uk");
 
-    await clickZone(user, /Main Electrical Room/);
+    await clickZone(user, /Main Electrical/);
 
     const hotspotButton = screen.getByRole("button", {
       name: "Busbar Systems, overhead distribution run",
