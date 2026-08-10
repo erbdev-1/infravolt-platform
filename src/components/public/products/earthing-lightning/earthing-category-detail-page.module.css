@@ -1,0 +1,1648 @@
+/* =========================================================
+   01. PAGE THEME & DESIGN TOKENS
+   (identical token values to earthing-lightning-hub-page.module.css)
+   ========================================================= */
+
+.page {
+  --earthing-accent: #c1622d;
+  --earthing-accent-dark: #96491f;
+  --earthing-accent-light: #e8a874;
+  --earthing-accent-soft: #fbeee4;
+  --earthing-navy: #061a35;
+  --earthing-ink: #102033;
+  /* Three deliberate secondary-text tones, not seven ad-hoc near-identical
+     greys — --earthing-body for paragraph copy, --earthing-muted for
+     labels/meta/nav, --earthing-faint for placeholder/disabled/table-header
+     captions. Consolidated from #637587/#68778c/#53657d/#607087/#8593a5,
+     which had all drifted apart across this file and the hub page. */
+  --earthing-body: #5b6c81;
+  --earthing-muted: #66758a;
+  --earthing-faint: #94a3b5;
+  --earthing-border: #dce2e8;
+  --earthing-surface: #f6f2ee;
+  /* Baseline card elevation — every card in this design (family cards,
+     snapshot strip, accordions) now rests on a faint idle shadow instead
+     of sitting perfectly flat until hover; each card's hover shadow stays
+     its own distinct depth/tint, only the idle state is shared. */
+  --earthing-shadow-idle: 0 1px 2px rgb(6 26 53 / 4%), 0 1px 1px rgb(6 26 53 / 3%);
+
+  background: linear-gradient(180deg, #ffffff 0%, var(--earthing-surface) 54%, #ffffff 100%);
+  color: var(--earthing-ink);
+  color-scheme: light;
+  min-height: 100vh;
+  /* Reserves room for the fixed enquiry bar (05b) so its last section
+     isn't covered once the bar appears; a no-op when the bar is hidden. */
+  padding-bottom: 4.5rem;
+}
+
+/* =========================================================
+   02. BREADCRUMBS & BACK NAV
+   ========================================================= */
+
+.breadcrumbs {
+  align-items: center;
+  border-bottom: 1px solid rgb(6 26 53 / 9%);
+  color: var(--earthing-muted);
+  display: flex;
+  font-size: 0.82rem;
+  gap: 0.65rem;
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem);
+}
+
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--earthing-accent);
+}
+
+.backNav {
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem) 0;
+}
+
+.backButton {
+  align-items: center;
+  background: var(--earthing-accent);
+  border: 1px solid var(--earthing-accent);
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.backButton:hover {
+  background: var(--earthing-accent-dark);
+  border-color: var(--earthing-accent-dark);
+  transform: translateY(-2px);
+}
+
+.backButton:focus-visible {
+  outline: 3px solid rgb(193 98 45 / 30%);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   03. HERO
+   ========================================================= */
+
+.hero {
+  align-items: center;
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 0.9fr) minmax(24rem, 1.1fr);
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 3rem clamp(1.25rem, 4vw, 4rem) 1rem;
+}
+
+.heroContent {
+  align-self: center;
+  max-width: 40rem;
+}
+
+.eyebrow {
+  color: var(--earthing-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  color: var(--earthing-navy);
+  font-size: clamp(2.2rem, 3.6vw, 3.2rem);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.heroDescription {
+  color: var(--earthing-body);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  margin: 1.25rem 0 0;
+  max-width: 34rem;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.primaryButton {
+  align-items: center;
+  background: var(--earthing-accent);
+  border: 1px solid var(--earthing-accent);
+  border-radius: 0.45rem;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 3.1rem;
+  padding: 0.8rem 1.3rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.primaryButton:hover {
+  background: var(--earthing-accent-dark);
+  border-color: var(--earthing-accent-dark);
+  transform: translateY(-2px);
+}
+
+/* Secondary CTA — softly-tinted outline so it doesn't compete with the
+   copper-filled .primaryButton. The two remaining hero actions (Request
+   Technical Pack + this one) sit on one row on desktop, stacked
+   full-width on mobile — "Talk to an Engineer" was removed from this row
+   entirely. */
+.catalogueButton {
+  align-items: center;
+  background: var(--earthing-accent-soft);
+  border: 1px solid var(--earthing-accent-light);
+  border-radius: 0.45rem;
+  color: var(--earthing-accent-dark);
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  gap: 0.6rem;
+  min-height: 3.1rem;
+  padding: 0.8rem 1.3rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.catalogueButton:hover {
+  background: #f6e3d5;
+  border-color: var(--earthing-accent);
+  transform: translateY(-2px);
+}
+
+.catalogueButtonIcon {
+  flex-shrink: 0;
+  height: 1.15rem;
+  width: 1.15rem;
+}
+
+.catalogueButton span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.catalogueButton small {
+  color: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+@media (max-width: 640px) {
+  .heroActions {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .catalogueButton {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   03b. HERO VISUAL — premium-product-hero-motion skill
+   Layering, outer to inner: .heroVisual (no background of its own) →
+   .heroVisualGlow (static decoration — the only background layer) →
+   .heroVisualFloat (CSS-only entrance + idle animation, no JS) →
+   .heroVisualParallax (the ONLY JS-driven piece — pointer translate,
+   desktop fine-pointer only, see earthing-hero-parallax.tsx) →
+   .heroVisualImage (the product photo itself).
+   Two separate elements each own `transform` (Float vs Parallax) so the
+   CSS keyframes and the JS-driven pointer transform never fight over the
+   same property on the same element.
+   No grid/checker/technical-line texture layer here by design — removed
+   on request; do not reintroduce a background-image or ::before/::after
+   texture behind the product without being asked. */
+
+/* No panel background, no border, no visible boundary — the product
+   (an alpha-transparent cutout, see heroImage in content.ts) sits
+   directly on the page's own background (.page's white-to-surface
+   gradient). aspect-ratio/position are kept because next/image `fill`
+   and the glow decoration layer both need them structurally; neither
+   renders a visible box on its own. */
+.heroVisual {
+  aspect-ratio: 4 / 3;
+  position: relative;
+}
+
+/* The one place copper appears here — a material-toned glow, not an
+   action colour (see [[earthing-page-design-direction]]). Fades to fully
+   transparent well inside its own box, so it never reveals — let alone
+   matches — the container's edges. This is the only background layer
+   behind the product; keep it that way. */
+.heroVisualGlow {
+  background: radial-gradient(closest-side, var(--earthing-accent-light) 0%, transparent 60%);
+  filter: blur(48px);
+  inset: 20%;
+  opacity: 0.2;
+  position: absolute;
+}
+
+.heroVisualFloat {
+  /* position: relative (not just static) so this paints above the
+     absolutely positioned .heroVisualGlow layer per normal stacking
+     order, instead of under it. */
+  animation:
+    heroVisualEnter 800ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    heroVisualIdle 8s ease-in-out 800ms infinite;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.heroVisualParallax {
+  height: 100%;
+  position: relative;
+  transition: transform 220ms ease-out;
+  width: 100%;
+}
+
+.heroVisualImage {
+  /* No padding: the photo (already a fixed 4:3, matching .heroVisual's
+     own aspect-ratio exactly) fills the box edge to edge with zero
+     letterboxing. This also keeps the per-family pulse overlay's
+     hand-measured percentages (earthing-hero-effects.tsx) mapping 1:1
+     onto the rendered box — CSS percentage padding resolves against the
+     container's *width* on every side, which would have thrown the
+     vertical measurements off against a non-square 4:3 box. */
+  filter: drop-shadow(0 16px 22px rgb(6 26 53 / 14%));
+  object-fit: contain;
+  transition: transform 260ms ease;
+}
+
+/* Wraps the image so per-family motion (currently just the
+   conductors-tapes rotation drift) owns its own `transform`, separate
+   from .heroVisualImage's hover-scale and .heroVisualFloat/.heroVisualParallax's
+   entrance/idle/pointer transforms — same reasoning as the Float/Parallax
+   split above: each animated property stays on its own element. */
+.heroVisualStaticLayer,
+.heroVisualDriftLayer {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+/* conductors-tapes only: slow oscillating rotation drift — acceptable
+   here specifically because the coiled wire has a circular, direction-
+   agnostic form (see premium-product-hero-motion variant rules). */
+.heroVisualDriftLayer {
+  animation: heroVisualCoilDrift 7s ease-in-out infinite;
+  transform-origin: 50% 55%;
+}
+
+@keyframes heroVisualCoilDrift {
+  0%,
+  100% {
+    transform: rotate(-1.5deg);
+  }
+
+  50% {
+    transform: rotate(1.5deg);
+  }
+}
+
+/* conductors-tapes only: soft glow seated in the coil's own opening. */
+.coilGlow {
+  background: radial-gradient(closest-side, var(--earthing-accent-light) 0%, transparent 75%);
+  filter: blur(10px);
+  height: 16%;
+  left: 58%;
+  opacity: 0.35;
+  position: absolute;
+  top: 24%;
+  width: 16%;
+}
+
+/* inspection-ground-enhancement only: a soft glow rising from beneath the
+   product, standing in for "grounding" — static, no motion, matching
+   that family's near-motionless treatment. */
+.groundingGlow {
+  background: radial-gradient(closest-side, var(--earthing-accent-light) 0%, transparent 70%);
+  bottom: -6%;
+  filter: blur(32px);
+  height: 26%;
+  left: 22%;
+  opacity: 0.18;
+  position: absolute;
+  width: 56%;
+}
+
+.heroVisualSweep {
+  animation: heroVisualSweep 8s ease-in-out infinite;
+  background: linear-gradient(115deg, transparent 40%, rgb(255 255 255 / 55%) 50%, transparent 60%);
+  inset: 0;
+  mix-blend-mode: soft-light;
+  opacity: 0.5;
+  pointer-events: none;
+  position: absolute;
+}
+
+/* No panel-level hover lift any more — there's no panel to lift. Default
+   hover is a slight product scale; individual families override this
+   below via [data-family] where the brief calls for something else
+   (lift-only, a small tilt, …). */
+@media (hover: hover) and (pointer: fine) {
+  .heroVisualParallax:hover .heroVisualImage {
+    transform: scale(1.02);
+  }
+
+  /* clamps-connectors: scale + a small technical tilt rather than a
+     plain scale. */
+  .heroVisual[data-family="clamps-connectors"] .heroVisualParallax:hover .heroVisualImage {
+    transform: scale(1.02) rotate(0.6deg);
+  }
+
+  /* equipotential-earth-bars / inspection-ground-enhancement: lift only,
+     no scale — the brief calls for a more restrained hover on these two. */
+  .heroVisual[data-family="equipotential-earth-bars"] .heroVisualParallax:hover .heroVisualImage,
+  .heroVisual[data-family="inspection-ground-enhancement"] .heroVisualParallax:hover .heroVisualImage {
+    transform: translateY(-2px);
+  }
+
+  /* lightning-protection: a very subtle repeat tip-glint on hover,
+     distinct from the one-time load pulse (see earthing-hero-effects.tsx). */
+  .heroVisual[data-family="lightning-protection"] .heroVisualParallax:hover .pulseTipFlash {
+    animation-duration: 900ms;
+    animation-name: pulseTipFlashGlint;
+  }
+
+  /* exothermic-welding / static-ex-proof-grounding: replay the metallic
+     sweep once on hover, as a restrained "material shine" — a distinct
+     single-pass keyframe (not just a duration tweak) so it actually
+     restarts each time hover begins, rather than just changing the speed
+     of the ambient loop already running. */
+  .heroVisual[data-family="exothermic-welding"] .heroVisualParallax:hover .heroVisualSweep,
+  .heroVisual[data-family="static-ex-proof-grounding"] .heroVisualParallax:hover .heroVisualSweep {
+    animation-duration: 900ms;
+    animation-iteration-count: 1;
+    animation-name: heroVisualSweepOnce;
+  }
+}
+
+/* inspection-ground-enhancement: "almost no motion" — entrance only, no
+   idle float. Scoped inside (prefers-reduced-motion: no-preference):
+   this selector is MORE specific than the plain `.heroVisualFloat` rule
+   in the reduced-motion block below, so left unscoped it would silently
+   win and override that block, defeating reduced-motion for this family. */
+@media (prefers-reduced-motion: no-preference) {
+  .heroVisual[data-family="inspection-ground-enhancement"] .heroVisualFloat {
+    animation: heroVisualEnter 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes heroVisualEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes heroVisualIdle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes heroVisualSweep {
+  0%,
+  92%,
+  100% {
+    transform: translateX(-120%);
+  }
+
+  50% {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroVisualFloat {
+    animation: heroVisualEnterReduced 250ms ease both;
+  }
+
+  .heroVisualParallax {
+    transition: none;
+  }
+
+  .heroVisualSweep {
+    display: none;
+  }
+}
+
+@keyframes heroVisualEnterReduced {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   03c. FAMILY PULSE — per-product-family conductive pulse/flash overlay
+   One-time light trace(s) + tip flash(es), positions/angles/timings
+   defined per family in earthing-hero-effects.tsx (FAMILY_PULSE_CONFIG).
+   Sits inside .heroVisualParallax so it tracks the pointer-parallax
+   offset together with the image. Plays once: no `infinite`, ends on
+   `forwards` fill mode.
+   ========================================================= */
+
+.familyPulse {
+  inset: 0;
+  position: absolute;
+}
+
+.pulseTrace {
+  animation-fill-mode: forwards;
+  animation-name: pulseTraceMove;
+  animation-timing-function: ease-out;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(255 244 220 / 15%) 30%,
+    rgb(255 255 255 / 90%) 55%,
+    rgb(222 126 55 / 35%) 75%,
+    transparent 100%
+  );
+  filter: blur(0.5px) drop-shadow(0 0 4px rgb(212 111 45 / 35%));
+  height: 3px;
+  opacity: 0;
+  position: absolute;
+  transform-origin: 0% 50%;
+}
+
+/* --pulse-angle is set per-element (inline style, see the .tsx) so this
+   one keyframe rule serves every trace on every family despite differing
+   angles/lengths. */
+@keyframes pulseTraceMove {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--pulse-angle)) scaleX(0);
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+    transform: rotate(var(--pulse-angle)) scaleX(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(var(--pulse-angle)) scaleX(1);
+  }
+}
+
+.pulseTipFlash {
+  animation-fill-mode: forwards;
+  animation-name: pulseTipFlash;
+  animation-timing-function: ease-out;
+  background: radial-gradient(circle, rgb(255 250 240 / 95%) 0%, rgb(222 126 55 / 55%) 45%, transparent 75%);
+  border-radius: 50%;
+  opacity: 0;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes pulseTipFlash {
+  0% {
+    opacity: 0;
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* lightning-protection hover-only repeat glint — a shorter, gentler
+   pulse than the one-time load flash above. */
+@keyframes pulseTipFlashGlint {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* exothermic-welding / static-ex-proof-grounding hover — single pass,
+   no hold at the edges (unlike the ambient heroVisualSweep loop). */
+@keyframes heroVisualSweepOnce {
+  from {
+    transform: translateX(-120%);
+  }
+
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .familyPulse {
+    display: none;
+  }
+
+  .heroVisualDriftLayer {
+    animation: none;
+  }
+
+  .coilGlow {
+    display: none;
+  }
+}
+
+/* Explicit fallback per the design brief — the trig confirms alignment
+   holds at any size because .heroVisual keeps a fixed 4:3 aspect-ratio
+   at every breakpoint, but a multi-layer effect like this is not worth
+   the complexity on phone-sized screens regardless. */
+@media (max-width: 480px) {
+  .familyPulse {
+    display: none;
+  }
+}
+
+/* =========================================================
+   04. PRODUCT FAMILIES
+   ========================================================= */
+
+.families {
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.familiesHeading {
+  margin-bottom: 2rem;
+  max-width: 42rem;
+}
+
+.familiesHeading h2 {
+  color: var(--earthing-navy);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.familiesHeading p {
+  color: var(--earthing-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.75rem 0 0;
+}
+
+.familiesGrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.familyCard {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.9rem;
+  box-shadow: var(--earthing-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    border-color 400ms ease,
+    box-shadow 400ms ease,
+    transform 400ms ease;
+}
+
+/* Media area: a CSS-only gradient, consistent across every card and every
+   category — no baked photo background, no baked glow, no inner frame
+   around the image. See LocalizedEarthingProductFamily.image
+   (src/data/products/earthing-lightning/types.ts) — falls back to this
+   plain gradient with no product photo until a family image is supplied. */
+.familyMedia {
+  background: radial-gradient(circle at 52% 45%, #ffffff 0%, #f5f2ee 58%, #edf1f4 100%);
+  height: 190px;
+  position: relative;
+}
+
+.familyImage {
+  object-fit: cover;
+  transition: transform 400ms ease;
+}
+
+/* A small pill badge, not raw text floating on the photo — reads as a
+   deliberate UI element instead of an overlay that just happened to land
+   there, and keeps the numeral legible over any part of the image. */
+.familyIndex {
+  background: rgb(255 255 255 / 92%);
+  border-radius: 999px;
+  color: var(--earthing-accent);
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  left: 1rem;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.55rem;
+  position: absolute;
+  top: 1rem;
+}
+
+.familyBody {
+  flex: 1;
+  padding: 1.25rem 1.4rem 1.1rem;
+}
+
+.familyBody h3 {
+  color: var(--earthing-navy);
+  display: -webkit-box;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.familyBody p {
+  color: var(--earthing-body);
+  display: -webkit-box;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.familyFooter {
+  align-items: center;
+  border-top: 1px solid var(--earthing-border);
+  color: var(--earthing-accent);
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 800;
+  justify-content: space-between;
+  padding: 0.9rem 1.4rem;
+}
+
+.familyFooterArrow {
+  transition: transform 400ms ease;
+}
+
+.familyCard:focus-visible {
+  outline: 3px solid rgb(193 98 45 / 30%);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .familyCard:hover {
+    border-color: rgb(193 98 45 / 45%);
+    box-shadow: 0 1rem 2rem rgb(6 26 53 / 12%);
+    transform: translateY(-3px);
+  }
+
+  .familyCard:hover .familyImage {
+    transform: scale(1.035);
+  }
+
+  .familyCard:hover .familyFooterArrow {
+    transform: translateX(4px);
+  }
+}
+
+/* =========================================================
+   05. ORDER CODES & TECHNICAL SCHEDULE (searchable variant table)
+   Tek bileşen, tek davranış: her aile her zaman bir <details> grubu.
+   Açık/kapalı durumu artık tamamen React state'i tarafından kontrol
+   ediliyor (bkz. earthing-variant-table.tsx — effectiveOpen): boyuta göre
+   varsayılan, kullanıcının elle aç/kapa'sı, arama/filtre aktifken eşleşen
+   ailelerin otomatik açılması ve yazdırma sırasında tümünün açılması hep
+   aynı hesaplanan değerden geçiyor. Büyük aileler (100+ satır) açılana
+   kadar <tbody> hiç render edilmiyor (mountedRef) — 479 satırlık Clamps &
+   Connectors gibi kategorilerde ilk yüklemede gereksiz DOM oluşturmamak
+   için şart.
+   ========================================================= */
+
+.variants {
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.variantsMeta {
+  align-items: center;
+  color: var(--earthing-accent-dark);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+/* =========================================================
+   05a. TOOLBAR (search + CSV export)
+   ========================================================= */
+
+.variantsToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.searchField {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.6rem;
+  display: flex;
+  flex: 1 1 20rem;
+  gap: 0.55rem;
+  min-width: 14rem;
+  padding: 0 0.85rem;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.searchField:focus-within {
+  border-color: var(--earthing-accent);
+  box-shadow: 0 0 0 3px var(--earthing-accent-soft);
+}
+
+.searchIcon {
+  color: var(--earthing-muted);
+  flex-shrink: 0;
+  height: 1rem;
+  width: 1rem;
+}
+
+.searchInput {
+  background: none;
+  border: none;
+  color: var(--earthing-ink);
+  flex: 1;
+  font-size: 0.88rem;
+  min-width: 0;
+  padding: 0.65rem 0;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--earthing-faint);
+}
+
+.searchClear {
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 0.3rem;
+  color: var(--earthing-muted);
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+  padding: 0.3rem;
+}
+
+.searchClear:hover {
+  color: var(--earthing-accent);
+}
+
+.searchClear svg {
+  height: 0.8rem;
+  width: 0.8rem;
+}
+
+.csvActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.csvButton,
+.csvButtonSecondary {
+  align-items: center;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 0.45rem;
+  padding: 0.65rem 1.1rem;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+  white-space: nowrap;
+}
+
+.csvButton {
+  background: var(--earthing-accent);
+  border: 1px solid var(--earthing-accent);
+  color: #ffffff;
+}
+
+.csvButton:hover {
+  background: var(--earthing-accent-dark);
+  border-color: var(--earthing-accent-dark);
+}
+
+.csvButton:disabled {
+  background: var(--earthing-border);
+  border-color: var(--earthing-border);
+  color: var(--earthing-faint);
+  cursor: not-allowed;
+}
+
+.csvButtonIcon {
+  height: 0.95rem;
+  width: 0.95rem;
+}
+
+.csvButtonSecondary {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  color: var(--earthing-muted);
+}
+
+.csvButtonSecondary:hover {
+  border-color: var(--earthing-accent);
+  color: var(--earthing-accent);
+}
+
+/* =========================================================
+   05b. MATERIAL CHIPS
+   ========================================================= */
+
+.materialChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.1rem;
+}
+
+.chip,
+.chipActive {
+  align-items: center;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.chip {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  color: var(--earthing-muted);
+}
+
+.chip:hover {
+  border-color: rgb(193 98 45 / 45%);
+  color: var(--earthing-accent);
+}
+
+.chipActive {
+  background: var(--earthing-accent);
+  border: 1px solid var(--earthing-accent);
+  color: #ffffff;
+}
+
+.chipCount {
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.42rem;
+}
+
+.chip .chipCount {
+  background: var(--earthing-surface);
+  color: var(--earthing-muted);
+}
+
+.chipActive .chipCount {
+  background: rgb(255 255 255 / 25%);
+  color: #ffffff;
+}
+
+.variantsResultsLine {
+  color: var(--earthing-muted);
+  font-size: 0.82rem;
+  margin: 0 0 1rem;
+}
+
+.variantsEmpty {
+  background: #ffffff;
+  border: 1px dashed var(--earthing-border);
+  border-radius: 0.7rem;
+  color: var(--earthing-muted);
+  font-size: 0.88rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* =========================================================
+   05c. FAMILY ACCORDIONS
+   ========================================================= */
+
+.variantTableWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.variantGroup {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.7rem;
+  overflow: hidden;
+  scroll-margin-top: 1.5rem;
+}
+
+/* Brief, restrained highlight applied by earthing-variant-table.tsx when
+   a family card's "#slug" link lands here — removed again after ~1.6s. */
+.variantGroupHighlight {
+  animation: variantGroupHighlight 1.6s ease-out;
+}
+
+@keyframes variantGroupHighlight {
+  0% {
+    background: var(--earthing-accent-soft);
+    border-color: var(--earthing-accent-light);
+  }
+
+  100% {
+    background: #ffffff;
+    border-color: var(--earthing-border);
+  }
+}
+
+/* A real <button>, not <summary> — reset the default button chrome back
+   to plain text/flex so it reads identically to the old accordion header. */
+.variantGroupSummary {
+  align-items: center;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0.85rem 1.4rem;
+  text-align: left;
+  width: 100%;
+}
+
+.variantGroupSummary:focus-visible {
+  outline: 2px solid var(--earthing-accent);
+  outline-offset: -2px;
+}
+
+.variantGroupIdentity {
+  align-items: center;
+  display: flex;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+/* Representative family photo, reused from the family card above (see
+   LocalizedEarthingProductFamily.image) — never a new/different image, and
+   never repeated per row below. */
+.variantGroupImage {
+  background: radial-gradient(circle at 50% 45%, #ffffff 0%, #f5f2ee 60%, #edf1f4 100%);
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+  height: 3rem;
+  overflow: hidden;
+  position: relative;
+  width: 3rem;
+}
+
+.variantGroupImage img {
+  object-fit: cover;
+}
+
+.variantGroupName {
+  color: var(--earthing-navy);
+  font-size: 1rem;
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.variantGroupMeta {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.9rem;
+}
+
+.variantGroupCount {
+  color: var(--earthing-muted);
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.variantGroupChevron {
+  color: var(--earthing-muted);
+  flex-shrink: 0;
+  height: 1rem;
+  transition: transform 200ms ease;
+  width: 1rem;
+}
+
+.variantGroupSummary[aria-expanded="true"] .variantGroupChevron {
+  transform: rotate(180deg);
+}
+
+.variantGroupSummary[aria-expanded="true"] {
+  border-bottom: 1px solid var(--earthing-border);
+}
+
+/* Grid-rows expand/collapse — content can mount/unmount freely (see
+   earthing-variant-table.tsx, isExpanded) and still animates smoothly,
+   since the transition targets the row track size, not the child directly. */
+.variantGroupPanel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 240ms ease;
+}
+
+.variantGroupPanel[data-expanded="true"] {
+  grid-template-rows: 1fr;
+}
+
+.variantGroupPanelInner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .variantGroupPanel {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   05d. TABLE
+   Masaüstünde sticky başlıklı, dikey kaydırmalı bir çerçeve (uzun
+   şemalar için); ≤720px'te tablo satırları kompakt kartlara dönüşüyor
+   (bkz. 07. RESPONSIVE) — ikinci bir bileşen/markup icat etmeden, aynı
+   semantik <table> üzerinde salt CSS ile.
+   ========================================================= */
+
+.variantTableScroll {
+  max-height: min(34rem, 70vh);
+  overflow: auto;
+}
+
+.variantTable {
+  border-collapse: collapse;
+  min-width: 100%;
+  white-space: nowrap;
+}
+
+.variantTable thead {
+  background: var(--earthing-surface);
+}
+
+.variantTable th {
+  background: var(--earthing-surface);
+  color: var(--earthing-faint);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.65rem 1rem;
+  position: sticky;
+  text-align: left;
+  text-transform: uppercase;
+  top: 0;
+  z-index: 1;
+}
+
+.variantTable td {
+  border-top: 1px solid var(--earthing-border);
+  color: var(--earthing-ink);
+  font-size: 0.85rem;
+  padding: 0.65rem 1rem;
+}
+
+.variantTable td strong {
+  color: var(--earthing-navy);
+  display: block;
+  font-weight: 700;
+}
+
+.variantSecondaryLine {
+  color: var(--earthing-muted);
+  display: block;
+  font-size: 0.76rem;
+  margin-top: 0.15rem;
+  white-space: normal;
+}
+
+.variantTable tbody tr:hover {
+  background: var(--earthing-accent-soft);
+}
+
+.stockCodeCell {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+.copyButton {
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 0.3rem;
+  color: var(--earthing-muted);
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: 0.2rem;
+}
+
+.copyButton:hover {
+  background: var(--earthing-accent-soft);
+  color: var(--earthing-accent);
+}
+
+.copyIcon {
+  height: 0.85rem;
+  width: 0.85rem;
+}
+
+.variantEnquiryButton,
+.variantEnquiredButton {
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.4rem 0.7rem;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+  white-space: nowrap;
+}
+
+.variantEnquiryButton {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  color: var(--earthing-muted);
+}
+
+.variantEnquiryButton:hover {
+  border-color: var(--earthing-accent);
+  color: var(--earthing-accent);
+}
+
+.variantEnquiredButton {
+  background: var(--earthing-accent-soft);
+  border: 1px solid var(--earthing-accent-light);
+  color: var(--earthing-accent-dark);
+}
+
+/* =========================================================
+   05b. ENQUIRY LIST (RFQ bar)
+   Sticky bottom bar, hidden while empty. Persists in localStorage
+   (earthing-enquiry-store.ts) across category-page navigations so an
+   engineer can collect stock codes while browsing before submitting one
+   enquiry — see earthing-page-design-direction memory.
+   ========================================================= */
+
+.enquiryBar {
+  background: #ffffff;
+  border-top: 1px solid var(--earthing-border);
+  bottom: 0;
+  box-shadow: 0 -0.75rem 2rem rgb(6 26 53 / 12%);
+  left: 0;
+  position: fixed;
+  right: 0;
+  z-index: 40;
+}
+
+.enquiryBarRow {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0.9rem clamp(1.25rem, 4vw, 4rem);
+}
+
+.enquiryToggle {
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--earthing-navy);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.9rem;
+  gap: 0.5rem;
+}
+
+.enquiryToggle strong {
+  color: var(--earthing-accent);
+  font-size: 1.05rem;
+}
+
+.enquirySubmit {
+  align-items: center;
+  background: var(--earthing-accent);
+  border-radius: 0.45rem;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 800;
+  gap: 0.45rem;
+  padding: 0.7rem 1.2rem;
+  transition: background-color 180ms ease;
+}
+
+.enquirySubmit:hover {
+  background: var(--earthing-accent-dark);
+}
+
+.enquiryPanel {
+  border-bottom: 1px solid var(--earthing-border);
+  margin: 0 auto;
+  max-height: 40vh;
+  max-width: 1400px;
+  overflow-y: auto;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem) 0.5rem;
+}
+
+.enquiryPanelHeading {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.enquiryPanelHeading h3 {
+  color: var(--earthing-navy);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.enquiryClear {
+  background: none;
+  border: none;
+  color: var(--earthing-muted);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.enquiryClear:hover {
+  color: var(--earthing-accent);
+}
+
+.enquiryList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.enquiryList li {
+  align-items: center;
+  border-bottom: 1px solid var(--earthing-border);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+}
+
+.enquiryList li div {
+  display: flex;
+  flex-direction: column;
+}
+
+.enquiryList li strong {
+  color: var(--earthing-navy);
+  font-size: 0.82rem;
+}
+
+.enquiryList li span {
+  color: var(--earthing-muted);
+  font-size: 0.74rem;
+}
+
+.enquiryRemove {
+  background: none;
+  border: none;
+  color: var(--earthing-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.2rem 0.4rem;
+}
+
+.enquiryRemove:hover {
+  color: var(--earthing-accent);
+}
+
+/* =========================================================
+   06. PROJECT SUPPORT CTA
+   (identical structure to earthing-lightning-hub-page.module.css)
+   ========================================================= */
+
+.projectSupport {
+  align-items: center;
+  background:
+    radial-gradient(circle at 78% 25%, rgb(193 98 45 / 30%), transparent 32%),
+    var(--earthing-navy);
+  border-radius: 0.7rem;
+  color: #ffffff;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  margin: 4.5rem auto 4rem;
+  max-width: 1400px;
+  padding: 2.75rem clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.supportIdentity {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.supportBrand {
+  align-items: center;
+  background: #ffffff;
+  border-radius: 0.4rem;
+  display: inline-flex;
+  padding: 0.5rem 0.75rem;
+}
+
+.infravoltWordmark {
+  height: auto;
+  object-fit: contain;
+  width: 9.5rem;
+}
+
+.supportEyebrow {
+  color: var(--earthing-accent-light);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.projectSupport h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 32rem;
+}
+
+.projectSupport > div > p {
+  color: rgb(255 255 255 / 78%);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0.75rem 0 0;
+  max-width: 30rem;
+}
+
+.projectSupport > a {
+  align-items: center;
+  background: var(--earthing-accent);
+  border-radius: 0.45rem;
+  color: #ffffff;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  padding: 0.9rem 1.4rem;
+  text-decoration: none;
+  transition: background-color 180ms ease;
+}
+
+.projectSupport > a:hover {
+  background: var(--earthing-accent-dark);
+}
+
+/* =========================================================
+   07. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 0 clamp(1.25rem, 4vw, 3rem);
+  }
+
+  .heroContent {
+    max-width: none;
+    padding: 2.5rem 0 1rem;
+  }
+
+  .heroVisual {
+    order: -1;
+  }
+
+  .familiesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projectSupport {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .supportIdentity {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 720px) {
+  .familiesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .familyMedia {
+    height: 160px;
+  }
+
+  .enquiryBarRow {
+    padding: 0.75rem 1.1rem;
+  }
+
+  .enquiryToggle {
+    font-size: 0.82rem;
+  }
+
+  .enquirySubmit {
+    padding: 0.6rem 0.9rem;
+  }
+
+  /* Order-codes toolbar stacks; CSV actions become full-width so they stay
+     easily tappable next to the search field. */
+  .variantsToolbar {
+    flex-direction: column;
+  }
+
+  .csvActions {
+    flex-direction: column;
+  }
+
+  .csvButton,
+  .csvButtonSecondary {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .variantGroupName {
+    font-size: 0.92rem;
+  }
+
+  /* Each <tr> becomes a compact record card — same semantic <table>
+     markup, no second component. Column labels move into each cell via
+     data-label (set in earthing-variant-table.tsx) since <thead> is
+     visually hidden here but stays screen-reader accessible. */
+  .variantTableScroll {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .variantTable,
+  .variantTable tbody,
+  .variantTable tr {
+    display: block;
+    width: 100%;
+  }
+
+  .variantTable thead {
+    clip: rect(0 0 0 0);
+    border: 0;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .variantTable tbody tr {
+    border-top: 1px solid var(--earthing-border);
+    display: grid;
+    gap: 0.6rem 0.75rem;
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem 1.2rem;
+  }
+
+  .variantTable tbody tr:first-child {
+    border-top: none;
+  }
+
+  .variantTable td {
+    border-top: none;
+    display: block;
+    padding: 0;
+    white-space: normal;
+  }
+
+  .variantTable td::before {
+    color: var(--earthing-muted);
+    content: attr(data-label);
+    display: block;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+  }
+
+  .variantTable td:first-child,
+  .variantTable td:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .variantEnquiryButton,
+  .variantEnquiredButton {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+}

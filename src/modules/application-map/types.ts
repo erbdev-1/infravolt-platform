@@ -27,9 +27,10 @@ export const PRODUCT_FAMILY_NUMBERS = {
 export const ZONE_IDS = [
   "main-electrical-room",
   "server-hall",
-  "raised-floor-services",
-  "mechanical-electrical-plant-room",
-  "rooftop-cooling-electrical",
+  "electrical-riser-floor-distribution",
+  "generator-resilient-power-hall",
+  "cooling-plant-pump-room",
+  "noc-control-room",
   "external-utility-area",
   "parking-ev-services",
 ] as const;

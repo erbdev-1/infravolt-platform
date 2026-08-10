@@ -1,0 +1,3005 @@
+/* =========================================================
+   01. PAGE THEME & DESIGN TOKENS
+   Cool technical blue — the Cable Management counterpart to the earthing
+   line's warm copper (src/.../earthing-lightning/*.module.css). Kept as a
+   fully separate token set/component folder so nothing here can affect
+   that line, per the "do not modify Earthing & Lightning Protection
+   pages" requirement.
+   ========================================================= */
+
+.page {
+  --cable-accent: #2563eb;
+  --cable-accent-strong: #071c3b;
+  --cable-accent-dark: #0b5ed7;
+  --cable-accent-light: #93c0fb;
+  --cable-accent-soft: #eaf3ff;
+  --cable-navy: #071c3b;
+  --cable-ink: #16233b;
+  --cable-body: #4b5b76;
+  --cable-muted: #64748b;
+  --cable-faint: #94a3b5;
+  --cable-border: #d7e1ee;
+  --cable-page-background: #f4f7fb;
+  --cable-surface: #ffffff;
+  --cable-shadow-idle: 0 1px 2px rgb(7 28 59 / 5%), 0 1px 1px rgb(7 28 59 / 3%);
+
+  background: var(--cable-page-background);
+  color: var(--cable-ink);
+  color-scheme: light;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   02. BACK BUTTON + BREADCRUMBS
+   ========================================================= */
+
+.backButtonWrapper {
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem) 0;
+}
+
+.backButton {
+  align-items: center;
+  background: var(--cable-accent-soft);
+  border: 1px solid var(--cable-accent);
+  border-radius: 0.45rem;
+  color: var(--cable-accent-dark);
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 600;
+  gap: 0.4rem;
+  padding: 0.5rem 0.95rem;
+  text-decoration: none;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.backButton:hover,
+.backButton:focus-visible {
+  background: #d6e6ff;
+  border-color: var(--cable-accent-dark);
+}
+
+.backButton::before {
+  content: "←";
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: 700;
+}
+
+.backButton:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.breadcrumbs {
+  align-items: center;
+  color: var(--cable-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  gap: 0.5rem;
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem) 0;
+}
+
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover,
+.breadcrumbs a:focus-visible {
+  color: var(--cable-accent);
+}
+
+.breadcrumbs a:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.breadcrumbCurrent {
+  color: var(--cable-navy);
+  font-weight: 700;
+}
+
+/* =========================================================
+   03. HERO
+   Pale blue technical gradient, distinct from the plain page background —
+   product remains fully visible, no framed card, no checker/grid texture.
+   ========================================================= */
+
+.hero {
+  background:
+    radial-gradient(circle at 78% 20%, rgb(37 99 235 / 10%), transparent 45%),
+    linear-gradient(180deg, #eef4fc 0%, var(--cable-page-background) 100%);
+  margin-top: 1rem;
+}
+
+.heroInner {
+  align-items: center;
+  display: grid;
+  gap: clamp(2rem, 4vw, 4rem);
+  grid-template-columns: minmax(0, 0.95fr) minmax(22rem, 1.05fr);
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 4rem);
+}
+
+.eyebrow {
+  color: var(--cable-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.85rem;
+  text-transform: uppercase;
+}
+
+.heroContent h1 {
+  color: var(--cable-navy);
+  font-size: clamp(2.1rem, 3.4vw, 3rem);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.heroQualifier {
+  color: var(--cable-accent-dark);
+  display: block;
+  font-size: 0.55em;
+  font-weight: 700;
+  margin-top: 0.35rem;
+}
+
+.heroDescription {
+  color: var(--cable-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 1.1rem 0 0;
+  max-width: 34rem;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.primaryButton,
+.catalogueButton {
+  align-items: center;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 3.1rem;
+  padding: 0.8rem 1.35rem;
+  text-decoration: none;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease;
+}
+
+.primaryButton {
+  background: var(--cable-accent-dark);
+  border: 1px solid var(--cable-accent-dark);
+  color: #ffffff;
+}
+
+.primaryButton:hover {
+  background: #094db8;
+  border-color: #094db8;
+  transform: translateY(-2px);
+}
+
+.catalogueButton {
+  background: var(--cable-accent-soft);
+  border: 1px solid var(--cable-accent-light);
+  color: var(--cable-accent-dark);
+  gap: 0.6rem;
+}
+
+.catalogueButton:hover {
+  background: #dcebff;
+  border-color: var(--cable-accent);
+  transform: translateY(-2px);
+}
+
+.catalogueButtonIcon {
+  flex-shrink: 0;
+  height: 1.1rem;
+  width: 1.1rem;
+}
+
+.catalogueButton span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.catalogueButton small {
+  color: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+@media (max-width: 640px) {
+  .heroActions {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .catalogueButton {
+    width: 100%;
+  }
+}
+
+/* ---- Hero visual ---- */
+
+.heroVisual {
+  aspect-ratio: 4 / 3;
+  position: relative;
+}
+
+.heroVisualGlow {
+  background: radial-gradient(circle at 50% 45%, rgb(37 99 235 / 14%), transparent 62%);
+  inset: -8%;
+  position: absolute;
+}
+
+.heroVisualFloat {
+  animation: cableHeroFloat 8s ease-in-out infinite;
+  animation-delay: 850ms;
+  height: 100%;
+  position: relative;
+  transform: translateY(16px) scale(0.98);
+  width: 100%;
+}
+
+.heroVisualEnter {
+  animation: cableHeroEnter 780ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 80ms;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.heroVisualCard {
+  align-items: center;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: var(--cable-shadow-idle), 0 1.5rem 3rem rgb(7 28 59 / 8%);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  overflow: hidden;
+  padding: 4%;
+  position: relative;
+  transition: transform 300ms ease;
+  width: 100%;
+}
+
+.heroVisualCard:hover {
+  transform: scale(1.015);
+}
+
+.heroVisualImage {
+  object-fit: contain;
+}
+
+@keyframes cableHeroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cableHeroFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroVisualEnter,
+  .heroVisualFloat {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+  }
+
+  .heroVisual {
+    aspect-ratio: 16 / 10;
+    order: -1;
+  }
+}
+
+/* =========================================================
+   04. TECHNICAL SNAPSHOT — product specification summary cards
+   Each item is its own separated, elevated card (not a fused strip) —
+   mirrors a datasheet's spec-card language: accent top edge, icon + label
+   header on a divider, then either a single bold stat or a strict
+   2-column grid of values. Matches the pattern proven on the earthing
+   line but restyled with --cable-* tokens.
+   ========================================================= */
+
+.snapshotSection {
+  margin: 3rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.snapshotGrid {
+  /* Default (stretch) — every card in the row shares the same height,
+     bottom edges aligned, regardless of how many value rows each one
+     needs. */
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.snapshotCell {
+  align-items: center;
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.9rem;
+  box-shadow: var(--cable-shadow-idle), 0 0.85rem 2.25rem rgb(7 28 59 / 5%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 8.5rem;
+  overflow: hidden;
+  padding: 1.5rem 1.375rem 1.625rem;
+  position: relative;
+  text-align: center;
+}
+
+/* Accent top edge — the one colour cue that marks this as a spec card. */
+.snapshotCell::before {
+  background: var(--cable-accent);
+  content: "";
+  height: 3px;
+  inset: 0 0 auto;
+  position: absolute;
+}
+
+.snapshotHeader {
+  align-items: center;
+  border-bottom: 1px solid var(--cable-border);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  padding-bottom: 0.75rem;
+  width: 100%;
+}
+
+.snapshotIconBadge {
+  align-items: center;
+  background: var(--cable-accent-soft);
+  border: 1px solid var(--cable-accent-light);
+  border-radius: 50%;
+  display: inline-flex;
+  flex-shrink: 0;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+
+.snapshotIcon {
+  color: var(--cable-accent-dark);
+  height: 1.05rem;
+  width: 1.05rem;
+}
+
+.snapshotLabel {
+  color: var(--cable-navy);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Single-stat values only — multi-value items switch to .snapshotValueList
+   below instead of stacking centred lines here. */
+.snapshotValue {
+  align-items: center;
+  color: var(--cable-navy);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  justify-content: center;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Same typography as .snapshotValueList .snapshotValueLine below — a
+   single-value card (most often Material & Finish, whenever that family
+   has only one material/finish to show) must read as the same kind of
+   content as the always-multi-value cards (Applicable Standards, Key
+   Features, Engineering Support), never as a bigger, heading-like value.
+   overflow-wrap guards long material names wrapping onto multiple lines
+   without pushing past the card's fixed-width column. */
+.snapshotValueLine {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+/* Multi-item values — a strict 2-column grid. Every value keeps its own
+   grid cell regardless of how long its text is; a long value wraps inside
+   its own cell instead of pushing/reordering into the opposite column, so
+   rows and columns always stay visually aligned. */
+.snapshotValueList {
+  align-items: start;
+  align-self: stretch; /* takes the cell's full width, same as .snapshotHeader */
+  column-gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: 10px;
+  text-align: left;
+}
+
+.snapshotValueList .snapshotValueLine {
+  align-items: flex-start;
+  color: var(--cable-navy);
+  display: flex;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  gap: 0.4rem;
+  letter-spacing: normal;
+  line-height: 1.4;
+}
+
+.snapshotValueList .snapshotValueLine::before {
+  background: var(--cable-accent);
+  border-radius: 1px;
+  content: "";
+  flex-shrink: 0;
+  height: 0.35rem;
+  margin-top: 0.45em;
+  width: 0.35rem;
+}
+
+.snapshotNote {
+  color: var(--cable-muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  margin-top: 0.55rem;
+  text-align: center;
+}
+
+.snapshotFootnote {
+  color: var(--cable-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin: 1rem 0 0;
+  text-align: center;
+}
+
+@media (max-width: 1100px) {
+  .snapshotGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .snapshotGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .snapshotCell {
+    min-height: 0;
+  }
+}
+
+/* =========================================================
+   05. RELATED PRODUCT FAMILIES
+   Subtle cool-blue wash — visually distinct from both the hero and the
+   plain page background, keeps the page from reading as one flat block.
+   ========================================================= */
+
+.relatedSection {
+  background: #f7f9fc;
+  border-top: 1px solid var(--cable-border);
+  border-bottom: 1px solid var(--cable-border);
+  margin-top: 3.5rem;
+  padding: 3rem 0;
+}
+
+.relatedInner {
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.sectionHeading {
+  color: var(--cable-navy);
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem;
+}
+
+.familyGrid {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.familyCard {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.85rem;
+  box-shadow: var(--cable-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  transition:
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    transform 300ms ease;
+}
+
+a.familyCard:hover {
+  border-color: var(--cable-accent);
+  box-shadow: var(--cable-shadow-idle), 0 1rem 2rem rgb(7 28 59 / 10%);
+  transform: translateY(-3px);
+}
+
+a.familyCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.familyCard:hover .familyImage {
+  transform: scale(1.03);
+}
+
+.familyCardCurrent {
+  background: var(--cable-accent-soft);
+  border-color: var(--cable-accent);
+}
+
+.currentBadge {
+  background: var(--cable-accent);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  left: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0.9rem;
+  z-index: 1;
+}
+
+/* Cover-fill treatment (matches .supportSeriesMedia/.supportSeriesImage) —
+   the image fills the full media area instead of floating as a small
+   contained thumbnail; the gradient stays as a safety net for any edge the
+   photo doesn't reach at this box's exact ratio. */
+.familyMedia {
+  background: linear-gradient(160deg, #ffffff 0%, #eef3fa 100%);
+  height: 160px;
+  overflow: hidden;
+  position: relative;
+}
+
+.familyImage {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 300ms ease;
+  width: 100%;
+}
+
+.familyMediaEmpty {
+  align-items: center;
+  color: var(--cable-faint);
+  display: flex;
+  font-size: 0.75rem;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.familyBody {
+  flex: 1;
+  padding: 1.1rem 1.25rem 1.3rem;
+}
+
+.familyBody h3 {
+  color: var(--cable-navy);
+  font-size: 1rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.familyCount {
+  color: var(--cable-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0;
+}
+
+.familyComingSoon {
+  color: var(--cable-faint);
+  font-size: 0.74rem;
+  font-style: italic;
+  margin: 0.35rem 0 0;
+}
+
+@media (max-width: 1100px) {
+  .familyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .familyGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   06. ORDER CODES & TECHNICAL SCHEDULE
+   Cool-grey section background with a white data surface for the table
+   itself.
+   ========================================================= */
+
+.scheduleSection {
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 3.5rem clamp(1.25rem, 4vw, 4rem) 0;
+}
+
+.scheduleHeading {
+  margin-bottom: 0.5rem;
+  max-width: 46rem;
+}
+
+.scheduleMeta {
+  align-items: center;
+  color: var(--cable-accent-dark);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.scheduleIntroduction {
+  color: var(--cable-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.75rem 0 1.75rem;
+  max-width: 46rem;
+}
+
+.scheduleLayout {
+  align-items: start;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 17rem minmax(0, 1fr);
+}
+
+.customSpecNote {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.75rem;
+}
+
+.customSpecNote p {
+  color: var(--cable-body);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 52rem;
+}
+
+.filterPanel {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.85rem;
+  box-shadow: var(--cable-shadow-idle);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  position: sticky;
+  top: 1.25rem;
+}
+
+.searchField {
+  align-items: center;
+  background: var(--cable-page-background);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.6rem;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.searchField:focus-within {
+  background: #ffffff;
+  border-color: var(--cable-accent);
+  box-shadow: 0 0 0 3px var(--cable-accent-soft);
+}
+
+.searchIcon {
+  color: var(--cable-muted);
+  flex-shrink: 0;
+  height: 0.95rem;
+  width: 0.95rem;
+}
+
+.searchInput {
+  background: none;
+  border: none;
+  color: var(--cable-ink);
+  flex: 1;
+  font-size: 0.85rem;
+  min-width: 0;
+  padding: 0.65rem 0;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--cable-faint);
+}
+
+.searchClear {
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 0.3rem;
+  color: var(--cable-muted);
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+  padding: 0.3rem;
+}
+
+.searchClear:hover {
+  color: var(--cable-accent);
+}
+
+.searchClear svg {
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.filterPanelHeader {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterPanelTitle {
+  color: var(--cable-navy);
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.filterGroupLabel {
+  color: var(--cable-navy);
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin: 0 0 0.6rem;
+}
+
+.filterGroup + .filterGroup {
+  border-top: 1px solid var(--cable-border);
+  padding-top: 1.1rem;
+}
+
+.filterCheckList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  max-height: 12rem;
+  overflow-y: auto;
+}
+
+.filterCheckOption {
+  align-items: center;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  display: flex;
+  gap: 0.55rem;
+  padding: 0.35rem 0.4rem;
+  transition: background-color 150ms ease;
+}
+
+.filterCheckOption:hover {
+  background: var(--cable-page-background);
+}
+
+.filterCheckOption input[type="checkbox"] {
+  accent-color: var(--cable-accent);
+  flex-shrink: 0;
+  height: 0.95rem;
+  width: 0.95rem;
+}
+
+.filterCheckValue {
+  color: var(--cable-ink);
+  flex: 1;
+  font-size: 0.83rem;
+  font-weight: 600;
+}
+
+.filterCheckCount {
+  color: var(--cable-faint);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.applyFiltersButton {
+  background: var(--cable-accent-dark);
+  border: 1px solid var(--cable-accent-dark);
+  border-radius: 0.55rem;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 0.7rem 1rem;
+  transition: background-color 200ms ease;
+}
+
+.applyFiltersButton:hover {
+  background: #094db8;
+}
+
+.clearAllButton {
+  background: none;
+  border: none;
+  color: var(--cable-accent-dark);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0;
+  text-align: left;
+  text-decoration: underline;
+}
+
+.clearAllButton:hover:not(:disabled) {
+  color: var(--cable-navy);
+}
+
+.clearAllButton:disabled {
+  color: var(--cable-faint);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.mobileFilterToggle {
+  align-items: center;
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.6rem;
+  color: var(--cable-navy);
+  cursor: pointer;
+  display: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+}
+
+.mobileFilterToggleIcon {
+  color: var(--cable-accent-dark);
+  flex-shrink: 0;
+  height: 1.05rem;
+  width: 1.05rem;
+}
+
+.mobileFilterBadge {
+  background: var(--cable-accent-soft);
+  border-radius: 999px;
+  color: var(--cable-accent-dark);
+  font-size: 0.76rem;
+  font-weight: 800;
+  margin-left: auto;
+  padding: 0.15rem 0.55rem;
+}
+
+.filterPanelMobileOpen,
+.filterPanelMobileClosed {
+  display: contents;
+}
+
+@media (max-width: 900px) {
+  .mobileFilterToggle {
+    display: flex;
+  }
+
+  .filterPanelMobileClosed {
+    display: none;
+  }
+
+  .filterPanelMobileOpen {
+    display: block;
+  }
+}
+
+/* Mobile-only active-filter chips, shown below the toolbar once at least
+   one filter/search term is active — display:contents keeps this
+   invisible to desktop layout entirely (see .filterPanelMobileOpen). */
+.mobileFilterChips {
+  display: contents;
+}
+
+@media (max-width: 900px) {
+  .mobileFilterChips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.filterChip {
+  align-items: center;
+  background: var(--cable-accent-soft);
+  border: 1px solid var(--cable-accent-dark);
+  border-radius: 999px;
+  color: var(--cable-accent-dark);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 700;
+  gap: 0.35rem;
+  padding: 0.4rem 0.7rem;
+}
+
+.filterChipIcon {
+  flex-shrink: 0;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+/* Mobile-only results collapse — the order-code / size-variant table and
+   its pagination stay hidden behind "View X ..." until tapped, so a long
+   schedule never dumps 50-100 rows onto the page on load. Same
+   display:contents pattern as the filter panel: desktop always renders the
+   table expanded, regardless of resultsOpen state. */
+.mobileResultsToggle {
+  align-items: center;
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.6rem;
+  color: var(--cable-navy);
+  cursor: pointer;
+  display: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+}
+
+.mobileResultsToggleArrow {
+  color: var(--cable-accent-dark);
+  font-weight: 800;
+}
+
+.resultsMobileOpen,
+.resultsMobileClosed {
+  display: contents;
+}
+
+@media (max-width: 900px) {
+  .mobileResultsToggle {
+    display: flex;
+  }
+
+  .resultsMobileClosed {
+    display: none;
+  }
+
+  .resultsMobileOpen {
+    display: block;
+  }
+}
+
+.scheduleResults {
+  min-width: 0;
+}
+
+.scheduleToolbar {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.resultsLine {
+  color: var(--cable-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.csvActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.csvButton,
+.csvButtonSecondary {
+  align-items: center;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 0.45rem;
+  padding: 0.6rem 1rem;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+  white-space: nowrap;
+}
+
+.csvButton {
+  background: var(--cable-accent-dark);
+  border: 1px solid var(--cable-accent-dark);
+  color: #ffffff;
+}
+
+.csvButton:hover {
+  background: #094db8;
+}
+
+.csvButton:disabled {
+  background: var(--cable-border);
+  border-color: var(--cable-border);
+  color: var(--cable-faint);
+  cursor: not-allowed;
+}
+
+.csvButtonIcon {
+  height: 0.9rem;
+  width: 0.9rem;
+}
+
+.csvButtonSecondary {
+  background: #ffffff;
+  border: 1px solid var(--cable-border);
+  color: var(--cable-muted);
+}
+
+.csvButtonSecondary:hover {
+  border-color: var(--cable-accent);
+  color: var(--cable-accent-dark);
+}
+
+.scheduleEmpty {
+  background: var(--cable-surface);
+  border: 1px dashed var(--cable-border);
+  border-radius: 0.7rem;
+  color: var(--cable-muted);
+  font-size: 0.88rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.tableScroll {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.9rem;
+  box-shadow: var(--cable-shadow-idle);
+  max-height: min(34rem, 65vh);
+  overflow: auto;
+}
+
+.table {
+  border-collapse: collapse;
+  min-width: 100%;
+  white-space: nowrap;
+}
+
+.table th {
+  background: #f4f7fb;
+  color: var(--cable-faint);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.65rem 0.9rem;
+  position: sticky;
+  text-align: left;
+  text-transform: uppercase;
+  top: 0;
+  z-index: 1;
+}
+
+.table td {
+  border-top: 1px solid var(--cable-border);
+  color: var(--cable-ink);
+  font-size: 0.83rem;
+  padding: 0.6rem 0.9rem;
+}
+
+.table td strong {
+  color: var(--cable-navy);
+  display: block;
+  font-weight: 700;
+}
+
+.tableSecondaryLine {
+  color: var(--cable-muted);
+  display: block;
+  font-size: 0.74rem;
+  margin-top: 0.15rem;
+  white-space: normal;
+}
+
+.table tbody tr:hover {
+  background: var(--cable-accent-soft);
+}
+
+.stockCodeCell {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+.copyButton {
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 0.3rem;
+  color: var(--cable-muted);
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: 0.2rem;
+}
+
+.copyButton:hover {
+  background: var(--cable-accent-soft);
+  color: var(--cable-accent-dark);
+}
+
+.copyIcon {
+  height: 0.8rem;
+  width: 0.8rem;
+}
+
+.enquiryButton,
+.enquiredButton {
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.4rem 0.7rem;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+  white-space: nowrap;
+}
+
+.enquiryButton {
+  background: #ffffff;
+  border: 1px solid var(--cable-border);
+  color: var(--cable-muted);
+}
+
+.enquiryButton:hover {
+  border-color: var(--cable-accent);
+  color: var(--cable-accent-dark);
+}
+
+.enquiredButton {
+  background: var(--cable-accent-soft);
+  border: 1px solid var(--cable-accent-light);
+  color: var(--cable-accent-dark);
+}
+
+.pagination {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.paginationButton {
+  background: #ffffff;
+  border: 1px solid var(--cable-border);
+  border-radius: 0.5rem;
+  color: var(--cable-navy);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.paginationButton:hover:not(:disabled) {
+  border-color: var(--cable-accent);
+  color: var(--cable-accent-dark);
+}
+
+.paginationButton:disabled {
+  color: var(--cable-faint);
+  cursor: not-allowed;
+}
+
+.paginationStatus {
+  color: var(--cable-muted);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 900px) {
+  .scheduleLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .filterPanel {
+    position: static;
+  }
+}
+
+/* ---- Mobile technical record cards ---- */
+
+@media (max-width: 720px) {
+  .tableScroll {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .table,
+  .table tbody,
+  .table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .table thead {
+    clip: rect(0 0 0 0);
+    border: 0;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .table tbody tr {
+    border-top: 1px solid var(--cable-border);
+    display: grid;
+    gap: 0.6rem 0.75rem;
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem 1.1rem;
+  }
+
+  .table tbody tr:first-child {
+    border-top: none;
+  }
+
+  .table td {
+    border-top: none;
+    display: block;
+    padding: 0;
+    white-space: normal;
+  }
+
+  .table td::before {
+    color: var(--cable-muted);
+    content: attr(data-label);
+    display: block;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+  }
+
+  .table td:first-child,
+  .table td:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .enquiryButton,
+  .enquiredButton {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   07. COMPATIBLE ACCESSORIES
+   Very light blue-grey wash. Compact catalogue-style cards — a single
+   row on desktop (one card per accessory group, all equal width), not the
+   larger table-browser cards this replaced. Each card is just image +
+   name + optional qualifier + a "View Product" link; no counts, no
+   spec rows — see cable-family-body.tsx.
+   ========================================================= */
+
+.accessoriesSection {
+  background: #f6f9fd;
+  margin-top: 3.5rem;
+  padding: 3rem 0;
+}
+
+.accessoriesInner {
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.accessoriesHeader {
+  align-items: baseline;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.accessoriesViewAllLink {
+  align-items: center;
+  color: var(--cable-accent-dark);
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  gap: 0.35rem;
+  text-decoration: none;
+}
+
+.accessoriesViewAllLink:hover,
+.accessoriesViewAllLink:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.accessoriesIntroduction {
+  color: var(--cable-body);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 1.75rem;
+  max-width: 42rem;
+}
+
+/* Small compact accessory cards — one light, narrow row on desktop that
+   wraps only once there isn't room for all of them, tightening to fewer
+   columns on smaller screens below. */
+.accessoryGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+}
+
+.accessoryCard {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.6rem;
+  box-shadow: var(--cable-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.accessoryCard:hover {
+  border-color: var(--cable-accent);
+  box-shadow: var(--cable-shadow-idle), 0 0.5rem 1rem rgb(7 28 59 / 8%);
+  transform: translateY(-2px);
+}
+
+.accessoryCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.accessoryMedia {
+  align-items: center;
+  background: #ffffff;
+  display: flex;
+  height: 84px;
+  justify-content: center;
+  padding: 0.6rem;
+  position: relative;
+}
+
+.accessoryImage {
+  object-fit: contain;
+}
+
+.accessoryMediaEmpty {
+  align-items: center;
+  color: var(--cable-faint);
+  display: flex;
+  font-size: 0.68rem;
+  font-style: italic;
+  height: 100%;
+  justify-content: center;
+  padding: 0.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.accessoryBody {
+  flex: 1;
+  padding: 0.15rem 0.85rem 0.6rem;
+  text-align: left;
+}
+
+.accessoryBody h3 {
+  color: var(--cable-navy);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.accessoryMeta {
+  color: var(--cable-muted);
+  font-size: 0.72rem;
+  margin: 0.2rem 0 0;
+}
+
+.accessoryFooter {
+  align-items: center;
+  color: var(--cable-accent-dark);
+  display: flex;
+  font-size: 0.72rem;
+  font-weight: 700;
+  gap: 0.3rem;
+  padding: 0 0.85rem 0.7rem;
+}
+
+.accessoryFooterArrow {
+  transition: transform 200ms ease;
+}
+
+.accessoryCard:hover .accessoryFooterArrow {
+  transform: translateX(3px);
+}
+
+@media (max-width: 1100px) {
+  .accessoryGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .accessoryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .accessoriesHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .accessoryGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   07b. SIBLING FAMILIES (compact)
+   "Other <macro-group> Families" — small compact cards linking to the
+   other family detail pages in the same macro-group, deliberately
+   smaller than the .familyGrid/.familyCard layout used by the (larger)
+   related-families section; sized/styled the same as .accessoryCard.
+   ========================================================= */
+
+.siblingFamiliesSection {
+  margin: 3.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.siblingFamilyGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+}
+
+.siblingFamilyCard {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.6rem;
+  box-shadow: var(--cable-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.siblingFamilyCard:hover {
+  border-color: var(--cable-accent);
+  box-shadow: var(--cable-shadow-idle), 0 0.5rem 1rem rgb(7 28 59 / 8%);
+  transform: translateY(-2px);
+}
+
+.siblingFamilyCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+/* Cover-fill treatment (matches .supportSeriesMedia/.supportSeriesImage) —
+   the image fills the full media area instead of floating as a small
+   contained thumbnail. .accessoryMediaEmpty (used for the no-image
+   fallback) centers its own text independently, so this container no
+   longer needs to be a flex box itself. */
+.siblingFamilyMedia {
+  background: #ffffff;
+  height: 84px;
+  overflow: hidden;
+  position: relative;
+}
+
+.siblingFamilyImage {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.siblingFamilyBody {
+  flex: 1;
+  padding: 0.15rem 0.85rem 0.6rem;
+  text-align: left;
+}
+
+.siblingFamilyBody h3 {
+  color: var(--cable-navy);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.siblingFamilyFooter {
+  color: var(--cable-accent-dark);
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0 0.85rem 0.7rem;
+}
+
+@media (max-width: 1100px) {
+  .siblingFamilyGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .siblingFamilyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 420px) {
+  .siblingFamilyGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Photo-free "icon" sibling-card style (siblingCardVariant="icon" on
+   CableFamilyBody) — currently Support & Hanging Systems only. Desktop:
+   4-column grid. Tablet/mobile degrade to 2 then 1 column, same card
+   layout throughout (no separate mobile-only arrangement). */
+.siblingIconGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.siblingIconCard {
+  background: #f5f8fc;
+  border: 1px solid var(--cable-border);
+  border-radius: 0.85rem;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.25rem 1.15rem;
+  text-decoration: none;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+a.siblingIconCard:hover {
+  background: var(--cable-accent-soft);
+  border-color: var(--cable-accent);
+  box-shadow: 0 0.5rem 1rem rgb(7 28 59 / 8%);
+  transform: translateY(-2px);
+}
+
+a.siblingIconCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.siblingIconCardCurrent {
+  background: var(--cable-accent-soft);
+  border-color: var(--cable-accent);
+}
+
+/* Icon + title sit on one compact header row — icon fixed-size, title
+   takes the remaining width and truncates to a single line. Same layout at
+   every breakpoint, including mobile (no stacked icon/title fallback). */
+.siblingIconHeader {
+  align-items: center;
+  display: flex;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.siblingIconGlyph {
+  align-items: center;
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.6rem;
+  color: var(--cable-accent-dark);
+  display: flex;
+  flex-shrink: 0;
+  height: 2.2rem;
+  justify-content: center;
+  width: 2.2rem;
+}
+
+.siblingIconGlyphIcon {
+  height: 1.15rem;
+  width: 1.15rem;
+}
+
+.siblingIconTitle {
+  color: var(--cable-navy);
+  flex: 1;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.siblingIconCurrentBadge {
+  background: var(--cable-accent);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.18rem 0.55rem;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.siblingIconSubtitle {
+  color: var(--cable-muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.siblingIconMeta {
+  color: var(--cable-faint);
+  font-size: 0.74rem;
+  font-weight: 700;
+  margin-top: auto;
+}
+
+.siblingIconFooter {
+  color: var(--cable-accent-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .siblingIconGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .siblingIconGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   08. TECHNICAL RESOURCES
+   Cool-neutral surface (page background), white resource cards.
+   ========================================================= */
+
+.resourcesSection {
+  margin: 3.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.resourceGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.resourceCard,
+.resourceCardDisabled {
+  align-items: flex-start;
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--cable-shadow-idle);
+  display: flex;
+  gap: 0.85rem;
+  padding: 1.1rem 1.2rem;
+  text-decoration: none;
+  transition:
+    border-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.resourceCard {
+  color: inherit;
+}
+
+.resourceCard:hover {
+  background: var(--cable-accent-soft);
+  border-color: var(--cable-accent);
+}
+
+.resourceCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.resourceCardDisabled {
+  color: var(--cable-faint);
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.resourceIcon {
+  color: var(--cable-accent);
+  flex-shrink: 0;
+  height: 1.3rem;
+  margin-top: 0.15rem;
+  width: 1.3rem;
+}
+
+.resourceCardDisabled .resourceIcon {
+  color: var(--cable-faint);
+}
+
+.resourceBody h3 {
+  color: var(--cable-navy);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+.resourceCardDisabled .resourceBody h3 {
+  color: var(--cable-muted);
+}
+
+.resourceBody p {
+  color: var(--cable-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin: 0.35rem 0 0;
+}
+
+.resourceUnavailable {
+  color: var(--cable-faint);
+  display: block;
+  font-size: 0.7rem;
+  font-style: italic;
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 1100px) {
+  .resourceGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .resourceGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   09. FINAL SUPPORT CTA
+   Deep navy — the one full-width strong-colour block on the page, by
+   design (per the alternating-section system, not a random flourish).
+   ========================================================= */
+
+.supportSection {
+  background:
+    radial-gradient(circle at 82% 20%, rgb(37 99 235 / 26%), transparent 40%),
+    var(--cable-accent-strong);
+  margin: 3.5rem auto 0;
+  max-width: 1400px;
+  border-radius: 1rem;
+  overflow: hidden;
+  padding: clamp(2.5rem, 4vw, 3.5rem) clamp(1.5rem, 4vw, 3.5rem);
+  position: relative;
+}
+
+.supportSection::before {
+  background-image:
+    linear-gradient(rgb(147 192 251 / 10%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(147 192 251 / 10%) 1px, transparent 1px);
+  background-size: 42px 42px;
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.supportContent {
+  align-items: center;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  position: relative;
+}
+
+.supportContent h2 {
+  color: #ffffff;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 30rem;
+}
+
+.supportContent p {
+  color: rgb(255 255 255 / 78%);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.85rem 0 0;
+  max-width: 32rem;
+}
+
+.supportActions {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.supportAction,
+.supportActionSecondary {
+  align-items: center;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  font-size: 0.88rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  min-height: 3.1rem;
+  padding: 0.85rem 1.4rem;
+  text-decoration: none;
+  transition: background-color 200ms ease, border-color 200ms ease, transform 200ms ease;
+  white-space: nowrap;
+}
+
+.supportAction {
+  background: var(--cable-accent-dark);
+  border: 1px solid var(--cable-accent-dark);
+  color: #ffffff;
+}
+
+.supportAction:hover {
+  background: #3576f0;
+  transform: translateY(-2px);
+}
+
+.supportActionSecondary {
+  background: transparent;
+  border: 1px solid rgb(255 255 255 / 35%);
+  color: #ffffff;
+}
+
+.supportActionSecondary:hover {
+  background: rgb(255 255 255 / 10%);
+  border-color: rgb(255 255 255 / 60%);
+  transform: translateY(-2px);
+}
+
+.supportAction:focus-visible,
+.supportActionSecondary:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .supportContent {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.pageEnd {
+  height: 4rem;
+}
+
+/* =========================================================
+   10. CATEGORY HERO (category landing page only)
+   Full-bleed looping video, same structural technique as the Busbar and
+   Earthing & Lightning category-level heroes: the visual fills its grid
+   column edge-to-edge (no padding, no nested card frame) and fades into
+   the page via a left-edge gradient, rather than sitting in a bordered
+   box. Page-scoped (categoryHero*) — .hero stays the shared decorative
+   background wrapper, but the grid/padding mechanics below replace
+   .heroInner for this page only, so the family-detail and
+   support-hanging templates (which still use .heroInner) are untouched.
+   ========================================================= */
+
+.categoryHeroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(28rem, 1.08fr);
+  margin: 0 auto;
+  max-width: 1400px;
+  min-height: 28rem;
+  overflow: hidden;
+  padding-left: clamp(1.25rem, 4vw, 4rem);
+}
+
+/* Combined with the shared .heroContent (kept for its h1/eyebrow rules) —
+   supplies the padding .heroInner used to provide, right-side only, since
+   the visual now needs to touch the grid's own right edge. */
+.categoryHeroContentPad {
+  align-self: center;
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 3vw, 2.75rem) clamp(2.5rem, 5vw, 4rem) 0;
+}
+
+.categoryHeroVisual {
+  background: #06101e;
+  border-radius: 0 1rem 1rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.heroVideo {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  width: 100%;
+}
+
+/* Left-edge fade blends the video into the page background instead of a
+   hard rectangular seam; bottom vignette adds depth — same two-gradient
+   technique as Busbar/Earthing, retoned to this page's pale-blue
+   background instead of pure white. */
+.heroVideoOverlay {
+  background:
+    linear-gradient(90deg, #eef4fc 0%, rgb(238 244 252 / 80%) 7%, transparent 26%),
+    linear-gradient(0deg, rgb(7 28 59 / 28%) 0%, transparent 42%);
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+@media (max-width: 1100px) {
+  .categoryHeroGrid {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding-left: 0;
+  }
+
+  .categoryHeroContentPad {
+    padding: clamp(2rem, 6vw, 3rem) clamp(1.25rem, 4vw, 4rem);
+  }
+
+  .categoryHeroVisual {
+    aspect-ratio: 16 / 10;
+    border-radius: 0;
+  }
+}
+
+/* =========================================================
+   11. EXPLORE CABLE MANAGEMENT SYSTEMS (6 macro group cards)
+   Very light blue-grey wash, distinct from the plain page background.
+   ========================================================= */
+
+.exploreSection {
+  background: #f6f9fd;
+  border-top: 1px solid var(--cable-border);
+  border-bottom: 1px solid var(--cable-border);
+  margin-top: 3.5rem;
+  padding: 3.25rem 0;
+}
+
+.exploreInner {
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.sectionIntroduction {
+  color: var(--cable-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: -1rem 0 1.75rem;
+  max-width: 42rem;
+}
+
+.macroGrid {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.macroCard {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.9rem;
+  box-shadow: var(--cable-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  transition:
+    border-color 320ms ease,
+    box-shadow 320ms ease,
+    transform 320ms ease;
+}
+
+.macroCard:hover {
+  border-color: var(--cable-accent);
+  box-shadow: var(--cable-shadow-idle), 0 1rem 2rem rgb(7 28 59 / 10%);
+  transform: translateY(-3px);
+}
+
+.macroCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.macroCard:hover .macroImage {
+  transform: scale(1.03);
+}
+
+.macroIndex {
+  background: rgb(255 255 255 / 92%);
+  border-radius: 999px;
+  color: var(--cable-accent-dark);
+  font-size: 0.7rem;
+  font-weight: 800;
+  left: 1rem;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  position: absolute;
+  top: 1rem;
+  z-index: 1;
+}
+
+/* Cover-fill treatment (matches .supportSeriesMedia/.supportSeriesImage) —
+   the image fills the full media area instead of floating as a small
+   contained thumbnail; the radial wash stays as a safety net for any edge
+   the photo doesn't reach at this box's exact ratio. */
+.macroMedia {
+  background: radial-gradient(circle at 50% 40%, rgb(37 99 235 / 9%), transparent 70%), #eef3fa;
+  height: 190px;
+  overflow: hidden;
+  position: relative;
+}
+
+.macroImage {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 320ms ease;
+  width: 100%;
+}
+
+.macroBody {
+  flex: 1;
+  padding: 1.25rem 1.4rem 1.1rem;
+}
+
+.macroBody h3 {
+  color: var(--cable-navy);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.macroBody p {
+  color: var(--cable-body);
+  font-size: 0.83rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+}
+
+.macroFooter {
+  align-items: center;
+  border-top: 1px solid var(--cable-border);
+  color: var(--cable-accent-dark);
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 800;
+  justify-content: space-between;
+  padding: 0.9rem 1.4rem;
+}
+
+.macroFooterArrow {
+  transition: transform 250ms ease;
+}
+
+.macroCard:hover .macroFooterArrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 1100px) {
+  .macroGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .macroGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   12. DECISION HELPER — "Which System Do You Need?"
+   Transparent over the base page background. Each card recommends a
+   series/family for a project scenario; only the CTA is a link (the
+   scenario/recommendation text is not), so the actionable target stays
+   unambiguous.
+   ========================================================= */
+
+.decisionSection {
+  margin: 3.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.decisionGrid {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.decisionCard {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.85rem;
+  box-shadow: var(--cable-shadow-idle);
+  display: flex;
+  flex-direction: column;
+  padding: 1.35rem 1.4rem 1.25rem;
+}
+
+.decisionScenario {
+  color: var(--cable-accent-dark);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.decisionRecommendation {
+  color: var(--cable-navy);
+  font-size: 1.02rem;
+  line-height: 1.35;
+  margin: 0.5rem 0 0;
+}
+
+.decisionDescription {
+  color: var(--cable-body);
+  font-size: 0.83rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+}
+
+.decisionAction {
+  align-items: center;
+  color: var(--cable-accent-dark);
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 800;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  text-decoration: none;
+}
+
+.decisionAction span[aria-hidden="true"] {
+  transition: transform 200ms ease;
+}
+
+.decisionAction:hover span[aria-hidden="true"],
+.decisionAction:focus-visible span[aria-hidden="true"] {
+  transform: translateX(4px);
+}
+
+.decisionAction:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .decisionGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .decisionGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   12b. APPLICATIONS — "Where Cable Management Systems Are Used"
+   Very light blue-grey wash, matching the Explore/Featured sections'
+   alternating rhythm. Compact tiles sized to fit all 8 sectors on one
+   row at desktop width. Cards for sectors with a real, built Application
+   Map route are a Link; the rest render as a non-link "coming soon"
+   card — never a placeholder destination.
+   ========================================================= */
+
+.applicationsSection {
+  background: #f6f9fd;
+  border-top: 1px solid var(--cable-border);
+  border-bottom: 1px solid var(--cable-border);
+  margin-top: 3.5rem;
+  padding: 3.25rem 0;
+}
+
+.applicationsInner {
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.applicationsGrid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 640px) {
+  .applicationsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1050px) {
+  .applicationsGrid {
+    gap: 0.65rem;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+.applicationCard,
+.applicationCardDisabled {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--cable-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.applicationCard {
+  transition:
+    border-color 280ms ease,
+    box-shadow 280ms ease,
+    transform 280ms ease;
+}
+
+.applicationCard:hover {
+  border-color: var(--cable-accent);
+  box-shadow: var(--cable-shadow-idle), 0 0.85rem 1.75rem rgb(7 28 59 / 10%);
+  transform: translateY(-3px);
+}
+
+.applicationCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.applicationCard:hover .applicationImage {
+  transform: scale(1.05);
+}
+
+.applicationCardDisabled {
+  opacity: 0.72;
+}
+
+.applicationMedia {
+  aspect-ratio: 1 / 1;
+  background: #eef3fa;
+  overflow: hidden;
+  position: relative;
+}
+
+.applicationImage {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 320ms ease;
+}
+
+.applicationBody {
+  flex: 1;
+  padding: 0.65rem 0.7rem 0;
+}
+
+.applicationBody h3 {
+  color: var(--cable-navy);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.applicationFooter {
+  align-items: center;
+  color: var(--cable-accent-dark);
+  display: flex;
+  font-size: 0.66rem;
+  font-weight: 800;
+  gap: 0.3rem;
+  justify-content: space-between;
+  padding: 0.55rem 0.7rem 0.7rem;
+}
+
+.applicationFooterArrow {
+  transition: transform 220ms ease;
+}
+
+.applicationCard:hover .applicationFooterArrow {
+  transform: translateX(3px);
+}
+
+.applicationComingSoon {
+  color: var(--cable-faint);
+  display: block;
+  font-size: 0.64rem;
+  font-style: italic;
+  padding: 0.55rem 0.7rem 0.7rem;
+}
+
+/* =========================================================
+   13. WHAT WE PROVIDE (category page only)
+   Plain page background — a lighter, non-download-styled card language
+   than the family-detail page's Engineering & Technical Resources grid
+   (.resourceCard et al., section 08), since most of these are
+   consultative services rather than documents. Only the catalogue card
+   carries a real `href`/download; the rest render as the same card
+   shape without a link, never a "not yet available" disclaimer.
+   ========================================================= */
+
+.provideSection {
+  margin: 3.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.provideGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.provideCard {
+  align-items: flex-start;
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--cable-shadow-idle);
+  color: inherit;
+  display: flex;
+  gap: 0.85rem;
+  padding: 1.1rem 1.2rem;
+  text-decoration: none;
+  transition:
+    border-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+a.provideCard:hover {
+  background: var(--cable-accent-soft);
+  border-color: var(--cable-accent);
+}
+
+a.provideCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.provideIcon {
+  color: var(--cable-accent);
+  flex-shrink: 0;
+  height: 1.3rem;
+  margin-top: 0.15rem;
+  width: 1.3rem;
+}
+
+.provideBody h3 {
+  color: var(--cable-navy);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+.provideBody p {
+  color: var(--cable-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin: 0.35rem 0 0;
+}
+
+@media (max-width: 1100px) {
+  .provideGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .provideGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   15. SUPPORT & HANGING SYSTEMS — macro-family page only
+   Reuses the shared hero/snapshot/resource/support-CTA styles above.
+   Everything below is specific to this page.
+   ========================================================= */
+
+/* ---- 15a. Technical snapshot — strict 2-column value grid ----
+   Scoped override: only applies where CableTechnicalSnapshot is wrapped in
+   .supportSnapshotWrapper (this page), never touches the shared
+   component's default single-column stack used elsewhere. */
+
+.supportSnapshotWrapper .snapshotValue {
+  display: grid;
+  gap: 0.35rem 0.6rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* ---- 15b. Product Series in This System ---- */
+
+.supportSeriesSection {
+  margin: 3.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.supportSeriesGrid {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.supportSeriesCard {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.9rem;
+  box-shadow: var(--cable-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    border-color 320ms ease,
+    box-shadow 320ms ease,
+    transform 320ms ease;
+}
+
+a.supportSeriesCard:hover {
+  border-color: var(--cable-accent);
+  box-shadow: var(--cable-shadow-idle), 0 0.75rem 1.75rem rgb(7 28 59 / 10%);
+  transform: translateY(-3px);
+}
+
+a.supportSeriesCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.supportSeriesCard:hover .supportSeriesImage {
+  transform: scale(1.03);
+}
+
+/* Cover-fill "product card cover" treatment — the studio photo itself
+   already frames the product with its own whitespace, so a fixed-height
+   box with object-fit: cover (not contain+padding) reads as a proper card
+   cover instead of a small thumbnail floating in empty space. The pale
+   blue-grey wash stays as a safety net for any edge the photo doesn't
+   reach at this box's exact ratio. */
+.supportSeriesMedia {
+  background: radial-gradient(circle at 50% 40%, rgb(37 99 235 / 8%), transparent 70%), #eef3fa;
+  height: 232px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Series without an extracted image yet — a plain typographic placeholder,
+   never a broken/missing image. */
+.supportSeriesMediaEmpty {
+  align-items: center;
+  color: var(--cable-faint);
+  display: flex;
+  font-size: 0.8rem;
+  font-style: italic;
+  height: 100%;
+  justify-content: center;
+}
+
+.supportSeriesImage {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 320ms ease;
+  width: 100%;
+}
+
+.supportSeriesBody {
+  flex: 1;
+  padding: 1.2rem 1.35rem 0.5rem;
+}
+
+.supportSeriesBody h3 {
+  color: var(--cable-navy);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.supportSeriesCatalogueName {
+  color: var(--cable-muted);
+  font-size: 0.72rem;
+  font-style: italic;
+  margin: 0.3rem 0 0;
+}
+
+.supportSeriesBody p:last-child {
+  color: var(--cable-body);
+  font-size: 0.83rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+}
+
+.supportSeriesFooter {
+  align-items: center;
+  border-top: 1px solid var(--cable-border);
+  color: var(--cable-accent-dark);
+  display: flex;
+  font-size: 0.78rem;
+  font-weight: 800;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding: 0.85rem 1.35rem;
+}
+
+.supportSeriesSoon {
+  color: var(--cable-faint);
+  font-style: italic;
+  font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .supportSeriesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .supportSeriesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- 15c. Choose by Installation Type ---- */
+
+.installationSection {
+  margin: 3.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.installationGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.installationCard {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.85rem;
+  box-shadow: var(--cable-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.1rem 1.25rem;
+  text-decoration: none;
+  transition: border-color 250ms ease, transform 250ms ease;
+}
+
+.installationCard:hover {
+  border-color: var(--cable-accent);
+  transform: translateY(-3px);
+}
+
+.installationCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.installationLabel {
+  color: var(--cable-navy);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.installationDescription {
+  color: var(--cable-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 1100px) {
+  .installationGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .installationGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- 15e. Compatible Systems ---- */
+
+.compatibleSection {
+  margin: 3.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.compatibleGrid {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.compatibleCard {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.85rem;
+  box-shadow: var(--cable-shadow-idle);
+  color: inherit;
+  display: block;
+  padding: 1.25rem 1.4rem;
+  text-decoration: none;
+  transition: border-color 250ms ease, transform 250ms ease;
+}
+
+.compatibleCard:hover {
+  border-color: var(--cable-accent);
+  transform: translateY(-3px);
+}
+
+.compatibleCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.compatibleCard h3 {
+  color: var(--cable-navy);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.compatibleCard p {
+  color: var(--cable-body);
+  font-size: 0.83rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+}
+
+.compatibleCard span[aria-hidden="true"] {
+  color: var(--cable-accent-dark);
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-top: 0.85rem;
+}
+
+@media (max-width: 1100px) {
+  .compatibleGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .compatibleGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   16. SUPPORT & HANGING HERO VISUAL — premium-product-hero-motion skill
+   Page-scoped (supportHeroVisual*) so this treatment never touches the
+   shared .heroVisual/.heroVisualCard boxed-thumbnail pattern used by the
+   family-detail template (H60 etc.) — see cable-support-hanging-page.tsx.
+   .heroVisualGlow (shared, purely decorative, no motion) is reused as-is.
+   Layering, outer to inner: .supportHeroVisual (no background of its own)
+   -> .heroVisualGlow (shared static decoration) -> .supportHeroVisualFloat
+   (CSS-only entrance + idle animation, no JS) -> .supportHeroVisualParallax
+   (the ONLY JS-driven piece — pointer translate, desktop fine-pointer only,
+   see cable-hero-parallax.tsx) -> .supportHeroVisualImage (the product
+   photo). No nested white card/frame by design — the product fills the
+   right-hand panel directly, per the skill's "remove nested image frames"
+   rule, instead of sitting in a small bordered box.
+   ========================================================= */
+
+.supportHeroVisual {
+  aspect-ratio: 3 / 2;
+  position: relative;
+}
+
+.supportHeroVisualFloat {
+  animation:
+    supportHeroVisualEnter 800ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    supportHeroVisualIdle 8s ease-in-out 800ms infinite;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.supportHeroVisualParallax {
+  height: 100%;
+  position: relative;
+  transition: transform 220ms ease-out;
+  width: 100%;
+}
+
+.supportHeroVisualImage {
+  filter: drop-shadow(0 18px 26px rgb(7 28 59 / 16%));
+  object-fit: contain;
+  transition: transform 280ms ease;
+}
+
+.supportHeroVisualSweep {
+  animation: supportHeroVisualSweep 8s ease-in-out infinite;
+  background: linear-gradient(115deg, transparent 40%, rgb(255 255 255 / 55%) 50%, transparent 60%);
+  inset: 0;
+  mix-blend-mode: soft-light;
+  opacity: 0.5;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .supportHeroVisualParallax:hover .supportHeroVisualImage {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes supportHeroVisualEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes supportHeroVisualIdle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes supportHeroVisualSweep {
+  0%,
+  92%,
+  100% {
+    transform: translateX(-120%);
+  }
+
+  50% {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .supportHeroVisualFloat {
+    animation: supportHeroVisualEnterReduced 250ms ease both;
+  }
+
+  .supportHeroVisualParallax {
+    transition: none;
+  }
+
+  .supportHeroVisualSweep {
+    display: none;
+  }
+}
+
+@keyframes supportHeroVisualEnterReduced {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1100px) {
+  .supportHeroVisual {
+    aspect-ratio: 4 / 3;
+    order: -1;
+  }
+}
+
+/* =========================================================
+   17. HEAVY DUTY CABLE TRAYS — variant switcher (H=40/50/60/100mm, GKT-CE)
+   One page, one URL — tabs swap which family's data CableFamilyBody
+   renders below, instead of five separate routes.
+   ========================================================= */
+
+.heroVisualEmpty {
+  align-items: center;
+  color: var(--cable-faint);
+  display: flex;
+  font-size: 0.85rem;
+  font-style: italic;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Compact Product Variant pills — the first group inside the Filter &
+   Search sidebar (see cable-variant-family-template.tsx /
+   cable-family-variant-table.tsx). Two columns by default so they fit the
+   sidebar's own width without the large image cards the old standalone
+   selector used. */
+.variantPillGroup {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.variantPill,
+.variantPillActive {
+  background: var(--cable-surface);
+  border: 1.5px solid var(--cable-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.5rem 0.6rem;
+  text-align: center;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.variantPill {
+  color: var(--cable-ink);
+}
+
+.variantPill:hover {
+  border-color: var(--cable-accent-light);
+}
+
+.variantPillActive {
+  background: var(--cable-accent-soft);
+  border-color: var(--cable-accent);
+  color: var(--cable-accent-dark);
+}
+
+.variantPill:focus-visible,
+.variantPillActive:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.variantPillPending {
+  color: var(--cable-faint);
+  display: block;
+  font-size: 0.62rem;
+  font-style: italic;
+  font-weight: 500;
+  margin-top: 0.15rem;
+}
+
+.variantPillActive .variantPillPending {
+  color: var(--cable-accent-dark);
+  opacity: 0.75;
+}

@@ -1,0 +1,26 @@
+import type { CableManagementVariant } from "../types";
+
+export const SOCKET_FUSE_FIXING_UNIT_VARIANTS: readonly CableManagementVariant[] = [
+  { name: "Socket Plate", model: "GPP-01 D", stockCode: "0501000119140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "priz plakası", weight: "0.150 Kg/pc" },
+  { name: "Socket Plate", model: "GPP-02 D", stockCode: "0501000219140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "priz plakası", weight: "0.220 Kg/pc" },
+  { name: "Socket Plate", model: "GPP-05 D", stockCode: "0501000519140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "priz plakası", weight: "0.120 Kg/pc" },
+  { name: "Socket Plate", model: "GPP-06 D", stockCode: "0501000619140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "priz plakası", weight: "0.220 Kg/pc" },
+  { name: "Singlephase and Threephase Circuit Breaker", model: "GPP-03 D", stockCode: "0501000319141", material: "Hot-Dip Galvanized Steel", accessoryGroup: "otomat plakası", weight: "0.220 Kg/pc" },
+  { name: "Singlephase and Threephase Circuit Breaker", model: "GPP-04 D", stockCode: "0501000419141", material: "Hot-Dip Galvanized Steel", accessoryGroup: "otomat plakası", weight: "0.200 Kg/pc" },
+  { name: "Tray Fixing Piece", model: "GBT-40 D", stockCode: "0601004029140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "kanala tespit elemanı", weight: "0.110 Kg/pc" },
+  { name: "Tray Fixing Piece", model: "GBT-50 D", stockCode: "0601005029140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "kanala tespit elemanı", weight: "0.130 Kg/pc" },
+  { name: "Tray Fixing Piece", model: "GBT-60 D", stockCode: "0601006029140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "kanala tespit elemanı", weight: "0.150 Kg/pc" },
+  { name: "Tray Fixing Piece", model: "GBT-100 D", stockCode: "0601010029140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "kanala tespit elemanı", weight: "0.230 Kg/pc" },
+  { name: "Pipe Elbow", model: "GBD-250 D", stockCode: "0602025019140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "boru dönüş elemanı", weight: "0.300 Kg/pc" },
+  { name: "Pipe Elbow", model: "GBD-420 D", stockCode: "0602042019140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "boru dönüş elemanı", weight: "1.130 Kg/pc" },
+  { name: "Pipe Connection Piece", model: "GBE-250 D", stockCode: "0603025019140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "boru ek elemanı", lengthMm: 120, weight: "0.080 Kg/pc" },
+  { name: "Pipe Connection Piece", model: "GBE-420 D", stockCode: "0603042019140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "boru ek elemanı", lengthMm: 120, weight: "0.200 Kg/pc" },
+  { name: "Pipe", model: "GB-250 D", stockCode: "0604025019140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "boru", lengthMm: 3000, weight: "1.800 Kg/pc" },
+  { name: "Pipe", model: "GB-420 D", stockCode: "0604042019140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "boru", lengthMm: 3000, weight: "5.100 Kg/pc" },
+  { name: "Pipe Fixing Bracket", model: "BK-250 D", stockCode: "0604B25019140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "boru tespit kroşesi", weight: "0.040 Kg/pc" },
+  { name: "Pipe Fixing Bracket", model: "BK-420 D", stockCode: "0604B42029140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "boru tespit kroşesi", weight: "0.060 Kg/pc" },
+  { name: "Machine Outlet", model: "GBC-250 D", stockCode: "0605C25019140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "makine çıkış elemanı", lengthMm: 250, weight: "0.250 Kg/pc" },
+  { name: "Machine Outlet", model: "GBC-420 D", stockCode: "0605C42019140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "makine çıkış elemanı", lengthMm: 420, weight: "0.450 Kg/pc" },
+  { name: "Floor Fixing", model: "GBY-250 D", stockCode: "0605Y25019140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "yere tespit elemanı", lengthMm: 190, weight: "0.350 Kg/pc" },
+  { name: "Floor Fixing", model: "GBY-420 D", stockCode: "0605C42019140", material: "Hot-Dip Galvanized Steel", accessoryGroup: "yere tespit elemanı", lengthMm: 250, weight: "0.550 Kg/pc" },
+];

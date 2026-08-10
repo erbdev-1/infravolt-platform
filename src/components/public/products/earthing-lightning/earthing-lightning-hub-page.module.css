@@ -1,0 +1,1005 @@
+/* =========================================================
+   01. PAGE THEME & DESIGN TOKENS
+   Copper / Burnt Orange is this category's primary accent
+   (replaces the site's default InfraVolt red for this section).
+   ========================================================= */
+
+.page {
+  --earthing-accent: #c1622d;
+  --earthing-accent-dark: #96491f;
+  --earthing-accent-light: #e8a874;
+  --earthing-accent-soft: #fbeee4;
+  --earthing-navy: #061a35;
+  --earthing-ink: #102033;
+  /* Three deliberate secondary-text tones, not seven ad-hoc near-identical
+     greys — --earthing-body for paragraph copy, --earthing-muted for
+     labels/meta/nav, --earthing-faint for placeholder/disabled captions.
+     Consolidated from #637587/#68778c/#53657d/#607087, which had drifted
+     apart across this file and the category detail page. */
+  --earthing-body: #5b6c81;
+  --earthing-muted: #66758a;
+  --earthing-faint: #94a3b5;
+  --earthing-border: #dce2e8;
+  --earthing-surface: #f6f2ee;
+  /* Baseline card elevation — every card (category, pathway, guidance,
+     application, snapshot strip) now rests on a faint idle shadow instead
+     of sitting perfectly flat until hover; each card's hover shadow keeps
+     its own distinct depth/tint, only the idle state is shared. */
+  --earthing-shadow-idle: 0 1px 2px rgb(6 26 53 / 4%), 0 1px 1px rgb(6 26 53 / 3%);
+
+  background: linear-gradient(180deg, #ffffff 0%, var(--earthing-surface) 54%, #ffffff 100%);
+  color: var(--earthing-ink);
+  /* Bu sayfa bilinçli olarak tek temalı (açık). Bunu belirtmeden bazı
+     tarayıcılar/WebView'lar (ör. zorla karanlık modu olan Android) yazar
+     tarafından belirlenmiş renkleri otomatik ters çevirip başlıkları
+     okunaksız hale getirebiliyor — bu satır o davranışı devre dışı bırakır. */
+  color-scheme: light;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   02. BREADCRUMBS
+   ========================================================= */
+
+/* Same back-button pattern as earthing-category-detail-page.module.css
+   .backNav/.backButton — kept as a separate copy (not a shared class)
+   because this is a different CSS module per page component. */
+.backNav {
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem) 0;
+}
+
+.backButton {
+  align-items: center;
+  background: var(--earthing-accent);
+  border: 1px solid var(--earthing-accent);
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.backButton:hover {
+  background: var(--earthing-accent-dark);
+  border-color: var(--earthing-accent-dark);
+  transform: translateY(-2px);
+}
+
+.backButton:focus-visible {
+  outline: 3px solid rgb(193 98 45 / 30%);
+  outline-offset: 3px;
+}
+
+.breadcrumbs {
+  align-items: center;
+  border-bottom: 1px solid rgb(6 26 53 / 9%);
+  color: var(--earthing-muted);
+  display: flex;
+  font-size: 0.82rem;
+  gap: 0.65rem;
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem);
+}
+
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--earthing-accent);
+}
+
+/* =========================================================
+   03. HERO
+   ========================================================= */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(34rem, 1.1fr);
+  margin: 0 auto;
+  max-width: 1600px;
+  min-height: 31rem;
+  overflow: hidden;
+  padding-left: clamp(1.25rem, 4vw, 4rem);
+}
+
+.heroContent {
+  align-self: center;
+  max-width: 43rem;
+  padding: 4rem 3rem 4rem 0;
+  position: relative;
+  z-index: 2;
+}
+
+.manufacturerLockup {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+}
+
+.gersanLogo {
+  height: auto;
+  object-fit: contain;
+  width: clamp(8.75rem, 12vw, 10.5rem);
+}
+
+.hero h1 {
+  color: var(--earthing-navy);
+  font-size: clamp(2.6rem, 4.4vw, 4.2rem);
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.heroSubtitle {
+  color: var(--earthing-navy);
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 1.25rem 0 0;
+  max-width: 38rem;
+}
+
+.heroDescription {
+  color: var(--earthing-body);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.7;
+  margin: 1rem 0 0;
+  max-width: 39rem;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.primaryButton {
+  align-items: center;
+  background: var(--earthing-accent);
+  border: 1px solid var(--earthing-accent);
+  border-radius: 0.45rem;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.3rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.primaryButton:hover {
+  background: var(--earthing-accent-dark);
+  border-color: var(--earthing-accent-dark);
+  transform: translateY(-2px);
+}
+
+/* Secondary CTA — a softly-tinted outline so it doesn't compete with the
+   copper-filled .primaryButton, per the hero-CTA hierarchy brief. The two
+   remaining hero actions ("Explore Product Families" + this one) sit on
+   one row on desktop, stacked full-width on mobile (see the media query
+   below) — "Talk to an Engineer" was removed from this row entirely. */
+.catalogueButton {
+  align-items: center;
+  background: var(--earthing-accent-soft);
+  border: 1px solid var(--earthing-accent-light);
+  border-radius: 0.45rem;
+  color: var(--earthing-accent-dark);
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.3rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.catalogueButton:hover {
+  background: #f6e3d5;
+  border-color: var(--earthing-accent);
+  transform: translateY(-2px);
+}
+
+.catalogueButtonIcon {
+  flex-shrink: 0;
+  height: 1.15rem;
+  width: 1.15rem;
+}
+
+.catalogueButton span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.catalogueButton small {
+  color: inherit;
+  font-size: 0.68rem;
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+@media (max-width: 640px) {
+  .heroActions {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .catalogueButton {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   04. HERO MEDIA
+   ========================================================= */
+
+.heroVisual {
+  background: #06101e;
+  border-radius: 0 0.55rem 0.55rem 0;
+  min-height: 31rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.heroVisual::before {
+  background: linear-gradient(90deg, #ffffff, transparent);
+  content: "";
+  inset: 0 auto 0 0;
+  pointer-events: none;
+  position: absolute;
+  width: 20%;
+  z-index: 2;
+}
+
+.heroVideo {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.heroVideoOverlay {
+  background:
+    linear-gradient(90deg, #ffffff 0%, rgb(255 255 255 / 82%) 7%, transparent 28%),
+    linear-gradient(0deg, rgb(6 26 53 / 20%) 0%, transparent 45%);
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+/* =========================================================
+   06. SOLUTION PATHWAYS ("what are you installing?")
+   ========================================================= */
+
+.pathways {
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.pathways h2 {
+  color: var(--earthing-navy);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  letter-spacing: -0.03em;
+  margin: 0 0 1.5rem;
+}
+
+.pathwaysGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.pathwayCard {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.7rem;
+  border-top: 3px solid var(--earthing-border);
+  box-shadow: var(--earthing-shadow-idle);
+  padding: 1.6rem 1.5rem;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.pathwayCard:hover {
+  border-color: rgb(193 98 45 / 35%);
+  border-top-color: var(--earthing-accent);
+  box-shadow: 0 1.25rem 2.25rem rgb(193 98 45 / 16%);
+  transform: translateY(-4px);
+}
+
+.pathwayIcon {
+  color: var(--earthing-accent);
+  height: 2.1rem;
+  margin-bottom: 1.1rem;
+  width: 2.1rem;
+}
+
+.pathwayCard h3 {
+  color: var(--earthing-navy);
+  font-size: 1.05rem;
+  margin: 0 0 0.6rem;
+}
+
+.pathwayCard p {
+  color: var(--earthing-body);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================================
+   07. PRODUCT FAMILY CATEGORIES
+   ========================================================= */
+
+.categories {
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+  scroll-margin-top: 6rem;
+}
+
+.categoriesHeading {
+  margin-bottom: 2rem;
+  max-width: 44rem;
+}
+
+.categoriesHeading h2 {
+  color: var(--earthing-navy);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.categoriesHeading p {
+  color: var(--earthing-body);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin: 0.75rem 0 0;
+}
+
+.categoriesGrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.categoryCard {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--earthing-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.categoryCard:hover {
+  border-color: rgb(193 98 45 / 40%);
+  box-shadow: 0 1.5rem 3rem rgb(6 26 53 / 14%);
+  transform: translateY(-4px);
+}
+
+.categoryImage {
+  aspect-ratio: 4 / 3;
+  background: var(--earthing-surface);
+  overflow: hidden;
+  position: relative;
+}
+
+.categoryImage img {
+  /* Card photos (public/assets/products/earthing-lightning, card
+     subfolders) are composed edge-to-edge on their own neutral
+     background at a matching 4:3 ratio — no inset padding here, or the
+     card would double-border the photo's own background against
+     .categoryImage's. */
+  object-fit: cover;
+  transition: transform 280ms ease;
+}
+
+.categoryCard:hover .categoryImage img {
+  transform: scale(1.06);
+}
+
+.categoryContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.3rem 1.4rem 1.1rem;
+}
+
+.categoryContent h3 {
+  color: var(--earthing-navy);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.categoryDescription {
+  color: var(--earthing-body);
+  flex: 1;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0.65rem 0 0;
+}
+
+/* flex-shrink: 0, not flex: 1 — this must stay pinned to a fixed height
+   so it lands on the same baseline across every card. The description
+   above (.categoryDescription) is the only flexible element; it absorbs
+   the leftover space so every card's family-count line lines up
+   regardless of how long that card's description text is. */
+.categoryFamilyCount {
+  border-top: 1px solid rgb(6 26 53 / 8%);
+  color: var(--earthing-muted);
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin: 1.1rem 0 0;
+  padding-top: 0.9rem;
+}
+
+/* Aksiyon çubuğu: kartın alt kenarına yaslanan, dolu genişlikte bir
+   şerit — hover'da tamamen bakıra dolarak net bir "tıklanabilir"
+   sinyali verir (metin rengi değişiminden daha güçlü bir vurgu). */
+.categoryAction {
+  align-items: center;
+  background: var(--earthing-surface);
+  border-top: 1px solid var(--earthing-border);
+  color: var(--earthing-accent);
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 800;
+  gap: 0.45rem;
+  justify-content: space-between;
+  padding: 0.9rem 1.4rem;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.categoryAction span {
+  transition: transform 180ms ease;
+}
+
+.categoryCard:hover .categoryAction {
+  background: var(--earthing-accent);
+  color: #ffffff;
+}
+
+.categoryCard:hover .categoryAction span {
+  transform: translateX(4px);
+}
+
+/* =========================================================
+   08. ENGINEERING GUIDANCE
+   ========================================================= */
+
+.guidance {
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.guidanceHeading {
+  margin-bottom: 2rem;
+  max-width: 42rem;
+}
+
+.guidanceHeading h2 {
+  color: var(--earthing-navy);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.guidanceHeading p {
+  color: var(--earthing-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.75rem 0 0;
+}
+
+.guidanceGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.guidanceCard {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--earthing-shadow-idle);
+  overflow: hidden;
+  padding: 1.5rem 1.5rem 1.6rem;
+  position: relative;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.guidanceCard::before {
+  background: var(--earthing-accent);
+  content: "";
+  height: 3px;
+  inset: 0 0 auto 0;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+}
+
+.guidanceCard:hover {
+  border-color: rgb(193 98 45 / 35%);
+  box-shadow: 0 1.1rem 2.25rem rgb(6 26 53 / 10%);
+  transform: translateY(-3px);
+}
+
+.guidanceCard:hover::before {
+  transform: scaleX(1);
+}
+
+.guidanceIcon {
+  color: var(--earthing-accent);
+  height: 1.65rem;
+  margin-bottom: 0.9rem;
+  width: 1.65rem;
+}
+
+.guidanceCard h3 {
+  color: var(--earthing-navy);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.guidanceCard p {
+  color: var(--earthing-body);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+}
+
+/* =========================================================
+   08b. THREE PRINCIPLES (standalone, high-impact band —
+   deliberately placed ABOVE Engineering Guidance as the
+   memorable takeaway before the detailed topics)
+   ========================================================= */
+
+.principlesSection {
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.principles {
+  background:
+    radial-gradient(circle at 10% 15%, rgb(193 98 45 / 32%), transparent 42%),
+    radial-gradient(circle at 90% 85%, rgb(193 98 45 / 18%), transparent 45%),
+    var(--earthing-navy);
+  border-radius: 1rem;
+  padding: clamp(2.5rem, 4vw, 3.5rem) clamp(1.75rem, 4vw, 3.5rem);
+  position: relative;
+}
+
+.principles h2 {
+  color: #ffffff;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  letter-spacing: -0.025em;
+  margin: 0 0 2.25rem;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.principlesList {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.principlesList li {
+  align-items: center;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 0 1.75rem;
+  text-align: center;
+}
+
+.principlesList li + li {
+  border-left: 1px solid rgb(255 255 255 / 14%);
+}
+
+.principlesList li span:last-child {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+}
+
+.principleIcon {
+  align-items: center;
+  background: rgb(193 98 45 / 22%);
+  border: 1px solid rgb(232 168 116 / 45%);
+  border-radius: 50%;
+  color: var(--earthing-accent-light);
+  display: inline-flex;
+  height: 3.5rem;
+  justify-content: center;
+  width: 3.5rem;
+}
+
+.principleIcon svg {
+  height: 1.7rem;
+  width: 1.7rem;
+}
+
+.principleIcon svg {
+  height: 1.15rem;
+  width: 1.15rem;
+}
+
+/* =========================================================
+   09. APPLICATIONS
+   ========================================================= */
+
+.applicationsSection {
+  border-top: 1px solid rgb(7 24 39 / 12%);
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 3.5rem clamp(1.25rem, 4vw, 4rem) 0;
+}
+
+.applicationsHeading {
+  margin-bottom: 2rem;
+  max-width: 42rem;
+}
+
+.applicationsHeading h2 {
+  color: var(--earthing-navy);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.applicationsHeading p {
+  color: var(--earthing-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.75rem 0 0;
+}
+
+/* 8 uygulama tek satırda erişilebilir olmalı — bir 4-sütun grid 2 satıra
+   bölerdi. Bunun yerine tek, yatay kaydırılabilir sıra (scroll-snap ile),
+   Busbar'ın kart tasarımını korurken tüm kartların aynı satırda
+   erişilebilir olmasını sağlar. Doğal kaydırmaya ek olarak görünür ok
+   butonları da var (bkz. ApplicationsCarousel) — masaüstü fare
+   kullanıcıları için yatay kaydırma tek başına yeterince keşfedilebilir
+   değil. */
+.applicationsCarousel {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.applicationsArrow {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 50%;
+  color: var(--earthing-navy);
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  height: 2.6rem;
+  justify-content: center;
+  line-height: 1;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    opacity 180ms ease;
+  width: 2.6rem;
+}
+
+.applicationsArrow:hover:not(:disabled) {
+  background: var(--earthing-accent);
+  border-color: var(--earthing-accent);
+  color: #ffffff;
+}
+
+.applicationsArrow:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.applicationsRow {
+  display: flex;
+  flex: 1;
+  gap: 1.1rem;
+  min-width: 0;
+  overflow-x: auto;
+  padding-bottom: 0.9rem;
+  scroll-padding-left: 0.25rem;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.applicationsRow::-webkit-scrollbar {
+  display: none;
+}
+
+.applicationPhotoCard {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--earthing-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex: 0 0 17rem;
+  flex-direction: column;
+  overflow: hidden;
+  scroll-snap-align: start;
+  text-decoration: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.applicationPhotoCard:hover {
+  border-color: rgb(193 98 45 / 35%);
+  box-shadow: 0 1.5rem 2.75rem rgb(6 26 53 / 15%);
+  transform: translateY(-4px);
+}
+
+.applicationPhotoVisual {
+  aspect-ratio: 4 / 3;
+  background: var(--earthing-surface);
+  overflow: hidden;
+  position: relative;
+}
+
+.applicationPhotoImage {
+  object-fit: cover;
+  transition: transform 320ms ease;
+}
+
+.applicationPhotoCard:hover .applicationPhotoImage {
+  transform: scale(1.07);
+}
+
+.applicationPhotoContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.15rem 1.3rem 1.3rem;
+}
+
+.applicationPhotoContent h3 {
+  color: var(--earthing-navy);
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.applicationPhotoContent p {
+  color: var(--earthing-body);
+  flex: 1;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  margin: 0.55rem 0 0;
+}
+
+.applicationAction {
+  align-items: center;
+  color: var(--earthing-accent);
+  display: inline-flex;
+  font-size: 0.76rem;
+  font-weight: 800;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.applicationAction span {
+  transition: transform 180ms ease;
+}
+
+.applicationPhotoCard:hover .applicationAction span {
+  transform: translateX(4px);
+}
+
+/* =========================================================
+   10. PROJECT SUPPORT CTA
+   ========================================================= */
+
+.projectSupport {
+  align-items: center;
+  background:
+    radial-gradient(circle at 78% 25%, rgb(193 98 45 / 30%), transparent 32%),
+    var(--earthing-navy);
+  border-radius: 0.7rem;
+  color: #ffffff;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  margin: 4.5rem auto 4rem;
+  max-width: 1400px;
+  padding: 2.75rem clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.supportIdentity {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.supportBrand {
+  align-items: center;
+  background: #ffffff;
+  border-radius: 0.4rem;
+  display: inline-flex;
+  padding: 0.5rem 0.75rem;
+}
+
+.infravoltWordmark {
+  height: auto;
+  object-fit: contain;
+  width: 9.5rem;
+}
+
+.supportEyebrow {
+  color: var(--earthing-accent-light);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.projectSupport h2 {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  margin: 0;
+  max-width: 30rem;
+}
+
+.projectSupport > div > p {
+  color: rgb(255 255 255 / 78%);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.85rem 0 0;
+  max-width: 34rem;
+}
+
+.projectSupport > a {
+  align-items: center;
+  background: var(--earthing-accent);
+  border-radius: 0.5rem;
+  color: #ffffff;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.88rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  min-height: 3.1rem;
+  padding: 0.85rem 1.4rem;
+  text-decoration: none;
+  transition: background-color 180ms ease;
+  white-space: nowrap;
+}
+
+.projectSupport > a:hover {
+  background: var(--earthing-accent-dark);
+}
+
+/* =========================================================
+   11. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding: 0 clamp(1.25rem, 4vw, 3rem);
+  }
+
+  .heroContent {
+    max-width: none;
+    padding: 3rem 0 2rem;
+  }
+
+  .heroVisual {
+    border-radius: 0.55rem;
+    min-height: 20rem;
+  }
+
+  .heroVisual::before {
+    display: none;
+  }
+
+  .pathwaysGrid,
+  .categoriesGrid,
+  .guidanceGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .principlesList {
+    grid-template-columns: 1fr;
+    row-gap: 1.75rem;
+  }
+
+  .principlesList li + li {
+    border-left: 0;
+    border-top: 1px solid rgb(255 255 255 / 14%);
+    padding-top: 1.75rem;
+  }
+
+  .applicationPhotoCard {
+    flex-basis: 15rem;
+  }
+
+  .projectSupport {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .supportIdentity {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 720px) {
+  .pathwaysGrid,
+  .categoriesGrid,
+  .guidanceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .applicationPhotoCard {
+    flex-basis: 13.5rem;
+  }
+}

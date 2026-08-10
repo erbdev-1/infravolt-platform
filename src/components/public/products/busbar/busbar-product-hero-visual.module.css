@@ -1,3 +1,15 @@
+/* =========================================================
+   BUSBAR HERO VISUAL — controlled power-distribution motion language.
+   Layering: .stage (sizing only) → .glow (static decoration) →
+   .motion (JS pointer-parallax, fine-pointer desktop only) → .float
+   (CSS-only entrance + idle animation) → .image + .sweep + .effects
+   (see busbar-hero-effects.tsx for per-series trace/flash config).
+   .motion and .float each own their own `transform` so the JS-driven
+   pointer offset and the CSS keyframes never fight over the same
+   property on the same element — same principle as the
+   earthing-lightning hero visual this was adapted from.
+   ========================================================= */
+
 .stage {
   --hero-x: 0px;
   --hero-y: 0px;
@@ -10,6 +22,17 @@
   width: 100%;
 }
 
+/* Minimal, restrained — a soft blue-white wash rather than a brand-colour
+   glow, matching "controlled power-distribution" rather than earthing's
+   copper/material language. Fades out well inside its own box. */
+.glow {
+  background: radial-gradient(closest-side, rgb(214 228 245 / 65%) 0%, transparent 62%);
+  filter: blur(44px);
+  inset: 18%;
+  opacity: 0.5;
+  position: absolute;
+}
+
 .motion {
   inset: -12% -12% -14% -8%;
   position: absolute;
@@ -19,7 +42,9 @@
 }
 
 .float {
-  animation: heroProductFloat 7s ease-in-out infinite;
+  animation:
+    busbarHeroEnter 800ms cubic-bezier(0.22, 1, 0.36, 1) both,
+    heroProductFloat 7s ease-in-out 800ms infinite;
   height: 100%;
   position: relative;
   width: 100%;
@@ -37,10 +62,40 @@
   will-change: transform;
 }
 
-.stage:hover .image {
-  filter: contrast(1.055) saturate(1.1)
-    drop-shadow(0 2rem 2.2rem rgb(6 26 53 / 20%));
-  transform: scale(1.09);
+/* Restrained on purpose — premium, not punchy (see shared hover rules in
+   the design brief this was built from). */
+@media (hover: hover) and (pointer: fine) {
+  .stage:hover .image {
+    filter: contrast(1.045) saturate(1.08)
+      drop-shadow(0 1.8rem 2rem rgb(6 26 53 / 18%));
+    transform: scale(1.06);
+  }
+}
+
+/* A single soft highlight passing over the product — reads as reflected
+   light travelling along the housing, not a loading shimmer. Shared
+   across all six series; per-series files only add to this, never
+   duplicate it. */
+.sweep {
+  animation: busbarHeroSweep 9s ease-in-out infinite;
+  background: linear-gradient(115deg, transparent 42%, rgb(255 255 255 / 45%) 50%, transparent 58%);
+  inset: 0;
+  mix-blend-mode: soft-light;
+  opacity: 0.45;
+  pointer-events: none;
+  position: absolute;
+}
+
+@keyframes busbarHeroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @keyframes heroProductFloat {
@@ -50,7 +105,19 @@
   }
 
   50% {
-    transform: translate3d(0, -7px, 0);
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@keyframes busbarHeroSweep {
+  0%,
+  90%,
+  100% {
+    transform: translateX(-120%);
+  }
+
+  45% {
+    transform: translateX(120%);
   }
 }
 
@@ -74,9 +141,98 @@
     animation: none;
   }
 
-  .image,
-  .stage:hover .image {
+  .image {
     transform: scale(1.04);
     transition: none;
+  }
+
+  .sweep {
+    display: none;
+  }
+
+  .effects {
+    display: none;
+  }
+}
+
+/* =========================================================
+   PER-SERIES EFFECTS — GL energy-flow trace, GM/GGD point highlights.
+   Positions/angles/timings are defined per series in
+   busbar-hero-effects.tsx. Plays once: no `infinite`, ends on `forwards`
+   fill mode. Not present at all for GNL/GS/GR — those already have a
+   baked-in ribbon effect on the source photo (see the long comment at
+   the top of busbar-hero-effects.tsx) and rely on .glow/.sweep above.
+   ========================================================= */
+
+.effects {
+  inset: 0;
+  position: absolute;
+}
+
+.trace {
+  animation-fill-mode: forwards;
+  animation-duration: 750ms;
+  animation-name: busbarTraceMove;
+  animation-timing-function: ease-out;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(224 238 255 / 20%) 30%,
+    rgb(255 255 255 / 92%) 55%,
+    rgb(120 176 235 / 40%) 75%,
+    transparent 100%
+  );
+  filter: blur(0.5px) drop-shadow(0 0 4px rgb(90 150 220 / 35%));
+  height: 3px;
+  opacity: 0;
+  position: absolute;
+  transform-origin: 0% 50%;
+}
+
+/* --trace-angle is set per-element (inline style, see the .tsx). */
+@keyframes busbarTraceMove {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--trace-angle)) scaleX(0);
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+    transform: rotate(var(--trace-angle)) scaleX(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(var(--trace-angle)) scaleX(1);
+  }
+}
+
+.tipFlash {
+  animation-fill-mode: forwards;
+  animation-duration: 700ms;
+  animation-name: busbarTipFlash;
+  animation-timing-function: ease-out;
+  background: radial-gradient(circle, rgb(255 255 255 / 92%) 0%, rgb(150 190 235 / 55%) 45%, transparent 75%);
+  border-radius: 50%;
+  opacity: 0;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes busbarTipFlash {
+  0% {
+    opacity: 0;
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
