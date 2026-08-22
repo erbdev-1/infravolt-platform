@@ -243,7 +243,6 @@ export function EarthingCategoryDetailPage({
           <span aria-hidden="true">→</span>
         </Link>
       </section>
-
     </main>
   );
 }

@@ -78,7 +78,6 @@ export function HomePageView({ market }: HomePageViewProps) {
           label={content.hero.videoLabel}
           pauseLabel={content.hero.pauseLabel}
           playLabel={content.hero.playLabel}
-          poster={MEDIA_ASSETS.hero.poster}
           source={MEDIA_ASSETS.hero.video}
         />
 

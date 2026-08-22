@@ -43,7 +43,6 @@ type IndustryAsset = Readonly<{
 export const MEDIA_ASSETS = Object.freeze({
   hero: {
     video: mediaAsset("/assets/media/home/infravolt-home-hero-00-20-final.mp4"),
-    poster: mediaAsset("/assets/media/home/infravolt-home-hero-poster.webp"),
   },
 
   aboutGersan: {
@@ -144,7 +143,8 @@ export const INDUSTRY_ASSETS = Object.freeze({
 
 export const GERSAN_COMPANY_ASSETS = Object.freeze({
   factoryExterior: "/assets/company/gersan/gersan-factory-exterior.webp",
-  tuzlaFactory: "/assets/company/gersan-tuzla-istanbul-head-office-factory.webp",
+  tuzlaFactory:
+    "/assets/company/gersan-tuzla-istanbul-head-office-factory.webp",
   zonguldakFactory: "/assets/company/gersan-zonguldak-factory.webp",
   omanFactory: "/assets/company/gersan-sultanate-of-oman-factory.webp",
 } as const);

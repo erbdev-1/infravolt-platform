@@ -95,7 +95,6 @@ describe("HomePage", () => {
       const videos = container.querySelectorAll("video");
 
       expect(videos).toHaveLength(1);
-      expect(videos[0]).toHaveAttribute("poster", MEDIA_ASSETS.hero.poster);
       expect(
         container.querySelector(
           `source[src="${MEDIA_ASSETS.hero.video}"][type="video/mp4"]`,
@@ -174,7 +173,9 @@ describe("HomePage", () => {
         }),
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("link", { name: content.technicalDocuments.action.label }),
+        screen.getByRole("link", {
+          name: content.technicalDocuments.action.label,
+        }),
       ).toHaveAttribute("href", content.technicalDocuments.action.href);
     },
   );
