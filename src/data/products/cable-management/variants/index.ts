@@ -40,6 +40,7 @@ import { STRENGTHENED_CABLE_TRAYS_H40_VARIANTS } from "./strengthened-cable-tray
 import { STRENGTHENED_CABLE_TRAYS_H50_VARIANTS } from "./strengthened-cable-trays-h50";
 import { STRENGTHENED_CABLE_TRAYS_H60_VARIANTS } from "./strengthened-cable-trays-h60";
 import { STRENGTHENED_CABLE_TRAYS_H100_VARIANTS } from "./strengthened-cable-trays-h100";
+import { WIRE_MESH_SYSTEMS_VARIANTS } from "./wire-mesh-systems";
 
 // Only families with a real, fully-extracted order-code dataset have a
 // non-empty entry here. The other real families referenced by
@@ -127,4 +128,5 @@ export const CABLE_MANAGEMENT_VARIANTS: Readonly<
   "cable-drum-support-equipment": CABLE_DRUM_SUPPORT_EQUIPMENT_VARIANTS,
   "mechanical-dilatation-element": MECHANICAL_DILATATION_ELEMENT_VARIANTS,
   "shaft-access-cover": SHAFT_ACCESS_COVER_VARIANTS,
+  "wire-mesh-systems": WIRE_MESH_SYSTEMS_VARIANTS,
 };

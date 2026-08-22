@@ -30,9 +30,6 @@
   color: var(--earthing-ink);
   color-scheme: light;
   min-height: 100vh;
-  /* Reserves room for the fixed enquiry bar (05b) so its last section
-     isn't covered once the bar appears; a no-op when the bar is hidden. */
-  padding-bottom: 4.5rem;
 }
 
 /* =========================================================
@@ -1273,152 +1270,6 @@
 }
 
 /* =========================================================
-   05b. ENQUIRY LIST (RFQ bar)
-   Sticky bottom bar, hidden while empty. Persists in localStorage
-   (earthing-enquiry-store.ts) across category-page navigations so an
-   engineer can collect stock codes while browsing before submitting one
-   enquiry — see earthing-page-design-direction memory.
-   ========================================================= */
-
-.enquiryBar {
-  background: #ffffff;
-  border-top: 1px solid var(--earthing-border);
-  bottom: 0;
-  box-shadow: 0 -0.75rem 2rem rgb(6 26 53 / 12%);
-  left: 0;
-  position: fixed;
-  right: 0;
-  z-index: 40;
-}
-
-.enquiryBarRow {
-  align-items: center;
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 1400px;
-  padding: 0.9rem clamp(1.25rem, 4vw, 4rem);
-}
-
-.enquiryToggle {
-  align-items: center;
-  background: none;
-  border: none;
-  color: var(--earthing-navy);
-  cursor: pointer;
-  display: inline-flex;
-  font-size: 0.9rem;
-  gap: 0.5rem;
-}
-
-.enquiryToggle strong {
-  color: var(--earthing-accent);
-  font-size: 1.05rem;
-}
-
-.enquirySubmit {
-  align-items: center;
-  background: var(--earthing-accent);
-  border-radius: 0.45rem;
-  color: #ffffff;
-  display: inline-flex;
-  font-size: 0.85rem;
-  font-weight: 800;
-  gap: 0.45rem;
-  padding: 0.7rem 1.2rem;
-  transition: background-color 180ms ease;
-}
-
-.enquirySubmit:hover {
-  background: var(--earthing-accent-dark);
-}
-
-.enquiryPanel {
-  border-bottom: 1px solid var(--earthing-border);
-  margin: 0 auto;
-  max-height: 40vh;
-  max-width: 1400px;
-  overflow-y: auto;
-  padding: 1rem clamp(1.25rem, 4vw, 4rem) 0.5rem;
-}
-
-.enquiryPanelHeading {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-}
-
-.enquiryPanelHeading h3 {
-  color: var(--earthing-navy);
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-.enquiryClear {
-  background: none;
-  border: none;
-  color: var(--earthing-muted);
-  cursor: pointer;
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-decoration: underline;
-}
-
-.enquiryClear:hover {
-  color: var(--earthing-accent);
-}
-
-.enquiryList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.enquiryList li {
-  align-items: center;
-  border-bottom: 1px solid var(--earthing-border);
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  padding: 0.4rem 0;
-}
-
-.enquiryList li div {
-  display: flex;
-  flex-direction: column;
-}
-
-.enquiryList li strong {
-  color: var(--earthing-navy);
-  font-size: 0.82rem;
-}
-
-.enquiryList li span {
-  color: var(--earthing-muted);
-  font-size: 0.74rem;
-}
-
-.enquiryRemove {
-  background: none;
-  border: none;
-  color: var(--earthing-muted);
-  cursor: pointer;
-  flex-shrink: 0;
-  font-size: 1.1rem;
-  line-height: 1;
-  padding: 0.2rem 0.4rem;
-}
-
-.enquiryRemove:hover {
-  color: var(--earthing-accent);
-}
-
-/* =========================================================
    06. PROJECT SUPPORT CTA
    (identical structure to earthing-lightning-hub-page.module.css)
    ========================================================= */
@@ -1543,18 +1394,6 @@
 
   .familyMedia {
     height: 160px;
-  }
-
-  .enquiryBarRow {
-    padding: 0.75rem 1.1rem;
-  }
-
-  .enquiryToggle {
-    font-size: 0.82rem;
-  }
-
-  .enquirySubmit {
-    padding: 0.6rem 0.9rem;
   }
 
   /* Order-codes toolbar stacks; CSV actions become full-width so they stay

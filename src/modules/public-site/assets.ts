@@ -106,6 +106,15 @@ export const PRODUCT_ASSETS = Object.freeze({
   },
 } as const satisfies Readonly<Record<ProductId, ProductAsset>>);
 
+export const PRODUCT_PAGE_HREFS = {
+  busbar: "/products/busbar",
+  "cable-management": "/products/cable-support-systems",
+  "earthing-lightning": "/products/earthing-and-lightning-protection",
+  underfloor: "/products/underfloor-systems",
+  "led-bus lighting": "/products/led-systems",
+  "ev-charging": "https://g-charge.com.tr/en/",
+} as const satisfies Readonly<Record<ProductId, string>>;
+
 export const INDUSTRY_ASSETS = Object.freeze({
   "data-centres": {
     image: "/assets/industries/cards/data-centres.webp",
@@ -135,6 +144,9 @@ export const INDUSTRY_ASSETS = Object.freeze({
 
 export const GERSAN_COMPANY_ASSETS = Object.freeze({
   factoryExterior: "/assets/company/gersan/gersan-factory-exterior.webp",
+  tuzlaFactory: "/assets/company/gersan-tuzla-istanbul-head-office-factory.webp",
+  zonguldakFactory: "/assets/company/gersan-zonguldak-factory.webp",
+  omanFactory: "/assets/company/gersan-sultanate-of-oman-factory.webp",
 } as const);
 
 export const TECHNICAL_RESOURCE_ICONS = Object.freeze({

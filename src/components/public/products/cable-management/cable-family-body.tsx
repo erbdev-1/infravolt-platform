@@ -272,6 +272,9 @@ export function CableFamilyBody({
             hideMaterialFilter={hideMaterialFilter}
             initialQuery={initialQuery}
             labels={labels}
+            market={market}
+            columnLabels={content.scheduleColumnLabels}
+            sourceRoute={`/products/cable-support-systems/${currentSlug}`}
             variants={variants}
             variantSelector={variantSelector}
           />
@@ -287,9 +290,13 @@ export function CableFamilyBody({
               {siblingFamilies.map((family) => {
                 const isCurrent = family.slug === currentSlug;
                 const Icon = SIBLING_ICONS[family.icon ?? "support"];
-                const cardClassName = isCurrent
-                  ? `${styles.siblingIconCard} ${styles.siblingIconCardCurrent}`
-                  : styles.siblingIconCard;
+                const cardClassName = [
+                  styles.siblingIconCard,
+                  isCurrent ? styles.siblingIconCardCurrent : "",
+                  family.informational ? styles.siblingIconCardInformational : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ");
 
                 const inner = (
                   <>
@@ -312,13 +319,13 @@ export function CableFamilyBody({
                     <span className={styles.siblingIconMeta}>
                       {family.countLabel ?? `${family.orderCodeCount ?? 0} ${labels.countSuffix}`}
                     </span>
-                    {isCurrent ? null : (
+                    {isCurrent || family.informational ? null : (
                       <span className={styles.siblingIconFooter}>{labels.viewSeriesLabel}</span>
                     )}
                   </>
                 );
 
-                if (isCurrent) {
+                if (isCurrent || family.informational) {
                   return (
                     <div className={cardClassName} key={family.slug}>
                       {inner}

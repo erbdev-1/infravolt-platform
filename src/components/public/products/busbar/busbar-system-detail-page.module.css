@@ -840,6 +840,10 @@
   position: absolute;
 }
 
+.featureToggle {
+  display: none;
+}
+
 /* =========================================================
    08. TECHNICAL DATA TABLE
    ========================================================= */
@@ -2183,6 +2187,682 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+}
+
+/* =========================================================
+   SHARED BUSBAR SERIES MOBILE DETAIL STANDARD
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .breadcrumbs {
+    font-size: 0.7rem;
+    gap: 0.45rem;
+    overflow-x: auto;
+    padding: 0.7rem 1rem;
+    white-space: nowrap;
+  }
+
+  .backNav {
+    padding: 0.7rem 1rem 0;
+  }
+
+  .backButton {
+    font-size: 0.75rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.95rem;
+  }
+
+  .hero {
+    gap: 1.25rem;
+    padding: 1.2rem 1rem 0.5rem;
+  }
+
+  .heroContent {
+    min-width: 0;
+  }
+
+  .hero .eyebrow {
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.65rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.9rem, 8.5vw, 2.25rem);
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+    overflow-wrap: break-word;
+  }
+
+  .heroDescription {
+    display: -webkit-box;
+    font-size: 0.87rem;
+    line-height: 1.5;
+    margin-top: 0.85rem;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+  }
+
+  .heroActions {
+    align-items: stretch;
+    display: grid;
+    gap: 0.55rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1.15rem;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    align-self: stretch;
+    font-size: 0.7rem;
+    height: 3rem;
+    line-height: 1.15;
+    max-height: 3rem;
+    min-height: 3rem;
+    min-width: 0;
+    overflow-wrap: break-word;
+    padding: 0.35rem 0.3rem;
+    text-align: center;
+    white-space: normal;
+    width: 100%;
+  }
+
+  .primaryButton:hover,
+  .secondaryButton:hover {
+    transform: none;
+  }
+
+  .heroVisual {
+    height: 13.5rem;
+    min-height: 13.5rem;
+    order: -1;
+    overflow: clip;
+  }
+
+  .heroBadge {
+    left: 0.2rem;
+    top: 25%;
+  }
+
+  .heroBadgeRing {
+    height: 4.5rem;
+    width: 4.5rem;
+  }
+
+  .heroBadgeRing strong {
+    font-size: 1rem;
+  }
+
+  .heroBadgeRing small {
+    font-size: 0.48rem;
+  }
+
+  .factStrip {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    gap: 0.55rem;
+    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1.25rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  .factStrip article,
+  .factStrip article + article,
+  .factStrip article:nth-child(3),
+  .factStrip article:nth-child(4) {
+    background: linear-gradient(145deg, #ffffff 20%, #f7f9fb 100%);
+    border: 1px solid rgb(6 26 53 / 11%);
+    border-radius: 0.55rem;
+    box-shadow: inset 0 2px 0 rgb(217 35 50 / 68%);
+    gap: 0.3rem;
+    justify-content: center;
+    min-height: 5.65rem;
+    min-width: 0;
+    padding: 0.75rem;
+  }
+
+  .factStrip strong {
+    font-size: 0.91rem;
+    line-height: 1.2;
+    overflow-wrap: break-word;
+  }
+
+  .factStrip span {
+    font-size: 0.68rem;
+    line-height: 1.35;
+  }
+
+  .tabsSection {
+    margin-top: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .tabList {
+    gap: 1rem;
+    scrollbar-width: thin;
+  }
+
+  .tabButton,
+  .tabButtonActive {
+    flex: 0 0 auto;
+    font-size: 0.64rem;
+    letter-spacing: 0.045em;
+    min-height: 2.75rem;
+    padding: 0.7rem 0.05rem;
+  }
+
+  .tabPanel {
+    min-width: 0;
+    padding: 1.5rem 0 2.6rem;
+  }
+
+  .tabPanel h2,
+  .overviewContent h2 {
+    font-size: 1.55rem;
+    line-height: 1.08;
+    margin-bottom: 0.85rem;
+  }
+
+  .overviewLayout {
+    gap: 1.5rem;
+  }
+
+  .overviewCarousel {
+    height: auto;
+    min-height: 16.75rem;
+  }
+
+  .productGallery {
+    gap: 0.45rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 13rem 3.3rem;
+    min-height: 16.75rem;
+  }
+
+  .galleryViewport {
+    border-radius: 0.7rem;
+    grid-row: 1;
+  }
+
+  .galleryImageWrap {
+    border-radius: 0.7rem;
+    box-shadow: 0 0.65rem 1.5rem rgb(6 26 53 / 10%);
+  }
+
+  .galleryImageContain {
+    padding: 0.45rem;
+  }
+
+  .galleryRail {
+    flex-direction: row;
+    gap: 0.4rem;
+    grid-row: 2;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.05rem 0 0.15rem;
+  }
+
+  .galleryThumbnail,
+  .galleryThumbnailActive {
+    flex: 0 0 3.2rem;
+    height: 3.1rem;
+  }
+
+  .galleryThumbnail:hover,
+  .galleryThumbnailActive {
+    transform: none;
+  }
+
+  .galleryImageOverlay {
+    bottom: 0.5rem;
+    left: 0.5rem;
+    padding: 0.45rem 0.6rem;
+    right: 0.5rem;
+  }
+
+  .galleryImageOverlay strong {
+    font-size: 0.7rem;
+  }
+
+  .overviewDescription {
+    font-size: 0.83rem;
+    line-height: 1.52;
+    margin-bottom: 1.1rem;
+  }
+
+  .highlightList {
+    gap: 0.58rem;
+  }
+
+  .highlightList li {
+    font-size: 0.76rem;
+    line-height: 1.42;
+    min-width: 0;
+    padding-left: 1.25rem;
+  }
+
+  .highlightCollapsedMobile {
+    display: none;
+  }
+
+  .featureToggle {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--busbar-accent);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 0.72rem;
+    font-weight: 800;
+    gap: 0.4rem;
+    margin-top: 0.9rem;
+    min-height: 2.75rem;
+    padding: 0;
+  }
+
+  .featureToggle:focus-visible {
+    border-radius: 0.2rem;
+    outline: 3px solid rgb(217 35 50 / 28%);
+    outline-offset: 3px;
+  }
+
+  .specVariantToggle {
+    gap: 0.45rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+  }
+
+  .specVariantButton,
+  .specVariantButtonActive {
+    flex: 0 0 auto;
+    font-size: 0.7rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.9rem;
+  }
+
+  .tableWrapper {
+    max-width: 100%;
+    overscroll-behavior-inline: contain;
+  }
+
+  .specTable {
+    min-width: 30rem;
+  }
+
+  .specTable th,
+  .specTable td,
+  .specTable thead th:not(:first-child),
+  .specTable tbody td {
+    font-size: 0.7rem;
+    padding: 0.65rem 0.7rem;
+  }
+
+  .componentsGrid {
+    gap: 0.65rem;
+  }
+
+  .componentCard {
+    grid-template-columns: 6rem minmax(0, 1fr);
+    min-width: 0;
+  }
+
+  .componentCard:hover {
+    transform: none;
+  }
+
+  .componentVisual {
+    min-height: 7.5rem;
+  }
+
+  .componentVisual img {
+    object-fit: contain;
+    padding: 0.4rem;
+  }
+
+  .componentContent {
+    min-width: 0;
+    padding: 0.75rem;
+  }
+
+  .componentOrderCode {
+    display: -webkit-box;
+    font-size: 0.62rem;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .componentContent h3 {
+    display: -webkit-box;
+    font-size: 0.82rem;
+    line-height: 1.25;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .componentContent p {
+    display: -webkit-box;
+    font-size: 0.68rem;
+    line-height: 1.4;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .documentsGrid {
+    gap: 0.65rem;
+  }
+
+  .documentCard {
+    gap: 0.7rem;
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    min-width: 0;
+    padding: 0.8rem;
+  }
+
+  .documentIcon {
+    height: 2.35rem;
+    width: 2.35rem;
+  }
+
+  .documentIcon svg {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
+  .documentContent {
+    min-width: 0;
+  }
+
+  .documentContent h3 {
+    font-size: 0.84rem;
+  }
+
+  .documentContent p {
+    display: -webkit-box;
+    font-size: 0.7rem;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .documentAction {
+    flex-basis: auto;
+    font-size: 0.72rem;
+    grid-column: 1 / -1;
+    min-height: 2.75rem;
+    width: 100%;
+  }
+
+  .documentation {
+    border-left: 3px solid var(--busbar-accent);
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    padding: 0.9rem;
+  }
+
+  .documentation .eyebrow {
+    font-size: 0.66rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .documentationDescription {
+    display: -webkit-box;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    margin-top: 0.35rem;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .documentationAction {
+    background: transparent;
+    color: var(--busbar-accent);
+    font-size: 0.72rem;
+    min-height: 2.75rem;
+    min-width: 0;
+    padding: 0;
+    width: auto;
+  }
+
+  .documentationAction:hover {
+    background: transparent;
+    color: var(--busbar-accent-dark);
+    transform: none;
+  }
+
+  .smartAutomationSection {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 2.75rem;
+    padding: 2.5rem 1rem;
+  }
+
+  .smartAutomationContent {
+    display: contents;
+    max-width: none;
+    min-width: 0;
+  }
+
+  .smartAutomationContent > .eyebrow {
+    order: 1;
+  }
+
+  .smartAutomationContent h2 {
+    font-size: 1.65rem;
+    line-height: 1.1;
+    order: 2;
+  }
+
+  .smartAutomationDescription {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-top: 0.8rem;
+    order: 3;
+  }
+
+  .smartAutomationCompatibility {
+    font-size: 0.72rem;
+    margin-top: 1rem;
+    order: 5;
+  }
+
+  .smartAutomationFeatures {
+    gap: 0.55rem;
+    grid-template-columns: 1fr;
+    margin-top: 1.1rem;
+    order: 6;
+  }
+
+  .smartAutomationCard {
+    display: grid;
+    gap: 0.2rem 0.65rem;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    min-height: 4.5rem;
+    padding: 0.7rem;
+  }
+
+  .smartAutomationCard > img {
+    grid-row: 1 / span 2;
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+
+  .smartAutomationCard h3,
+  .smartAutomationCard p {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .smartAutomationCard h3 {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  .smartAutomationCard p {
+    display: -webkit-box;
+    font-size: 0.68rem;
+    line-height: 1.35;
+    margin: 0;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .smartAutomationActions {
+    margin-top: 1.1rem;
+    order: 7;
+  }
+
+  .smartAutomationPrimaryButton {
+    font-size: 0.72rem;
+    min-height: 2.75rem;
+    padding: 0.65rem 0.9rem;
+  }
+
+  .smartAutomationVisual {
+    aspect-ratio: auto;
+    height: clamp(10.625rem, 50vw, 13.75rem);
+    margin-top: 1rem;
+    max-height: none;
+    order: 4;
+  }
+
+  .smartAutomationVisual img {
+    object-position: center;
+  }
+
+  .applicationsSection {
+    padding: 0.75rem 1rem 2.75rem;
+  }
+
+  .applicationsHeader {
+    margin-bottom: 1rem;
+  }
+
+  .applicationsHeader .eyebrow {
+    font-size: 0.68rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .applicationsDescription {
+    display: -webkit-box;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .applicationsGrid {
+    gap: 0.65rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .applicationCard {
+    box-shadow: 0 0.35rem 1rem rgb(6 26 53 / 5%);
+    min-width: 0;
+  }
+
+  .applicationCard:hover {
+    transform: none;
+  }
+
+  .applicationVisual {
+    height: 6.5rem;
+  }
+
+  .applicationContent {
+    min-width: 0;
+    padding: 0.7rem;
+  }
+
+  .applicationContent h3 {
+    display: -webkit-box;
+    font-size: 0.8rem;
+    line-height: 1.22;
+    min-height: 2.44em;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .applicationContent p {
+    display: -webkit-box;
+    font-size: 0.67rem;
+    line-height: 1.38;
+    margin-top: 0.4rem;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .projectSupport {
+    gap: 1.15rem;
+    margin: 2.75rem 1rem 2rem;
+    max-width: none;
+    padding: 1.5rem;
+  }
+
+  .projectSupport .eyebrow {
+    font-size: 0.66rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .projectSupport h2 {
+    font-size: 1.7rem;
+    line-height: 1.08;
+  }
+
+  .projectSupport p:not(.eyebrow) {
+    font-size: 0.82rem;
+    line-height: 1.48;
+    margin-top: 0.75rem;
+  }
+
+  .projectSupport > a {
+    font-size: 0.75rem;
+    min-height: 2.875rem;
+    padding: 0.65rem 0.9rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .heroActions {
+    gap: 0.4rem;
+  }
+
+  .factStrip,
+  .applicationsGrid {
+    gap: 0.45rem;
+  }
+
+  .factStrip article {
+    padding: 0.65rem;
+  }
+
+  .applicationVisual {
+    height: 5.75rem;
+  }
+
+  .applicationContent {
+    padding: 0.6rem;
+  }
+
+  .applicationContent h3 {
+    font-size: 0.74rem;
+  }
+
+  .applicationContent p {
+    font-size: 0.63rem;
   }
 }
 

@@ -20,6 +20,8 @@ const INDUSTRIAL_FACILITY_CONTENT = {
     },
     headingSector: "Industrial Facilities",
     headingSuffix: "Application Map",
+    overviewHeadingPrimary: "Industrial Facilities",
+    overviewHeadingSecondary: "Application Map",
     introduction:
       "Explore InfraVolt product systems across a modern\nindustrial facility.",
     overviewThumbnailLabel: "Overview",
@@ -41,6 +43,7 @@ const INDUSTRIAL_FACILITY_CONTENT = {
       benefitsHeading: "Key benefits",
       closeLabel: "Close product information",
       chooseProductHeading: "Available systems in this zone",
+      exploreSystemLabel: "Explore {system} →",
     },
   },
   ua: {
@@ -55,6 +58,8 @@ const INDUSTRIAL_FACILITY_CONTENT = {
     },
     headingSector: "Промислові об'єкти",
     headingSuffix: "Карта застосувань",
+    overviewHeadingPrimary: "Карта застосувань",
+    overviewHeadingSecondary: "промислових об'єктів",
     introduction:
       "Дізнайтеся, де застосовуються системи InfraVolt на сучасному\nпромисловому об'єкті.",
     overviewThumbnailLabel: "Огляд",
@@ -76,6 +81,7 @@ const INDUSTRIAL_FACILITY_CONTENT = {
       benefitsHeading: "Основні переваги",
       closeLabel: "Закрити інформацію про продукт",
       chooseProductHeading: "Доступні системи в цій зоні",
+      exploreSystemLabel: "Переглянути {system} →",
     },
   },
 } as const satisfies Readonly<Record<MarketCode, ApplicationMapPageContent>>;

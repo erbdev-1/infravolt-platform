@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 
-import { DataCentreApplicationMap } from "@/components/public/application-map/data-centre-application-map";
+import { ApplicationMapViewer } from "@/components/public/application-map/application-map-viewer";
 import { educationPublicSectorApplicationMapContentForMarket } from "@/modules/application-map/education-public-sector-content";
 import { EDUCATION_PUBLIC_SECTOR_APPLICATION_MAP } from "@/modules/application-map/education-public-sector";
 import { resolveApplicationMap } from "@/modules/application-map/resolve";
@@ -36,10 +36,12 @@ export default async function EducationPublicSectorApplicationMapRoute() {
   );
 
   return (
-    <DataCentreApplicationMap
+    <ApplicationMapViewer
       content={content}
+      industryId="education-public-sector"
       map={map}
       overviewImageFit="contain"
+      sourcePath="/application-map/education-public-sector"
     />
   );
 }

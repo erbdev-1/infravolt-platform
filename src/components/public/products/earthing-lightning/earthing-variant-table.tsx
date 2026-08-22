@@ -3,14 +3,16 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
+import {
+  EnquiryAddedConfirmation,
+  EnquiryToolbarSummary,
+} from "@/components/public/enquiry/enquiry-feedback";
 import type { EarthingHubContent, EarthingProductVariant } from "@/data/products/earthing-lightning/types";
+import { addEnquiryItem, removeEnquiryItem, useEnquiryItems } from "@/modules/enquiry/store";
+import { earthingEnquiryItem } from "@/modules/enquiry/item-builders";
+import type { MarketCode } from "@/modules/markets/types";
 
 import { buildVariantCsv, downloadCsv } from "./earthing-variant-csv";
-import {
-  addToEnquiry,
-  removeFromEnquiry,
-  useEarthingEnquiry,
-} from "./earthing-enquiry-store";
 import { slugifyFamilyName } from "./earthing-family-slug";
 import { IconCheck, IconChevronDown, IconClose, IconCopy, IconDownload, IconSearch } from "./earthing-icons";
 import styles from "./earthing-category-detail-page.module.css";
@@ -40,6 +42,7 @@ type VariantTableProps = Readonly<{
   standardLabel?: string;
   categorySlug: string;
   categoryName: string;
+  market: MarketCode;
 }>;
 
 function buildHaystack(variant: EarthingProductVariant): string {
@@ -49,11 +52,19 @@ function buildHaystack(variant: EarthingProductVariant): string {
     .toLowerCase();
 }
 
-export function EarthingVariantTable({ groups, labels, standardLabel, categorySlug, categoryName }: VariantTableProps) {
-  const enquiryItems = useEarthingEnquiry();
-  const enquiredCodes = useMemo(
-    () => new Set(enquiryItems.map((item) => item.stockCode)),
-    [enquiryItems],
+export function EarthingVariantTable({
+  groups,
+  labels,
+  standardLabel,
+  categorySlug,
+  categoryName,
+  market,
+}: VariantTableProps) {
+  const sourceRoute = `/products/earthing-and-lightning-protection/${categorySlug}`;
+  const enquiryItems = useEnquiryItems();
+  const enquiryItemIds = useMemo(() => new Set(enquiryItems.map((item) => item.id)), [enquiryItems]);
+  const hasCurrentPageEnquiryItem = enquiryItems.some(
+    (item) => item.system === "earthing-lightning" && item.sourceRoute === sourceRoute,
   );
 
   const totalCount = useMemo(
@@ -88,6 +99,7 @@ export function EarthingVariantTable({ groups, labels, standardLabel, categorySl
   const [activeMaterial, setActiveMaterial] = useState<string | null>(null);
   const [expandedFamilies, setExpandedFamilies] = useState<Set<string>>(() => new Set());
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [confirmation, setConfirmation] = useState<Readonly<{ id: string; title: string }> | null>(null);
 
   const normalizedQuery = query.trim().toLowerCase();
   const isFiltering = normalizedQuery !== "" || activeMaterial !== null;
@@ -148,6 +160,26 @@ export function EarthingVariantTable({ groups, labels, standardLabel, categorySl
         // Clipboard permission denied or unavailable — non-critical
         // enhancement, fail silently.
       });
+  }
+
+  function toggleEnquiry(variant: EarthingProductVariant, familyName: string) {
+    const item = earthingEnquiryItem(
+      categorySlug,
+      slugifyFamilyName(familyName),
+      familyName || categoryName,
+      variant,
+      sourceRoute,
+    );
+    const { id } = item;
+
+    if (enquiryItemIds.has(id)) {
+      removeEnquiryItem(id);
+      setConfirmation((current) => (current?.id === id ? null : current));
+      return;
+    }
+
+    addEnquiryItem(item);
+    setConfirmation({ id, title: `${variant.model} · ${variant.stockCode}` });
   }
 
   // One search pass (query only) drives the material chip counts, so every
@@ -267,6 +299,10 @@ export function EarthingVariantTable({ groups, labels, standardLabel, categorySl
             </button>
           ) : null}
         </div>
+
+        {hasCurrentPageEnquiryItem ? (
+          <EnquiryToolbarSummary count={enquiryItems.length} market={market} />
+        ) : null}
 
         <div className={styles.csvActions}>
           <button
@@ -401,7 +437,15 @@ export function EarthingVariantTable({ groups, labels, standardLabel, categorySl
                           </thead>
                           <tbody>
                             {group.visible.map(({ variant }) => {
-                              const inEnquiry = enquiredCodes.has(variant.stockCode);
+                              const inEnquiry = enquiryItemIds.has(
+                                earthingEnquiryItem(
+                                  categorySlug,
+                                  group.slug,
+                                  group.familyName || categoryName,
+                                  variant,
+                                  sourceRoute,
+                                ).id,
+                              );
                               const isCopied = copiedCode === variant.stockCode;
 
                               return (
@@ -438,18 +482,7 @@ export function EarthingVariantTable({ groups, labels, standardLabel, categorySl
                                     <button
                                       aria-pressed={inEnquiry}
                                       className={inEnquiry ? styles.variantEnquiredButton : styles.variantEnquiryButton}
-                                      onClick={() =>
-                                        inEnquiry
-                                          ? removeFromEnquiry(variant.stockCode)
-                                          : addToEnquiry({
-                                              stockCode: variant.stockCode,
-                                              model: variant.model,
-                                              name: variant.name,
-                                              familyName: group.familyName,
-                                              categorySlug,
-                                              categoryName,
-                                            })
-                                      }
+                                      onClick={() => toggleEnquiry(variant, group.familyName)}
                                       type="button"
                                     >
                                       {inEnquiry ? labels.enquiryRemoveAction : labels.enquiryAddAction}
@@ -469,6 +502,15 @@ export function EarthingVariantTable({ groups, labels, standardLabel, categorySl
           );
         })}
       </div>
+
+      {confirmation ? (
+        <EnquiryAddedConfirmation
+          count={enquiryItems.length}
+          itemLabel={confirmation.title}
+          market={market}
+          onContinue={() => setConfirmation(null)}
+        />
+      ) : null}
     </section>
   );
 }

@@ -1,0 +1,827 @@
+/* =========================================================
+   01. PAGE THEME & DESIGN TOKENS
+   Green is this category's primary accent (LEDBUS LED colour
+   identity) — same per-page-scoped custom-property pattern as
+   busbar-catalog-page.module.css (--busbar-*) and
+   earthing-lightning-hub-page.module.css (--earthing-*).
+   ========================================================= */
+
+.page {
+  --led-accent: #69c934;
+  --led-accent-hover: #7ddb43;
+  --led-accent-dark: #4fa824;
+  --led-accent-soft: #f1f9ec;
+  --led-accent-border: #b9e6a2;
+  --led-accent-tint: #f7fcf4;
+  --led-dark: #0b0f0c;
+  --led-dark-elevated: #12211a;
+  --led-ink: #10201c;
+  --led-body: #55655c;
+  --led-muted: #66756c;
+  --led-border: #dfe6e0;
+  --led-shadow-idle: 0 1px 2px rgb(11 15 12 / 4%), 0 1px 1px rgb(11 15 12 / 3%);
+
+  background: #ffffff;
+  color: var(--led-ink);
+  color-scheme: light;
+  min-height: 100vh;
+}
+
+.srOnlyHeading {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* =========================================================
+   02. HERO (dark, real photo background)
+   ========================================================= */
+
+.hero {
+  color: #ffffff;
+  min-height: 34rem;
+  position: relative;
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+/* Left-to-right (not flat) overlay: darker where the copy sits, lighter
+   toward the right/centre so the application photo actually reads —
+   plus a shallow bottom vignette so the CTA row keeps contrast without
+   darkening the whole image like the previous near-black scrim did. */
+.heroScrim {
+  background:
+    linear-gradient(100deg, rgb(11 15 12 / 86%) 0%, rgb(11 15 12 / 68%) 34%, rgb(11 15 12 / 34%) 64%, rgb(11 15 12 / 16%) 100%),
+    linear-gradient(0deg, rgb(11 15 12 / 45%) 0%, transparent 38%);
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+/* Restrained accent glow behind the copy — not a neon effect, just enough
+   to tie the dark hero to the LED green identity. */
+.heroGlow {
+  background: radial-gradient(46% 50% at 20% 60%, rgb(105 201 52 / 18%), transparent 72%);
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.heroTop {
+  align-items: center;
+  display: flex;
+  gap: 1.25rem;
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 1.25rem clamp(1.25rem, 4vw, 4rem) 0;
+  position: relative;
+  z-index: 2;
+}
+
+.backButton {
+  align-items: center;
+  background: rgb(255 255 255 / 10%);
+  border: 1px solid rgb(255 255 255 / 25%);
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.backButton:hover {
+  background: rgb(255 255 255 / 18%);
+  border-color: rgb(255 255 255 / 40%);
+  transform: translateY(-2px);
+}
+
+.breadcrumbs {
+  align-items: center;
+  color: rgb(255 255 255 / 68%);
+  display: flex;
+  font-size: 0.82rem;
+  gap: 0.65rem;
+}
+
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--led-accent);
+}
+
+.heroContent {
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 6rem clamp(1.25rem, 4vw, 4rem) 5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.manufacturerLockup {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.6rem;
+}
+
+.gersanLogoChip {
+  background: #ffffff;
+  border-radius: 0.35rem;
+  display: inline-flex;
+  padding: 0.4rem 0.65rem;
+}
+
+.gersanLogo {
+  height: auto;
+  object-fit: contain;
+  width: clamp(7.5rem, 10vw, 8.75rem);
+}
+
+.heroEyebrow {
+  color: var(--led-accent);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  color: var(--led-accent);
+  font-size: clamp(2.25rem, 3.6vw, 3.4rem);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin: 0;
+  max-width: 34rem;
+  text-wrap: balance;
+}
+
+.heroSubtitle {
+  color: #ffffff;
+  font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 1.1rem 0 0;
+  max-width: 34rem;
+}
+
+.heroDescription {
+  color: rgb(255 255 255 / 74%);
+  font-size: clamp(0.92rem, 1.1vw, 1rem);
+  line-height: 1.65;
+  margin: 0.85rem 0 0;
+  max-width: 30rem;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+}
+
+.primaryButton {
+  align-items: center;
+  background: var(--led-accent);
+  border: 1px solid var(--led-accent);
+  border-radius: 0.45rem;
+  color: var(--led-dark);
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.3rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.primaryButton:hover {
+  background: var(--led-accent-hover);
+  border-color: var(--led-accent-hover);
+  transform: translateY(-2px);
+}
+
+.secondaryButton {
+  align-items: center;
+  background: transparent;
+  border: 1px solid rgb(105 201 52 / 40%);
+  border-radius: 0.45rem;
+  color: rgb(255 255 255 / 88%);
+  display: inline-flex;
+  font-size: 0.87rem;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.3rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.secondaryButton:hover {
+  background: rgb(105 201 52 / 10%);
+  border-color: var(--led-accent);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .heroActions {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   03. VALUE-PROP STRIP (dark)
+   ========================================================= */
+
+.valueStrip {
+  background: var(--led-dark);
+  padding: 3.5rem clamp(1.25rem, 4vw, 4rem);
+}
+
+.valueGrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+.valueCard {
+  border-left: 2px solid rgb(105 201 52 / 30%);
+  padding-left: 1.1rem;
+}
+
+.valueIcon {
+  align-items: center;
+  background: rgb(105 201 52 / 14%);
+  border: 1px solid rgb(105 201 52 / 35%);
+  border-radius: 50%;
+  color: var(--led-accent);
+  display: inline-flex;
+  height: 2.6rem;
+  justify-content: center;
+  margin-bottom: 0.9rem;
+  width: 2.6rem;
+}
+
+.valueIconSvg {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.valueCard h3 {
+  color: #ffffff;
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.valueCard p {
+  color: rgb(255 255 255 / 68%);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+}
+
+/* =========================================================
+   04. PRODUCT CATEGORIES (white)
+   ========================================================= */
+
+.categories {
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+  scroll-margin-top: 6rem;
+}
+
+.categoriesHeading {
+  margin-bottom: 2rem;
+  max-width: 44rem;
+}
+
+.categoriesHeading h2 {
+  color: var(--led-ink);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.categoriesHeading p {
+  color: var(--led-body);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin: 0.75rem 0 0;
+}
+
+.categoriesGrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.categoryCard {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--led-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.categoryCard:hover {
+  border-color: var(--led-accent-border);
+  box-shadow: 0 1.5rem 3rem rgb(11 15 12 / 12%);
+  transform: translateY(-4px);
+}
+
+.categoryImage {
+  aspect-ratio: 4 / 3;
+  background: var(--led-accent-tint);
+  overflow: hidden;
+  position: relative;
+}
+
+.categoryImage img {
+  object-fit: cover;
+  transition: transform 280ms ease;
+}
+
+.categoryCard:hover .categoryImage img {
+  transform: scale(1.06);
+}
+
+.categoryImagePlaceholder {
+  align-items: center;
+  background:
+    linear-gradient(135deg, var(--led-accent-tint) 0%, var(--led-accent-soft) 100%);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.categoryImagePendingIcon {
+  color: var(--led-accent-border);
+  height: 1.6rem;
+  width: 1.6rem;
+}
+
+.categoryNumber {
+  background: rgb(11 15 12 / 55%);
+  border-radius: 0.35rem;
+  color: var(--led-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  left: 0.75rem;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.5rem;
+  position: absolute;
+  top: 0.75rem;
+}
+
+.categoryContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.2rem 1.3rem 1rem;
+}
+
+.categoryContent h3 {
+  color: var(--led-ink);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.categoryDescription {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  color: var(--led-body);
+  display: -webkit-box;
+  flex: 1;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+  overflow: hidden;
+}
+
+/* Small restrained status badge, not a full-width action bar — every
+   category is informational-only until its detail page ships, so this
+   reads as a status, not a call to action. */
+.categoryBadge {
+  align-self: flex-start;
+  background: var(--led-accent-soft);
+  border: 1px solid var(--led-accent-border);
+  border-radius: 999px;
+  color: var(--led-accent-dark);
+  flex-shrink: 0;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-top: 0.75rem;
+  padding: 0.28rem 0.65rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Real, clickable categories (currently just Industrial & High-Bay) get an
+   actionable link row instead of the status badge. */
+.categoryLinkAction {
+  align-items: center;
+  color: var(--led-accent-dark);
+  display: inline-flex;
+  font-size: 0.76rem;
+  font-weight: 800;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.categoryLinkAction span {
+  transition: transform 180ms ease;
+}
+
+.categoryCard:hover .categoryLinkAction span {
+  transform: translateX(4px);
+}
+
+/* =========================================================
+   05. HOW THE SYSTEM WORKS (light)
+   ========================================================= */
+
+.howItWorks {
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.howItWorksHeading {
+  margin-bottom: 2.25rem;
+  max-width: 42rem;
+}
+
+.howItWorksHeading h2 {
+  color: var(--led-ink);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.howItWorksHeading p {
+  color: var(--led-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.75rem 0 0;
+}
+
+.stepsList {
+  align-items: stretch;
+  display: flex;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.stepItem {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: 0.75rem;
+}
+
+.stepCard {
+  background: var(--led-accent-tint);
+  border: 1px solid var(--led-border);
+  border-radius: 0.7rem;
+  flex: 1;
+  padding: 1.5rem 1.4rem;
+}
+
+.stepNumber {
+  align-items: center;
+  background: var(--led-accent);
+  border-radius: 50%;
+  color: var(--led-dark);
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 800;
+  height: 2.25rem;
+  justify-content: center;
+  margin-bottom: 0.9rem;
+  width: 2.25rem;
+}
+
+.stepCard h3 {
+  color: var(--led-ink);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.stepCard p {
+  color: var(--led-body);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  margin: 0.55rem 0 0;
+}
+
+.stepArrow {
+  color: var(--led-accent-border);
+  flex-shrink: 0;
+  font-size: 1.4rem;
+}
+
+/* =========================================================
+   06. BOTTOM CTA (dark, real photo background)
+   ========================================================= */
+
+.bottomCta {
+  border-radius: 0.7rem;
+  margin: 4.5rem auto 2.5rem;
+  max-width: 1400px;
+  min-height: 20rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.bottomCtaImage {
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.bottomCtaScrim {
+  background:
+    radial-gradient(circle at 78% 25%, rgb(105 201 52 / 22%), transparent 32%),
+    linear-gradient(90deg, rgb(11 15 12 / 92%) 0%, rgb(11 15 12 / 72%) 55%, rgb(11 15 12 / 45%) 100%);
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.bottomCtaContent {
+  color: #ffffff;
+  padding: clamp(2.5rem, 4vw, 3.5rem);
+  position: relative;
+  max-width: 34rem;
+  z-index: 2;
+}
+
+.bottomCtaBrand {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.infravoltWordmark {
+  height: auto;
+  object-fit: contain;
+  width: 8.25rem;
+}
+
+.bottomCtaEyebrow {
+  color: var(--led-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.bottomCtaContent h2 {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  margin: 0;
+}
+
+.bottomCtaContent p {
+  color: rgb(255 255 255 / 78%);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.85rem 0 0;
+}
+
+.bottomCtaAction {
+  align-items: center;
+  background: var(--led-accent);
+  border-radius: 0.5rem;
+  color: var(--led-dark);
+  display: inline-flex;
+  font-size: 0.88rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+  min-height: 3.1rem;
+  padding: 0.85rem 1.4rem;
+  text-decoration: none;
+  transition: background-color 180ms ease;
+}
+
+.bottomCtaAction:hover {
+  background: var(--led-accent-hover);
+}
+
+/* =========================================================
+   07. TRUST STRIP (dark)
+   ========================================================= */
+
+.trustStrip {
+  background: var(--led-dark-elevated);
+  margin-top: 4.5rem;
+  padding: 3.5rem clamp(1.25rem, 4vw, 4rem) 4rem;
+}
+
+.trustGrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+.trustCard {
+  text-align: center;
+}
+
+.trustIcon {
+  color: var(--led-accent);
+  height: 1.9rem;
+  margin-bottom: 0.9rem;
+  width: 1.9rem;
+}
+
+.trustCard h3 {
+  color: #ffffff;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.trustCard p {
+  color: rgb(255 255 255 / 65%);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  margin: 0.55rem 0 0;
+}
+
+/* =========================================================
+   08. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .heroContent {
+    padding: 4.5rem clamp(1.25rem, 4vw, 3rem) 3.5rem;
+  }
+
+  .valueGrid,
+  .trustGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stepsList {
+    flex-direction: column;
+  }
+
+  .stepArrow {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .categoriesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile stays 2-column for categories (denser, less scrolling) rather
+   than collapsing to 1 — see the density pass below. */
+@media (max-width: 640px) {
+  .valueGrid,
+  .trustGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroTop {
+    flex-wrap: wrap;
+  }
+
+  .hero {
+    min-height: 30rem;
+  }
+
+  .heroContent {
+    padding: 3.5rem clamp(1.25rem, 4vw, 3rem) 2.75rem;
+  }
+
+  .heroDescription {
+    max-width: none;
+  }
+
+  /* Category section density pass — shorter image area, tighter card
+     padding/gaps, compact type, badge instead of a full-width bar. */
+  .categories {
+    margin-top: 3.25rem;
+    padding: 0 1.1rem;
+  }
+
+  .categoriesHeading {
+    margin-bottom: 1.25rem;
+  }
+
+  .categoriesGrid {
+    gap: 0.7rem;
+  }
+
+  .categoryImage {
+    aspect-ratio: 3 / 2;
+  }
+
+  .categoryContent {
+    padding: 0.8rem 0.85rem 0.7rem;
+  }
+
+  .categoryContent h3 {
+    font-size: 0.92rem;
+  }
+
+  .categoryDescription {
+    -webkit-line-clamp: 2;
+    font-size: 0.76rem;
+    margin-top: 0.4rem;
+  }
+
+  .categoryBadge {
+    font-size: 0.62rem;
+    margin-top: 0.65rem;
+    padding: 0.24rem 0.55rem;
+  }
+
+  /* How the System Works density pass — compact steps, no tall cards. */
+  .howItWorks {
+    margin-top: 3.25rem;
+  }
+
+  .stepCard {
+    padding: 1rem 1.1rem;
+  }
+
+  .stepItem {
+    gap: 0.5rem;
+  }
+
+  .stepNumber {
+    font-size: 0.78rem;
+    height: 1.9rem;
+    margin-bottom: 0.55rem;
+    width: 1.9rem;
+  }
+
+  .stepCard h3 {
+    font-size: 0.88rem;
+  }
+
+  .stepCard p {
+    font-size: 0.76rem;
+    margin-top: 0.4rem;
+  }
+}

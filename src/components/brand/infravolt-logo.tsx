@@ -5,12 +5,19 @@ type InfraVoltLogoProps = Readonly<{
   href: string;
   accessibleLabel: string;
   placement?: "header" | "mobile" | "footer";
+  variant?: "primary" | "transparent";
 }>;
+
+const LOGO_SOURCES = {
+  primary: "/assets/brand/infravolt-wordmark-primary.webp",
+  transparent: "/assets/brand/infravolt-wordmark-transparent.webp",
+} as const;
 
 export function InfraVoltLogo({
   href,
   accessibleLabel,
   placement = "header",
+  variant = "primary",
 }: InfraVoltLogoProps) {
   return (
     <Link
@@ -19,7 +26,7 @@ export function InfraVoltLogo({
       href={href}
     >
       <Image
-        src="/assets/brand/infravolt-wordmark-primary.webp"
+        src={LOGO_SOURCES[variant]}
         alt=""
         aria-hidden="true"
         width={1040}

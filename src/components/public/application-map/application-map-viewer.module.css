@@ -1,0 +1,1619 @@
+/* =========================================================
+   01. PAGE THEME & DESIGN TOKENS
+   ========================================================= */
+
+.page {
+  --app-map-accent: #d92332;
+  --app-map-accent-dark: #a91624;
+  --app-map-navy: #061a35;
+  --app-map-ink: #102033;
+  --app-map-muted: #66758a;
+  --app-map-border: #26344a;
+  --app-map-surface: #0b2340;
+  --app-map-max-width: 90rem;
+  --app-map-gutter: clamp(1.25rem, 4vw, 3rem);
+  --app-map-header-height: 4.875rem;
+  /* Yalnız overview modundaki .stageVisual için sabit yükseklik kaynağı
+     (bölge modu artık kendi doğal 16:9 aspect-ratio'sunu kullanır, bkz.
+     .zoneStage). */
+  --app-map-stage-height: clamp(640px, calc(100svh - var(--app-map-header-height)), 900px);
+  /* Overview'daki alt galeri şeridinin sabit yüksekliği — .gallerySection
+     ile .overviewHotspots'un ne kadar boşluk bırakması gerektiğini bilmesi
+     için tek kaynak. */
+  --app-map-gallery-height: 8.75rem;
+
+  background: var(--app-map-navy);
+  color: #ffffff;
+}
+
+/* Tarayıcı Fullscreen API'si ile aktif olunduğunda konteyner tüm ekranı
+   kaplar; iç scroll davranışı normal sayfa akışıyla aynı kalır. */
+/* Tam ekranda global header/footer görünmez (Fullscreen API yalnız .page
+   alt ağacını büyütür), bu yüzden header için ayrılan boşluk düşülmeden
+   sahne doğrudan 100dvh'yi doldurur — aksi halde altta boş lacivert alan
+   kalırdı. Normal moddaki sabit rem yükseklik (zoom kararlılığı için)
+   burada bilinçli olarak geçersiz kılınır: tam ekranda amaç zoom
+   kararlılığı değil, mevcut ekranı tam doldurmaktır. */
+.page:fullscreen {
+  height: 100dvh;
+  overflow-y: auto;
+}
+
+/* CSS fallback tam ekran: gerçek Fullscreen API mobil/tablette (en yaygın
+   örnek iOS Safari) yoksa veya reddederse, .pageCssFullscreen sınıfı
+   (bkz. TSX toggleFullscreen) aynı deneyimi position:fixed ile taklit
+   eder — .page bu durumda kendi normal akıştaki yerinden çıkıp tüm
+   viewport'u kaplar, header/footer'ın üzerine biner. Yalnız <=860px'te
+   anlamlıdır (masaüstünde native API her zaman kullanılabilir olduğundan
+   bu sınıf hiç uygulanmaz), yine de kural kapsamı istemeden başka bir yere
+   sızmasın diye burada da genel bırakılmaz. */
+.pageCssFullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  overflow-y: auto;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Masaüstü/yatay tam ekranda sahne tüm ekranı doldurur (aşağıdaki dikey
+   mobil portre kuralı bunu geçersiz kılar). */
+.page:fullscreen .stageVisual,
+.pageCssFullscreen .stageVisual {
+  height: 100dvh;
+  min-height: 0;
+}
+
+/* Dikey mobil tam ekranda 100dvh'ye zorlamak, 16:9 görseli çok uzun/dar
+   bir kutu içinde ortada bırakıp üstte/altta büyük boş alan yaratıyordu.
+   Bunun yerine sahne (overview: .stageVisual, bölge: .zoneStage/.zoneStageRow)
+   kendi doğal 16:9 boyutuna döner; kontroller ve galeri (ikisi de görselin
+   kenarlarına bindirilmiş overlay'lerdir, bkz. .sceneControls/.gallerySection
+   ve bölge modunda .zoneGallerySection) böylece görselin hemen üstünde/
+   altında görünür, aradaki boşluk kalkar. Yalnızca EN DIŞTAKİ .page:fullscreen
+   kayar (overflow-y:auto); içerideki hiçbir kutu kendi başına scroll
+   konteyneri olmaz. 860px eşiği, dosyanın geri kalanındaki mobil/tablet
+   sınırıyla (bkz. 15. bölüm) tutarlı tutulur. */
+@media (max-width: 860px) and (orientation: portrait) {
+  .page:fullscreen .stageVisual,
+  .page:fullscreen .zoneStage,
+  .pageCssFullscreen .stageVisual,
+  .pageCssFullscreen .zoneStage {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 0;
+  }
+
+  .page:fullscreen .zoneStageRow,
+  .pageCssFullscreen .zoneStageRow {
+    grid-template-rows: auto;
+    height: auto;
+    min-height: 0;
+  }
+}
+
+/* =========================================================
+   02. EXPERIENCE (dış konteyner: sahne + panel)
+   ========================================================= */
+
+/* Kenarlarda/altta lacivert boşluk KALMAMASI için .experience tam
+   genişlik, sıfır padding — fotoğraf tam kenardan kenara uzanır. İç
+   içerik (başlık, seçici, galeri, panel) kendi --app-map-gutter
+   değerleriyle kenardan ayrı tutulur, ama arka plan görseli asla
+   kesilmez/boşluk bırakmaz. */
+.experience {
+  margin: 0;
+  position: relative;
+  width: 100%;
+}
+
+/* .overviewStageGroup ve .zoneStageGroup: masaüstü/yatayda konum:relative
+   referans kutuları — sceneControls (ve overview'da gallerySection) bu
+   kutuya göre mutlak konumlanıp fotoğrafın üzerine biner. Dikey mobilde
+   (15. bölüm, .page:not(:fullscreen)) bu davranış geçersiz kılınır:
+   sceneControls/gallerySection normal akışa döner, artık görseli
+   kaplamazlar — görselin sırasıyla ÜSTÜNDE ve ALTINDA ayrı satırlar olurlar. */
+.overviewStageGroup,
+.zoneStageGroup {
+  position: relative;
+}
+
+/* The extra wrapper becomes a real viewport only in mobile portal
+   fullscreen. display:contents keeps every normal/mobile/desktop layout
+   byte-for-byte equivalent to the previous structure. */
+.mapStageViewport,
+.mapAspectFrame {
+  display: contents;
+}
+
+/* =========================================================
+   03. STAGE VISUAL (tek sınırlı fotoğrafik sahne)
+   ========================================================= */
+
+.stageVisual {
+  height: var(--app-map-stage-height);
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+/* overviewImageFit="contain" (bkz. bileşen prop'u) — yalnız masaüstünde
+   (≥861px) devreye girer; mobil zaten kendi 16:9 aspect-ratio kuralına
+   sahiptir (15. bölüm), tam ekran kendi kurallarını korur (13. bölüm).
+   Görsel hiç kırpılmaz/germe olmaz; kullanılmayan alan mevcut koyu
+   "gunmetal" degrade zeminiyle doldurulur (bkz. .sceneFrame ile aynı ton). */
+.stageVisualContain {
+  background: radial-gradient(
+    circle at 50% 45%,
+    #26313f 0%,
+    #161f2a 55%,
+    #0a0f16 100%
+  );
+}
+
+.backgroundImageContain {
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (min-width: 861px) {
+  .stageVisualContain {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 0;
+  }
+}
+
+.backgroundLayer {
+  inset: 0;
+  position: absolute;
+  z-index: 0;
+}
+
+.backgroundImage {
+  object-fit: cover;
+  object-position: center right;
+}
+
+/* Bir bölge seçiliyken arka plan overview görseli "atmosfer" olarak
+   kalır: bulanıklaşır ve koyulaşır, ön plandaki keskin bölge fotoğrafıyla
+   rekabet etmez. prefers-reduced-motion altında geçiş anında olur. */
+.backgroundLayerDimmed {
+  filter: blur(11px) brightness(0.5) saturate(0.9);
+  transform: scale(1.04);
+  transition: filter 260ms ease;
+}
+
+/* z-index:3 — hem overview'daki hem de bölge modundaki (artık sahneyi
+   tamamen dolduran) fotoğrafın ÜZERİNDE durur, böylece contextPanel metni
+   her iki modda da tutarlı kontrasta sahip olur. pointer-events:none
+   olmadan bu üstteki katman hotspot tıklamalarını engellerdi. */
+.readabilityScrim {
+  background:
+    linear-gradient(
+      180deg,
+      rgb(4 10 20 / 60%) 0%,
+      rgb(4 10 20 / 0%) 24%,
+      rgb(4 10 20 / 0%) 66%,
+      rgb(4 10 20 / 78%) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgb(4 10 20 / 55%) 0%,
+      rgb(4 10 20 / 18%) 34%,
+      rgb(4 10 20 / 0%) 56%
+    );
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 3;
+}
+
+/* =========================================================
+   04. OVERVIEW HOTSPOTS / FOREGROUND ZONE
+   ========================================================= */
+
+/* Overview modunda ayrı bir görsel kutusu yok; hotspot'lar arka plan
+   katmanıyla birebir aynı sınırlara (inset:0) sahip bu katmana biner,
+   böylece yüzde koordinatları arka plandaki gerçek fotoğrafla hizalı
+   kalır. */
+.overviewHotspots {
+  inset: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+/* Seçili bölgenin keskin ön-plan sahnesi: arka planın merkezinde,
+   kenarlarda bulanık overview'ın "atmosfer" olarak sızmasına izin veren
+   bir boşlukla. Kendi hotspot koordinat sistemi bu kutunun sınırlarına
+   bağlıdır (application-scene.tsx .sceneFrame, width/height:100%). */
+/* Bölge modu: gerçek 16:9 sahne. Yükseklik aspect-ratio'dan doğal olarak
+   gelir (sabit bir clamp()/CSS değişkenine bağlı değildir), bu yüzden her
+   genişlikte öngörülebilir şekilde ölçeklenir — ayrı mobil/masaüstü
+   override'larına ihtiyaç duymaz. */
+.zoneStageRow {
+  display: grid;
+  position: relative;
+}
+
+.zoneStage {
+  aspect-ratio: 16 / 9;
+  background: #000000;
+  grid-column: 1;
+  grid-row: 1;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.zoneGallerySection {
+  margin-top: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+.scene {
+  height: 100%;
+  width: 100%;
+}
+
+/* Koyu, hafif degrade bir zemin — bölge fotoğrafı object-fit:contain ile
+   tam gösterildiğinde (kırpılmadan) üstte/altta veya yanlarda kalan boş
+   alanı düz siyah/şeffaf yerine bu degrade doldurur. */
+.sceneFrame {
+  background: radial-gradient(
+    circle at 50% 45%,
+    #26313f 0%,
+    #161f2a 55%,
+    #0a0f16 100%
+  );
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.sceneImage {
+  object-fit: contain;
+}
+
+.sceneHotspots {
+  inset: 0;
+  position: absolute;
+}
+
+/* =========================================================
+   05. HOTSPOTS
+   ========================================================= */
+
+.hotspot {
+  align-items: center;
+  background: rgb(6 26 53 / 88%);
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0.4rem 1rem rgb(0 0 0 / 45%);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.85rem;
+  font-weight: 800;
+  height: 2.2rem;
+  justify-content: center;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
+  width: 2.2rem;
+}
+
+.hotspot:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.hotspotActive {
+  background: var(--app-map-accent);
+  border-color: #ffffff;
+}
+
+/* İlk-ziyaret "nabız" ipucu: tıklanabilirliği işaret eder, seçili durumla
+   (dolgu kırmızı) karıştırılmasın diye yalnız kenarlık/glow atar, dolgu
+   değişmez. prefers-reduced-motion altında sabit bir vurguya döner (bkz.
+   09. bölüm/erişilebilirlik). */
+.hotspotPulse {
+  animation: appMapPulse 1.8s ease-in-out infinite;
+  border-color: var(--app-map-accent);
+}
+
+@keyframes appMapPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(217 35 50 / 55%);
+  }
+
+  50% {
+    box-shadow: 0 0 0 0.5rem rgb(217 35 50 / 0%);
+  }
+}
+
+/* Overview hotspot'unun numarasının hemen altında bölge adını gösteren
+   dekoratif etiket (aria-hidden — erişilebilir isim zaten hotspot
+   butonunun kendisinde). Tıklamayı engellememesi için pointer-events:none;
+   z-index, okunabilirlik overlay'inin (readabilityScrim, z-index:3)
+   üzerinde kalacak şekilde ayarlanır. */
+.hotspotLabel {
+  background: rgb(6 20 40 / 82%);
+  border-radius: 0.3rem;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  max-width: 9rem;
+  overflow: hidden;
+  padding: 0.2rem 0.5rem;
+  pointer-events: none;
+  position: absolute;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 50%);
+  transform: translate(-50%, 1.4rem);
+  white-space: nowrap;
+  z-index: 4;
+}
+
+/* =========================================================
+   06. CONTEXT PANEL (geri + breadcrumb + başlık + tanım + seçici)
+   ========================================================= */
+
+/* Mobil-öncelikli taban: contextPanel normal akışta, sahneden ÖNCE, tam
+   genişlikte bir blok olarak render edilir (fotoğrafın üzerine binmez).
+   861px ve üzerinde (14. bölüm) mutlak konuma geçip fotoğrafın sol-üst
+   köşesine biner — bkz. TSX'teki not: .stageVisual overflow:hidden +
+   sabit yükseklikli olduğu için değişken yükseklikli bu blok onun
+   İÇİNE değil KARDEŞİ olarak yerleştirildi. */
+.contextPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem var(--app-map-gutter) 0;
+}
+
+/* Kırmızı, kısa metinli geri butonu (ok + "Back"/"Назад"); erişilebilir
+   isim daha açıklayıcı backTo*Label değerleriyle aria-label üzerinden
+   verilir. */
+.backControl {
+  align-items: center;
+  background: var(--app-map-accent);
+  border: none;
+  border-radius: 999px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 800;
+  gap: 0.35rem;
+  height: 2.35rem;
+  padding: 0 0.9rem;
+  text-decoration: none;
+  transition: background-color 180ms ease;
+  width: fit-content;
+}
+
+.backControl:hover {
+  background: var(--app-map-accent-dark);
+}
+
+.breadcrumb {
+  color: #a9b8cc;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  margin: 0;
+  text-shadow: 0 1px 6px rgb(0 0 0 / 55%);
+  text-transform: uppercase;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  font-weight: 800;
+  gap: 0.1em;
+  letter-spacing: 0.01em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Fotoğraf üzerindeki okunabilirlik yalnız geniş bir vinyet gradyanına
+   (readabilityScrim) değil, metnin kendi text-shadow'una da dayanır; bu
+   "büyük dikdörtgen kart" izlenimi yaratmadan kontrastı garanti eder. */
+.heading span:first-child {
+  color: #ffffff;
+  font-size: clamp(1.7rem, 2.9vw, 2.35rem);
+  line-height: 1;
+  text-shadow: 0 2px 10px rgb(0 0 0 / 60%);
+}
+
+.heading span:last-child {
+  color: #dbe3ee;
+  font-size: clamp(1.25rem, 2.1vw, 1.7rem);
+  line-height: 1.05;
+  text-shadow: 0 2px 10px rgb(0 0 0 / 60%);
+}
+
+/* content.ts'teki \n karakteri burada gerçek bir satır sonu olarak
+   render edilsin diye white-space:pre-line kullanılır. */
+.introduction {
+  color: #dbe3ee;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0;
+  text-shadow: 0 1px 6px rgb(0 0 0 / 55%);
+  white-space: pre-line;
+}
+
+/* İlk-ziyaret ipucu metni; ürün seçildiğinde veya oturum boyunca bir kez
+   görüldükten sonra kalıcı olarak kaybolur. */
+.zoneHint {
+  color: #ffb3ba;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 1px 6px rgb(0 0 0 / 55%);
+}
+
+/* =========================================================
+   07. PRODUCT FAMILY SELECTOR (kompakt, DİKEY, translucent glass)
+   ========================================================= */
+
+/* Maksimum ~240-260px genişlik: fotoğrafın merkez-sağındaki teknik bina
+   alanını kapatmayacak kadar dar, ama altı satırı da okunaklı tutacak
+   kadar geniş. Arka plan yarı saydam olduğu için fotoğraf arkasından
+   görünmeye devam eder. */
+.navOverlay {
+  background: rgb(10 22 40 / 66%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 0.6rem;
+  margin-top: 0.25rem;
+  max-width: 16rem;
+  padding: 0.4rem;
+}
+
+.nav {
+  min-width: 0;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  align-items: center;
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid transparent;
+  border-radius: 0.4rem;
+  color: #dbe3ee;
+  cursor: pointer;
+  display: flex;
+  gap: 0.45rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  height: 2.1rem;
+  /* flex satırında varsayılan min-width:auto, içindeki uzun metnin
+     (ör. "Underfloor Cable Trunking") küçülüp elipsle kısalmasını
+     engelleyip satırı/konteyneri dışarı doğru geriyordu (zoom
+     seviyelerinde daha belirgin fark ediliyordu). min-width:0 bunu açar. */
+  min-width: 0;
+  padding: 0 0.5rem;
+  text-align: left;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+  width: 100%;
+}
+
+.navItem:hover {
+  background: rgb(255 255 255 / 10%);
+}
+
+.navItemActive {
+  background: rgb(217 35 50 / 26%);
+  border-color: var(--app-map-accent);
+  color: #ffffff;
+}
+
+/* Hotspot ile aynı ilk-ziyaret ipucu davranışı — bkz. .hotspotPulse. */
+.navItemPulse {
+  animation: appMapPulse 1.8s ease-in-out infinite;
+  border-color: var(--app-map-accent);
+}
+
+.navItemStatic {
+  cursor: default;
+}
+
+.navItemStatic:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.navNumber {
+  align-items: center;
+  background: rgb(255 255 255 / 12%);
+  border-radius: 50%;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.64rem;
+  font-weight: 800;
+  height: 1.15rem;
+  justify-content: center;
+  width: 1.15rem;
+}
+
+.navItemActive .navNumber {
+  background: var(--app-map-accent);
+}
+
+.navIcon {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.navItemActive .navIcon {
+  opacity: 1;
+}
+
+.navName {
+  flex: 1 1 auto;
+  line-height: 1.2;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   08. SCENE CONTROLS (Reset View / Fullscreen — üst-orta)
+   ========================================================= */
+
+.sceneControls {
+  display: flex;
+  gap: 0.5rem;
+  left: 50%;
+  position: absolute;
+  top: 1.25rem;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.sceneControlButton {
+  align-items: center;
+  background: rgb(6 26 53 / 78%);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 0.5rem;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.74rem;
+  font-weight: 700;
+  gap: 0.35rem;
+  height: 2.15rem;
+  padding: 0 0.85rem;
+  transition: background-color 180ms ease;
+}
+
+.sceneControlButton:hover:not(:disabled) {
+  background: rgb(217 35 50 / 55%);
+}
+
+.sceneControlButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* =========================================================
+   09. BRAND MARK (yalnız gerçek tam ekran modunda)
+   ========================================================= */
+
+/* Onaylı InfraVolt wordmark varlığının (infravolt-wordmark-primary.webp)
+   kendisi beyaz zemin üzerine gömülü — repoda şeffaf bir varyantı yok. Yeni
+   bir görsel üretmek/değiştirmek yerine mix-blend-mode:multiply kullanılır:
+   beyaz piksel arka planla harmanlanınca görünmez olur, lacivert/kırmızı
+   logo izi olduğu gibi kalır — böylece ayrı bir "beyaz kart" görünmez. */
+.brandMark {
+  display: inline-block;
+  line-height: 0;
+  position: absolute;
+  right: var(--app-map-gutter);
+  top: 1.25rem;
+  z-index: 5;
+}
+
+.brandMark img {
+  height: auto;
+  width: clamp(6rem, 8vw, 7.5rem);
+}
+
+/* =========================================================
+   10. GALLERY SECTION (sahnenin alt kısmına biner)
+   ========================================================= */
+
+.gallerySection {
+  background: linear-gradient(
+    0deg,
+    rgb(4 10 20 / 94%) 0%,
+    rgb(4 10 20 / 82%) 55%,
+    rgb(4 10 20 / 0%) 100%
+  );
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  height: var(--app-map-gallery-height);
+  justify-content: flex-end;
+  left: 0;
+  padding: 0 var(--app-map-gutter) 0.6rem;
+  position: absolute;
+  right: 0;
+  z-index: 4;
+}
+
+/* =========================================================
+   11. ZONE THUMBNAIL STRIP
+   ========================================================= */
+
+.zoneStrip {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* Ok butonları görünür bir "kart grubu" kadar kaydırır; şeridin doğal
+   scroll sınırına ulaşıldığında ilgili ok devre dışı bırakılır (TSX
+   tarafında scroll/resize dinleyicileriyle senkron tutulur). */
+.zoneStripArrow {
+  align-items: center;
+  background: rgb(255 255 255 / 8%);
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  height: 2.2rem;
+  justify-content: center;
+  line-height: 1;
+  transition: background-color 180ms ease, opacity 180ms ease;
+  width: 2.2rem;
+}
+
+.zoneStripArrow:hover:not(:disabled) {
+  background: rgb(217 35 50 / 55%);
+}
+
+.zoneStripArrow:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.zoneStripList {
+  display: flex;
+  flex: 1;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 0.2rem 0.1rem 0.1rem;
+  scroll-padding-inline: 0.5rem;
+  scroll-snap-type: x proximity;
+  /* Kaydırma işlevi korunurken görünür tarayıcı scrollbar'ı gizlenir;
+     kullanıcılar ok butonları, dokunmatik kaydırma veya trackpad ile
+     gezinir. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.zoneStripList::-webkit-scrollbar {
+  display: none;
+}
+
+.zoneStripList > li {
+  flex: 1 1 0;
+  min-width: 5rem;
+}
+
+.zoneStripItem {
+  background: rgb(255 255 255 / 6%);
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 0.45rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.3rem 0.3rem 0.4rem;
+  scroll-snap-align: start;
+  transition: border-color 180ms ease, background-color 180ms ease;
+  width: 100%;
+}
+
+.zoneStripItem:hover {
+  border-color: rgb(255 255 255 / 34%);
+}
+
+.zoneStripItemActive {
+  background: rgb(217 35 50 / 16%);
+  border-color: var(--app-map-accent);
+}
+
+/* Sabit iki satırlık başlık yüksekliği: tek veya iki satırlık başlıklar
+   olsa da her kartın görseli aynı dikey konumdan başlar. */
+.zoneStripName {
+  color: #dbe3ee;
+  display: -webkit-box;
+  font-size: 0.6rem;
+  font-weight: 700;
+  height: 1.5rem;
+  line-height: 1.2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.zoneStripItemActive .zoneStripName {
+  color: #ffffff;
+}
+
+.zoneStripThumb {
+  aspect-ratio: 16 / 10;
+  background: #000000;
+  border-radius: 0.3rem;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.zoneStripThumb img {
+  object-fit: cover;
+}
+
+/* =========================================================
+   12. PRODUCT PANEL
+   ========================================================= */
+
+/* Panel normal akışta kalır (böylece uzun içerik .experience'ı büyütüp
+   sayfanın normal kaymasını sağlar) ama negatif margin-top ile tam
+   .stageVisual'ın yüksekliği kadar yukarı çekilir; sonuç: panel sahnenin
+   SAĞ tarafına bir "drawer" gibi biner, sahnenin genişliğini/yüksekliğini
+   ASLA etkilemez. İçerik sahneden kısaysa .experience'ın toplam
+   yüksekliği artmaz (navy boşluk kalmaz); uzunsa fark kadar sayfa uzar. */
+/* Panel, .zoneStageRow grid'inde .zoneStage ile AYNI hücreyi paylaşır
+   (bkz. .zoneStageRow) ve sağa hizalanarak üzerine biner — bu sayede
+   sahnenin doğal (aspect-ratio tabanlı) yüksekliğine bağlı bir hesaba
+   gerek kalmadan "sahneyi küçültmeden binen sağ panel" elde edilir.
+   İçerik sahneden uzunsa grid satırı büyür, sayfa normal kayar. */
+.panel {
+  align-self: start;
+  background: var(--app-map-surface);
+  border: 1px solid var(--app-map-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 40%);
+  display: flex;
+  flex-direction: column;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+  margin-right: var(--app-map-gutter);
+  margin-top: 1rem;
+  min-width: 0;
+  width: 22rem;
+  z-index: 6;
+}
+
+.panelHeader {
+  align-items: flex-start;
+  border-bottom: 1px solid var(--app-map-border);
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.75rem;
+  padding: 1.1rem 1.1rem 0.9rem;
+}
+
+.panelHeader h2 {
+  color: #ffffff;
+  flex: 1;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin: 0.15rem 0 0;
+}
+
+.panelNumber {
+  align-items: center;
+  background: var(--app-map-accent);
+  border-radius: 50%;
+  color: #ffffff;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 800;
+  height: 1.9rem;
+  justify-content: center;
+  width: 1.9rem;
+}
+
+.panelClose {
+  background: transparent;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  height: 2rem;
+  line-height: 1;
+  width: 2rem;
+}
+
+.panelClose:hover {
+  background: rgb(255 255 255 / 10%);
+}
+
+.panelBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.1rem;
+}
+
+/* Şeffaf ürün render'ları (ör. busbar) için kontrollü, koyu "gunmetal"
+   teknik sahne; simge (icon) fallback'i de aynı sahnede tutarlı görünür.
+   Kare orana yakın oran + azaltılmış iç boşluk, ürünü medya alanının
+   büyük çoğunluğunu (~%80+) kaplayacak şekilde baskın gösterir. */
+.panelMedia {
+  align-items: center;
+  aspect-ratio: 4 / 3;
+  background: radial-gradient(
+    circle at 50% 42%,
+    #354252 0%,
+    #202b37 44%,
+    #111923 100%
+  );
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 0.6rem;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 4%);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.panelMediaImage {
+  filter: drop-shadow(0 16px 18px rgb(0 0 0 / 30%));
+  object-fit: contain;
+  padding: 0.3rem;
+}
+
+.panelMediaCategory {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.panelMediaCategory .panelMediaImage {
+  filter: none;
+  object-fit: contain;
+  object-position: center;
+  padding: 0;
+  transform: scale(0.9);
+  transform-origin: center;
+}
+
+.panelMediaIcon {
+  filter: drop-shadow(0 6px 10px rgb(0 0 0 / 35%));
+  opacity: 0.92;
+}
+
+.panelSection h3 {
+  color: var(--app-map-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+}
+
+.panelSection p {
+  color: #dbe3ee;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.panelList {
+  display: grid;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.panelList li {
+  color: #dbe3ee;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.panelList li::before {
+  color: var(--app-map-accent);
+  content: "•";
+  left: 0;
+  position: absolute;
+}
+
+.panelActions {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 0.25rem;
+}
+
+/* Bir zone'da aynı ürün ailesine ait birden fazla somut ürün olduğunda
+   (ör. Busbar Systems altında GGD + GNL) açılan seçim listesi — bkz.
+   ApplicationProductChooser. */
+.panelChoiceList {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.panelChoiceButton {
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.75rem 0.9rem;
+  text-align: left;
+  transition: background-color 180ms ease;
+}
+
+.panelChoiceButton:hover {
+  background: rgb(255 255 255 / 10%);
+}
+
+.panelChoiceName {
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.panelChoiceDescription {
+  color: #dbe3ee;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.panelAction {
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 0.5rem;
+  color: #ffffff;
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.7rem 0.9rem;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 180ms ease;
+}
+
+.panelAction:hover {
+  background: rgb(255 255 255 / 10%);
+}
+
+.panelActionPrimary {
+  background: var(--app-map-accent);
+  border-color: var(--app-map-accent);
+}
+
+.panelActionPrimary:hover {
+  background: var(--app-map-accent-dark);
+}
+
+/* =========================================================
+   13. ACCESSIBILITY
+   ========================================================= */
+
+.navItem:focus-visible,
+.navItemStatic:focus-visible,
+.hotspot:focus-visible,
+.zoneStripItem:focus-visible,
+.zoneStripArrow:focus-visible,
+.sceneControlButton:focus-visible,
+.backControl:focus-visible,
+.panelClose:focus-visible,
+.panelAction:focus-visible,
+.panelChoiceButton:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspot,
+  .navItem,
+  .zoneStripItem,
+  .zoneStripArrow,
+  .sceneControlButton,
+  .panelAction,
+  .backgroundLayerDimmed {
+    transition: none;
+  }
+
+  .zoneStripList {
+    scroll-behavior: auto;
+  }
+
+  /* Animasyonlu nabız yerine sabit kırmızı vurgu — hareket tercih
+     edilmediğinde tıklanabilirlik ipucu yine de görsel olarak iletilir. */
+  .hotspotPulse,
+  .navItemPulse {
+    animation: none;
+    box-shadow: 0 0 0 0.2rem rgb(217 35 50 / 45%);
+  }
+}
+
+/* =========================================================
+   14. DESKTOP OVERLAY (≥861px)
+
+   Bu genişlikten itibaren contextPanel akıştan çıkıp .experience'a göre
+   mutlak konumlanır ve fotoğrafın sol-üst köşesine biner; .stageVisual bu
+   sayede tamamen fotoğrafik bir sahne olarak kalır (bkz. TSX'teki not).
+   ========================================================= */
+
+@media (min-width: 861px) {
+  .page {
+    /* Gutter artık dar bir vw payıyla sınırlanır; %80 zoom'da genişleyen
+       CSS viewport'unun (svh/vw büyür) boşlukları abartılı büyütmesi
+       önlenir. */
+    --app-map-gutter: clamp(1.25rem, 1.6vw, 2rem);
+    /* 100svh TAMAMEN kaldırıldı: viewport birimi tarayıcı zoom'unda kök
+       font-size'a göre farklı bir modelle ölçeklenir (rem/vw birimlerinden
+       BAĞIMSIZ), bu da sahnenin sayfanın geri kalanıyla aynı oranda
+       küçülüp büyümemesine (zoom'da "donmuş" görünmesine) yol açıyordu.
+       Sabit rem değeri, tüm sayfa gibi zoom ile birebir aynı oranda
+       ölçeklenir — %80/%100 arasında tutarlı kalır. */
+    --app-map-stage-height: 42rem;
+  }
+
+  .contextPanel {
+    left: var(--app-map-gutter);
+    /* Bina, fotoğrafın merkez-sağında olduğu için sol üst güvenli alan
+       sınırlı tutulur; bu genişlik başlık/tanım/seçicinin teknik bina
+       alanına taşmasını engeller. */
+    max-width: min(25rem, 36%);
+    padding: 0;
+    position: absolute;
+    top: 1.25rem;
+    z-index: 5;
+  }
+
+  /* Başlık artık vw'ye değil sabit rem değerlerine dayanır; masaüstü
+     genişlik aralığında (≥861px) zaten dar bir bant içindeyiz, bu yüzden
+     akıcı vw ölçeklemesine gerek yok — zoom seviyeleri arasında öngörülebilir
+     kalır. Mobil, bu bloğun dışındaki taban clamp()'i kullanmaya devam eder. */
+  .heading span:first-child {
+    font-size: 2.05rem;
+  }
+
+  .heading span:last-child {
+    font-size: 1.5rem;
+  }
+
+  .stageVisual {
+    /* Hesaplanan --app-map-stage-height her ne olursa olsun, sahne bu
+       değerin altına asla inmez — galerinin ana sahneyi/hotspot'ları
+       kaplaması buradan engellenir. */
+    min-height: 42rem;
+  }
+
+  /* Masaüstünde ürün seçici metni ve hotspot boyutları büyütüldü (mobil
+     bu blokun dışında olduğu için etkilenmez). Ellipsis/overflow:hidden
+     zaten .navName üzerinde tanımlı olduğu için büyüyen metin satır
+     kaymasına değil kısalmaya (…) neden olur — taşma/kayma olmaz. */
+  .navItem {
+    font-size: 0.83rem;
+  }
+
+  .navNumber {
+    font-size: 0.7rem;
+    height: 1.3rem;
+    width: 1.3rem;
+  }
+
+  .hotspot {
+    font-size: 1.0625rem;
+    font-weight: 800;
+    height: 2.625rem;
+    width: 2.625rem;
+  }
+}
+
+/* =========================================================
+   15. TABLET & MOBILE
+
+   Ürün paneli, sahnenin sağına binen bir "drawer" olmaktan çıkıp tam
+   genişlikte sahnenin altına, normal akışa iner (≤1100px). Ürün ailesi
+   seçici yatay kaydırmalı bir şeride döner (≤860px).
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  /* Panel .zoneStage ile aynı grid hücresini paylaşıp üzerine binmek
+     yerine ikinci satıra iner — tam genişlikte, sahnenin ALTINDA normal
+     akışa döner. */
+  .panel {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: stretch;
+    margin-right: 0;
+    margin-top: 0.75rem;
+    width: auto;
+  }
+
+  .navOverlay {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 860px) {
+  .page {
+    --app-map-gallery-height: 8rem;
+  }
+
+  /* vh tabanlı yükseklik yerine sabit 16:9 sahne: dikey aşırı uzama
+     olmadan, öngörülebilir bir oranla görüntülenir; object-fit:contain
+     ile görsel hiç kırpılmadan tam gösterilir. */
+  .stageVisual {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  .backgroundImage {
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .navList {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .navList::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navItem,
+  .navItemStatic {
+    flex: 0 0 auto;
+  }
+
+  /* Kartlar artık esnek değil, sabit 8rem genişlikte — bu sayede ekranda
+     yaklaşık 2,5 kart görünüp yatay kaydırılabilir olduğunu ima eder. */
+  .zoneStripList > li {
+    flex: 0 0 auto;
+    min-width: 0;
+    width: 8rem;
+  }
+
+  .zoneStripThumb {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* =========================================================
+   16. PORTRAIT MOBILE, NORMAL MODE (tam ekran DEĞİL)
+
+   sceneControls ve gallerySection artık görselin üzerine binmez: normal
+   akışa dönüp sırasıyla görselin ÜSTÜNDE ve ALTINDA ayrı satırlar olurlar.
+   .page:not(:fullscreen) ile kapsam yalnız normal moda sınırlanır — gerçek
+   tam ekran (13. bölümdeki dikey tam ekran kuralları) bundan etkilenmez.
+   ========================================================= */
+
+@media (max-width: 860px) and (orientation: portrait) {
+  .page:not(:fullscreen):not(.pageCssFullscreen) .sceneControls {
+    justify-content: center;
+    left: auto;
+    margin-bottom: 0.6rem;
+    position: static;
+    top: auto;
+    transform: none;
+    width: 100%;
+  }
+
+  .page:not(:fullscreen):not(.pageCssFullscreen) .gallerySection {
+    background: none;
+    bottom: auto;
+    height: auto;
+    left: auto;
+    margin-top: 0.75rem;
+    padding: 0 0 0.5rem;
+    position: static;
+    right: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    --app-map-gallery-height: 7.25rem;
+  }
+
+  .brandMark {
+    display: none;
+  }
+
+  .sceneControls {
+    top: 0.85rem;
+  }
+
+  .gallerySection {
+    padding: 0 calc(var(--app-map-gutter) / 1.4) 0.5rem;
+  }
+}
+
+/* Shared Application Map viewer styles. */
+
+/* =========================================================
+   17. MOBILE/TABLET PORTAL FULLSCREEN (<=768px)
+
+   This mode is rendered directly under document.body. It therefore does not
+   inherit a page container's width, overflow or stacking context and always
+   covers the sticky site chrome. Native desktop fullscreen remains unchanged.
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .pageCssFullscreen {
+    --app-map-gallery-height: 5.5rem;
+    --app-map-gutter: 0.625rem;
+
+    background: var(--app-map-navy);
+    border-radius: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    inset: 0;
+    max-height: none;
+    max-width: none;
+    overflow: hidden;
+    overscroll-behavior: none;
+    padding:
+      env(safe-area-inset-top)
+      0
+      env(safe-area-inset-bottom);
+    position: fixed;
+    width: 100%;
+    z-index: 2147483647;
+  }
+
+  .pageCssFullscreen .experience {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .pageCssFullscreen .contextPanel {
+    background: #061a35;
+    flex: 0 0 auto;
+    gap: 0.12rem;
+    max-height: 22dvh;
+    overflow: hidden;
+    padding: 0.3rem 0.625rem 0.25rem;
+    position: relative;
+    z-index: 30;
+  }
+
+  .pageCssFullscreen .backControl {
+    font-size: 0.66rem;
+    gap: 0.25rem;
+    height: 1.7rem;
+    padding: 0 0.6rem;
+  }
+
+  .pageCssFullscreen .breadcrumb {
+    font-size: 0.56rem;
+    line-height: 1.15;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .pageCssFullscreen .heading {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .pageCssFullscreen .heading span:first-child,
+  .pageCssFullscreen .heading span:last-child {
+    display: inline;
+    font-size: 0.88rem;
+    line-height: 1.1;
+  }
+
+  .pageCssFullscreen .heading span:last-child:not(:first-child)::before {
+    content: " / ";
+  }
+
+  .pageCssFullscreen .introduction,
+  .pageCssFullscreen .zoneHint {
+    display: none;
+  }
+
+  .pageCssFullscreen .navOverlay {
+    border-radius: 0.4rem;
+    margin-top: 0.1rem;
+    max-width: none;
+    padding: 0.2rem;
+  }
+
+  .pageCssFullscreen .navList {
+    flex-direction: row;
+    gap: 0.2rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+
+  .pageCssFullscreen .navItem,
+  .pageCssFullscreen .navItemStatic {
+    flex: 0 0 7.35rem;
+    font-size: 0.61rem;
+    gap: 0.25rem;
+    height: 1.75rem;
+    padding: 0 0.35rem;
+  }
+
+  .pageCssFullscreen .navNumber {
+    font-size: 0.55rem;
+    height: 0.95rem;
+    width: 0.95rem;
+  }
+
+  .pageCssFullscreen .navIcon {
+    height: 0.8rem;
+    width: 0.8rem;
+  }
+
+  .pageCssFullscreen .overviewStageGroup,
+  .pageCssFullscreen .zoneStageGroup {
+    align-items: stretch;
+    background: #030a13;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pageCssFullscreen .mapStageViewport {
+    align-items: center;
+    background: #030a13;
+    display: flex;
+    flex: 1 1 auto;
+    height: 100%;
+    justify-content: center;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .pageCssFullscreen .mapAspectFrame {
+    display: block;
+    flex: 0 0 auto;
+    max-height: 100%;
+    max-width: 100%;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pageCssFullscreen .sceneControls {
+    gap: 0.35rem;
+    left: auto;
+    position: fixed;
+    right: 0.5rem;
+    top: calc(env(safe-area-inset-top) + 0.4rem);
+    transform: none;
+    z-index: 50;
+  }
+
+  .pageCssFullscreen .sceneControlButton {
+    border-radius: 0.4rem;
+    font-size: 0.63rem;
+    height: 2.5rem;
+    padding: 0 0.65rem;
+  }
+
+  /* ApplicationMapAspectFrame measures the active image's natural ratio and
+     computes the largest uncropped rectangle that fits the flexible stage.
+     Image and percentage hotspots fill this exact same coordinate surface. */
+  .pageCssFullscreen .stageVisual {
+    aspect-ratio: auto;
+    height: 100%;
+    margin: 0;
+    max-height: none;
+    max-width: none;
+    min-height: 0;
+    position: relative;
+    transform: none;
+    width: 100%;
+  }
+
+  .pageCssFullscreen .backgroundImage {
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .pageCssFullscreen .zoneStageRow {
+    background: #030a13;
+    display: block;
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pageCssFullscreen .zoneStage {
+    aspect-ratio: auto;
+    height: 100%;
+    max-height: none;
+    max-width: none;
+    min-height: 0;
+    position: relative;
+    transform: none;
+    width: 100%;
+  }
+
+  .pageCssFullscreen .gallerySection,
+  .pageCssFullscreen .zoneGallerySection {
+    background: #061425;
+    bottom: auto;
+    flex: 0 0 var(--app-map-gallery-height);
+    height: var(--app-map-gallery-height);
+    justify-content: center;
+    left: auto;
+    margin: 0;
+    overflow: hidden;
+    padding: 0.3rem 0.45rem;
+    position: static;
+    right: auto;
+    width: 100%;
+  }
+
+  .pageCssFullscreen .zoneStrip {
+    gap: 0.3rem;
+    height: 100%;
+  }
+
+  .pageCssFullscreen .zoneStripArrow {
+    font-size: 0.9rem;
+    height: 1.8rem;
+    width: 1.8rem;
+  }
+
+  .pageCssFullscreen .zoneStripList {
+    gap: 0.3rem;
+    padding: 0;
+  }
+
+  .pageCssFullscreen .zoneStripList > li {
+    flex: 0 0 5.25rem;
+    width: 5.25rem;
+  }
+
+  .pageCssFullscreen .zoneStripItem {
+    border-radius: 0.35rem;
+    gap: 0.1rem;
+    padding: 0.18rem;
+  }
+
+  .pageCssFullscreen .zoneStripName {
+    font-size: 0.5rem;
+    height: 1.15rem;
+    line-height: 1.1;
+  }
+
+  .pageCssFullscreen .zoneStripThumb {
+    aspect-ratio: 16 / 9;
+    border-radius: 0.2rem;
+  }
+
+  .pageCssFullscreen .panel {
+    align-self: auto;
+    bottom: 0.5rem;
+    grid-column: auto;
+    grid-row: auto;
+    justify-self: auto;
+    left: 0.5rem;
+    margin: 0;
+    max-height: min(52dvh, 24rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    position: absolute;
+    right: 0.5rem;
+    top: auto;
+    width: auto;
+    z-index: 40;
+  }
+
+  .pageCssFullscreen .hotspot {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  .pageCssFullscreen .panelHeader {
+    padding: 0.7rem;
+  }
+
+  .pageCssFullscreen .panelHeader h2 {
+    font-size: 0.95rem;
+  }
+
+  .pageCssFullscreen .panelBody {
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .pageCssFullscreen .brandMark {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .pageCssFullscreen .contextPanel {
+    gap: 0.1rem;
+    max-height: 24dvh;
+    padding-block: 0.25rem;
+  }
+
+  .pageCssFullscreen .backControl {
+    height: 1.5rem;
+  }
+
+  .pageCssFullscreen .navItem,
+  .pageCssFullscreen .navItemStatic {
+    height: 1.55rem;
+  }
+
+  .pageCssFullscreen .gallerySection,
+  .pageCssFullscreen .zoneGallerySection {
+    --app-map-gallery-height: 4rem;
+  }
+
+  .pageCssFullscreen .zoneStripList > li {
+    flex-basis: 4.5rem;
+    width: 4.5rem;
+  }
+
+  .pageCssFullscreen .zoneStripName {
+    height: 0.7rem;
+    -webkit-line-clamp: 1;
+  }
+}

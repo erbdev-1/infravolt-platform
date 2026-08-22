@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 
-import { DataCentreApplicationMap } from "@/components/public/application-map/data-centre-application-map";
+import { ApplicationMapViewer } from "@/components/public/application-map/application-map-viewer";
 import { commercialBuildingApplicationMapContentForMarket } from "@/modules/application-map/commercial-building-content";
 import { COMMERCIAL_BUILDING_APPLICATION_MAP } from "@/modules/application-map/commercial-building";
 import { resolveApplicationMap } from "@/modules/application-map/resolve";
@@ -36,10 +36,12 @@ export default async function CommercialBuildingApplicationMapRoute() {
   );
 
   return (
-    <DataCentreApplicationMap
+    <ApplicationMapViewer
       content={content}
+      industryId="commercial-building"
       map={map}
       overviewImageFit="contain"
+      sourcePath="/application-map/commercial-building"
     />
   );
 }

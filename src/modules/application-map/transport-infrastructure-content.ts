@@ -15,6 +15,8 @@ const TRANSPORT_INFRASTRUCTURE_CONTENT = {
     },
     headingSector: "Airport",
     headingSuffix: "Application Map",
+    overviewHeadingPrimary: "Airport",
+    overviewHeadingSecondary: "Application Map",
     introduction:
       "Explore InfraVolt product systems across a modern\nairport terminal.",
     overviewThumbnailLabel: "Overview",
@@ -36,6 +38,7 @@ const TRANSPORT_INFRASTRUCTURE_CONTENT = {
       benefitsHeading: "Key benefits",
       closeLabel: "Close product information",
       chooseProductHeading: "Available systems in this zone",
+      exploreSystemLabel: "Explore {system} →",
     },
   },
   ua: {
@@ -50,6 +53,8 @@ const TRANSPORT_INFRASTRUCTURE_CONTENT = {
     },
     headingSector: "Аеропорт",
     headingSuffix: "Карта застосувань",
+    overviewHeadingPrimary: "Карта застосувань",
+    overviewHeadingSecondary: "аеропорту",
     introduction:
       "Дізнайтеся, де застосовуються системи InfraVolt в сучасному\nтерміналі аеропорту.",
     overviewThumbnailLabel: "Огляд",
@@ -71,6 +76,7 @@ const TRANSPORT_INFRASTRUCTURE_CONTENT = {
       benefitsHeading: "Основні переваги",
       closeLabel: "Закрити інформацію про продукт",
       chooseProductHeading: "Доступні системи в цій зоні",
+      exploreSystemLabel: "Переглянути {system} →",
     },
   },
 } as const satisfies Readonly<Record<MarketCode, ApplicationMapPageContent>>;

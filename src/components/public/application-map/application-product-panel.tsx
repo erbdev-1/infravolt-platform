@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 
 import type { ProductAction } from "@/modules/application-map/types";
 
-import styles from "./data-centre-application-map.module.css";
+import styles from "./application-map-viewer.module.css";
 
 export type ApplicationProductPanelLabels = Readonly<{
   usedHereForHeading: string;
@@ -25,6 +25,7 @@ type ApplicationProductPanelProps = Readonly<{
   icon: string;
   image?: string;
   imageAlt?: string;
+  imagePresentation?: "category" | "product";
   labels: ApplicationProductPanelLabels;
   restoreFocusId: string;
   onClose: () => void;
@@ -40,6 +41,7 @@ export function ApplicationProductPanel({
   icon,
   image,
   imageAlt,
+  imagePresentation = "product",
   labels,
   restoreFocusId,
   onClose,
@@ -66,7 +68,7 @@ export function ApplicationProductPanel({
     // tut. Bu kontroller kendi onClick'leriyle zaten seçimi değiştirir;
     // onları da kapatma tetikleyicisi sayarsak, aynı tıklamada hem yeni
     // seçim hem de onClose() çakışıp yanlış sonuca yol açabilir (bkz.
-    // data-app-map-controls işaretli alanlar, data-centre-application-map.tsx).
+    // data-app-map-controls işaretli alanlar, application-map-viewer.tsx).
     function handlePointerDown(event: PointerEvent) {
       const target = event.target;
 
@@ -119,13 +121,19 @@ export function ApplicationProductPanel({
       </div>
 
       <div className={styles.panelBody}>
-        <div className={styles.panelMedia}>
+        <div
+          className={
+            imagePresentation === "category"
+              ? `${styles.panelMedia} ${styles.panelMediaCategory}`
+              : styles.panelMedia
+          }
+        >
           {image ? (
             <Image
               alt={imageAlt ?? ""}
               className={styles.panelMediaImage}
               fill
-              sizes="380px"
+              sizes="(max-width: 860px) calc(100vw - 2.2rem), 380px"
               src={image}
             />
           ) : (

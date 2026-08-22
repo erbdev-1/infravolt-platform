@@ -131,6 +131,20 @@
   }
 }
 
+@media (max-width: 768px) {
+  .motion {
+    inset: -3%;
+  }
+
+  .stage {
+    min-height: 13rem;
+  }
+
+  .image {
+    transform: scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .motion {
     transform: none;

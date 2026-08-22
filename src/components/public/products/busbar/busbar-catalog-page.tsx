@@ -10,6 +10,7 @@ import {
 } from "@/data/products/busbar/systems";
 import {
   busbarCatalogContentForMarket,
+  type BusbarCatalogContent,
   type BusbarApplicationId,
   type BusbarSystemSlug,
 } from "@/data/products/busbar/catalog-content";
@@ -17,6 +18,7 @@ import type {
   BusbarCatalogView,
   BusbarConductor,
 } from "@/data/products/busbar/types";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import { BusbarCinematicIntro } from "./busbar-cinematic-intro";
@@ -92,6 +94,36 @@ function formatSystemCount(
   return `${count} ${forms.many}`;
 }
 
+function TechnicalPack({
+  className,
+  copy,
+}: Readonly<{
+  className: string;
+  copy: BusbarCatalogContent["sidebar"];
+}>) {
+  return (
+    <div className={`${styles.technicalPack} ${className}`}>
+      <Image
+        alt=""
+        aria-hidden="true"
+        className={styles.technicalPackIcon}
+        height={28}
+        src="/assets/icons/actions/icon-technical-pack.svg"
+        width={28}
+      />
+
+      <p>{copy.technicalTitle}</p>
+
+      <span>{copy.technicalDescription}</span>
+
+      <Link href="/#technical-documents">
+        {copy.technicalAction}
+        <span aria-hidden="true">→</span>
+      </Link>
+    </div>
+  );
+}
+
 export function BusbarCatalogPage({
   market,
 }: Readonly<{
@@ -102,6 +134,12 @@ export function BusbarCatalogPage({
   const [conductor, setConductor] = useState<ConductorFilter>("all");
   const [currentRange, setCurrentRange] = useState<CurrentFilter>("all");
   const [ipRating, setIpRating] = useState<IpFilter>("all");
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  const activeFilterCount = [conductor, currentRange, ipRating].filter(
+    (filter) => filter !== "all",
+  ).length;
+  const hasActiveSelection = category !== "all" || activeFilterCount > 0;
 
   const filteredSystems = useMemo(() => {
     const selectedSystemCategory =
@@ -180,13 +218,21 @@ export function BusbarCatalogPage({
             <p className={styles.heroDescription}>{content.hero.description}</p>
 
             <div className={styles.heroActions}>
-              <Link className={styles.primaryButton} href="#systems">
-                {content.hero.primaryAction}
-              </Link>
-
-              <Link className={styles.secondaryButton} href="/#project-support">
+              <Link
+                className={styles.primaryButton}
+                href={buildEnquiryHref("project", { system: "busbar" })}
+              >
                 {content.hero.secondaryAction}
               </Link>
+
+              <a
+                className={styles.catalogueButton}
+                download="gersan-busbar-systems-catalogue.pdf"
+                href="/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf"
+              >
+                {content.hero.downloadAction}
+                <span aria-hidden="true">↓</span>
+              </a>
             </div>
           </div>
 
@@ -264,69 +310,90 @@ export function BusbarCatalogPage({
             <div className={styles.filterHeading}>
               <p>{content.sidebar.filters}</p>
 
-              <button onClick={clearFilters} type="button">
+              <button
+                className={`${styles.clearFilters} ${
+                  hasActiveSelection ? styles.clearFiltersActive : ""
+                }`}
+                onClick={clearFilters}
+                type="button"
+              >
                 {content.sidebar.clearAll}
               </button>
             </div>
 
-            <label className={styles.filterField}>
-              <span>{content.sidebar.conductor}</span>
+            <button
+              aria-controls="busbar-product-filters"
+              aria-expanded={mobileFiltersOpen}
+              className={styles.mobileFilterToggle}
+              onClick={() => setMobileFiltersOpen((isOpen) => !isOpen)}
+              type="button"
+            >
+              <span>
+                {content.sidebar.filters}
+                {activeFilterCount > 0 ? ` (${activeFilterCount})` : ""}
+              </span>
+              <span aria-hidden="true">{mobileFiltersOpen ? "−" : "+"}</span>
+            </button>
 
-              <select
-                onChange={(event) =>
-                  setConductor(event.target.value as ConductorFilter)
-                }
-                value={conductor}
-              >
-                <option value="all">{content.sidebar.allConductors}</option>
-                <option value="aluminium">{content.sidebar.aluminium}</option>
-                <option value="copper">{content.sidebar.copper}</option>
-              </select>
-            </label>
+            <div
+              className={`${styles.filterPanel} ${
+                mobileFiltersOpen ? styles.filterPanelOpen : ""
+              }`}
+              id="busbar-product-filters"
+            >
+              <label className={styles.filterField}>
+                <span>{content.sidebar.conductor}</span>
 
-            <label className={styles.filterField}>
-              <span>{content.sidebar.currentRange}</span>
+                <select
+                  onChange={(event) =>
+                    setConductor(event.target.value as ConductorFilter)
+                  }
+                  value={conductor}
+                >
+                  <option value="all">{content.sidebar.allConductors}</option>
+                  <option value="aluminium">{content.sidebar.aluminium}</option>
+                  <option value="copper">{content.sidebar.copper}</option>
+                </select>
+              </label>
 
-              <select
-                onChange={(event) =>
-                  setCurrentRange(event.target.value as CurrentFilter)
-                }
-                value={currentRange}
-              >
-                <option value="all">{content.sidebar.allCurrentRanges}</option>
-                <option value="up-to-100">{content.sidebar.upTo100}</option>
-                <option value="100-to-1000">
-                  {content.sidebar.from100To1000}
-                </option>
-                <option value="above-1000">{content.sidebar.above1000}</option>
-              </select>
-            </label>
+              <label className={styles.filterField}>
+                <span>{content.sidebar.currentRange}</span>
 
-            <label className={styles.filterField}>
-              <span>{content.sidebar.ipRating}</span>
+                <select
+                  onChange={(event) =>
+                    setCurrentRange(event.target.value as CurrentFilter)
+                  }
+                  value={currentRange}
+                >
+                  <option value="all">{content.sidebar.allCurrentRanges}</option>
+                  <option value="up-to-100">{content.sidebar.upTo100}</option>
+                  <option value="100-to-1000">
+                    {content.sidebar.from100To1000}
+                  </option>
+                  <option value="above-1000">{content.sidebar.above1000}</option>
+                </select>
+              </label>
 
-              <select
-                onChange={(event) =>
-                  setIpRating(event.target.value as IpFilter)
-                }
-                value={ipRating}
-              >
-                <option value="all">{content.sidebar.allIpRatings}</option>
-                <option value="ip55">{content.sidebar.includesIp55}</option>
-                <option value="ip68">{content.sidebar.includesIp68}</option>
-              </select>
-            </label>
+              <label className={styles.filterField}>
+                <span>{content.sidebar.ipRating}</span>
 
-            <div className={styles.technicalPack}>
-              <p>{content.sidebar.technicalTitle}</p>
-
-              <span>{content.sidebar.technicalDescription}</span>
-
-              <Link href="/#technical-documents">
-                {content.sidebar.technicalAction}
-                <span aria-hidden="true">→</span>
-              </Link>
+                <select
+                  onChange={(event) =>
+                    setIpRating(event.target.value as IpFilter)
+                  }
+                  value={ipRating}
+                >
+                  <option value="all">{content.sidebar.allIpRatings}</option>
+                  <option value="ip55">{content.sidebar.includesIp55}</option>
+                  <option value="ip68">{content.sidebar.includesIp68}</option>
+                </select>
+              </label>
             </div>
+
+            <TechnicalPack
+              className={styles.technicalPackDesktop}
+              copy={content.sidebar}
+            />
           </aside>
 
           <div className={styles.results}>
@@ -363,7 +430,7 @@ export function BusbarCatalogPage({
                           className={styles.cardProductImage}
                           fill
                           priority={system.featured}
-                          sizes="(min-width: 1280px) 25vw, (min-width: 768px) 40vw, 100vw"
+                          sizes="(max-width: 768px) 46vw, (min-width: 1280px) 25vw, (min-width: 769px) 40vw, 100vw"
                           src={system.image}
                         />
                       </Link>
@@ -482,7 +549,7 @@ export function BusbarCatalogPage({
             <p>{content.projectSupport.description}</p>
           </div>
 
-          <Link href="/#project-support">
+          <Link href={buildEnquiryHref("project", { system: "busbar" })}>
             {content.projectSupport.action}
             <span aria-hidden="true">→</span>
           </Link>

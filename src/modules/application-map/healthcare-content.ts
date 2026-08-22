@@ -20,6 +20,8 @@ const HEALTHCARE_CONTENT = {
     },
     headingSector: "Healthcare",
     headingSuffix: "Application Map",
+    overviewHeadingPrimary: "Healthcare",
+    overviewHeadingSecondary: "Application Map",
     introduction:
       "Explore InfraVolt product systems across a modern\nhealthcare facility.",
     overviewThumbnailLabel: "Overview",
@@ -41,6 +43,7 @@ const HEALTHCARE_CONTENT = {
       benefitsHeading: "Key benefits",
       closeLabel: "Close product information",
       chooseProductHeading: "Available systems in this zone",
+      exploreSystemLabel: "Explore {system} →",
     },
   },
   ua: {
@@ -55,6 +58,8 @@ const HEALTHCARE_CONTENT = {
     },
     headingSector: "Охорона здоров'я",
     headingSuffix: "Карта застосувань",
+    overviewHeadingPrimary: "Карта застосувань",
+    overviewHeadingSecondary: "охорони здоров'я",
     introduction:
       "Дізнайтеся, де застосовуються системи InfraVolt у сучасному\nмедичному закладі.",
     overviewThumbnailLabel: "Огляд",
@@ -76,6 +81,7 @@ const HEALTHCARE_CONTENT = {
       benefitsHeading: "Основні переваги",
       closeLabel: "Закрити інформацію про продукт",
       chooseProductHeading: "Доступні системи в цій зоні",
+      exploreSystemLabel: "Переглянути {system} →",
     },
   },
 } as const satisfies Readonly<Record<MarketCode, ApplicationMapPageContent>>;

@@ -1,0 +1,2242 @@
+/* =========================================================
+   01. PAGE THEME & DESIGN TOKENS
+   (identical token values to led-lighting-hub-page.module.css /
+   led-category-detail-page.module.css)
+   ========================================================= */
+
+.page {
+  --led-accent: #69c934;
+  --led-accent-hover: #7ddb43;
+  --led-accent-dark: #4fa824;
+  --led-accent-soft: #f1f9ec;
+  --led-accent-border: #b9e6a2;
+  --led-accent-tint: #f7fcf4;
+  --led-dark: #0b0f0c;
+  --led-dark-elevated: #12211a;
+  --led-ink: #10201c;
+  --led-body: #55655c;
+  --led-muted: #66756c;
+  --led-faint: #97a39c;
+  --led-border: #dfe6e0;
+  --led-surface: #f7f8f7;
+  --led-shadow-idle: 0 1px 2px rgb(11 15 12 / 4%), 0 1px 1px rgb(11 15 12 / 3%);
+
+  background: #ffffff;
+  color: var(--led-ink);
+  color-scheme: light;
+  min-height: 100vh;
+}
+
+.srOnlyHeading {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.sectionHeading {
+  margin-bottom: 1.75rem;
+  max-width: 44rem;
+}
+
+.sectionHeading h2 {
+  color: var(--led-ink);
+  font-size: clamp(1.7rem, 2.8vw, 2.2rem);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.sectionHeading p {
+  color: var(--led-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+}
+
+/* =========================================================
+   02. HERO — real high-ceiling industrial background (cover) +
+   a separate, independent product foreground layer (contain),
+   same two-layer principle as the category page's hero. The
+   background photo stays visible and legible on its own; only a
+   left-to-right scrim darkens it for the copy, never a flat
+   solid panel.
+   ========================================================= */
+
+.hero {
+  color: #ffffff;
+  min-height: 34rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.heroBackground {
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.heroScrim {
+  background:
+    linear-gradient(100deg, rgb(11 15 12 / 90%) 0%, rgb(11 15 12 / 74%) 34%, rgb(11 15 12 / 42%) 64%, rgb(11 15 12 / 22%) 100%),
+    linear-gradient(0deg, rgb(11 15 12 / 45%) 0%, transparent 38%);
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+/* Independent product layer — contain, not cover, so the real catalogue
+   geometry is never cropped or stretched. Positioned right of centre; the
+   background environment stays visible around and behind it. */
+.heroForeground {
+  bottom: 0;
+  position: absolute;
+  right: -2%;
+  top: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.heroTop {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 1.25rem clamp(1.25rem, 4vw, 4rem) 0;
+  position: relative;
+  z-index: 3;
+}
+
+.backButton {
+  align-items: center;
+  background: rgb(255 255 255 / 10%);
+  border: 1px solid rgb(255 255 255 / 25%);
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.backButton:hover {
+  background: rgb(255 255 255 / 18%);
+  border-color: rgb(255 255 255 / 40%);
+  transform: translateY(-2px);
+}
+
+.breadcrumbs {
+  align-items: center;
+  color: rgb(255 255 255 / 62%);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  gap: 0.6rem;
+}
+
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--led-accent);
+}
+
+.heroContent {
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 4.5rem clamp(1.25rem, 4vw, 4rem) 5.5rem;
+  position: relative;
+  width: 58%;
+  z-index: 3;
+}
+
+.heroEyebrow {
+  color: var(--led-accent);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+}
+
+.heroCategory {
+  color: rgb(255 255 255 / 60%);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 0.9rem;
+}
+
+.hero h1 {
+  color: #ffffff;
+  font-size: clamp(2rem, 3.1vw, 2.85rem);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.heroDescription {
+  color: rgb(255 255 255 / 76%);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin: 1rem 0 0;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.primaryButton {
+  align-items: center;
+  background: var(--led-accent);
+  border: 1px solid var(--led-accent);
+  border-radius: 0.45rem;
+  color: var(--led-dark);
+  display: inline-flex;
+  font-size: 0.88rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 3.1rem;
+  padding: 0.8rem 1.25rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.primaryButton:hover {
+  background: var(--led-accent-hover);
+  border-color: var(--led-accent-hover);
+  transform: translateY(-2px);
+}
+
+.secondaryButton {
+  align-items: center;
+  background: transparent;
+  border: 1px solid rgb(105 201 52 / 40%);
+  border-radius: 0.45rem;
+  color: rgb(255 255 255 / 88%);
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 3.1rem;
+  padding: 0.8rem 1.25rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.secondaryButton:hover {
+  background: rgb(105 201 52 / 10%);
+  border-color: var(--led-accent);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   03. TECHNICAL INFORMATION — shared 4-card standard
+   Overlaps the hero's bottom edge, same treatment as the
+   Industrial & High-Bay category page's technical strip.
+   ========================================================= */
+
+.technicalInfo {
+  margin: -3.25rem auto 0;
+  max-width: 1300px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+  position: relative;
+  z-index: 2;
+}
+
+.technicalInfoGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.technicalInfoCard {
+  background: var(--led-dark-elevated);
+  border-radius: 0.7rem;
+  box-shadow: 0 1.5rem 3rem rgb(11 15 12 / 22%);
+  padding: 1.5rem 1.4rem;
+}
+
+.technicalInfoHeader {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.technicalInfoIconBadge {
+  align-items: center;
+  background: rgb(105 201 52 / 14%);
+  border: 1px solid rgb(105 201 52 / 35%);
+  border-radius: 50%;
+  color: var(--led-accent);
+  display: inline-flex;
+  flex-shrink: 0;
+  height: 2.4rem;
+  justify-content: center;
+  width: 2.4rem;
+}
+
+.technicalInfoIcon {
+  height: 1.1rem;
+  width: 1.1rem;
+}
+
+/* Title sits directly beside its icon badge (not stacked above the
+   values list) and reads as the card's strongest text after the values
+   themselves — bumped up from the previous 0.92rem/regular-weight
+   treatment for scannability. */
+.technicalInfoTitle {
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.technicalInfoValues {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.technicalInfoValueRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.technicalInfoValueLabel {
+  color: rgb(255 255 255 / 55%);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.technicalInfoValueValue {
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.technicalInfoValueStandalone {
+  color: rgb(255 255 255 / 88%);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Colour & Finish / Compliance / Warranty — folded into this same
+   Technical Information section as one compact row directly beneath the
+   4 cards, instead of separate large sections further down the page. */
+/* This row sits directly in .technicalInfo (the light page background),
+   not inside the dark .technicalInfoCard tiles above it — it must use
+   dark-on-light ink tokens, not the cards' white text, or the label/
+   value text renders invisibly (white on light) leaving only the green
+   icons visibly on screen. */
+.technicalAssuranceRow {
+  border-top: 1px solid var(--led-border);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1rem;
+  padding-top: 1.25rem;
+}
+
+.technicalAssuranceRowSingle {
+  grid-template-columns: minmax(0, 30rem);
+}
+
+.technicalAssuranceRowDouble {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.technicalAssuranceItem {
+  align-items: center;
+  display: flex;
+  gap: 0.7rem;
+}
+
+/* Warranty gets the same premium badge treatment previously used for a
+   separate hero callout (icon + bold value in a green-tinted, bordered
+   pill) — folded back into its existing slot in this row instead of a
+   standalone hero element, so Colour & Finish / Compliance stay plain
+   while Warranty reads as the stronger trust signal. */
+.technicalAssuranceItemWarranty {
+  align-items: center;
+  background: var(--led-accent-soft);
+  border: 1px solid var(--led-accent-border);
+  border-radius: 0.6rem;
+  display: flex;
+  gap: 0.7rem;
+  padding: 0.6rem 0.85rem;
+}
+
+.technicalAssuranceIcon {
+  color: var(--led-accent-dark);
+  flex-shrink: 0;
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+.technicalAssuranceBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.technicalAssuranceLabel {
+  color: var(--led-muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.technicalAssuranceValue {
+  color: var(--led-ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* =========================================================
+   04. MODELS & TECHNICAL SCHEDULE
+   ========================================================= */
+
+.models {
+  margin: 5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.modelsNote {
+  color: var(--led-muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  margin: 0.85rem 0 0;
+}
+
+.scheduleLayout {
+  align-items: start;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 17rem minmax(0, 1fr);
+}
+
+.filterPanel {
+  background: var(--led-surface);
+  border: 1px solid var(--led-border);
+  border-radius: 0.85rem;
+  box-shadow: var(--led-shadow-idle);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  position: sticky;
+  top: 1.25rem;
+}
+
+.filterPanelHeader {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterPanelTitle {
+  color: var(--led-ink);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.searchField {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  border-radius: 0.6rem;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 0.75rem;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.searchField:focus-within {
+  border-color: var(--led-accent);
+  box-shadow: 0 0 0 3px var(--led-accent-soft);
+}
+
+.searchIcon {
+  color: var(--led-muted);
+  flex-shrink: 0;
+  height: 0.95rem;
+  width: 0.95rem;
+}
+
+.searchInput {
+  background: none;
+  border: none;
+  color: var(--led-ink);
+  flex: 1;
+  font-size: 0.85rem;
+  min-width: 0;
+  padding: 0.65rem 0;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: var(--led-faint);
+}
+
+.filterGroupLabel {
+  color: var(--led-ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin: 0 0 0.6rem;
+}
+
+.filterGroup + .filterGroup {
+  border-top: 1px solid var(--led-border);
+  padding-top: 1.1rem;
+}
+
+.filterCheckList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  max-height: 12rem;
+  overflow-y: auto;
+}
+
+.filterCheckOption {
+  align-items: center;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  display: flex;
+  gap: 0.55rem;
+  padding: 0.35rem 0.4rem;
+  transition: background-color 150ms ease;
+}
+
+.filterCheckOption:hover {
+  background: var(--led-accent-tint);
+}
+
+.filterCheckOption input[type="checkbox"] {
+  accent-color: var(--led-accent);
+  flex-shrink: 0;
+  height: 0.95rem;
+  width: 0.95rem;
+}
+
+.filterCheckValue {
+  color: var(--led-ink);
+  flex: 1;
+  font-size: 0.83rem;
+  font-weight: 600;
+}
+
+.applyFiltersButton {
+  background: var(--led-accent-dark);
+  border: 1px solid var(--led-accent-dark);
+  border-radius: 0.55rem;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 0.7rem 1rem;
+  transition: background-color 200ms ease;
+}
+
+.applyFiltersButton:hover {
+  background: var(--led-accent-hover);
+}
+
+.clearAllButton {
+  background: none;
+  border: none;
+  color: var(--led-accent-dark);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0;
+  text-align: left;
+  text-decoration: underline;
+}
+
+.clearAllButton:hover:not(:disabled) {
+  color: var(--led-ink);
+}
+
+.clearAllButton:disabled {
+  color: var(--led-faint);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.mobileFilterToggle {
+  align-items: center;
+  background: var(--led-surface);
+  border: 1px solid var(--led-border);
+  border-radius: 0.6rem;
+  color: var(--led-ink);
+  cursor: pointer;
+  display: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+}
+
+.mobileFilterToggleIcon {
+  color: var(--led-accent-dark);
+  flex-shrink: 0;
+  height: 1.05rem;
+  width: 1.05rem;
+}
+
+.mobileFilterBadge {
+  background: var(--led-accent-soft);
+  border-radius: 999px;
+  color: var(--led-accent-dark);
+  font-size: 0.76rem;
+  font-weight: 800;
+  margin-left: auto;
+  padding: 0.15rem 0.55rem;
+}
+
+.filterPanelMobileOpen,
+.filterPanelMobileClosed {
+  display: contents;
+}
+
+.mobileFilterChips {
+  display: contents;
+}
+
+.filterChip {
+  align-items: center;
+  background: var(--led-accent-soft);
+  border: 1px solid var(--led-accent-dark);
+  border-radius: 999px;
+  color: var(--led-accent-dark);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 700;
+  gap: 0.35rem;
+  padding: 0.35rem 0.7rem;
+}
+
+.filterChipIcon {
+  flex-shrink: 0;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.mobileResultsToggle {
+  align-items: center;
+  background: var(--led-surface);
+  border: 1px solid var(--led-border);
+  border-radius: 0.6rem;
+  color: var(--led-ink);
+  cursor: pointer;
+  display: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+}
+
+.mobileResultsToggleArrow {
+  color: var(--led-accent-dark);
+  font-weight: 800;
+}
+
+.resultsMobileOpen,
+.resultsMobileClosed {
+  display: contents;
+}
+
+.scheduleResults {
+  min-width: 0;
+}
+
+.scheduleToolbar {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.resultsLine {
+  color: var(--led-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.scheduleToolbarActions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: flex-end;
+}
+
+.csvActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.csvButton {
+  align-items: center;
+  background: var(--led-accent-dark);
+  border: 1px solid var(--led-accent-dark);
+  border-radius: 0.6rem;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 0.45rem;
+  padding: 0.6rem 1rem;
+  transition: background-color 200ms ease;
+  white-space: nowrap;
+}
+
+.csvButton:hover {
+  background: var(--led-accent-hover);
+}
+
+.csvButton:disabled {
+  background: var(--led-border);
+  border-color: var(--led-border);
+  color: var(--led-faint);
+  cursor: not-allowed;
+}
+
+.csvButtonIcon {
+  height: 0.9rem;
+  width: 0.9rem;
+}
+
+.scheduleEmpty {
+  background: var(--led-surface);
+  border: 1px dashed var(--led-border);
+  border-radius: 0.7rem;
+  color: var(--led-muted);
+  font-size: 0.88rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.tableScroll {
+  background: var(--led-surface);
+  border: 1px solid var(--led-border);
+  border-radius: 0.9rem;
+  box-shadow: var(--led-shadow-idle);
+  max-height: min(34rem, 65vh);
+  overflow: auto;
+}
+
+.table {
+  border-collapse: collapse;
+  min-width: 100%;
+  white-space: nowrap;
+}
+
+.table th {
+  background: #eef2ee;
+  color: var(--led-faint);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.65rem 0.9rem;
+  position: sticky;
+  text-align: left;
+  text-transform: uppercase;
+  top: 0;
+  z-index: 1;
+}
+
+.table td {
+  border-top: 1px solid var(--led-border);
+  color: var(--led-ink);
+  font-size: 0.83rem;
+  padding: 0.6rem 0.9rem;
+}
+
+.table td strong {
+  color: var(--led-ink);
+  display: block;
+  font-weight: 700;
+}
+
+.table tbody tr:hover {
+  background: var(--led-accent-soft);
+}
+
+.componentCell {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.75rem;
+  white-space: normal;
+}
+
+.componentThumbnail {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  border-radius: 0.4rem;
+  flex: 0 0 4rem;
+  height: 3rem;
+  position: relative;
+  width: 4rem;
+}
+
+.stockCodeCell {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+.copyButton {
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 0.3rem;
+  color: var(--led-muted);
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: 0.2rem;
+}
+
+.copyButton:hover {
+  background: var(--led-accent-soft);
+  color: var(--led-accent-dark);
+}
+
+.copyIcon {
+  height: 0.8rem;
+  width: 0.8rem;
+}
+
+.enquiryButton,
+.enquiredButton {
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.4rem 0.7rem;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+  white-space: nowrap;
+}
+
+.enquiryButton {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  color: var(--led-muted);
+}
+
+.enquiryButton:hover {
+  border-color: var(--led-accent);
+  color: var(--led-accent-dark);
+}
+
+.enquiredButton {
+  background: var(--led-accent-soft);
+  border: 1px solid var(--led-accent-border);
+  color: var(--led-accent-dark);
+}
+
+/* =========================================================
+   04B. SERVICEABILITY & ADJUSTMENT
+   Family-specific, optional section (e.g. GER-LED Industrial High
+   Ceiling's plug-and-remove modular construction) — pale neutral cards,
+   distinct from the white .mountingCard surface used by families with a
+   real mounting-hardware dataset.
+   ========================================================= */
+
+.serviceability {
+  margin: 5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.serviceabilityGrid {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.serviceabilityCard {
+  background: var(--led-surface);
+  border: 1px solid var(--led-border);
+  border-radius: 0.7rem;
+  padding: 1.4rem 1.3rem;
+}
+
+.serviceabilityIconBadge {
+  align-items: center;
+  background: var(--led-accent-soft);
+  border: 1px solid var(--led-accent-border);
+  border-radius: 50%;
+  color: var(--led-accent-dark);
+  display: inline-flex;
+  height: 2.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 2.5rem;
+}
+
+.serviceabilityIcon {
+  height: 1.15rem;
+  width: 1.15rem;
+}
+
+.serviceabilityCard h3 {
+  color: var(--led-ink);
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+}
+
+.serviceabilityCard p {
+  color: var(--led-body);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.familyTechnical {
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.familyTechnicalLayout {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+}
+
+.familyTechnicalLayoutSingle {
+  display: grid;
+}
+
+.configurationSelector {
+  background: #ffffff;
+  border-bottom: 1px solid var(--led-border);
+}
+
+.configurationSelectorInner {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem);
+}
+
+.configurationSelectorLabel {
+  color: var(--led-muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.configurationSelectorTabs {
+  background: var(--led-accent-tint);
+  border: 1px solid var(--led-accent-border);
+  border-radius: 0.65rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.25rem;
+}
+
+.configurationSelectorTab,
+.configurationSelectorTabActive {
+  border: 0;
+  border-radius: 0.45rem;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 0.65rem 0.9rem;
+}
+
+.configurationSelectorTab {
+  background: transparent;
+  color: var(--led-body);
+}
+
+.configurationSelectorTabActive {
+  background: var(--led-accent);
+  color: #07110b;
+}
+
+@media (max-width: 640px) {
+  .configurationSelectorInner {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .configurationSelectorTabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.familyTechnicalSettings {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.familyTechnicalSettingsCompact {
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.familyTechnicalSettingsSingle {
+  grid-template-columns: minmax(0, 40rem);
+}
+
+.familyTechnicalSetting {
+  background: var(--led-accent-tint);
+  border: 1px solid var(--led-accent-border);
+  border-radius: 0.65rem;
+  padding: 0.9rem 1rem;
+}
+
+.familyTechnicalSetting dt {
+  color: var(--led-accent-dark);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.familyTechnicalSetting dd {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0.35rem 0 0;
+}
+
+.familyTechnicalSetting dd strong {
+  color: var(--led-ink);
+  font-size: 0.95rem;
+}
+
+.familyTechnicalSetting dd span {
+  color: var(--led-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.familyTechnicalSettingsCompact .familyTechnicalSetting {
+  height: 100%;
+  min-height: 0;
+  padding: 0.72rem 0.9rem;
+}
+
+.familyTechnicalSettingsCompact .familyTechnicalSetting dd span {
+  display: -webkit-box;
+  line-height: 1.45;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.familyTechnicalAssets {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.familyTechnicalAsset {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--led-shadow-idle);
+  overflow: hidden;
+}
+
+.familyTechnicalAsset h3 {
+  border-bottom: 1px solid var(--led-border);
+  color: var(--led-ink);
+  font-size: 0.88rem;
+  margin: 0;
+  padding: 0.8rem 1rem;
+}
+
+.familyTechnicalAssetImage {
+  aspect-ratio: 4 / 3;
+  position: relative;
+}
+
+/* Small, restrained catalogue/source statement — never a compliance
+   badge, never inside .technicalAssurance. */
+.sourceNote {
+  color: var(--led-muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  margin: 1rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.smartIntegrationIntroduction {
+  color: var(--led-muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: -0.5rem 0 1rem;
+}
+
+/* =========================================================
+   04C. MOUNTING CONFIGURATIONS
+   Distinct, richer product-configuration cards — real product visual on
+   an accent-tinted panel, not the small icon+text .mountingCard used by
+   the generic Mounting & Integration Options section. Positioned before
+   Models & Technical Schedule (see LedSeriesDetailPage), for families
+   with genuinely separate catalogue installation configurations (e.g.
+   GER-LED High Ceiling's Suspended / Surface Mounted).
+   ========================================================= */
+
+.mountingConfigurations {
+  margin: 5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.mountingConfigurationsGrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mountingConfigurationCard {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  border-radius: 0.9rem;
+  overflow: hidden;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.mountingConfigurationCard:hover {
+  border-color: var(--led-accent-border);
+  box-shadow: 0 1.5rem 3rem rgb(11 15 12 / 12%);
+}
+
+.mountingConfigurationVisual {
+  aspect-ratio: 4 / 3;
+  background: var(--led-accent-tint);
+  position: relative;
+}
+
+.mountingConfigurationVisual img {
+  padding: 1.75rem;
+}
+
+.mountingConfigurationBody {
+  border-top: 3px solid var(--led-accent);
+  padding: 1.5rem 1.6rem 1.75rem;
+}
+
+.mountingConfigurationIconBadge {
+  align-items: center;
+  background: var(--led-accent-soft);
+  border: 1px solid var(--led-accent-border);
+  border-radius: 50%;
+  color: var(--led-accent-dark);
+  display: inline-flex;
+  height: 2.5rem;
+  justify-content: center;
+  margin-bottom: 0.9rem;
+  width: 2.5rem;
+}
+
+.mountingConfigurationIcon {
+  height: 1.15rem;
+  width: 1.15rem;
+}
+
+.mountingConfigurationBody h3 {
+  color: var(--led-ink);
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem;
+}
+
+.mountingConfigurationBody p {
+  color: var(--led-body);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  margin: 0 0 1.1rem;
+}
+
+.mountingConfigurationFacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mountingConfigurationFacts li {
+  background: var(--led-surface);
+  border: 1px solid var(--led-border);
+  border-radius: 0.4rem;
+  color: var(--led-ink);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+}
+
+/* Suspended/Surface-style technical-asset tab selector. */
+
+.technicalAssetTabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.technicalAssetTab,
+.technicalAssetTabActive {
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.86rem;
+  font-weight: 700;
+  padding: 0.65rem 1.3rem;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.technicalAssetTab {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  color: var(--led-muted);
+}
+
+.technicalAssetTab:hover {
+  border-color: var(--led-accent-border);
+  color: var(--led-accent-dark);
+}
+
+.technicalAssetTabActive {
+  background: var(--led-accent);
+  border: 1px solid var(--led-accent);
+  color: var(--led-dark);
+}
+
+/* Compact beam-angle selector nested inside the Photometric Data card
+   (e.g. GER-LED High Ceiling's real 20/60/90/120/130x60 catalogue
+   distributions) — smaller than the Suspended/Surface tabs above since
+   it selects within one already-active configuration, not between them. */
+.beamAngleTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.beamAngleTab,
+.beamAngleTabActive {
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.beamAngleTab {
+  background: var(--led-surface);
+  border: 1px solid var(--led-border);
+  color: var(--led-muted);
+}
+
+.beamAngleTab:hover {
+  border-color: var(--led-accent-border);
+  color: var(--led-accent-dark);
+}
+
+.beamAngleTabActive {
+  background: var(--led-accent-soft);
+  border: 1px solid var(--led-accent-border);
+  color: var(--led-accent-dark);
+}
+
+/* =========================================================
+   05. MOUNTING & INTEGRATION OPTIONS
+   ========================================================= */
+
+.mounting {
+  margin: 5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.mountingGrid {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mountingCard {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--led-shadow-idle);
+  padding: 1.5rem 1.4rem;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.mountingCard:hover {
+  border-color: var(--led-accent-border);
+  box-shadow: 0 1.25rem 2.25rem rgb(105 201 52 / 14%);
+  transform: translateY(-4px);
+}
+
+.mountingIconBadge {
+  align-items: center;
+  background: var(--led-accent-soft);
+  border: 1px solid var(--led-accent-border);
+  border-radius: 50%;
+  color: var(--led-accent-dark);
+  display: inline-flex;
+  height: 2.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 2.5rem;
+}
+
+.mountingIcon {
+  height: 1.15rem;
+  width: 1.15rem;
+}
+
+.mountingCard h3 {
+  color: var(--led-ink);
+  font-size: 0.98rem;
+  margin: 0 0 0.55rem;
+}
+
+.mountingCard p {
+  color: var(--led-body);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Real installation-assembly photography — a small, neutrally-captioned
+   gallery rather than mislabelling individual images with a specific
+   mounting name when the exact per-image mapping can't be verified from
+   the catalogue extraction alone. */
+.assemblyGallery {
+  border-top: 1px solid var(--led-border);
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+}
+
+.assemblyGallery h3 {
+  color: var(--led-ink);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.assemblyGallery p {
+  color: var(--led-body);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.assemblyGalleryGrid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.assemblyGalleryItem {
+  aspect-ratio: 1;
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  position: relative;
+}
+
+/* =========================================================
+   06. CONTROLS & LIGHTING OPTIONS
+   ========================================================= */
+
+.controls {
+  margin: 5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.controlsGroup + .controlsGroup {
+  margin-top: 1.5rem;
+}
+
+.controlsGroupLabel {
+  color: var(--led-faint);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+/* Equal-height technical cards, not chips — stronger presence than a
+   pill/chip row, still lighter than the main Technical Information
+   cards. Flexbox (not a fixed-column grid) so this scales cleanly
+   whether a family has 5 controls (LDBE) or 6 (High Ceiling's G-BUS PLC
+   + 5 others) without a hardcoded column count. */
+.controlsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.controlChip {
+  align-items: center;
+  background: var(--led-accent-tint);
+  border: 1px solid var(--led-accent-border);
+  border-radius: 0.65rem;
+  color: var(--led-ink);
+  display: flex;
+  flex: 1 1 9.5rem;
+  flex-direction: column;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 0.6rem;
+  justify-content: center;
+  min-height: 6.25rem;
+  padding: 1.1rem 0.75rem;
+  text-align: center;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.controlChip:hover {
+  border-color: var(--led-accent);
+  box-shadow: 0 0.75rem 1.5rem rgb(105 201 52 / 14%);
+  transform: translateY(-2px);
+}
+
+.controlChipIcon {
+  color: var(--led-accent-dark);
+  flex-shrink: 0;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.controlChipSecondary {
+  color: var(--led-muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  margin-top: -0.35rem;
+}
+
+.opticalOptions {
+  margin-top: 2rem;
+}
+
+.opticalOptions h3 {
+  color: var(--led-ink);
+  font-size: 0.95rem;
+  margin: 0 0 0.75rem;
+}
+
+.opticalOptions ul {
+  color: var(--led-body);
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  gap: 0.5rem;
+  line-height: 1.6;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.opticalOptions li {
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.opticalOptions li::before {
+  color: var(--led-accent-dark);
+  content: "—";
+  left: 0;
+  position: absolute;
+}
+
+/* =========================================================
+   07. PHOTOMETRIC & TECHNICAL DATA
+   ========================================================= */
+
+.photometric {
+  margin: 5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.photometricGrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.photometricCard {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--led-shadow-idle);
+  overflow: hidden;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.photometricCard h3 {
+  color: var(--led-ink);
+  font-size: 0.92rem;
+  margin: 0 0 1rem;
+}
+
+.photometricImage {
+  aspect-ratio: 4 / 3;
+  background: #ffffff;
+  position: relative;
+}
+
+.dimensionNote {
+  color: var(--led-muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 1.25rem 0 0;
+}
+
+/* =========================================================
+   09. TYPICAL APPLICATIONS
+   ========================================================= */
+
+.applications {
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.applicationsLayout {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+}
+
+.applicationsVisual {
+  aspect-ratio: 4 / 3;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.applicationsList {
+  align-content: center;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.applicationsLayoutCompact {
+  grid-template-columns: minmax(240px, 0.7fr) minmax(0, 2.3fr);
+}
+
+.applicationsListCompact {
+  align-items: stretch;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.applicationsListCompact .applicationItem {
+  flex: 1 1 0;
+  justify-content: center;
+  min-width: 0;
+  padding-inline: 0.75rem;
+  text-align: center;
+}
+
+.applicationItem {
+  align-items: center;
+  background: var(--led-accent-tint);
+  border: 1px solid var(--led-accent-border);
+  border-radius: 0.6rem;
+  color: var(--led-ink);
+  display: flex;
+  font-size: 0.86rem;
+  font-weight: 700;
+  gap: 0.65rem;
+  padding: 1rem 1.1rem;
+}
+
+.applicationItemIcon {
+  color: var(--led-accent-dark);
+  flex-shrink: 0;
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+/* Image-led application card grid — used once a family provides a real,
+   verified photo for at least one of its applications (see
+   LedSeriesApplicationItem.image). Mirrors the product-series card
+   language from led-category-detail-page.module.css (.seriesCard): white
+   surface, thin border, idle shadow, gentle lift + border-accent on
+   hover. Any application without its own verified photo renders as an
+   icon-only card (.applicationCardMediaEmpty) rather than reusing an
+   unrelated image. */
+.applicationsGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.applicationCard {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--led-shadow-idle);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.applicationCard:hover {
+  border-color: var(--led-accent-border);
+  box-shadow: 0 1.5rem 3rem rgb(11 15 12 / 12%);
+  transform: translateY(-4px);
+}
+
+.applicationCardMedia {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  position: relative;
+}
+
+.applicationCardMedia img {
+  transition: transform 280ms ease;
+}
+
+.applicationCard:hover .applicationCardMedia img {
+  transform: scale(1.05);
+}
+
+.applicationCardMediaEmpty {
+  align-items: center;
+  background: var(--led-accent-tint);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.applicationCardMediaEmptyIcon {
+  color: var(--led-accent-border);
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.applicationCardBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.1rem 1.15rem 1.25rem;
+}
+
+.applicationCardHeading {
+  align-items: start;
+  display: flex;
+  gap: 0.55rem;
+  min-height: 1.4rem;
+}
+
+.applicationCardIcon {
+  color: var(--led-accent-dark);
+  flex: 0 0 auto;
+  height: 1.4rem;
+  width: 1.4rem;
+}
+
+.applicationCardHeading .applicationCardTitle {
+  line-height: 1.4rem;
+}
+
+.applicationCardTitle {
+  color: var(--led-ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.applicationCardDescription {
+  color: var(--led-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* =========================================================
+   10. OTHER INDUSTRIAL & HIGH-BAY FAMILIES
+   ========================================================= */
+
+.siblings {
+  margin: 4.5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.siblingsGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.siblingCard {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--led-shadow-idle);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.25rem 1.3rem;
+  text-decoration: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+a.siblingCard:hover {
+  border-color: var(--led-accent-border);
+  box-shadow: 0 1.25rem 2.25rem rgb(105 201 52 / 14%);
+  transform: translateY(-4px);
+}
+
+.siblingCardCurrent {
+  background: var(--led-accent-tint);
+  border-color: var(--led-accent-border);
+}
+
+.siblingTitle {
+  color: var(--led-ink);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.siblingSubtitle {
+  color: var(--led-muted);
+  font-size: 0.78rem;
+}
+
+.siblingCurrentBadge {
+  align-self: flex-start;
+  background: var(--led-accent);
+  border-radius: 999px;
+  color: var(--led-dark);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-top: 0.4rem;
+  padding: 0.24rem 0.6rem;
+  text-transform: uppercase;
+}
+
+.siblingFooter {
+  align-items: center;
+  color: var(--led-accent-dark);
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 800;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.siblingCard:hover .siblingFooter span {
+  transform: translateX(4px);
+}
+
+.siblingFooter span {
+  transition: transform 180ms ease;
+}
+
+/* =========================================================
+   11. TECHNICAL SUPPORT CTA
+   ========================================================= */
+
+.supportCta {
+  background: radial-gradient(circle at 78% 25%, rgb(105 201 52 / 22%), transparent 32%), var(--led-dark);
+  border-radius: 0.7rem;
+  margin: 4.5rem auto 2.5rem;
+  max-width: 1400px;
+}
+
+.supportCtaContent {
+  color: #ffffff;
+  max-width: 34rem;
+  padding: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.supportCtaContent h2 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  margin: 0;
+}
+
+.supportCtaContent p {
+  color: rgb(255 255 255 / 78%);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.85rem 0 0;
+}
+
+.supportCtaAction {
+  align-items: center;
+  background: var(--led-accent);
+  border-radius: 0.5rem;
+  color: var(--led-dark);
+  display: inline-flex;
+  font-size: 0.88rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+  min-height: 3.1rem;
+  padding: 0.85rem 1.4rem;
+  text-decoration: none;
+  transition: background-color 180ms ease;
+}
+
+.supportCtaAction:hover {
+  background: var(--led-accent-hover);
+}
+
+/* =========================================================
+   12. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  /* Stack copy above the product foreground instead of overlapping it —
+     same reflow principle as the category page's hero: heroTop/
+     heroForeground/heroContent become normal flex children (background/
+     scrim stay absolute). The product renders as its own dedicated block
+     directly below the back-button/breadcrumb row and above the copy —
+     fully visible, contained, never covering the text or CTAs. */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .heroTop {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.6rem;
+    order: 1;
+  }
+
+  .backButton {
+    order: 1;
+  }
+
+  .breadcrumbs {
+    font-size: 0.78rem;
+    order: 2;
+    width: 100%;
+  }
+
+  .heroForeground {
+    bottom: auto;
+    height: 14rem;
+    order: 2;
+    padding: 0.75rem clamp(1.25rem, 4vw, 3rem);
+    position: relative;
+    right: auto;
+    top: auto;
+    width: 100%;
+  }
+
+  .heroContent {
+    order: 3;
+    padding: 0.5rem clamp(1.25rem, 4vw, 3rem) 2rem;
+    width: 100%;
+  }
+
+  .technicalInfo {
+    margin-top: 1.5rem;
+  }
+
+  .technicalInfoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mountingGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .assemblyGalleryGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  /* ~3 cards per row on tablet (3 + 2 for a 5-item row). */
+  .controlChip {
+    flex-basis: 30%;
+  }
+
+  .photometricGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .applicationsLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .familyTechnicalLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .applicationsListCompact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .applicationsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .serviceabilityGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .siblingsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scheduleLayout {
+    grid-template-columns: 15rem minmax(0, 1fr);
+  }
+
+  /* Configuration/selector blocks (Track Spot Configuration, Mounting
+     Configuration, Product Configuration, etc. — any per-family variant
+     selector passed through the `configurationSelector` prop) render high
+     on the page on desktop, directly under the hero. On mobile/tablet they
+     reflow via flex order to sit immediately above Models & Technical
+     Schedule instead — DOM order, functionality and desktop layout are
+     untouched; every other section keeps its natural document order by
+     relying on the default order value (0), which sorts before both the
+     selector (2) and the models-and-beyond group (3). */
+  .page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .configurationSelector {
+    margin: 5rem auto 0;
+    max-width: 1400px;
+    order: 2;
+    padding: 0 clamp(1.25rem, 4vw, 4rem);
+  }
+
+  .models,
+  .familyTechnical,
+  .serviceabilityAfterModels,
+  .mounting,
+  .controls,
+  .photometric,
+  .applications,
+  .siblings,
+  .supportCta {
+    order: 3;
+  }
+}
+
+@media (max-width: 900px) {
+  .mobileFilterToggle {
+    display: flex;
+  }
+
+  .filterPanelMobileClosed {
+    display: none;
+  }
+
+  .scheduleLayout {
+    display: block;
+  }
+
+  .filterPanel {
+    position: static;
+  }
+
+  .mobileFilterChips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .scheduleToolbar {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 720px) {
+  .scheduleToolbar,
+  .scheduleToolbarActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .scheduleToolbarActions {
+    width: 100%;
+  }
+
+  .csvActions,
+  .csvButton {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .tableScroll {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .table,
+  .table tbody,
+  .table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .table thead {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .table tbody tr {
+    border-top: 1px solid var(--led-border);
+    display: grid;
+    gap: 0.6rem 0.75rem;
+    grid-template-columns: 1fr 1fr;
+    padding: 1rem 1.1rem;
+  }
+
+  .table tbody tr:first-child {
+    border-top: none;
+  }
+
+  .table td {
+    border-top: none;
+    display: block;
+    padding: 0;
+    white-space: normal;
+  }
+
+  .table td::before {
+    color: var(--led-muted);
+    content: attr(data-label);
+    display: block;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+  }
+
+  .table td:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .table td:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .enquiryButton,
+  .enquiredButton {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  .mobileResultsToggle {
+    display: flex;
+  }
+
+  .resultsMobileClosed {
+    display: none;
+  }
+
+  .resultsMobileOpen {
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  .familyTechnicalSettingsCompact {
+    grid-template-columns: 1fr;
+  }
+
+  .heroTop {
+    padding-top: 1rem;
+  }
+
+  .backButton {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.95rem;
+  }
+
+  .breadcrumbs {
+    font-size: 0.72rem;
+    gap: 0.4rem;
+  }
+
+  .heroActions {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+
+  .heroForeground {
+    height: 11rem;
+  }
+
+  .assemblyGalleryGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .technicalInfoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .technicalAssuranceRow {
+    grid-template-columns: 1fr;
+  }
+
+  .mountingGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .applicationsList {
+    grid-template-columns: 1fr;
+  }
+
+  .familyTechnicalAssets {
+    grid-template-columns: 1fr;
+  }
+
+  .applicationsListCompact {
+    grid-template-columns: 1fr;
+  }
+
+  .applicationsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .serviceabilityGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .mountingConfigurationsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .siblingsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .controlsRow {
+    gap: 0.6rem;
+  }
+
+  /* Clean 2-column wrap on mobile. */
+  .controlChip {
+    flex-basis: 44%;
+    min-height: 5.5rem;
+    padding: 0.9rem 0.6rem;
+  }
+}

@@ -66,7 +66,7 @@ export function BusbarProductHeroVisual({
             className={styles.image}
             fill
             priority={priority}
-            sizes="(min-width: 1000px) 55vw, 100vw"
+            sizes="(max-width: 768px) 100vw, (min-width: 1000px) 55vw, 60vw"
             src={image}
           />
 

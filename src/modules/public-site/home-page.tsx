@@ -1,11 +1,7 @@
 import Image from "next/image";
 
 import { AccessibleVideo } from "@/components/public/accessible-video";
-import type { ProductId } from "@/modules/public-site/assets";
-import { DATA_CENTRE_APPLICATION_MAP } from "@/modules/application-map/data-centre";
-import { UKSupportPreview } from "@/components/public/uk-support-preview";
 import { TechnicalResourcesPreview } from "@/components/public/technical-resources-preview";
-import { GersanManufacturerPreview } from "@/components/public/gersan-manufacturer-preview";
 import { Container } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/link-button";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -14,6 +10,7 @@ import {
   INDUSTRY_ASSETS,
   MEDIA_ASSETS,
   PRODUCT_ASSETS,
+  PRODUCT_PAGE_HREFS,
 } from "@/modules/public-site/assets";
 import { publicSiteContentForMarket } from "@/modules/public-site/content";
 
@@ -22,17 +19,6 @@ import type { MarketCode } from "@/modules/markets/types";
 type HomePageViewProps = Readonly<{
   market: MarketCode;
 }>;
-
-const PRODUCT_PAGE_HREFS = {
-  busbar: "/products/busbar",
-  "cable-management": "/products/cable-support-systems",
-  "earthing-lightning": "/products/earthing-and-lightning-protection",
-  underfloor: "/products/underfloor-systems",
-  "led-bus lighting": "/products/lighting-busbar",
-  "ev-charging": "/products/ev-charging",
-} as const satisfies Readonly<Record<ProductId, string>>;
-
-const FEATURED_APPLICATION_SCENE = DATA_CENTRE_APPLICATION_MAP.overview;
 
 const HERO_BADGES = [
   {
@@ -202,6 +188,7 @@ export function HomePageView({ market }: HomePageViewProps) {
               const asset = PRODUCT_ASSETS[item.id];
               const href =
                 PRODUCT_PAGE_HREFS[item.id as keyof typeof PRODUCT_PAGE_HREFS];
+              const isExternal = href.startsWith("http");
 
               return (
                 <a
@@ -209,6 +196,8 @@ export function HomePageView({ market }: HomePageViewProps) {
                   className="product-card"
                   href={href}
                   key={item.id}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  target={isExternal ? "_blank" : undefined}
                 >
                   <div className="product-card__media">
                     <Image
@@ -294,139 +283,7 @@ export function HomePageView({ market }: HomePageViewProps) {
         </Container>
       </Section>
 
-      <Section
-        className="application-section"
-        id="application-map"
-        tone="white"
-      >
-        <Container className="application-feature__grid" size="wide">
-          <div className="application-feature__copy">
-            <SectionHeading
-              eyebrow={content.applicationMap.eyebrow}
-              introduction={content.applicationMap.description}
-              title={content.applicationMap.title}
-            />
-
-            <ul className="application-feature__steps">
-              {content.applicationMap.connections.map((item) => (
-                <li key={item}>
-                  <span
-                    aria-hidden="true"
-                    className="application-feature__step-marker"
-                  />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <LinkButton
-              className="application-feature__button"
-              href={content.applicationMap.action.href}
-            >
-              <span>{content.applicationMap.action.label}</span>
-              <span aria-hidden="true">→</span>
-            </LinkButton>
-          </div>
-
-          <a
-            aria-label={content.applicationMap.action.label}
-            className="application-preview"
-            href={content.applicationMap.action.href}
-          >
-            <div className="application-preview__toolbar">
-              <strong>{content.applicationMap.previewTitle}</strong>
-              <span>{content.applicationMap.previewZones[0]}</span>
-            </div>
-
-            <div className="application-preview__scene">
-              <Image
-                alt={FEATURED_APPLICATION_SCENE.imageAlt[market]}
-                fill
-                sizes="(min-width: 1024px) 55vw, 100vw"
-                src={FEATURED_APPLICATION_SCENE.image}
-                unoptimized
-              />
-
-              <div
-                aria-hidden="true"
-                className="application-preview__overlay"
-              />
-
-              {FEATURED_APPLICATION_SCENE.hotspots
-                .slice(0, 4)
-                .map((hotspot) => (
-                  <span
-                    aria-hidden="true"
-                    className="application-preview__hotspot"
-                    key={hotspot.id}
-                    style={{
-                      left: `${hotspot.x}%`,
-                      top: `${hotspot.y}%`,
-                    }}
-                  >
-                    <span className="application-preview__hotspot-dot" />
-
-                    <span className="application-preview__hotspot-label">
-                      {hotspot.accessibleLabel[market]}
-                    </span>
-                  </span>
-                ))}
-            </div>
-
-            <div className="application-preview__footer">
-              <div aria-hidden="true" className="application-preview__zones">
-                {content.applicationMap.previewZones.map((zone, index) => (
-                  <span
-                    className={
-                      index === 0
-                        ? "application-preview__zone application-preview__zone--active"
-                        : "application-preview__zone"
-                    }
-                    key={zone}
-                  >
-                    {zone}
-                  </span>
-                ))}
-              </div>
-
-              <span className="application-preview__action">
-                <span>{content.applicationMap.action.label}</span>
-                <span aria-hidden="true">→</span>
-              </span>
-            </div>
-          </a>
-        </Container>
-      </Section>
-
-      <UKSupportPreview content={content.support} />
-
-      <GersanManufacturerPreview content={content.manufacturer} />
-
       <TechnicalResourcesPreview content={content.technicalDocuments} />
-
-      <section className="contact-section" id="contact">
-        <Container className="contact-section__inner" size="wide">
-          <div>
-            <p className="eyebrow">{content.contact.eyebrow}</p>
-            <h2>{content.contact.title}</h2>
-            <p>{content.contact.description}</p>
-          </div>
-          <div className="button-group">
-            <LinkButton
-              href={content.contact.primaryAction.href}
-              variant="accent"
-            >
-              {content.contact.primaryAction.label}
-            </LinkButton>
-            <LinkButton
-              href={content.contact.secondaryAction.href}
-              variant="secondary"
-            >
-              {content.contact.secondaryAction.label}
-            </LinkButton>
-          </div>
-        </Container>
-      </section>
     </main>
   );
 }

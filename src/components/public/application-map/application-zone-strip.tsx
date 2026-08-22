@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import styles from "./data-centre-application-map.module.css";
+import styles from "./application-map-viewer.module.css";
 
 export type ZoneThumbnailItem = Readonly<{
   id: string;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 
-import { DataCentreApplicationMap } from "@/components/public/application-map/data-centre-application-map";
+import { ApplicationMapViewer } from "@/components/public/application-map/application-map-viewer";
 import { renewableEnergyApplicationMapContentForMarket } from "@/modules/application-map/renewable-energy-content";
 import { RENEWABLE_ENERGY_APPLICATION_MAP } from "@/modules/application-map/renewable-energy";
 import { resolveApplicationMap } from "@/modules/application-map/resolve";
@@ -36,10 +36,12 @@ export default async function RenewableEnergyApplicationMapRoute() {
   );
 
   return (
-    <DataCentreApplicationMap
+    <ApplicationMapViewer
       content={content}
+      industryId="renewable-energy"
       map={map}
       overviewImageFit="contain"
+      sourcePath="/application-map/renewable-energy"
     />
   );
 }

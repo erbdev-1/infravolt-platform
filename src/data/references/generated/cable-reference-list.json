@@ -1,0 +1,1376 @@
+{
+  "source": "GERSAN Cable Support catalogue · PDF pages 180-183 (printed pages 355-360), 'Reference List - Cable Tray Systems'",
+  "extractedAt": "2026-08-21",
+  "references": [
+    {
+      "id": "cable-reflist-1",
+      "project": "1. DIŞ HATLAR TERMİNALİ",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-2",
+      "project": "1. HES DARICA",
+      "location": "ORDU"
+    },
+    {
+      "id": "cable-reflist-3",
+      "project": "3H HAVALİMANI",
+      "location": "ÖZBEKİSTAN"
+    },
+    {
+      "id": "cable-reflist-4",
+      "project": "42 MASLAK KONUT-OFİS-AVM",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-5",
+      "project": "5. KISIM OG TAŞIYICI SİSTEMLER",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-6",
+      "project": "9 EYLÜL ÜNİ. GENEL KÜTÜP",
+      "location": "İZMİR"
+    },
+    {
+      "id": "cable-reflist-7",
+      "project": "A1 AVM",
+      "location": "ANKARA"
+    },
+    {
+      "id": "cable-reflist-8",
+      "project": "ACIBADEM HAST. POLİ",
+      "location": "BODRUM-MUĞLA"
+    },
+    {
+      "id": "cable-reflist-9",
+      "project": "ADALYA OCEAN OTEL",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-10",
+      "project": "ADAM & EVE OTEL",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-11",
+      "project": "ADIGÜZEL HES",
+      "location": "DENİZLİ"
+    },
+    {
+      "id": "cable-reflist-12",
+      "project": "ADNAN MENDERES HAVALİMANI",
+      "location": "İZMİR"
+    },
+    {
+      "id": "cable-reflist-13",
+      "project": "AFYON SPOR KOMPLEKSİ",
+      "location": "AFYON"
+    },
+    {
+      "id": "cable-reflist-14",
+      "project": "AĞAOĞLU AYAZMA ŞANTİYESİ",
+      "location": "İST"
+    },
+    {
+      "id": "cable-reflist-15",
+      "project": "AĞLAT PROJESİ",
+      "location": "BİTLİS"
+    },
+    {
+      "id": "cable-reflist-16",
+      "project": "AGT AĞAÇ SANAYİ PROJESİ",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-17",
+      "project": "AĞVA İPSALA - PAŞABAHÇE PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-18",
+      "project": "AKASYA ACIBADEM KONUT+AVM İSTANBUL",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-19",
+      "project": "AKBANK OPERASYON MERKEZİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-20",
+      "project": "AKBANK T.A.Ş. ŞUBELERİ (TÜRKİYE GENELİ)",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-21",
+      "project": "AKE ELEKTRONİK",
+      "location": "KONYA"
+    },
+    {
+      "id": "cable-reflist-22",
+      "project": "AKGÜN GIDA",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-23",
+      "project": "AKKOZA-2 KONUTLARI",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-24",
+      "project": "AKS YAPI LOBİ TUZLA",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-25",
+      "project": "AKS YAPI SARİSSA EVLERİ ÜMRANİYE İST",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-26",
+      "project": "AKTEKS TEKSTİL FABRİKASI",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-27",
+      "project": "AL SHARGİYAH EXPRESSWAY KM 24",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-28",
+      "project": "ALANYA TÜRK TELEKOM",
+      "location": "ALANYA-ANTALYA"
+    },
+    {
+      "id": "cable-reflist-29",
+      "project": "ALAŞEHİR JES PROJESİ",
+      "location": "OSMANİYE"
+    },
+    {
+      "id": "cable-reflist-30",
+      "project": "ALBARAKA ŞUBELERİ (TÜRKİYE GENELİ)",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-31",
+      "project": "ALEMDAR KİMYA DİLOVASI",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-32",
+      "project": "ALGİDA DONDURMA FABRİKASI",
+      "location": "TEKİRDAĞ"
+    },
+    {
+      "id": "cable-reflist-33",
+      "project": "ALİ İHSAN TÜZÜN İŞ MRKZ. SAMANDIRA",
+      "location": "İST"
+    },
+    {
+      "id": "cable-reflist-34",
+      "project": "ALİAĞA OSB KİMYASAL VE BİYOLOJİK",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-35",
+      "project": "ALİNMAA OFİS",
+      "location": "LİBYA"
+    },
+    {
+      "id": "cable-reflist-36",
+      "project": "ALKATAŞ SOSYAL HİZMETLER BİNASI PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-37",
+      "project": "ALMAATA HAVAALANI",
+      "location": "TÜRKMENİSTAN"
+    },
+    {
+      "id": "cable-reflist-38",
+      "project": "ALMONDHİLL KONUTLARI",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-39",
+      "project": "ALTINOVA ÇİMENTO FABRİKASI",
+      "location": "ELAZIĞ"
+    },
+    {
+      "id": "cable-reflist-40",
+      "project": "ALVA DONNA HOTEL",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-41",
+      "project": "AMBARLI TERMİK SANTRALİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-42",
+      "project": "AMBASSADOR HOTEL",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-43",
+      "project": "AMMARA HASTANESİ",
+      "location": "IRAK"
+    },
+    {
+      "id": "cable-reflist-44",
+      "project": "ANADOLU YALDIZ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-45",
+      "project": "ANADOLUCAM FABRİKASI",
+      "location": "ESKİŞEHİR"
+    },
+    {
+      "id": "cable-reflist-46",
+      "project": "ANADOLUCAM FABRİKASI",
+      "location": "İNEGÖL"
+    },
+    {
+      "id": "cable-reflist-47",
+      "project": "ANAYAPI PLAZA KOZYATAĞI",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-48",
+      "project": "ANKARA TED KOLEJİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-49",
+      "project": "ANTALYA HAVAALANI",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-50",
+      "project": "ANTALYA ORG.SAN.BÖL. İDARE BİNASI TESİS",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-51",
+      "project": "AREVA GEBZE",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-52",
+      "project": "ARI-3 TEKNOKENT (İTÜ MASLAK KAMP",
+      "location": "İST."
+    },
+    {
+      "id": "cable-reflist-53",
+      "project": "ARİSTA BOMONTİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-54",
+      "project": "ARTVİN HES PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-55",
+      "project": "AŞAĞI KALEKÖY HES GENÇ",
+      "location": "BİNGÖL"
+    },
+    {
+      "id": "cable-reflist-56",
+      "project": "ASİA RAMADA OTEL",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-57",
+      "project": "ASSAN ALÜMİNYUM",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-58",
+      "project": "ASSAN HANİL PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-59",
+      "project": "ATABAY İLAÇ FABR. GEBZE",
+      "location": "KOCAELİ PROJESİ"
+    },
+    {
+      "id": "cable-reflist-60",
+      "project": "ATAKAŞ MAKİNA OSB GEBZE",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-61",
+      "project": "ATAKULE AVM",
+      "location": "ANKARA"
+    },
+    {
+      "id": "cable-reflist-62",
+      "project": "ATAŞEHİR DELUXIA KONUTLARI",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-63",
+      "project": "ATAŞEHİR EMLAK KONUT PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-64",
+      "project": "ATATÜRK HAVALİMANI 3. GELİŞİM PRJ",
+      "location": "İST."
+    },
+    {
+      "id": "cable-reflist-65",
+      "project": "ATATÜRK HAVALİMANI ASKERİ PROTOKOL PRJ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-66",
+      "project": "ATATÜRK HAVALİMANI İÇ VE DIŞ HATLAR",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-67",
+      "project": "ATİK PAŞA YALISI",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-68",
+      "project": "ATIK SU ARITMA TESİSİ PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-69",
+      "project": "AVEA GÜNEŞLİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-70",
+      "project": "AVRUPA KONUTLARI ISPARTAKULE",
+      "location": "İST."
+    },
+    {
+      "id": "cable-reflist-71",
+      "project": "AXİS İSTANBUL OFİS + AVM",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-72",
+      "project": "AYSİR KEMPİNSKİ HOTEL",
+      "location": "MUĞLA"
+    },
+    {
+      "id": "cable-reflist-73",
+      "project": "BABY GİZ PLAZA MASLAK",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-74",
+      "project": "ÇAMSAN PARK AVM",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-75",
+      "project": "BAĞIŞTAŞ HES",
+      "location": "ERZİNCAN"
+    },
+    {
+      "id": "cable-reflist-76",
+      "project": "ÇANAKKALE İLAHİYAT FAKÜLTESİ",
+      "location": "Ç.KALE"
+    },
+    {
+      "id": "cable-reflist-77",
+      "project": "BAK KADIN DOĞUM HASTANESİ",
+      "location": "IRAK"
+    },
+    {
+      "id": "cable-reflist-78",
+      "project": "ÇARŞAMBA HAVAALANI",
+      "location": "SAMSUN"
+    },
+    {
+      "id": "cable-reflist-79",
+      "project": "BAKÜ-TİFLİS-CEYHAN BORU HATTI",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-80",
+      "project": "CASABA ÖMERLİ VİLALARI",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-81",
+      "project": "BALIKESİR 850 YATAKLI DEVLET HASTANESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-82",
+      "project": "CEBİR TEKSTİL",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-83",
+      "project": "BANDIRMA BOR VE ASİT FABR",
+      "location": "BALIKESİR"
+    },
+    {
+      "id": "cable-reflist-84",
+      "project": "CENAL TERMİK SANTRALİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-85",
+      "project": "BARIŞ KOZMETİK TEKSTİLKENT",
+      "location": "İST."
+    },
+    {
+      "id": "cable-reflist-86",
+      "project": "CENGİZ TOPEL ASK. HAVAALANI",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-87",
+      "project": "BARUT SUNWING HOTEL",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-88",
+      "project": "CENTRAL BALAT",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-89",
+      "project": "BARZAN HASTANESİ",
+      "location": "IRAK"
+    },
+    {
+      "id": "cable-reflist-90",
+      "project": "ÇERMİKLER HES",
+      "location": "SİVAS"
+    },
+    {
+      "id": "cable-reflist-91",
+      "project": "BAŞBAKANLIK HİZMET BİNASI",
+      "location": "ANKARA"
+    },
+    {
+      "id": "cable-reflist-92",
+      "project": "CETAŞ KUYUMCULUK",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-93",
+      "project": "BASRA HASTANESİ",
+      "location": "IRAK"
+    },
+    {
+      "id": "cable-reflist-94",
+      "project": "CEVAHİR AVM",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-95",
+      "project": "BATI ATAŞEHİR KENT PLUS",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-96",
+      "project": "CHIPITA GEBZE FABRİKASI",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-97",
+      "project": "BATI ŞEHİR KONUT-OFİS-OTEL",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-98",
+      "project": "ÇİFTÇİ TOWERS",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-99",
+      "project": "BATMAN TÜPRAŞ PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-100",
+      "project": "CLUB MEGA SARAY",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-101",
+      "project": "BATUMİ GEORGİA AİRPORT",
+      "location": "GÜRCİSTAN"
+    },
+    {
+      "id": "cable-reflist-102",
+      "project": "CLUB PACİFİC HOTEL",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-103",
+      "project": "BEACH CLUB",
+      "location": "COLOMBİA"
+    },
+    {
+      "id": "cable-reflist-104",
+      "project": "CLUB VOYAGE",
+      "location": "MUĞLA"
+    },
+    {
+      "id": "cable-reflist-105",
+      "project": "BELAZUR RESORT & SPA",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-106",
+      "project": "COCO COLA ÇORLU TESİSLERİ",
+      "location": "TEKİRDAĞ"
+    },
+    {
+      "id": "cable-reflist-107",
+      "project": "BERA OTEL",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-108",
+      "project": "CONCORDE RESORT & SPA",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-109",
+      "project": "BEYBİ ELDİVEN FABRİKASI",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-110",
+      "project": "CRYSTAL HOTEL",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-111",
+      "project": "BİBERCİ BİOGAS SANTRALI",
+      "location": "AKŞEHİR"
+    },
+    {
+      "id": "cable-reflist-112",
+      "project": "CRYSTAL HOTELS GREEN OTEL",
+      "location": "MUĞLA"
+    },
+    {
+      "id": "cable-reflist-113",
+      "project": "BİBERCİ BİOGAS SANTRALI 1",
+      "location": "KONYA"
+    },
+    {
+      "id": "cable-reflist-114",
+      "project": "CRYSTAL NİRVANA RESORT",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-115",
+      "project": "BİBERCİ BİOGAS SANTRALI 2",
+      "location": "KONYA"
+    },
+    {
+      "id": "cable-reflist-116",
+      "project": "CRYSTAL SUNSET RESORT &SPA",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-117",
+      "project": "BİBERCİ BİOGAS SANTRALI",
+      "location": "ERZURUM"
+    },
+    {
+      "id": "cable-reflist-118",
+      "project": "CRYSTAL WATERWORLD HOTEL",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-119",
+      "project": "BİLİM İLAÇ GEBZE",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-120",
+      "project": "CVK PARK OTEL TAKSİM",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-121",
+      "project": "BJK SELENIUM",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-122",
+      "project": "D-OFİS MASLAK PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-123",
+      "project": "BODRUM YALIKAVAK TİLKİCİK KÖRFEZİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-124",
+      "project": "DAP ROYAL CENTER",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-125",
+      "project": "BOĞAZLAYAN ENTEGRE ŞEKER FABR",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-126",
+      "project": "DEFACTO",
+      "location": "SİVAS (OZON TEKSTİL)"
+    },
+    {
+      "id": "cable-reflist-127",
+      "project": "BORUSAN GENEL MÜDÜRLÜK",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-128",
+      "project": "DEFNE TARIM ENTEGRE SÜT TESİSİ",
+      "location": "TİRE"
+    },
+    {
+      "id": "cable-reflist-129",
+      "project": "BOSEN ENERJİ",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-130",
+      "project": "DEĞİRMEN HES",
+      "location": "TRABZON"
+    },
+    {
+      "id": "cable-reflist-131",
+      "project": "BOYTEKS TEKSTİL",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-132",
+      "project": "DEICHMANN KIZILAY",
+      "location": "ANKARA"
+    },
+    {
+      "id": "cable-reflist-133",
+      "project": "BRİSA LASTİK SANAYİ FABR",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-134",
+      "project": "DENSO OTO. YAN SANAYİ FAB",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-135",
+      "project": "BU YAKA AVM ÜMRANİYE",
+      "location": "İST"
+    },
+    {
+      "id": "cable-reflist-136",
+      "project": "DEŞARJ-ARITMA TESİSLERİ",
+      "location": "İZMİT"
+    },
+    {
+      "id": "cable-reflist-137",
+      "project": "BURSARAY",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-138",
+      "project": "DEÜ TINAZTEPE KAMPÜSÜ",
+      "location": "İZMİR"
+    },
+    {
+      "id": "cable-reflist-139",
+      "project": "BUSKİ AAT PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-140",
+      "project": "DEVA HOLDİNG",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-141",
+      "project": "BUSKİ KENT KATI ATIK ALANI PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-142",
+      "project": "DHI MERZİFON HAVAALANI",
+      "location": "AMASYA"
+    },
+    {
+      "id": "cable-reflist-143",
+      "project": "BÜYÜKYALI PROJESİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-144",
+      "project": "DHMİ ADIYAMAN HAVAALANI",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-145",
+      "project": "DIAMOND LİFE",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-146",
+      "project": "DİKTAŞ ÖREN BAYAN PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-147",
+      "project": "DİONİS OTEL RESORT",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-148",
+      "project": "DİŞ HASTANESİ",
+      "location": "TÜRKMENİSTAN"
+    },
+    {
+      "id": "cable-reflist-149",
+      "project": "DKY İNŞAAT LOKUM EVLER PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-150",
+      "project": "DMY İŞ MERKEZİ ÜMRANİYE",
+      "location": "İST"
+    },
+    {
+      "id": "cable-reflist-151",
+      "project": "DOĞADAN GIDA",
+      "location": "İZMİR"
+    },
+    {
+      "id": "cable-reflist-152",
+      "project": "DOĞUŞ OTO MASLAK PROJESİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-153",
+      "project": "DOĞUŞ POWER CENTER AVM",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-154",
+      "project": "DONGHEE HENDEK",
+      "location": "SAKARYA"
+    },
+    {
+      "id": "cable-reflist-155",
+      "project": "DORA 3 JES",
+      "location": "AYDIN"
+    },
+    {
+      "id": "cable-reflist-156",
+      "project": "DORUK TIP HASTANESİ",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-157",
+      "project": "DOSTEL MAKİNA GEBZE OSB OG-AG",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-158",
+      "project": "DOSU MAYA FABRİKASI",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-159",
+      "project": "DP WORLD YARIMCA LİMANI",
+      "location": "İZMİT"
+    },
+    {
+      "id": "cable-reflist-160",
+      "project": "DR. TARSA TARIM A.Ş",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-161",
+      "project": "DUMANKAYA ADRES PANORAMA",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-162",
+      "project": "DUMANKAYA CADDE",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-163",
+      "project": "DUMANKAYA FLEX",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-164",
+      "project": "DUMANKAYA FLEX KURTKÖY",
+      "location": "İST"
+    },
+    {
+      "id": "cable-reflist-165",
+      "project": "DUMANKAYA KONSEPT HALKALI",
+      "location": "İST"
+    },
+    {
+      "id": "cable-reflist-166",
+      "project": "DUMANKAYA MODERN VADİ ESENYURT",
+      "location": "İST"
+    },
+    {
+      "id": "cable-reflist-167",
+      "project": "DUMANKAYA PANORAMA TUZLA",
+      "location": "İST"
+    },
+    {
+      "id": "cable-reflist-168",
+      "project": "DUMANKAYA RİTİM MALTEPE",
+      "location": "İST"
+    },
+    {
+      "id": "cable-reflist-169",
+      "project": "DUMANKAYA RİTİM PROJESİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-170",
+      "project": "DÜZCE ÜNİVERSİTESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-171",
+      "project": "ECZACIBAŞI FABRİKA İŞLERİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-172",
+      "project": "ECZACIBAŞI KANYON AVM",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-173",
+      "project": "EFEMÇUKURU ALTIN MADENİ",
+      "location": "İZMİR"
+    },
+    {
+      "id": "cable-reflist-174",
+      "project": "EFES -SWISS OTEL",
+      "location": "İZMİR"
+    },
+    {
+      "id": "cable-reflist-175",
+      "project": "EGEBOYU KONUTLARI SANCAKTEPE",
+      "location": "İST"
+    },
+    {
+      "id": "cable-reflist-176",
+      "project": "EKİN PANO",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-177",
+      "project": "EKSUN GIDA FABRİKASI",
+      "location": "TEKİRDAĞ"
+    },
+    {
+      "id": "cable-reflist-178",
+      "project": "ELBA GEBZE FABRİKASI",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-179",
+      "project": "EMAAR SGUARE AVM",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-180",
+      "project": "EMAAR SQUARE PROJESİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-181",
+      "project": "ACIBADEM ATAŞEHİR HASTAHANESİ VE OFİS PROJESİ",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-182",
+      "project": "ACIBADEM MEDİPOL HASTAHANE PROJESİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-183",
+      "project": "ADANA ORGANİZE SANAYİ SİTESİ",
+      "location": "ADANA"
+    },
+    {
+      "id": "cable-reflist-184",
+      "project": "AFYON ŞEKER PROJESİ",
+      "location": "AFYON"
+    },
+    {
+      "id": "cable-reflist-185",
+      "project": "AKINAL SENTETİK TEKSTİL PROJESİ",
+      "location": "GAZİANTEP"
+    },
+    {
+      "id": "cable-reflist-186",
+      "project": "AKKİM KİMYA YALOVA FABRİKA PROJESİ",
+      "location": "YALOVA"
+    },
+    {
+      "id": "cable-reflist-187",
+      "project": "AKSA AKRİLİK FABRİKASI",
+      "location": "YALOVA"
+    },
+    {
+      "id": "cable-reflist-188",
+      "project": "AKZİRVE TOPKAPI KONUTLARI",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-189",
+      "project": "ANTALYA H.LİMANI GENİŞLEME PROJ. 2023",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-190",
+      "project": "ASFAT HİZMET BİNASI PROJESİ ÇANKAYA",
+      "location": "ANKARA"
+    },
+    {
+      "id": "cable-reflist-191",
+      "project": "BALTA LİMANI ARITMA TESİSİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-192",
+      "project": "BELLONA GES PROJESİ",
+      "location": "KAYSERİ"
+    },
+    {
+      "id": "cable-reflist-193",
+      "project": "BENESTA ACIBADEM PROJESİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-194",
+      "project": "BİEM İLAÇ PROJESİ",
+      "location": "TEKİRDAĞ"
+    },
+    {
+      "id": "cable-reflist-195",
+      "project": "ÇANAKÇILAR SERAMİK",
+      "location": "ZONGULDAK"
+    },
+    {
+      "id": "cable-reflist-196",
+      "project": "CEVAHİR AVM PROJESİ ŞİŞLİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-197",
+      "project": "DALGAKIRAN KOMPRASÖR FABRİKA PROJESİ",
+      "location": "İZMİT"
+    },
+    {
+      "id": "cable-reflist-198",
+      "project": "DEICHMANN MAĞAZASI FETHİYE ERASTA AVM PROJESİ FETHİYE",
+      "location": "MUĞLA"
+    },
+    {
+      "id": "cable-reflist-199",
+      "project": "DEICHMANN MAĞAZASI (MARK ANTALYA AVM PROJESİ) MURATPAŞA",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-200",
+      "project": "DEICHMANN MAĞAZASI (WEST PARK AVM İZMİR PROJESİ ) BORNOVA",
+      "location": "İZMİR"
+    },
+    {
+      "id": "cable-reflist-201",
+      "project": "DEVA İLAÇ ÇK-2 YENİ ONKOLOJİ BİNASI",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-202",
+      "project": "DORUK TIP HASTAHANE PROJESİ",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-203",
+      "project": "DOWAKSA FABRİKASI",
+      "location": "YALOVA"
+    },
+    {
+      "id": "cable-reflist-204",
+      "project": "DREAM VALLEY PROJESİ BODRUM",
+      "location": "MUĞLA"
+    },
+    {
+      "id": "cable-reflist-205",
+      "project": "ECZACI BAŞI VİTRA FABRİKASI",
+      "location": "BİLECİK"
+    },
+    {
+      "id": "cable-reflist-206",
+      "project": "EMLAK KONUT FLORYA EVLERİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-207",
+      "project": "EMLAK KONUT FİKİRTEPE PROJESİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-208",
+      "project": "EMLAK KONUT FLORYA EVLERİ PROJESİ BAKIRKÖY",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-209",
+      "project": "ESSEL KAĞIT",
+      "location": "OSMANİYE"
+    },
+    {
+      "id": "cable-reflist-210",
+      "project": "ESSEL KAĞIT",
+      "location": "ZONGULDAK"
+    },
+    {
+      "id": "cable-reflist-211",
+      "project": "ETİ BAKIR ADIYAMAN İŞLETMESİ PROJESİ",
+      "location": "ADIYAMAN"
+    },
+    {
+      "id": "cable-reflist-212",
+      "project": "ETİ BAKIR ELAZIĞ İŞLETMESİ PROJESİ",
+      "location": "ELAZIĞ"
+    },
+    {
+      "id": "cable-reflist-213",
+      "project": "ETİ BAKIR KÜRE İŞLETMESİ PROJESİ KASTAMONU",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-214",
+      "project": "ETİ BAKIR SAMSUN İŞLETMESİ PROJESİ",
+      "location": "SAMSUN"
+    },
+    {
+      "id": "cable-reflist-215",
+      "project": "ETİ BAKIR SİİRT İŞLETMESİ PROJESİ",
+      "location": "SİİRT"
+    },
+    {
+      "id": "cable-reflist-216",
+      "project": "EUROPAP TEZOL KAĞIT PROJESİ",
+      "location": "İZMİR"
+    },
+    {
+      "id": "cable-reflist-217",
+      "project": "EVORA KONUT PROJESİ",
+      "location": "İZMİR"
+    },
+    {
+      "id": "cable-reflist-218",
+      "project": "FİMAR SÜT FABRİKASI GES PROJESİ",
+      "location": "AMASYA"
+    },
+    {
+      "id": "cable-reflist-219",
+      "project": "FİNANS ŞEHİR / ATAŞEHİR",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-220",
+      "project": "FOUR SEASONS OTEL PROJESİ",
+      "location": "ETİLER İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-221",
+      "project": "GAZİANTEP OSB OKUL PROJESİ",
+      "location": "GAZİANTEP"
+    },
+    {
+      "id": "cable-reflist-222",
+      "project": "GAZİANTEP ŞEHİR HASTAHANESİ",
+      "location": "GAZİANTEP"
+    },
+    {
+      "id": "cable-reflist-223",
+      "project": "GEMLİK GÜBRE FABRİKASI",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-224",
+      "project": "GTC GÜNEŞ SANAYİ YAPTIĞI GES PROJELERİ",
+      "location": "NİĞDE"
+    },
+    {
+      "id": "cable-reflist-225",
+      "project": "GÜRAL PORSELEN KÜTAHYA",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-226",
+      "project": "HALKALI BİZİM MAHALLE PROJESİ KÜÇÜKÇEKMECE",
+      "location": "İST."
+    },
+    {
+      "id": "cable-reflist-227",
+      "project": "HATAY DÖRTYOL GAZ DOLUM TESİSİ",
+      "location": "HATAY"
+    },
+    {
+      "id": "cable-reflist-228",
+      "project": "HAVELSAN PROJESİ",
+      "location": "ANKARA"
+    },
+    {
+      "id": "cable-reflist-229",
+      "project": "HİLLORİA HİLTON HAMPTON OTEL PROJESİ",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-230",
+      "project": "HİLLORİA YAŞAM MERKEZİ SERDİVAN",
+      "location": "SAKARYA"
+    },
+    {
+      "id": "cable-reflist-231",
+      "project": "HİLTON OTEL PROJESİ ALTUNİZADE",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-232",
+      "project": "İSTİKBAL GES PROJESİ",
+      "location": "KAYSERİ"
+    },
+    {
+      "id": "cable-reflist-233",
+      "project": "İZMİR ALİAĞA PROJESİ",
+      "location": "İZMİR"
+    },
+    {
+      "id": "cable-reflist-234",
+      "project": "KIRIKKALE TÜPRAŞ",
+      "location": "KIRIKKALE"
+    },
+    {
+      "id": "cable-reflist-235",
+      "project": "KONYA SANAYİ SİTESİ",
+      "location": "KONYA"
+    },
+    {
+      "id": "cable-reflist-236",
+      "project": "KORUMA KLOR",
+      "location": "İZMİT"
+    },
+    {
+      "id": "cable-reflist-237",
+      "project": "KORUMA KLOR DERİNCE",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-238",
+      "project": "KORUMA KLOR KOLEJ PROJESİ KIRIKHAN",
+      "location": "HATAY"
+    },
+    {
+      "id": "cable-reflist-239",
+      "project": "KOZA POLYESTER PROJESİ",
+      "location": "GAZİANTEP"
+    },
+    {
+      "id": "cable-reflist-240",
+      "project": "KUŞTEPE ADLİYESİ İSTANBUL",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-241",
+      "project": "LİMAŞ LİMAN İŞLETMESİ HAYAT HOLDİNG PROJESİ BAŞİSKELE",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-242",
+      "project": "MURAT YAPI ÇATI GES PROJESİ",
+      "location": "MALATYA"
+    },
+    {
+      "id": "cable-reflist-243",
+      "project": "MEDİPOL BAĞCILAR HASTAHANE PROJESİ",
+      "location": "İST."
+    },
+    {
+      "id": "cable-reflist-244",
+      "project": "NİĞDE OSB PROJESİ",
+      "location": "NİĞDE"
+    },
+    {
+      "id": "cable-reflist-245",
+      "project": "ORDU ÇAMSAN PROJESİ",
+      "location": "ORDU"
+    },
+    {
+      "id": "cable-reflist-246",
+      "project": "POLİSAN BOYA DİLOVASI",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-247",
+      "project": "RİVA DÜŞLER VADİSİ PROJESİ BEYKOZ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-248",
+      "project": "SAĞLIK KAMPÜSÜ",
+      "location": "KOCAELİ"
+    },
+    {
+      "id": "cable-reflist-249",
+      "project": "SAMSUNG ÇERKEZKÖY FABRİKASI",
+      "location": "TEKİRDAĞ"
+    },
+    {
+      "id": "cable-reflist-250",
+      "project": "SEFİNE TERSANESİ",
+      "location": "YALOVA"
+    },
+    {
+      "id": "cable-reflist-251",
+      "project": "ŞEKER FABRİKASI",
+      "location": "AFYON"
+    },
+    {
+      "id": "cable-reflist-252",
+      "project": "ŞİŞECEM FABRİKASI",
+      "location": "ESKİŞEHİR"
+    },
+    {
+      "id": "cable-reflist-253",
+      "project": "SURYAPI BİZİM MAHALLE PROJESİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-254",
+      "project": "SURYAPI EXCELLENCE",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-255",
+      "project": "SURYAPI TOPKAPI EVLERİ / TOPKAPI",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-256",
+      "project": "SURYAPI MAVİ-YEŞİL KONUT PROJESİ İSTANBUL",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-257",
+      "project": "SURYAPI MUHİT SANCAKTEPE PROJESİ SANCAKTEPE",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-258",
+      "project": "SURYAPI PROJESİ",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-259",
+      "project": "SWİSS OTEL PROJESİ",
+      "location": "ANTALYA"
+    },
+    {
+      "id": "cable-reflist-260",
+      "project": "TERSANE İSTANBUL PROJESİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-261",
+      "project": "THY OFİS BİNASI YEŞİLKÖY",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-262",
+      "project": "TOGG PROJESİ GEMLİK",
+      "location": "BURSA"
+    },
+    {
+      "id": "cable-reflist-263",
+      "project": "TÖREN GIDA SAN VE TİC AŞ GAZİANTEP",
+      "location": ""
+    },
+    {
+      "id": "cable-reflist-264",
+      "project": "TOSYALI HOLDİNG SARISEKİ",
+      "location": "İSKENDERUN"
+    },
+    {
+      "id": "cable-reflist-265",
+      "project": "TOSYALI HOLDİNG OSMANİYE",
+      "location": "ADANA"
+    },
+    {
+      "id": "cable-reflist-266",
+      "project": "TRENDYOL DEPO",
+      "location": "ANKARA"
+    },
+    {
+      "id": "cable-reflist-267",
+      "project": "TÜPRAŞ KIŞLADAĞ ALTIN MADENİ PROJESİ",
+      "location": "UŞAK"
+    },
+    {
+      "id": "cable-reflist-268",
+      "project": "TÜPRAŞ KIRIKKALE PROJESİ",
+      "location": "KIRIKKALE"
+    },
+    {
+      "id": "cable-reflist-269",
+      "project": "TURKCELL GEBZE VERİ MERKEZİ GEM-4",
+      "location": "İZMİT"
+    },
+    {
+      "id": "cable-reflist-270",
+      "project": "TURKCELL DUDULLU VERİ MERKEZİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-271",
+      "project": "TÜRKTELEKOM VERİ VERKEZİ ÇERKEZKÖY",
+      "location": "TEKİRDAĞ"
+    },
+    {
+      "id": "cable-reflist-272",
+      "project": "YENİMAHALLE AVRUPA KONUTLARI",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-273",
+      "project": "YİĞİTOĞLU RESİDENCE GÜNEŞLİ",
+      "location": "İSTANBUL"
+    },
+    {
+      "id": "cable-reflist-274",
+      "project": "YURT ÇİMENTO PROJESİ",
+      "location": "ANTALYA"
+    }
+  ]
+}

@@ -1,0 +1,1757 @@
+.page {
+  overflow-x: clip;
+}
+
+.sectionHeading {
+  max-width: 46rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.sectionHeading h2 {
+  margin-top: 0.75rem;
+  color: var(--colour-navy);
+  font-size: clamp(1.9rem, 3.2vw, 2.65rem);
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hero */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  color: var(--colour-white);
+  background:
+    linear-gradient(90deg, rgb(2 18 38 / 38%) 0%, rgb(2 18 38 / 8%) 72%),
+    var(--colour-navy-dark) url("/assets/company/about-hero-background.webp") center / cover no-repeat;
+}
+
+.heroBackdrop {
+  display: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.78fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: center;
+  padding-block: clamp(4.5rem, 8vw, 7rem);
+}
+
+.heroEyebrow,
+.finalCtaEyebrow {
+  margin-bottom: 1rem;
+  color: var(--colour-red);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.heroCopy h1 {
+  max-width: 35rem;
+  font-size: clamp(2.55rem, 4.5vw, 3.75rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.heroDescription {
+  max-width: 33rem;
+  margin-top: 1.25rem;
+  color: var(--colour-text-light);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.heroActions :global(.button-link) {
+  min-height: 2.75rem;
+  padding-block: 0.625rem;
+}
+
+.heroMarkets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 0.0625rem solid rgb(255 255 255 / 14%);
+}
+
+.heroMarkets span {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--colour-text-light);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.heroMarkets span::before {
+  content: "";
+  position: absolute;
+  top: 0.4rem;
+  left: 0;
+  width: 0.35rem;
+  height: 0.35rem;
+  background: var(--colour-red);
+  border-radius: 50%;
+}
+
+.heroVisual {
+  display: none;
+}
+
+.heroVisualGrid {
+  position: absolute;
+  inset: 8%;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 10%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 10%) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+  border: 0.0625rem solid rgb(255 255 255 / 14%);
+  border-radius: var(--radius-media);
+}
+
+.heroVisualGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgb(215 25 32 / 35%) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+}
+
+.heroVisualRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 42%;
+  height: 42%;
+  border: 0.0625rem solid rgb(255 255 255 / 22%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.heroVisualNode {
+  position: absolute;
+  width: 0.6rem;
+  height: 0.6rem;
+  background: var(--colour-white);
+  border-radius: 50%;
+  box-shadow: 0 0 0.75rem 0.15rem rgb(215 25 32 / 55%);
+}
+
+.heroVisualNode1 {
+  top: 18%;
+  left: 22%;
+}
+
+.heroVisualNode2 {
+  top: 62%;
+  left: 76%;
+  background: var(--colour-red);
+}
+
+.heroVisualNode3 {
+  top: 78%;
+  left: 30%;
+}
+
+/* Who we are */
+
+.whoWeAre {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 94% 22%, rgb(36 93 132 / 6%), transparent 26rem),
+    linear-gradient(135deg, rgb(255 255 255 / 42%), transparent 58%),
+    var(--colour-surface);
+  border-bottom: 0.0625rem solid var(--colour-border);
+}
+
+.whoWeAre::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(11 31 51 / 6%) 0.0625rem, transparent 0.0625rem),
+    linear-gradient(90deg, rgb(11 31 51 / 6%) 0.0625rem, transparent 0.0625rem);
+  background-size: 3.5rem 3.5rem;
+  opacity: 0.28;
+  mask-image: linear-gradient(105deg, transparent 8%, #000 52%, transparent 96%);
+}
+
+.whoWeAre::after {
+  position: absolute;
+  right: -7rem;
+  bottom: -3rem;
+  width: min(42vw, 36rem);
+  aspect-ratio: 1.85;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(151deg, transparent 48.8%, rgb(26 70 104 / 11%) 49.2% 49.6%, transparent 50%),
+    linear-gradient(29deg, transparent 48.8%, rgb(26 70 104 / 9%) 49.2% 49.6%, transparent 50%),
+    repeating-linear-gradient(90deg, transparent 0 4.8rem, rgb(26 70 104 / 7%) 4.8rem 4.86rem);
+  opacity: 0.48;
+  mask-image: radial-gradient(ellipse at 70% 60%, #000 0%, transparent 70%);
+}
+
+.whoWeAreGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-areas:
+    "brand copy"
+    "capabilities copy";
+  grid-template-columns: minmax(17rem, 36%) minmax(0, 64%);
+  gap: 1.75rem 0;
+  align-items: start;
+  padding-block: 0.75rem;
+}
+
+.whoWeAreGrid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 36%;
+  width: 0.0625rem;
+  background: linear-gradient(180deg, transparent, var(--colour-border-dark) 8% 92%, transparent);
+  opacity: 0.58;
+}
+
+.whoWeAreBrand {
+  grid-area: brand;
+  padding-right: clamp(2.25rem, 4vw, 4rem);
+}
+
+.whoWeAreBrand :global(.eyebrow) {
+  color: var(--colour-red);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.15em;
+}
+
+.whoWeAreLogo {
+  display: block;
+  width: clamp(11.5rem, 17vw, 14.5rem);
+  height: auto;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  object-fit: contain;
+}
+
+.whoWeAreDescriptor {
+  max-width: 17rem;
+  margin-top: 1.75rem;
+  padding-top: 1.15rem;
+  color: var(--colour-navy);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  line-height: 1.65;
+  text-transform: uppercase;
+  border-top: 0.0625rem solid var(--colour-border);
+}
+
+.whoWeAreCopy {
+  grid-area: copy;
+  padding: 0 clamp(0rem, 1vw, 1rem) 0 clamp(3rem, 6vw, 6rem);
+}
+
+.whoWeAreCopy h2 {
+  max-width: 50rem;
+  color: var(--colour-navy);
+  font-size: clamp(2.35rem, 4vw, 3.75rem);
+  font-weight: 620;
+  letter-spacing: -0.055em;
+  line-height: 1.035;
+  text-wrap: balance;
+}
+
+.whoWeAreStatementAccent {
+  display: block;
+  width: 3.75rem;
+  height: 0.16rem;
+  margin-top: clamp(1.6rem, 3vw, 2.25rem);
+  background: var(--colour-red);
+}
+
+.whoWeAreCopy p {
+  max-width: 41rem;
+  margin-top: 1.35rem;
+  color: var(--colour-text-muted);
+  font-size: clamp(0.98rem, 1.25vw, 1.08rem);
+  line-height: 1.75;
+}
+
+.whoWeAreCapabilities {
+  grid-area: capabilities;
+  margin: 0;
+  padding: 0 clamp(2.25rem, 4vw, 4rem) 0 0;
+  border-bottom: 0.0625rem solid var(--colour-border);
+  list-style: none;
+}
+
+.whoWeAreCapabilities li {
+  display: grid;
+  grid-template-columns: 1.55rem minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: start;
+  padding-block: 0.95rem;
+  border-top: 0.0625rem solid var(--colour-border);
+}
+
+.whoWeAreCapabilities li > span {
+  position: relative;
+  display: grid;
+  width: 1.45rem;
+  height: 1.45rem;
+  margin-top: 0.05rem;
+  place-items: center;
+  background: rgb(255 255 255 / 72%);
+  border: 0.0625rem solid rgb(36 93 132 / 24%);
+  border-radius: 50%;
+}
+
+.whoWeAreCapabilities li > span::after {
+  width: 0.34rem;
+  height: 0.34rem;
+  content: "";
+  background: var(--colour-red);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.18rem rgb(200 30 42 / 8%);
+}
+
+.whoWeAreCapabilities h3 {
+  color: var(--colour-navy);
+  font-size: 0.92rem;
+  font-weight: 760;
+  letter-spacing: -0.012em;
+  line-height: 1.35;
+}
+
+.whoWeAreCapabilities p {
+  margin-top: 0.3rem;
+  color: var(--colour-text-muted);
+  font-size: 0.77rem;
+  line-height: 1.55;
+}
+
+.whoWeAreActions {
+  position: absolute;
+  right: clamp(0rem, 1vw, 1rem);
+  bottom: 0.65rem;
+  left: 36%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  padding-left: clamp(3rem, 6vw, 6rem);
+}
+
+.whoWeAreActions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.65rem;
+  padding: 0.65rem 0.95rem;
+  color: var(--colour-navy);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.015em;
+  line-height: 1.2;
+  text-decoration: none;
+  background: rgb(255 255 255 / 76%);
+  border: 0.0625rem solid var(--colour-border-dark);
+  border-radius: 0.45rem;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.whoWeAreActions a:first-child {
+  color: var(--colour-white);
+  background: var(--colour-navy);
+  border-color: var(--colour-navy);
+}
+
+.whoWeAreActions a span {
+  transition: transform 160ms ease;
+}
+
+.whoWeAreActions a:hover {
+  color: var(--colour-red);
+  background: var(--colour-white);
+  border-color: var(--colour-red);
+  transform: translateY(-0.06rem);
+}
+
+.whoWeAreActions a:first-child:hover {
+  color: var(--colour-white);
+  background: var(--colour-navy-light);
+  border-color: var(--colour-navy-light);
+}
+
+.whoWeAreActions a:hover span {
+  transform: translateX(0.15rem);
+}
+
+/* Manufacturer and distributor */
+
+.relationshipEcosystem {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 92% 10%, rgb(11 54 94 / 7%), transparent 31rem),
+    radial-gradient(circle at 8% 68%, rgb(204 31 48 / 4%), transparent 25rem),
+    var(--colour-surface);
+  border-bottom: 0.0625rem solid var(--colour-border);
+}
+
+.relationshipEcosystem::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgb(4 26 53 / 8%) 0.045rem, transparent 0.05rem);
+  background-size: 1.25rem 1.25rem;
+  opacity: 0.22;
+  mask-image: linear-gradient(115deg, transparent 18%, #000 62%, transparent 96%);
+}
+
+.relationshipEcosystem .sectionHeading {
+  position: relative;
+  max-width: 55rem;
+}
+
+.relationshipEcosystem .sectionHeading h2 {
+  max-width: 49rem;
+  font-size: clamp(2.35rem, 4.6vw, 3.7rem);
+  letter-spacing: -0.052em;
+  line-height: 1.02;
+}
+
+.ecosystemFlow {
+  position: relative;
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.gersanPlatform {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-areas: "capabilities brand";
+  grid-template-columns: minmax(0, 7fr) minmax(15rem, 5fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  width: min(82%, 64rem);
+  min-height: 21rem;
+  margin-inline: auto;
+  padding: clamp(2rem, 4vw, 3.1rem);
+  overflow: hidden;
+  background: var(--colour-white) url("/assets/company/gersan-market-card-background.webp") center / cover no-repeat;
+  border: 0.0625rem solid var(--colour-border);
+  border-top: 0.2rem solid var(--colour-navy);
+  border-radius: 1.3rem;
+  box-shadow:
+    0 1.25rem 3.75rem rgb(4 26 53 / 8%),
+    0 0.25rem 1rem rgb(4 26 53 / 4%);
+}
+
+.gersanPlatform::after {
+  position: absolute;
+  top: -0.0625rem;
+  right: 1.8rem;
+  width: 2.5rem;
+  height: 0.18rem;
+  content: "";
+  background: var(--colour-red);
+}
+
+.gersanPlatformTexture {
+  display: none;
+}
+
+.gersanPlatformHeader {
+  position: relative;
+  grid-area: brand;
+  padding-left: clamp(1.5rem, 3vw, 2.5rem);
+  border-left: 0.0625rem solid var(--colour-border);
+}
+
+.gersanPlatformLogo {
+  display: block;
+  width: min(100%, 13rem);
+  height: auto;
+  margin-bottom: 2rem;
+  object-fit: contain;
+}
+
+.gersanPlatformHeader p {
+  color: var(--colour-navy);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.gersanPlatformHeader span {
+  display: block;
+  max-width: 40rem;
+  margin-top: 0.55rem;
+  color: var(--colour-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.gersanCapabilityGrid {
+  grid-area: capabilities;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gersanCapabilityGrid li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.65rem minmax(0, 1fr);
+  gap: 0.7rem;
+  align-items: center;
+  min-width: 0;
+  min-height: 4.65rem;
+  padding: 0.85rem 0.9rem;
+  color: var(--colour-navy);
+  background: rgb(255 255 255 / 72%);
+  border-radius: 0.55rem;
+  box-shadow: inset 0 0 0 0.0625rem rgb(4 26 53 / 6%);
+}
+
+.gersanCapabilityGrid li::after {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0;
+  left: 0.9rem;
+  height: 0.1rem;
+  content: "";
+  background: linear-gradient(90deg, var(--colour-red) 0 1.75rem, var(--colour-border) 1.75rem 100%);
+}
+
+.gersanCapabilityGrid li > span {
+  color: var(--colour-red);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.gersanCapabilityGrid strong {
+  font-size: 0.78rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.marketsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.marketPanel {
+  position: relative;
+  overflow: hidden;
+  min-height: 21rem;
+  padding: clamp(1.5rem, 3.5vw, 2.25rem);
+  color: var(--colour-white);
+  background-color: var(--colour-navy-dark);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 0.0625rem solid rgb(255 255 255 / 13%);
+  border-top: 0.1875rem solid var(--colour-red);
+  border-radius: 1.15rem;
+  box-shadow:
+    0 1.5rem 3.5rem rgb(4 26 53 / 17%),
+    inset 0 0.0625rem rgb(255 255 255 / 8%);
+  transition: border-color 160ms ease-out, box-shadow 160ms ease-out, transform 160ms ease-out;
+}
+
+.marketPanel[data-market="uk"] {
+  background-image: url("/assets/company/infravolt-uk-market-card-background.webp");
+}
+
+.marketPanel[data-market="ua"] {
+  background-image: url("/assets/company/infravolt-ukraine-market-card-background.webp");
+}
+
+.marketPanel:hover {
+  border-color: rgb(255 255 255 / 24%);
+  border-top-color: var(--colour-red);
+  box-shadow: 0 1.25rem 2.8rem rgb(4 26 53 / 18%);
+  transform: translateY(-0.1rem);
+}
+
+.marketPanelHeader {
+  position: relative;
+  z-index: 1;
+}
+
+.marketPanelBrandRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.1rem;
+}
+
+.marketPanelLogo {
+  display: block;
+  width: 5.75rem;
+  height: auto;
+  object-fit: contain;
+}
+
+.marketMark {
+  position: relative;
+  display: inline-grid;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  color: var(--colour-white);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  border: 0.0625rem solid rgb(255 255 255 / 28%);
+  border-radius: 50%;
+}
+
+.marketMark::after {
+  position: absolute;
+  right: -0.12rem;
+  bottom: 0.16rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  content: "";
+  background: var(--colour-red);
+  border: 0.1rem solid var(--colour-navy-light);
+  border-radius: 50%;
+}
+
+.marketPanel h3 {
+  color: var(--colour-white);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.marketDescriptor {
+  margin-top: 0.45rem;
+  color: var(--colour-text-light);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.marketCopy {
+  position: relative;
+  z-index: 1;
+  max-width: 31rem;
+  margin-top: 1.5rem;
+  color: var(--colour-text-light);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.marketSupportList {
+  position: relative;
+  z-index: 1;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border-bottom: 0.0625rem solid rgb(255 255 255 / 13%);
+  list-style: none;
+}
+
+.marketSupportList li {
+  display: grid;
+  grid-template-columns: 0.65rem minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--colour-white);
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.4;
+  border-top: 0.0625rem solid rgb(255 255 255 / 13%);
+}
+
+.marketSupportList li > span {
+  width: 0.42rem;
+  height: 0.1rem;
+  background: var(--colour-red);
+}
+
+/* About GERSAN */
+
+.aboutGersanGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.aboutGersanVisualColumn {
+  display: grid;
+  min-width: 0;
+  gap: clamp(1.5rem, 2.4vw, 2rem);
+}
+
+.aboutGersanMedia {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  isolation: isolate;
+  margin: 0;
+  /* Top-left stays square: the source photo has a "TUZLA – İSTANBUL /
+     HEAD OFFICE / FACTORY" ribbon baked in flush with that corner, and
+     rounding it there clips into the ribbon's own sharp edge. */
+  border-radius: 0 1rem 1rem 1rem;
+  box-shadow:
+    0 2rem 4.5rem rgb(4 26 53 / 16%),
+    0 0.5rem 1.5rem rgb(4 26 53 / 7%);
+}
+
+.aboutGersanMedia img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: inherit;
+}
+
+.aboutGersanQuality {
+  min-width: 0;
+}
+
+.aboutGersanQuality h3 {
+  margin: 0 0 clamp(0.875rem, 1.5vw, 1.125rem);
+  color: var(--colour-navy);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.aboutGersanQualityGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.5rem, 0.8vw, 0.7rem);
+}
+
+.aboutGersanQualityCard {
+  display: grid;
+  height: 4.25rem;
+  min-width: 0;
+  padding: 0.55rem;
+  place-items: center;
+  overflow: hidden;
+  background: #fbfcfd;
+  border: 0.0625rem solid rgb(4 26 53 / 12%);
+  border-radius: 0.5rem;
+}
+
+.aboutGersanQualityLogo {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 2.6rem;
+  object-fit: contain;
+}
+
+.aboutGersanCopy h2 {
+  max-width: 30rem;
+  margin-bottom: 1.25rem;
+  color: var(--colour-navy);
+  font-size: clamp(2rem, 3.3vw, 2.75rem);
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.aboutGersanLead {
+  margin-top: 1.15rem;
+  color: var(--colour-navy);
+  font-size: 1.05rem;
+  font-weight: 550;
+  line-height: 1.6;
+}
+
+.aboutGersanText {
+  margin-top: 1.15rem;
+  color: var(--colour-text-muted);
+  font-size: 0.94rem;
+  line-height: 1.68;
+}
+
+.aboutGersanReadMore {
+  display: none;
+}
+
+.aboutGersanReadMore:focus-visible {
+  outline: 0.125rem solid var(--colour-red);
+  outline-offset: 0.2rem;
+}
+
+/* Manufacturing footprint */
+
+.footprintGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footprintCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--colour-white);
+  border: 0.0625rem solid var(--colour-border);
+  border-radius: 1rem;
+  box-shadow:
+    0 1.25rem 3rem rgb(4 26 53 / 8%),
+    0 0.25rem 0.75rem rgb(4 26 53 / 4%);
+  transition: box-shadow 160ms ease-out, transform 160ms ease-out;
+}
+
+.footprintCard::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  height: 0.1875rem;
+  content: "";
+  background: var(--colour-red);
+  pointer-events: none;
+}
+
+.footprintCard:hover {
+  box-shadow:
+    0 1.5rem 3.5rem rgb(4 26 53 / 13%),
+    0 0.3rem 0.9rem rgb(4 26 53 / 6%);
+  transform: translateY(-0.15rem);
+}
+
+.footprintCardMedia {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 0;
+  overflow: hidden;
+}
+
+.footprintCardMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.footprintCardMedia::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, transparent 60%, rgb(2 18 38 / 58%) 100%);
+}
+
+.footprintCardNumber {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.75rem;
+  z-index: 1;
+  color: var(--colour-white);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+}
+
+/* Corporate credibility */
+
+.scale {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(3rem, 5.5vw, 4.5rem);
+  color: var(--colour-white);
+  background:
+    radial-gradient(circle at 88% 0%, rgb(23 105 170 / 22%), transparent 42%),
+    linear-gradient(150deg, var(--colour-navy-light), var(--colour-navy-dark));
+  border-top: 0.1875rem solid var(--colour-red);
+}
+
+.scale::before {
+  position: absolute;
+  inset: 0 0 0 45%;
+  content: "";
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgb(255 255 255 / 16%) 0.05rem, transparent 0.055rem);
+  background-size: 1.15rem 1.15rem;
+  opacity: 0.22;
+  mask-image: linear-gradient(90deg, transparent, #000);
+}
+
+.scaleGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.scaleMetric {
+  min-width: 0;
+  padding-inline: clamp(1.25rem, 2.75vw, 2.25rem);
+  border-left: 0.0625rem solid rgb(255 255 255 / 14%);
+}
+
+.scaleMetric:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.scaleValue {
+  display: block;
+  color: var(--colour-white);
+  font-size: clamp(2.1rem, 3.9vw, 3.1rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.scaleLabel {
+  display: block;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  color: var(--colour-text-light);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  border-top: 0.0625rem solid rgb(255 255 255 / 14%);
+}
+
+/* Project support */
+
+.projectSupport {
+  position: relative;
+  overflow: hidden;
+}
+
+.projectSupport::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(4 26 53 / 4%) 0.0625rem, transparent 0.0625rem),
+    linear-gradient(90deg, rgb(4 26 53 / 4%) 0.0625rem, transparent 0.0625rem);
+  background-size: 3rem 3rem;
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse at 50% 38%, #000 0%, transparent 72%);
+}
+
+.projectSupport .sectionHeading,
+.projectSupport .processTimeline {
+  position: relative;
+  z-index: 1;
+}
+
+.processTimeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.processStep {
+  min-width: 0;
+  padding: 0 clamp(1.25rem, 2.5vw, 2rem);
+  border-left: 0.0625rem solid var(--colour-border);
+}
+
+.processStep:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.processStepHead {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.processNumber {
+  display: block;
+  color: var(--colour-navy);
+  font-size: clamp(1.6rem, 2.3vw, 1.95rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  transition: color 160ms ease-out;
+}
+
+.processAccent {
+  display: block;
+  flex: 0 0 auto;
+  width: 0.16rem;
+  height: 1.15rem;
+  background: var(--colour-red);
+  transition: height 160ms ease-out;
+}
+
+.processStep h3 {
+  margin: 0;
+  color: var(--colour-navy);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  transition: color 160ms ease-out;
+}
+
+.processStep p {
+  margin-top: 0.85rem;
+  color: var(--colour-text-muted);
+  font-size: 0.86rem;
+  line-height: 1.58;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .processStep:hover .processNumber {
+    color: var(--colour-red);
+  }
+
+  .processStep:hover .processAccent {
+    height: 1.6rem;
+  }
+
+  .processStep:hover h3 {
+    color: var(--colour-red);
+  }
+}
+
+.processStep:active .processNumber {
+  color: var(--colour-red);
+}
+
+.processStep:active .processAccent {
+  height: 1.6rem;
+}
+
+.processStep:active h3 {
+  color: var(--colour-red);
+}
+
+/* Final CTA */
+
+.finalCta {
+  padding-block: clamp(4.5rem, 8vw, 6.5rem);
+  background: var(--colour-surface);
+  border-top: 0.0625rem solid var(--colour-border);
+}
+
+.finalCtaInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) auto;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.finalCta h2 {
+  max-width: 37rem;
+  color: var(--colour-navy);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.finalCta p:not(.finalCtaEyebrow) {
+  max-width: 42rem;
+  margin-top: 1rem;
+  color: var(--colour-text-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.finalCtaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+@media (max-width: 64rem) {
+  .heroInner {
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.52fr);
+  }
+
+  .heroVisual {
+    max-width: 18rem;
+  }
+
+  .whoWeAreGrid {
+    grid-template-areas:
+      "brand"
+      "copy"
+      "capabilities"
+      "actions";
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding-block: 0;
+  }
+
+  .whoWeAreGrid::after {
+    display: none;
+  }
+
+  .whoWeAreBrand {
+    padding: 0 0 2rem;
+  }
+
+  .whoWeAreCopy {
+    padding: 2rem 0 0;
+    border-top: 0.0625rem solid var(--colour-border);
+  }
+
+  .whoWeAreCapabilities {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 1.5rem;
+    margin-top: 2rem;
+    padding: 0;
+  }
+
+  .whoWeAreActions {
+    position: static;
+    grid-area: actions;
+    padding: 1.75rem 0 0;
+  }
+
+  .gersanPlatform {
+    width: 100%;
+  }
+
+  .aboutGersanGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .aboutGersanMedia {
+    aspect-ratio: 4 / 3;
+  }
+
+  .aboutGersanQualityGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .aboutGersanQualityCard:nth-last-child(2) {
+    grid-column: auto;
+  }
+
+  .aboutGersanQualityCard:last-child {
+    grid-column: 2;
+  }
+
+  .footprintGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scaleGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scaleMetric:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .scaleMetric:nth-child(n + 3) {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 0.0625rem solid rgb(255 255 255 / 16%);
+  }
+
+  .processTimeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2.25rem;
+  }
+
+  .processStep:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .processStep:nth-child(n + 3) {
+    padding-top: 2.25rem;
+    border-top: 0.0625rem solid var(--colour-border);
+  }
+
+  .finalCtaInner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .finalCtaActions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .hero {
+    background:
+      linear-gradient(90deg, rgb(2 18 38 / 42%) 0%, rgb(2 18 38 / 12%) 76%),
+      var(--colour-navy-dark) url("/assets/company/about-hero-background-mobile.webp") center / cover no-repeat;
+  }
+
+  .heroInner {
+    display: block;
+    padding-block: 3.25rem 2.75rem;
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(2.2rem, 11vw, 3rem);
+  }
+
+  .heroDescription {
+    font-size: 0.94rem;
+  }
+
+  .sectionHeading {
+    margin-bottom: clamp(1.75rem, 6vw, 2.25rem);
+  }
+
+  .heroActions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+    margin-top: 1.5rem;
+  }
+
+  .heroActions :global(.button-link) {
+    min-height: 2.75rem;
+    padding: 0.5rem 0.6rem;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    justify-content: center;
+  }
+
+  .heroActions :global(.button-link) > span[aria-hidden="true"] {
+    display: none;
+  }
+
+  .heroActions :global(.button-link--light-outline) {
+    color: var(--colour-white);
+    background: rgb(2 18 38 / 45%);
+    border-color: rgb(255 255 255 / 85%);
+    font-weight: 800;
+  }
+
+  .heroMarkets {
+    margin-top: 1.5rem;
+  }
+
+  .heroVisual {
+    display: none;
+  }
+
+  .marketsGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .relationshipEcosystem .sectionHeading h2 {
+    font-size: clamp(1.9rem, 7vw, 2.25rem);
+  }
+
+  .relationshipEcosystem .sectionHeading :global(.section-heading__introduction) {
+    margin-top: 0.85rem;
+  }
+
+  .ecosystemFlow {
+    margin-top: 1.75rem;
+  }
+
+  .whoWeAre {
+    padding-top: 3.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .whoWeAreGrid {
+    gap: 0;
+  }
+
+  .whoWeAreBrand :global(.eyebrow) {
+    margin-top: 0;
+  }
+
+  .whoWeAreLogo {
+    width: 11.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .whoWeAreCopy {
+    padding-top: 1.75rem;
+  }
+
+  .whoWeAreCopy h2 {
+    font-size: clamp(1.85rem, 7.8vw, 2.3rem);
+    line-height: 1.08;
+  }
+
+  .whoWeAreCopy p {
+    margin-top: 1.1rem;
+    font-size: 0.96rem;
+  }
+
+  .whoWeAreStatementAccent {
+    width: 3rem;
+    margin-top: 1.35rem;
+  }
+
+  .whoWeAreCapabilities {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+    margin-top: 1.5rem;
+    border-bottom: 0;
+  }
+
+  .whoWeAreCapabilities li {
+    grid-template-columns: 1.35rem minmax(0, 1fr);
+    gap: 0.5rem;
+    min-height: 7rem;
+    padding: 0.85rem 0.75rem;
+    border: 0.0625rem solid var(--colour-border);
+    border-radius: 0.6rem;
+  }
+
+  .whoWeAreCapabilities p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  /* Removed from the mobile layout entirely (not just visually hidden
+     behind empty space) — the 2x2 support grid above is the section's
+     natural mobile end-point; the desktop-only CTA row would otherwise
+     leave a padding-only gap before "Manufacturer & Distributor". */
+  .whoWeAreActions {
+    display: none;
+  }
+
+  .gersanPlatform {
+    grid-template-areas:
+      "brand"
+      "capabilities";
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.15rem;
+    min-height: 0;
+    padding: 1.1rem;
+    border-radius: 1rem;
+  }
+
+  .gersanPlatform::before {
+    position: absolute;
+    right: -1.75rem;
+    bottom: -1.5rem;
+    z-index: 0;
+    width: 64%;
+    aspect-ratio: 480 / 354;
+    content: "";
+    background: url("/assets/company/gersan-market-card-motif-mobile.png") center / contain no-repeat;
+    opacity: 0.92;
+  }
+
+  .gersanPlatformHeader {
+    padding: 0 0 1.1rem;
+    border-left: 0;
+    border-bottom: 0.0625rem solid var(--colour-border);
+  }
+
+  .gersanPlatformLogo {
+    width: 9rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .gersanCapabilityGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+
+  .gersanCapabilityGrid li {
+    min-height: 4rem;
+    padding: 0.65rem 0.7rem;
+  }
+
+  .marketsGrid {
+    margin-top: 1.15rem;
+    gap: 0.85rem;
+  }
+
+  .marketPanel {
+    min-height: 0;
+    padding: 1.1rem;
+  }
+
+  .marketPanel:hover {
+    transform: none;
+  }
+
+  .marketPanelBrandRow {
+    margin-bottom: 0.75rem;
+  }
+
+  .marketDescriptor {
+    font-size: 0.68rem;
+  }
+
+  .marketCopy {
+    margin-top: 0.85rem;
+    font-size: 0.81rem;
+    line-height: 1.55;
+  }
+
+  .marketSupportList {
+    margin-top: 0.85rem;
+  }
+
+  .marketSupportList li {
+    min-height: 2.1rem;
+    font-size: 0.79rem;
+  }
+
+  .aboutGersanSection {
+    padding-block: clamp(2.75rem, 9vw, 3.5rem);
+  }
+
+  /* Overrides the <=64rem tablet tier's 4/3 crop box: the source photo is
+     1672x941 (~16/9), so a 4/3 frame forced object-fit:cover to crop ~25%
+     off the sides, cutting into the embedded "TUZLA - ISTANBUL" ribbon at
+     the left edge. Matching the box ratio to the source ratio means cover
+     has nothing left to crop. */
+  .aboutGersanMedia {
+    aspect-ratio: 1672 / 941;
+  }
+
+  .aboutGersanGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .aboutGersanVisualColumn {
+    gap: 1.25rem;
+  }
+
+  .aboutGersanCopy h2 {
+    margin-bottom: 0.85rem;
+    font-size: clamp(1.7rem, 7.5vw, 2rem);
+  }
+
+  .aboutGersanLead,
+  .aboutGersanText {
+    margin-top: 0.85rem;
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .aboutGersanExtra {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 200ms ease;
+  }
+
+  .aboutGersanExtraOpen {
+    grid-template-rows: 1fr;
+  }
+
+  .aboutGersanExtraInner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .aboutGersanReadMore {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.9rem;
+    padding: 0.45rem 0.15rem;
+    color: var(--colour-red);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .aboutGersanReadMore span {
+    font-weight: 800;
+  }
+
+  .aboutGersanQualityGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.3rem;
+  }
+
+  .aboutGersanQualityCard {
+    height: 3rem;
+    padding: 0.25rem;
+  }
+
+  .aboutGersanQuality h3 {
+    margin-bottom: 0.75rem;
+    font-size: 0.72rem;
+  }
+
+  .aboutGersanQualityLogo {
+    max-height: 1.8rem;
+  }
+
+  .aboutGersanQualityCard:last-child {
+    grid-column: auto;
+  }
+
+  .footprintSection {
+    padding-block: clamp(2.75rem, 9vw, 3.5rem);
+  }
+
+  .footprintGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.1rem;
+  }
+
+  .scale {
+    padding-block: clamp(0.375rem, 1.5vw, 0.625rem);
+  }
+
+  .scaleGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .scaleMetric:nth-child(n + 1) {
+    position: relative;
+    min-height: 0;
+    padding: 0.9375rem 0.55rem;
+    margin-top: 0;
+    border-top: 0;
+    border-left: 0;
+  }
+
+  .scaleMetric:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .scaleMetric:last-child {
+    padding-right: 0;
+  }
+
+  /* Inset vertical divider (not a full-height border) so it never touches
+     the section's red top rule — sits only between the four cells. */
+  .scaleMetric:not(:first-child)::before {
+    position: absolute;
+    top: 0.85rem;
+    bottom: 0.85rem;
+    left: 0;
+    width: 0.0625rem;
+    content: "";
+    background: rgb(255 255 255 / 18%);
+  }
+
+  .scaleValue {
+    font-size: clamp(1.2rem, 5.5vw, 1.5rem);
+    letter-spacing: -0.015em;
+  }
+
+  .scaleLabel {
+    margin-top: 0.3rem;
+    padding-top: 0.3rem;
+    font-size: 0.53rem;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+
+  .projectSupport {
+    padding-block: clamp(2.75rem, 9vw, 3.5rem);
+  }
+
+  .processTimeline {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+  }
+
+  .processStep:nth-child(n + 1) {
+    min-height: 8.5rem;
+    padding: 0.85rem 0.8rem;
+    background: var(--colour-white);
+    border: 0.0625rem solid var(--colour-border);
+    border-radius: 0.5rem;
+  }
+
+  .processStepHead {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .processNumber {
+    font-size: 1.05rem;
+  }
+
+  .processAccent {
+    height: 0.85rem;
+  }
+
+  .processStep h3 {
+    display: -webkit-box;
+    flex: 1 0 100%;
+    margin-top: 0.4rem;
+    overflow: hidden;
+    font-size: 0.88rem;
+    line-height: 1.28;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .processStep p {
+    display: -webkit-box;
+    margin-top: 0.4rem;
+    overflow: hidden;
+    color: var(--colour-text-muted);
+    font-size: 0.78rem;
+    line-height: 1.4;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .finalCta {
+    padding-block: clamp(2.75rem, 9vw, 3.5rem);
+  }
+
+  .finalCtaActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .finalCtaActions :global(.button-link) {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 40rem) {
+  .heroInner {
+    padding-block: 2.75rem 2.5rem;
+  }
+
+  .heroEyebrow {
+    margin-bottom: 0.65rem;
+  }
+
+  .heroCopy h1 {
+    max-width: 21.25rem;
+    font-size: clamp(2.125rem, 10vw, 2.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.03;
+  }
+
+  .heroDescription {
+    max-width: 20.625rem;
+    margin-top: 0.7rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .heroActions {
+    margin-top: 1.15rem;
+    gap: 0.625rem;
+  }
+
+  .heroMarkets {
+    margin-top: 1.15rem;
+    padding-top: 1rem;
+  }
+}
+
+@media (max-width: 24rem) {
+  .heroActions :global(.button-link) {
+    padding: 0.5rem 0.4rem;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  .whoWeAreCapabilities li {
+    padding: 0.75rem 0.6rem;
+  }
+
+  .gersanCapabilityGrid li {
+    padding-inline: 0.55rem;
+  }
+
+  .marketPanelLogo {
+    width: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marketPanel,
+  .footprintCard,
+  .processNumber,
+  .processAccent,
+  .processStep h3,
+  .whoWeAreActions a,
+  .whoWeAreActions a span,
+  .aboutGersanExtra {
+    transition: none;
+  }
+}

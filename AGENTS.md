@@ -19,7 +19,8 @@ Specifications `00` through `18` are authoritative project documentation. Do not
 - Do not install or upgrade packages, scaffold applications, change providers, or mutate external systems unless the task explicitly authorises it.
 - Do not use production credentials, production customer data, or destructive database operations.
 - Do not add secrets, tokens, passwords, private keys, private contracts, or real credentials to files, logs, fixtures, commits, or messages.
-- Do not publish or imply official Gersan authorisation, or use restricted claims, certificates, product documents, images, logos, or other licensed assets, until written authorisation and rights evidence are recorded.
+- Do not publish or imply an official Gersan relationship, territory, exclusivity, certification, or endorsement beyond the wording supported by recorded project decisions and source material.
+- GERSAN source catalogues and catalogue-derived materials supplied inside this repository/project workspace are authorised project source material for the InfraVolt website. They may be used for website implementation, including product information, reference lists and tables, customer/contractor/project names, locations, catalogue headings and structures, company logos extracted directly from those catalogues, and technical catalogue assets already prepared for the website. Preserve source wording and provenance; do not extend this permission to unrelated external assets or fabricated claims.
 - Engineering implementation remains accountable to the recorded engineering owner; legal and commercial decisions remain with their authorised owners.
 
 ## Repository authorship and ownership

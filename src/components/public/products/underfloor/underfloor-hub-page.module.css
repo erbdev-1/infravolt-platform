@@ -1,0 +1,893 @@
+/* =========================================================
+   01. PAGE THEME & DESIGN TOKENS — dark navy/charcoal + amber/copper,
+   deliberately distinct from LED green, Busbar red and Cable
+   Management blue (see brief).
+   ========================================================= */
+
+.page {
+  --underfloor-dark: #0c1b2c;
+  --underfloor-dark-elevated: #1b242b;
+  --underfloor-accent: #c66a1e;
+  --underfloor-accent-hover: #e78a2a;
+  --underfloor-accent-soft: #fff7ee;
+  --underfloor-accent-border: rgb(198 106 30 / 25%);
+  --underfloor-ink: #1a1f24;
+  --underfloor-body: #565f66;
+  --underfloor-muted: #6b7480;
+  --underfloor-border: #e6e2db;
+  --underfloor-surface: #fafaf8;
+  --underfloor-shadow-idle: 0 1px 2px rgb(12 27 44 / 5%), 0 1px 1px rgb(12 27 44 / 4%);
+
+  background: #ffffff;
+  color: var(--underfloor-ink);
+  color-scheme: light;
+  min-height: 100vh;
+}
+
+.srOnlyHeading {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.sectionHeading {
+  margin-bottom: 1.75rem;
+  max-width: 44rem;
+}
+
+.sectionHeading h2 {
+  color: var(--underfloor-ink);
+  font-size: clamp(1.7rem, 2.8vw, 2.2rem);
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.sectionHeading p {
+  color: var(--underfloor-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+}
+
+/* =========================================================
+   02. HERO — separate application background and transparent
+   product foreground layers.
+   ========================================================= */
+
+.hero {
+  background: var(--underfloor-dark);
+  color: #ffffff;
+  min-height: 32rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.heroBackground {
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.heroScrim {
+  background:
+    linear-gradient(98deg, rgb(8 20 33 / 74%) 0%, rgb(8 20 33 / 58%) 38%, rgb(8 20 33 / 24%) 72%, rgb(8 20 33 / 10%) 100%),
+    linear-gradient(0deg, rgb(8 20 33 / 24%) 0%, transparent 42%);
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.heroTop {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 1.25rem clamp(1.25rem, 4vw, 4rem) 0;
+  position: relative;
+  z-index: 3;
+}
+
+.backButton {
+  align-items: center;
+  background: rgb(255 255 255 / 10%);
+  border: 1px solid rgb(255 255 255 / 25%);
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.backButton:hover {
+  background: rgb(255 255 255 / 18%);
+  border-color: rgb(255 255 255 / 40%);
+  transform: translateY(-2px);
+}
+
+.breadcrumbs {
+  align-items: center;
+  color: rgb(255 255 255 / 62%);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  gap: 0.6rem;
+}
+
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--underfloor-accent-hover);
+}
+
+.heroInner {
+  align-items: center;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 3.5rem clamp(1.25rem, 4vw, 4rem) 4.5rem;
+  position: relative;
+  z-index: 3;
+}
+
+.heroContent {
+  position: relative;
+}
+
+.heroEyebrow {
+  color: var(--underfloor-accent-hover);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.9rem;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  color: #ffffff;
+  font-size: clamp(2rem, 3.2vw, 2.9rem);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.heroDescription {
+  color: rgb(255 255 255 / 76%);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 1.1rem 0 0;
+  max-width: 32rem;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.85rem;
+}
+
+.primaryButton {
+  align-items: center;
+  background: var(--underfloor-accent);
+  border: 1px solid var(--underfloor-accent);
+  border-radius: 0.45rem;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.88rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 3.1rem;
+  padding: 0.8rem 1.25rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.primaryButton:hover {
+  background: var(--underfloor-accent-hover);
+  border-color: var(--underfloor-accent-hover);
+  transform: translateY(-2px);
+}
+
+.secondaryButton {
+  align-items: center;
+  background: transparent;
+  border: 1px solid rgb(198 106 30 / 45%);
+  border-radius: 0.45rem;
+  color: rgb(255 255 255 / 88%);
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 3.1rem;
+  padding: 0.8rem 1.25rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.secondaryButton:hover {
+  background: rgb(198 106 30 / 12%);
+  border-color: var(--underfloor-accent-hover);
+  transform: translateY(-2px);
+}
+
+/* Independent transparent product layer; contain preserves the complete
+   composition without flattening it into the application background. */
+.heroVisual {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 24rem;
+  position: relative;
+}
+
+.heroVisual img {
+  filter: drop-shadow(0 1.5rem 2.5rem rgb(0 0 0 / 28%));
+  object-fit: contain;
+  object-position: center;
+}
+
+/* =========================================================
+   03. TECHNICAL OVERVIEW — compact four-card strip overlapping
+   the hero's bottom edge, matching the established InfraVolt
+   category-overview density.
+   ========================================================= */
+
+.overview {
+  margin: -3.25rem auto 0;
+  max-width: 1300px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+  position: relative;
+  z-index: 4;
+}
+
+.overviewGrid {
+  background: var(--underfloor-dark-elevated);
+  border-radius: 0.7rem;
+  box-shadow: 0 1.5rem 3rem rgb(12 27 44 / 22%);
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  overflow: hidden;
+}
+
+.overviewCell {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.95rem;
+  padding: 1.5rem 1.4rem;
+}
+
+.overviewCell + .overviewCell {
+  border-left: 1px solid rgb(255 255 255 / 10%);
+}
+
+.overviewIconBadge {
+  align-items: center;
+  background: rgb(198 106 30 / 16%);
+  border: 1px solid rgb(198 106 30 / 40%);
+  border-radius: 50%;
+  color: var(--underfloor-accent-hover);
+  display: inline-flex;
+  flex-shrink: 0;
+  height: 2.4rem;
+  justify-content: center;
+  width: 2.4rem;
+}
+
+.overviewIcon {
+  height: 1.1rem;
+  width: 1.1rem;
+}
+
+.overviewCellBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.overviewTitle {
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.overviewDescription {
+  color: rgb(255 255 255 / 68%);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   04. PRODUCT SERIES — compact cards, same proportions as the
+   established LED category series grid.
+   ========================================================= */
+
+.series {
+  margin: 5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.seriesGrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.seriesCard {
+  background: #ffffff;
+  border: 1px solid var(--underfloor-border);
+  border-radius: 0.75rem;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.seriesCard:hover {
+  border-color: var(--underfloor-accent-border);
+  box-shadow: 0 1.5rem 3rem rgb(12 27 44 / 12%);
+  transform: translateY(-4px);
+}
+
+.seriesImage {
+  aspect-ratio: 4 / 3;
+  background: var(--underfloor-surface);
+  overflow: hidden;
+  position: relative;
+}
+
+.seriesImage img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.seriesImageEmpty {
+  align-items: center;
+  color: rgb(198 106 30 / 45%);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.seriesImageEmptyIcon {
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+.seriesNumber {
+  background: rgb(12 27 44 / 78%);
+  border-radius: 0.35rem;
+  color: var(--underfloor-accent-hover);
+  font-size: 0.72rem;
+  font-weight: 800;
+  left: 0.75rem;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.5rem;
+  position: absolute;
+  top: 0.75rem;
+}
+
+.seriesContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.15rem 1.25rem 1.35rem;
+}
+
+.seriesContent h3 {
+  color: var(--underfloor-ink);
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.seriesDescription {
+  color: var(--underfloor-body);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.seriesFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0.2rem 0 0;
+  padding: 0;
+}
+
+.seriesFeatures li {
+  align-items: center;
+  color: var(--underfloor-ink);
+  display: flex;
+  font-size: 0.78rem;
+  font-weight: 600;
+  gap: 0.5rem;
+}
+
+.seriesFeatureIcon {
+  color: var(--underfloor-accent);
+  flex-shrink: 0;
+  height: 1rem;
+  width: 1rem;
+}
+
+.seriesLinkAction {
+  align-items: center;
+  color: var(--underfloor-accent);
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 800;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.seriesBadge {
+  background: var(--underfloor-accent-soft);
+  border: 1px solid var(--underfloor-accent-border);
+  border-radius: 999px;
+  color: var(--underfloor-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-top: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  width: fit-content;
+}
+
+/* =========================================================
+   05. SYSTEM ARCHITECTURE — compact horizontal flow (desktop),
+   stacked (mobile). Amber connector line/arrow accents.
+   ========================================================= */
+
+.systemSection {
+  margin: 5rem auto 0;
+  max-width: 1200px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.systemFlow {
+  align-items: stretch;
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.systemStep {
+  background: var(--underfloor-surface);
+  border: 1px solid var(--underfloor-border);
+  border-radius: 0.7rem;
+  padding: 1.5rem 1.35rem;
+  position: relative;
+}
+
+.systemStepNumber {
+  align-items: center;
+  background: var(--underfloor-accent-soft);
+  border: 1px solid var(--underfloor-accent-border);
+  border-radius: 50%;
+  color: var(--underfloor-accent);
+  display: inline-flex;
+  font-size: 0.85rem;
+  font-weight: 800;
+  height: 2rem;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+  width: 2rem;
+}
+
+.systemStep h3 {
+  color: var(--underfloor-ink);
+  font-size: 0.94rem;
+  margin: 0 0 0.4rem;
+}
+
+.systemStep p {
+  color: var(--underfloor-body);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.systemConnector {
+  align-items: center;
+  color: var(--underfloor-accent);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  width: 2.5rem;
+}
+
+.systemConnector svg {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+/* =========================================================
+   06. CONSTRUCTION & SYSTEM OPTIONS
+   ========================================================= */
+
+.construction {
+  margin: 5rem auto 0;
+  max-width: 1200px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.constructionGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.constructionCard {
+  background: #ffffff;
+  border: 1px solid var(--underfloor-border);
+  border-left: 3px solid var(--underfloor-accent);
+  border-radius: 0.55rem;
+  box-shadow: var(--underfloor-shadow-idle);
+  padding: 1.15rem 1.35rem;
+}
+
+.constructionCard h3 {
+  color: var(--underfloor-ink);
+  font-size: 0.92rem;
+  margin: 0 0 0.4rem;
+}
+
+.constructionCard p {
+  color: var(--underfloor-body);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* =========================================================
+   07. TYPICAL APPLICATIONS
+   ========================================================= */
+
+.applications {
+  margin: 5rem auto 0;
+  max-width: 1400px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+.applicationsGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.applicationCard {
+  background: #ffffff;
+  border: 1px solid var(--underfloor-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--underfloor-shadow-idle);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.applicationCard:hover {
+  border-color: var(--underfloor-accent-border);
+  box-shadow: 0 1.5rem 3rem rgb(12 27 44 / 12%);
+  transform: translateY(-4px);
+}
+
+.applicationMedia {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  position: relative;
+}
+
+.applicationMedia img {
+  object-fit: cover;
+}
+
+.applicationMediaEmpty {
+  align-items: center;
+  background: var(--underfloor-accent-soft);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.applicationMediaEmptyIcon {
+  color: var(--underfloor-accent-border);
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+.applicationBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.applicationTitleRow {
+  align-items: center;
+  display: flex;
+  gap: 0.55rem;
+}
+
+.applicationIcon {
+  color: var(--underfloor-accent);
+  flex-shrink: 0;
+  height: 1.15rem;
+  width: 1.15rem;
+}
+
+.applicationTitle {
+  color: var(--underfloor-ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.applicationDescription {
+  color: var(--underfloor-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* =========================================================
+   08. FINAL CTA
+   ========================================================= */
+
+.supportCta {
+  background: #f6f4ef;
+  border-top: 1px solid rgb(12 27 44 / 8%);
+  margin: 5.5rem 0 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.supportCta::before {
+  background-image:
+    linear-gradient(rgb(12 27 44 / 2.5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(12 27 44 / 2.5%) 1px, transparent 1px);
+  background-size: 32px 32px;
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.supportCtaInner {
+  align-items: center;
+  display: grid;
+  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: clamp(4.5rem, 6vw, 5.5rem) clamp(1.25rem, 4vw, 4rem);
+  position: relative;
+  z-index: 1;
+}
+
+.supportCtaCopy {
+  max-width: 39rem;
+}
+
+.supportCtaEyebrowRow {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.supportCtaAccent {
+  background: var(--underfloor-accent);
+  height: 2px;
+  width: 2rem;
+}
+
+.supportCtaEyebrow {
+  color: var(--underfloor-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.supportCta h2 {
+  color: var(--underfloor-dark);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  margin: 1rem 0 0;
+  max-width: 38rem;
+}
+
+.supportCtaDescription {
+  color: #526170;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 1rem 0 0;
+  max-width: 35rem;
+}
+
+.supportCtaAction {
+  align-items: center;
+  background: var(--underfloor-accent);
+  border-radius: 0.45rem;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1.75rem;
+  min-height: 3.1rem;
+  padding: 0.85rem 1.4rem;
+  text-decoration: none;
+  transition: background-color 180ms ease;
+}
+
+.supportCtaAction:hover,
+.supportCtaAction:focus-visible {
+  background: #a95517;
+}
+
+.supportCtaVisual {
+  min-height: 20rem;
+  position: relative;
+}
+
+.supportCtaVisual img {
+  object-fit: contain;
+  object-position: right bottom;
+  transform: scale(0.78);
+  transform-origin: right bottom;
+}
+
+/* =========================================================
+   09. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    padding-bottom: 3rem;
+  }
+
+  .heroVisual {
+    min-height: clamp(15rem, 48vw, 22rem);
+  }
+
+  .heroDescription {
+    max-width: none;
+  }
+
+  .overviewGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .overviewCell:nth-child(2n + 1) {
+    border-left: none;
+  }
+
+  .overviewCell:nth-child(n + 3) {
+    border-top: 1px solid rgb(255 255 255 / 10%);
+  }
+
+  .seriesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .systemFlow {
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  .systemConnector {
+    transform: rotate(90deg);
+    width: 100%;
+  }
+
+  .constructionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .supportCtaInner {
+    grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.72fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .heroVisual {
+    min-height: 13rem;
+  }
+
+  .heroActions {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+
+  .overviewGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .overviewCell {
+    border-left: none !important;
+  }
+
+  .overviewCell:nth-child(n + 2) {
+    border-top: 1px solid rgb(255 255 255 / 10%);
+  }
+
+  .seriesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .applicationsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .supportCtaInner {
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    padding-bottom: 3rem;
+    padding-top: 3.5rem;
+  }
+
+  .supportCtaAction {
+    width: 100%;
+  }
+
+  .supportCtaVisual {
+    min-height: 12rem;
+  }
+
+  .supportCtaVisual img {
+    object-position: center bottom;
+    transform: scale(0.84);
+    transform-origin: center bottom;
+  }
+}

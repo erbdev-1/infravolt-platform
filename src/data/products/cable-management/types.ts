@@ -41,7 +41,8 @@ export type CableManagementFamilySlug =
   | "granite-mounting-elements"
   | "cable-drum-support-equipment"
   | "mechanical-dilatation-element"
-  | "shaft-access-cover";
+  | "shaft-access-cover"
+  | "wire-mesh-systems";
 
 export type CableManagementSnapshotIconName = "shield" | "layers" | "system" | "support";
 
@@ -64,6 +65,12 @@ export type CableManagementVariant = Readonly<{
   model: string;
   stockCode: string;
   material: string;
+  /** Optional catalogue sub-family used by schedules that combine several
+   * closely related product families in one table (for example TTK-A/B/C). */
+  family?: string;
+  /** Optional row classification used when a schedule intentionally combines
+   * primary products with their catalogue-backed jointing/support items. */
+  productType?: string;
   /** English translation of the catalogue's component_type column — groups
    * rows into "Compatible Accessories" categories (Flat Bend, Tee, Reducer,
    * etc.) separately from the family's own straight-length rows. */
@@ -133,6 +140,20 @@ export type CableFamilySiblingLink = Readonly<{
   icon?: CableFamilySiblingIconName;
   orderCodeCount?: number;
   countLabel?: string;
+  /** Renders the shared card as non-routing product-family information when
+   * a dedicated child route does not exist. */
+  informational?: boolean;
+}>;
+
+export type CableManagementScheduleColumnLabels = Readonly<{
+  family?: string;
+  type?: string;
+  stockCode?: string;
+  width?: string;
+  height?: string;
+  thickness?: string;
+  length?: string;
+  weight?: string;
 }>;
 
 export type CableManagementResource = Readonly<{
@@ -198,6 +219,9 @@ export type CableManagementFamilyContent = Readonly<{
   scheduleHeading: string;
   scheduleIntroduction: string;
   standardLabel: string;
+  /** Optional per-family technical notation while retaining the shared
+   * schedule component (for example Wire / e instead of sheet thickness). */
+  scheduleColumnLabels?: CableManagementScheduleColumnLabels;
   /** Present only for a family whose catalogue rows are real, verified size
    * variants that were never assigned an order/stock code — rendered
    * instead of the standard schedule table (see aluminium-cable-cleats). */
@@ -223,6 +247,14 @@ export type CableManagementLabels = Readonly<{
   searchPlaceholder: string;
   clearSearchAction: string;
   materialFilterLabel: string;
+  familyFilterLabel: string;
+  typeFilterLabel: string;
+  widthFilterLabel: string;
+  heightFilterLabel: string;
+  thicknessFilterLabel: string;
+  filterPanelTitle: string;
+  clearAllAction: string;
+  applyFiltersAction: string;
   allMaterialsLabel: string;
   showingLabel: string;
   ofLabel: string;
@@ -234,6 +266,8 @@ export type CableManagementLabels = Readonly<{
   copyStockCodeAction: string;
   copiedLabel: string;
   columnModel: string;
+  columnFamily: string;
+  columnType: string;
   columnStockCode: string;
   columnWidth: string;
   columnHeight: string;
@@ -290,4 +324,6 @@ export type CableManagementLabels = Readonly<{
   /** Accessible label for a mobile active-filter chip's remove (×) button —
    * combined with the chip's own value, e.g. "Remove filter: Steel". */
   removeFilterAction: string;
+  previousAction: string;
+  nextAction: string;
 }>;

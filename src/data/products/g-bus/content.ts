@@ -109,7 +109,7 @@ const GBUS_CONTENT = {
       imageAlt:
         "G-BUS Automation showcase with receiver modules, control panels and monitoring dashboard overlays",
       actionLabel: "Talk to our team",
-      actionHref: "/uk-support?product=g-bus",
+      actionHref: "/contact?type=project&system=g-bus",
     },
     facts: [
       { value: "25–6000 A", label: "System compatibility" },
@@ -367,7 +367,7 @@ const GBUS_CONTENT = {
       description:
         "Share your busbar system, site conditions and monitoring requirements with our technical team.",
       action: "Talk to our team",
-      href: "/uk-support?product=g-bus",
+      href: "/contact?type=project&system=g-bus",
     },
   },
   ua: {
@@ -389,7 +389,7 @@ const GBUS_CONTENT = {
       imageAlt:
         "Вітрина G-BUS Automation з приймальними модулями, панелями керування та накладками моніторингу",
       actionLabel: "Зв'язатися з нашою командою",
-      actionHref: "/ua-support?product=g-bus",
+      actionHref: "/contact?type=project&system=g-bus",
     },
     facts: [
       { value: "25–6000 А", label: "Сумісність систем" },
@@ -647,7 +647,7 @@ const GBUS_CONTENT = {
       description:
         "Поділіться інформацією про вашу шинопровідну систему, умови об'єкта та вимоги до моніторингу з нашою технічною командою.",
       action: "Зв'язатися з нашою командою",
-      href: "/ua-support?product=g-bus",
+      href: "/contact?type=project&system=g-bus",
     },
   },
 } as const satisfies Readonly<Record<MarketCode, GBusPageContent>>;

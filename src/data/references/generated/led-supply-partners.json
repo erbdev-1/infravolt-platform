@@ -1,0 +1,30 @@
+{
+  "source": "GERSAN LED Systems catalogue · PDF page 128 (printed pages 240-241), 'Our Supply Partners'",
+  "note": "Component/technology supply partners (LED drivers, chips, optics, connectors) — a genuinely different, LED-specific list from the shared Earthing/Cable/Busbar worldwide-client company directory. Logos cropped from a single reference montage supplied for this project.",
+  "companies": [
+    { "name": "TRIDONIC", "logo": "/assets/references/led-systems/supply-partners/tridonic.png" },
+    { "name": "MEAN WELL", "logo": "/assets/references/led-systems/supply-partners/mean-well.png" },
+    { "name": "PHILIPS", "logo": "/assets/references/led-systems/supply-partners/philips.png" },
+    { "name": "VS Lighting Solutions", "logo": "/assets/references/led-systems/supply-partners/vs-lighting-solutions.png" },
+    { "name": "TCI LED", "logo": "/assets/references/led-systems/supply-partners/tci-led.png" },
+    { "name": "Helvar", "logo": "/assets/references/led-systems/supply-partners/helvar.png" },
+    { "name": "INVENTRONICS", "logo": "/assets/references/led-systems/supply-partners/inventronics.png" },
+    { "name": "OSRAM", "logo": "/assets/references/led-systems/supply-partners/osram.png" },
+    { "name": "MOSO", "logo": "/assets/references/led-systems/supply-partners/moso.png" },
+    { "name": "SAMSUNG LED", "logo": "/assets/references/led-systems/supply-partners/samsung-led.png" },
+    { "name": "LUMILEDS", "logo": "/assets/references/led-systems/supply-partners/lumileds.png" },
+    { "name": "NICHIA", "logo": "/assets/references/led-systems/supply-partners/nichia.png" },
+    { "name": "CREE", "logo": "/assets/references/led-systems/supply-partners/cree.png" },
+    { "name": "LEDiL", "logo": "/assets/references/led-systems/supply-partners/ledil.png" },
+    { "name": "DARKOO Optics", "logo": "/assets/references/led-systems/supply-partners/darkoo-optics.png" },
+    { "name": "AVX", "logo": "/assets/references/led-systems/supply-partners/avx.png" },
+    { "name": "wieland", "logo": "/assets/references/led-systems/supply-partners/wieland.png" },
+    { "name": "BJB", "logo": "/assets/references/led-systems/supply-partners/bjb.png" },
+    { "name": "WAGO", "logo": "/assets/references/led-systems/supply-partners/wago.png" },
+    { "name": "ELECTRO-TERMINAL", "logo": "/assets/references/led-systems/supply-partners/electro-terminal.png" },
+    { "name": "GiPlast", "logo": "/assets/references/led-systems/supply-partners/giplast.png" },
+    { "name": "OSRAM LED Technology", "logo": "/assets/references/led-systems/supply-partners/osram-led-technology.png" },
+    { "name": "KHATOD", "logo": "/assets/references/led-systems/supply-partners/khatod.png" },
+    { "name": "Lextar", "logo": "/assets/references/led-systems/supply-partners/lextar.png" }
+  ]
+}

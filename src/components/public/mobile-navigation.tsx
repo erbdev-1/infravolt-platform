@@ -2,13 +2,16 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 
+import { PRODUCT_ENQUIRY_REVIEW_HREF } from "@/modules/enquiry/routing";
+
 import type { PublicSiteContent } from "@/modules/public-site/content";
 
 type MobileNavigationProps = Readonly<{
   content: PublicSiteContent["shell"];
+  enquiryCount: number;
 }>;
 
-export function MobileNavigation({ content }: MobileNavigationProps) {
+export function MobileNavigation({ content, enquiryCount }: MobileNavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dialogId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -20,7 +23,7 @@ export function MobileNavigation({ content }: MobileNavigationProps) {
     }
 
     const previousOverflow = document.body.style.overflow;
-    const mediaQuery = window.matchMedia("(min-width: 80rem)");
+    const mediaQuery = window.matchMedia("(min-width: 88rem)");
 
     document.body.style.overflow = "hidden";
     firstLinkRef.current?.focus();
@@ -83,6 +86,38 @@ export function MobileNavigation({ content }: MobileNavigationProps) {
               </a>
             ))}
           </nav>
+          <div className="mobile-navigation__commercial-actions">
+            <p>{content.commercialGroupLabel}</p>
+            <a
+              className="mobile-navigation__commercial-primary"
+              href="/commercial-partners"
+              onClick={() => setIsOpen(false)}
+            >
+              {content.commercialPartnersLabel}
+              <span aria-hidden="true">→</span>
+            </a>
+            <a
+              className="mobile-navigation__trade-account"
+              href="/trade-account"
+              onClick={() => setIsOpen(false)}
+            >
+              {content.tradeAccountLabel}
+              <span>{content.soonLabel}</span>
+            </a>
+          </div>
+
+          {enquiryCount > 0 ? (
+            <a
+              aria-label={`${content.enquiryLabel} (${enquiryCount})`}
+              className="mobile-navigation__enquiry"
+              href={PRODUCT_ENQUIRY_REVIEW_HREF}
+              onClick={() => setIsOpen(false)}
+            >
+              {content.enquiryLabel}
+              <span aria-hidden="true">{enquiryCount}</span>
+            </a>
+          ) : null}
+
           <div className="mobile-navigation__market">
             <span>{content.marketLabel}</span>
             <strong>{content.marketName}</strong>

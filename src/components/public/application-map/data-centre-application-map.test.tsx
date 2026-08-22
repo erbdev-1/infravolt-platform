@@ -29,7 +29,14 @@ function renderMap(market: "uk" | "ua") {
   const content = applicationMapContentForMarket(market);
   const map = resolveDataCentreApplicationMap(DATA_CENTRE_APPLICATION_MAP, market);
 
-  return render(<DataCentreApplicationMap content={content} map={map} />);
+  return render(
+    <DataCentreApplicationMap
+      content={content}
+      industryId="data-centre"
+      map={map}
+      sourcePath="/application-map"
+    />,
+  );
 }
 
 function getZoneNav() {
@@ -79,7 +86,7 @@ describe("DataCentreApplicationMap", () => {
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: "Центр обробки даних Карта застосувань",
+        name: "Карта застосувань центру обробки даних",
       }),
     ).toBeInTheDocument();
     expect(
@@ -268,12 +275,29 @@ describe("DataCentreApplicationMap", () => {
     ).toBeInTheDocument();
   });
 
-  it("hides the Fullscreen control when the Fullscreen API is unavailable", () => {
+  it("falls back to the CSS fullscreen mode when the browser Fullscreen API is unavailable", async () => {
+    const user = userEvent.setup();
     renderMap("uk");
 
+    // jsdom implements neither document.fullscreenEnabled nor
+    // Element.prototype.requestFullscreen by default, so this exercises the
+    // same "API unavailable" path mobile Safari hits — the control must stay
+    // visible and usable via the CSS fallback rather than being hidden.
+    const fullscreenButton = await screen.findByRole("button", {
+      name: "Fullscreen",
+    });
+
+    await user.click(fullscreenButton);
+
     expect(
-      screen.queryByRole("button", { name: "Fullscreen" }),
-    ).not.toBeInTheDocument();
+      await screen.findByRole("button", { name: "Exit Fullscreen" }),
+    ).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Exit Fullscreen" }));
+
+    expect(
+      await screen.findByRole("button", { name: "Fullscreen" }),
+    ).toBeInTheDocument();
   });
 
   it("toggles fullscreen and reflects browser fullscreenchange events", async () => {

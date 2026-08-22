@@ -15,6 +15,8 @@ const INFRASTRUCTURE_UTILITIES_CONTENT = {
     },
     headingSector: "Infrastructure & Utilities",
     headingSuffix: "Application Map",
+    overviewHeadingPrimary: "Infrastructure & Utilities",
+    overviewHeadingSecondary: "Application Map",
     introduction:
       "Explore InfraVolt product systems across a modern\ninfrastructure and utilities site.",
     overviewThumbnailLabel: "Overview",
@@ -36,6 +38,7 @@ const INFRASTRUCTURE_UTILITIES_CONTENT = {
       benefitsHeading: "Key benefits",
       closeLabel: "Close product information",
       chooseProductHeading: "Available systems in this zone",
+      exploreSystemLabel: "Explore {system} →",
     },
   },
   ua: {
@@ -50,6 +53,8 @@ const INFRASTRUCTURE_UTILITIES_CONTENT = {
     },
     headingSector: "Інфраструктура та комунальне господарство",
     headingSuffix: "Карта застосувань",
+    overviewHeadingPrimary: "Карта застосувань",
+    overviewHeadingSecondary: "інфраструктури та комунального господарства",
     introduction:
       "Дізнайтеся, де застосовуються системи InfraVolt на сучасному\nоб'єкті інфраструктури та комунального господарства.",
     overviewThumbnailLabel: "Огляд",
@@ -71,6 +76,7 @@ const INFRASTRUCTURE_UTILITIES_CONTENT = {
       benefitsHeading: "Основні переваги",
       closeLabel: "Закрити інформацію про продукт",
       chooseProductHeading: "Доступні системи в цій зоні",
+      exploreSystemLabel: "Переглянути {system} →",
     },
   },
 } as const satisfies Readonly<Record<MarketCode, ApplicationMapPageContent>>;
