@@ -7,6 +7,7 @@ import { useId, useState } from "react";
 import { BusbarHeroCarousel } from "./busbar-hero-carousel";
 
 import type { BusbarSystemDetail } from "@/data/products/busbar/series/types";
+import type { MarketCode } from "@/modules/markets/types";
 
 import styles from "./busbar-system-detail-page.module.css";
 
@@ -20,6 +21,7 @@ export function BusbarDetailTabs({
   documentsTitle,
   documentsDescription,
   documentsActionLabel,
+  market,
 }: Readonly<{
   detail: BusbarSystemDetail;
   shortName: string;
@@ -28,12 +30,15 @@ export function BusbarDetailTabs({
   documentsTitle: string;
   documentsDescription: string;
   documentsActionLabel: string;
+  market: MarketCode;
 }>) {
   const [activeTab, setActiveTab] = useState<TabId>("overview");
   const [activeSpecVariant, setActiveSpecVariant] = useState(
     detail.specVariants?.[0]?.id,
   );
+  const [showAllFeatures, setShowAllFeatures] = useState(false);
   const baseId = useId();
+  const featureListId = `${baseId}-overview-features`;
 
   const specColumns =
     detail.specVariants?.find((variant) => variant.id === activeSpecVariant)
@@ -96,11 +101,39 @@ export function BusbarDetailTabs({
 
             <p className={styles.overviewDescription}>{systemDescription}</p>
 
-            <ul className={styles.highlightList}>
-              {detail.overviewHighlights.map((highlight) => (
-                <li key={highlight}>{highlight}</li>
+            <ul className={styles.highlightList} id={featureListId}>
+              {detail.overviewHighlights.map((highlight, index) => (
+                <li
+                  className={
+                    index >= 4 && !showAllFeatures
+                      ? styles.highlightCollapsedMobile
+                      : undefined
+                  }
+                  key={highlight}
+                >
+                  {highlight}
+                </li>
               ))}
             </ul>
+
+            {detail.overviewHighlights.length > 4 ? (
+              <button
+                aria-controls={featureListId}
+                aria-expanded={showAllFeatures}
+                className={styles.featureToggle}
+                onClick={() => setShowAllFeatures((isOpen) => !isOpen)}
+                type="button"
+              >
+                {showAllFeatures
+                  ? market === "ua"
+                    ? "Показати менше характеристик"
+                    : "View fewer features"
+                  : market === "ua"
+                    ? "Переглянути всі характеристики"
+                    : "View all features"}
+                <span aria-hidden="true">{showAllFeatures ? "−" : "+"}</span>
+              </button>
+            ) : null}
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ export function BusbarApplicationsSection({
                 alt={application.imageAlt}
                 className={styles.applicationImage}
                 fill
-                sizes="(min-width: 1100px) 31vw, (min-width: 700px) 48vw, 100vw"
+                sizes="(max-width: 768px) 46vw, (min-width: 1100px) 31vw, (min-width: 769px) 48vw, 100vw"
                 src={application.image}
               />
             </div>

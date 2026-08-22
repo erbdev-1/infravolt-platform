@@ -7,7 +7,6 @@ import { EARTHING_CATEGORY_VARIANTS } from "@/data/products/earthing-lightning/v
 import type { MarketCode } from "@/modules/markets/types";
 
 import { IconDownload } from "./earthing-icons";
-import { EarthingEnquiryBar } from "./earthing-enquiry-bar";
 import { slugifyFamilyName } from "./earthing-family-slug";
 import { EarthingHeroEffects } from "./earthing-hero-effects";
 import { EarthingHeroParallax } from "./earthing-hero-parallax";
@@ -215,6 +214,7 @@ export function EarthingCategoryDetailPage({
           categorySlug={category.slug}
           groups={variantGroups}
           labels={detail}
+          market={market}
           standardLabel={standardLabel}
         />
       ) : null}
@@ -243,14 +243,6 @@ export function EarthingCategoryDetailPage({
           <span aria-hidden="true">→</span>
         </Link>
       </section>
-
-      <EarthingEnquiryBar
-        clearAction={detail.enquiryClearAction}
-        countSuffix={detail.enquiryCountSuffix}
-        heading={detail.enquiryHeading}
-        removeAction={detail.enquiryRemoveAction}
-        submitAction={detail.requestPackAction}
-      />
     </main>
   );
 }

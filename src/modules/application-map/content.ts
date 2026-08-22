@@ -13,6 +13,16 @@ export type ApplicationMapPageContent = Readonly<{
   // text-transform:uppercase ile görsel olarak büyük harfe çevrilir).
   headingSector: string;
   headingSuffix: string;
+  // Overview modundaki H1'in gerçek iki satırı — headingSector/headingSuffix
+  // İNGİLİZCE kelime sırasına göre birleştirilmez (bkz. ApplicationMapViewer
+  // yorumu): "sektör adı + Application Map" birleştirmesi bazı dillerde
+  // (ör. Ukraynaca çekim/hal gerektiren yapılar) doğal/doğru bir cümle
+  // üretmez. Bu iki alan, her pazarın kendi doğal kelime sırasını ve
+  // hal/çekim biçimini tam olarak kodlar — component yalnız sırayla render
+  // eder, hiçbir dilbilgisel varsayımda bulunmaz. headingSector/headingSuffix
+  // başka yerlerde (breadcrumb, endüstri etiketi) hâlâ ayrı ayrı kullanılır.
+  overviewHeadingPrimary: string;
+  overviewHeadingSecondary: string;
   introduction: string;
   overviewThumbnailLabel: string;
   zoneNavigationLabel: string;
@@ -42,6 +52,7 @@ export type ApplicationMapPageContent = Readonly<{
     // (ör. Busbar Systems altında GGD + GNL), sol seçiciden açılan seçim
     // listesinin üst başlığı.
     chooseProductHeading: string;
+    exploreSystemLabel: string;
   }>;
 }>;
 
@@ -58,6 +69,8 @@ const APPLICATION_MAP_CONTENT = {
     },
     headingSector: "Data Centre",
     headingSuffix: "Application Map",
+    overviewHeadingPrimary: "Data Centre",
+    overviewHeadingSecondary: "Application Map",
     introduction:
       "Explore InfraVolt product systems across a modern\nData Centre environment.",
     overviewThumbnailLabel: "Overview",
@@ -79,6 +92,7 @@ const APPLICATION_MAP_CONTENT = {
       benefitsHeading: "Key benefits",
       closeLabel: "Close product information",
       chooseProductHeading: "Available systems in this zone",
+      exploreSystemLabel: "Explore {system} →",
     },
   },
   ua: {
@@ -93,6 +107,8 @@ const APPLICATION_MAP_CONTENT = {
     },
     headingSector: "Центр обробки даних",
     headingSuffix: "Карта застосувань",
+    overviewHeadingPrimary: "Карта застосувань",
+    overviewHeadingSecondary: "центру обробки даних",
     introduction:
       "Дізнайтеся, де застосовуються системи InfraVolt у сучасному\nцентрі обробки даних.",
     overviewThumbnailLabel: "Огляд",
@@ -114,6 +130,7 @@ const APPLICATION_MAP_CONTENT = {
       benefitsHeading: "Основні переваги",
       closeLabel: "Закрити інформацію про продукт",
       chooseProductHeading: "Доступні системи в цій зоні",
+      exploreSystemLabel: "Переглянути {system} →",
     },
   },
 } as const satisfies Readonly<Record<MarketCode, ApplicationMapPageContent>>;

@@ -21,6 +21,8 @@ const EDUCATION_PUBLIC_SECTOR_CONTENT = {
     },
     headingSector: "Education & Public Sector",
     headingSuffix: "Application Map",
+    overviewHeadingPrimary: "Education & Public Sector",
+    overviewHeadingSecondary: "Application Map",
     introduction:
       "Explore InfraVolt product systems across a modern\neducation and public sector campus.",
     overviewThumbnailLabel: "Overview",
@@ -42,6 +44,7 @@ const EDUCATION_PUBLIC_SECTOR_CONTENT = {
       benefitsHeading: "Key benefits",
       closeLabel: "Close product information",
       chooseProductHeading: "Available systems in this zone",
+      exploreSystemLabel: "Explore {system} →",
     },
   },
   ua: {
@@ -56,6 +59,8 @@ const EDUCATION_PUBLIC_SECTOR_CONTENT = {
     },
     headingSector: "Освіта та громадський сектор",
     headingSuffix: "Карта застосувань",
+    overviewHeadingPrimary: "Карта застосувань",
+    overviewHeadingSecondary: "освіти та громадського сектору",
     introduction:
       "Дізнайтеся, де застосовуються системи InfraVolt у сучасному\nкампусі освітнього та громадського сектору.",
     overviewThumbnailLabel: "Огляд",
@@ -77,6 +82,7 @@ const EDUCATION_PUBLIC_SECTOR_CONTENT = {
       benefitsHeading: "Основні переваги",
       closeLabel: "Закрити інформацію про продукт",
       chooseProductHeading: "Доступні системи в цій зоні",
+      exploreSystemLabel: "Переглянути {system} →",
     },
   },
 } as const satisfies Readonly<Record<MarketCode, ApplicationMapPageContent>>;

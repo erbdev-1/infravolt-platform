@@ -9,10 +9,25 @@ function toCsvRow(fields: readonly string[]): string {
 }
 
 export function buildVariantCsv(variants: readonly CableManagementVariant[]): string {
+  const hasFamily = variants.some((variant) => variant.family !== undefined);
+  const hasProductType = variants.some((variant) => variant.productType !== undefined);
   const lines = [
-    toCsvRow(["Model", "Description", "Stock Code", "Width (mm)", "Height (mm)", "Thickness (mm)", "Length (mm)", "Weight", "Material / Finish"]),
+    toCsvRow([
+      ...(hasFamily ? ["Family"] : []),
+      "Model",
+      "Description",
+      hasFamily ? "Order Code" : "Stock Code",
+      "Width (mm)",
+      "Height (mm)",
+      hasFamily ? "Wire / e (mm)" : "Thickness (mm)",
+      "Length (mm)",
+      "Weight",
+      "Material / Finish",
+      ...(hasProductType ? ["Type"] : []),
+    ]),
     ...variants.map((v) =>
       toCsvRow([
+        ...(hasFamily ? [v.family ?? ""] : []),
         v.model,
         v.name,
         v.stockCode,
@@ -22,6 +37,7 @@ export function buildVariantCsv(variants: readonly CableManagementVariant[]): st
         v.lengthMm !== undefined ? String(v.lengthMm) : "",
         v.weight ?? "",
         v.material,
+        ...(hasProductType ? [v.productType ?? ""] : []),
       ]),
     ),
   ];

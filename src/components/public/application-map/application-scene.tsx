@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { ApplicationHotspot } from "./application-hotspot";
-import styles from "./data-centre-application-map.module.css";
+import styles from "./application-map-viewer.module.css";
 
 export type SceneHotspotDescriptor = Readonly<{
   id: string;
@@ -18,6 +18,7 @@ type ApplicationSceneProps = Readonly<{
   hotspots: readonly SceneHotspotDescriptor[];
   activeHotspotId: string | null;
   onHotspotSelect: (id: string) => void;
+  onImageAspectRatioChange?: (aspectRatio: number) => void;
   priority?: boolean;
 }>;
 
@@ -30,6 +31,7 @@ export function ApplicationSceneView({
   hotspots,
   activeHotspotId,
   onHotspotSelect,
+  onImageAspectRatioChange,
   priority = false,
 }: ApplicationSceneProps) {
   return (
@@ -39,6 +41,13 @@ export function ApplicationSceneView({
           alt={imageAlt}
           className={styles.sceneImage}
           fill
+          onLoad={(event) => {
+            const { naturalHeight, naturalWidth } = event.currentTarget;
+
+            if (naturalHeight > 0 && naturalWidth > 0) {
+              onImageAspectRatioChange?.(naturalWidth / naturalHeight);
+            }
+          }}
           priority={priority}
           sizes="(min-width: 1101px) 65vw, 92vw"
           src={image}

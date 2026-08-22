@@ -54,6 +54,7 @@ export type BusbarCatalogContent = Readonly<{
     description: string;
     primaryAction: string;
     secondaryAction: string;
+    downloadAction: string;
     videoLabel: string;
   }>;
   facts: readonly [
@@ -131,6 +132,7 @@ export const BUSBAR_CATALOG_CONTENT = {
         "Engineered for safe, efficient and flexible electrical power distribution across commercial, industrial and critical-infrastructure projects.",
       primaryAction: "Explore systems",
       secondaryAction: "Request support",
+      downloadAction: "Download catalogue",
       videoLabel: "Gersan busbar manufacturing and product systems",
     },
     facts: [
@@ -315,6 +317,7 @@ export const BUSBAR_CATALOG_CONTENT = {
         "Рішення для безпечного, ефективного та гнучкого розподілу електроенергії в комерційних, промислових та критично важливих інфраструктурних проєктах.",
       primaryAction: "Оглянути системи",
       secondaryAction: "Запросити підтримку",
+      downloadAction: "Завантажити каталог",
       videoLabel: "Виробництво та шинопровідні системи Gersan",
     },
     facts: [

@@ -27,7 +27,14 @@ function renderMap() {
   const content = industrialFacilityApplicationMapContentForMarket("uk");
   const map = resolveApplicationMap(INDUSTRIAL_FACILITY_APPLICATION_MAP, "uk");
 
-  return render(<DataCentreApplicationMap content={content} map={map} />);
+  return render(
+    <DataCentreApplicationMap
+      content={content}
+      industryId="industrial-facility"
+      map={map}
+      sourcePath="/application-map/industrial-facility"
+    />,
+  );
 }
 
 function getZoneNav() {

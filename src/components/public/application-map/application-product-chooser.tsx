@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-import styles from "./data-centre-application-map.module.css";
+import styles from "./application-map-viewer.module.css";
 
 export type ApplicationProductChoice = Readonly<{
   id: string;

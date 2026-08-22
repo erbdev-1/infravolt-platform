@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { InfraVoltLogo } from "@/components/brand/infravolt-logo";
 import { MobileNavigation } from "@/components/public/mobile-navigation";
 import { Container } from "@/components/ui/container";
+import { PRODUCT_ENQUIRY_REVIEW_HREF } from "@/modules/enquiry/routing";
+import { useEnquiryItems } from "@/modules/enquiry/store";
 
 import type { PublicSiteContent } from "@/modules/public-site/content";
 
@@ -32,6 +34,7 @@ function splitNavigationHref(href: string) {
 export function SiteHeader({ content }: SiteHeaderProps) {
   const pathname = usePathname();
   const [activeHash, setActiveHash] = useState("#top");
+  const enquiryCount = useEnquiryItems().length;
 
   useEffect(() => {
     const updateActiveLink = () => {
@@ -69,13 +72,8 @@ export function SiteHeader({ content }: SiteHeaderProps) {
           className="desktop-navigation"
         >
           {content.navigation.map((item) => {
-            const isDealer = item.label === "Dealer / Trade Account";
-            const isContact =
-              item.label === "Contact" || item.label === "Контакти";
-
-            const label = isDealer ? "References" : item.label;
-            const href = isDealer ? "/references" : item.href;
-            const target = splitNavigationHref(href);
+            const isContact = item.href === "/contact";
+            const target = splitNavigationHref(item.href);
 
             const isActive = target.hash
               ? pathname === target.path && activeHash === target.hash
@@ -91,25 +89,47 @@ export function SiteHeader({ content }: SiteHeaderProps) {
             return (
               <a
                 className={className || undefined}
-                href={href}
-                key={`${href}-${label}`}
+                href={item.href}
+                key={`${item.href}-${item.label}`}
                 onClick={() => {
                   if (target.hash) {
                     setActiveHash(target.hash);
                   }
                 }}
               >
-                {label}
+                {item.label}
               </a>
             );
           })}
         </nav>
 
-        <a className="desktop-navigation__dealer" href="/dealer">
-          Dealer / Trade Account
-        </a>
+        {enquiryCount > 0 ? (
+          <a
+            aria-label={`${content.enquiryLabel} (${enquiryCount})`}
+            className="site-header__enquiry"
+            href={PRODUCT_ENQUIRY_REVIEW_HREF}
+          >
+            {content.enquiryLabel}
+            <span aria-hidden="true" className="site-header__enquiry-count">
+              {enquiryCount}
+            </span>
+          </a>
+        ) : null}
 
-        <MobileNavigation content={content} />
+        <div className="site-header__commercial-actions">
+          <a
+            className="site-header__commercial-primary"
+            href="/commercial-partners"
+          >
+            {content.commercialPartnersLabel}
+          </a>
+          <a className="site-header__trade-account" href="/trade-account">
+            {content.tradeAccountLabel}
+            <span>{content.soonLabel}</span>
+          </a>
+        </div>
+
+        <MobileNavigation content={content} enquiryCount={enquiryCount} />
       </Container>
     </header>
   );

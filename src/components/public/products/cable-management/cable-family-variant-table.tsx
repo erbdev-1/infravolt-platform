@@ -3,7 +3,18 @@
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 
-import type { CableManagementLabels, CableManagementVariant } from "@/data/products/cable-management/types";
+import {
+  EnquiryAddedConfirmation,
+  EnquiryToolbarSummary,
+} from "@/components/public/enquiry/enquiry-feedback";
+import type {
+  CableManagementLabels,
+  CableManagementScheduleColumnLabels,
+  CableManagementVariant,
+} from "@/data/products/cable-management/types";
+import { addEnquiryItem, removeEnquiryItem, useEnquiryItems } from "@/modules/enquiry/store";
+import { cableEnquiryItem } from "@/modules/enquiry/item-builders";
+import type { MarketCode } from "@/modules/markets/types";
 
 import { buildVariantCsv, downloadCsv } from "./cable-variant-csv";
 import { IconCheck, IconClose, IconCopy, IconDownload, IconFilter, IconSearch } from "./cable-icons";
@@ -18,6 +29,8 @@ function buildHaystack(variant: CableManagementVariant): string {
     variant.stockCode,
     variant.material,
     variant.accessoryGroup,
+    variant.family,
+    variant.productType,
     variant.widthMm,
     variant.heightMm,
     variant.thicknessMm,
@@ -36,9 +49,22 @@ function toggleInSet<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
   return next;
 }
 
+const UA_PRODUCT_TYPE_LABELS: Readonly<Record<string, string>> = {
+  Tray: "Лоток",
+  "Jointing Piece": "З'єднувальний елемент",
+  "Support Console": "Опорна консоль",
+};
+
+function productTypeLabel(productType: string, market: MarketCode): string {
+  if (market !== "ua") return productType;
+  return UA_PRODUCT_TYPE_LABELS[productType] ?? productType;
+}
+
 type CableFamilyVariantTableProps = Readonly<{
   familySlug: string;
   familyName: string;
+  market: MarketCode;
+  sourceRoute: string;
   variants: readonly CableManagementVariant[];
   labels: CableManagementLabels;
   /** Set by "View order codes" on an accessory card — pre-fills the search
@@ -55,6 +81,7 @@ type CableFamilyVariantTableProps = Readonly<{
    * sidebar, above Search — variant-switcher family pages only. Absent on
    * the standalone single-family pages, which have no variant to pick. */
   variantSelector?: ReactNode;
+  columnLabels?: CableManagementScheduleColumnLabels;
 }>;
 
 // On variant-switcher family pages the edge height is usually already
@@ -64,11 +91,14 @@ type CableFamilyVariantTableProps = Readonly<{
 export function CableFamilyVariantTable({
   familySlug,
   familyName,
+  market,
+  sourceRoute,
   variants,
   labels,
   initialQuery,
   hideMaterialFilter,
   variantSelector,
+  columnLabels,
 }: CableFamilyVariantTableProps) {
   const enriched = useMemo(
     () => variants.map((variant) => ({ variant, haystack: buildHaystack(variant) })),
@@ -79,6 +109,23 @@ export function CableFamilyVariantTable({
     const set = new Set<string>();
     for (const variant of variants) set.add(variant.material);
     return Array.from(set).sort();
+  }, [variants]);
+
+  const families = useMemo(() => {
+    const set = new Set<string>();
+    for (const variant of variants) {
+      if (variant.family) set.add(variant.family);
+    }
+    return Array.from(set).sort();
+  }, [variants]);
+
+  const productTypes = useMemo(() => {
+    const set = new Set<string>();
+    for (const variant of variants) {
+      if (variant.productType) set.add(variant.productType);
+    }
+    const order: Readonly<Record<string, number>> = { Tray: 0, "Jointing Piece": 1, "Support Console": 2 };
+    return Array.from(set).sort((a, b) => (order[a] ?? 99) - (order[b] ?? 99));
   }, [variants]);
 
   const widths = useMemo(() => {
@@ -107,12 +154,19 @@ export function CableFamilyVariantTable({
 
   const [query, setQuery] = useState(initialQuery ?? "");
   const [activeMaterials, setActiveMaterials] = useState<ReadonlySet<string>>(() => new Set());
+  const [activeFamilies, setActiveFamilies] = useState<ReadonlySet<string>>(() => new Set());
+  const [activeProductTypes, setActiveProductTypes] = useState<ReadonlySet<string>>(() => new Set());
   const [activeWidths, setActiveWidths] = useState<ReadonlySet<number>>(() => new Set());
   const [activeHeights, setActiveHeights] = useState<ReadonlySet<number>>(() => new Set());
   const [activeThicknesses, setActiveThicknesses] = useState<ReadonlySet<number>>(() => new Set());
   const [page, setPage] = useState(0);
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
-  const [enquired, setEnquired] = useState<ReadonlySet<string>>(() => new Set());
+  const [confirmation, setConfirmation] = useState<Readonly<{ id: string; title: string }> | null>(null);
+  const enquiryItems = useEnquiryItems();
+  const enquiryItemIds = useMemo(() => new Set(enquiryItems.map((item) => item.id)), [enquiryItems]);
+  const hasCurrentPageEnquiryItem = enquiryItems.some(
+    (item) => item.system === "cable-management" && item.sourceRoute === sourceRoute,
+  );
   // Mobile-only: both start collapsed so a long schedule never dumps a full
   // filter panel + 50-100 rows onto the page on load. Neither state has any
   // effect on desktop — filterPanelMobileOpen/Closed and
@@ -126,6 +180,8 @@ export function CableFamilyVariantTable({
   const isFiltering =
     normalizedQuery !== "" ||
     activeMaterials.size > 0 ||
+    activeFamilies.size > 0 ||
+    activeProductTypes.size > 0 ||
     activeWidths.size > 0 ||
     activeHeights.size > 0 ||
     activeThicknesses.size > 0;
@@ -134,11 +190,17 @@ export function CableFamilyVariantTable({
     normalizedQuery === "" ? enriched : enriched.filter(({ haystack }) => haystack.includes(normalizedQuery));
 
   const materialCounts = new Map<string, number>();
+  const familyCounts = new Map<string, number>();
+  const productTypeCounts = new Map<string, number>();
   const widthCounts = new Map<number, number>();
   const heightCounts = new Map<number, number>();
   const thicknessCounts = new Map<number, number>();
   for (const { variant } of searchOnly) {
     materialCounts.set(variant.material, (materialCounts.get(variant.material) ?? 0) + 1);
+    if (variant.family) familyCounts.set(variant.family, (familyCounts.get(variant.family) ?? 0) + 1);
+    if (variant.productType) {
+      productTypeCounts.set(variant.productType, (productTypeCounts.get(variant.productType) ?? 0) + 1);
+    }
     if (variant.widthMm !== undefined) {
       widthCounts.set(variant.widthMm, (widthCounts.get(variant.widthMm) ?? 0) + 1);
     }
@@ -154,6 +216,9 @@ export function CableFamilyVariantTable({
     ({ variant, haystack }) =>
       (normalizedQuery === "" || haystack.includes(normalizedQuery)) &&
       (activeMaterials.size === 0 || activeMaterials.has(variant.material)) &&
+      (activeFamilies.size === 0 || (variant.family !== undefined && activeFamilies.has(variant.family))) &&
+      (activeProductTypes.size === 0 ||
+        (variant.productType !== undefined && activeProductTypes.has(variant.productType))) &&
       (activeWidths.size === 0 || (variant.widthMm !== undefined && activeWidths.has(variant.widthMm))) &&
       (activeHeights.size === 0 || (variant.heightMm !== undefined && activeHeights.has(variant.heightMm))) &&
       (activeThicknesses.size === 0 ||
@@ -171,6 +236,21 @@ export function CableFamilyVariantTable({
       key: `material-${material}`,
       label: material,
       onRemove: () => updateFilterState(() => setActiveMaterials((prev) => toggleInSet(prev, material))),
+    });
+  }
+  for (const family of activeFamilies) {
+    chips.push({
+      key: `family-${family}`,
+      label: family,
+      onRemove: () => updateFilterState(() => setActiveFamilies((prev) => toggleInSet(prev, family))),
+    });
+  }
+  for (const productType of activeProductTypes) {
+    chips.push({
+      key: `type-${productType}`,
+      label: productTypeLabel(productType, market),
+      onRemove: () =>
+        updateFilterState(() => setActiveProductTypes((prev) => toggleInSet(prev, productType))),
     });
   }
   for (const width of activeWidths) {
@@ -209,6 +289,8 @@ export function CableFamilyVariantTable({
     updateFilterState(() => {
       setQuery("");
       setActiveMaterials(new Set());
+      setActiveFamilies(new Set());
+      setActiveProductTypes(new Set());
       setActiveWidths(new Set());
       setActiveHeights(new Set());
       setActiveThicknesses(new Set());
@@ -231,13 +313,18 @@ export function CableFamilyVariantTable({
       });
   }
 
-  function toggleEnquiry(stockCode: string) {
-    setEnquired((prev) => {
-      const next = new Set(prev);
-      if (next.has(stockCode)) next.delete(stockCode);
-      else next.add(stockCode);
-      return next;
-    });
+  function toggleEnquiry(variant: CableManagementVariant) {
+    const item = cableEnquiryItem(familySlug, familyName, variant, sourceRoute);
+    const { id } = item;
+
+    if (enquiryItemIds.has(id)) {
+      removeEnquiryItem(id);
+      setConfirmation((current) => (current?.id === id ? null : current));
+      return;
+    }
+
+    addEnquiryItem(item);
+    setConfirmation({ id, title: `${variant.model} · ${variant.stockCode}` });
   }
 
   function handleDownloadFiltered() {
@@ -251,16 +338,58 @@ export function CableFamilyVariantTable({
   const filterPanel = (
     <div className={styles.filterPanel}>
       <div className={styles.filterPanelHeader}>
-        <h2 className={styles.filterPanelTitle}>Filter & Search</h2>
+        <h2 className={styles.filterPanelTitle}>{labels.filterPanelTitle}</h2>
         <button
           className={styles.clearAllButton}
           disabled={!isFiltering}
           onClick={clearAll}
           type="button"
         >
-          Clear All
+          {labels.clearAllAction}
         </button>
       </div>
+
+      {families.length > 1 ? (
+        <div aria-label={labels.familyFilterLabel} className={styles.filterGroup} role="group">
+          <h3 className={styles.filterGroupLabel}>{labels.familyFilterLabel}</h3>
+          <div className={styles.filterCheckList}>
+            {families.map((family) => (
+              <label className={styles.filterCheckOption} key={family}>
+                <input
+                  checked={activeFamilies.has(family)}
+                  onChange={() => updateFilterState(() => setActiveFamilies((prev) => toggleInSet(prev, family)))}
+                  type="checkbox"
+                />
+                <span className={styles.filterCheckValue}>{family}</span>
+                <span className={styles.filterCheckCount}>{familyCounts.get(family) ?? 0}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {productTypes.length > 1 ? (
+        <div aria-label={labels.typeFilterLabel} className={styles.filterGroup} role="group">
+          <h3 className={styles.filterGroupLabel}>{labels.typeFilterLabel}</h3>
+          <div className={styles.filterCheckList}>
+            {productTypes.map((productType) => (
+              <label className={styles.filterCheckOption} key={productType}>
+                <input
+                  checked={activeProductTypes.has(productType)}
+                  onChange={() =>
+                    updateFilterState(() =>
+                      setActiveProductTypes((prev) => toggleInSet(prev, productType)),
+                    )
+                  }
+                  type="checkbox"
+                />
+                <span className={styles.filterCheckValue}>{productTypeLabel(productType, market)}</span>
+                <span className={styles.filterCheckCount}>{productTypeCounts.get(productType) ?? 0}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       {variantSelector}
 
@@ -306,8 +435,8 @@ export function CableFamilyVariantTable({
       ) : null}
 
       {widths.length > 1 ? (
-        <div aria-label="Filter by width" className={styles.filterGroup} role="group">
-          <h3 className={styles.filterGroupLabel}>Width (mm)</h3>
+        <div aria-label={labels.widthFilterLabel} className={styles.filterGroup} role="group">
+          <h3 className={styles.filterGroupLabel}>{columnLabels?.width ?? labels.widthFilterLabel}</h3>
           <div className={styles.filterCheckList}>
             {widths.map((width) => (
               <label className={styles.filterCheckOption} key={width}>
@@ -325,8 +454,8 @@ export function CableFamilyVariantTable({
       ) : null}
 
       {heights.length > 1 ? (
-        <div aria-label="Filter by height" className={styles.filterGroup} role="group">
-          <h3 className={styles.filterGroupLabel}>Height (mm)</h3>
+        <div aria-label={labels.heightFilterLabel} className={styles.filterGroup} role="group">
+          <h3 className={styles.filterGroupLabel}>{columnLabels?.height ?? labels.heightFilterLabel}</h3>
           <div className={styles.filterCheckList}>
             {heights.map((height) => (
               <label className={styles.filterCheckOption} key={height}>
@@ -344,8 +473,8 @@ export function CableFamilyVariantTable({
       ) : null}
 
       {thicknesses.length > 1 ? (
-        <div aria-label="Filter by thickness" className={styles.filterGroup} role="group">
-          <h3 className={styles.filterGroupLabel}>Thickness (mm)</h3>
+        <div aria-label={labels.thicknessFilterLabel} className={styles.filterGroup} role="group">
+          <h3 className={styles.filterGroupLabel}>{columnLabels?.thickness ?? labels.thicknessFilterLabel}</h3>
           <div className={styles.filterCheckList}>
             {thicknesses.map((thickness) => (
               <label className={styles.filterCheckOption} key={thickness}>
@@ -365,7 +494,7 @@ export function CableFamilyVariantTable({
       ) : null}
 
       <button className={styles.applyFiltersButton} onClick={() => setFiltersOpen(false)} type="button">
-        Apply Filters
+        {labels.applyFiltersAction}
       </button>
     </div>
   );
@@ -379,7 +508,7 @@ export function CableFamilyVariantTable({
         type="button"
       >
         <IconFilter aria-hidden="true" className={styles.mobileFilterToggleIcon} />
-        Filter & Search
+        {labels.filterPanelTitle}
         {isFiltering ? <span className={styles.mobileFilterBadge}>{filtered.length}</span> : null}
       </button>
 
@@ -396,27 +525,32 @@ export function CableFamilyVariantTable({
                 : `${variants.length} ${labels.countSuffix}`}
             </p>
 
-            <div className={styles.csvActions}>
-              <button
-                aria-label={`${labels.downloadCsvAction} (${filtered.length} ${labels.countSuffix})`}
-                className={styles.csvButton}
-                disabled={filtered.length === 0}
-                onClick={handleDownloadFiltered}
-                type="button"
-              >
-                <IconDownload aria-hidden="true" className={styles.csvButtonIcon} />
-                {labels.downloadCsvAction}
-              </button>
-              {isFiltering ? (
+            <div className={styles.scheduleToolbarActions}>
+              {hasCurrentPageEnquiryItem ? (
+                <EnquiryToolbarSummary count={enquiryItems.length} market={market} />
+              ) : null}
+              <div className={styles.csvActions}>
                 <button
-                  aria-label={`${labels.downloadAllCsvAction} (${variants.length} ${labels.countSuffix})`}
-                  className={styles.csvButtonSecondary}
-                  onClick={handleDownloadAll}
+                  aria-label={`${labels.downloadCsvAction} (${filtered.length} ${labels.countSuffix})`}
+                  className={styles.csvButton}
+                  disabled={filtered.length === 0}
+                  onClick={handleDownloadFiltered}
                   type="button"
                 >
-                  {labels.downloadAllCsvAction}
+                  <IconDownload aria-hidden="true" className={styles.csvButtonIcon} />
+                  {labels.downloadCsvAction}
                 </button>
-              ) : null}
+                {isFiltering ? (
+                  <button
+                    aria-label={`${labels.downloadAllCsvAction} (${variants.length} ${labels.countSuffix})`}
+                    className={styles.csvButtonSecondary}
+                    onClick={handleDownloadAll}
+                    type="button"
+                  >
+                    {labels.downloadAllCsvAction}
+                  </button>
+                ) : null}
+              </div>
             </div>
           </div>
 
@@ -460,31 +594,38 @@ export function CableFamilyVariantTable({
                   <table className={styles.table}>
                     <thead>
                       <tr>
+                        {families.length > 0 ? <th scope="col">{columnLabels?.family ?? labels.columnFamily}</th> : null}
                         <th scope="col">{labels.columnModel}</th>
-                        <th scope="col">{labels.columnStockCode}</th>
-                        <th scope="col">{labels.columnWidth}</th>
-                        <th scope="col">{labels.columnHeight}</th>
-                        <th scope="col">{labels.columnThickness}</th>
-                        <th scope="col">{labels.columnLength}</th>
-                        <th scope="col">{labels.columnWeight}</th>
+                        <th scope="col">{columnLabels?.stockCode ?? labels.columnStockCode}</th>
+                        <th scope="col">{columnLabels?.width ?? labels.columnWidth}</th>
+                        <th scope="col">{columnLabels?.height ?? labels.columnHeight}</th>
+                        <th scope="col">{columnLabels?.thickness ?? labels.columnThickness}</th>
+                        <th scope="col">{columnLabels?.length ?? labels.columnLength}</th>
+                        <th scope="col">{columnLabels?.weight ?? labels.columnWeight}</th>
                         <th scope="col">{labels.columnMaterial}</th>
+                        {productTypes.length > 0 ? <th scope="col">{columnLabels?.type ?? labels.columnType}</th> : null}
                         <th scope="col">{labels.columnAction}</th>
                       </tr>
                     </thead>
                     <tbody>
                       {pageItems.map(({ variant }) => {
                         const isCopied = copiedCode === variant.stockCode;
-                        const isEnquired = enquired.has(variant.stockCode);
+                        const isEnquired = enquiryItemIds.has(
+                          cableEnquiryItem(familySlug, familyName, variant, sourceRoute).id,
+                        );
 
                         return (
                           <tr key={`${familyName}-${variant.model}-${variant.stockCode}`}>
-                            <td data-label={labels.columnModel}>
+                            {families.length > 0 ? (
+                              <td data-label={columnLabels?.family ?? labels.columnFamily}>{variant.family ?? "—"}</td>
+                            ) : null}
+                            <td className={styles.tableModelCell} data-label={labels.columnModel}>
                               <strong>{variant.model}</strong>
                               {variant.name !== variant.model ? (
                                 <span className={styles.tableSecondaryLine}>{variant.name}</span>
                               ) : null}
                             </td>
-                            <td data-label={labels.columnStockCode}>
+                            <td data-label={columnLabels?.stockCode ?? labels.columnStockCode}>
                               <span className={styles.stockCodeCell}>
                                 <span>{variant.stockCode}</span>
                                 <button
@@ -501,17 +642,22 @@ export function CableFamilyVariantTable({
                                 </button>
                               </span>
                             </td>
-                            <td data-label={labels.columnWidth}>{variant.widthMm ?? "—"}</td>
-                            <td data-label={labels.columnHeight}>{variant.heightMm ?? "—"}</td>
-                            <td data-label={labels.columnThickness}>{variant.thicknessMm ?? "—"}</td>
-                            <td data-label={labels.columnLength}>{variant.lengthMm ?? "—"}</td>
-                            <td data-label={labels.columnWeight}>{variant.weight ?? "—"}</td>
+                            <td data-label={columnLabels?.width ?? labels.columnWidth}>{variant.widthMm ?? "—"}</td>
+                            <td data-label={columnLabels?.height ?? labels.columnHeight}>{variant.heightMm ?? "—"}</td>
+                            <td data-label={columnLabels?.thickness ?? labels.columnThickness}>{variant.thicknessMm ?? "—"}</td>
+                            <td data-label={columnLabels?.length ?? labels.columnLength}>{variant.lengthMm ?? "—"}</td>
+                            <td data-label={columnLabels?.weight ?? labels.columnWeight}>{variant.weight ?? "—"}</td>
                             <td data-label={labels.columnMaterial}>{variant.material}</td>
+                            {productTypes.length > 0 ? (
+                              <td data-label={columnLabels?.type ?? labels.columnType}>
+                                {variant.productType ? productTypeLabel(variant.productType, market) : "—"}
+                              </td>
+                            ) : null}
                             <td data-label={labels.columnAction}>
                               <button
                                 aria-pressed={isEnquired}
                                 className={isEnquired ? styles.enquiredButton : styles.enquiryButton}
-                                onClick={() => toggleEnquiry(variant.stockCode)}
+                                onClick={() => toggleEnquiry(variant)}
                                 type="button"
                               >
                                 {isEnquired ? labels.enquiryRemoveAction : labels.enquiryAddAction}
@@ -532,7 +678,7 @@ export function CableFamilyVariantTable({
                       onClick={() => setPage((p) => Math.max(0, p - 1))}
                       type="button"
                     >
-                      Previous
+                      {labels.previousAction}
                     </button>
                     <span className={styles.paginationStatus}>
                       {pageStart + 1}–{Math.min(pageStart + PAGE_SIZE, filtered.length)} of {filtered.length}
@@ -543,7 +689,7 @@ export function CableFamilyVariantTable({
                       onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
                       type="button"
                     >
-                      Next
+                      {labels.nextAction}
                     </button>
                   </nav>
                 ) : null}
@@ -552,6 +698,15 @@ export function CableFamilyVariantTable({
           )}
         </div>
       </div>
+
+      {confirmation ? (
+        <EnquiryAddedConfirmation
+          count={enquiryItems.length}
+          itemLabel={confirmation.title}
+          market={market}
+          onContinue={() => setConfirmation(null)}
+        />
+      ) : null}
     </div>
   );
 }

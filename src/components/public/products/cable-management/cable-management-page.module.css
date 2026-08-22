@@ -336,6 +336,14 @@
 
   .heroVisual {
     aspect-ratio: 16 / 10;
+    /* .heroVisualGlow deliberately bleeds 8% past this box (inset:-8%) for
+       a soft decorative edge — harmless on the desktop 2-column layout
+       where .heroVisual is narrower than the page, but once this stacks to
+       full container width here the bleed reaches the real viewport edge
+       and adds to the page's horizontal scroll range. Clipping it at its
+       own container keeps the same visual (the gradient is already faded
+       to transparent well before the edge) without the page-level overflow. */
+    overflow: hidden;
     order: -1;
   }
 }
@@ -1059,6 +1067,14 @@ a.familyCard:focus-visible {
   margin-bottom: 1rem;
 }
 
+.scheduleToolbarActions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: flex-end;
+}
+
 .resultsLine {
   color: var(--cable-muted);
   font-size: 0.85rem;
@@ -1292,6 +1308,20 @@ a.familyCard:focus-visible {
 /* ---- Mobile technical record cards ---- */
 
 @media (max-width: 720px) {
+  .scheduleToolbar,
+  .scheduleToolbarActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .scheduleToolbarActions,
+  .csvActions,
+  .csvButton,
+  .csvButtonSecondary {
+    justify-content: center;
+    width: 100%;
+  }
+
   .tableScroll {
     max-height: none;
     overflow: visible;
@@ -1346,7 +1376,8 @@ a.familyCard:focus-visible {
   }
 
   .table td:first-child,
-  .table td:last-child {
+  .table td:last-child,
+  .tableModelCell {
     grid-column: 1 / -1;
   }
 
@@ -1682,6 +1713,13 @@ a.siblingIconCard:focus-visible {
 .siblingIconCardCurrent {
   background: var(--cable-accent-soft);
   border-color: var(--cable-accent);
+}
+
+.siblingIconCardInformational .siblingIconTitle,
+.siblingIconCardInformational .siblingIconSubtitle {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 /* Icon + title sit on one compact header row — icon fixed-size, title
@@ -2922,6 +2960,10 @@ a.supportSeriesCard:focus-visible {
 @media (max-width: 1100px) {
   .supportHeroVisual {
     aspect-ratio: 4 / 3;
+    /* Same fix as .heroVisual above: .heroVisualGlow's inset:-8% bleed
+       reaches the real viewport edge once this stacks to full container
+       width, causing page-level horizontal scroll. */
+    overflow: hidden;
     order: -1;
   }
 }

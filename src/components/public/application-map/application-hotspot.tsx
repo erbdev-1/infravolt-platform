@@ -1,4 +1,4 @@
-import styles from "./data-centre-application-map.module.css";
+import styles from "./application-map-viewer.module.css";
 
 type ApplicationHotspotProps = Readonly<{
   id: string;

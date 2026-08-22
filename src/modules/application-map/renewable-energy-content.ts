@@ -15,6 +15,8 @@ const RENEWABLE_ENERGY_CONTENT = {
     },
     headingSector: "Renewable Energy",
     headingSuffix: "Application Map",
+    overviewHeadingPrimary: "Renewable Energy",
+    overviewHeadingSecondary: "Application Map",
     introduction:
       "Explore InfraVolt product systems across a modern\nrenewable energy generation site.",
     overviewThumbnailLabel: "Overview",
@@ -36,6 +38,7 @@ const RENEWABLE_ENERGY_CONTENT = {
       benefitsHeading: "Key benefits",
       closeLabel: "Close product information",
       chooseProductHeading: "Available systems in this zone",
+      exploreSystemLabel: "Explore {system} →",
     },
   },
   ua: {
@@ -50,6 +53,8 @@ const RENEWABLE_ENERGY_CONTENT = {
     },
     headingSector: "Відновлювана енергетика",
     headingSuffix: "Карта застосувань",
+    overviewHeadingPrimary: "Карта застосувань",
+    overviewHeadingSecondary: "відновлюваної енергетики",
     introduction:
       "Дізнайтеся, де застосовуються системи InfraVolt на сучасному\nоб'єкті відновлюваної генерації.",
     overviewThumbnailLabel: "Огляд",
@@ -71,6 +76,7 @@ const RENEWABLE_ENERGY_CONTENT = {
       benefitsHeading: "Основні переваги",
       closeLabel: "Закрити інформацію про продукт",
       chooseProductHeading: "Доступні системи в цій зоні",
+      exploreSystemLabel: "Переглянути {system} →",
     },
   },
 } as const satisfies Readonly<Record<MarketCode, ApplicationMapPageContent>>;

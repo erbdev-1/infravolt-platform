@@ -8,7 +8,6 @@ type AccessibleVideoProps = Readonly<{
   label: string;
   pauseLabel: string;
   playLabel: string;
-  poster: string;
   source: string;
 }>;
 
@@ -18,7 +17,6 @@ export function AccessibleVideo({
   label,
   pauseLabel,
   playLabel,
-  poster,
   source,
 }: AccessibleVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -82,7 +80,6 @@ export function AccessibleVideo({
         onPause={() => setIsPlaying(false)}
         onPlay={() => setIsPlaying(true)}
         playsInline
-        poster={poster}
         preload="metadata"
         ref={videoRef}
       >

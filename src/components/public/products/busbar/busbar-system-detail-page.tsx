@@ -103,6 +103,7 @@ export function BusbarSystemDetailPage({
         documentsActionLabel={content.sidebar.technicalAction}
         documentsDescription={content.sidebar.technicalDescription}
         documentsTitle={content.sidebar.technicalTitle}
+        market={market}
         shortName={system.shortName}
         systemDescription={systemCopy.description}
         systemName={systemCopy.name}

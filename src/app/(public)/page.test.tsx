@@ -95,23 +95,36 @@ describe("HomePage", () => {
       const videos = container.querySelectorAll("video");
 
       expect(videos).toHaveLength(1);
-      expect(videos[0]).toHaveAttribute("poster", MEDIA_ASSETS.hero.poster);
       expect(
         container.querySelector(
           `source[src="${MEDIA_ASSETS.hero.video}"][type="video/mp4"]`,
         ),
       ).not.toBeNull();
 
-      const certificationImages = container.querySelectorAll<HTMLImageElement>(
-        'img[src^="/assets/company/gersan/certifications/"]',
-      );
+      // Six-badge hero overview + value strip is the credibility/overview
+      // content actually rendered on the current homepage hero (the older
+      // certifications strip and manufacturer/disclosures block this test
+      // used to check were removed in the hero/product-systems redesign).
+      const heroBadgeLabels = [
+        "Cable Management Systems",
+        "Busbar Systems",
+        "Underfloor Cable Trunking",
+        "Earthing and Lightning Protection",
+        "LED Systems",
+        "EV Charging Systems",
+      ];
+      const hero = container.querySelector(".hero") as HTMLElement;
 
-      expect(certificationImages.length).toBeGreaterThan(0);
-
-      for (const image of certificationImages) {
-        expect(image).toHaveAttribute("alt");
-        expect(image.getAttribute("alt")?.trim()).not.toBe("");
+      for (const label of heroBadgeLabels) {
+        expect(
+          within(hero).getByRole("link", { name: `Explore ${label}` }),
+        ).toHaveAttribute("href", "#product-systems");
       }
+
+      expect(screen.getByText("One Partner")).toBeInTheDocument();
+      expect(screen.getByText("Six Product Groups")).toBeInTheDocument();
+      expect(screen.getByText("Complete Project Support")).toBeInTheDocument();
+
       expect(container.textContent).not.toMatch(/\b(?:GOST|EAC|UKCA|RoHS)\b/u);
 
       const pageText = (container.textContent ?? "").toLocaleLowerCase("uk-UA");
@@ -150,15 +163,20 @@ describe("HomePage", () => {
         ).not.toBeInTheDocument();
       }
 
-      const disclosures = screen.getByRole("link", {
-        name: content.manufacturer.externalAction.accessibleLabel,
-      });
-      expect(disclosures).toHaveAttribute(
-        "href",
-        content.manufacturer.externalAction.href,
-      );
-      expect(disclosures).toHaveAttribute("target", "_blank");
-      expect(disclosures).toHaveAttribute("rel", "noopener noreferrer");
+      // Technical Resources Preview is the current final homepage section
+      // (the manufacturer/external-disclosures block this test used to
+      // check is no longer rendered — see the hero-badge assertion above).
+      expect(
+        screen.getByRole("heading", {
+          level: 2,
+          name: content.technicalDocuments.title,
+        }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("link", {
+          name: content.technicalDocuments.action.label,
+        }),
+      ).toHaveAttribute("href", content.technicalDocuments.action.href);
     },
   );
 

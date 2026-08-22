@@ -33,11 +33,6 @@ export function TechnicalResourcesPreview({
           <h2>{content.title}</h2>
 
           <p className={styles.introduction}>{content.description}</p>
-
-          <LinkButton href={content.action.href}>
-            {content.action.label}
-            <span aria-hidden="true">→</span>
-          </LinkButton>
         </div>
 
         <div className={styles.cards}>
@@ -72,6 +67,17 @@ export function TechnicalResourcesPreview({
               </article>
             );
           })}
+        </div>
+
+        <div className={styles.actions}>
+          <LinkButton href={content.action.href}>
+            {content.action.label}
+            <span aria-hidden="true">→</span>
+          </LinkButton>
+          <LinkButton href={content.secondaryAction.href} variant="accent">
+            {content.secondaryAction.label}
+            <span aria-hidden="true">→</span>
+          </LinkButton>
         </div>
       </Container>
     </Section>

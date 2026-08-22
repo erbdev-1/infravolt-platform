@@ -100,8 +100,7 @@ type EightIndustries = readonly [
   IndustryItem,
 ];
 
-type FiveFacts = readonly [
-  ContentCard,
+type FourFacts = readonly [
   ContentCard,
   ContentCard,
   ContentCard,
@@ -130,15 +129,23 @@ export type PublicSiteContent = Readonly<{
     localeName: string;
     brandDescriptor: string;
     relationshipLabel?: string;
+    enquiryLabel: string;
+    commercialGroupLabel: string;
+    commercialPartnersLabel: string;
+    tradeAccountLabel: string;
+    soonLabel: string;
     navigation: Navigation;
     footerDescription: string;
     footerProductLabel: string;
     footerResourceLabel: string;
     footerCompanyLabel: string;
-    footerProducts: readonly AnchorLink[];
+    footerProducts: readonly Readonly<{ id: ProductId; label: string }>[];
     footerResources: readonly AnchorLink[];
     footerCompany: readonly AnchorLink[];
     footerMarketLabel: string;
+    footerCtaLabel: string;
+    footerCtaCopy: string;
+    footerCtaActionLabel: string;
   }>;
   hero: Readonly<{
     eyebrow: string;
@@ -216,7 +223,7 @@ export type PublicSiteContent = Readonly<{
     playLabel: string;
     pauseLabel: string;
     fallback: string;
-    facts: FiveFacts;
+    facts: FourFacts;
     factoryImageAlt: string;
     facilityLabel: string;
     qualityLabel: string;
@@ -232,6 +239,7 @@ export type PublicSiteContent = Readonly<{
     description: string;
     items: FiveTechnicalDocumentItems;
     action: AnchorLink;
+    secondaryAction: AnchorLink;
   }>;
   contact: Readonly<{
     eyebrow: string;
@@ -266,41 +274,52 @@ export const PUBLIC_SITE_CONTENT = {
       localeName: "en-GB",
       brandDescriptor: "Electrical infrastructure",
       relationshipLabel: "Official UK Representative",
+      enquiryLabel: "Enquiry",
+      commercialGroupLabel: "Commercial",
+      commercialPartnersLabel: "Commercial Partners",
+      tradeAccountLabel: "Trade Account",
+      soonLabel: "Soon",
       navigation: [
         { href: "/#top", label: "Home" },
-        { href: "/#about-gersan", label: "About" },
+        { href: "/about", label: "About" },
         { href: "/#product-systems", label: "Gersan Products" },
         { href: "/#industries", label: "Industries" },
         { href: "/uk-support", label: "UK Support" },
-        { href: "/#contact", label: "Dealer / Trade Account" },
-        { href: "/#technical-documents", label: "Resources" },
-        { href: "/#contact", label: "Contact" },
+        { href: "/resources", label: "Resources" },
+        { href: "/references", label: "References" },
+        { href: "/contact", label: "Contact" },
       ],
       footerDescription:
-        "Electrical infrastructure systems, technical documentation and coordinated project-supply support for the UK market.",
+        "Electrical infrastructure systems, technical documentation and coordinated project support across the United Kingdom and Ukraine.",
       footerProductLabel: "Product Systems",
       footerResourceLabel: "Project Resources",
       footerCompanyLabel: "Company",
       footerProducts: [
-        { href: "#product-systems", label: "Busbar Systems" },
-        { href: "#product-systems", label: "Cable Management" },
-        {
-          href: "#product-systems",
-          label: "Earthing & Lightning Protection",
-        },
-        { href: "#product-systems", label: "Distribution Systems" },
+        { id: "busbar", label: "Busbar Systems" },
+        { id: "cable-management", label: "Cable Management" },
+        { id: "earthing-lightning", label: "Earthing & Lightning Protection" },
+        { id: "underfloor", label: "Underfloor Systems" },
+        { id: "led-bus lighting", label: "LED Systems" },
+        { id: "ev-charging", label: "EV Charging" },
       ],
       footerResources: [
-        { href: "#industries", label: "Industries" },
-        { href: "#technical-documents", label: "Technical Documents" },
-        { href: "#project-support", label: "Project Support" },
-        { href: "#contact", label: "Dealer / Trade Account" },
+        { href: "/#industries", label: "Industries" },
+        { href: "/resources", label: "Technical Documents" },
+        { href: "/references", label: "References" },
+        { href: "/about", label: "Project Support" },
+        { href: "/contact", label: "Contact / Enquiry" },
+        { href: "/commercial-partners", label: "Commercial Partners" },
       ],
       footerCompany: [
-        { href: "#about-gersan", label: "About" },
-        { href: "#contact", label: "Contact" },
+        { href: "/about", label: "About" },
+        { href: "/contact", label: "Contact" },
+        { href: "/trade-account", label: "Trade Account" },
       ],
       footerMarketLabel: "Serving",
+      footerCtaLabel: "Need Project Support?",
+      footerCtaCopy:
+        "Product selection, quotations and technical documentation support for your project.",
+      footerCtaActionLabel: "Contact Our Team",
     },
     hero: {
       eyebrow: "Electrical infrastructure • Project supply",
@@ -313,7 +332,7 @@ export const PUBLIC_SITE_CONTENT = {
         label: "Explore Product Systems",
       },
       secondaryAction: {
-        href: "#project-support",
+        href: "/contact?type=project",
         label: "Request Project Support",
       },
       videoLabel: "Gersan electrical infrastructure manufacturing overview",
@@ -395,7 +414,7 @@ export const PUBLIC_SITE_CONTENT = {
             "System coordination for dense, continuity-focused technical environments.",
           imageAlt:
             "Illustrative data-centre server hall showing electrical service routes",
-          href: "#application-map",
+          href: "/application-map",
         },
         {
           id: "commercial-buildings",
@@ -564,12 +583,12 @@ export const PUBLIC_SITE_CONTENT = {
       },
 
       primaryAction: {
-        href: "#contact",
+        href: "/contact?type=project",
         label: "Discuss a project",
       },
 
       secondaryAction: {
-        href: "#technical-documents",
+        href: "/resources",
         label: "Review technical documents",
       },
 
@@ -595,20 +614,16 @@ export const PUBLIC_SITE_CONTENT = {
           description: "Manufacturing experience",
         },
         {
-          title: "55,000 m²",
-          description: "Manufacturing facility",
-        },
-        {
-          title: "750+",
-          description: "Specialist staff",
-        },
-        {
           title: "90+ Countries",
           description: "International export network",
         },
         {
           title: "GEREL",
           description: "Listed on Borsa İstanbul",
+        },
+        {
+          title: "GERLF",
+          description: "OTCQX Best Market",
         },
       ],
       factoryImageAlt:
@@ -621,7 +636,7 @@ export const PUBLIC_SITE_CONTENT = {
       listingStatement:
         "Gersan Elektrik Ticaret ve Sanayi A.Ş. is listed on Borsa İstanbul under the ticker GEREL.",
       internalAction: {
-        href: "/about/gersan",
+        href: "/about",
         label: "Discover Gersan",
       },
       externalAction: {
@@ -666,8 +681,12 @@ export const PUBLIC_SITE_CONTENT = {
       ],
 
       action: {
-        href: "#contact",
+        href: "/resources",
         label: "Request Technical Pack",
+      },
+      secondaryAction: {
+        href: "/contact?type=general",
+        label: "Contact InfraVolt",
       },
     },
     contact: {
@@ -676,11 +695,11 @@ export const PUBLIC_SITE_CONTENT = {
       description:
         "Share your system requirements, project stage and documentation needs with the InfraVolt team.",
       primaryAction: {
-        href: "#project-support",
+        href: "/contact?type=project",
         label: "Request Project Support",
       },
       secondaryAction: {
-        href: "#footer-company",
+        href: "/contact?type=general",
         label: "Contact InfraVolt",
       },
     },
@@ -709,41 +728,52 @@ export const PUBLIC_SITE_CONTENT = {
       marketName: "Україна",
       localeName: "uk-UA",
       brandDescriptor: "Електрична інфраструктура",
+      enquiryLabel: "Запит",
+      commercialGroupLabel: "Комерційні можливості",
+      commercialPartnersLabel: "Комерційні партнери",
+      tradeAccountLabel: "Торговий акаунт",
+      soonLabel: "Незабаром",
       navigation: [
         { href: "/#top", label: "Головна" },
-        { href: "/#about-gersan", label: "Про Gersan" },
+        { href: "/about", label: "Про InfraVolt" },
         { href: "/#product-systems", label: "Продукція Gersan" },
         { href: "/#industries", label: "Галузі" },
         { href: "/uk-support", label: "Підтримка у Великій Британії" },
-        { href: "/#contact", label: "Дилерам / Торговий акаунт" },
-        { href: "/#technical-documents", label: "Ресурси" },
-        { href: "/#contact", label: "Контакти" },
+        { href: "/resources", label: "Ресурси" },
+        { href: "/references", label: "Референції" },
+        { href: "/contact", label: "Контакти" },
       ],
       footerDescription:
-        "Системи електричної інфраструктури, технічна документація та узгоджена підтримка проєктного постачання для України.",
+        "Системи електричної інфраструктури, технічна документація та скоординована підтримка проєктів у Великій Британії та Україні.",
       footerProductLabel: "Системи продукції",
       footerResourceLabel: "Ресурси для проєктів",
       footerCompanyLabel: "Компанія",
       footerProducts: [
-        { href: "#product-systems", label: "Шинопровідні системи" },
-        { href: "#product-systems", label: "Кабельні траси" },
-        {
-          href: "#product-systems",
-          label: "Заземлення та блискавкозахист",
-        },
-        { href: "#product-systems", label: "Системи розподілу" },
+        { id: "busbar", label: "Шинопровідні системи" },
+        { id: "cable-management", label: "Кабельні системи" },
+        { id: "earthing-lightning", label: "Заземлення та блискавкозахист" },
+        { id: "underfloor", label: "Підпідлогові системи" },
+        { id: "led-bus lighting", label: "LED-системи" },
+        { id: "ev-charging", label: "Заряджання електромобілів" },
       ],
       footerResources: [
-        { href: "#industries", label: "Галузі" },
-        { href: "#technical-documents", label: "Технічні документи" },
-        { href: "#project-support", label: "Підтримка проєктів" },
-        { href: "#contact", label: "Дилерам / Торговий акаунт" },
+        { href: "/#industries", label: "Галузі" },
+        { href: "/resources", label: "Технічні документи" },
+        { href: "/references", label: "Референції" },
+        { href: "/about", label: "Підтримка проєктів" },
+        { href: "/contact", label: "Контакти / Запит" },
+        { href: "/commercial-partners", label: "Комерційні партнери" },
       ],
       footerCompany: [
-        { href: "#about-gersan", label: "Про Gersan" },
-        { href: "#contact", label: "Контакти" },
+        { href: "/about", label: "Про InfraVolt" },
+        { href: "/contact", label: "Контакти" },
+        { href: "/trade-account", label: "Торговий акаунт" },
       ],
       footerMarketLabel: "Ринок",
+      footerCtaLabel: "Потрібна підтримка проєкту?",
+      footerCtaCopy:
+        "Вибір продукції, комерційні пропозиції та технічна документація для вашого проєкту.",
+      footerCtaActionLabel: "Зв'язатися з командою",
     },
     hero: {
       eyebrow: "Електрична інфраструктура • Проєктне постачання",
@@ -755,7 +785,7 @@ export const PUBLIC_SITE_CONTENT = {
         label: "Оглянути системи продукції",
       },
       secondaryAction: {
-        href: "#project-support",
+        href: "/contact?type=project",
         label: "Запросити підтримку проєкту",
       },
       videoLabel: "Огляд виробництва систем електричної інфраструктури Gersan",
@@ -837,7 +867,7 @@ export const PUBLIC_SITE_CONTENT = {
             "Координація систем для щільних технічних середовищ із фокусом на безперервності.",
           imageAlt:
             "Ілюстративний серверний зал із маршрутами інженерних мереж",
-          href: "#application-map",
+          href: "/application-map",
         },
         {
           id: "commercial-buildings",
@@ -1003,12 +1033,12 @@ export const PUBLIC_SITE_CONTENT = {
         label: "Детальніше про підтримку у Великій Британії",
       },
       primaryAction: {
-        href: "#contact",
+        href: "/contact?type=project",
         label: "Обговорити проєкт",
       },
 
       secondaryAction: {
-        href: "#technical-documents",
+        href: "/resources",
         label: "Переглянути технічні документи",
       },
 
@@ -1034,20 +1064,16 @@ export const PUBLIC_SITE_CONTENT = {
           description: "Досвід виробництва",
         },
         {
-          title: "55 000 м²",
-          description: "Виробничий комплекс",
-        },
-        {
-          title: "750+",
-          description: "Кваліфікованих фахівців",
-        },
-        {
           title: "90+ країн",
           description: "Міжнародна експортна мережа",
         },
         {
           title: "GEREL",
           description: "Лістинг на Borsa İstanbul",
+        },
+        {
+          title: "GERLF",
+          description: "OTCQX Best Market",
         },
       ],
       factoryImageAlt:
@@ -1060,7 +1086,7 @@ export const PUBLIC_SITE_CONTENT = {
       listingStatement:
         "Gersan Elektrik Ticaret ve Sanayi A.Ş. котирується на Borsa İstanbul під тикером GEREL.",
       internalAction: {
-        href: "/about/gersan",
+        href: "/about",
         label: "Дізнатися більше про Gersan",
       },
       externalAction: {
@@ -1104,8 +1130,12 @@ export const PUBLIC_SITE_CONTENT = {
       ],
 
       action: {
-        href: "#contact",
+        href: "/resources",
         label: "Запросити технічний пакет",
+      },
+      secondaryAction: {
+        href: "/contact?type=general",
+        label: "Зв'язатися з InfraVolt",
       },
     },
     contact: {
@@ -1114,11 +1144,11 @@ export const PUBLIC_SITE_CONTENT = {
       description:
         "Повідомте команді InfraVolt про потрібні системи, стадію проєкту та вимоги до документації.",
       primaryAction: {
-        href: "#project-support",
+        href: "/contact?type=project",
         label: "Запросити підтримку проєкту",
       },
       secondaryAction: {
-        href: "#footer-company",
+        href: "/contact?type=general",
         label: "Зв’язатися з InfraVolt",
       },
     },

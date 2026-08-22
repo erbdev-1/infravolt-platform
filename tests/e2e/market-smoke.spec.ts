@@ -32,20 +32,36 @@ test("@uk public root renders the UK market homepage safely", async ({
   await expect(
     page.getByRole("link", { name: "Explore Product Systems" }).first(),
   ).toHaveAttribute("href", "#product-systems");
+  // Two instances exist on the page: a header badge (only shown at very wide
+  // desktop widths, hidden at this test's 1280px viewport by design) and a
+  // footer brand descriptor (always rendered). `.last()` targets the footer
+  // instance so this assertion doesn't depend on the header's breakpoint.
   await expect(
-    page.getByText("Official UK Representative").first(),
+    page.getByText("Official UK Representative").last(),
   ).toBeVisible();
   await expect(page.locator("#product-systems a.product-card")).toHaveCount(6);
   await expect(page.locator("#industries article")).toHaveCount(8);
 
-  const disclosureLink = page.getByRole("link", {
-    name: /View official Gersan disclosures/u,
-  });
-  await expect(disclosureLink).toHaveAttribute("target", "_blank");
-  await expect(disclosureLink).toHaveAttribute("rel", "noopener noreferrer");
+  // Hero six-badge overview + value strip and the Technical Resources
+  // Preview section are the credibility/final-section content actually
+  // rendered on the current homepage (the manufacturer/disclosures block
+  // this test used to check was removed in the hero/product-systems
+  // redesign).
+  await expect(
+    page.locator(".hero").getByRole("link", { name: "Explore Busbar Systems" }),
+  ).toHaveAttribute("href", "#product-systems");
+  await expect(page.getByText("Six Product Groups")).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      level: 2,
+      name: "Project-ready technical documentation",
+    }),
+  ).toBeVisible();
+  // 5, not 6: EV Charging Systems routes to an external partner site
+  // (g-charge.com.tr), not an internal /products/ page.
   await expect(
     page.locator('#product-systems a.product-card[href^="/products/"]'),
-  ).toHaveCount(6);
+  ).toHaveCount(5);
   await expectValidPageAnchors(page);
   browserDiagnostics.assertClean();
 });
