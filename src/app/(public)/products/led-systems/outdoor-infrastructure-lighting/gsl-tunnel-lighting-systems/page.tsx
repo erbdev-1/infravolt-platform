@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { LedSeriesDetailPage } from "@/components/public/products/led-lighting/led-series-detail-page";
 import { gslTunnelLightingSystemsContentForMarket } from "@/data/products/led-lighting/series/gsl-tunnel-lighting-systems";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 const SERIES_SLUG = "gsl-tunnel-lighting-systems";
 const CATEGORY_HREF = "/products/led-systems/outdoor-infrastructure-lighting";
@@ -12,16 +13,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = gslTunnelLightingSystemsContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: `${CATEGORY_HREF}/${SERIES_SLUG}`,
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL(
-        `${CATEGORY_HREF}/${SERIES_SLUG}`,
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function GslTunnelLightingSystemsSeriesPage() {

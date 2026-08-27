@@ -6,6 +6,7 @@ import { EarthingCategoryDetailPage } from "@/components/public/products/earthin
 import { earthingHubContentForMarket } from "@/data/products/earthing-lightning/content";
 import type { EarthingCategorySlug } from "@/data/products/earthing-lightning/types";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 const EARTHING_CATEGORY_SLUGS: readonly EarthingCategorySlug[] = [
   "lightning-protection",
@@ -38,16 +39,12 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: `/products/earthing-and-lightning-protection/${slug}`,
     title: `${category.name} | InfraVolt`,
     description: category.description,
-    alternates: {
-      canonical: new URL(
-        `/products/earthing-and-lightning-protection/${slug}`,
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function EarthingCategoryPage({

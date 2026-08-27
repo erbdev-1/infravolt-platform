@@ -6,18 +6,18 @@ import { applicationMapContentForMarket } from "@/modules/application-map/conten
 import { DATA_CENTRE_APPLICATION_MAP } from "@/modules/application-map/data-centre";
 import { resolveDataCentreApplicationMap } from "@/modules/application-map/resolve";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = applicationMapContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/application-map",
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL("/application-map", marketContext.publicSiteUrl),
-    },
-  };
+  });
 }
 
 export default async function ApplicationMapRoute() {

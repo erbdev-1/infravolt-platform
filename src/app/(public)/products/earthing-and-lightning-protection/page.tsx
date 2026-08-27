@@ -4,21 +4,18 @@ import { headers } from "next/headers";
 import { EarthingLightningHubPage } from "@/components/public/products/earthing-lightning/earthing-lightning-hub-page";
 import { earthingHubContentForMarket } from "@/data/products/earthing-lightning/content";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = earthingHubContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/products/earthing-and-lightning-protection",
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL(
-        "/products/earthing-and-lightning-protection",
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function EarthingLightningProtectionPage() {

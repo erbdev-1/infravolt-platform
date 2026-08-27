@@ -4,18 +4,18 @@ import { headers } from "next/headers";
 import { CableCategoryPage } from "@/components/public/products/cable-management/cable-category-page";
 import { cableManagementCategoryContentForMarket } from "@/data/products/cable-management/category-content";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = cableManagementCategoryContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/products/cable-support-systems",
     title: `${content.title} | InfraVolt`,
     description: content.description,
-    alternates: {
-      canonical: new URL("/products/cable-support-systems", marketContext.publicSiteUrl),
-    },
-  };
+  });
 }
 
 export default async function CableSupportSystemsIndexPage() {

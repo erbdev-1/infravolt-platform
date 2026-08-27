@@ -154,7 +154,7 @@ const content = {
   },
   ua: {
     metadata: {
-      title: "Освітлення паркінгів та вологозахищене освітлення | Системи LED-освітлення | LEDBUS від Gersan | InfraVolt",
+      title: "Освітлення паркінгів і вологозахищені LED-системи | InfraVolt",
       description:
         "Освітлення паркінгів та вологозахищене освітлення — світильники LED-BUS Etange Carpark, StepDIM Waterproof та Etanj PC для паркінгів і складних сервісних приміщень, 11–70 Вт, IP65.",
     },

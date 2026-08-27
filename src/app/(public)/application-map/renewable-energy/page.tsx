@@ -6,6 +6,7 @@ import { renewableEnergyApplicationMapContentForMarket } from "@/modules/applica
 import { RENEWABLE_ENERGY_APPLICATION_MAP } from "@/modules/application-map/renewable-energy";
 import { resolveApplicationMap } from "@/modules/application-map/resolve";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
@@ -13,16 +14,12 @@ export async function generateMetadata(): Promise<Metadata> {
     marketContext.market,
   );
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/application-map/renewable-energy",
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL(
-        "/application-map/renewable-energy",
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function RenewableEnergyApplicationMapRoute() {

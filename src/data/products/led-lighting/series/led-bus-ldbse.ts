@@ -305,7 +305,7 @@ const content = {
   },
   ua: {
     metadata: {
-      title: "LED-BUS LDBSE Series Lighting Systems | Промислове освітлення та освітлення високих прольотів | Системи LED-освітлення | InfraVolt",
+      title: "LED-BUS LDBSE – промислове LED-освітлення | InfraVolt",
       description:
         "LED-BUS LDBSE Series Lighting Systems — 8 каталожних моделей, 50–250 Вт, тонкопрофільна мультилінзова оптика, 135–148 лм/Вт, IP20/IP65, для промислових, авіаційних та логістичних об'єктів.",
     },

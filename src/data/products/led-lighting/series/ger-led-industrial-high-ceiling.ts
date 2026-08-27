@@ -104,7 +104,7 @@ const MODELS_UA: readonly LedSeriesModel[] = [
 const content = {
   uk: {
     metadata: {
-      title: "GER-LED Industrial High Ceiling Lighting Systems | Industrial & High-Bay Lighting | LED Systems | InfraVolt",
+      title: "GER-LED Industrial High Ceiling – Industrial LED | InfraVolt",
       description:
         "GER-LED Industrial High Ceiling Lighting Systems — 9 catalogue models, 35–250 W, IP66, modular plug-and-remove LED/driver construction, adjustable angle, smart integration, 7-year warranty.",
     },
@@ -381,7 +381,7 @@ const content = {
   },
   ua: {
     metadata: {
-      title: "GER-LED Industrial High Ceiling Lighting Systems | Промислове освітлення та освітлення високих прольотів | Системи LED-освітлення | InfraVolt",
+      title: "GER-LED Industrial High Ceiling – промислове LED-освітлення | InfraVolt",
       description:
         "GER-LED Industrial High Ceiling Lighting Systems — 9 каталожних моделей, 35–250 Вт, IP66, модульна так-чіпна конструкція LED/драйвера, регульований кут, розумна інтеграція, 7 років гарантії.",
     },

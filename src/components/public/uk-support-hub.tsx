@@ -90,6 +90,7 @@ export function UKSupportHub({ content, market }: UKSupportHubProps) {
         <div className="uk-support-header">
           <SectionHeading
             eyebrow={content.eyebrow}
+            headingLevel="h1"
             introduction={content.introduction}
             title={content.title}
           />

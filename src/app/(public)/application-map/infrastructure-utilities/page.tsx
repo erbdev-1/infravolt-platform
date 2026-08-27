@@ -6,6 +6,7 @@ import { infrastructureUtilitiesApplicationMapContentForMarket } from "@/modules
 import { INFRASTRUCTURE_UTILITIES_APPLICATION_MAP } from "@/modules/application-map/infrastructure-utilities";
 import { resolveApplicationMap } from "@/modules/application-map/resolve";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
@@ -13,16 +14,12 @@ export async function generateMetadata(): Promise<Metadata> {
     marketContext.market,
   );
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/application-map/infrastructure-utilities",
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL(
-        "/application-map/infrastructure-utilities",
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function InfrastructureUtilitiesApplicationMapRoute() {

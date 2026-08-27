@@ -4,18 +4,18 @@ import { headers } from "next/headers";
 import { CommercialPartnersPage } from "@/components/public/commercial-partners/commercial-partners-page";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
 import { commercialPartnersContentForMarket } from "@/modules/public-site/commercial-partners-content";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = commercialPartnersContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/commercial-partners",
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL("/commercial-partners", marketContext.publicSiteUrl),
-    },
-  };
+  });
 }
 
 export default async function CommercialPartnersRoute() {

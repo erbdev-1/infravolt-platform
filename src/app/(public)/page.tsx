@@ -4,18 +4,18 @@ import { headers } from "next/headers";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
 import { HomePageView } from "@/modules/public-site/home-page";
 import { publicSiteContentForMarket } from "@/modules/public-site/content";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = publicSiteContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/",
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL("/", marketContext.publicSiteUrl),
-    },
-  };
+  });
 }
 
 export default async function HomePage() {

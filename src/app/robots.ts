@@ -1,19 +1,37 @@
 import type { MetadataRoute } from "next";
+import { headers } from "next/headers";
 
 import { isSiteIndexingEnabled } from "@/config/site-indexing";
+import { createRuntimeMarketResolver } from "@/modules/markets/server";
 
 // Belt-and-suspenders with the noindex/nofollow meta tag in layout.tsx —
 // robots.txt stops crawling, the meta tag stops indexing even of a URL
-// discovered elsewhere. Gated on the explicit SITE_INDEXING_ENABLED flag
-// (see src/config/site-indexing.ts), not VERCEL_ENV — the real production
-// domain is connected before SEO launch is approved, so "is this a real
-// Vercel Production deployment" is no longer the right question. Sitemap
-// submission is a later SEO-launch milestone, not part of this one — no
-// sitemap reference here yet.
-export default function robots(): MetadataRoute.Robots {
+// discovered elsewhere. The explicit launch flag and Vercel Production
+// signal must both be present; Preview remains closed even if the flag is
+// copied there accidentally.
+export function buildRobots(
+  indexingEnabled: boolean,
+  publicSiteUrl?: URL,
+): MetadataRoute.Robots {
   return {
-    rules: isSiteIndexingEnabled()
+    rules: indexingEnabled
       ? { userAgent: "*", allow: "/" }
       : { userAgent: "*", disallow: "/" },
+    sitemap:
+      indexingEnabled && publicSiteUrl
+        ? new URL("/sitemap.xml", publicSiteUrl).href
+        : undefined,
   };
+}
+
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const indexingEnabled = isSiteIndexingEnabled();
+  if (!indexingEnabled) return buildRobots(false);
+
+  const requestHeaders = await headers();
+  const resolution = createRuntimeMarketResolver().resolve(
+    requestHeaders.get("host") ?? "",
+  );
+
+  return buildRobots(true, resolution.context.publicSiteUrl);
 }

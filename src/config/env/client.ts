@@ -79,6 +79,14 @@ export function parseClientEnvironment(
     if (missingVariables.length > 0) {
       throw new EnvironmentValidationError(missingVariables);
     }
+
+    const nonHttpsMarketOrigins = productionRequiredVariables.filter(
+      (variable) => result.data[variable]?.protocol !== "https:",
+    );
+
+    if (nonHttpsMarketOrigins.length > 0) {
+      throw new EnvironmentValidationError(nonHttpsMarketOrigins);
+    }
   }
 
   return omitUndefinedEnvironmentValues(result.data);

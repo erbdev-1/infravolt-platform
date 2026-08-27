@@ -6,21 +6,18 @@ import { healthcareApplicationMapContentForMarket } from "@/modules/application-
 import { HEALTHCARE_APPLICATION_MAP } from "@/modules/application-map/healthcare";
 import { resolveApplicationMap } from "@/modules/application-map/resolve";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = healthcareApplicationMapContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/application-map/healthcare",
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL(
-        "/application-map/healthcare",
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function HealthcareApplicationMapRoute() {

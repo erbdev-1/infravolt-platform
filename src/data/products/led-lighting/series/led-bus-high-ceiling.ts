@@ -320,7 +320,7 @@ const content = {
   },
   ua: {
     metadata: {
-      title: "LED-BUS High Ceiling Lighting Systems | Промислове освітлення та освітлення високих прольотів | Системи LED-освітлення | InfraVolt",
+      title: "LED-BUS High Ceiling – освітлення високих прольотів | InfraVolt",
       description:
         "LED-BUS High Ceiling Lighting Systems — 8 каталожних моделей, 50–240 Вт, IP65, пряма інтеграція з шинопроводом Gersan Lighting Busbar, для складів, ангарів, портів та зон обслуговування авіатехніки.",
     },
