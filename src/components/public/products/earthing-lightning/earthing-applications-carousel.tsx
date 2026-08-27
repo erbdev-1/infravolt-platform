@@ -139,7 +139,8 @@ export function ApplicationsCarousel({
                 <p>{application.description}</p>
 
                 <span className={styles.applicationAction}>
-                  {exploreLabel}
+                  <span className={styles.applicationActionDefaultLabel}>{exploreLabel}</span>
+                  <span className={styles.applicationActionDesktopLabel}>View Map</span>
                   <span aria-hidden="true">→</span>
                 </span>
               </div>
