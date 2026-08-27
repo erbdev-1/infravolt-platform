@@ -24,7 +24,7 @@ export default async function UKSupportPage() {
 
   return (
     <main id="main-content">
-      <UKSupportHub content={content.support} />
+      <UKSupportHub content={content.support} market={marketContext.market} />
     </main>
   );
 }

@@ -57,6 +57,21 @@ export const COMPANY_ASSETS = Object.freeze({
   },
 } as const);
 
+// UK Support page, UA market only — InfraVolt has no physical showroom or
+// owned warehouse in Ukraine, so these replace COMPANY_ASSETS.showroom/
+// warehouse (UK-specific facility photos) with UA-appropriate visuals for
+// technical support/solution selection and project supply/logistics
+// coordination instead.
+export const UA_SUPPORT_ASSETS = Object.freeze({
+  technicalSupport: {
+    image: publicMediaUrl("company/ua-support-technical-support-and-solution-selection.webp"),
+  },
+
+  logistics: {
+    image: publicMediaUrl("company/ua-support-project-supply-and-logistics-coordination.webp"),
+  },
+} as const);
+
 export const CAPABILITY_ICONS = Object.freeze({
   documentation: publicMediaUrl("icons/actions/icon-technical-pack.svg"),
   "project-support": publicMediaUrl("icons/actions/icon-quote.svg"),

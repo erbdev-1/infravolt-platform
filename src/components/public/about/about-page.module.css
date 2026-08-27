@@ -33,9 +33,16 @@
   position: relative;
   overflow: hidden;
   color: var(--colour-white);
+  /* Desktop only: right center / auto 100% (not cover) preserves the
+     source composition — dark negative space on the left for copy, full
+     UK/Türkiye/Ukraine map with connection lines intact on the right —
+     instead of "cover" zooming/cropping into it. Overlay lightened from
+     38%/8% so the map detail and red connection lines stay visible under
+     the white copy. Mobile keeps its own separate background rule below,
+     unchanged. */
   background:
-    linear-gradient(90deg, rgb(2 18 38 / 38%) 0%, rgb(2 18 38 / 8%) 72%),
-    var(--colour-navy-dark) var(--hero-background-image) center / cover no-repeat;
+    linear-gradient(90deg, rgb(2 18 38 / 26%) 0%, rgb(2 18 38 / 6%) 72%),
+    var(--colour-navy-dark) var(--hero-background-image) right center / auto 100% no-repeat;
 }
 
 .heroBackdrop {
