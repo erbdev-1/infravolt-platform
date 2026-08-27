@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import { PRODUCT_FAMILY_NUMBERS } from "./types";
 
 import type {
@@ -8,7 +9,7 @@ import type {
   Zone,
 } from "./types";
 
-const IMAGE_BASE = "/assets/application-map/healthcare";
+const IMAGE_BASE = publicMediaUrl("application-map/healthcare");
 
 // ---------------------------------------------------------------------------
 // Healthcare bölge kimlikleri — Data Centre'den bağımsız, kendi sektörüne
@@ -106,7 +107,7 @@ const PRODUCT_FAMILIES = [
     content: {
       uk: {
         name: "Busbar Systems",
-        image: "/assets/products/busbar/gs/card/gs-main-transparent-product.webp",
+        image: publicMediaUrl("products/busbar/gs/card/gs-main-transparent-product.webp"),
         imageAlt: "GS Super Compact busbar system main product view",
         applicationPoints: [
           "Distributes power between switchgear, distribution boards and downstream clinical equipment",
@@ -142,7 +143,7 @@ const PRODUCT_FAMILIES = [
       },
       ua: {
         name: "Шинопровідні системи",
-        image: "/assets/products/busbar/gs/card/gs-main-transparent-product.webp",
+        image: publicMediaUrl("products/busbar/gs/card/gs-main-transparent-product.webp"),
         imageAlt: "Шинопровідна система GS Super Compact — вигляд основного продукту",
         applicationPoints: [
           "Розподіл живлення між розподільними пристроями, щитами та підключеним клінічним обладнанням",
@@ -773,7 +774,7 @@ const ZONES = [
         // Bu koridordaki gerçek ürün GL Lighting Busbar'dır (GS Super
         // Compact değil) — bu yüzden panel görseli/CTA'ları aile
         // varsayılanı yerine bu override'ları kullanır.
-        imageOverride: "/assets/products/busbar/gl/card/gl-main-product.webp",
+        imageOverride: publicMediaUrl("products/busbar/gl/card/gl-main-product.webp"),
         imageAltOverride: {
           uk: "GL lighting busbar system main product view",
           ua: "Освітлювальний шинопровід GL — вигляд основного продукту",

@@ -1,3 +1,5 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import { cableTraysTrunkingSiblingFamilies } from "./cable-trays-trunking-content";
@@ -5,8 +7,14 @@ import { CABLE_SUPPORT_CATALOGUE_PDF_HREF, heavyDutyCableTraysH60ContentForMarke
 import type { CableAccessoryDisplayGroup, CableManagementFamilyContent } from "./types";
 import type { CableVariantFamilyTemplateContent } from "./variant-family-template-types";
 
-const IMAGE_BASE = "/assets/products/cable-management";
-const REQUEST_HREF_BASE = "/uk-support?request=technical-pack&product=cable-management";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+function requestHrefFor(familySuffix: string): string {
+  return buildEnquiryHref("technical-document", {
+    system: "cable-management",
+    family: `cable-management${familySuffix}`,
+    source: "/products/cable-support-systems",
+  });
+}
 
 function t(market: MarketCode, uk: string, ua: string): string {
   return market === "ua" ? ua : uk;
@@ -37,7 +45,7 @@ export function marineTypeCableTraysContentForMarket(market: MarketCode): CableM
       { label: t(market, "Marine Type", "Морський тип") },
     ],
     requestPackAction: t(market, "Request Technical Pack", "Запросити технічний пакет"),
-    requestPackHref: `${REQUEST_HREF_BASE}-marine-type-cable-trays`,
+    requestPackHref: requestHrefFor("-marine-type-cable-trays"),
     catalogueDocument: {
       label: t(market, "Download PDF Catalogue", "Завантажити PDF-каталог"),
       meta: t(market, "PDF Catalogue", "PDF-каталог"),
@@ -96,7 +104,7 @@ export function marineTypeCableTraysContentForMarket(market: MarketCode): CableM
       "Наша технічна команда допоможе з підбором продукції, вимогами до навантаження, координацією монтажу та індивідуальними конфігураціями проєкту.",
     ),
     supportAction: t(market, "Request Technical Support", "Запросити технічну підтримку"),
-    supportHref: `${REQUEST_HREF_BASE}-marine-type-cable-trays`,
+    supportHref: requestHrefFor("-marine-type-cable-trays"),
   };
 }
 
@@ -135,7 +143,7 @@ export function lightingFixtureCableTraysContentForMarket(market: MarketCode): C
       { label: t(market, "Lighting Fixture Type", "Освітлювальний тип") },
     ],
     requestPackAction: t(market, "Request Technical Pack", "Запросити технічний пакет"),
-    requestPackHref: `${REQUEST_HREF_BASE}-lighting-fixture-cable-trays`,
+    requestPackHref: requestHrefFor("-lighting-fixture-cable-trays"),
     catalogueDocument: {
       label: t(market, "Download PDF Catalogue", "Завантажити PDF-каталог"),
       meta: t(market, "PDF Catalogue", "PDF-каталог"),
@@ -198,7 +206,7 @@ export function lightingFixtureCableTraysContentForMarket(market: MarketCode): C
       "Наша технічна команда допоможе з підбором продукції, вимогами до навантаження, координацією монтажу та індивідуальними конфігураціями проєкту.",
     ),
     supportAction: t(market, "Request Technical Support", "Запросити технічну підтримку"),
-    supportHref: `${REQUEST_HREF_BASE}-lighting-fixture-cable-trays`,
+    supportHref: requestHrefFor("-lighting-fixture-cable-trays"),
   };
 }
 
@@ -232,7 +240,7 @@ export function marineLightingFixtureTemplateContentForMarket(market: MarketCode
     ),
     heroVisualMode: "frameless",
     requestPackAction: t(market, "Request Technical Pack", "Запросити технічний пакет"),
-    requestPackHref: `${REQUEST_HREF_BASE}-marine-lighting-fixture-cable-trays`,
+    requestPackHref: requestHrefFor("-marine-lighting-fixture-cable-trays"),
     catalogueDocument: {
       label: t(market, "Download PDF Catalogue", "Завантажити PDF-каталог"),
       meta: t(market, "PDF Catalogue", "PDF-каталог"),
@@ -291,6 +299,6 @@ export function marineLightingFixtureTemplateContentForMarket(market: MarketCode
       "Наша технічна команда допоможе з підбором продукції, вимогами до навантаження, координацією монтажу та індивідуальними конфігураціями проєкту.",
     ),
     supportAction: t(market, "Request Technical Support", "Запросити технічну підтримку"),
-    supportHref: `${REQUEST_HREF_BASE}-marine-lighting-fixture-cable-trays`,
+    supportHref: requestHrefFor("-marine-lighting-fixture-cable-trays"),
   };
 }

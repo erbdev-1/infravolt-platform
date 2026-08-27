@@ -162,6 +162,40 @@ export function CableFamilyVariantTable({
   const [page, setPage] = useState(0);
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [confirmation, setConfirmation] = useState<Readonly<{ id: string; title: string }> | null>(null);
+  const [expandedRows, setExpandedRows] = useState<ReadonlySet<string>>(() => new Set());
+
+  // Compact filter accordion — only the first group that actually renders
+  // starts open, the rest are collapsed, so the sidebar doesn't grow tall
+  // just because a family happens to have many filterable fields. Order
+  // matches the group render order below. Tracked in state (not a static
+  // `open={}` literal) because React reconciles the `open` prop on every
+  // render — an uncontrolled literal would snap a user-opened group shut
+  // the instant any other filter/search state changes.
+  const firstOpenGroupKey = useMemo(() => {
+    if (families.length > 1) return "family";
+    if (productTypes.length > 1) return "type";
+    if (!hideMaterialFilter && materials.length > 1) return "material";
+    if (widths.length > 1) return "width";
+    if (heights.length > 1) return "height";
+    if (thicknesses.length > 1) return "thickness";
+    return null;
+  }, [families, productTypes, hideMaterialFilter, materials, widths, heights, thicknesses]);
+  const [openGroups, setOpenGroups] = useState<ReadonlySet<string>>(
+    () => new Set(firstOpenGroupKey ? [firstOpenGroupKey] : []),
+  );
+
+  function toggleRowSpecs(rowKey: string) {
+    setExpandedRows((prev) => toggleInSet(prev, rowKey));
+  }
+
+  function setGroupOpen(key: string, isOpen: boolean) {
+    setOpenGroups((prev) => {
+      const next = new Set(prev);
+      if (isOpen) next.add(key);
+      else next.delete(key);
+      return next;
+    });
+  }
   const enquiryItems = useEnquiryItems();
   const enquiryItemIds = useMemo(() => new Set(enquiryItems.map((item) => item.id)), [enquiryItems]);
   const hasCurrentPageEnquiryItem = enquiryItems.some(
@@ -350,8 +384,18 @@ export function CableFamilyVariantTable({
       </div>
 
       {families.length > 1 ? (
-        <div aria-label={labels.familyFilterLabel} className={styles.filterGroup} role="group">
-          <h3 className={styles.filterGroupLabel}>{labels.familyFilterLabel}</h3>
+        <details
+          className={styles.filterGroup}
+          onToggle={(event) => setGroupOpen("family", event.currentTarget.open)}
+          open={openGroups.has("family")}
+        >
+          <summary className={styles.filterGroupSummary}>
+            <span className={styles.filterGroupLabel}>{labels.familyFilterLabel}</span>
+            {activeFamilies.size > 0 ? (
+              <span className={styles.filterGroupCount}>{activeFamilies.size}</span>
+            ) : null}
+            <span aria-hidden="true" className={styles.filterGroupChevron} />
+          </summary>
           <div className={styles.filterCheckList}>
             {families.map((family) => (
               <label className={styles.filterCheckOption} key={family}>
@@ -365,12 +409,22 @@ export function CableFamilyVariantTable({
               </label>
             ))}
           </div>
-        </div>
+        </details>
       ) : null}
 
       {productTypes.length > 1 ? (
-        <div aria-label={labels.typeFilterLabel} className={styles.filterGroup} role="group">
-          <h3 className={styles.filterGroupLabel}>{labels.typeFilterLabel}</h3>
+        <details
+          className={styles.filterGroup}
+          onToggle={(event) => setGroupOpen("type", event.currentTarget.open)}
+          open={openGroups.has("type")}
+        >
+          <summary className={styles.filterGroupSummary}>
+            <span className={styles.filterGroupLabel}>{labels.typeFilterLabel}</span>
+            {activeProductTypes.size > 0 ? (
+              <span className={styles.filterGroupCount}>{activeProductTypes.size}</span>
+            ) : null}
+            <span aria-hidden="true" className={styles.filterGroupChevron} />
+          </summary>
           <div className={styles.filterCheckList}>
             {productTypes.map((productType) => (
               <label className={styles.filterCheckOption} key={productType}>
@@ -388,7 +442,7 @@ export function CableFamilyVariantTable({
               </label>
             ))}
           </div>
-        </div>
+        </details>
       ) : null}
 
       {variantSelector}
@@ -416,8 +470,18 @@ export function CableFamilyVariantTable({
       </div>
 
       {!hideMaterialFilter && materials.length > 1 ? (
-        <div aria-label={labels.materialFilterLabel} className={styles.filterGroup} role="group">
-          <h3 className={styles.filterGroupLabel}>{labels.materialFilterLabel}</h3>
+        <details
+          className={styles.filterGroup}
+          onToggle={(event) => setGroupOpen("material", event.currentTarget.open)}
+          open={openGroups.has("material")}
+        >
+          <summary className={styles.filterGroupSummary}>
+            <span className={styles.filterGroupLabel}>{labels.materialFilterLabel}</span>
+            {activeMaterials.size > 0 ? (
+              <span className={styles.filterGroupCount}>{activeMaterials.size}</span>
+            ) : null}
+            <span aria-hidden="true" className={styles.filterGroupChevron} />
+          </summary>
           <div className={styles.filterCheckList}>
             {materials.map((material) => (
               <label className={styles.filterCheckOption} key={material}>
@@ -431,12 +495,20 @@ export function CableFamilyVariantTable({
               </label>
             ))}
           </div>
-        </div>
+        </details>
       ) : null}
 
       {widths.length > 1 ? (
-        <div aria-label={labels.widthFilterLabel} className={styles.filterGroup} role="group">
-          <h3 className={styles.filterGroupLabel}>{columnLabels?.width ?? labels.widthFilterLabel}</h3>
+        <details
+          className={styles.filterGroup}
+          onToggle={(event) => setGroupOpen("width", event.currentTarget.open)}
+          open={openGroups.has("width")}
+        >
+          <summary className={styles.filterGroupSummary}>
+            <span className={styles.filterGroupLabel}>{columnLabels?.width ?? labels.widthFilterLabel}</span>
+            {activeWidths.size > 0 ? <span className={styles.filterGroupCount}>{activeWidths.size}</span> : null}
+            <span aria-hidden="true" className={styles.filterGroupChevron} />
+          </summary>
           <div className={styles.filterCheckList}>
             {widths.map((width) => (
               <label className={styles.filterCheckOption} key={width}>
@@ -450,12 +522,20 @@ export function CableFamilyVariantTable({
               </label>
             ))}
           </div>
-        </div>
+        </details>
       ) : null}
 
       {heights.length > 1 ? (
-        <div aria-label={labels.heightFilterLabel} className={styles.filterGroup} role="group">
-          <h3 className={styles.filterGroupLabel}>{columnLabels?.height ?? labels.heightFilterLabel}</h3>
+        <details
+          className={styles.filterGroup}
+          onToggle={(event) => setGroupOpen("height", event.currentTarget.open)}
+          open={openGroups.has("height")}
+        >
+          <summary className={styles.filterGroupSummary}>
+            <span className={styles.filterGroupLabel}>{columnLabels?.height ?? labels.heightFilterLabel}</span>
+            {activeHeights.size > 0 ? <span className={styles.filterGroupCount}>{activeHeights.size}</span> : null}
+            <span aria-hidden="true" className={styles.filterGroupChevron} />
+          </summary>
           <div className={styles.filterCheckList}>
             {heights.map((height) => (
               <label className={styles.filterCheckOption} key={height}>
@@ -469,12 +549,24 @@ export function CableFamilyVariantTable({
               </label>
             ))}
           </div>
-        </div>
+        </details>
       ) : null}
 
       {thicknesses.length > 1 ? (
-        <div aria-label={labels.thicknessFilterLabel} className={styles.filterGroup} role="group">
-          <h3 className={styles.filterGroupLabel}>{columnLabels?.thickness ?? labels.thicknessFilterLabel}</h3>
+        <details
+          className={styles.filterGroup}
+          onToggle={(event) => setGroupOpen("thickness", event.currentTarget.open)}
+          open={openGroups.has("thickness")}
+        >
+          <summary className={styles.filterGroupSummary}>
+            <span className={styles.filterGroupLabel}>
+              {columnLabels?.thickness ?? labels.thicknessFilterLabel}
+            </span>
+            {activeThicknesses.size > 0 ? (
+              <span className={styles.filterGroupCount}>{activeThicknesses.size}</span>
+            ) : null}
+            <span aria-hidden="true" className={styles.filterGroupChevron} />
+          </summary>
           <div className={styles.filterCheckList}>
             {thicknesses.map((thickness) => (
               <label className={styles.filterCheckOption} key={thickness}>
@@ -490,7 +582,7 @@ export function CableFamilyVariantTable({
               </label>
             ))}
           </div>
-        </div>
+        </details>
       ) : null}
 
       <button className={styles.applyFiltersButton} onClick={() => setFiltersOpen(false)} type="button">
@@ -600,11 +692,11 @@ export function CableFamilyVariantTable({
                         <th scope="col">{columnLabels?.width ?? labels.columnWidth}</th>
                         <th scope="col">{columnLabels?.height ?? labels.columnHeight}</th>
                         <th scope="col">{columnLabels?.thickness ?? labels.columnThickness}</th>
-                        <th scope="col">{columnLabels?.length ?? labels.columnLength}</th>
-                        <th scope="col">{columnLabels?.weight ?? labels.columnWeight}</th>
                         <th scope="col">{labels.columnMaterial}</th>
                         {productTypes.length > 0 ? <th scope="col">{columnLabels?.type ?? labels.columnType}</th> : null}
-                        <th scope="col">{labels.columnAction}</th>
+                        <th className={styles.tableActionHeader} scope="col">
+                          {labels.columnAction}
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -613,16 +705,48 @@ export function CableFamilyVariantTable({
                         const isEnquired = enquiryItemIds.has(
                           cableEnquiryItem(familySlug, familyName, variant, sourceRoute).id,
                         );
+                        const rowKey = `${familyName}-${variant.model}-${variant.stockCode}`;
+                        const hasMoreSpecs = variant.lengthMm !== undefined || variant.weight !== undefined;
+                        const rowExpanded = expandedRows.has(rowKey);
 
                         return (
-                          <tr key={`${familyName}-${variant.model}-${variant.stockCode}`}>
+                          <tr key={rowKey}>
                             {families.length > 0 ? (
-                              <td data-label={columnLabels?.family ?? labels.columnFamily}>{variant.family ?? "—"}</td>
+                              <td className={styles.tableFamilyCell} data-label={columnLabels?.family ?? labels.columnFamily}>
+                                {variant.family ?? "—"}
+                              </td>
                             ) : null}
                             <td className={styles.tableModelCell} data-label={labels.columnModel}>
                               <strong>{variant.model}</strong>
                               {variant.name !== variant.model ? (
                                 <span className={styles.tableSecondaryLine}>{variant.name}</span>
+                              ) : null}
+                              {hasMoreSpecs ? (
+                                <button
+                                  aria-expanded={rowExpanded}
+                                  className={styles.tableMoreSpecsToggle}
+                                  onClick={() => toggleRowSpecs(rowKey)}
+                                  type="button"
+                                >
+                                  <span aria-hidden="true" className={styles.tableMoreSpecsToggleGlyph}>
+                                    {rowExpanded ? "−" : "+"}
+                                  </span>
+                                  {columnLabels?.length ?? labels.columnLength} · {columnLabels?.weight ?? labels.columnWeight}
+                                </button>
+                              ) : null}
+                              {hasMoreSpecs && rowExpanded ? (
+                                <div className={styles.tableMoreSpecsPanel}>
+                                  {variant.lengthMm !== undefined ? (
+                                    <span>
+                                      {columnLabels?.length ?? labels.columnLength}: <strong>{variant.lengthMm}</strong>
+                                    </span>
+                                  ) : null}
+                                  {variant.weight !== undefined ? (
+                                    <span>
+                                      {columnLabels?.weight ?? labels.columnWeight}: <strong>{variant.weight}</strong>
+                                    </span>
+                                  ) : null}
+                                </div>
                               ) : null}
                             </td>
                             <td data-label={columnLabels?.stockCode ?? labels.columnStockCode}>
@@ -645,15 +769,13 @@ export function CableFamilyVariantTable({
                             <td data-label={columnLabels?.width ?? labels.columnWidth}>{variant.widthMm ?? "—"}</td>
                             <td data-label={columnLabels?.height ?? labels.columnHeight}>{variant.heightMm ?? "—"}</td>
                             <td data-label={columnLabels?.thickness ?? labels.columnThickness}>{variant.thicknessMm ?? "—"}</td>
-                            <td data-label={columnLabels?.length ?? labels.columnLength}>{variant.lengthMm ?? "—"}</td>
-                            <td data-label={columnLabels?.weight ?? labels.columnWeight}>{variant.weight ?? "—"}</td>
                             <td data-label={labels.columnMaterial}>{variant.material}</td>
                             {productTypes.length > 0 ? (
                               <td data-label={columnLabels?.type ?? labels.columnType}>
                                 {variant.productType ? productTypeLabel(variant.productType, market) : "—"}
                               </td>
                             ) : null}
-                            <td data-label={labels.columnAction}>
+                            <td className={styles.tableActionCell} data-label={labels.columnAction}>
                               <button
                                 aria-pressed={isEnquired}
                                 className={isEnquired ? styles.enquiredButton : styles.enquiryButton}

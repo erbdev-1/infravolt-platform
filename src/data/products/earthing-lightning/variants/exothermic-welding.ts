@@ -3,7 +3,7 @@ import type { EarthingProductVariant } from "../types";
 export const EXOTHERMIC_WELDING_VARIANTS: Readonly<
   Record<string, readonly EarthingProductVariant[]>
 > = {
-  "Thermoveld": [
+  "thermoveld": [
     { name: "Thermoweld Cup Type C", model: "GTE-401", stockCode: "303104010P0T0", material: "Graphite mould", dimensions: "Tip C", weight: "1.350 kg" },
     { name: "Thermoweld Cup Type D", model: "GTE-401-1", stockCode: "303104011P0T0", material: "Graphite mould", dimensions: "Tip D", weight: "1.800 kg" },
     { name: "Thermoweld Powder", model: "15G20", stockCode: "3031015G20", material: "Thermoweld metal powder", dimensions: "15G20", weight: "0.025 kg" },

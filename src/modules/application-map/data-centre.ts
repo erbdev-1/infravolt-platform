@@ -1,3 +1,5 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+
 import { PRODUCT_FAMILY_NUMBERS } from "./types";
 
 import type {
@@ -8,7 +10,7 @@ import type {
   Zone,
 } from "./types";
 
-const IMAGE_BASE = "/assets/application-map/data-centre";
+const IMAGE_BASE = publicMediaUrl("application-map/data-centre");
 
 // ---------------------------------------------------------------------------
 // Ürün aileleri — InfraVolt'un mevcut altı ürün ailesi. Sahne bağlamından
@@ -86,7 +88,7 @@ const PRODUCT_FAMILIES = [
     content: {
       uk: {
         name: "Busbar Systems",
-        image: "/assets/products/busbar/gs/card/gs-main-transparent-product.webp",
+        image: publicMediaUrl("products/busbar/gs/card/gs-main-transparent-product.webp"),
         imageAlt: "GS Super Compact busbar system main product view",
         applicationPoints: [
           "Distributes power between switchgear, distribution boards and downstream equipment",
@@ -122,7 +124,7 @@ const PRODUCT_FAMILIES = [
       },
       ua: {
         name: "Шинопровідні системи",
-        image: "/assets/products/busbar/gs/card/gs-main-transparent-product.webp",
+        image: publicMediaUrl("products/busbar/gs/card/gs-main-transparent-product.webp"),
         imageAlt: "Шинопровідна система GS Super Compact — вигляд основного продукту",
         applicationPoints: [
           "Розподіл живлення між розподільними пристроями, щитами та підключеним обладнанням",
@@ -500,7 +502,7 @@ const ZONES = [
           "Розподіл вхідного живлення від розподільних пристроїв до підключеного обладнання та ДБЖ у межах головного електротехнічного приміщення.",
         ),
         // Bu bölgede kullanılan gerçek seri: GGD Medium Power.
-        imageOverride: "/assets/products/busbar/ggd/card/ggd-main-transparent-product.webp",
+        imageOverride: publicMediaUrl("products/busbar/ggd/card/ggd-main-transparent-product.webp"),
         imageAltOverride: {
           uk: "GGD medium power busbar system cutaway view",
           ua: "Розрізний вигляд шинопровідної системи GGD",
@@ -589,7 +591,7 @@ const ZONES = [
         // Bu bölgede kullanılan gerçek seri: GGD Medium Power (ana güç
         // hattı). Konum: kırmızı tap-off kutuları arasında, kanalın kendi
         // gövdesi üzerinde — boş tavan alanında değil.
-        imageOverride: "/assets/products/busbar/ggd/card/ggd-main-transparent-product.webp",
+        imageOverride: publicMediaUrl("products/busbar/ggd/card/ggd-main-transparent-product.webp"),
         imageAltOverride: {
           uk: "GGD medium power busbar system cutaway view",
           ua: "Розрізний вигляд шинопровідної системи GGD",
@@ -639,7 +641,7 @@ const ZONES = [
           uk: "LED Busbar (GNL Lighting Busbar)",
           ua: "LED-шинопровід (GNL Lighting Busbar)",
         },
-        imageOverride: "/assets/products/busbar/gnl/products/gnl-hero-energy-transparent.webp",
+        imageOverride: publicMediaUrl("products/busbar/gnl/products/gnl-hero-energy-transparent.webp"),
         imageAltOverride: {
           uk: "GNL lighting busbar with blue and orange energy trails",
           ua: "Освітлювальна шинопровідна система GNL із синіми та помаранчевими світловими лініями",
@@ -730,7 +732,7 @@ const ZONES = [
           "Вертикальний розподіл живлення між поверхами через шинопровідний стояк з відгалуженням на кожному рівні.",
         ),
         // Bu bölgede kullanılan gerçek seri: GGD Medium Power.
-        imageOverride: "/assets/products/busbar/ggd/card/ggd-main-transparent-product.webp",
+        imageOverride: publicMediaUrl("products/busbar/ggd/card/ggd-main-transparent-product.webp"),
         imageAltOverride: {
           uk: "GGD medium power busbar system cutaway view",
           ua: "Розрізний вигляд шинопровідної системи GGD",
@@ -807,7 +809,7 @@ const ZONES = [
           "Розподіл живлення від генераторів та розподільних пристроїв вздовж стіни технічного приміщення до підключених щитів.",
         ),
         // Bu bölgede kullanılan gerçek seri: GGD Medium Power.
-        imageOverride: "/assets/products/busbar/ggd/card/ggd-main-transparent-product.webp",
+        imageOverride: publicMediaUrl("products/busbar/ggd/card/ggd-main-transparent-product.webp"),
         imageAltOverride: {
           uk: "GGD medium power busbar system cutaway view",
           ua: "Розрізний вигляд шинопровідної системи GGD",
@@ -894,7 +896,7 @@ const ZONES = [
           "Розподіл живлення від щита керування до чилерів і циркуляційних насосів через надземний шинопровід.",
         ),
         // Bu bölgede kullanılan gerçek seri: GR Cast Resin.
-        imageOverride: "/assets/products/busbar/gr/card/gr-main-transparent-product.webp",
+        imageOverride: publicMediaUrl("products/busbar/gr/card/gr-main-transparent-product.webp"),
         imageAltOverride: {
           uk: "GR Cast Resin busbar system main product view",
           ua: "Шинопровідна система GR Cast Resin — вигляд основного продукту",
@@ -997,7 +999,7 @@ const ZONES = [
           "Живлення лінії LED-світильників та точок підключення під підлогою від тонкого освітлювального шинопроводу над робочими місцями.",
         ),
         // Bu bölgede kullanılan gerçek seri: GNL Lighting Busbar (LEDBUS).
-        imageOverride: "/assets/products/busbar/gnl/products/gnl-hero-energy-transparent.webp",
+        imageOverride: publicMediaUrl("products/busbar/gnl/products/gnl-hero-energy-transparent.webp"),
         imageAltOverride: {
           uk: "GNL lighting busbar with blue and orange energy trails",
           ua: "Освітлювальна шинопровідна система GNL із синіми та помаранчевими світловими лініями",
@@ -1084,7 +1086,7 @@ const ZONES = [
           "Передача живлення від зовнішнього трансформатора до вхідних розподільних пристроїв будівлі через надземний шинопровідний місток.",
         ),
         // Bu bölgede kullanılan gerçek seri: GS Super Compact.
-        imageOverride: "/assets/products/busbar/gs/card/gs-main-transparent-product.webp",
+        imageOverride: publicMediaUrl("products/busbar/gs/card/gs-main-transparent-product.webp"),
         imageAltOverride: {
           uk: "GS Super Compact busbar system main product view",
           ua: "Шинопровідна система GS Super Compact — вигляд основного продукту",

@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
@@ -5,7 +6,7 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
 export const LINEAR_TRUNKING_CATEGORY_HREF = "/products/led-systems/linear-trunking-lighting";
 
 const ASSET_BASE = "/assets/products/led-lighting/series/linear-trunking";
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/linear&trunking";
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/linear-trunking");
 const PRODUCT_HERO_BASE = `${CATEGORY_ASSET_BASE}/product`;
 const PRODUCT_BACKGROUND_BASE = `${PRODUCT_HERO_BASE}/background`;
 const PHOTOMETRIC_BASE = `${CATEGORY_ASSET_BASE}/photometric`;

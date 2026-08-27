@@ -168,6 +168,26 @@ const ledSupplyPartners: readonly ReferenceCompany[] = ledSupplyPartnerEntries.m
   sourcePage: 128,
 }));
 
+const RUSSIA_REFERENCE_PATTERN = /(?:\brussia(?:n)?\b|\brusya\b|\brossiya\b|\brossia\b|\bgersan-r\b|росси)/iu;
+const RUSSIA_ONLY_COMPANY_NAMES = new Set(["ZAO GERSAN-R", "ЭнергоСервис"]);
+
+function isRussiaPublicReference(...values: readonly (string | undefined)[]): boolean {
+  return values.some((value) => {
+    if (!value) return false;
+    if (RUSSIA_REFERENCE_PATTERN.test(value)) return true;
+    if (resolveOwnerCountry(value) === "Russia") return true;
+    const resolved = resolveReferenceLocation(value);
+    return resolved.kind === "country" && resolved.display === "Russia";
+  });
+}
+
+function isRussiaOnlyCompany(company: ReferenceCompany): boolean {
+  return (
+    RUSSIA_ONLY_COMPANY_NAMES.has(company.name.trim()) ||
+    isRussiaPublicReference(company.name, company.logoIdentity)
+  );
+}
+
 const uiByMarket: Record<MarketCode, ReferencesUiContent> = {
   uk: {
     metadata: {
@@ -299,6 +319,142 @@ export function referencesContentForMarket(market: MarketCode) {
   return uiByMarket[market];
 }
 
+export type ReferenceSector = Readonly<{
+  id: string;
+  title: string;
+  image: string;
+  isGlobal?: boolean;
+  /** Undefined when no verified figure has been supplied for this sector — the card omits the stat row rather than showing an invented number. */
+  referencesValue?: string;
+  countriesValue?: string;
+}>;
+
+export type ReferenceSectorsContent = Readonly<{
+  eyebrow: string;
+  heading: string;
+  description: string;
+  cardReferencesLabel: string;
+  cardCountryLabel: string;
+  sectors: readonly ReferenceSector[];
+}>;
+
+// Sector titles/copy are UI-only groupings for visual navigation into the
+// existing reference directory below — they are not derived from or linked
+// to any per-project sector field in the source catalogue data (no such
+// field exists), so sector cards scroll to the directory rather than filter
+// it. See referenceSectorsForMarket callers for the scroll-only behaviour.
+//
+// Per-card References/Country figures are the market-approved sector-level
+// counts supplied for this section (source: GERSAN reference visual). They
+// are independent of the catalogue-sourced directory below and are not
+// derived by counting per-project sector tags, since no such field exists.
+// A sector with no verified figure supplied would have its stat row
+// intentionally omitted rather than invented — see the ternary in
+// references-page.tsx for that fallback.
+const sectorImages: Record<string, string> = {
+  global: "/assets/references/card/global.webp",
+  "commercial-buildings": "/assets/references/card/sector-commercial-buildings.webp",
+  "industrial-facilities": "/assets/references/card/sector-industrial-facilities.webp",
+  "data-centres": "/assets/references/card/sector-data-centres.webp",
+  "energy-utilities": "/assets/references/card/sector-energy-utilities.webp",
+  "oil-gas": "/assets/references/card/sector-oil-gas.webp",
+  airports: "/assets/references/card/sector-airports.webp",
+  "rail-metro": "/assets/references/card/sector-rail-metro.webp",
+  healthcare: "/assets/references/card/sector-healthcare.webp",
+  "public-educational-infrastructure":
+    "/assets/references/card/sector-public-educational-infrastructure.webp",
+};
+
+const sectorStats: Record<string, { references: string; countries: string } | undefined> = {
+  global: { references: "20,000+", countries: "120+" },
+  "commercial-buildings": { references: "3,000+", countries: "50+" },
+  "energy-utilities": { references: "100+", countries: "40+" },
+  airports: { references: "20+", countries: "5+" },
+  "rail-metro": { references: "50+", countries: "10+" },
+  "industrial-facilities": { references: "100+", countries: "20+" },
+  "oil-gas": { references: "100+", countries: "20+" },
+  healthcare: { references: "500+", countries: "20+" },
+  "data-centres": { references: "200+", countries: "20+" },
+  "public-educational-infrastructure": { references: "300+", countries: "30+" },
+};
+
+const sectorTitles: Record<MarketCode, Record<string, string>> = {
+  uk: {
+    global: "Global / GERSAN",
+    "commercial-buildings": "Commercial Buildings",
+    "energy-utilities": "Energy & Utilities",
+    airports: "Airports",
+    "rail-metro": "Rail & Metro",
+    "industrial-facilities": "Industrial Facilities",
+    "oil-gas": "Oil & Gas",
+    healthcare: "Healthcare",
+    "data-centres": "Data Centres",
+    "public-educational-infrastructure": "Public & Educational Infrastructure",
+  },
+  ua: {
+    global: "Глобально / GERSAN",
+    "commercial-buildings": "Комерційні будівлі",
+    "energy-utilities": "Енергетика та комунальні послуги",
+    airports: "Аеропорти",
+    "rail-metro": "Залізниця та метро",
+    "industrial-facilities": "Промислові об'єкти",
+    "oil-gas": "Нафта і газ",
+    healthcare: "Охорона здоров'я",
+    "data-centres": "Дата-центри",
+    "public-educational-infrastructure": "Публічна та освітня інфраструктура",
+  },
+};
+
+const sectorOrder = [
+  "global",
+  "commercial-buildings",
+  "energy-utilities",
+  "airports",
+  "rail-metro",
+  "industrial-facilities",
+  "oil-gas",
+  "healthcare",
+  "data-centres",
+  "public-educational-infrastructure",
+] as const;
+
+const sectorsHeaderByMarket: Record<MarketCode, Omit<ReferenceSectorsContent, "sectors">> = {
+  uk: {
+    eyebrow: "Sector coverage",
+    heading: "References Across Critical Sectors",
+    description:
+      "Gersan electrical infrastructure systems are specified across commercial, industrial, transport, energy and mission-critical environments worldwide.",
+    cardReferencesLabel: "References",
+    cardCountryLabel: "Country",
+  },
+  ua: {
+    eyebrow: "Охоплення за секторами",
+    heading: "Референції в ключових секторах",
+    description:
+      "Системи електричної інфраструктури Gersan застосовуються в комерційних, промислових, транспортних, енергетичних та критично важливих об'єктах по всьому світу.",
+    cardReferencesLabel: "Референцій",
+    cardCountryLabel: "Країна",
+  },
+};
+
+export function referenceSectorsForMarket(market: MarketCode): ReferenceSectorsContent {
+  const titles = sectorTitles[market];
+  return {
+    ...sectorsHeaderByMarket[market],
+    sectors: sectorOrder.map((id) => {
+      const stats = sectorStats[id];
+      return {
+        id,
+        title: titles[id],
+        image: sectorImages[id],
+        isGlobal: id === "global",
+        referencesValue: stats?.references,
+        countriesValue: stats?.countries,
+      };
+    }),
+  };
+}
+
 export function isReferenceSystemKey(value: string | undefined): value is ReferenceSystemKey {
   return referenceSystemKeys.includes(value as ReferenceSystemKey);
 }
@@ -309,7 +465,15 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   const descriptions = systemDescriptions[market];
   const names = systemNames[market];
   const companiesSuppliedLabel = t("Companies Supplied Worldwide", "Компанії, яким постачалася продукція у світі");
-  const worldwideCompanies = sourceData.earthingLightning.companies;
+  const worldwideCompanies = sourceData.earthingLightning.companies.filter(
+    (company) => !isRussiaOnlyCompany(company),
+  );
+  const publicBusbarCompanies = busbarCompanies.filter((company) => !isRussiaOnlyCompany(company));
+  const publicLedReferenceCompanies = sourceData.ledSystems.companies.filter(
+    (company) => !isRussiaOnlyCompany(company),
+  );
+  const publicLedSupplyPartners = ledSupplyPartners.filter((company) => !isRussiaOnlyCompany(company));
+  const publicGBusCompanies = sourceData.gBus.companies.filter((company) => !isRussiaOnlyCompany(company));
   const projectDisplay = (value: string) => (market === "uk" ? englishReferenceText(value) : value);
   const locationDisplay = (value: string) => {
     if (market !== "uk") return value;
@@ -348,7 +512,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
         "Знаки компаній із власного, повнішого друку цього довідника в каталозі шинопроводів.",
       ),
       kind: "logos",
-      companies: busbarCompanies,
+      companies: publicBusbarCompanies,
     };
   }
 
@@ -362,7 +526,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
         "Партнери з постачання LED-компонентів і технологій, надруковані в каталозі LED Systems.",
       ),
       kind: "logos",
-      companies: ledSupplyPartners,
+      companies: publicLedSupplyPartners,
     };
   }
 
@@ -371,7 +535,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   const busbarUnified = [
     ...sourceData.busbar.customerProjects.map((item) => ({ id: item.id, who: item.customer, project: item.project, location: item.location })),
     ...sourceData.busbar.projectContractors.map((item) => ({ id: item.id, who: item.contractor, project: item.project, location: item.location })),
-  ];
+  ].filter((item) => !isRussiaPublicReference(item.who, item.project, item.location));
   const busbarInternational = busbarUnified.filter(
     (item) => resolveReferenceLocation(item.location).kind === "country" && !isDomesticTurkeyLocation(item.location),
   );
@@ -391,23 +555,32 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   // Domestic / Regional; all other recognised countries are International.
   // The raw owner text remains the source for the displayed Location cell.
   const cableReferenceListInternational = cableReferenceList
-    .filter((item) => resolveReferenceLocation(item.location).kind === "country" && !isDomesticTurkeyLocation(item.location))
+    .filter(
+      (item) =>
+        !isRussiaPublicReference(item.project, item.location) &&
+        resolveReferenceLocation(item.location).kind === "country" &&
+        !isDomesticTurkeyLocation(item.location),
+    )
     .map((item) => ({ id: item.id, project: item.project, location: item.location }));
   const cableRelationshipsInternational = sourceData.cableManagement.relationships
     .filter((item) => {
+      if (isRussiaPublicReference(item.contractor, item.project, item.owner)) return false;
       const country = resolveOwnerCountry(item.owner);
       return country !== undefined && !isTurkeyCountry(country);
     })
     .map((item) => ({ id: item.id, project: item.project, location: item.owner }));
   const cableRelationshipsDomestic = sourceData.cableManagement.relationships
     .filter((item) => {
+      if (isRussiaPublicReference(item.contractor, item.project, item.owner)) return false;
       const country = resolveOwnerCountry(item.owner);
       return isTurkeyCountry(country);
     })
     .map((item) => ({ id: item.id, project: item.project, location: item.owner }));
   const cableInternational = [...cableReferenceListInternational, ...cableRelationshipsInternational];
   const cableDomestic = [
-    ...cableReferenceList.filter((item) => isDomesticTurkeyLocation(item.location)),
+    ...cableReferenceList.filter(
+      (item) => !isRussiaPublicReference(item.project, item.location) && isDomesticTurkeyLocation(item.location),
+    ),
     ...cableRelationshipsDomestic,
   ];
   const cableColumns = [
@@ -420,10 +593,15 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   // an unambiguous foreign country (e.g. Turkmenistan, Kazakhstan) are moved
   // in the opposite direction into International.
   const earthingIntlScoped = sourceData.earthingLightning.references.filter(
-    (item) => item.scope === "international_project_references" && !isDomesticTurkeyLocation(item.location),
+    (item) =>
+      !isRussiaPublicReference(item.reference, item.project, item.location) &&
+      item.scope === "international_project_references" &&
+      !isDomesticTurkeyLocation(item.location),
   );
   const earthingDomesticScoped = sourceData.earthingLightning.references.filter(
-    (item) => item.scope !== "international_project_references" || isDomesticTurkeyLocation(item.location),
+    (item) =>
+      !isRussiaPublicReference(item.reference, item.project, item.location) &&
+      (item.scope !== "international_project_references" || isDomesticTurkeyLocation(item.location)),
   );
   const earthingReclassified = earthingDomesticScoped.filter(
     (item) => resolveReferenceLocation(item.location).kind === "country" && !isDomesticTurkeyLocation(item.location),
@@ -445,7 +623,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
       title: names.busbar.title,
       description: descriptions.busbar,
       source: "GERSAN Busbar catalogue · PDF pages 161–192",
-      total: busbarInternational.length + busbarDomestic.length + busbarCompanies.length,
+      total: busbarInternational.length + busbarDomestic.length + publicBusbarCompanies.length,
       tabs: [
         {
           id: "international",
@@ -521,7 +699,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
       title: names["earthing-lightning"].title,
       description: descriptions["earthing-lightning"],
       source: "GERSAN Earthing catalogue · PDF pages 124–142",
-      total: earthingInternational.length + earthingTrueDomestic.length + sourceData.earthingLightning.companies.length,
+      total: earthingInternational.length + earthingTrueDomestic.length + worldwideCompanies.length,
       tabs: [
         {
           id: "international-projects",
@@ -558,7 +736,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
             "Знаки компаній із каталогу, включно з обмеженими джерелом знаками, де це застосовно.",
           ),
           kind: "logos",
-          companies: sourceData.earthingLightning.companies,
+          companies: worldwideCompanies,
         },
       ],
     },
@@ -579,7 +757,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
       title: names["led-systems"].title,
       description: descriptions["led-systems"],
       source: "GERSAN LED Systems catalogue · PDF pages 127–128",
-      total: sourceData.ledSystems.companies.length + ledSupplyPartners.length,
+      total: publicLedReferenceCompanies.length + publicLedSupplyPartners.length,
       tabs: [
         {
           id: "some-of-our-references",
@@ -590,7 +768,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
             "Окремі референційні знаки, взяті безпосередньо з вихідних сторінок каталогу.",
           ),
           kind: "logos",
-          companies: sourceData.ledSystems.companies,
+          companies: publicLedReferenceCompanies,
         },
         ledSupplyPartnersTab(),
       ],
@@ -602,7 +780,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
       title: names["g-bus"].title,
       description: descriptions["g-bus"],
       source: "G-BUS catalogue · current reference panel",
-      total: sourceData.gBus.companies.length + worldwideCompanies.length,
+      total: publicGBusCompanies.length + worldwideCompanies.length,
       tabs: [
         {
           id: "reference-projects",
@@ -613,7 +791,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
             "Іменовані знаки проєктів, представлені в каталозі G-BUS.",
           ),
           kind: "logos",
-          companies: sourceData.gBus.companies,
+          companies: publicGBusCompanies,
         },
         worldwideCompaniesTab(),
       ],

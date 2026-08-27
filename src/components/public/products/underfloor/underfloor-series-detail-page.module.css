@@ -185,26 +185,112 @@
 }
 
 .variantGroup {
-  margin-bottom: 2.75rem;
+  border: 1px solid var(--underfloor-border);
+  border-radius: 0.65rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
 }
 
 .variantGroup:last-child {
   margin-bottom: 0;
 }
 
-.variantGroup h2 {
-  border-bottom: 2px solid var(--underfloor-accent);
+/* Family accordion trigger — replaces the always-visible <h2> + fully
+   expanded table every group used to render at once. Same
+   grid-template-rows expand/collapse technique as earthing-lightning's
+   .variantGroupPanel, reused here for a consistent interaction language
+   across both catalogue sections. */
+.variantGroupTrigger {
+  align-items: center;
+  background: var(--underfloor-surface);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  width: 100%;
+}
+
+.variantGroupName {
   color: var(--underfloor-ink);
-  font-size: 1.15rem;
+  font-size: 1rem;
+  font-weight: 700;
   letter-spacing: -0.01em;
-  margin: 0 0 1rem;
-  padding-bottom: 0.6rem;
+}
+
+.variantGroupMeta {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.75rem;
+}
+
+.variantGroupCount {
+  color: var(--underfloor-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.variantGroupChevron,
+.variantGroupChevronOpen {
+  color: var(--underfloor-accent);
+  flex-shrink: 0;
+  height: 1rem;
+  transition: transform 200ms ease;
+  width: 1rem;
+}
+
+.variantGroupChevronOpen {
+  transform: rotate(180deg);
+}
+
+.variantGroupPanel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 240ms ease;
+}
+
+.variantGroupPanel[data-expanded="true"] {
+  grid-template-rows: 1fr;
+}
+
+.variantGroupPanelInner {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 1.25rem 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .variantGroupPanel {
+    transition: none;
+  }
+}
+
+.showMoreButton {
+  background: #ffffff;
+  border: 1px solid var(--underfloor-border);
+  border-radius: 0.5rem;
+  color: var(--underfloor-accent);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-top: 0.85rem;
+  padding: 0.65rem 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.showMoreButton:hover {
+  background: var(--underfloor-accent-soft, #fff7ee);
+  border-color: var(--underfloor-accent);
 }
 
 .tableWrap {
-  border: 1px solid var(--underfloor-border);
-  border-radius: 0.65rem;
+  border-top: 1px solid var(--underfloor-border);
   overflow-x: auto;
+  padding-top: 1.1rem;
 }
 
 .table {
@@ -428,8 +514,51 @@
 }
 
 @media (max-width: 640px) {
+  /* Pill/chip wall → one integrated technical-facts panel. Same <ul><li>
+     markup as desktop (no JSX change, shared across every Underfloor
+     series via this one template) — just reflowed as a grid: the first
+     fact (by source order, no separate priority field in the data) spans
+     the full width as the primary row, every fact after it auto-flows
+     into a 2-column grid below with a divider, matching an engineering
+     datasheet rather than marketing tags. Handles 1, 2, 3 or 4+ facts
+     without a per-series hack. */
   .heroFeatures {
-    gap: 0.45rem;
+    background: rgb(255 255 255 / 6%);
+    border: 1px solid rgb(255 255 255 / 14%);
+    border-radius: 0.55rem;
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1.1rem;
+  }
+
+  .heroFeatures li {
+    background: none;
+    border: none;
+    border-radius: 0;
+    color: rgb(255 255 255 / 88%);
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.35;
+    overflow: hidden;
+    padding: 0.7rem 0.85rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .heroFeatures li:first-child {
+    border-bottom: 1px solid rgb(255 255 255 / 14%);
+    font-size: 0.88rem;
+    grid-column: 1 / -1;
+  }
+
+  .heroFeatures li:nth-child(2):not(:last-child) {
+    border-right: 1px solid rgb(255 255 255 / 14%);
+  }
+
+  .heroFeatures li:nth-child(n + 4) {
+    border-top: 1px solid rgb(255 255 255 / 14%);
   }
 
   .heroForeground {
@@ -492,12 +621,20 @@
     width: 1px;
   }
 
+  /* Compact record card — same 7 semantic cells (model, product, order
+     code, stock code, dimensions, weight, action) as desktop's table,
+     just reflowed via nth-child/grid-column so nothing in
+     underfloor-series-detail-page.tsx has to change: model + product
+     each take a full-width row, order/stock code pair onto one 2-column
+     row, dimensions/weight onto another, then a compact (not full-width
+     block) Add to Enquiry button. Matches the pattern already used by
+     earthing-category-detail-page.module.css. */
   .table tbody tr {
     border-top: 1px solid var(--underfloor-border);
     display: grid;
-    gap: 0.6rem 0.75rem;
+    gap: 0.5rem 0.6rem;
     grid-template-columns: 1fr 1fr;
-    padding: 1rem 1.1rem;
+    padding: 0.85rem 1.1rem;
   }
 
   .table tbody tr:first-child {
@@ -517,22 +654,131 @@
     color: var(--underfloor-muted);
     content: attr(data-label);
     display: block;
-    font-size: 0.66rem;
+    font-size: 0.6rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.2rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.15rem;
     text-transform: uppercase;
   }
 
   .table tbody th,
-  .table tbody td:last-child {
+  .table tbody td:nth-child(2),
+  .table tbody td:nth-child(7) {
     grid-column: 1 / -1;
+  }
+
+  .table tbody td:nth-child(3),
+  .table tbody td:nth-child(4),
+  .table tbody td:nth-child(5),
+  .table tbody td:nth-child(6) {
+    font-size: 0.78rem;
   }
 
   .enquiryButton,
   .enquiredButton {
-    display: block;
-    text-align: center;
-    width: 100%;
+    display: inline-block;
+    margin-top: 0.1rem;
+  }
+}
+
+/* =========================================================
+   RELATED SERIES — compact navigator rows, added below the variant
+   groups (this section did not previously exist on the detail page).
+   ========================================================= */
+
+.relatedSeries {
+  margin: 0 auto;
+  max-width: 1600px;
+  padding: 0 clamp(1.25rem, 4vw, 4rem) clamp(3rem, 5vw, 4rem);
+}
+
+.sectionHeading {
+  margin-bottom: 1.25rem;
+}
+
+.sectionHeading h2 {
+  color: var(--underfloor-ink);
+  font-size: clamp(1.5rem, 2.4vw, 1.85rem);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.relatedSeriesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.relatedSeriesRow {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--underfloor-border);
+  border-radius: 0.6rem;
+  color: inherit;
+  display: flex;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.relatedSeriesRow:hover {
+  border-color: var(--underfloor-accent-border);
+  box-shadow: var(--underfloor-shadow-idle, 0 1px 2px rgb(12 27 44 / 5%));
+}
+
+.relatedSeriesImage {
+  background: var(--underfloor-surface);
+  border-radius: 0.4rem;
+  flex-shrink: 0;
+  height: 3.25rem;
+  overflow: hidden;
+  position: relative;
+  width: 3.25rem;
+}
+
+.relatedSeriesImage img {
+  object-fit: contain;
+}
+
+.relatedSeriesBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.relatedSeriesName {
+  color: var(--underfloor-ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.relatedSeriesDescription {
+  color: var(--underfloor-muted);
+  display: -webkit-box;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.relatedSeriesAction {
+  align-items: center;
+  color: var(--underfloor-accent);
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  font-weight: 800;
+  gap: 0.35rem;
+}
+
+@media (max-width: 640px) {
+  .relatedSeriesDescription {
+    display: none;
   }
 }

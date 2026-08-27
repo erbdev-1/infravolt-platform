@@ -2,7 +2,7 @@ import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedCategoryDetailContent } from "./types";
 
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/outdorr&infrastructure";
+const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/outdoor-infrastructure";
 const CARD_IMAGE_BASE = `${CATEGORY_ASSET_BASE}/card`;
 const APPLICATION_IMAGE_BASE = `${CATEGORY_ASSET_BASE}/applications`;
 

@@ -44,6 +44,13 @@ export function ApplicationsCarousel({
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
+  // Mobile-only interactive selector state — the half-visible-next-card
+  // scroller below is CSS-hidden under 640px (see .applicationsCarousel)
+  // and replaced by one active presentation card + a compact selector
+  // grid that updates it in place. Both blocks read the same
+  // `applications` data; only this piece of state is selector-specific.
+  const [activeId, setActiveId] = useState(applications[0]?.id);
+  const activeApplication = applications.find((application) => application.id === activeId) ?? applications[0];
 
   const updateScrollBounds = useCallback(() => {
     const scroller = scrollerRef.current;
@@ -93,57 +100,112 @@ export function ApplicationsCarousel({
     });
   }
 
+  if (!activeApplication) return null;
+
   return (
-    <div className={styles.applicationsCarousel}>
-      <button
-        aria-label={previousLabel}
-        className={styles.applicationsArrow}
-        disabled={!canScrollPrev}
-        onClick={() => scrollByGroup(-1)}
-        type="button"
-      >
-        <span aria-hidden="true">‹</span>
-      </button>
+    <>
+      {/* Desktop/tablet — unchanged horizontal scroller, hidden below
+          640px (see .applicationsCarousel). */}
+      <div className={styles.applicationsCarousel}>
+        <button
+          aria-label={previousLabel}
+          className={styles.applicationsArrow}
+          disabled={!canScrollPrev}
+          onClick={() => scrollByGroup(-1)}
+          type="button"
+        >
+          <span aria-hidden="true">‹</span>
+        </button>
 
-      <div className={styles.applicationsRow} ref={scrollerRef}>
-        {applications.map((application) => (
-          <Link
-            className={styles.applicationPhotoCard}
-            href={applicationHref(application.id)}
-            key={application.id}
-          >
-            <div className={styles.applicationPhotoVisual}>
-              <Image
-                alt={application.imageAlt}
-                className={styles.applicationPhotoImage}
-                fill
-                sizes="18rem"
-                src={application.image}
-              />
-            </div>
+        <div className={styles.applicationsRow} ref={scrollerRef}>
+          {applications.map((application) => (
+            <Link
+              className={styles.applicationPhotoCard}
+              href={applicationHref(application.id)}
+              key={application.id}
+            >
+              <div className={styles.applicationPhotoVisual}>
+                <Image
+                  alt={application.imageAlt}
+                  className={styles.applicationPhotoImage}
+                  fill
+                  sizes="18rem"
+                  src={application.image}
+                />
+              </div>
 
-            <div className={styles.applicationPhotoContent}>
-              <h3>{application.title}</h3>
-              <p>{application.description}</p>
+              <div className={styles.applicationPhotoContent}>
+                <h3>{application.title}</h3>
+                <p>{application.description}</p>
 
-              <span className={styles.applicationAction}>
-                {exploreLabel}
-                <span aria-hidden="true">→</span>
-              </span>
-            </div>
-          </Link>
-        ))}
+                <span className={styles.applicationAction}>
+                  {exploreLabel}
+                  <span aria-hidden="true">→</span>
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <button
+          aria-label={nextLabel}
+          className={styles.applicationsArrow}
+          disabled={!canScrollNext}
+          onClick={() => scrollByGroup(1)}
+          type="button"
+        >
+          <span aria-hidden="true">›</span>
+        </button>
       </div>
 
-      <button
-        aria-label={nextLabel}
-        className={styles.applicationsArrow}
-        disabled={!canScrollNext}
-        onClick={() => scrollByGroup(1)}
-        type="button"
-      >
-        <span aria-hidden="true">›</span>
-      </button>
-    </div>
+      {/* Mobile only — one active presentation card + a compact selector
+          grid that swaps it in place, replacing the half-visible-next-card
+          carousel above (hidden below 640px). */}
+      <div className={styles.applicationSelector}>
+        <Link
+          className={styles.applicationActiveCard}
+          href={applicationHref(activeApplication.id)}
+          key={activeApplication.id}
+        >
+          <div className={styles.applicationActiveVisual}>
+            <Image
+              alt={activeApplication.imageAlt}
+              className={styles.applicationPhotoImage}
+              fill
+              sizes="100vw"
+              src={activeApplication.image}
+            />
+          </div>
+
+          <div className={styles.applicationActiveContent}>
+            <h3>{activeApplication.title}</h3>
+            <p>{activeApplication.description}</p>
+
+            <span className={styles.applicationAction}>
+              {exploreLabel}
+              <span aria-hidden="true">→</span>
+            </span>
+          </div>
+        </Link>
+
+        <div aria-label={exploreLabel} className={styles.applicationSelectorGrid} role="group">
+          {applications.map((application) => (
+            <button
+              aria-pressed={application.id === activeApplication.id}
+              className={
+                application.id === activeApplication.id
+                  ? styles.applicationSelectorItemActive
+                  : styles.applicationSelectorItem
+              }
+              key={application.id}
+              onClick={() => setActiveId(application.id)}
+              type="button"
+            >
+              {application.title}
+            </button>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }

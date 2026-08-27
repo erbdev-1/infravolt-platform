@@ -30,7 +30,7 @@ describe("Special & Hazardous Environment Lighting category", () => {
 
   it("uses the prepared family product composition in the hero foreground", () => {
     expect(SPECIAL_HAZARDOUS_HERO_FOREGROUND).toBe(
-      "/assets/products/led-lighting/category/special&hazardous/hero/special-hazardous-environment-lighting-hero-foreground-products.webp",
+      "/assets/products/led-lighting/category/special-hazardous/hero/special-hazardous-environment-lighting-hero-foreground-products.webp",
     );
   });
 

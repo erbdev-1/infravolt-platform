@@ -255,12 +255,7 @@
 
 @media (max-width: 640px) {
   .heroActions {
-    flex-direction: column;
-  }
-
-  .primaryButton,
-  .secondaryButton {
-    width: 100%;
+    gap: 0.625rem;
   }
 }
 
@@ -736,9 +731,60 @@
 /* Mobile stays 2-column for categories (denser, less scrolling) rather
    than collapsing to 1 — see the density pass below. */
 @media (max-width: 640px) {
+  /* 2x2 compact capability tiles rather than a single stacked column —
+     all four items (value strip / trust strip) stay visible at once. */
   .valueGrid,
   .trustGrid {
-    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .valueCard {
+    padding-left: 0.75rem;
+  }
+
+  .valueIcon,
+  .trustIcon {
+    margin-bottom: 0.6rem;
+  }
+
+  .valueIcon {
+    height: 2.1rem;
+    width: 2.1rem;
+  }
+
+  .trustIcon {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+
+  .valueCard h3,
+  .trustCard h3 {
+    font-size: 0.86rem;
+  }
+
+  .valueCard p,
+  .trustCard p {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 0.74rem;
+    line-height: 1.4;
+    margin-top: 0.35rem;
+    overflow: hidden;
+  }
+
+  .heroActions {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    font-size: 0.84rem;
+    min-height: 2.75rem;
+    padding: 0.6rem 1rem;
+    width: 100%;
   }
 
   .heroTop {

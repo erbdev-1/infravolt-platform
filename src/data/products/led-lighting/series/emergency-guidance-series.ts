@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import { EMERGENCY_GUIDANCE_HERO_BACKGROUND, EMERGENCY_GUIDANCE_HERO_BACKGROUND_ALT } from "../emergency-guidance-lighting";
@@ -10,10 +11,10 @@ export const EMERGENCY_GUIDANCE_CATEGORY_HREF = "/products/led-systems/emergency
 // product/ and product/background/ folders (verified by visual
 // inspection: real isolated product renders and matching real interior
 // environment photography, not raw catalogue crops or placeholders).
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/emergency&guidance";
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/emergency-guidance");
 const PRODUCT_BASE = `${CATEGORY_ASSET_BASE}/product`;
 const BACKGROUND_BASE = `${PRODUCT_BASE}/background`;
-const PICTOGRAMS_BASE = `${CATEGORY_ASSET_BASE}/Pictograms`;
+const PICTOGRAMS_BASE = `${CATEGORY_ASSET_BASE}/pictograms`;
 const DIMENSIONS_BASE = `${CATEGORY_ASSET_BASE}/dimensions`;
 
 const ARL_HERO_IMAGE = `${PRODUCT_BASE}/arl-exit-sign-series-hero-product-transparent.webp`;

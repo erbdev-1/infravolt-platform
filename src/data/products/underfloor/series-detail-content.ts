@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { UnderfloorSeriesDetail } from "./series-detail-types";
@@ -10,7 +11,7 @@ import type { UnderfloorSeriesDetail } from "./series-detail-types";
 // catalogue). Nothing here is invented; codes are language-neutral and
 // therefore identical across markets, only labels/product names differ.
 
-const IMG = "/assets/products/underfloor/detail";
+const IMG = publicMediaUrl("products/underfloor/detail");
 
 const COLUMN_LABELS = {
   uk: {
@@ -41,6 +42,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "GDK",
+          id: "gdk",
           variants: [
             { model: "GDK-01", productName: "Underfloor junction box", orderCode: "GDK-01", stockCode: "101506070BLS0", weight: "4.060 kg/unit", image: `${IMG}/junction-boxes/gdk-01-open.webp` },
             { model: "GDK-02", productName: "Socket case", orderCode: "GDK-02", stockCode: "101500020PLS0", weight: "1.100 kg/unit", image: `${IMG}/junction-boxes/gdk-02-open.webp` },
@@ -50,6 +52,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "GDK-Y",
+          id: "gdk-y",
           variants: [
             { model: "GDK-31-Y", productName: "Underfloor junction box", orderCode: "GDK-31-Y", stockCode: "101500310PLS1", dimensions: "400×400 mm; opening 280×280 mm; h≈69 mm", weight: "5.580 kg/unit", image: `${IMG}/junction-boxes/gdk-31-y-open.webp` },
             { model: "GDK-32-Y", productName: "Socket case", orderCode: "GDK-32-Y", stockCode: "101500320PLS1", weight: "2.110 kg/unit", image: `${IMG}/junction-boxes/gdk-32-y-open.webp` },
@@ -60,6 +63,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "British System (ING)",
+          id: "british-system-ing",
           variants: [
             { model: "GDK-31 ING", productName: "Junction box — British system", orderCode: "GDK-31 ING", stockCode: "1015ING310PLS1", weight: "5.580 kg/unit", image: `${IMG}/junction-boxes/gdk-31-ing-open.webp` },
             { model: "GDK-32 ING", productName: "Socket case — British system", orderCode: "GDK-32 ING", stockCode: "1015ING320PLS1", weight: "2.160 kg/unit", image: `${IMG}/junction-boxes/gdk-32-ing-open.webp` },
@@ -69,6 +73,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "GDK / GDKB Accessories",
+          id: "gdk-gdkb-accessories",
           variants: [
             { model: "GDK-06", productName: "Special junction box for marble floor", orderCode: "GDK-06", stockCode: "1015000609141", weight: "4.020 kg/unit", image: `${IMG}/junction-boxes/gdk-06-open.webp` },
             { model: "GDK-011", productName: "Double underfloor junction box", orderCode: "GDK-011", stockCode: "1015001109141", weight: "8.000 kg/unit", image: `${IMG}/junction-boxes/gdk-011-open.webp` },
@@ -86,6 +91,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "Junction Box Sockets",
+          id: "junction-box-sockets",
           variants: [
             { model: "GDKF-401", productName: "UPS socket", orderCode: "GDKF-401", stockCode: "101504010PLS0", weight: "0.034 kg/unit", image: `${IMG}/socket-accessories/gdkf-401.webp` },
             { model: "GDKF-402", productName: "Socket with earthing", orderCode: "GDKF-402", stockCode: "101504020PLS0", weight: "0.032 kg/unit", image: `${IMG}/socket-accessories/gdkf-402.webp` },
@@ -113,6 +119,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "Solid",
+          id: "solid",
           variants: [
             { model: "GDK-18", productName: "Underfloor cable tray without holes", orderCode: "GDK-18", stockCode: "1015018018220", dimensions: "180×30 mm; L=3000 mm; 1–1 mm thick", weight: "3.550 kg/m", image: `${IMG}/underfloor-cable-trays/gdk-18.webp` },
             { model: "GDK-24", productName: "Underfloor cable tray without holes", orderCode: "GDK-24", stockCode: "1015024018220", dimensions: "240×30 mm; L=3000 mm; 1–1 mm thick", weight: "5.550 kg/m", image: `${IMG}/underfloor-cable-trays/gdk-24.webp` },
@@ -121,6 +128,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "Perforated",
+          id: "perforated",
           variants: [
             { model: "GDK-18-B", productName: "Underfloor cable tray with holes", orderCode: "GDK-18-B", stockCode: "1015B18018220", dimensions: "180×30 mm; L=3000 mm; 1–1 mm thick", weight: "3.550 kg/m", image: `${IMG}/underfloor-cable-trays/gdk-18-b.webp` },
             { model: "GDK-24-B", productName: "Underfloor cable tray with holes", orderCode: "GDK-24-B", stockCode: "1015030018220", dimensions: "240×30 mm; L=3000 mm; 1–1 mm thick", weight: "5.550 kg/m", image: `${IMG}/underfloor-cable-trays/gdk-24-b.webp` },
@@ -135,6 +143,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "GYDK Trunking (50 / 60 / 100 mm cavity)",
+          id: "gydk-trunking",
           variants: [
             { model: "GYDK-10", productName: "In-cavity floor trunking", orderCode: "GYDK-10", stockCode: "1015001018220", dimensions: "A=100 mm; h=50 mm; L=3000 mm", weight: "1.700 kg/m" },
             { model: "GYDK-20", productName: "In-cavity floor trunking", orderCode: "GYDK-20", stockCode: "1015002028220", dimensions: "A=200 mm; h=50 mm; L=3000 mm", weight: "3.750 kg/m" },
@@ -155,6 +164,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "GYDK Cover",
+          id: "gydk-cover",
           variants: [
             { model: "GYDK-10K", productName: "In-cavity floor trunking cover", orderCode: "GYDK-10K", stockCode: "1015C1K18220", dimensions: "A=100 mm; h=9 mm; L=3000 mm", weight: "1.000 kg/m" },
             { model: "GYDK-20K", productName: "In-cavity floor trunking cover", orderCode: "GYDK-20K", stockCode: "1015C2K18220", dimensions: "A=200 mm; h=9 mm; L=3000 mm", weight: "1.700 kg/m" },
@@ -171,6 +181,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "GOR",
+          id: "gor",
           variants: [
             { model: "GOR-01", productName: "Aluminium trunking, single compartment", orderCode: "GOR-01", stockCode: "101700212AL1", dimensions: "60×55 mm", weight: "0.970 kg/m", image: `${IMG}/aluminium-trunking/gor-01-front.webp` },
             { model: "GOR-02", productName: "Aluminium trunking, double compartment", orderCode: "GOR-02", stockCode: "101700202AL1", dimensions: "120×55 mm", weight: "1.720 kg/m", image: `${IMG}/aluminium-trunking/gor-02-front.webp` },
@@ -180,6 +191,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "GOR Accessories",
+          id: "gor-accessories",
           variants: [
             { model: "GOR-07", productName: "Aluminium vertical bend", orderCode: "GOR-07", stockCode: "101700052AL1", dimensions: "60×55 mm", weight: "0.430 kg/unit", image: `${IMG}/aluminium-trunking/gor-07-front.webp` },
             { model: "GOR-08", productName: "Aluminium horizontal bend", orderCode: "GOR-08", stockCode: "101700042AL1", dimensions: "120×55 mm", weight: "0.770 kg/unit", image: `${IMG}/aluminium-trunking/gor-08-front.webp` },
@@ -188,6 +200,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "GOR / GDKF Accessories",
+          id: "gor-gdkf-accessories",
           variants: [
             { model: "GDKF-401", productName: "UPS socket", orderCode: "GDKF-401", stockCode: "101504010PLS0", weight: "0.034 kg/unit", image: `${IMG}/socket-accessories/gdkf-401-front.webp` },
             { model: "GDKF-402", productName: "Socket with earthing", orderCode: "GDKF-402", stockCode: "101504020PLS0", weight: "0.032 kg/unit", image: `${IMG}/socket-accessories/gdkf-402-front.webp` },
@@ -205,6 +218,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "Joining Strap (GDKE)",
+          id: "joining-strap-gdke",
           variants: [
             { model: "GDKE-18", productName: "Joining strap", orderCode: "GDKE-18", stockCode: "1015E18008220", weight: "0.270 kg/unit", image: `${IMG}/tray-accessories/gdke-family-front.webp` },
             { model: "GDKE-24", productName: "Joining strap", orderCode: "GDKE-24", stockCode: "1015E24008220", weight: "0.330 kg/unit", image: `${IMG}/tray-accessories/gdke-family-front.webp` },
@@ -213,6 +227,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "End Cap (GDKS)",
+          id: "end-cap-gdks",
           variants: [
             { model: "GDKS-18", productName: "End cap", orderCode: "GDKS-18", stockCode: "1015S18008220", weight: "0.360 kg/unit", image: `${IMG}/tray-accessories/gdks-family-front.webp` },
             { model: "GDKS-24", productName: "End cap", orderCode: "GDKS-24", stockCode: "1015S24008220", weight: "0.450 kg/unit", image: `${IMG}/tray-accessories/gdks-family-front.webp` },
@@ -221,6 +236,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "90° Riser (GDKD)",
+          id: "riser-gdkd",
           variants: [
             { model: "GDKD-18", productName: "90° riser", orderCode: "GDKD-18", stockCode: "1015G18008220", weight: "1.480 kg/unit", image: `${IMG}/tray-accessories/gdkd-family-front.webp` },
             { model: "GDKD-24", productName: "90° riser", orderCode: "GDKD-24", stockCode: "1015G24008220", weight: "1.990 kg/unit", image: `${IMG}/tray-accessories/gdkd-family-front.webp` },
@@ -239,6 +255,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "GDK",
+          id: "gdk",
           variants: [
             { model: "GDK-01", productName: "Підпідлогова розподільна коробка", orderCode: "GDK-01", stockCode: "101506070BLS0", weight: "4.060 кг/шт", image: `${IMG}/junction-boxes/gdk-01-open.webp` },
             { model: "GDK-02", productName: "Розетковий вкладиш", orderCode: "GDK-02", stockCode: "101500020PLS0", weight: "1.100 кг/шт", image: `${IMG}/junction-boxes/gdk-02-open.webp` },
@@ -248,6 +265,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "GDK-Y",
+          id: "gdk-y",
           variants: [
             { model: "GDK-31-Y", productName: "Підпідлогова розподільна коробка", orderCode: "GDK-31-Y", stockCode: "101500310PLS1", dimensions: "400×400 мм; отвір 280×280 мм; h≈69 мм", weight: "5.580 кг/шт", image: `${IMG}/junction-boxes/gdk-31-y-open.webp` },
             { model: "GDK-32-Y", productName: "Розетковий вкладиш", orderCode: "GDK-32-Y", stockCode: "101500320PLS1", weight: "2.110 кг/шт", image: `${IMG}/junction-boxes/gdk-32-y-open.webp` },
@@ -258,6 +276,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "Британська система (ING)",
+          id: "british-system-ing",
           variants: [
             { model: "GDK-31 ING", productName: "Розподільна коробка — британська система", orderCode: "GDK-31 ING", stockCode: "1015ING310PLS1", weight: "5.580 кг/шт", image: `${IMG}/junction-boxes/gdk-31-ing-open.webp` },
             { model: "GDK-32 ING", productName: "Розетковий вкладиш — британська система", orderCode: "GDK-32 ING", stockCode: "1015ING320PLS1", weight: "2.160 кг/шт", image: `${IMG}/junction-boxes/gdk-32-ing-open.webp` },
@@ -267,6 +286,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "Аксесуари GDK / GDKB",
+          id: "gdk-gdkb-accessories",
           variants: [
             { model: "GDK-06", productName: "Спеціальна коробка для мармурової підлоги", orderCode: "GDK-06", stockCode: "1015000609141", weight: "4.020 кг/шт", image: `${IMG}/junction-boxes/gdk-06-open.webp` },
             { model: "GDK-011", productName: "Здвоєна підпідлогова розподільна коробка", orderCode: "GDK-011", stockCode: "1015001109141", weight: "8.000 кг/шт", image: `${IMG}/junction-boxes/gdk-011-open.webp` },
@@ -284,6 +304,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "Розетки для розподільних коробок",
+          id: "junction-box-sockets",
           variants: [
             { model: "GDKF-401", productName: "Розетка UPS", orderCode: "GDKF-401", stockCode: "101504010PLS0", weight: "0.034 кг/шт", image: `${IMG}/socket-accessories/gdkf-401.webp` },
             { model: "GDKF-402", productName: "Розетка із заземленням", orderCode: "GDKF-402", stockCode: "101504020PLS0", weight: "0.032 кг/шт", image: `${IMG}/socket-accessories/gdkf-402.webp` },
@@ -311,6 +332,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "Суцільний",
+          id: "solid",
           variants: [
             { model: "GDK-18", productName: "Підпідлоговий лоток без отворів", orderCode: "GDK-18", stockCode: "1015018018220", dimensions: "180×30 мм; L=3000 мм; товщина 1–1 мм", weight: "3.550 кг/м", image: `${IMG}/underfloor-cable-trays/gdk-18.webp` },
             { model: "GDK-24", productName: "Підпідлоговий лоток без отворів", orderCode: "GDK-24", stockCode: "1015024018220", dimensions: "240×30 мм; L=3000 мм; товщина 1–1 мм", weight: "5.550 кг/м", image: `${IMG}/underfloor-cable-trays/gdk-24.webp` },
@@ -319,6 +341,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "Перфорований",
+          id: "perforated",
           variants: [
             { model: "GDK-18-B", productName: "Перфорований підпідлоговий лоток", orderCode: "GDK-18-B", stockCode: "1015B18018220", dimensions: "180×30 мм; L=3000 мм; товщина 1–1 мм", weight: "3.550 кг/м", image: `${IMG}/underfloor-cable-trays/gdk-18-b.webp` },
             { model: "GDK-24-B", productName: "Перфорований підпідлоговий лоток", orderCode: "GDK-24-B", stockCode: "1015030018220", dimensions: "240×30 мм; L=3000 мм; товщина 1–1 мм", weight: "5.550 кг/м", image: `${IMG}/underfloor-cable-trays/gdk-24-b.webp` },
@@ -333,6 +356,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "Канал GYDK (порожнина 50 / 60 / 100 мм)",
+          id: "gydk-trunking",
           variants: [
             { model: "GYDK-10", productName: "Заглиблений канал для підвищеної підлоги", orderCode: "GYDK-10", stockCode: "1015001018220", dimensions: "A=100 мм; h=50 мм; L=3000 мм", weight: "1.700 кг/м" },
             { model: "GYDK-20", productName: "Заглиблений канал для підвищеної підлоги", orderCode: "GYDK-20", stockCode: "1015002028220", dimensions: "A=200 мм; h=50 мм; L=3000 мм", weight: "3.750 кг/м" },
@@ -353,6 +377,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "Кришка GYDK",
+          id: "gydk-cover",
           variants: [
             { model: "GYDK-10K", productName: "Кришка заглибленого каналу", orderCode: "GYDK-10K", stockCode: "1015C1K18220", dimensions: "A=100 мм; h=9 мм; L=3000 мм", weight: "1.000 кг/м" },
             { model: "GYDK-20K", productName: "Кришка заглибленого каналу", orderCode: "GYDK-20K", stockCode: "1015C2K18220", dimensions: "A=200 мм; h=9 мм; L=3000 мм", weight: "1.700 кг/м" },
@@ -369,6 +394,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "GOR",
+          id: "gor",
           variants: [
             { model: "GOR-01", productName: "Алюмінієвий канал, одновідсіковий", orderCode: "GOR-01", stockCode: "101700212AL1", dimensions: "60×55 мм", weight: "0.970 кг/м", image: `${IMG}/aluminium-trunking/gor-01-front.webp` },
             { model: "GOR-02", productName: "Алюмінієвий канал, двовідсіковий", orderCode: "GOR-02", stockCode: "101700202AL1", dimensions: "120×55 мм", weight: "1.720 кг/м", image: `${IMG}/aluminium-trunking/gor-02-front.webp` },
@@ -378,6 +404,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "Аксесуари GOR",
+          id: "gor-accessories",
           variants: [
             { model: "GOR-07", productName: "Алюмінієвий вертикальний поворот", orderCode: "GOR-07", stockCode: "101700052AL1", dimensions: "60×55 мм", weight: "0.430 кг/шт", image: `${IMG}/aluminium-trunking/gor-07-front.webp` },
             { model: "GOR-08", productName: "Алюмінієвий горизонтальний поворот", orderCode: "GOR-08", stockCode: "101700042AL1", dimensions: "120×55 мм", weight: "0.770 кг/шт", image: `${IMG}/aluminium-trunking/gor-08-front.webp` },
@@ -386,6 +413,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "Аксесуари GOR / GDKF",
+          id: "gor-gdkf-accessories",
           variants: [
             { model: "GDKF-401", productName: "Розетка UPS", orderCode: "GDKF-401", stockCode: "101504010PLS0", weight: "0.034 кг/шт", image: `${IMG}/socket-accessories/gdkf-401-front.webp` },
             { model: "GDKF-402", productName: "Розетка із заземленням", orderCode: "GDKF-402", stockCode: "101504020PLS0", weight: "0.032 кг/шт", image: `${IMG}/socket-accessories/gdkf-402-front.webp` },
@@ -403,6 +431,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
       groups: [
         {
           name: "Елемент з'єднання (GDKE)",
+          id: "joining-strap-gdke",
           variants: [
             { model: "GDKE-18", productName: "Елемент з'єднання", orderCode: "GDKE-18", stockCode: "1015E18008220", weight: "0.270 кг/шт", image: `${IMG}/tray-accessories/gdke-family-front.webp` },
             { model: "GDKE-24", productName: "Елемент з'єднання", orderCode: "GDKE-24", stockCode: "1015E24008220", weight: "0.330 кг/шт", image: `${IMG}/tray-accessories/gdke-family-front.webp` },
@@ -411,6 +440,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "Заглушка (GDKS)",
+          id: "end-cap-gdks",
           variants: [
             { model: "GDKS-18", productName: "Заглушка", orderCode: "GDKS-18", stockCode: "1015S18008220", weight: "0.360 кг/шт", image: `${IMG}/tray-accessories/gdks-family-front.webp` },
             { model: "GDKS-24", productName: "Заглушка", orderCode: "GDKS-24", stockCode: "1015S24008220", weight: "0.450 кг/шт", image: `${IMG}/tray-accessories/gdks-family-front.webp` },
@@ -419,6 +449,7 @@ const content: Record<MarketCode, Record<string, UnderfloorSeriesDetail>> = {
         },
         {
           name: "Поворот 90° (GDKD)",
+          id: "riser-gdkd",
           variants: [
             { model: "GDKD-18", productName: "Поворот 90°", orderCode: "GDKD-18", stockCode: "1015G18008220", weight: "1.480 кг/шт", image: `${IMG}/tray-accessories/gdkd-family-front.webp` },
             { model: "GDKD-24", productName: "Поворот 90°", orderCode: "GDKD-24", stockCode: "1015G24008220", weight: "1.990 кг/шт", image: `${IMG}/tray-accessories/gdkd-family-front.webp` },

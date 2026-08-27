@@ -235,7 +235,6 @@ const earthingGroups = [
   ["tse-62561-1-en", "TS EN 62561-1 Certificate — English", ["CERT-015", "CERT-016"], "Turkish Standards Institution (TSE)", "008237-TSE-07/02"],
   ["tse-62561-2-tr", "TS EN IEC 62561-2 Certificate — Turkish", ["CERT-017", "CERT-018"], "Turkish Standards Institution (TSE)", "008237-TSE-08/03"],
   ["tse-62561-2-en", "TS EN IEC 62561-2 Certificate — English", ["CERT-019", "CERT-020"], "Turkish Standards Institution (TSE)", "008237-TSE-08/03"],
-  ["gost-r", "GOST R Certificate of Conformity", ["CERT-021", "CERT-022", "CERT-023"], "GOST R", "РОСС TR.ПР06.Н00911"],
 ];
 for (const [id, title, ids, issuer, number] of earthingGroups) addPdf({ id: `earthing-${id}`, title, system: "earthing", type: "certificate", subtype: "Certificate", issuer, number, sourceCatalogue: "Gersan Earthing & Lightning Protection Catalogue", sourcePages: [...new Set(ids.map((key) => earthingById.get(key).source_pdf_page))].map((page) => `PDF ${page}`).join(", "), relativePath: `assets/resources/certificates/earthing-lightning/${id}.pdf`, pages: ids.map((key) => ({ path: earthingImage(key) })) });
 
@@ -272,8 +271,6 @@ const cableDocs = [
   ["tse-02-03-two-page", "TSE — Certificate of Conformity to Turkish Standards", "Turkish Standards Institution (TSE)", "008237-TSE-02/03", [cp(154,"left","tl"),cp(154,"left","tr")]],
   ["tse-02-03-three-page", "TSE — Certificate of Conformity to Turkish Standards", "Turkish Standards Institution (TSE)", "008237-TSE-02/03", [cp(154,"left","bl"),cp(154,"left","br"),cp(154,"right","rtl")]],
   ["tse-00-02", "TSE — Certificate of Conformity to Turkish Standards", "Turkish Standards Institution (TSE)", "008237-TSE-00/02", [cp(154,"right","rtr")]],
-  ["gost-1171084", "GOST R — Certificate of Conformity", "GOST R", "1171084", [cp(154,"right","rbl"),cp(154,"right","rbr"),cp(155,"left","tl")]],
-  ["gost-10170226", "GOST R — Certificate of Conformity", "GOST R", "10170226", [cp(155,"left","tr"),cp(155,"left","bl")]],
   ["declaration-tr-ag85-b06497", "Declaration of Conformity", undefined, "Д-TR.AG85.B.06497", [cp(155,"left","br"),cp(155,"right","rtl")]],
   ["fire-safety-011731", "Certificate of Conformity — Fire Safety", undefined, "011731", [cp(155,"right","rtr")]],
   ["iso9001-tr-annex", "ISO 9001:2015 Certificate Annex — Turkish", "TÜV NORD CERT GmbH", "44 100 19530004", [cp(155,"right","rbl")]],

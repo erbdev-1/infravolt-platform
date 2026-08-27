@@ -18,6 +18,7 @@ import type {
   BusbarConductor,
 } from "@/data/products/busbar/types";
 import type { MarketCode } from "@/modules/markets/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import styles from "./busbar-catalog-page.module.css";
 
 type CategoryFilter = BusbarCatalogView;
@@ -156,11 +157,11 @@ export function BusbarCatalogPage({
               loop
               muted
               playsInline
-              poster="/assets/media/products/busbar/infravolt-busbar-poster.webp"
+              poster={publicMediaUrl("media/products/busbar/infravolt-busbar-poster.webp")}
               preload="metadata"
             >
               <source
-                src="/assets/media/products/busbar/infravolt-busbar.mp4"
+                src={publicMediaUrl("media/products/busbar/infravolt-busbar.mp4")}
                 type="video/mp4"
               />
             </video>

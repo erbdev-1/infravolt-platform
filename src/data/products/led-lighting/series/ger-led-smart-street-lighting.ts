@@ -1,9 +1,10 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
 
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/smart-lighting&automation";
-const APPLICATION_IMAGE_BASE = "/assets/products/led-lighting/category/outdorr&infrastructure/applications";
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/smart-lighting-automation");
+const APPLICATION_IMAGE_BASE = publicMediaUrl("products/led-lighting/category/outdoor-infrastructure/applications");
 
 // Prepared studio/cutout assets (no baked-in catalogue chrome or callout
 // text, unlike the original raw catalogue-page extracts under

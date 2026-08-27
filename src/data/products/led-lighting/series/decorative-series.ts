@@ -1,11 +1,12 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
 
 export const DECORATIVE_CATEGORY_HREF = "/products/led-systems/decorative-lighting";
 
-const ASSET_BASE = "/assets/products/led-lighting/series/decorative";
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/decorative";
+const ASSET_BASE = publicMediaUrl("products/led-lighting/series/decorative");
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/decorative");
 const PRODUCT_BASE = `${CATEGORY_ASSET_BASE}/product`;
 const BACKGROUND_BASE = `${PRODUCT_BASE}/background`;
 const PHOTOMETRIC_BASE = `${CATEGORY_ASSET_BASE}/photometric`;

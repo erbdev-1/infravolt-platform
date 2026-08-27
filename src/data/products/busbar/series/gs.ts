@@ -1,7 +1,14 @@
+import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
+
 import type { BusbarSystemDetailByMarket } from "./types";
 
-const IMAGE_BASE = "/assets/products/busbar/gs";
-const INDUSTRY_IMAGE_BASE = "/assets/industries/cards";
+const SOURCE_ROUTE = "/products/busbar-systems/gs-super-compact";
+const REQUEST_QUOTE_HREF = buildEnquiryHref("quote", { system: "busbar", family: "gs-super-compact", source: SOURCE_ROUTE });
+const REQUEST_DOCUMENTATION_HREF = buildEnquiryHref("technical-document", { system: "busbar", family: "gs-super-compact", source: SOURCE_ROUTE });
+
+const IMAGE_BASE = publicMediaUrl("products/busbar/gs");
+const INDUSTRY_IMAGE_BASE = publicMediaUrl("industries/cards");
 
 const SPEC_COLUMNS_GS = [
   { id: "c400", label: "400A" },
@@ -134,7 +141,7 @@ export const GS_SYSTEM_DETAIL = {
         title: "Transport infrastructure",
         description:
           "Power distribution for airports, rail stations and other major transport hubs.",
-        image: "/assets/industries/cards/transport-infrastructure.webp",
+        image: publicMediaUrl("industries/cards/transport-infrastructure.webp"),
         imageAlt: "Airport terminal and transit infrastructure at night",
       },
       {
@@ -142,7 +149,7 @@ export const GS_SYSTEM_DETAIL = {
         title: "Renewable Energy",
         description:
           "High-current collection and switchgear connections for wind and solar generation sites.",
-        image: "/assets/industries/cards/renewable-energy.webp",
+        image: publicMediaUrl("industries/cards/renewable-energy.webp"),
         imageAlt: "Wind turbines and solar panel array",
       },
     ],
@@ -169,7 +176,7 @@ export const GS_SYSTEM_DETAIL = {
             "Track key electrical parameters, automate switching and schedule operations with ease.",
         },
       ],
-      image: "/assets/products/g-bus/g-bus-smart-rail-dashboard.webp",
+      image: publicMediaUrl("products/g-bus/g-bus-smart-rail-dashboard.webp"),
       imageAlt:
         "G-BUS automation dashboard overlay on a Gersan busbar with receiver modules",
       primaryActionLabel: "Explore G-BUS Automation",
@@ -1280,7 +1287,7 @@ export const GS_SYSTEM_DETAIL = {
         description:
           "Full product catalogue covering all Gersan busbar trunking systems, including GS technical data, order codes and dimensional drawings.",
         fileLabel: "PDF · 25.1 MB",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Download catalogue",
       },
       {
@@ -1288,12 +1295,12 @@ export const GS_SYSTEM_DETAIL = {
         description:
           "Quick reference for joining two GS busbar elements: alignment, joint assembly and closing the joint covers.",
         fileLabel: "PDF",
-        href: `${IMAGE_BASE}/installation/GS_Busbar_Installation_Guide.pdf`,
+        href: `${IMAGE_BASE}/installation/gs-busbar-installation-guide.pdf`,
         downloadLabel: "Download installation guide",
       },
     ],
-    requestQuoteHref: "/uk-support?product=gs-super-compact",
-    requestDocumentationHref: "/#technical-documents",
+    requestQuoteHref: REQUEST_QUOTE_HREF,
+    requestDocumentationHref: REQUEST_DOCUMENTATION_HREF,
   },
   ua: {
     slug: "gs-super-compact",
@@ -1407,7 +1414,7 @@ export const GS_SYSTEM_DETAIL = {
         title: "Транспортна інфраструктура",
         description:
           "Розподіл живлення для аеропортів, залізничних станцій та інших великих транспортних вузлів.",
-        image: "/assets/industries/cards/transport-infrastructure.webp",
+        image: publicMediaUrl("industries/cards/transport-infrastructure.webp"),
         imageAlt: "Термінал аеропорту та транспортна інфраструктура вночі",
       },
       {
@@ -1415,7 +1422,7 @@ export const GS_SYSTEM_DETAIL = {
         title: "Відновлювана енергетика",
         description:
           "Збір потужного струму та підключення розподільних пристроїв для вітрових і сонячних електростанцій.",
-        image: "/assets/industries/cards/renewable-energy.webp",
+        image: publicMediaUrl("industries/cards/renewable-energy.webp"),
         imageAlt: "Вітрові турбіни та масив сонячних панелей",
       },
     ],
@@ -1442,7 +1449,7 @@ export const GS_SYSTEM_DETAIL = {
             "Відстежуйте ключові електричні параметри, автоматизуйте перемикання та плануйте операції.",
         },
       ],
-      image: "/assets/products/g-bus/g-bus-smart-rail-dashboard.webp",
+      image: publicMediaUrl("products/g-bus/g-bus-smart-rail-dashboard.webp"),
       imageAlt:
         "Панель автоматизації G-BUS поверх шинопроводу Gersan з приймальними модулями",
       primaryActionLabel: "Дізнатися про G-BUS Automation",
@@ -2549,7 +2556,7 @@ export const GS_SYSTEM_DETAIL = {
         description:
           "Повний каталог з усіма шинопровідними системами Gersan, включно з технічними даними GS.",
         fileLabel: "PDF · 25,1 МБ",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Завантажити каталог",
       },
       {
@@ -2557,11 +2564,11 @@ export const GS_SYSTEM_DETAIL = {
         description:
           "Короткий довідник із з'єднання двох елементів шинопроводу GS: вирівнювання, збірка з'єднання та закриття кришок з'єднання.",
         fileLabel: "PDF",
-        href: `${IMAGE_BASE}/installation/GS_Busbar_Installation_Guide.pdf`,
+        href: `${IMAGE_BASE}/installation/gs-busbar-installation-guide.pdf`,
         downloadLabel: "Завантажити інструкцію з монтажу",
       },
     ],
-    requestQuoteHref: "/uk-support?product=gs-super-compact",
-    requestDocumentationHref: "/#technical-documents",
+    requestQuoteHref: REQUEST_QUOTE_HREF,
+    requestDocumentationHref: REQUEST_DOCUMENTATION_HREF,
   },
 } as const satisfies BusbarSystemDetailByMarket;

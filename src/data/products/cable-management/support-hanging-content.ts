@@ -1,10 +1,16 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { CableMacroFamilyContent } from "./macro-family-types";
 import { CABLE_SUPPORT_CATALOGUE_PDF_HREF } from "./content";
 
-const IMAGE_BASE = "/assets/products/cable-management";
-const REQUEST_HREF = "/uk-support?request=technical-pack&product=support-hanging-systems";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+const REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "support-hanging-systems",
+  source: "/products/cable-support-systems",
+});
 
 // Every series entry, order-code count and material below is taken from
 // catalog-source/cable-support/{NPI-80 Support System, U-Z-L-W Profile and

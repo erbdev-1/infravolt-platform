@@ -73,3 +73,5 @@ $RECYCLE.BIN/
 
 # Local catalogue extraction source files
 catalog-source/
+.vercel
+.env*

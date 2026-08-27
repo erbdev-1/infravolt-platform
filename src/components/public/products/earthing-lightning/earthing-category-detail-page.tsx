@@ -4,10 +4,10 @@ import Link from "next/link";
 import { EARTHING_CATALOGUE_PDF_HREF, earthingHubContentForMarket } from "@/data/products/earthing-lightning/content";
 import type { LocalizedEarthingCategory } from "@/data/products/earthing-lightning/types";
 import { EARTHING_CATEGORY_VARIANTS } from "@/data/products/earthing-lightning/variants";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import { IconDownload } from "./earthing-icons";
-import { slugifyFamilyName } from "./earthing-family-slug";
 import { EarthingHeroEffects } from "./earthing-hero-effects";
 import { EarthingHeroParallax } from "./earthing-hero-parallax";
 import { EarthingVariantTable } from "./earthing-variant-table";
@@ -15,9 +15,12 @@ import styles from "./earthing-category-detail-page.module.css";
 import { TechnicalSnapshotStrip } from "./technical-snapshot-strip";
 
 function familyRequestHref(categorySlug: string, familyName: string): string {
-  const family = encodeURIComponent(familyName);
-
-  return `/uk-support?request=technical-pack&product=earthing-${categorySlug}&family=${family}`;
+  return buildEnquiryHref("technical-document", {
+    system: "earthing-lightning",
+    family: `earthing-${categorySlug}`,
+    label: familyName,
+    source: `/products/earthing-and-lightning-protection/${categorySlug}`,
+  });
 }
 
 export function EarthingCategoryDetailPage({
@@ -29,13 +32,21 @@ export function EarthingCategoryDetailPage({
 }>) {
   const content = earthingHubContentForMarket(market);
   const detail = content.categoryDetail;
-  const categoryRequestHref = `/uk-support?request=technical-pack&product=earthing-${category.slug}`;
+  const categoryRequestHref = buildEnquiryHref("technical-document", {
+    system: "earthing-lightning",
+    family: `earthing-${category.slug}`,
+    label: category.name,
+    source: `/products/earthing-and-lightning-protection/${category.slug}`,
+  });
   const categoryVariants = EARTHING_CATEGORY_VARIANTS[category.slug];
   const variantGroups = categoryVariants
     ? category.families
         .map((family) => ({
+          familyId: family.id,
           familyName: family.name,
-          variants: categoryVariants[family.name] ?? [],
+          // Stable id, never the display name — see LocalizedEarthingProductFamily.id
+          // for why (this is the fix for the UA lookup bug).
+          variants: categoryVariants[family.id] ?? [],
           image: family.image,
           imageAlt: family.imageAlt,
         }))
@@ -149,7 +160,7 @@ export function EarthingCategoryDetailPage({
         <div className={styles.familiesGrid}>
           {category.families.map((family, index) => {
             const indexLabel = String(index + 1).padStart(2, "0");
-            const hasVariants = Boolean(categoryVariants?.[family.name]?.length);
+            const hasVariants = Boolean(categoryVariants?.[family.id]?.length);
 
             const cardContent = (
               <>
@@ -192,14 +203,14 @@ export function EarthingCategoryDetailPage({
             // the technical-pack request form when this family has no
             // catalogue data yet.
             return hasVariants ? (
-              <a className={styles.familyCard} href={`#${slugifyFamilyName(family.name)}`} key={family.name}>
+              <a className={styles.familyCard} href={`#${family.id}`} key={family.id}>
                 {cardContent}
               </a>
             ) : (
               <Link
                 className={styles.familyCard}
                 href={familyRequestHref(category.slug, family.name)}
-                key={family.name}
+                key={family.id}
               >
                 {cardContent}
               </Link>

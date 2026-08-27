@@ -1,3 +1,5 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import { CABLE_SUPPORT_CATALOGUE_PDF_HREF, heavyDutyCableTraysH60ContentForMarket } from "./content";
@@ -12,9 +14,13 @@ import { REDUCERS_VARIANTS } from "./variants/reducers";
 import { SCREW_SETS_THREADED_RODS_ANCHORS_VARIANTS } from "./variants/screw-sets-threaded-rods-anchors";
 import { SEPARATOR_END_CAP_LEVEL_DIRECTION_CHANGER_VARIANTS } from "./variants/separator-end-cap-level-direction-changer";
 
-const IMAGE_BASE = "/assets/products/cable-management";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
 const HERO_IMAGE = `${IMAGE_BASE}/accessories-fixings/hero/threaded-rods-anchors-fixings-transparent-card.png`;
-const REQUEST_HREF = "/uk-support?request=technical-pack&product=accessories-fixings";
+const REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "accessories-fixings",
+  source: "/products/cable-support-systems",
+});
 
 function t(market: MarketCode, uk: string, ua: string): string {
   return market === "ua" ? ua : uk;

@@ -141,6 +141,24 @@ export function ApplicationMapViewer({
   // Sol seçiciden tıklanıp o ailede birden fazla hotspot varsa bu null
   // kalır ve seçim listesi (ApplicationProductChooser) gösterilir.
   const [activeHotspotId, setActiveHotspotId] = useState<string | null>(null);
+  // Mobil/tablette (bkz. CSS <=860px) overview'daki sayılı pin'lerden yalnız
+  // BİRİNİN adı/etiketi aynı anda görünür — aksi halde tüm bölge adları
+  // üst üste binip okunmaz hale geliyordu. Bu state SADECE hangi pin'in o
+  // etiketi/nabzı taşıdığını belirler; activeHotspotId'den (bir bölge
+  // İÇİNDEKİ somut ürün seçimi, ürün paneliyle bağlı) kasıtlı olarak
+  // AYRIDIR — ikisini birleştirmek iki farklı anlamı karıştırırdı. null
+  // iken effectiveActiveOverviewHotspotId ilk hotspot'a (map.overview.hotspots[0])
+  // düşer.
+  const [activeOverviewHotspotId, setActiveOverviewHotspotId] = useState<
+    string | null
+  >(null);
+  // Level B onboarding cue: the ONE product/system item that briefly
+  // pulses right after a room becomes active, teaching "these cards are
+  // clickable" — timer-driven (see the effect below), not tied to the
+  // session-scoped hintDismissed/zoneHint text. Reset to null the instant
+  // a different room is selected or the timer expires.
+  const [productPulseFamilyId, setProductPulseFamilyId] =
+    useState<ProductFamilyId | null>(null);
   const [mapAspectRatio, setMapAspectRatio] = useState<number | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   // Native Fullscreen API tarayıcı/ortam sınırlamalarıyla mevcut olsa bile
@@ -188,10 +206,24 @@ export function ApplicationMapViewer({
     };
   }, []);
 
-  // Kullanıcı CSS fallback tam ekran açıkken sayfadan ayrılırsa (route
-  // değişimi vb.) body kilidi component ile birlikte kaybolmasın diye
-  // güvenlik amaçlı geri alınır.
   useEffect(() => {
+    if (!cssFallbackActive || bodyScrollLockRef.current) return;
+
+    scrollPositionRef.current = window.scrollY;
+    bodyScrollLockRef.current = {
+      bodyOverflow: document.body.style.overflow,
+      bodyPosition: document.body.style.position,
+      bodyTop: document.body.style.top,
+      bodyWidth: document.body.style.width,
+      htmlOverflow: document.documentElement.style.overflow,
+    };
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollPositionRef.current}px`;
+    document.body.style.width = "100%";
+
     return () => {
       const savedStyles = bodyScrollLockRef.current;
 
@@ -205,7 +237,7 @@ export function ApplicationMapViewer({
         window.scrollTo(0, scrollPositionRef.current);
       }
     };
-  }, []);
+  }, [cssFallbackActive]);
 
   useEffect(() => {
     if (!cssFallbackActive) {
@@ -217,20 +249,8 @@ export function ApplicationMapViewer({
         return;
       }
 
-      const savedStyles = bodyScrollLockRef.current;
-
       setCssFallbackActive(false);
       setIsFullscreen(false);
-
-      if (savedStyles) {
-        document.body.style.overflow = savedStyles.bodyOverflow;
-        document.body.style.position = savedStyles.bodyPosition;
-        document.body.style.top = savedStyles.bodyTop;
-        document.body.style.width = savedStyles.bodyWidth;
-        document.documentElement.style.overflow = savedStyles.htmlOverflow;
-        bodyScrollLockRef.current = null;
-        window.scrollTo(0, scrollPositionRef.current);
-      }
     }
 
     window.addEventListener("keydown", handleOverlayKeyDown);
@@ -270,6 +290,41 @@ export function ApplicationMapViewer({
         activeZone.approvedProductFamilyIds.includes(family.id),
       )
     : map.productFamilies;
+
+  function updateActiveZone(zoneId: string | null) {
+    const nextZone = zoneId ? (zoneById.get(zoneId) ?? null) : null;
+    const firstApprovedFamilyId = nextZone
+      ? (map.productFamilies.find((family) =>
+          nextZone.approvedProductFamilyIds.includes(family.id),
+        )?.id ?? null)
+      : null;
+
+    setActiveZoneId(nextZone?.id ?? null);
+    setProductPulseFamilyId(firstApprovedFamilyId);
+  }
+
+  // Level B onboarding cue — starts the instant a room becomes active,
+  // targets ONLY that room's first product/system item (existing render
+  // order, never reordered/invented), and auto-stops after ~3 pulse
+  // cycles (appMapPulse runs 1.8s/cycle, so ~5.4s here) so it reads as a
+  // discoverability cue rather than a permanent animation. Re-fires on
+  // every new activeZoneId (including re-selecting a room left earlier —
+  // see PRD section 13), independent of the separate session-scoped
+  // hintDismissed/zoneHint text handled elsewhere in this component.
+  useEffect(() => {
+    if (!activeZoneId || !productPulseFamilyId) return;
+
+    const timeoutId = window.setTimeout(() => {
+      setProductPulseFamilyId(null);
+    }, 5400);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [activeZoneId, productPulseFamilyId]);
+
+  // Hides the cue immediately once a product is actually selected in this
+  // room, regardless of where the timer above currently stands.
+  const productPulseTarget =
+    activeZone && !activeProductFamilyId ? productPulseFamilyId : null;
 
   const matchingHotspotsForFamily =
     activeZone && activeProductFamilyId
@@ -344,16 +399,13 @@ export function ApplicationMapViewer({
     !activeHotspot &&
     matchingHotspotsForFamily.length > 1;
 
-  // İlk-ziyaret ipucu: bölgede henüz ürün seçilmemiş ve ipucu bu oturumda
-  // kapatılmamışsa, o bölgenin ilk uygun ürün ailesi ve ona karşılık gelen
-  // hotspot "nabız" alır — tıklanabilirliği işaret eder, seçili durumla
-  // (kırmızı dolgu) karıştırılmaması için ayrı, daha yumuşak bir görsel
-  // kullanır (bkz. .navItemPulse / .hotspotPulse).
+  // İlk-ziyaret metin ipucu ("Select a system to explore") oturum başına
+  // bir kez gösterilir — bu, aşağıdaki productPulseTarget'tan (her yeni
+  // oda seçiminde kısa süreliğine yeniden tetiklenen görsel nabız)
+  // KASITLI olarak ayrı tutulur; ikisi farklı iki iş yapar (bkz. effect
+  // yukarısı).
   const showZoneHint =
     Boolean(activeZone) && !hintDismissed && !activeProductFamilyId;
-  const firstAvailableProductFamilyId = showZoneHint
-    ? (visibleProductFamilies[0]?.id ?? null)
-    : null;
 
   const sceneHotspots: readonly SceneHotspotDescriptor[] = activeZone
     ? activeZone.hotspots.map((hotspot) => ({
@@ -362,7 +414,7 @@ export function ApplicationMapViewer({
         label: hotspot.label,
         x: hotspot.x,
         y: hotspot.y,
-        pulse: hotspot.productFamilyId === firstAvailableProductFamilyId,
+        pulse: hotspot.productFamilyId === productPulseTarget,
       }))
     : map.overview.hotspots.map((hotspot) => ({
         id: hotspot.id,
@@ -372,6 +424,11 @@ export function ApplicationMapViewer({
         y: hotspot.y,
       }));
 
+  // Kural 3: zaten seçili/başlangıç bir hotspot varsa onu kullan, yoksa
+  // hotspot 1'e (overview listesindeki ilk kayıt) düş.
+  const effectiveActiveOverviewHotspotId =
+    activeOverviewHotspotId ?? (map.overview.hotspots[0]?.id ?? null);
+
   const navItems: readonly NavigationItem[] = visibleProductFamilies.map(
     (family) => ({
       id: family.id,
@@ -379,7 +436,7 @@ export function ApplicationMapViewer({
       name: family.name,
       icon: productFamilyIcon(family.id),
       active: family.id === activeProductFamilyId,
-      pulse: family.id === firstAvailableProductFamilyId,
+      pulse: family.id === productPulseTarget,
     }),
   );
 
@@ -401,13 +458,26 @@ export function ApplicationMapViewer({
   ];
 
   function selectZone(zoneId: string) {
-    setActiveZoneId(zoneId);
+    updateActiveZone(zoneId);
     setActiveProductFamilyId(null);
     setActiveHotspotId(null);
   }
 
   function backToOverview() {
-    setActiveZoneId(null);
+    // Overview'a dönerken az önce bakılan bölgenin pin'i aktif kalsın
+    // (Kural 3: "currently selected hotspot" varsa onu kullan) — hep
+    // hotspot 1'e sıfırlanmaz.
+    if (activeZoneId) {
+      const returningHotspot = map.overview.hotspots.find(
+        (hotspot) => hotspot.zoneId === activeZoneId,
+      );
+
+      if (returningHotspot) {
+        setActiveOverviewHotspotId(returningHotspot.id);
+      }
+    }
+
+    updateActiveZone(null);
     setActiveProductFamilyId(null);
     setActiveHotspotId(null);
   }
@@ -483,6 +553,7 @@ export function ApplicationMapViewer({
     );
 
     if (overviewHotspot) {
+      setActiveOverviewHotspotId(overviewHotspot.id);
       selectZone(overviewHotspot.zoneId);
     }
   }
@@ -525,58 +596,14 @@ export function ApplicationMapViewer({
     backToOverview();
   }
 
-  // Yalnız CSS fallback modunda gerekli: gerçek Fullscreen API zaten
-  // arkadaki sayfanın scroll'unu engelliyor (fullscreen elemanı kendi
-  // scroll konteyneri olur), position:fixed ile taklit edilen modda ise
-  // bunu elle yapmak gerekir. Scroll konumu kaydedilip çıkışta geri
-  // yüklenir — sayfa başa sıçramaz.
-  function lockBodyScroll() {
-    if (bodyScrollLockRef.current) {
-      return;
-    }
-
-    scrollPositionRef.current = window.scrollY;
-    bodyScrollLockRef.current = {
-      bodyOverflow: document.body.style.overflow,
-      bodyPosition: document.body.style.position,
-      bodyTop: document.body.style.top,
-      bodyWidth: document.body.style.width,
-      htmlOverflow: document.documentElement.style.overflow,
-    };
-
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollPositionRef.current}px`;
-    document.body.style.width = "100%";
-  }
-
-  function unlockBodyScroll() {
-    const savedStyles = bodyScrollLockRef.current;
-
-    if (!savedStyles) {
-      return;
-    }
-
-    document.body.style.overflow = savedStyles.bodyOverflow;
-    document.body.style.position = savedStyles.bodyPosition;
-    document.body.style.top = savedStyles.bodyTop;
-    document.body.style.width = savedStyles.bodyWidth;
-    document.documentElement.style.overflow = savedStyles.htmlOverflow;
-    bodyScrollLockRef.current = null;
-    window.scrollTo(0, scrollPositionRef.current);
-  }
-
   function enterCssFallbackFullscreen() {
     setCssFallbackActive(true);
     setIsFullscreen(true);
-    lockBodyScroll();
   }
 
   function exitCssFallbackFullscreen() {
     setCssFallbackActive(false);
     setIsFullscreen(false);
-    unlockBodyScroll();
   }
 
   async function toggleFullscreen() {
@@ -910,6 +937,7 @@ export function ApplicationMapViewer({
                   {sceneHotspots.map((hotspot) => (
                     <ApplicationHotspot
                       active={false}
+                      activeOnMobile={hotspot.id === effectiveActiveOverviewHotspotId}
                       id={`app-map-hotspot-${hotspot.id}`}
                       key={hotspot.id}
                       label={hotspot.label}
@@ -923,7 +951,14 @@ export function ApplicationMapViewer({
                   {sceneHotspots.map((hotspot) => (
                     <span
                       aria-hidden="true"
-                      className={styles.hotspotLabel}
+                      className={[
+                        styles.hotspotLabel,
+                        hotspot.id === effectiveActiveOverviewHotspotId
+                          ? styles.hotspotLabelActive
+                          : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
                       key={`${hotspot.id}-label`}
                       style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
                     >

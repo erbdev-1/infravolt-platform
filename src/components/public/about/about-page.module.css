@@ -70,6 +70,11 @@
   letter-spacing: -0.045em;
   line-height: 1.02;
   text-wrap: balance;
+  /* Title carries an explicit \n where a decorative period used to sit (see
+     about-content.ts). Desktop deliberately does NOT get white-space:
+     pre-line — \n collapses to a space here (default `normal`), so desktop
+     wraps exactly as before, just without the period. The forced line
+     break is mobile-only, see the 47.99rem tier below. */
 }
 
 .heroDescription {
@@ -1257,8 +1262,12 @@
     padding-block: 3.25rem 2.75rem;
   }
 
+  /* Mobile-only: \n in the content string (see about-content.ts) renders as
+     a real line break here. Desktop deliberately does not set this (see
+     base .heroCopy h1) — the \n just collapses to a space there. */
   .heroCopy h1 {
     font-size: clamp(2.2rem, 11vw, 3rem);
+    white-space: pre-line;
   }
 
   .heroDescription {
@@ -1267,6 +1276,10 @@
 
   .sectionHeading {
     margin-bottom: clamp(1.75rem, 6vw, 2.25rem);
+  }
+
+  .sectionHeading h2 {
+    white-space: pre-line;
   }
 
   .heroActions {
@@ -1342,9 +1355,12 @@
     padding-top: 1.75rem;
   }
 
+  /* Smaller than before (was 1.85-2.3rem) — this statement is a long
+     sentence (~100 chars); at heading-scale size it forced 4-5 short,
+     choppy lines. text-wrap:balance (base rule) still applies. */
   .whoWeAreCopy h2 {
-    font-size: clamp(1.85rem, 7.8vw, 2.3rem);
-    line-height: 1.08;
+    font-size: clamp(1.5rem, 6.4vw, 1.9rem);
+    line-height: 1.18;
   }
 
   .whoWeAreCopy p {
@@ -1698,15 +1714,18 @@
     margin-bottom: 0.65rem;
   }
 
+  /* max-width kaldırıldı — mevcut genişlikten daha dar bir üst sınır
+     kullanılabilir alanı gereksiz kısıtlayıp anlamsız satır kırılmalarına
+     yol açıyordu (bkz. globals.css .hero h1, aynı düzeltme). */
   .heroCopy h1 {
-    max-width: 21.25rem;
+    max-width: 100%;
     font-size: clamp(2.125rem, 10vw, 2.5rem);
     letter-spacing: -0.02em;
     line-height: 1.03;
   }
 
   .heroDescription {
-    max-width: 20.625rem;
+    max-width: 100%;
     margin-top: 0.7rem;
     font-size: 0.9375rem;
     line-height: 1.5;

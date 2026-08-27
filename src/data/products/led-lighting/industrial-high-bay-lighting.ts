@@ -1,33 +1,34 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedCategoryDetailContent } from "./types";
 
 /** Real extracted LEDBUS catalogue photos — see
- * public/assets/products/led-lighting/category/industrial&high-bay. Shared
+ * public/assets/products/led-lighting/category/industrial-high-bay. Shared
  * across markets; only copy is localized. Hero background/foreground are
  * deliberately separate layers (see led-category-detail-page.tsx) — never
  * flatten them into one image. */
 export const INDUSTRIAL_HIGH_BAY_HERO_BACKGROUND =
-  "/assets/products/led-lighting/category/industrial&high-bay/hero/industrial-high-bay-lighting-hero-background.webp";
+  publicMediaUrl("products/led-lighting/category/industrial-high-bay/hero/industrial-high-bay-lighting-hero-background.webp");
 export const INDUSTRIAL_HIGH_BAY_HERO_BACKGROUND_ALT =
   "Dark high-bay warehouse interior lit by round LED high-bay fixtures";
 export const INDUSTRIAL_HIGH_BAY_HERO_FOREGROUND =
-  "/assets/products/led-lighting/category/industrial&high-bay/hero/industrial-high-bay-lighting-hero-foreground-products.webp";
+  publicMediaUrl("products/led-lighting/category/industrial-high-bay/hero/industrial-high-bay-lighting-hero-foreground-products.webp");
 export const INDUSTRIAL_HIGH_BAY_HERO_FOREGROUND_ALT =
   "LEDBUS high-bay and floodlight luminaires from the Industrial & High-Bay Lighting range";
 export const INDUSTRIAL_HIGH_BAY_CATEGORY_CARD_IMAGE =
-  "/assets/products/led-lighting/category/industrial&high-bay/card/industrial-high-bay-lighting-category-card.webp";
+  publicMediaUrl("products/led-lighting/category/industrial-high-bay/card/industrial-high-bay-lighting-category-card.webp");
 export const INDUSTRIAL_HIGH_BAY_CATEGORY_CARD_IMAGE_ALT =
   "Warehouse aisle lit by LEDBUS high-bay fixtures, with pallet racking and a forklift";
 export const INDUSTRIAL_HIGH_BAY_SUPPORT_CTA_IMAGE =
-  "/assets/products/led-lighting/category/industrial&high-bay/applications/support-cta-application.webp";
+  publicMediaUrl("products/led-lighting/category/industrial-high-bay/applications/support-cta-application.webp");
 export const INDUSTRIAL_HIGH_BAY_SUPPORT_CTA_IMAGE_ALT =
   "Large industrial high-bay hall lit by LED high-bay fixtures";
 
 const SERIES_IMAGE_BASE =
-  "/assets/products/led-lighting/category/industrial&high-bay/series";
+  publicMediaUrl("products/led-lighting/category/industrial-high-bay/series");
 const APPLICATION_IMAGE_BASE =
-  "/assets/products/led-lighting/category/industrial&high-bay/applications";
+  publicMediaUrl("products/led-lighting/category/industrial-high-bay/applications");
 
 const content = {
   uk: {

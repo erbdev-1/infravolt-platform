@@ -2,26 +2,15 @@
 
 import Link from "next/link";
 
+import { enquiryItemCountLabel } from "@/modules/enquiry/format";
 import { PRODUCT_ENQUIRY_REVIEW_HREF } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import styles from "./enquiry-feedback.module.css";
 
 function itemCountLabel(count: number, market: MarketCode): string {
-  if (market === "uk") return `${count} ${count === 1 ? "item" : "items"} in your enquiry`;
-
-  const lastTwo = count % 100;
-  const lastOne = count % 10;
-  const noun =
-    lastTwo >= 11 && lastTwo <= 14
-      ? "позицій"
-      : lastOne === 1
-        ? "позиція"
-        : lastOne >= 2 && lastOne <= 4
-          ? "позиції"
-          : "позицій";
-
-  return `${count} ${noun} у вашому запиті`;
+  const suffix = market === "uk" ? " in your enquiry" : " у вашому запиті";
+  return `${enquiryItemCountLabel(count, market)}${suffix}`;
 }
 
 export function EnquiryToolbarSummary({ count, market }: Readonly<{ count: number; market: MarketCode }>) {

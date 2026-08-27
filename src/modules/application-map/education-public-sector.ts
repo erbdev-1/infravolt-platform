@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import { PRODUCT_FAMILY_NUMBERS } from "./types";
 
 import type {
@@ -8,7 +9,7 @@ import type {
   Zone,
 } from "./types";
 
-const IMAGE_BASE = "/assets/application-map/education-public-sector";
+const IMAGE_BASE = publicMediaUrl("application-map/education-public-sector");
 
 // ---------------------------------------------------------------------------
 // Education & Public Sector bölge kimlikleri — Data Centre'den bağımsız,
@@ -108,7 +109,7 @@ const PRODUCT_FAMILIES = [
     content: {
       uk: {
         name: "Busbar Systems",
-        image: "/assets/products/busbar/gs/card/gs-main-transparent-product.webp",
+        image: publicMediaUrl("products/busbar/gs/card/gs-main-transparent-product.webp"),
         imageAlt: "GS Super Compact busbar system main product view",
         applicationPoints: [
           "Distributes power between switchgear, distribution boards and downstream campus equipment",
@@ -144,7 +145,7 @@ const PRODUCT_FAMILIES = [
       },
       ua: {
         name: "Шинопровідні системи",
-        image: "/assets/products/busbar/gs/card/gs-main-transparent-product.webp",
+        image: publicMediaUrl("products/busbar/gs/card/gs-main-transparent-product.webp"),
         imageAlt: "Шинопровідна система GS Super Compact — вигляд основного продукту",
         applicationPoints: [
           "Розподіл живлення між розподільними пристроями, щитами та підключеним обладнанням кампусу",
@@ -546,7 +547,7 @@ const ZONES = [
           ua: "Освітлювальний шинопровід GL розподіляє живлення вздовж стелі навчального класу та забезпечує впорядковані точки підключення для світильників і освітлювальних кіл.",
         },
         imageOverride:
-          "/assets/products/busbar/gl/card/gl-main-product.webp",
+          publicMediaUrl("products/busbar/gl/card/gl-main-product.webp"),
         imageAltOverride: {
           uk: "GL lighting busbar system main product view",
           ua: "Освітлювальний шинопровід GL — вигляд основного продукту",

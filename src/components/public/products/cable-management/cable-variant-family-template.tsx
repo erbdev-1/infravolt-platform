@@ -129,10 +129,7 @@ export function CableVariantFamilyTemplate({
                 href={content.catalogueDocument.href}
               >
                 <IconDownload aria-hidden="true" className={styles.catalogueButtonIcon} />
-                <span>
-                  {content.catalogueDocument.label}
-                  <small>{content.catalogueDocument.meta}</small>
-                </span>
+                <span>{content.catalogueDocument.label}</span>
               </a>
             </div>
           </div>

@@ -1,8 +1,9 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedCategoryDetailContent } from "./types";
 
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/decorative";
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/decorative");
 const APPLICATION_IMAGE_BASE = `${CATEGORY_ASSET_BASE}/applications`;
 const CARD_IMAGE_BASE = `${CATEGORY_ASSET_BASE}/card`;
 

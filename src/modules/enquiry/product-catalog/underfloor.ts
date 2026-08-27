@@ -14,7 +14,7 @@ export function underfloorFamilies(market: MarketCode): readonly EnquiryProductF
       id: `underfloor:${series.slug}`,
       title: series.name,
       system: "underfloor",
-      categoryLabel: market === "ua" ? "Підпідлогові кабельні системи" : "Underfloor Cable Trunking",
+      categoryLabel: market === "ua" ? "Підпідлогові кабельні системи" : "Underfloor Systems",
       sourceRoute,
     },
   }));

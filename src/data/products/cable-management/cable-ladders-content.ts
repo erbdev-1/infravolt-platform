@@ -1,10 +1,16 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { CableMacroFamilyContent } from "./macro-family-types";
 import { CABLE_SUPPORT_CATALOGUE_PDF_HREF } from "./content";
 
-const IMAGE_BASE = "/assets/products/cable-management";
-const REQUEST_HREF = "/uk-support?request=technical-pack&product=cable-ladders";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+const REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "cable-ladders",
+  source: "/products/cable-support-systems",
+});
 
 // None of the four series in this macro group has an extracted
 // catalog-source folder yet (no product-data.csv for C-Profile Rung,

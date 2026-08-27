@@ -31,18 +31,18 @@ describe("Parking & Waterproof catalogue series", () => {
     expect(content.technicalAssets?.map(({ title, image }) => ({ title, image }))).toEqual([
       {
         title: "Photometric Data",
-        image: "/assets/products/led-lighting/category/parking&waterproof/photometric/stepdim-photometric-data.png",
+        image: "/assets/products/led-lighting/category/parking-waterproof/photometric/stepdim-photometric-data.png",
       },
       {
         title: "Technical Data",
-        image: "/assets/products/led-lighting/category/parking&waterproof/technical/stepdim-technical-data.png",
+        image: "/assets/products/led-lighting/category/parking-waterproof/technical/stepdim-technical-data.png",
       },
     ]);
     expect(content.familyTechnicalSection?.assets.map(({ image }) => image)).toEqual([
-      "/assets/products/led-lighting/category/parking&waterproof/technical/stepdim/led-bus-stepdim-waterproof-control-settings.png",
-      "/assets/products/led-lighting/category/parking&waterproof/technical/stepdim/led-bus-stepdim-waterproof-component-detail.png",
-      "/assets/products/led-lighting/category/parking&waterproof/technical/stepdim/led-bus-stepdim-waterproof-sensor-coverage.png",
-      "/assets/products/led-lighting/category/parking&waterproof/technical/stepdim/led-bus-stepdim-waterproof-led-module-installation.png",
+      "/assets/products/led-lighting/category/parking-waterproof/technical/stepdim/led-bus-stepdim-waterproof-control-settings.png",
+      "/assets/products/led-lighting/category/parking-waterproof/technical/stepdim/led-bus-stepdim-waterproof-component-detail.png",
+      "/assets/products/led-lighting/category/parking-waterproof/technical/stepdim/led-bus-stepdim-waterproof-sensor-coverage.png",
+      "/assets/products/led-lighting/category/parking-waterproof/technical/stepdim/led-bus-stepdim-waterproof-led-module-installation.png",
     ]);
   });
 

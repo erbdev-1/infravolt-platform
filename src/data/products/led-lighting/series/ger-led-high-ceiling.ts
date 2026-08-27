@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
@@ -15,7 +16,7 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  *
  * Photometric/technical-drawing assets: premium pre-generated renders
  * from the shared Industrial & High-Bay category asset library
- * (category/industrial&high-bay/photometric/recessed-ceiling,
+ * (category/industrial-high-bay/photometric/recessed-ceiling,
  * .../photometric/Surface-Mounted, .../technical) — higher-resolution,
  * cleaner versions of the same real catalogue photometric polar
  * diagrams and technical drawings, replacing this file's earlier
@@ -24,39 +25,39 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  * / 60° / 90° / 120° / 130×60°) and its own dimensional drawing were
  * visually verified one by one before wiring in. */
 export const GER_LED_HC_HERO_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-hero-foreground.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-hero-foreground.webp");
 export const GER_LED_HC_HERO_IMAGE_ALT =
   "GER-LED High Ceiling Ø434 mm luminaire — Recessed Ceiling configuration (main) and the Surface Mounted configuration's rear mounting bracket (inset)";
 export const GER_LED_HC_HERO_BACKGROUND_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-hero-background.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-hero-background.webp");
 export const GER_LED_HC_HERO_BACKGROUND_IMAGE_ALT =
   "Modern factory and warehouse interior with high-ceiling LED lighting";
 
 export const GER_LED_HC_RECESSED_DRAWING_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-drawing.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-drawing.webp");
 export const GER_LED_HC_SURFACE_DRAWING_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-drawing.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-drawing.webp");
 
 const GER_LED_HC_RECESSED_PHOTOMETRIC_20 =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-photometric-20.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-photometric-20.webp");
 const GER_LED_HC_RECESSED_PHOTOMETRIC_60 =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-photometric-60.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-photometric-60.webp");
 const GER_LED_HC_RECESSED_PHOTOMETRIC_90 =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-photometric-90.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-photometric-90.webp");
 const GER_LED_HC_RECESSED_PHOTOMETRIC_120 =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-photometric-120.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-photometric-120.webp");
 const GER_LED_HC_RECESSED_PHOTOMETRIC_130X60 =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-photometric-130x60.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-recessed-photometric-130x60.webp");
 const GER_LED_HC_SURFACE_PHOTOMETRIC_20 =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-photometric-20.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-photometric-20.webp");
 const GER_LED_HC_SURFACE_PHOTOMETRIC_60 =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-photometric-60.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-photometric-60.webp");
 const GER_LED_HC_SURFACE_PHOTOMETRIC_90 =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-photometric-90.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-photometric-90.webp");
 const GER_LED_HC_SURFACE_PHOTOMETRIC_120 =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-photometric-120.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-photometric-120.webp");
 const GER_LED_HC_SURFACE_PHOTOMETRIC_130X60 =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-photometric-130x60.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-surface-photometric-130x60.webp");
 
 function recessedPhotometricOptions(alt: (angle: string) => string) {
   return [
@@ -92,11 +93,11 @@ function surfacePhotometricOptions(alt: (angle: string) => string) {
  * Factories) are near-identical shots of the same installation and
  * would have read as a duplicate. */
 export const GER_LED_HC_APPLICATION_FACTORIES_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-application-factories.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-application-factories.webp");
 export const GER_LED_HC_APPLICATION_WAREHOUSES_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-application-warehouses.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-application-warehouses.webp");
 export const GER_LED_HC_APPLICATION_HIGH_CEILING_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-application-high-ceiling-applications.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-high-ceiling/ger-led-high-ceiling-application-high-ceiling-applications.webp");
 
 /** Source-accuracy note (GER-LED High Ceiling catalogue extraction, page
  * 15): the specification text states an input voltage range of
@@ -205,7 +206,6 @@ const MODELS_UA: readonly LedSeriesModel[] = [
   },
 ] as const;
 
-const SUPPORT_REQUEST_HREF = "/uk-support?request=technical-pack&product=ger-led-high-ceiling";
 
 const content = {
   uk: {
@@ -714,5 +714,3 @@ const content = {
 export function gerLedHighCeilingContentForMarket(market: MarketCode): LedSeriesDetailContent {
   return content[market];
 }
-
-export { SUPPORT_REQUEST_HREF as GER_LED_HIGH_CEILING_SUPPORT_REQUEST_HREF };

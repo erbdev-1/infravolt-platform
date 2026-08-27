@@ -1,7 +1,14 @@
+import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
+
 import type { BusbarSystemDetailByMarket } from "./types";
 
-const IMAGE_BASE = "/assets/products/busbar/gr";
-const INDUSTRY_IMAGE_BASE = "/assets/industries/cards";
+const SOURCE_ROUTE = "/products/busbar-systems/gr-cast-resin";
+const REQUEST_QUOTE_HREF = buildEnquiryHref("quote", { system: "busbar", family: "gr-cast-resin", source: SOURCE_ROUTE });
+const REQUEST_DOCUMENTATION_HREF = buildEnquiryHref("technical-document", { system: "busbar", family: "gr-cast-resin", source: SOURCE_ROUTE });
+
+const IMAGE_BASE = publicMediaUrl("products/busbar/gr");
+const INDUSTRY_IMAGE_BASE = publicMediaUrl("industries/cards");
 
 const SPEC_COLUMNS_GR_A = [
   { id: "c500", label: "500A" },
@@ -548,7 +555,7 @@ export const GR_SYSTEM_DETAIL = {
         description:
           "Full product catalogue covering all Gersan busbar trunking systems, including GR technical data, order codes and dimensional drawings.",
         fileLabel: "PDF · 25.1 MB",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Download catalogue",
       },
       {
@@ -556,12 +563,12 @@ export const GR_SYSTEM_DETAIL = {
         description:
           "Quick reference for joining GR cast-resin busbar elements and closing the resin joint covers.",
         fileLabel: "PDF",
-        href: `${IMAGE_BASE}/installation/GR_Busbar_Installation_Guide.pdf`,
+        href: `${IMAGE_BASE}/installation/gr-busbar-installation-guide.pdf`,
         downloadLabel: "Download installation guide",
       },
     ],
-    requestQuoteHref: "/uk-support?product=gr-cast-resin",
-    requestDocumentationHref: "/#technical-documents",
+    requestQuoteHref: REQUEST_QUOTE_HREF,
+    requestDocumentationHref: REQUEST_DOCUMENTATION_HREF,
   },
   ua: {
     slug: "gr-cast-resin",
@@ -1078,7 +1085,7 @@ export const GR_SYSTEM_DETAIL = {
         description:
           "Повний каталог продукції, що охоплює всі шинопровідні системи Gersan, включно з технічними даними, кодами замовлення та кресленнями GR.",
         fileLabel: "PDF · 25.1 MB",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Завантажити каталог",
       },
       {
@@ -1086,11 +1093,11 @@ export const GR_SYSTEM_DETAIL = {
         description:
           "Короткий довідник із з'єднання елементів шинопроводу GR з литою ізоляцією та закриття кришок з'єднання.",
         fileLabel: "PDF",
-        href: `${IMAGE_BASE}/installation/GR_Busbar_Installation_Guide.pdf`,
+        href: `${IMAGE_BASE}/installation/gr-busbar-installation-guide.pdf`,
         downloadLabel: "Завантажити посібник з монтажу",
       },
     ],
-    requestQuoteHref: "/ua-support?product=gr-cast-resin",
-    requestDocumentationHref: "/#technical-documents",
+    requestQuoteHref: REQUEST_QUOTE_HREF,
+    requestDocumentationHref: REQUEST_DOCUMENTATION_HREF,
   },
 } as const satisfies BusbarSystemDetailByMarket;

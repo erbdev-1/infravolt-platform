@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
@@ -7,7 +8,7 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  *
  * Hero background/foreground: premium pre-generated assets sourced from
  * the shared Industrial & High-Bay category asset library
- * (category/industrial&high-bay/product and .../product/background) —
+ * (category/industrial-high-bay/product and .../product/background) —
  * a real industrial warehouse interior and the real, fully visible
  * LED-BUS High Ceiling fixture, already isolated and switched on with
  * neutral-white light. Replaces this file's earlier from-scratch
@@ -20,15 +21,15 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  * diagram and technical drawing, replacing the small raw catalogue-scan
  * PNGs originally extracted directly from the source PDF. */
 export const LED_BUS_HIGH_CEILING_HERO_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-hero-foreground.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-hero-foreground.webp");
 export const LED_BUS_HIGH_CEILING_HERO_IMAGE_ALT =
   "LED-BUS High Ceiling luminaire, illuminated, front view of the light-emitting diffuser";
 export const LED_BUS_HIGH_CEILING_HERO_BACKGROUND_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-hero-background.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-hero-background.webp");
 export const LED_BUS_HIGH_CEILING_HERO_BACKGROUND_IMAGE_ALT =
   "High-ceiling warehouse interior with visible industrial LED lighting fixtures";
 export const LED_BUS_HIGH_CEILING_APPLICATION_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-application.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-application.webp");
 export const LED_BUS_HIGH_CEILING_APPLICATION_IMAGE_ALT =
   "High-ceiling warehouse storage area lit by LED-BUS High Ceiling luminaires";
 /** Typical Applications card grid — Hangars and Aircraft Maintenance
@@ -39,19 +40,19 @@ export const LED_BUS_HIGH_CEILING_APPLICATION_IMAGE_ALT =
  * ground-operations scene (Hangars) and an aircraft assembly/maintenance
  * hangar interior (Aircraft Maintenance). */
 export const LED_BUS_HIGH_CEILING_APPLICATION_HANGARS_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-application-hangars.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-application-hangars.webp");
 export const LED_BUS_HIGH_CEILING_APPLICATION_AIRCRAFT_MAINTENANCE_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-application-aircraft-maintenance.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-application-aircraft-maintenance.webp");
 /** Real port/heavy-industry photo (container ship, gantry cranes, quay
  * floodlighting) — already used site-wide as the Industrial & High-Bay
  * category page's "Ports & Heavy Industry" application photo; copied
  * in for this series page's own Ports card. */
 export const LED_BUS_HIGH_CEILING_APPLICATION_PORTS_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-application-ports.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-application-ports.webp");
 export const LED_BUS_HIGH_CEILING_PHOTOMETRIC_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-photometric.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-photometric.webp");
 export const LED_BUS_HIGH_CEILING_TECHNICAL_DRAWING_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-technical-drawing.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-high-ceiling/led-bus-high-ceiling-technical-drawing.webp");
 
 const MODELS_UK: readonly LedSeriesModel[] = [
   { model: "LED-BUS LDB1-50", powerW: 50, luminousFluxLm: "6,600 lm", efficiencyLmW: "132.0 lm/W", ip: "IP65", weightKg: "6.0 kg" },
@@ -75,7 +76,6 @@ const MODELS_UA: readonly LedSeriesModel[] = [
   { model: "LED-BUS LDB9-240", powerW: 240, luminousFluxLm: "33 600 лм", efficiencyLmW: "140,0 лм/Вт", ip: "IP65", weightKg: "9,2 кг" },
 ] as const;
 
-const SUPPORT_REQUEST_HREF = "/uk-support?request=technical-pack&product=led-bus-high-ceiling";
 
 const content = {
   uk: {
@@ -563,5 +563,3 @@ const content = {
 export function ledBusHighCeilingContentForMarket(market: MarketCode): LedSeriesDetailContent {
   return content[market];
 }
-
-export { SUPPORT_REQUEST_HREF as LED_BUS_HIGH_CEILING_SUPPORT_REQUEST_HREF };

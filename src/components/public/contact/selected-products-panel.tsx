@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { enquiryItemCountLabel } from "@/modules/enquiry/format";
 import { ENQUIRY_REVIEW_ANCHOR } from "@/modules/enquiry/routing";
 import { removeEnquiryItem, updateEnquiryItemQuantity, useEnquiryItems } from "@/modules/enquiry/store";
 import { enquirySystemLabel } from "@/modules/enquiry/types";
@@ -10,20 +11,6 @@ import type { ContactPageContent } from "@/modules/public-site/contact-content";
 
 import styles from "./contact-page.module.css";
 import { ProductEnquiryBuilder } from "./product-enquiry-builder";
-
-function selectedItemCountLabel(count: number, market: MarketCode): string {
-  if (market === "uk") return `${count} ${count === 1 ? "item" : "items"}`;
-  const lastTwo = count % 100;
-  const lastOne = count % 10;
-  const noun = lastTwo >= 11 && lastTwo <= 14
-    ? "позицій"
-    : lastOne === 1
-      ? "позиція"
-      : lastOne >= 2 && lastOne <= 4
-        ? "позиції"
-        : "позицій";
-  return `${count} ${noun}`;
-}
 
 export function SelectedProductsPanel({
   content,
@@ -54,7 +41,7 @@ export function SelectedProductsPanel({
             <div>
               <h3>{content.selectedProducts.heading}</h3>
               <span aria-live="polite" className={styles.selectedProductsCount}>
-                {selectedItemCountLabel(items.length, market)}
+                {enquiryItemCountLabel(items.length, market)}
               </span>
             </div>
             <button onClick={() => setBuilderOpen((current) => !current)} type="button">

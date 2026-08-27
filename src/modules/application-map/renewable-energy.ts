@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import { PRODUCT_FAMILY_NUMBERS } from "./types";
 
 import type {
@@ -8,7 +9,7 @@ import type {
   Zone,
 } from "./types";
 
-const IMAGE_BASE = "/assets/application-map/renewable-energy";
+const IMAGE_BASE = publicMediaUrl("application-map/renewable-energy");
 
 export const RENEWABLE_ENERGY_ZONE_IDS = [
   "main-electrical-room",
@@ -94,7 +95,7 @@ const PRODUCT_FAMILIES = [
     content: {
       uk: {
         name: "Busbar Systems",
-        image: "/assets/products/busbar/gs/card/gs-main-transparent-product.webp",
+        image: publicMediaUrl("products/busbar/gs/card/gs-main-transparent-product.webp"),
         imageAlt: "GS Super Compact busbar system main product view",
         applicationPoints: [
           "Distributes power between switchgear, distribution boards and downstream generation equipment",
@@ -120,7 +121,7 @@ const PRODUCT_FAMILIES = [
       },
       ua: {
         name: "Шинопровідні системи",
-        image: "/assets/products/busbar/gs/card/gs-main-transparent-product.webp",
+        image: publicMediaUrl("products/busbar/gs/card/gs-main-transparent-product.webp"),
         imageAlt: "Шинопровідна система GS Super Compact — вигляд основного продукту",
         applicationPoints: [
           "Розподіл живлення між розподільними пристроями, щитами та підключеним генеруючим обладнанням",
@@ -412,7 +413,7 @@ const GGD_OVERRIDE: BusbarOverrideFields = {
     uk: "GGD Medium Power Busbar",
     ua: "Шинопровід GGD Medium Power",
   },
-  imageOverride: "/assets/products/busbar/ggd/card/ggd-main-transparent-product.webp",
+  imageOverride: publicMediaUrl("products/busbar/ggd/card/ggd-main-transparent-product.webp"),
   imageAltOverride: {
     uk: "GGD medium power busbar system cutaway view",
     ua: "Шинопровідна система GGD Medium Power — розріз продукту",
@@ -476,7 +477,7 @@ const GS_OVERRIDE: BusbarOverrideFields = {
     uk: "GS Super Compact",
     ua: "Шинопровід GS Super Compact",
   },
-  imageOverride: "/assets/products/busbar/gs/card/gs-main-transparent-product.webp",
+  imageOverride: publicMediaUrl("products/busbar/gs/card/gs-main-transparent-product.webp"),
   imageAltOverride: {
     uk: "GS Super Compact busbar system main product view",
     ua: "Шинопровідна система GS Super Compact — вигляд основного продукту",
@@ -540,7 +541,7 @@ const GR_OVERRIDE: BusbarOverrideFields = {
     uk: "GR Cast Resin Busbar",
     ua: "Шинопровід GR Cast Resin",
   },
-  imageOverride: "/assets/products/busbar/gr/card/gr-main-transparent-product.webp",
+  imageOverride: publicMediaUrl("products/busbar/gr/card/gr-main-transparent-product.webp"),
   imageAltOverride: {
     uk: "GR Cast Resin busbar system main product view",
     ua: "Шинопровідна система GR Cast Resin — вигляд основного продукту",
@@ -605,7 +606,7 @@ const GNL_OVERRIDE: BusbarOverrideFields = {
     ua: "Освітлювальний шинопровід GNL",
   },
   imageOverride:
-    "/assets/products/busbar/gnl/products/gnl-hero-energy-transparent.webp",
+    publicMediaUrl("products/busbar/gnl/products/gnl-hero-energy-transparent.webp"),
   imageAltOverride: {
     uk: "GNL lighting busbar with blue and orange energy trails",
     ua: "Освітлювальний шинопровід GNL — вигляд основного продукту",

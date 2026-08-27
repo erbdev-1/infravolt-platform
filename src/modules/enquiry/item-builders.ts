@@ -64,8 +64,12 @@ export function ledEnquiryItem(seriesSlug: string, seriesTitle: string, model: L
   };
 }
 
-export function underfloorEnquiryItem(seriesSlug: string, seriesName: string, groupName: string, variant: UnderfloorVariant, sourceRoute: string): EnquiryItem {
-  const identity = encodedIdentity([seriesSlug, groupName, variant.stockCode, variant.model]);
+// groupId must be the stable UnderfloorVariantGroup.id, never the
+// translated group.name — the identity has to stay identical for the
+// same physical part regardless of market/locale (see
+// UnderfloorVariantGroup.id in series-detail-types.ts).
+export function underfloorEnquiryItem(seriesSlug: string, seriesName: string, groupId: string, variant: UnderfloorVariant, sourceRoute: string): EnquiryItem {
+  const identity = encodedIdentity([seriesSlug, groupId, variant.stockCode, variant.model]);
   return {
     id: `underfloor:${identity}`,
     title: variant.productName,

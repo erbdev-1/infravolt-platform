@@ -34,9 +34,9 @@ export function isEnquirySystemKey(value: string | undefined): value is EnquiryS
 const SYSTEM_LABELS: Record<MarketCode, Record<EnquirySystemKey, string>> = {
   uk: {
     busbar: "Busbar Systems",
-    "cable-management": "Cable Management",
+    "cable-management": "Cable Management Systems",
     "earthing-lightning": "Earthing & Lightning Protection",
-    underfloor: "Underfloor Cable Trunking",
+    underfloor: "Underfloor Systems",
     "led-systems": "LED Systems",
     "ev-charging": "EV Charging",
     "g-bus": "G-BUS Automation",

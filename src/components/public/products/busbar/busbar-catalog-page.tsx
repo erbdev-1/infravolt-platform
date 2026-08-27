@@ -20,6 +20,7 @@ import type {
 } from "@/data/products/busbar/types";
 import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
+import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
 
 import { BusbarCinematicIntro } from "./busbar-cinematic-intro";
 import styles from "./busbar-catalog-page.module.css";
@@ -135,11 +136,14 @@ export function BusbarCatalogPage({
   const [currentRange, setCurrentRange] = useState<CurrentFilter>("all");
   const [ipRating, setIpRating] = useState<IpFilter>("all");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [activeApplicationIndex, setActiveApplicationIndex] = useState(0);
 
   const activeFilterCount = [conductor, currentRange, ipRating].filter(
     (filter) => filter !== "all",
   ).length;
   const hasActiveSelection = category !== "all" || activeFilterCount > 0;
+  const activeApplication =
+    content.applications.items[activeApplicationIndex] ?? content.applications.items[0];
 
   const filteredSystems = useMemo(() => {
     const selectedSystemCategory =
@@ -228,7 +232,7 @@ export function BusbarCatalogPage({
               <a
                 className={styles.catalogueButton}
                 download="gersan-busbar-systems-catalogue.pdf"
-                href="/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf"
+                href={publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf")}
               >
                 {content.hero.downloadAction}
                 <span aria-hidden="true">↓</span>
@@ -244,11 +248,11 @@ export function BusbarCatalogPage({
               loop
               muted
               playsInline
-              poster="/assets/media/products/busbar/infravolt-busbar-poster.webp"
+              poster={publicMediaUrl("media/products/busbar/infravolt-busbar-poster.webp")}
               preload="metadata"
             >
               <source
-                src="/assets/media/products/busbar/infravolt-busbar.mp4"
+                src={publicMediaUrl("media/products/busbar/infravolt-busbar.mp4")}
                 type="video/mp4"
               />
             </video>
@@ -522,6 +526,47 @@ export function BusbarCatalogPage({
                       </div>
                     </article>
                   ))}
+                </div>
+
+                <div className={styles.applicationSelector}>
+                  <div className={styles.applicationActiveCard}>
+                    <div className={styles.applicationActiveIcon}>
+                      <Image
+                        alt=""
+                        aria-hidden="true"
+                        height={64}
+                        src={APPLICATION_ICONS[activeApplication.id]}
+                        width={64}
+                      />
+                    </div>
+
+                    <div className={styles.applicationActiveContent}>
+                      <h3>{activeApplication.title}</h3>
+                      <p>{activeApplication.description}</p>
+                    </div>
+                  </div>
+
+                  <div
+                    aria-label={activeApplication.title}
+                    className={styles.applicationSelectorGrid}
+                    role="group"
+                  >
+                    {content.applications.items.map((application, index) => (
+                      <button
+                        aria-pressed={index === activeApplicationIndex}
+                        className={
+                          index === activeApplicationIndex
+                            ? styles.applicationSelectorItemActive
+                            : styles.applicationSelectorItem
+                        }
+                        key={application.id}
+                        onClick={() => setActiveApplicationIndex(index)}
+                        type="button"
+                      >
+                        {application.title}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </section>
             ) : null}

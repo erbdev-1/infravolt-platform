@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
@@ -5,7 +6,7 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
 export const SPECIAL_HAZARDOUS_CATEGORY_HREF =
   "/products/led-systems/special-hazardous-environment-lighting";
 
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/special&hazardous";
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/special-hazardous");
 const APPLICATION_ASSET_BASE = `${CATEGORY_ASSET_BASE}/applications`;
 
 const ROUTES = {

@@ -6,28 +6,24 @@ import {
   UNDERFLOOR_HUB_HERO_FOREGROUND,
 } from "@/data/products/underfloor/assets";
 import { underfloorHubContentForMarket } from "@/data/products/underfloor/content";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
+import { UnderfloorApplicationsSelector } from "./underfloor-applications-selector";
 import {
   IconAccess,
   IconAdaptable,
   IconCapacity,
-  IconCommercialBuilding,
   IconCompliance,
   IconConfiguration,
   IconDistribution,
-  IconEducation,
-  IconFlexibleWorkspace,
   IconImagePending,
   IconIntegration,
   IconJunction,
   IconMaterial,
-  IconMeetingRoom,
   IconMounting,
-  IconOffice,
   IconOutlet,
   IconProtection,
-  IconRetail,
   IconTrunking,
 } from "./underfloor-icons";
 import styles from "./underfloor-hub-page.module.css";
@@ -54,16 +50,10 @@ const SYSTEM_STEP_ICONS = {
   outlet: IconOutlet,
 } as const;
 
-const APPLICATION_ICONS = {
-  office: IconOffice,
-  "commercial-building": IconCommercialBuilding,
-  "meeting-room": IconMeetingRoom,
-  education: IconEducation,
-  retail: IconRetail,
-  "flexible-workspace": IconFlexibleWorkspace,
-} as const;
-
-const SUPPORT_REQUEST_HREF = "/uk-support?request=technical-pack&product=underfloor-systems";
+const SUPPORT_REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "underfloor",
+  source: "/products/underfloor-systems",
+});
 
 // The Underfloor Cable Trunking category hub page — a sibling top-level
 // product line (like Busbar, Cable Management, Earthing & Lightning),
@@ -115,7 +105,6 @@ export function UnderfloorHubPage({
             <div className={styles.heroActions}>
               <Link className={styles.primaryButton} href="#series">
                 {content.hero.primaryAction}
-                <span aria-hidden="true">→</span>
               </Link>
               <Link className={styles.secondaryButton} href={SUPPORT_REQUEST_HREF}>
                 {content.hero.secondaryAction}
@@ -278,38 +267,7 @@ export function UnderfloorHubPage({
           <h2>{content.applicationsHeading}</h2>
         </div>
 
-        <div className={styles.applicationsGrid}>
-          {content.applications.map((application) => {
-            const ApplicationIcon = APPLICATION_ICONS[application.icon];
-
-            return (
-              <article className={styles.applicationCard} key={application.title}>
-                <div className={styles.applicationMedia}>
-                  {application.image ? (
-                    <Image
-                      alt={application.imageAlt ?? application.title}
-                      fill
-                      sizes="(min-width: 900px) 25vw, (min-width: 640px) 50vw, 100vw"
-                      src={application.image}
-                    />
-                  ) : (
-                    <div className={styles.applicationMediaEmpty}>
-                      <IconImagePending className={styles.applicationMediaEmptyIcon} />
-                    </div>
-                  )}
-                </div>
-
-                <div className={styles.applicationBody}>
-                  <div className={styles.applicationTitleRow}>
-                    <ApplicationIcon aria-hidden="true" className={styles.applicationIcon} />
-                    <span className={styles.applicationTitle}>{application.title}</span>
-                  </div>
-                  <p className={styles.applicationDescription}>{application.description}</p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        <UnderfloorApplicationsSelector applications={content.applications} />
       </section>
 
       <section className={styles.supportCta}>

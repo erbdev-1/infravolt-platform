@@ -1,8 +1,9 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel, LedSiblingFamily } from "../types";
 
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/parking&waterproof";
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/parking-waterproof");
 const APPLICATION_ASSET_BASE = `${CATEGORY_ASSET_BASE}/applications`;
 const CATEGORY_HREF = "/products/led-systems/parking-waterproof-lighting";
 
@@ -57,7 +58,7 @@ const content = {
     metadata: { title: "LED-BUS Etanj PC | Parking & Waterproof Lighting | InfraVolt", description: "LED-BUS Etanj PC IP65 linear lighting, with 18 exact catalogue models from 11–70 W." },
     breadcrumbs: { home: "Home", products: "Products", ledSystems: "LED Systems", category: "Parking & Waterproof Lighting", current: "LED-BUS Etanj PC" },
     backToCategoryLabel: "Back to Parking & Waterproof Lighting",
-    hero: { eyebrow: "LED-BUS ETANJ PC", category: "Parking & Waterproof Lighting", title: "LED-BUS Etanj PC", description: "IP65 linear LED luminaires for car parks, offices, markets, education spaces and corridors, with a powder-coated body and satin opal PS diffuser.", primaryAction: "Request Technical Data", secondaryAction: "Request RFQ / Enquiry" },
+    hero: { eyebrow: "LED-BUS ETANJ PC", category: "Parking & Waterproof Lighting", title: "LED-BUS Etanj PC", description: "IP65 linear LED luminaires for car parks, offices, markets, education spaces and corridors, with a powder-coated body and satin opal PS diffuser.", primaryAction: "Request Technical Pack", secondaryAction: "Download PDF Catalogue" },
     ...shared,
     heroImageAlt: "LED-BUS Etanj PC linear luminaire from the source catalogue", heroBackgroundImageAlt: "LED-BUS Etanj PC lighting in a covered car park",
     technicalInformationHeading: "Technical Information",
@@ -89,7 +90,7 @@ const content = {
   ua: {
     metadata: { title: "LED-BUS Etanj PC | Освітлення паркінгів | InfraVolt", description: "Лінійне освітлення LED-BUS Etanj PC IP65: 18 точних каталожних моделей 11–70 Вт." },
     breadcrumbs: { home: "Головна", products: "Продукція", ledSystems: "LED-системи", category: "Освітлення паркінгів та вологозахищене освітлення", current: "LED-BUS Etanj PC" }, backToCategoryLabel: "Назад до освітлення паркінгів",
-    hero: { eyebrow: "LED-BUS ETANJ PC", category: "Освітлення паркінгів та вологозахищене освітлення", title: "LED-BUS Etanj PC", description: "Лінійні LED-світильники IP65 для паркінгів, офісів, магазинів, навчальних приміщень і коридорів із порошковим покриттям корпусу та сатиновим опаловим PS-дифузором.", primaryAction: "Запросити технічні дані", secondaryAction: "Запросити пропозицію" },
+    hero: { eyebrow: "LED-BUS ETANJ PC", category: "Освітлення паркінгів та вологозахищене освітлення", title: "LED-BUS Etanj PC", description: "Лінійні LED-світильники IP65 для паркінгів, офісів, магазинів, навчальних приміщень і коридорів із порошковим покриттям корпусу та сатиновим опаловим PS-дифузором.", primaryAction: "Запросити технічний пакет", secondaryAction: "Завантажити PDF-каталог" },
     ...shared,
     heroImageAlt: "Лінійний світильник LED-BUS Etanj PC із каталогу", heroBackgroundImageAlt: "Освітлення LED-BUS Etanj PC у критому паркінгу",
     technicalInformationHeading: "Технічна інформація",

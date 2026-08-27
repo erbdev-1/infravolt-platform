@@ -3,7 +3,7 @@ import type { EarthingProductVariant } from "../types";
 export const LIGHTNING_PROTECTION_VARIANTS: Readonly<
   Record<string, readonly EarthingProductVariant[]>
 > = {
-  "Active Lightning Rod & Mounting Material": [
+  "active-lightning-rod-mounting-material": [
     { name: "Active Lightning Rod", model: "ESE 6000", stockCode: "300200090PTR0", weight: "6.500 kg" },
     { name: "Active Lightning Rod", model: "PETEKS", stockCode: "300200180PTR0", weight: "2.315 kg" },
     { name: "Active Lightning Rod", model: "TESLA", stockCode: "300200070PRT0", weight: "6.500 kg" },
@@ -57,7 +57,7 @@ export const LIGHTNING_PROTECTION_VARIANTS: Readonly<
     { name: "Pole Fixing Clamp (Copper)", model: "PBK-500-CU", stockCode: "3005500CUPBK1", material: "CU", dimensions: "Ø 50-200 mm", weight: "0.395 kg" },
     { name: "Pole Fixing Clamp (Aluminium)", model: "PBK-501-AL", stockCode: "3005501ALPBK1", material: "AL", dimensions: "Ø 50-200 mm", weight: "0.150 kg" },
   ],
-  "Lightning Arrester": [
+  "lightning-arrester": [
     { name: "Lightning Arrester (Aluminium)", model: "GTY-105-A", stockCode: "3007A105AL1", material: "Aluminium", dimensions: "L 500 mm · Ø 16 mm", weight: "0.270 kg" },
     { name: "Lightning Arrester (Aluminium)", model: "GTY-106-A", stockCode: "3007A106AL1", material: "Aluminium", dimensions: "L 600 mm · Ø 16 mm", weight: "0.320 kg" },
     { name: "Lightning Arrester (Aluminium)", model: "GTY-107-A", stockCode: "3007A107AL1", material: "Aluminium", dimensions: "L 800 mm · Ø 16 mm", weight: "0.430 kg" },
@@ -107,7 +107,7 @@ export const LIGHTNING_PROTECTION_VARIANTS: Readonly<
     { name: "Lightning Arrester (Galvanized)", model: "GTY-907 D", stockCode: "303809079141", material: "Galvanized", dimensions: "L 800 mm · Ø 20 mm", weight: "1.900 kg" },
     { name: "Lightning Arrester (Galvanized)", model: "GTY-908 D", stockCode: "303809089141", material: "Galvanized", dimensions: "L 1000 mm · Ø 20 mm", weight: "2.400 kg" },
   ],
-  "Lightning Arrester Base": [
+  "lightning-arrester-base": [
     { name: "Lightning Arrester Base (Copper)", model: "GYUT-1", stockCode: "300612310CU1", material: "Copper", weight: "0.390 kg" },
     { name: "Lightning Arrester Base (Galvanized)", model: "GYUT-1-A", stockCode: "3006000109141", material: "Galvanized", weight: "0.300 kg" },
     { name: "Lightning Arrester Base (Stainless Steel)", model: "GYUT-1 P", stockCode: "3006P0013161", material: "Stainless steel", weight: "0.300 kg" },
@@ -164,7 +164,7 @@ export const LIGHTNING_PROTECTION_VARIANTS: Readonly<
     { name: "Two End Points Threaded Expasion Rod (Aluminium)", model: "GTY-702-A", stockCode: "3009A7020AL1", material: "Aluminium", dimensions: "L 1000 mm", weight: "0.550 kg" },
     { name: "Two End Points Threaded Expasion Rod (Aluminium)", model: "GTY-703-A", stockCode: "3009A7030AL1", material: "Aluminium", dimensions: "L 2000 mm", weight: "1.100 kg" },
   ],
-  "Down Conductor Clamps & Fixing Elements": [
+  "down-conductor-clamps-fixing-elements": [
     { name: "Holder Clamp For Wall (Cu)", model: "GF-101", stockCode: "3010010109141", weight: "0.105 kg" },
     { name: "Holder Clamp For Wall (Cu)", model: "GF-102", stockCode: "301001020914", weight: "0.070 kg" },
     { name: "Holder Clamp For Wall (Galvanized)", model: "GF-103", stockCode: "301001030914", material: "Galvanized steel", weight: "0.065 kg" },

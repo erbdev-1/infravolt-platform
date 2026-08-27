@@ -9,6 +9,7 @@ import {
   DOWNLIGHT_SYSTEMS_HERO_FOREGROUND_ALT,
   downlightLightingSystemsContentForMarket,
 } from "@/data/products/led-lighting/track-downlight";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
 
 const ROUTE = "/products/led-systems/track-downlight/downlight-lighting-systems";
@@ -44,7 +45,11 @@ export default async function DownlightLightingSystemsPage() {
       }}
       supportCtaImage={DOWNLIGHT_SYSTEMS_HERO_BACKGROUND}
       supportCtaImageAlt={DOWNLIGHT_SYSTEMS_HERO_BACKGROUND_ALT}
-      supportRequestHref="/uk-support?request=technical-pack&product=downlight-lighting-systems"
+      supportRequestHref={buildEnquiryHref("technical-document", {
+        system: "led-systems",
+        family: "downlight-lighting-systems",
+        source: ROUTE,
+      })}
     />
   );
 }

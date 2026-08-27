@@ -157,11 +157,14 @@
 }
 
 .heroContent {
-  margin: 0 auto;
-  max-width: 1600px;
+  /* Left edge matches the same centred 1600px content frame .heroTop
+     (breadcrumbs) already uses — flush to the small clamp() gutter below
+     that width, inset further at very wide viewports so it doesn't sit
+     hard against the true left edge like a full-bleed box would. */
+  margin-left: max(0px, calc((100% - 1600px) / 2));
+  max-width: 40rem;
   padding: 4.5rem clamp(1.25rem, 4vw, 4rem) 5.5rem;
   position: relative;
-  width: 58%;
   z-index: 3;
 }
 
@@ -202,6 +205,11 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 1.75rem;
+}
+
+.heroActions .primaryButton,
+.heroActions .secondaryButton {
+  min-width: 15.5rem;
 }
 
 .primaryButton {
@@ -267,6 +275,14 @@
   padding: 0 clamp(1.25rem, 4vw, 4rem);
   position: relative;
   z-index: 2;
+}
+
+/* Series with a configuration selector bar between the hero and this
+   section (e.g. recessed/surface-mount tabs) already have a solid white
+   break there — the hero-overlap negative margin above would instead pull
+   the cards up into that bar and cover its tabs, so cancel it here. */
+.configurationSelector + .technicalInfo {
+  margin-top: 2rem;
 }
 
 .technicalInfoGrid {
@@ -778,6 +794,8 @@
   border-radius: 0.9rem;
   box-shadow: var(--led-shadow-idle);
   max-height: min(34rem, 65vh);
+  max-width: 100%;
+  min-width: 0;
   overflow: auto;
 }
 
@@ -1748,6 +1766,10 @@
   margin: 0;
 }
 
+/* Mobile-only active card + selector now lives in its own shared module —
+   led-applications-selector.module.css — used by both this template and
+   the LED category pages. See led-applications-selector.tsx. */
+
 /* =========================================================
    10. OTHER INDUSTRIAL & HIGH-BAY FAMILIES
    ========================================================= */
@@ -2006,6 +2028,18 @@ a.siblingCard:hover {
     flex-direction: column;
   }
 
+  /* Flex column items default to min-width:auto — without this, a section
+     containing a wide element (the technical-schedule table, whose
+     intrinsic content width grows with longer translated headers/values)
+     refuses to shrink below that content width and pushes the whole page
+     wider than the viewport instead of scrolling internally. Reproduced
+     on the Ukrainian schedule at 768-1024px, not English, since the
+     Ukrainian header/cell text is long enough to cross the threshold. */
+  .page > * {
+    min-width: 0;
+    width: 100%;
+  }
+
   .configurationSelector {
     margin: 5rem auto 0;
     max-width: 1400px;
@@ -2174,10 +2208,14 @@ a.siblingCard:hover {
 
   .heroActions {
     flex-direction: column;
+    gap: 0.625rem;
   }
 
   .primaryButton,
   .secondaryButton {
+    font-size: 0.82rem;
+    min-height: 2.75rem;
+    padding: 0.6rem 1rem;
     width: 100%;
   }
 
@@ -2189,20 +2227,114 @@ a.siblingCard:hover {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  /* Technical summary + capability tiles — 2x2, not a single stacked
+     column of large dark cards. */
+  .technicalInfo {
+    margin-top: 1.1rem;
+  }
+
   .technicalInfoGrid {
-    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .technicalInfoCard {
+    padding: 0.9rem 0.85rem;
+  }
+
+  .technicalInfoHeader {
+    gap: 0.5rem;
+  }
+
+  .technicalInfoTitle {
+    font-size: 0.82rem;
   }
 
   .technicalAssuranceRow {
     grid-template-columns: 1fr;
   }
 
+  .serviceability,
+  .serviceabilityAfterModels {
+    margin-top: 2.25rem;
+  }
+
+  .serviceabilityGrid {
+    gap: 0.65rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .serviceabilityCard {
+    padding: 0.85rem 0.8rem;
+  }
+
+  .serviceabilityIconBadge {
+    height: 2.1rem;
+    margin-bottom: 0.6rem;
+    width: 2.1rem;
+  }
+
+  .serviceabilityCard h3 {
+    font-size: 0.84rem;
+  }
+
+  .serviceabilityCard p {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 0.72rem;
+    overflow: hidden;
+  }
+
+  /* Mounting & Integration Options — compact icon-left rows instead of
+     tall stacked cards; every option here is already short (title + one
+     sentence), so a non-collapsible row is enough, no accordion needed. */
+  .mounting {
+    margin-top: 2.25rem;
+  }
+
   .mountingGrid {
+    gap: 0.55rem;
     grid-template-columns: 1fr;
   }
 
+  .mountingCard {
+    align-items: center;
+    column-gap: 0.75rem;
+    display: grid;
+    grid-template-columns: 2.3rem minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    min-height: 4.25rem;
+    padding: 0.65rem 0.85rem;
+  }
+
+  .mountingIconBadge {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    height: 2.1rem;
+    margin-bottom: 0;
+    width: 2.1rem;
+  }
+
+  .mountingCard h3 {
+    font-size: 0.84rem;
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+  }
+
+  .mountingCard p {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 0.72rem;
+    grid-column: 2;
+    grid-row: 2;
+    overflow: hidden;
+  }
+
   .applicationsList {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .familyTechnicalAssets {
@@ -2210,23 +2342,115 @@ a.siblingCard:hover {
   }
 
   .applicationsListCompact {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  /* The image-led application card wall is replaced by the active-card +
+     selector below (see LedApplicationsSelector / .applicationSelector);
+     the original grid stays intact for tablet/desktop. */
   .applicationsGrid {
-    grid-template-columns: 1fr;
+    display: none;
   }
 
-  .serviceabilityGrid {
-    grid-template-columns: 1fr;
+  .applications {
+    margin-top: 2.25rem;
+  }
+
+  /* Product-configuration cards (real photography — e.g. Suspended /
+     Surface Mounted) become horizontal rows, same "image left, content
+     right" language as the category Product Series cards. Facts list
+     capped to ~2 rows rather than deleted — see .mountingConfigurationFacts
+     below. */
+  .mountingConfigurations {
+    margin-top: 2.25rem;
   }
 
   .mountingConfigurationsGrid {
+    gap: 0.6rem;
     grid-template-columns: 1fr;
   }
 
+  .mountingConfigurationCard {
+    display: flex;
+  }
+
+  .mountingConfigurationVisual {
+    aspect-ratio: auto;
+    flex: 0 0 108px;
+  }
+
+  .mountingConfigurationVisual img {
+    padding: 0.6rem;
+  }
+
+  .mountingConfigurationBody {
+    border-left: 3px solid var(--led-accent);
+    border-top: none;
+    flex: 1;
+    min-width: 0;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .mountingConfigurationIconBadge {
+    height: 1.9rem;
+    margin-bottom: 0.5rem;
+    width: 1.9rem;
+  }
+
+  .mountingConfigurationBody h3 {
+    font-size: 0.88rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .mountingConfigurationBody p {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 0.74rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+
+  .mountingConfigurationFacts {
+    max-height: 2.2rem;
+    overflow: hidden;
+  }
+
+  /* Related Series — compact navigator rows, not a second product-card
+     gallery; current-family tint/badge preserved. */
+  .siblings {
+    margin-top: 2.25rem;
+  }
+
   .siblingsGrid {
+    gap: 0.5rem;
     grid-template-columns: 1fr;
+  }
+
+  .siblingCard {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 0.6rem;
+    min-height: 3.5rem;
+    padding: 0.6rem 0.9rem;
+  }
+
+  .siblingTitle {
+    font-size: 0.84rem;
+  }
+
+  .siblingSubtitle {
+    font-size: 0.72rem;
+  }
+
+  .siblingCurrentBadge,
+  .siblingFooter {
+    margin-top: 0;
+  }
+
+  .models {
+    margin-top: 2.25rem;
   }
 
   .controlsRow {

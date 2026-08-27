@@ -1,8 +1,9 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedCategoryDetailContent } from "./types";
 
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/panel";
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/panel");
 const CARD_IMAGE_BASE = `${CATEGORY_ASSET_BASE}/card`;
 const APPLICATION_IMAGE_BASE = `${CATEGORY_ASSET_BASE}/applications`;
 
@@ -185,7 +186,7 @@ const content = {
       {
         title: "Offices & Workspaces",
         description: "General panel illumination for workplaces, meeting areas and office environments.",
-        image: `${APPLICATION_IMAGE_BASE}/panel-lighting-application-offices-workspaces .webp`,
+        image: `${APPLICATION_IMAGE_BASE}/panel-lighting-application-offices-workspaces.webp`,
         imageAlt: "Office illuminated by LED panel lighting",
       },
       {
@@ -386,7 +387,7 @@ const content = {
       {
         title: "Офіси й робочі простори",
         description: "Загальне панельне освітлення робочих місць, переговорних зон та офісних середовищ.",
-        image: `${APPLICATION_IMAGE_BASE}/panel-lighting-application-offices-workspaces .webp`,
+        image: `${APPLICATION_IMAGE_BASE}/panel-lighting-application-offices-workspaces.webp`,
         imageAlt: "Офіс, освітлений панельними LED-світильниками",
       },
       {

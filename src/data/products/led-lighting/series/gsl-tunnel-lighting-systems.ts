@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
@@ -20,7 +21,7 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  * All product/technical assets were cropped directly from the verified
  * source catalogue page pixels and visually confirmed one by one (same
  * discipline as the GER-LED High Ceiling asset correction). */
-const TUNNEL_CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/outdorr&infrastructure";
+const TUNNEL_CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/outdoor-infrastructure");
 
 export const GSL_TUNNEL_HERO_IMAGE =
   `${TUNNEL_CATEGORY_ASSET_BASE}/product/tunnel-lighting-hero-foreground-products.webp`;
@@ -49,11 +50,11 @@ export const GSL_TUNNEL_APPLICATION_BIOGAS_IMAGE =
  * the Outdoor & Infrastructure category's shared applications photos
  * (also used for the Special & Hazardous Environment Lighting family). */
 export const GSL_TUNNEL_APPLICATION_INDUSTRIAL_IMAGE =
-  "/assets/products/led-lighting/series/gsl-tunnel-lighting-systems/gsl-tunnel-lighting-systems-application-industrial.webp";
+  publicMediaUrl("products/led-lighting/series/gsl-tunnel-lighting-systems/gsl-tunnel-lighting-systems-application-industrial.webp");
 export const GSL_TUNNEL_APPLICATION_PORTS_IMAGE =
-  "/assets/products/led-lighting/series/gsl-tunnel-lighting-systems/gsl-tunnel-lighting-systems-application-ports.webp";
+  publicMediaUrl("products/led-lighting/series/gsl-tunnel-lighting-systems/gsl-tunnel-lighting-systems-application-ports.webp");
 export const GSL_TUNNEL_APPLICATION_COAL_IMAGE =
-  "/assets/products/led-lighting/series/gsl-tunnel-lighting-systems/gsl-tunnel-lighting-systems-application-coal.webp";
+  publicMediaUrl("products/led-lighting/series/gsl-tunnel-lighting-systems/gsl-tunnel-lighting-systems-application-coal.webp");
 
 /** Order-code note: the source catalogue prints the first GSL-TUNEL order
  * code with a space ("GSL 600 NM.25.02") while the other three rows in
@@ -259,7 +260,6 @@ const MODELS_UA: readonly LedSeriesModel[] = [
   },
 ] as const;
 
-const SUPPORT_REQUEST_HREF = "/uk-support?request=technical-pack&product=gsl-tunnel-lighting-systems";
 
 const content = {
   uk: {
@@ -804,5 +804,3 @@ const content = {
 export function gslTunnelLightingSystemsContentForMarket(market: MarketCode): LedSeriesDetailContent {
   return content[market];
 }
-
-export { SUPPORT_REQUEST_HREF as GSL_TUNNEL_LIGHTING_SYSTEMS_SUPPORT_REQUEST_HREF };

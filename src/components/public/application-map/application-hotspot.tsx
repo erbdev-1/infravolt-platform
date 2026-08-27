@@ -10,6 +10,12 @@ type ApplicationHotspotProps = Readonly<{
   // İlk ziyarette tıklanabilirliği işaret eden ipucu — seçili durumdan
   // (active) ayrı, daha yumuşak bir görsel kullanır.
   pulse?: boolean;
+  // Yalnız mobil/tablette (<=860px, bkz. CSS) etkili olan ayrı bir "aktif"
+  // sinyali: o genişliklerde tek bir hotspot'un adı + yumuşak nabız halkası
+  // gösterilir (bkz. application-map-viewer.tsx effectiveActiveOverviewHotspotId).
+  // `active`'ten kasıtlı olarak ayrı tutulur — masaüstündeki dolgu/seçili
+  // görünümü (.hotspotActive) bu değişiklikten etkilenmemeli.
+  activeOnMobile?: boolean;
   onSelect: () => void;
 }>;
 
@@ -23,6 +29,7 @@ export function ApplicationHotspot({
   y,
   active,
   pulse = false,
+  activeOnMobile = false,
   onSelect,
 }: ApplicationHotspotProps) {
   return (
@@ -33,6 +40,7 @@ export function ApplicationHotspot({
         styles.hotspot,
         active ? styles.hotspotActive : "",
         pulse && !active ? styles.hotspotPulse : "",
+        activeOnMobile ? styles.hotspotActiveMobile : "",
       ]
         .filter(Boolean)
         .join(" ")}

@@ -43,8 +43,8 @@ const content = {
       title: "Underfloor Cable Trunking Systems",
       description:
         "Flexible underfloor power and data distribution solutions for modern commercial interiors, providing accessible and adaptable service routing beneath the finished floor.",
-      primaryAction: "Explore Product Series",
-      secondaryAction: "Request Technical Support",
+      primaryAction: "Explore Series",
+      secondaryAction: "Request Support",
     },
     heroVisualImage: UNDERFLOOR_HERO_VISUAL_IMAGE,
     heroVisualImageAlt: UNDERFLOOR_HERO_VISUAL_IMAGE_ALT,
@@ -220,6 +220,9 @@ const content = {
       codesCountSuffix: "catalogue codes",
       addToEnquiryLabel: "Add to Enquiry",
       removeFromEnquiryLabel: "Remove from Enquiry",
+      modelsCountSuffix: "models",
+      showMoreAction: "Show more",
+      relatedSeriesHeading: "Related Series",
     },
   },
   ua: {
@@ -239,8 +242,8 @@ const content = {
       title: "Системи підпідлогового кабельного каналу",
       description:
         "Гнучкі рішення розподілу живлення та даних під підлогою для сучасних комерційних приміщень, що забезпечують доступну та адаптовану прокладку служб під готовою підлогою.",
-      primaryAction: "Переглянути продуктові серії",
-      secondaryAction: "Запросити технічну підтримку",
+      primaryAction: "Переглянути серії",
+      secondaryAction: "Запросити підтримку",
     },
     heroVisualImage: UNDERFLOOR_HERO_VISUAL_IMAGE,
     heroVisualImageAlt:
@@ -416,6 +419,9 @@ const content = {
       codesCountSuffix: "каталожних кодів",
       addToEnquiryLabel: "Додати до запиту",
       removeFromEnquiryLabel: "Прибрати із запиту",
+      modelsCountSuffix: "моделей",
+      showMoreAction: "Показати ще",
+      relatedSeriesHeading: "Пов'язані серії",
     },
   },
 } as const satisfies Readonly<Record<MarketCode, UnderfloorHubContent>>;

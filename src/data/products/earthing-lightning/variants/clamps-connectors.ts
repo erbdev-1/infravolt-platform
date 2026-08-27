@@ -3,7 +3,7 @@ import type { EarthingProductVariant } from "../types";
 export const CLAMPS_CONNECTORS_VARIANTS: Readonly<
   Record<string, readonly EarthingProductVariant[]>
 > = {
-  "Test Clamps": [
+  "test-clamps": [
     { name: "Earthing Circuit Braker (Copper)", model: "GF-200", stockCode: "3011020009141", material: "Copper", weight: "0.704 kg" },
     { name: "Earthing Circuit Braker (Tinned Copper)", model: "GF-200-A", stockCode: "3011A20009141", material: "Tinned copper", weight: "0.800 kg" },
     { name: "Test Clamp (Copper)", model: "GF-201", stockCode: "301102010PLS0", material: "Copper", weight: "0.440 kg" },
@@ -13,7 +13,7 @@ export const CLAMPS_CONNECTORS_VARIANTS: Readonly<
     { name: "Test Clamp (Galvanized)", model: "GF-201/1x50 D", stockCode: "301152150PLS914", material: "Galvanized", weight: "0.350 kg" },
     { name: "Test Clamp (Galvanized)", model: "GF-202 D", stockCode: "301152120PLS914", material: "Galvanized", weight: "0.350 kg" },
   ],
-  "Electrode Fixing Clamps": [
+  "electrode-fixing-clamps": [
     { name: "Electrode Fixing Clamp", model: "GTE-110-A", stockCode: "3018110A0CU1", material: "Copper", dimensions: "Conductor 10 mm² · Electrode Ø16 mm · e 2 mm", weight: "0.080 kg" },
     { name: "Electrode Fixing Clamp", model: "GTE-110-B", stockCode: "3018110B0CU1", material: "Copper", dimensions: "Conductor 16 mm² · Electrode Ø16 mm · e 2 mm", weight: "0.080 kg" },
     { name: "Electrode Fixing Clamp", model: "GTE-110-C", stockCode: "3018110C0CU1", material: "Copper", dimensions: "Conductor 25 mm² · Electrode Ø16 mm · e 2 mm", weight: "0.080 kg" },
@@ -163,7 +163,7 @@ export const CLAMPS_CONNECTORS_VARIANTS: Readonly<
     { name: "Electrode Fixing Clamp", model: "GFT-108", stockCode: "301801080BRZ0", dimensions: "Conductor 120; B=M8", weight: "0.210 kg" },
     { name: "Electrode Fixing Clamp", model: "GFT-108-A", stockCode: "3018A1080BRZ0", dimensions: "Conductor 120; B=M12", weight: "0.213 kg" },
   ],
-  "Cable Tray Fixing Clamps": [
+  "cable-tray-fixing-clamps": [
     { name: "Brass Fixing Clamp", model: "GİT-22", stockCode: "3303000220PRÇ0", material: "Brass", dimensions: "Conductor 10-35 mm²", weight: "0.035 kg" },
     { name: "Brass Fixing Clamp", model: "GİT-23", stockCode: "3303000230PRÇ0", material: "Brass", dimensions: "Conductor 35-70 mm²", weight: "0.060 kg" },
     { name: "Brass Fixing Clamp", model: "GİT-24", stockCode: "3303000240PRÇ0", material: "Brass", dimensions: "Conductor 70-150 mm²", weight: "0.095 kg" },
@@ -183,7 +183,7 @@ export const CLAMPS_CONNECTORS_VARIANTS: Readonly<
     { name: "Plain Washer", model: "CU-PUL 161", stockCode: "303000161CU0", material: "CuSn", dimensions: "Conductor 95-185 mm²", weight: "0.012 kg" },
     { name: "Plain Washer", model: "CU-PUL 162", stockCode: "303000162CU0", material: "CuSn", dimensions: "Conductor 240 mm²", weight: "0.017 kg" },
   ],
-  "Galvanized & Copper Fixing Clamps": [
+  "galvanized-copper-fixing-clamps": [
     { name: "Customized Earthing Clamp (Galvanized)", model: "GTOP-100", stockCode: "3010081259141", material: "Galvanized steel", dimensions: "A=30x3 - 30x3.5; B=Ø 8-12", weight: "0.100 kg" },
     { name: "Customized Earthing Clamp (Galvanized)", model: "GTOP-101", stockCode: "3010141659141", material: "Galvanized steel", dimensions: "A=30x3 - 30x3.5; B=Ø 14-16", weight: "0.120 kg" },
     { name: "Customized Earthing Clamp (Galvanized)", model: "GTOP-102", stockCode: "3010182059141", material: "Galvanized steel", dimensions: "A=30x3 - 30x3.5; B=Ø 18-20", weight: "0.140 kg" },
@@ -348,7 +348,7 @@ export const CLAMPS_CONNECTORS_VARIANTS: Readonly<
     { name: "Fixing Clamp Eko Type (Galvanized)", model: "GTE-204-A EKO", stockCode: "302EA20409141", material: "Galvanized steel", dimensions: "A=30x3 - 30x3.5; B=Ø18-20", weight: "0.229 kg" },
     { name: "Fixing Clamp Eko Type (Galvanized)", model: "GTE-206-A EKO", stockCode: "302EA20609141", material: "Galvanized steel", dimensions: "A=30x3 - 30x3.5; B=Ø22", weight: "0.235 kg" },
   ],
-  "Transition Clamps (Galvanized + Copper)": [
+  "transition-clamps-galvanized-copper": [
     { name: "Transition Clamp (Galvanized + Copper)", model: "GTE-260", stockCode: "302803260CU1", material: "Copper + galvanized steel", dimensions: "A=30x3 - 30x3.5; B=Ø6", weight: "0.211 kg" },
     { name: "Transition Clamp (Galvanized + Copper)", model: "GTE-261", stockCode: "302803261CU1", material: "Copper + galvanized steel", dimensions: "A=30x3 - 30x3.5; B=Ø8", weight: "0.213 kg" },
     { name: "Transition Clamp (Galvanized + Copper)", model: "GTE-262", stockCode: "302803262CU1", material: "Copper + galvanized steel", dimensions: "A=30x3 - 30x3.5; B=Ø10", weight: "0.215 kg" },
@@ -386,7 +386,7 @@ export const CLAMPS_CONNECTORS_VARIANTS: Readonly<
     { name: "Transition Clamp (Galvanized + Copper)", model: "GTE-296", stockCode: "302803296CU1", material: "Copper + galvanized steel", dimensions: "A=Ø12; B=Ø18 - 20", weight: "0.239 kg" },
     { name: "Transition Clamp (Galvanized + Copper)", model: "GTE-297", stockCode: "302803297CU1", material: "Copper + galvanized steel", dimensions: "A=Ø12; B=Ø22", weight: "0.245 kg" },
   ],
-  "Brass Connectors for Soldering": [
+  "brass-connectors-for-soldering": [
     { name: "Brass Connector for Soldering", model: "GKM-201", stockCode: "302602010PRÇ0", material: "Brass", dimensions: "16 mm²", weight: "0.015 kg" },
     { name: "Brass Connector for Soldering", model: "GKM-202", stockCode: "302602020PRÇ0", material: "Brass", dimensions: "25 mm²", weight: "0.018 kg" },
     { name: "Brass Connector for Soldering", model: "GKM-203", stockCode: "302602030PRÇ0", material: "Brass", dimensions: "35 mm²", weight: "0.030 kg" },
@@ -421,7 +421,7 @@ export const CLAMPS_CONNECTORS_VARIANTS: Readonly<
     { name: "Brass Crossing Connector for Soldering", model: "GDM-110", stockCode: "302611100PRÇ0", material: "Brass", dimensions: "240 mm²", weight: "0.540 kg" },
     { name: "Brass Crossing Connector for Soldering", model: "GDM-111", stockCode: "302611110PRÇ0", material: "Brass", dimensions: "300 mm²", weight: "0.620 kg" },
   ],
-  "Fixing Clamps (Deadend, U, H & C)": [
+  "fixing-clamps-deadend-u-h-c": [
     { name: "Deadend Clamp (Block Type) Brass", model: "GİT-1", stockCode: "302900010PRÇ1", material: "Brass", dimensions: "10-16 mm²", weight: "0.020 kg" },
     { name: "Deadend Clamp (Block Type) Brass", model: "GİT-2", stockCode: "302900020PRÇ1", material: "Brass", dimensions: "16-25 mm²", weight: "0.030 kg" },
     { name: "Deadend Clamp (Block Type) Brass", model: "GİT-3", stockCode: "302900030PRÇ1", material: "Brass", dimensions: "25-35 mm²", weight: "0.084 kg" },
@@ -448,7 +448,7 @@ export const CLAMPS_CONNECTORS_VARIANTS: Readonly<
     { name: "C Terminal", model: "GİT-52", stockCode: "303000520CU0", material: "Tin-plated copper; untinned optional", dimensions: "95-95 mm²", weight: "0.130 kg" },
     { name: "C Terminal", model: "GİT-53", stockCode: "303000530CU0", material: "Tin-plated copper; untinned optional", dimensions: "120-120 mm²", weight: "0.160 kg" },
   ],
-  "Cable Lugs": [
+  "cable-lugs": [
     { name: "Cable Lug", model: "GIP-48", stockCode: "302700480CU0", dimensions: "6 mm²", weight: "0.003 kg" },
     { name: "Cable Lug", model: "GIP-49", stockCode: "302700490CU0", dimensions: "10 mm²", weight: "0.005 kg" },
     { name: "Cable Lug", model: "GIP-50", stockCode: "302700500CU0", dimensions: "16 mm²", weight: "0.009 kg" },
@@ -476,7 +476,7 @@ export const CLAMPS_CONNECTORS_VARIANTS: Readonly<
     { name: "Butt Connector", model: "GTE-512", stockCode: "302705120CU0", dimensions: "240 mm²", weight: "0.140 kg" },
     { name: "Butt Connector", model: "GTE-513", stockCode: "302705130CU0", dimensions: "300 mm²", weight: "0.206 kg" },
   ],
-  "Flat Bar Connector": [
+  "flat-bar-connector": [
     { name: "Flat Bar Connector (Vertical)", model: "GBD-101", stockCode: "3032010109141", dimensions: "30 mm", weight: "0.350 kg" },
     { name: "Flat Bar Connector (Vertical)", model: "GBD-102", stockCode: "3032010209141", dimensions: "40 mm", weight: "0.380 kg" },
     { name: "Flat Bar Connector (Vertical)", model: "GBD-103", stockCode: "3032010309141", dimensions: "50 mm", weight: "0.400 kg" },

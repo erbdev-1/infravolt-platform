@@ -166,9 +166,15 @@
 
 .heroActions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.75rem;
   margin-top: 2rem;
+}
+
+.heroActions .primaryButton,
+.heroActions .catalogueButton {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .primaryButton,
@@ -235,12 +241,20 @@
 
 @media (max-width: 640px) {
   .heroActions {
-    flex-direction: column;
+    gap: 0.625rem;
   }
 
-  .primaryButton,
-  .catalogueButton {
-    width: 100%;
+  .heroInner {
+    padding: 1.75rem clamp(1.1rem, 5vw, 1.75rem) 2rem;
+  }
+
+  .heroDescription {
+    line-height: 1.6;
+    margin-top: 0.85rem;
+  }
+
+  .heroActions {
+    margin-top: 1.5rem;
   }
 }
 
@@ -361,6 +375,12 @@
   margin: 3rem auto 0;
   max-width: 1400px;
   padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+@media (max-width: 900px) {
+  .snapshotSection {
+    margin-top: 2rem;
+  }
 }
 
 .snapshotGrid {
@@ -516,13 +536,70 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
+  /* Compact 2x2 grid (not a 1-column stack) — four cards read as one
+     summary block instead of a long scroll of full-width cards. Tablet
+     gets the same tightened padding/icon scale as mobile; only the
+     narrow-card bullet-cramping fix below is mobile-only. */
   .snapshotGrid {
-    grid-template-columns: 1fr;
+    gap: 0.65rem;
   }
 
   .snapshotCell {
     min-height: 0;
+    padding: 0.9rem 0.75rem 1rem;
+  }
+
+  .snapshotHeader {
+    gap: 0.4rem;
+    padding-bottom: 0.55rem;
+  }
+
+  .snapshotIconBadge {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+
+  .snapshotIcon {
+    height: 0.85rem;
+    width: 0.85rem;
+  }
+
+  .snapshotLabel {
+    font-size: 0.68rem;
+  }
+
+  .snapshotValue {
+    margin-top: 0.65rem;
+  }
+}
+
+@media (max-width: 640px) {
+  /* A 2-column bullet list inside a card that is itself now half the row
+     width is too cramped at 360-430px — stack the bullets in a single
+     column instead; the outer grid (not this list) is what carries the
+     2x2 compaction. Same for the category-page Material/Mounting cards
+     that use .supportSnapshotWrapper .snapshotValue as a 2-col value grid
+     instead of .snapshotValueList. Tablet (641-900px) has room to keep
+     these 2-column, so this stays mobile-only. */
+  .snapshotValueList,
+  .supportSnapshotWrapper .snapshotValue {
+    grid-template-columns: 1fr;
+  }
+
+  .snapshotValueLine,
+  .snapshotValueList .snapshotValueLine {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .snapshotGrid {
+    gap: 0.55rem;
+  }
+
+  .snapshotCell {
+    padding: 0.8rem 0.65rem 0.9rem;
   }
 }
 
@@ -538,6 +615,13 @@
   border-bottom: 1px solid var(--cable-border);
   margin-top: 3.5rem;
   padding: 3rem 0;
+}
+
+@media (max-width: 900px) {
+  .relatedSection {
+    margin-top: 2.25rem;
+    padding: 2rem 0;
+  }
 }
 
 .relatedInner {
@@ -669,13 +753,79 @@ a.familyCard:focus-visible {
 
 @media (max-width: 1100px) {
   .familyGrid {
+    gap: 0.85rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .familyMedia {
+    height: 120px;
+  }
+
+  .familyBody {
+    padding: 0.85rem 1rem 0.95rem;
+  }
+
+  .familyBody h3 {
+    font-size: 0.94rem;
   }
 }
 
+/* Mobile — compact family NAVIGATOR rows (a tiny thumbnail + title/count),
+   not a second Product Series photo gallery. Same 2-3 elements as desktop
+   (currentBadge?, media, body), placed via CSS grid — no JSX change. */
 @media (max-width: 640px) {
   .familyGrid {
+    gap: 0.5rem;
     grid-template-columns: 1fr;
+  }
+
+  .familyCard {
+    align-items: center;
+    column-gap: 0.7rem;
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    min-height: 4.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .familyMedia {
+    border-radius: 0.5rem;
+    height: 48px;
+    width: 48px;
+  }
+
+  .familyMediaEmpty {
+    font-size: 0;
+    padding: 0;
+  }
+
+  .familyBody {
+    padding: 0;
+  }
+
+  .familyBody h3 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 0.84rem;
+    line-height: 1.25;
+    overflow: hidden;
+  }
+
+  .familyCount {
+    font-size: 0.7rem;
+    margin-top: 0.2rem;
+  }
+
+  .familyComingSoon {
+    font-size: 0.66rem;
+    margin-top: 0.15rem;
+  }
+
+  .currentBadge {
+    left: auto;
+    right: 0.6rem;
+    top: 0.6rem;
   }
 }
 
@@ -689,6 +839,12 @@ a.familyCard:focus-visible {
   margin: 0 auto;
   max-width: 1400px;
   padding: 3.5rem clamp(1.25rem, 4vw, 4rem) 0;
+}
+
+@media (max-width: 900px) {
+  .scheduleSection {
+    padding-top: 2.25rem;
+  }
 }
 
 .scheduleHeading {
@@ -718,8 +874,8 @@ a.familyCard:focus-visible {
 .scheduleLayout {
   align-items: start;
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: 17rem minmax(0, 1fr);
+  gap: 1.25rem;
+  grid-template-columns: 16rem minmax(0, 1fr);
 }
 
 .customSpecNote {
@@ -747,10 +903,22 @@ a.familyCard:focus-visible {
   box-shadow: var(--cable-shadow-idle);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.25rem;
+  gap: 0.9rem;
+  padding: 1.1rem;
   position: sticky;
   top: 1.25rem;
+}
+
+/* Desktop only — the accordion groups below already keep the panel
+   compact by default, but if a user opens several groups on a
+   high-filter-count family this caps it to the viewport instead of
+   letting the sidebar outgrow the results column, with its own internal
+   scroll. */
+@media (min-width: 901px) {
+  .filterPanel {
+    max-height: calc(100vh - 2.5rem);
+    overflow-y: auto;
+  }
 }
 
 .searchField {
@@ -832,12 +1000,61 @@ a.familyCard:focus-visible {
   color: var(--cable-navy);
   font-size: 0.78rem;
   font-weight: 700;
-  margin: 0 0 0.6rem;
+  margin: 0;
 }
 
+/* Groups render as <details> now (see cable-family-variant-table.tsx) —
+   collapsible so the panel doesn't grow tall just because a family has
+   several filterable fields; only the first one starts open. */
 .filterGroup + .filterGroup {
   border-top: 1px solid var(--cable-border);
-  padding-top: 1.1rem;
+  padding-top: 0.75rem;
+}
+
+.filterGroupSummary {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.filterGroupSummary::-webkit-details-marker {
+  display: none;
+}
+
+.filterGroupSummary:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.filterGroupCount {
+  background: var(--cable-accent-soft);
+  border-radius: 999px;
+  color: var(--cable-accent-dark);
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.1rem 0.45rem;
+}
+
+.filterGroupChevron {
+  border-bottom: 1.5px solid var(--cable-muted);
+  border-right: 1.5px solid var(--cable-muted);
+  flex-shrink: 0;
+  height: 0.4rem;
+  margin-left: auto;
+  transform: rotate(45deg);
+  transition: transform 180ms ease;
+  width: 0.4rem;
+}
+
+.filterGroup[open] > .filterGroupSummary .filterGroupChevron {
+  transform: rotate(-135deg);
+}
+
+.filterGroup[open] > .filterCheckList {
+  margin-top: 0.65rem;
 }
 
 .filterCheckList {
@@ -1159,16 +1376,26 @@ a.familyCard:focus-visible {
 .table {
   border-collapse: collapse;
   min-width: 100%;
-  white-space: nowrap;
+}
+
+/* Primary technical columns wrap instead of forcing a single line — the
+   old blanket `white-space: nowrap` was the main driver of the table's
+   horizontal width; Model/Family/Material text wrapping at a sane column
+   width reads better than a long one-line row does. Numeric/code cells
+   (.stockCodeCell, dimension values) stay effectively single-line on
+   their own since the values themselves are short. */
+.table th,
+.table td {
+  white-space: normal;
 }
 
 .table th {
   background: #f4f7fb;
   color: var(--cable-faint);
-  font-size: 0.66rem;
+  font-size: 0.64rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  padding: 0.65rem 0.9rem;
+  letter-spacing: 0.04em;
+  padding: 0.55rem 0.7rem;
   position: sticky;
   text-align: left;
   text-transform: uppercase;
@@ -1179,14 +1406,23 @@ a.familyCard:focus-visible {
 .table td {
   border-top: 1px solid var(--cable-border);
   color: var(--cable-ink);
-  font-size: 0.83rem;
-  padding: 0.6rem 0.9rem;
+  font-size: 0.82rem;
+  padding: 0.5rem 0.7rem;
 }
 
 .table td strong {
   color: var(--cable-navy);
   display: block;
   font-weight: 700;
+}
+
+/* Family/system text repeats on every row while the page section already
+   establishes that context — kept (never dropped, still real data/
+   accessible text) but visually quieter than the Model/Stock Code
+   columns that actually vary the decision. */
+.tableFamilyCell {
+  color: var(--cable-muted);
+  font-size: 0.78rem;
 }
 
 .tableSecondaryLine {
@@ -1199,6 +1435,85 @@ a.familyCard:focus-visible {
 
 .table tbody tr:hover {
   background: var(--cable-accent-soft);
+}
+
+/* Pinned "Add to Enquiry" column — desktop only (mobile/tablet already
+   reflow the table into full-width stacked cards, see the ≤720px block
+   below, where the action button is always visible without any
+   horizontal scroll to begin with). Regardless of how many technical
+   columns a family's schedule has, the action stays on-screen instead of
+   requiring a full horizontal scroll to reach it. */
+@media (min-width: 901px) {
+  .tableActionCell {
+    background: var(--cable-surface);
+    box-shadow: -6px 0 10px -6px rgb(7 28 59 / 14%);
+    position: sticky;
+    right: 0;
+    z-index: 2;
+  }
+
+  .table tbody tr:hover .tableActionCell {
+    background: var(--cable-accent-soft);
+  }
+
+  .tableActionHeader {
+    box-shadow: -6px 0 10px -6px rgb(7 28 59 / 14%);
+    position: sticky;
+    right: 0;
+    z-index: 3;
+  }
+}
+
+/* Compact per-row disclosure for Length/Weight — folded out of the main
+   column set (see cable-family-variant-table.tsx) since they're
+   reference/logistics figures rather than a selection-critical dimension
+   like Width/Height/Thickness; the data itself is never removed, just
+   one tap away instead of two permanent wide columns. */
+.tableMoreSpecsToggle {
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--cable-accent-dark);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.7rem;
+  font-weight: 700;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+  padding: 0;
+}
+
+.tableMoreSpecsToggle:hover,
+.tableMoreSpecsToggle:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.tableMoreSpecsToggleGlyph {
+  align-items: center;
+  background: var(--cable-accent-soft);
+  border-radius: 50%;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  height: 0.95rem;
+  justify-content: center;
+  line-height: 1;
+  width: 0.95rem;
+}
+
+.tableMoreSpecsPanel {
+  color: var(--cable-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.72rem;
+  gap: 0.15rem 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.tableMoreSpecsPanel strong {
+  color: var(--cable-ink);
+  font-weight: 700;
 }
 
 .stockCodeCell {
@@ -1265,7 +1580,8 @@ a.familyCard:focus-visible {
   display: flex;
   gap: 1rem;
   justify-content: center;
-  margin-top: 1.25rem;
+  margin-top: 1.1rem;
+  padding-top: 1.1rem;
 }
 
 .paginationButton {
@@ -1276,7 +1592,7 @@ a.familyCard:focus-visible {
   cursor: pointer;
   font-size: 0.8rem;
   font-weight: 700;
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.9rem;
   transition: border-color 200ms ease, color 200ms ease;
 }
 
@@ -1402,6 +1718,13 @@ a.familyCard:focus-visible {
   background: #f6f9fd;
   margin-top: 3.5rem;
   padding: 3rem 0;
+}
+
+@media (max-width: 900px) {
+  .accessoriesSection {
+    margin-top: 2.25rem;
+    padding: 2rem 0;
+  }
 }
 
 .accessoriesInner {
@@ -1580,6 +1903,26 @@ a.familyCard:focus-visible {
   padding: 0 clamp(1.25rem, 4vw, 4rem);
 }
 
+@media (max-width: 900px) {
+  .siblingFamiliesSection {
+    margin-top: 2.25rem;
+  }
+
+  .siblingIconCard {
+    gap: 0.4rem;
+    padding: 0.95rem 0.9rem;
+  }
+
+  .siblingIconGlyph {
+    height: 1.9rem;
+    width: 1.9rem;
+  }
+
+  .siblingIconTitle {
+    font-size: 0.86rem;
+  }
+}
+
 .siblingFamilyGrid {
   display: grid;
   gap: 1rem;
@@ -1659,15 +2002,51 @@ a.familyCard:focus-visible {
   }
 }
 
+/* Mobile — same compact family-navigator row treatment as .familyCard
+   above: tiny thumbnail + title + "View series", not a photo grid. */
 @media (max-width: 640px) {
   .siblingFamilyGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 420px) {
-  .siblingFamilyGrid {
+    gap: 0.45rem;
     grid-template-columns: 1fr;
+  }
+
+  .siblingFamilyCard {
+    align-items: center;
+    column-gap: 0.7rem;
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    min-height: 4rem;
+    padding: 0.45rem 0.7rem;
+  }
+
+  .siblingFamilyMedia {
+    border-radius: 0.45rem;
+    height: 44px;
+    width: 44px;
+  }
+
+  .siblingFamilyMedia .accessoryMediaEmpty {
+    font-size: 0;
+    padding: 0;
+  }
+
+  .siblingFamilyBody {
+    padding: 0;
+  }
+
+  .siblingFamilyBody h3 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 0.82rem;
+    line-height: 1.25;
+    overflow: hidden;
+  }
+
+  .siblingFamilyFooter {
+    font-size: 0.68rem;
+    margin-top: 0.15rem;
+    padding: 0;
   }
 }
 
@@ -1804,9 +2183,68 @@ a.siblingIconCard:focus-visible {
   }
 }
 
+/* Mobile — one compact row per family: icon, title, and a shared second
+   line for the order-code count + "View series" (or the current-family
+   badge). Subtitle dropped at this width — the count already carries the
+   real data, matching the .familyCard/.siblingFamilyCard row treatment
+   above so every "related family" list in Cable Management reads the
+   same way on mobile. */
 @media (max-width: 640px) {
   .siblingIconGrid {
+    gap: 0.5rem;
     grid-template-columns: 1fr;
+  }
+
+  .siblingIconCard {
+    align-items: center;
+    column-gap: 0.65rem;
+    display: grid;
+    grid-template-columns: 2.2rem minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    min-height: 4.5rem;
+    padding: 0.65rem 0.85rem;
+    row-gap: 0.2rem;
+  }
+
+  .siblingIconHeader {
+    display: contents;
+  }
+
+  .siblingIconGlyph {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .siblingIconTitle {
+    font-size: 0.84rem;
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .siblingIconSubtitle {
+    display: none;
+  }
+
+  /* The card's accent tint/border (.siblingIconCardCurrent) already marks
+     the current family — the badge text would otherwise have to share
+     this row with the count/footer line and get genuinely cramped. */
+  .siblingIconCurrentBadge {
+    display: none;
+  }
+
+  .siblingIconMeta {
+    font-size: 0.7rem;
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: start;
+    margin-top: 0;
+  }
+
+  .siblingIconFooter {
+    font-size: 0.72rem;
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
   }
 }
 
@@ -1819,6 +2257,17 @@ a.siblingIconCard:focus-visible {
   margin: 3.5rem auto 0;
   max-width: 1400px;
   padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+@media (max-width: 900px) {
+  .resourcesSection {
+    margin-top: 2.25rem;
+  }
+
+  .resourceCard,
+  .resourceCardDisabled {
+    padding: 0.9rem 1rem;
+  }
 }
 
 .resourceGrid {
@@ -1930,6 +2379,12 @@ a.siblingIconCard:focus-visible {
   position: relative;
 }
 
+@media (max-width: 900px) {
+  .supportSection {
+    margin-top: 2.25rem;
+  }
+}
+
 .supportSection::before {
   background-image:
     linear-gradient(rgb(147 192 251 / 10%) 1px, transparent 1px),
@@ -2028,6 +2483,12 @@ a.siblingIconCard:focus-visible {
   height: 4rem;
 }
 
+@media (max-width: 640px) {
+  .pageEnd {
+    height: 2.5rem;
+  }
+}
+
 /* =========================================================
    10. CATEGORY HERO (category landing page only)
    Full-bleed looping video, same structural technique as the Busbar and
@@ -2115,6 +2576,13 @@ a.siblingIconCard:focus-visible {
   border-bottom: 1px solid var(--cable-border);
   margin-top: 3.5rem;
   padding: 3.25rem 0;
+}
+
+@media (max-width: 900px) {
+  .exploreSection {
+    margin-top: 2.25rem;
+    padding: 2rem 0;
+  }
 }
 
 .exploreInner {
@@ -2241,13 +2709,93 @@ a.siblingIconCard:focus-visible {
 
 @media (max-width: 1100px) {
   .macroGrid {
+    gap: 0.85rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .macroMedia {
+    height: 130px;
+  }
+
+  .macroBody {
+    padding: 0.85rem 1rem 0.65rem;
+  }
+
+  .macroBody h3 {
+    font-size: 0.98rem;
+  }
+
+  .macroBody p {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-top: 0.4rem;
+    overflow: hidden;
+  }
+
+  .macroFooter {
+    font-size: 0.76rem;
+    padding: 0.65rem 1rem;
   }
 }
 
+/* Tablet — 3x2 uses the available width better than 2x3; overrides the
+   ≤1100px 2-column rule above for this narrower band only. */
+@media (min-width: 700px) and (max-width: 1100px) {
+  .macroGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Mobile: 2 columns x 3 rows (not a single stacked column) — fast system
+   scanning, title + compact footer only, description dropped rather than
+   squeezed unreadable at ~155px card width. */
 @media (max-width: 640px) {
   .macroGrid {
-    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .macroCard {
+    border-radius: 0.7rem;
+  }
+
+  .macroIndex {
+    font-size: 0.62rem;
+    left: 0.5rem;
+    padding: 0.15rem 0.4rem;
+    top: 0.5rem;
+  }
+
+  .macroMedia {
+    height: 104px;
+  }
+
+  .macroBody {
+    padding: 0.6rem 0.65rem 0.5rem;
+  }
+
+  .macroBody h3 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 0.8rem;
+    line-height: 1.25;
+    overflow: hidden;
+  }
+
+  /* Long descriptive copy dropped at this width — the title + footer
+     count already say enough for a fast scan, and a third line of body
+     text is what turned this into a wall of tall cards. */
+  .macroBody p {
+    display: none;
+  }
+
+  .macroFooter {
+    font-size: 0.66rem;
+    padding: 0.5rem 0.65rem;
   }
 }
 
@@ -2330,16 +2878,101 @@ a.siblingIconCard:focus-visible {
   outline-offset: 2px;
 }
 
+/* ---- Mobile/tablet accordion (see cable-category-page.tsx) ---- */
+
+.decisionAccordion {
+  display: none;
+}
+
 @media (max-width: 900px) {
+  .decisionSection {
+    margin-top: 2.25rem;
+  }
+
   .decisionGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: none;
+  }
+
+  .decisionAccordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
   }
 }
 
-@media (max-width: 640px) {
-  .decisionGrid {
-    grid-template-columns: 1fr;
-  }
+.decisionAccordionItem {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.7rem;
+  overflow: hidden;
+}
+
+.decisionAccordionItem[open] {
+  border-color: var(--cable-accent-light);
+}
+
+.decisionAccordionSummary {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0.85rem 1rem;
+}
+
+.decisionAccordionSummary::-webkit-details-marker {
+  display: none;
+}
+
+.decisionAccordionSummary:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: -2px;
+}
+
+.decisionAccordionText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.decisionAccordionText .decisionScenario {
+  font-size: 0.68rem;
+}
+
+.decisionAccordionRecommendation {
+  color: var(--cable-navy);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.decisionAccordionChevron {
+  border-bottom: 2px solid var(--cable-accent-dark);
+  border-right: 2px solid var(--cable-accent-dark);
+  flex-shrink: 0;
+  height: 0.5rem;
+  transform: rotate(45deg);
+  transition: transform 200ms ease;
+  width: 0.5rem;
+}
+
+.decisionAccordionItem[open] .decisionAccordionChevron {
+  transform: rotate(-135deg);
+}
+
+.decisionAccordionBody {
+  border-top: 1px solid var(--cable-border);
+  padding: 0.85rem 1rem 1.1rem;
+}
+
+.decisionAccordionBody .decisionDescription {
+  margin-top: 0;
+}
+
+.decisionAccordionBody .decisionAction {
+  padding-top: 0.75rem;
 }
 
 /* =========================================================
@@ -2357,6 +2990,13 @@ a.siblingIconCard:focus-visible {
   border-bottom: 1px solid var(--cable-border);
   margin-top: 3.5rem;
   padding: 3.25rem 0;
+}
+
+@media (max-width: 900px) {
+  .applicationsSection {
+    margin-top: 2.25rem;
+    padding: 2rem 0;
+  }
 }
 
 .applicationsInner {
@@ -2476,6 +3116,130 @@ a.siblingIconCard:focus-visible {
   padding: 0.55rem 0.7rem 0.7rem;
 }
 
+/* ---- Mobile-only active card + selector grid ----
+   See cable-applications-selector.tsx. Desktop/tablet keep the photo
+   grid above; this block replaces it below 640px instead of stacking a
+   wall of square photo cards. */
+.applicationSelector {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .applicationsGrid {
+    display: none;
+  }
+
+  .applicationSelector {
+    display: block;
+  }
+}
+
+.applicationActiveCard {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  border-radius: 0.85rem;
+  box-shadow: var(--cable-shadow-idle);
+  color: inherit;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.applicationActiveCard:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
+.applicationActiveVisual {
+  aspect-ratio: 16 / 10;
+  background: #eef3fa;
+  position: relative;
+}
+
+.applicationActiveContent {
+  padding: 0.9rem 1rem 1rem;
+}
+
+.applicationActiveContent h3 {
+  color: var(--cable-navy);
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.applicationActiveContent p {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  color: var(--cable-body);
+  display: -webkit-box;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin: 0.4rem 0 0;
+  overflow: hidden;
+}
+
+.applicationAction {
+  align-items: center;
+  color: var(--cable-accent-dark);
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 800;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+}
+
+.applicationActiveComingSoon {
+  color: var(--cable-faint);
+  display: block;
+  font-size: 0.72rem;
+  font-style: italic;
+  margin-top: 0.75rem;
+}
+
+.applicationSelectorGrid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0.65rem;
+}
+
+.applicationSelectorItem,
+.applicationSelectorItemActive {
+  border-radius: 0.55rem;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.65rem 0.55rem;
+  text-align: center;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.applicationSelectorItem {
+  background: var(--cable-surface);
+  border: 1px solid var(--cable-border);
+  color: var(--cable-muted);
+}
+
+.applicationSelectorItem:hover {
+  border-color: var(--cable-accent-light);
+  color: var(--cable-accent-dark);
+}
+
+.applicationSelectorItemActive {
+  background: var(--cable-accent-dark);
+  border: 1px solid var(--cable-accent-dark);
+  color: #ffffff;
+}
+
+.applicationSelectorItem:focus-visible,
+.applicationSelectorItemActive:focus-visible {
+  outline: 2px solid var(--cable-accent);
+  outline-offset: 2px;
+}
+
 /* =========================================================
    13. WHAT WE PROVIDE (category page only)
    Plain page background — a lighter, non-download-styled card language
@@ -2490,6 +3254,16 @@ a.siblingIconCard:focus-visible {
   margin: 3.5rem auto 0;
   max-width: 1400px;
   padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+@media (max-width: 900px) {
+  .provideSection {
+    margin-top: 2.25rem;
+  }
+
+  .provideCard {
+    padding: 0.9rem 1rem;
+  }
 }
 
 .provideGrid {
@@ -2551,9 +3325,50 @@ a.provideCard:focus-visible {
   }
 }
 
+/* Tablet — 3 columns uses the available width more cleanly than 2; same
+   band already used for the hub's 6-system-card grid. */
+@media (min-width: 700px) and (max-width: 1100px) {
+  .provideGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Mobile — 2x3 compact capability tiles (all six stay visible at once,
+   no accordion): icon+title row already matches the desktop layout, just
+   tightened and with the description clamped to 2 lines instead of
+   growing the tile to fit the full sentence. */
 @media (max-width: 640px) {
   .provideGrid {
-    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .provideCard {
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 4.5rem;
+    padding: 0.65rem 0.6rem;
+  }
+
+  .provideIcon {
+    height: 1.1rem;
+    margin-top: 0;
+    width: 1.1rem;
+  }
+
+  .provideBody h3 {
+    font-size: 0.76rem;
+    line-height: 1.25;
+  }
+
+  .provideBody p {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 0.66rem;
+    line-height: 1.3;
+    margin-top: 0.2rem;
+    overflow: hidden;
   }
 }
 
@@ -2580,6 +3395,12 @@ a.provideCard:focus-visible {
   margin: 3.5rem auto 0;
   max-width: 1400px;
   padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+@media (max-width: 900px) {
+  .supportSeriesSection {
+    margin-top: 2.25rem;
+  }
 }
 
 .supportSeriesGrid {
@@ -2697,13 +3518,113 @@ a.supportSeriesCard:focus-visible {
 
 @media (max-width: 1100px) {
   .supportSeriesGrid {
+    gap: 0.85rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .supportSeriesMedia {
+    height: 160px;
+  }
+
+  .supportSeriesBody {
+    padding: 0.85rem 1rem 0.35rem;
+  }
+
+  .supportSeriesBody h3 {
+    font-size: 0.96rem;
+  }
+
+  .supportSeriesCatalogueName {
+    margin-top: 0.2rem;
+  }
+
+  .supportSeriesBody p:last-child {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-top: 0.4rem;
+    overflow: hidden;
+  }
+
+  .supportSeriesFooter {
+    font-size: 0.74rem;
+    margin-top: 0.75rem;
+    padding: 0.65rem 1rem;
   }
 }
 
+/* Mobile — compact horizontal cards (image left, content right) instead
+   of the desktop's stacked image-on-top card; the real product photo is
+   kept (no icon substitute), just resized to a fixed-width thumbnail
+   column via CSS grid placement (no JSX change — .supportSeriesMedia
+   spans both content rows, .supportSeriesBody/.supportSeriesFooter each
+   take one row in the second column). */
 @media (max-width: 640px) {
   .supportSeriesGrid {
+    gap: 0.6rem;
     grid-template-columns: 1fr;
+  }
+
+  .supportSeriesCard {
+    border-radius: 0.7rem;
+    display: grid;
+    grid-template-columns: 108px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+  }
+
+  .supportSeriesMedia {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    height: auto;
+  }
+
+  .supportSeriesMediaEmpty {
+    font-size: 0.68rem;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .supportSeriesBody {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    padding: 0.6rem 0.75rem 0.15rem;
+  }
+
+  .supportSeriesBody h3 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 0.86rem;
+    line-height: 1.25;
+    overflow: hidden;
+  }
+
+  .supportSeriesCatalogueName {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    font-size: 0.68rem;
+    overflow: hidden;
+  }
+
+  /* Long-form description dropped at this width — the catalogue name
+     already gives a short descriptor, and the footer carries the order-
+     code count; a third text block is what made this a tall stacked
+     card, not a compact scannable row. */
+  .supportSeriesBody p:last-child {
+    display: none;
+  }
+
+  .supportSeriesFooter {
+    border-top: none;
+    font-size: 0.7rem;
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 0;
+    padding: 0 0.75rem 0.6rem;
   }
 }
 
@@ -2716,6 +3637,7 @@ a.supportSeriesCard:focus-visible {
 }
 
 .installationGrid {
+  counter-reset: installation-option;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2727,16 +3649,34 @@ a.supportSeriesCard:focus-visible {
   border-radius: 0.85rem;
   box-shadow: var(--cable-shadow-idle);
   color: inherit;
+  counter-increment: installation-option;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  padding: 1.1rem 1.25rem;
+  overflow: hidden;
+  padding: 1.25rem 1.25rem 1.1rem;
+  position: relative;
   text-decoration: none;
-  transition: border-color 250ms ease, transform 250ms ease;
+  transition:
+    border-color 250ms ease,
+    box-shadow 250ms ease,
+    transform 250ms ease;
+}
+
+/* Accent top edge, matching the technical-snapshot card language elsewhere
+   on the page — reads as a deliberate spec/decision card, not a plain
+   bordered box. */
+.installationCard::before {
+  background: var(--cable-accent);
+  content: "";
+  height: 3px;
+  inset: 0 0 auto;
+  position: absolute;
 }
 
 .installationCard:hover {
   border-color: var(--cable-accent);
+  box-shadow: var(--cable-shadow-idle), 0 0.75rem 1.5rem rgb(7 28 59 / 10%);
   transform: translateY(-3px);
 }
 
@@ -2746,9 +3686,21 @@ a.supportSeriesCard:focus-visible {
 }
 
 .installationLabel {
+  align-items: baseline;
   color: var(--cable-navy);
+  display: flex;
   font-size: 0.92rem;
   font-weight: 700;
+  gap: 0.5rem;
+}
+
+.installationLabel::before {
+  color: var(--cable-accent-dark);
+  content: counter(installation-option, decimal-leading-zero);
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
 }
 
 .installationDescription {
@@ -2763,9 +3715,55 @@ a.supportSeriesCard:focus-visible {
   }
 }
 
-@media (max-width: 640px) {
+/* Mobile/tablet: a deliberate technical-selector row, not a form/filter
+   input — index + title on one line, a chevron marking it as real
+   navigation, muted one-line description underneath. ~64-72px per row. */
+@media (max-width: 900px) {
+  .installationSection {
+    margin-top: 2.25rem;
+  }
+
   .installationGrid {
+    gap: 0.5rem;
     grid-template-columns: 1fr;
+  }
+
+  .installationCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    justify-content: center;
+    padding: 0.7rem 2rem 0.7rem 1rem;
+  }
+
+  .installationCard:hover {
+    background: var(--cable-accent-soft);
+    transform: none;
+  }
+
+  .installationCard::after {
+    border-bottom: 1.5px solid var(--cable-accent-dark);
+    border-right: 1.5px solid var(--cable-accent-dark);
+    content: "";
+    height: 0.42rem;
+    position: absolute;
+    right: 1.1rem;
+    top: 50%;
+    transform: translateY(-65%) rotate(-45deg);
+    width: 0.42rem;
+  }
+
+  .installationLabel {
+    font-size: 0.85rem;
+  }
+
+  .installationLabel::before {
+    font-size: 0.66rem;
+  }
+
+  .installationDescription {
+    font-size: 0.72rem;
+    line-height: 1.35;
   }
 }
 
@@ -2775,6 +3773,12 @@ a.supportSeriesCard:focus-visible {
   margin: 3.5rem auto 0;
   max-width: 1400px;
   padding: 0 clamp(1.25rem, 4vw, 4rem);
+}
+
+@media (max-width: 900px) {
+  .compatibleSection {
+    margin-top: 2.25rem;
+  }
 }
 
 .compatibleGrid {
@@ -2832,9 +3836,68 @@ a.supportSeriesCard:focus-visible {
   }
 }
 
+/* Mobile — compact related-system NAVIGATION rows, not another product-
+   card gallery: a small accent mark, title, one-line supporting phrase,
+   and the existing "View →" text repositioned as a right-aligned action
+   instead of a bottom-of-card line (no JSX change — same 3 elements,
+   placed via CSS grid). ~72px per row via min-height. */
 @media (max-width: 640px) {
   .compatibleGrid {
+    gap: 0.5rem;
     grid-template-columns: 1fr;
+  }
+
+  .compatibleCard {
+    align-items: center;
+    column-gap: 0.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    min-height: 4.5rem;
+    padding: 0.65rem 1rem 0.65rem 1.65rem;
+    position: relative;
+    row-gap: 0.1rem;
+  }
+
+  .compatibleCard:hover {
+    background: var(--cable-accent-soft);
+    transform: none;
+  }
+
+  .compatibleCard::before {
+    background: var(--cable-accent);
+    border-radius: 50%;
+    content: "";
+    height: 0.4rem;
+    left: 0.75rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.4rem;
+  }
+
+  .compatibleCard h3 {
+    font-size: 0.86rem;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .compatibleCard p {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    font-size: 0.72rem;
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 0;
+    overflow: hidden;
+  }
+
+  .compatibleCard span[aria-hidden="true"] {
+    font-size: 0.72rem;
+    grid-column: 2;
+    grid-row: 1 / 3;
+    margin-top: 0;
+    white-space: nowrap;
   }
 }
 

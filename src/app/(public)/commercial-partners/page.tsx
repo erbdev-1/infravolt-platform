@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 
-import { CommercialPartnersPage } from "@/components/public/trade-account/commercial-partners-page";
+import { CommercialPartnersPage } from "@/components/public/commercial-partners/commercial-partners-page";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
-import { commercialPartnersContentForMarket } from "@/modules/public-site/trade-account-content";
+import { commercialPartnersContentForMarket } from "@/modules/public-site/commercial-partners-content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());

@@ -1,6 +1,9 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+
 import Image from "next/image";
 
 import { AccessibleVideo } from "@/components/public/accessible-video";
+import { GersanHomepageCredibility } from "@/components/public/gersan-homepage-credibility";
 import { TechnicalResourcesPreview } from "@/components/public/technical-resources-preview";
 import { Container } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/link-button";
@@ -23,42 +26,42 @@ type HomePageViewProps = Readonly<{
 const HERO_BADGES = [
   {
     id: "cable-management",
-    src: "/assets/media/hero-badges/cable-management.webp",
+    src: publicMediaUrl("media/hero-badges/cable-management.webp"),
     label: "Cable Management Systems",
     className: "hero-badge--cable",
     href: "#product-systems",
   },
   {
     id: "busbar",
-    src: "/assets/media/hero-badges/busbar-systems.webp",
+    src: publicMediaUrl("media/hero-badges/busbar-systems.webp"),
     label: "Busbar Systems",
     className: "hero-badge--busbar",
     href: "#product-systems",
   },
   {
     id: "underfloor",
-    src: "/assets/media/hero-badges/underfloor-cable-trunking.webp",
+    src: publicMediaUrl("media/hero-badges/underfloor-cable-trunking.webp"),
     label: "Underfloor Cable Trunking",
     className: "hero-badge--underfloor",
     href: "#product-systems",
   },
   {
     id: "earthing",
-    src: "/assets/media/hero-badges/earthing-lightning-protection.webp",
+    src: publicMediaUrl("media/hero-badges/earthing-lightning-protection.webp"),
     label: "Earthing and Lightning Protection",
     className: "hero-badge--earthing",
     href: "#product-systems",
   },
   {
     id: "led",
-    src: "/assets/media/hero-badges/led-systems.webp",
+    src: publicMediaUrl("media/hero-badges/led-systems.webp"),
     label: "LED Systems",
     className: "hero-badge--led",
     href: "#product-systems",
   },
   {
     id: "ev-charging",
-    src: "/assets/media/hero-badges/ev-charging-systems.webp",
+    src: publicMediaUrl("media/hero-badges/ev-charging-systems.webp"),
     label: "EV Charging Systems",
     className: "hero-badge--ev",
     href: "#product-systems",
@@ -93,7 +96,18 @@ export function HomePageView({ market }: HomePageViewProps) {
               </p>
             ) : null}
 
-            <h1 id="hero-title">{content.hero.title}</h1>
+            <h1 id="hero-title">
+              {content.hero.titleLeadPhrase ? (
+                <>
+                  <span className="hero__title-lead">
+                    {content.hero.titleLeadPhrase}
+                  </span>
+                  {content.hero.title.slice(content.hero.titleLeadPhrase.length)}
+                </>
+              ) : (
+                content.hero.title
+              )}
+            </h1>
 
             <p className="hero__description">{content.hero.description}</p>
 
@@ -103,7 +117,6 @@ export function HomePageView({ market }: HomePageViewProps) {
                 variant="accent"
               >
                 {content.hero.primaryAction.label}
-                <span aria-hidden="true">→</span>
               </LinkButton>
 
               <LinkButton
@@ -111,7 +124,6 @@ export function HomePageView({ market }: HomePageViewProps) {
                 variant="light-outline"
               >
                 {content.hero.secondaryAction.label}
-                <span aria-hidden="true">→</span>
               </LinkButton>
             </div>
           </div>
@@ -159,6 +171,8 @@ export function HomePageView({ market }: HomePageViewProps) {
           </div>
         </Container>
       </section>
+
+      <GersanHomepageCredibility content={content.manufacturerCredibility} />
 
       <Section className="products-section" id="product-systems" tone="white">
         <Container size="wide">

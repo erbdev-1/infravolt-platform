@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
@@ -7,7 +8,7 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  *
  * Hero background/foreground: pre-generated, already-isolated assets
  * found under the Industrial & High-Bay category asset folder
- * (`.../category/industrial&high-bay/product/`) — a dark, premium
+ * (`.../category/industrial-high-bay/product/`) — a dark, premium
  * factory/manufacturing interior (background) and the real LDB-FL
  * fixture, fully visible with its fabricated-steel housing and 4 mm
  * tempered-glass cover, already reading as switched on with neutral-
@@ -16,11 +17,11 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  * unlike High Ceiling/LDBE/LDBSE, no flood-fill/glow pass was required
  * here because these assets were already prepared to the same standard. */
 export const LED_BUS_LDB_FL_HERO_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-hero-foreground.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-hero-foreground.webp");
 export const LED_BUS_LDB_FL_HERO_IMAGE_ALT =
   "LED-BUS LDB-FL luminaire, illuminated, fabricated-steel housing with 4 mm tempered-glass cover";
 export const LED_BUS_LDB_FL_HERO_BACKGROUND_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-hero-background.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-hero-background.webp");
 export const LED_BUS_LDB_FL_HERO_BACKGROUND_IMAGE_ALT =
   "Dark industrial manufacturing facility interior with operational high-bay lighting";
 /** The family's own verified catalogue application photo — a large-span
@@ -28,7 +29,7 @@ export const LED_BUS_LDB_FL_HERO_BACKGROUND_IMAGE_ALT =
  * Facilities" application card per the verified recommended_site_usage
  * in the catalogue extraction manifest. */
 export const LED_BUS_LDB_FL_APPLICATION_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-industrial-application.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-industrial-application.webp");
 export const LED_BUS_LDB_FL_APPLICATION_IMAGE_ALT =
   "Large-span industrial facility interior with overhead crane, lit by high-bay LED fixtures";
 /** Photometric/technical drawing: higher-resolution renders sourced from
@@ -37,9 +38,9 @@ export const LED_BUS_LDB_FL_APPLICATION_IMAGE_ALT =
  * replacing the small raw catalogue-scan PNGs originally extracted
  * directly from the source PDF. */
 export const LED_BUS_LDB_FL_PHOTOMETRIC_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-photometric.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-photometric.webp");
 export const LED_BUS_LDB_FL_TECHNICAL_DRAWING_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-technical-drawing.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-technical-drawing.webp");
 /** Typical Applications card grid — Aviation & Airports and Logistics
  * Facilities photos. LDB-FL's own catalogue page ships only one
  * application photo (above), so these reuse real, verified LEDBUS/
@@ -50,9 +51,9 @@ export const LED_BUS_LDB_FL_TECHNICAL_DRAWING_IMAGE =
  * the category page and LDBSE's "Logistics Facilities" card). Neither
  * photo repeats within this page's own 3-card grid. */
 export const LED_BUS_LDB_FL_APPLICATION_AVIATION_AIRPORTS_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-application-aviation-airports.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-application-aviation-airports.webp");
 export const LED_BUS_LDB_FL_APPLICATION_LOGISTICS_FACILITIES_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-application-logistics-facilities.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldb-fl/led-bus-ldb-fl-application-logistics-facilities.webp");
 
 /** Source-accuracy note (LED-BUS LDB-FL catalogue extraction, page 13):
  * the technical DRAWING clearly states the luminaire profile as
@@ -90,7 +91,6 @@ const MODELS_UA: readonly LedSeriesModel[] = [
   { model: "73O-LDB4FL", powerW: 205, luminousFluxLm: "27 800 лм", efficiencyLmW: ">135 лм/Вт", cri: ">80", colourTemperature: "3000–6000 K", dimensions: DIMENSIONS_SHORT["1500"], length: "1500 мм" },
 ] as const;
 
-const SUPPORT_REQUEST_HREF = "/uk-support?request=technical-pack&product=led-bus-ldb-fl";
 
 const content = {
   uk: {
@@ -528,5 +528,3 @@ const content = {
 export function ledBusLdbFlContentForMarket(market: MarketCode): LedSeriesDetailContent {
   return content[market];
 }
-
-export { SUPPORT_REQUEST_HREF as LED_BUS_LDB_FL_SUPPORT_REQUEST_HREF };

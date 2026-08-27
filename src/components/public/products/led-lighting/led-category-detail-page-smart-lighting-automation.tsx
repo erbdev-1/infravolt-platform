@@ -10,6 +10,8 @@ import {
   SMART_LIGHTING_SUPPORT_CTA_IMAGE_ALT,
   smartLightingAutomationContentForMarket,
 } from "@/data/products/led-lighting/smart-lighting-automation";
+import { canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import {
@@ -34,6 +36,8 @@ import {
   IconSuspension,
   IconTemperedGlass,
 } from "./led-icons";
+import { LedApplicationsSelector } from "./led-applications-selector";
+import { LedCtaLabel } from "./led-cta-label";
 import styles from "./led-category-detail-page.module.css";
 
 // Dedicated category component for Smart Lighting & Automation — mirrors
@@ -75,7 +79,11 @@ const TECHNICAL_SNAPSHOT_ICONS = {
   control: IconAutomation,
 } as const;
 
-const SUPPORT_REQUEST_HREF = "/uk-support?request=technical-pack&product=smart-lighting-automation";
+const SUPPORT_REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "led-systems",
+  family: "smart-lighting-automation",
+  source: "/products/led-systems/smart-lighting-automation",
+});
 
 export function LedCategoryDetailPageSmartLightingAutomation({
   market,
@@ -132,12 +140,11 @@ export function LedCategoryDetailPageSmartLightingAutomation({
 
           <div className={styles.heroActions}>
             <Link className={styles.primaryButton} href={SUPPORT_REQUEST_HREF}>
-              {content.hero.primaryAction}
-              <span aria-hidden="true">→</span>
+              <LedCtaLabel label={content.hero.primaryAction} />
             </Link>
-            <Link className={styles.secondaryButton} href={SUPPORT_REQUEST_HREF}>
-              {content.hero.secondaryAction}
-            </Link>
+            <a className={styles.secondaryButton} download href={canonicalCatalogueHref("led")}>
+              <LedCtaLabel label={content.hero.secondaryAction} />
+            </a>
           </div>
         </div>
       </section>
@@ -276,6 +283,16 @@ export function LedCategoryDetailPageSmartLightingAutomation({
             );
           })}
         </div>
+
+        <LedApplicationsSelector
+          applications={content.applications.map((application, index) => ({
+            id: String(index),
+            title: application.title,
+            description: application.description,
+            image: application.image,
+            imageAlt: application.imageAlt,
+          }))}
+        />
       </section>
 
       <section className={styles.supportCta}>

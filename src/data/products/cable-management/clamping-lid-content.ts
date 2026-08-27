@@ -1,3 +1,5 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import { cableTraysTrunkingSiblingFamilies } from "./cable-trays-trunking-content";
@@ -5,8 +7,12 @@ import { CABLE_SUPPORT_CATALOGUE_PDF_HREF, heavyDutyCableTraysH60ContentForMarke
 import type { CableAccessoryDisplayGroup, CableManagementFamilyContent } from "./types";
 import type { CableVariantFamilyTemplateContent } from "./variant-family-template-types";
 
-const IMAGE_BASE = "/assets/products/cable-management";
-const REQUEST_HREF = "/uk-support?request=technical-pack&product=cable-management-cable-tray-clamping-lid";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+const REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "cable-management-cable-tray-clamping-lid",
+  source: "/products/cable-support-systems",
+});
 
 function t(market: MarketCode, uk: string, ua: string): string {
   return market === "ua" ? ua : uk;

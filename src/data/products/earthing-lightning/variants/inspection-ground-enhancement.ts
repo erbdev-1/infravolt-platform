@@ -3,11 +3,11 @@ import type { EarthingProductVariant } from "../types";
 export const INSPECTION_GROUND_ENHANCEMENT_VARIANTS: Readonly<
   Record<string, readonly EarthingProductVariant[]>
 > = {
-  "Ground Enhancement Material": [
+  "ground-enhancement-material": [
     { name: "GEM Earth Resistivity Decrease Material", model: "GEM", stockCode: "30310GEM", weight: "11.000 kg" },
     { name: "TDM Earth Resistivity Decrease Material", model: "TDM", stockCode: "7001111188", weight: "10.000 kg" },
   ],
-  "Earthing Pits": [
+  "earthing-pits": [
     { name: "GTE-300 D Galvanized Sheet Earthing Pit", model: "GTE-300 D", stockCode: "3032030009141", material: "Galvanized sheet steel", dimensions: "300×300×300 mm", weight: "9.76 kg" },
     { name: "GTE-300-2 D Galvanized Sheet Earthing Pit", model: "GTE-300-2 D", stockCode: "3032241209141", material: "Galvanized sheet steel", dimensions: "400×400×400 mm", weight: "12.90 kg" },
     { name: "GTE-300-3 Concrete Earthing Pit", model: "GTE-300-3", stockCode: "303213000BET1", material: "Concrete", dimensions: "400×400×250 mm", weight: "40.00 kg" },
@@ -20,7 +20,7 @@ export const INSPECTION_GROUND_ENHANCEMENT_VARIANTS: Readonly<
     { name: "GTE-300-P4 PLS Plastic Earthing Pit", model: "GTE-300-P4 PLS", stockCode: "3032P3300PLS1", material: "Plastic", dimensions: "550×550×500 mm", weight: "13.000 kg" },
     { name: "GTE-304 Corrosion Tape Strip", model: "GTE-304", stockCode: "303203020KBN0", material: "Corrosion protection tape", dimensions: "L 10000 mm", weight: "1.000 kg" },
   ],
-  "Pipe Clamps & U-Bolts": [
+  "pipe-clamps-u-bolts": [
     { name: "Gİ-1 Pipe Clamp (One Side Fixed)", model: "Gİ-1", stockCode: "0801002129140", dimensions: "Pipe 1/2” · Ø21 mm", weight: "0.020 kg" },
     { name: "Gİ-2 Pipe Clamp (One Side Fixed)", model: "Gİ-2", stockCode: "0801002729140", dimensions: "Pipe 3/4” · Ø27 mm", weight: "0.025 kg" },
     { name: "Gİ-3 Pipe Clamp (One Side Fixed)", model: "Gİ-3", stockCode: "0801003429140", dimensions: "Pipe 1” · Ø34 mm", weight: "0.030 kg" },

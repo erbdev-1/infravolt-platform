@@ -22,6 +22,15 @@ export type UnderfloorVariant = Readonly<{
 }>;
 
 export type UnderfloorVariantGroup = Readonly<{
+  /** Stable, locale-independent identifier — English kebab-case, shared
+   * verbatim between the uk/ua blocks in series-detail-content.ts. This is
+   * the ONLY value the enquiry-item identity (underfloorEnquiryItem) and
+   * accordion/batching state should key on — `name` is display-only and
+   * is translated per market (e.g. "British System (ING)" vs
+   * "Британська система (ING)"), so using it as a lookup/identity key
+   * would silently diverge by locale — the same class of bug earthing's
+   * family.id fix addressed. */
+  id: string;
   name: string;
   variants: readonly UnderfloorVariant[];
 }>;

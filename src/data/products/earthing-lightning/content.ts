@@ -1,8 +1,10 @@
+import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+
 import type { EarthingHubContent } from "./types";
 
 import type { MarketCode } from "@/modules/markets/types";
 
-const IMAGE_BASE = "/assets/products/earthing-lightning";
+const IMAGE_BASE = publicMediaUrl("products/earthing-lightning");
 
 // Same asset for both markets — see public/assets/documents/earthing-lightning/.
 // Follows the existing busbar/g-bus convention
@@ -10,7 +12,7 @@ const IMAGE_BASE = "/assets/products/earthing-lightning";
 // not the /downloads/ path floated during planning — that path doesn't
 // exist anywhere else on the site.
 export const EARTHING_CATALOGUE_PDF_HREF =
-  "/assets/documents/earthing-lightning/gersan-earthing-lightning-protection-catalogue-2026.pdf";
+  publicDocumentUrl("documents/earthing-lightning/gersan-earthing-lightning-protection-catalogue-2026.pdf");
 
 const EARTHING_HUB_CONTENT = {
   uk: {
@@ -116,6 +118,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Active Lightning Rod & Mounting Material",
             description:
               "Active air termination rods, lightning strike counters, mounting poles, protective pipes, bases and fixing clamps.",
+            id: "active-lightning-rod-mounting-material",
             image: `${IMAGE_BASE}/lightning-protection/family/active-lightning-rod-mounting-material.webp`,
             imageAlt: "Gersan active air termination rod",
           },
@@ -123,6 +126,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Lightning Arrester",
             description:
               "Air termination rods in copper, aluminium, stainless steel and galvanized finishes, with chrome-nickel coated variants.",
+            id: "lightning-arrester",
             image: `${IMAGE_BASE}/lightning-protection/family/lightning-arrester.webp`,
             imageAlt: "Gersan copper lightning arrester rods",
           },
@@ -130,6 +134,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Lightning Arrester Base",
             description:
               "Mounting bases connecting air termination rods to roof, wall, ridge, tile and pole arrangements.",
+            id: "lightning-arrester-base",
             image: `${IMAGE_BASE}/lightning-protection/family/lightning-arrester-base.webp`,
             imageAlt: "Gersan copper lightning arrester mounting base",
           },
@@ -137,6 +142,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Down Conductor Clamps & Fixing Elements",
             description:
               "Down-conductor holder clamps, crochets and fixing elements for wall and roof installation.",
+            id: "down-conductor-clamps-fixing-elements",
             image: `${IMAGE_BASE}/lightning-protection/family/down-conductor-clamps-fixing-elements.webp`,
             imageAlt: "Gersan copper down-conductor holder clamp",
           },
@@ -175,6 +181,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Earthing Electrodes",
             description:
               "Earthing electrode and rod variants for driving fault and lightning currents into the ground.",
+            id: "earthing-electrodes",
             image: `${IMAGE_BASE}/earthing-electrodes-plates/family/earthing-electrodes.webp`,
             imageAlt: "Gersan copper earthing electrode",
           },
@@ -182,6 +189,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Earth Plate – Lattice Copper",
             description:
               "Lattice-type copper earth plates for shallow or space-constrained earthing installations.",
+            id: "earth-plate-lattice-copper",
             image: `${IMAGE_BASE}/earthing-electrodes-plates/family/earth-plate-lattice-copper.webp`,
             imageAlt: "Gersan lattice-type copper earth plate",
           },
@@ -220,6 +228,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Copper & Aluminium Conductor",
             description:
               "Insulated and non-insulated copper and aluminium conductors for above-ground and underground routing.",
+            id: "copper-aluminium-conductor",
             image: `${IMAGE_BASE}/conductors-tapes/family/copper-aluminium-conductor.webp`,
             imageAlt: "Gersan bare solid copper conductor coil",
           },
@@ -227,12 +236,14 @@ const EARTHING_HUB_CONTENT = {
             name: "Galvanized Mono Wires & Stranded Conductor",
             description:
               "Galvanized mono wires and stranded conductor for earthing and bonding runs.",
+            id: "galvanized-mono-wires-stranded-conductor",
             image: `${IMAGE_BASE}/conductors-tapes/family/galvanized-mono-wires-stranded-conductor.webp`,
             imageAlt: "Gersan galvanized mono wire coil",
           },
           {
             name: "Galvanized Earthing Tapes",
             description: "Galvanized earthing tapes for surface-mounted conductor runs.",
+            id: "galvanized-earthing-tapes",
             image: `${IMAGE_BASE}/conductors-tapes/family/galvanized-earthing-tapes.webp`,
             imageAlt: "Gersan galvanized earthing tape strip",
           },
@@ -240,6 +251,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Steel Wire Rope",
             description:
               "Steel wire rope and accessories for lightning protection down-conductor and tensioning applications.",
+            id: "steel-wire-rope",
             image: `${IMAGE_BASE}/conductors-tapes/family/steel-wire-rope.webp`,
             imageAlt: "Gersan galvanized steel wire rope",
           },
@@ -247,6 +259,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Flexible Bars",
             description:
               "Flexible copper bars for bonding connections across movement joints and enclosures.",
+            id: "flexible-bars",
             image: `${IMAGE_BASE}/conductors-tapes/family/flexible-bars.webp`,
             imageAlt: "Gersan bare copper flexible bars",
           },
@@ -289,54 +302,63 @@ const EARTHING_HUB_CONTENT = {
             name: "Test Clamps",
             description:
               "Test clamps providing accessible disconnection points for earth resistance measurement.",
+            id: "test-clamps",
             image: `${IMAGE_BASE}/clamps-connectors/family/test-clamps.webp`,
             imageAlt: "Gersan open-type copper test clamp",
           },
           {
             name: "Electrode Fixing Clamps",
             description: "Clamps connecting conductors directly to earthing electrodes.",
+            id: "electrode-fixing-clamps",
             image: `${IMAGE_BASE}/clamps-connectors/family/electrode-fixing-clamps.webp`,
             imageAlt: "Gersan electrode fixing clamp, GFT series",
           },
           {
             name: "Cable Tray Fixing Clamps",
             description: "Fixing clamps bonding cable trays into the earthing system.",
+            id: "cable-tray-fixing-clamps",
             image: `${IMAGE_BASE}/clamps-connectors/family/cable-tray-fixing-clamps.webp`,
             imageAlt: "Gersan cable tray fixing clamp family, GIT series",
           },
           {
             name: "Galvanized & Copper Fixing Clamps",
             description: "Fixing clamps for galvanized and copper conductor connections.",
+            id: "galvanized-copper-fixing-clamps",
             image: `${IMAGE_BASE}/clamps-connectors/family/galvanized-copper-fixing-clamps.webp`,
             imageAlt: "Gersan galvanized vertical fixing connector",
           },
           {
             name: "Transition Clamps (Galvanized + Copper)",
             description: "Transition clamps connecting galvanized and copper conductors.",
+            id: "transition-clamps-galvanized-copper",
             image: `${IMAGE_BASE}/clamps-connectors/family/transition-clamps-galvanized-copper.webp`,
             imageAlt: "Gersan galvanized-to-copper transition clamp",
           },
           {
             name: "Brass Connectors for Soldering",
             description: "Brass cable-joint sleeves for soldered conductor connections.",
+            id: "brass-connectors-for-soldering",
             image: `${IMAGE_BASE}/clamps-connectors/family/brass-connectors-for-soldering.webp`,
             imageAlt: "Gersan brass connector for soldering",
           },
           {
             name: "Fixing Clamps (Deadend, U, H & C)",
             description: "Deadend, U, H and C-type fixing clamps for conductor termination.",
+            id: "fixing-clamps-deadend-u-h-c",
             image: `${IMAGE_BASE}/clamps-connectors/family/fixing-clamps-deadend-u-h-c.webp`,
             imageAlt: "Gersan brass deadend fixing clamps",
           },
           {
             name: "Cable Lugs",
             description: "Cable lugs for terminating conductors at earth bars and equipment.",
+            id: "cable-lugs",
             image: `${IMAGE_BASE}/clamps-connectors/family/cable-lugs.webp`,
             imageAlt: "Gersan cable lug family, GIP series",
           },
           {
             name: "Flat Bar Connector",
             description: "Flat bar connectors joining conductors to busbars and flat connections.",
+            id: "flat-bar-connector",
             image: `${IMAGE_BASE}/clamps-connectors/family/flat-bar-connector.webp`,
             imageAlt: "Gersan horizontal flat bar connector",
           },
@@ -375,6 +397,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Equal Potential Bar",
             description:
               "Equipotential bars and accessories with single and double disconnecting-link configurations.",
+            id: "equal-potential-bar",
             image: `${IMAGE_BASE}/equipotential-earth-bars/family/equal-potential-bar.webp`,
             imageAlt: "Gersan copper equipotential earth bar, GEB-T series",
           },
@@ -409,6 +432,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Thermoveld",
             description:
               "Exothermic welding moulds, welding powder and ignition equipment for permanent conductor-to-electrode connections.",
+            id: "thermoveld",
             image: `${IMAGE_BASE}/exothermic-welding/family/thermoveld.webp`,
             imageAlt: "Gersan thermoweld mould cup",
           },
@@ -443,18 +467,21 @@ const EARTHING_HUB_CONTENT = {
             name: "Ground Enhancement Material",
             description:
               "Resistance-reducing backfill material improving earth resistance in poor soil conditions.",
+            id: "ground-enhancement-material",
             image: `${IMAGE_BASE}/inspection-ground-enhancement/family/ground-enhancement-material.webp`,
             imageAlt: "Gersan GEM ground enhancement material bag",
           },
           {
             name: "Earthing Pits",
             description: "Inspection pits providing accessible test points for earthing installations.",
+            id: "earthing-pits",
             image: `${IMAGE_BASE}/inspection-ground-enhancement/family/earthing-pits.webp`,
             imageAlt: "Gersan plastic earthing inspection pit",
           },
           {
             name: "Pipe Clamps & U-Bolts",
             description: "Pipe clamps and U-bolts for fixing conductors and equipment to pipework.",
+            id: "pipe-clamps-u-bolts",
             image: `${IMAGE_BASE}/inspection-ground-enhancement/family/pipe-clamps-u-bolts.webp`,
             imageAlt: "Gersan single-ear pipe clamp",
           },
@@ -488,6 +515,7 @@ const EARTHING_HUB_CONTENT = {
           {
             name: "Static Electric Earthing Equipment",
             description: "Static discharge clips, reels and plates for controlled static grounding.",
+            id: "static-electric-earthing-equipment",
             image: `${IMAGE_BASE}/static-ex-proof-grounding/family/static-electric-earthing-equipment.webp`,
             imageAlt: "Gersan bronze static earth discharge receptacle",
           },
@@ -495,6 +523,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Ex-Proof Grounding System",
             description:
               "Ex-proof grounding devices and connection schemes for hazardous-area installations.",
+            id: "ex-proof-grounding-system",
             image: `${IMAGE_BASE}/static-ex-proof-grounding/family/ex-proof-grounding-system.webp`,
             imageAlt: "Gersan PTC.1000 Ex-proof grounding system",
           },
@@ -620,7 +649,7 @@ const EARTHING_HUB_CONTENT = {
       title: "Engineering support for earthing and lightning protection projects",
       description:
         "From electrode selection to complete equipotential bonding schemes, our team supports specification, technical data and installation guidance.",
-      action: "Request Technical Package",
+      action: "Request Technical Pack",
     },
     categoryDetail: {
       backLabel: "Back to Earthing & Lightning Protection",
@@ -648,9 +677,16 @@ const EARTHING_HUB_CONTENT = {
       variantsMetaCodesLabel: "codes",
       variantsMetaFamiliesLabel: "product families",
       variantsSearchLabel: "Search order codes",
-      variantsSearchPlaceholder: "Search model, stock code, material or dimension",
+      variantsSearchPlaceholder: "Search product, code or material",
       variantsClearSearchAction: "Clear search",
       variantsMaterialFilterLabel: "Filter by material",
+      variantsFiltersButtonLabel: "Filters",
+      variantsFiltersDrawerTitle: "Filter by material",
+      variantsFiltersClearAllAction: "Clear all",
+      variantsFiltersRemoveAction: "Remove filter",
+      variantsShowMoreAction: "Show more",
+      variantsFiltersShowResultsAction: "Show",
+      variantsFiltersCloseAction: "Close filters",
       variantsShowingLabel: "Showing",
       variantsOfLabel: "of",
       variantsDownloadCsvAction: "Download CSV",
@@ -770,6 +806,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Активний блискавковідвід та монтажні матеріали",
             description:
               "Активні блискавковідводи, лічильники ударів блискавки, монтажні щогли, захисні труби, основи та кріпильні клеми.",
+            id: "active-lightning-rod-mounting-material",
             image: `${IMAGE_BASE}/lightning-protection/family/active-lightning-rod-mounting-material.webp`,
             imageAlt: "Активний стрижень уловлювання блискавки Gersan",
           },
@@ -777,6 +814,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Стрижні уловлювання",
             description:
               "Стрижні уловлювання з міді, алюмінію, нержавіючої сталі та оцинкованого покриття, включно з хромонікельованими варіантами.",
+            id: "lightning-arrester",
             image: `${IMAGE_BASE}/lightning-protection/family/lightning-arrester.webp`,
             imageAlt: "Мідні стрижні уловлювання блискавки Gersan",
           },
@@ -784,6 +822,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Основи стрижнів уловлювання",
             description:
               "Монтажні основи, що з'єднують стрижні уловлювання з дахом, стіною, коником та щоглою.",
+            id: "lightning-arrester-base",
             image: `${IMAGE_BASE}/lightning-protection/family/lightning-arrester-base.webp`,
             imageAlt: "Мідна монтажна основа стрижня уловлювання Gersan",
           },
@@ -791,6 +830,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Клеми струмовідводу та кріпильні елементи",
             description:
               "Тримальні клеми струмовідводу, кронштейни та кріпильні елементи для монтажу на стіні та даху.",
+            id: "down-conductor-clamps-fixing-elements",
             image: `${IMAGE_BASE}/lightning-protection/family/down-conductor-clamps-fixing-elements.webp`,
             imageAlt: "Мідна тримальна клема струмовідводу Gersan",
           },
@@ -825,6 +865,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Електроди заземлення",
             description:
               "Електроди та стрижні заземлення для відведення струмів короткого замикання та блискавки в землю.",
+            id: "earthing-electrodes",
             image: `${IMAGE_BASE}/earthing-electrodes-plates/family/earthing-electrodes.webp`,
             imageAlt: "Мідний електрод заземлення Gersan",
           },
@@ -832,6 +873,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Пластина заземлення – ґратчаста мідна",
             description:
               "Ґратчасті мідні пластини заземлення для неглибокого монтажу або обмеженого простору.",
+            id: "earth-plate-lattice-copper",
             image: `${IMAGE_BASE}/earthing-electrodes-plates/family/earth-plate-lattice-copper.webp`,
             imageAlt: "Ґратчаста мідна пластина заземлення Gersan",
           },
@@ -870,18 +912,21 @@ const EARTHING_HUB_CONTENT = {
             name: "Мідний та алюмінієвий провідник",
             description:
               "Ізольовані та неізольовані мідні й алюмінієві провідники для надземної та підземної прокладки.",
+            id: "copper-aluminium-conductor",
             image: `${IMAGE_BASE}/conductors-tapes/family/copper-aluminium-conductor.webp`,
             imageAlt: "Бухта голого суцільного мідного провідника Gersan",
           },
           {
             name: "Оцинковані моно-дроти та багатодротовий провідник",
             description: "Оцинковані моно-дроти та багатодротовий провідник для ліній заземлення та вирівнювання потенціалів.",
+            id: "galvanized-mono-wires-stranded-conductor",
             image: `${IMAGE_BASE}/conductors-tapes/family/galvanized-mono-wires-stranded-conductor.webp`,
             imageAlt: "Бухта оцинкованого моно-дроту Gersan",
           },
           {
             name: "Оцинковані стрічки заземлення",
             description: "Оцинковані стрічки заземлення для прокладки провідника поверхневим монтажем.",
+            id: "galvanized-earthing-tapes",
             image: `${IMAGE_BASE}/conductors-tapes/family/galvanized-earthing-tapes.webp`,
             imageAlt: "Оцинкована стрічка заземлення Gersan",
           },
@@ -889,6 +934,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Сталевий трос",
             description:
               "Сталевий трос та аксесуари для струмовідводу блискавкозахисту та натяжних застосувань.",
+            id: "steel-wire-rope",
             image: `${IMAGE_BASE}/conductors-tapes/family/steel-wire-rope.webp`,
             imageAlt: "Оцинкований сталевий трос Gersan",
           },
@@ -896,6 +942,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Гнучкі шини",
             description:
               "Гнучкі мідні шини для з'єднань вирівнювання потенціалів через деформаційні шви та корпуси обладнання.",
+            id: "flexible-bars",
             image: `${IMAGE_BASE}/conductors-tapes/family/flexible-bars.webp`,
             imageAlt: "Гнучкі мідні шини Gersan",
           },
@@ -937,54 +984,63 @@ const EARTHING_HUB_CONTENT = {
           {
             name: "Тестові клеми",
             description: "Тестові клеми, що забезпечують доступні точки роз'єднання для вимірювання опору заземлення.",
+            id: "test-clamps",
             image: `${IMAGE_BASE}/clamps-connectors/family/test-clamps.webp`,
             imageAlt: "Відкрита мідна тестова клема Gersan",
           },
           {
             name: "Клеми кріплення електрода",
             description: "Клеми, що з'єднують провідники безпосередньо з електродами заземлення.",
+            id: "electrode-fixing-clamps",
             image: `${IMAGE_BASE}/clamps-connectors/family/electrode-fixing-clamps.webp`,
             imageAlt: "Клема кріплення електрода Gersan, серія GFT",
           },
           {
             name: "Клеми кріплення кабельних лотків",
             description: "Кріпильні клеми, що приєднують кабельні лотки до системи заземлення.",
+            id: "cable-tray-fixing-clamps",
             image: `${IMAGE_BASE}/clamps-connectors/family/cable-tray-fixing-clamps.webp`,
             imageAlt: "Родина клем кріплення кабельних лотків Gersan, серія GIT",
           },
           {
             name: "Оцинковані та мідні кріпильні клеми",
             description: "Кріпильні клеми для з'єднань оцинкованого та мідного провідника.",
+            id: "galvanized-copper-fixing-clamps",
             image: `${IMAGE_BASE}/clamps-connectors/family/galvanized-copper-fixing-clamps.webp`,
             imageAlt: "Оцинкований вертикальний кріпильний з'єднувач Gersan",
           },
           {
             name: "Перехідні клеми (оцинковані + мідні)",
             description: "Перехідні клеми, що з'єднують оцинкований та мідний провідник.",
+            id: "transition-clamps-galvanized-copper",
             image: `${IMAGE_BASE}/clamps-connectors/family/transition-clamps-galvanized-copper.webp`,
             imageAlt: "Перехідна клема оцинк.-мідь Gersan",
           },
           {
             name: "Латунні з'єднувачі для пайки",
             description: "Латунні муфти для паяних з'єднань провідника.",
+            id: "brass-connectors-for-soldering",
             image: `${IMAGE_BASE}/clamps-connectors/family/brass-connectors-for-soldering.webp`,
             imageAlt: "Латунний з'єднувач для паяння Gersan",
           },
           {
             name: "Кріпильні клеми (тирнаклі, U, H та C)",
             description: "Кріпильні клеми типу тирнаклі, U, H та C для завершення провідника.",
+            id: "fixing-clamps-deadend-u-h-c",
             image: `${IMAGE_BASE}/clamps-connectors/family/fixing-clamps-deadend-u-h-c.webp`,
             imageAlt: "Латунні тупикові кріпильні клеми Gersan",
           },
           {
             name: "Кабельні наконечники",
             description: "Кабельні наконечники для завершення провідників на шинах заземлення та обладнанні.",
+            id: "cable-lugs",
             image: `${IMAGE_BASE}/clamps-connectors/family/cable-lugs.webp`,
             imageAlt: "Родина кабельних наконечників Gersan, серія GIP",
           },
           {
             name: "Тримач плоскої шини",
             description: "Тримачі плоскої шини, що з'єднують провідники з шинопроводами та плоскими з'єднаннями.",
+            id: "flat-bar-connector",
             image: `${IMAGE_BASE}/clamps-connectors/family/flat-bar-connector.webp`,
             imageAlt: "Горизонтальний з'єднувач плоскої шини Gersan",
           },
@@ -1023,6 +1079,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Шина вирівнювання потенціалів",
             description:
               "Шини вирівнювання потенціалів та аксесуари в одинарній та подвійній конфігурації роз'єднувальних перемичок.",
+            id: "equal-potential-bar",
             image: `${IMAGE_BASE}/equipotential-earth-bars/family/equal-potential-bar.webp`,
             imageAlt: "Мідна еквіпотенціальна шина заземлення Gersan, серія GEB-T",
           },
@@ -1057,6 +1114,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Thermoveld",
             description:
               "Форми для екзотермічного зварювання, зварювальний порошок та обладнання для запалювання постійних з'єднань провідник-електрод.",
+            id: "thermoveld",
             image: `${IMAGE_BASE}/exothermic-welding/family/thermoveld.webp`,
             imageAlt: "Тигель форми для термозварювання Gersan",
           },
@@ -1091,18 +1149,21 @@ const EARTHING_HUB_CONTENT = {
             name: "Матеріал для зниження опору заземлення",
             description:
               "Засипний матеріал, що знижує опір заземлення в умовах поганого ґрунту.",
+            id: "ground-enhancement-material",
             image: `${IMAGE_BASE}/inspection-ground-enhancement/family/ground-enhancement-material.webp`,
             imageAlt: "Мішок матеріалу для покращення заземлення Gersan GEM",
           },
           {
             name: "Оглядові колодязі заземлення",
             description: "Оглядові колодязі, що забезпечують доступні точки тестування для систем заземлення.",
+            id: "earthing-pits",
             image: `${IMAGE_BASE}/inspection-ground-enhancement/family/earthing-pits.webp`,
             imageAlt: "Пластиковий оглядовий колодязь заземлення Gersan",
           },
           {
             name: "Кроше для труб та U-подібні болти",
             description: "Кроше для труб та U-подібні болти для кріплення провідників та обладнання до трубопроводів.",
+            id: "pipe-clamps-u-bolts",
             image: `${IMAGE_BASE}/inspection-ground-enhancement/family/pipe-clamps-u-bolts.webp`,
             imageAlt: "Одновухий трубний хомут Gersan",
           },
@@ -1136,6 +1197,7 @@ const EARTHING_HUB_CONTENT = {
           {
             name: "Обладнання статичного заземлення",
             description: "Затискачі, котушки та пластини статичного розряду для контрольованого статичного заземлення.",
+            id: "static-electric-earthing-equipment",
             image: `${IMAGE_BASE}/static-ex-proof-grounding/family/static-electric-earthing-equipment.webp`,
             imageAlt: "Бронзова розетка статичного розряду заземлення Gersan",
           },
@@ -1143,6 +1205,7 @@ const EARTHING_HUB_CONTENT = {
             name: "Система Ex-proof заземлення",
             description:
               "Пристрої Ex-proof заземлення та схеми з'єднання для вибухонебезпечних зон.",
+            id: "ex-proof-grounding-system",
             image: `${IMAGE_BASE}/static-ex-proof-grounding/family/ex-proof-grounding-system.webp`,
             imageAlt: "Вибухозахищена система заземлення Gersan PTC.1000",
           },
@@ -1296,9 +1359,16 @@ const EARTHING_HUB_CONTENT = {
       variantsMetaCodesLabel: "кодів",
       variantsMetaFamiliesLabel: "продуктових сімейств",
       variantsSearchLabel: "Пошук кодів замовлення",
-      variantsSearchPlaceholder: "Пошук за моделлю, кодом складу, матеріалом або розміром",
+      variantsSearchPlaceholder: "Пошук за товаром, кодом або матеріалом",
       variantsClearSearchAction: "Очистити пошук",
       variantsMaterialFilterLabel: "Фільтр за матеріалом",
+      variantsFiltersButtonLabel: "Фільтри",
+      variantsFiltersDrawerTitle: "Фільтр за матеріалом",
+      variantsFiltersClearAllAction: "Очистити все",
+      variantsFiltersRemoveAction: "Прибрати фільтр",
+      variantsShowMoreAction: "Показати ще",
+      variantsFiltersShowResultsAction: "Показати",
+      variantsFiltersCloseAction: "Закрити фільтри",
       variantsShowingLabel: "Показано",
       variantsOfLabel: "з",
       variantsDownloadCsvAction: "Завантажити CSV",

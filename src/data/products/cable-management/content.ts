@@ -1,14 +1,25 @@
+import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { CableAccessoryDisplayGroup, CableManagementFamilyContent, CableManagementLabels } from "./types";
 
-const IMAGE_BASE = "/assets/products/cable-management";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+
+function heavyDutyRequestHrefFor(familySuffix: string): string {
+  return buildEnquiryHref("technical-document", {
+    system: "cable-management",
+    family: `cable-management-heavy-duty-cable-trays-${familySuffix}`,
+    source: "/products/cable-support-systems",
+  });
+}
 
 // Real file, already in the repo at this path (not /public/documents/... and
 // not duplicated anywhere) — see public/assets/documents/cable-support/.
 // Follows the same convention as busbar/g-bus/earthing-lightning catalogues.
 export const CABLE_SUPPORT_CATALOGUE_PDF_HREF =
-  "/assets/documents/cable-support/cable_support.pdf";
+  publicDocumentUrl("documents/cable-support/cable_support.pdf");
 
 // Picks the right-language string for a given market — used throughout
 // this file (and the other cable-management *-content.ts files) instead
@@ -291,7 +302,7 @@ export function heavyDutyCableTraysH60ContentForMarket(market: MarketCode): Cabl
       { label: "H = 60 mm" },
     ],
     requestPackAction: t(market, "Request Technical Pack", "Запросити технічний пакет"),
-    requestPackHref: "/uk-support?request=technical-pack&product=cable-management-heavy-duty-cable-trays-h60",
+    requestPackHref: heavyDutyRequestHrefFor("h60"),
     catalogueDocument: {
       label: t(market, "Download PDF Catalogue", "Завантажити PDF-каталог"),
       meta: t(market, "PDF Catalogue", "PDF-каталог"),
@@ -332,7 +343,7 @@ export function heavyDutyCableTraysH60ContentForMarket(market: MarketCode): Cabl
       "Наша технічна команда допоможе з підбором продукції, вимогами до навантаження, координацією монтажу та індивідуальними конфігураціями проєкту.",
     ),
     supportAction: t(market, "Request Technical Support", "Запросити технічну підтримку"),
-    supportHref: "/uk-support?request=technical-pack&product=cable-management-heavy-duty-cable-trays-h60",
+    supportHref: heavyDutyRequestHrefFor("h60"),
   };
 }
 
@@ -361,14 +372,14 @@ export function heavyDutyCableTraysH40ContentForMarket(market: MarketCode): Cabl
       { label: t(market, "Heavy Duty Cable Trays", "Кабельні лотки важкого типу") },
       { label: "H = 40 mm" },
     ],
-    requestPackHref: "/uk-support?request=technical-pack&product=cable-management-heavy-duty-cable-trays-h40",
+    requestPackHref: heavyDutyRequestHrefFor("h40"),
     accessoriesIntroduction: t(
       market,
       "Bends, tees, crossings, reducers and jointing pieces from the same h=40 mm system, drawn from the same catalogue family.",
       "Повороти, трійники, хрестовини, редукції та з'єднувальні елементи цієї ж системи h=40 мм з того самого каталогу.",
     ),
     accessoryDisplayGroups: heavyDutyAccessoryDisplayGroups(market, HEAVY_DUTY_H40_ACCESSORY_IMAGE_BASE),
-    supportHref: "/uk-support?request=technical-pack&product=cable-management-heavy-duty-cable-trays-h40",
+    supportHref: heavyDutyRequestHrefFor("h40"),
   };
 }
 
@@ -397,14 +408,14 @@ export function heavyDutyCableTraysH50ContentForMarket(market: MarketCode): Cabl
       { label: t(market, "Heavy Duty Cable Trays", "Кабельні лотки важкого типу") },
       { label: "H = 50 mm" },
     ],
-    requestPackHref: "/uk-support?request=technical-pack&product=cable-management-heavy-duty-cable-trays-h50",
+    requestPackHref: heavyDutyRequestHrefFor("h50"),
     accessoriesIntroduction: t(
       market,
       "Bends, tees, crossings, reducers and jointing pieces from the same h=50 mm system, drawn from the same catalogue family.",
       "Повороти, трійники, хрестовини, редукції та з'єднувальні елементи цієї ж системи h=50 мм з того самого каталогу.",
     ),
     accessoryDisplayGroups: heavyDutyAccessoryDisplayGroups(market, HEAVY_DUTY_ACCESSORY_IMAGE_BASE),
-    supportHref: "/uk-support?request=technical-pack&product=cable-management-heavy-duty-cable-trays-h50",
+    supportHref: heavyDutyRequestHrefFor("h50"),
   };
 }
 
@@ -439,7 +450,7 @@ export function heavyDutyCableTraysH100ContentForMarket(market: MarketCode): Cab
       { label: t(market, "Heavy Duty Cable Trays", "Кабельні лотки важкого типу") },
       { label: "H = 100 mm" },
     ],
-    requestPackHref: "/uk-support?request=technical-pack&product=cable-management-heavy-duty-cable-trays-h100",
+    requestPackHref: heavyDutyRequestHrefFor("h100"),
     scheduleIntroduction: t(
       market,
       "Full order-code schedule for the h=100 mm series, verified against the source catalogue.",
@@ -450,7 +461,7 @@ export function heavyDutyCableTraysH100ContentForMarket(market: MarketCode): Cab
       "Bends, tees, crossings, reducers and jointing pieces from the same h=100 mm system, drawn from the same catalogue family.",
       "Повороти, трійники, хрестовини, редукції та з'єднувальні елементи цієї ж системи h=100 мм з того самого каталогу.",
     ),
-    supportHref: "/uk-support?request=technical-pack&product=cable-management-heavy-duty-cable-trays-h100",
+    supportHref: heavyDutyRequestHrefFor("h100"),
   };
 }
 
@@ -479,7 +490,7 @@ export function heavyDutyCableTraysGktCeContentForMarket(market: MarketCode): Ca
       { label: t(market, "Heavy Duty Cable Trays", "Кабельні лотки важкого типу") },
       { label: "GKT-CE" },
     ],
-    requestPackHref: "/uk-support?request=technical-pack&product=cable-management-heavy-duty-cable-trays-gkt-ce",
+    requestPackHref: heavyDutyRequestHrefFor("gkt-ce"),
     scheduleIntroduction: t(
       market,
       "The full order-code schedule for this series is being re-verified against the source catalogue. Please contact our technical team to request the schedule directly.",
@@ -490,7 +501,7 @@ export function heavyDutyCableTraysGktCeContentForMarket(market: MarketCode): Ca
       "Bends, tees, crossings, reducers and jointing pieces from the same GKT-CE system.",
       "Повороти, трійники, хрестовини, редукції та з'єднувальні елементи цієї ж системи GKT-CE.",
     ),
-    supportHref: "/uk-support?request=technical-pack&product=cable-management-heavy-duty-cable-trays-gkt-ce",
+    supportHref: heavyDutyRequestHrefFor("gkt-ce"),
   };
 }
 

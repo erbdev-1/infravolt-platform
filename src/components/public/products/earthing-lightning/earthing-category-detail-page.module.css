@@ -139,9 +139,15 @@
 
 .heroActions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.75rem;
   margin-top: 2rem;
+}
+
+.heroActions .primaryButton,
+.heroActions .catalogueButton {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .primaryButton {
@@ -172,9 +178,9 @@
 
 /* Secondary CTA — softly-tinted outline so it doesn't compete with the
    copper-filled .primaryButton. The two remaining hero actions (Request
-   Technical Pack + this one) sit on one row on desktop, stacked
-   full-width on mobile — "Talk to an Engineer" was removed from this row
-   entirely. */
+   Technical Pack + this one) sit side by side at equal width on every
+   breakpoint (see .heroActions) — "Talk to an Engineer" was removed from
+   this row entirely. */
 .catalogueButton {
   align-items: center;
   background: var(--earthing-accent-soft);
@@ -221,12 +227,7 @@
 
 @media (max-width: 640px) {
   .heroActions {
-    flex-direction: column;
-  }
-
-  .primaryButton,
-  .catalogueButton {
-    width: 100%;
+    gap: 0.625rem;
   }
 }
 
@@ -803,6 +804,14 @@
   margin-bottom: 1.1rem;
 }
 
+/* Transparent at every breakpoint except mobile (see the 720px block),
+   where it becomes a real flex item so EnquiryToolbarSummary can be
+   forced onto its own row without needing to reach into that
+   component's own CSS module. */
+.enquirySummaryWrap {
+  display: contents;
+}
+
 .searchField {
   align-items: center;
   background: #ffffff;
@@ -985,6 +994,177 @@
   color: #ffffff;
 }
 
+/* =========================================================
+   05c. MOBILE FILTER DRAWER
+   .materialChips (the full wall, above) stays the tablet/desktop
+   treatment untouched. Below 720px it's replaced by .filtersButton +
+   .selectedFiltersRow, and the same chip buttons (materialChipButtons in
+   earthing-variant-table.tsx) render again inside .drawerChips — see that
+   component for why it's one render, two placements. Hidden by default;
+   the ≤720px block below is what actually turns this mobile UI on.
+   ========================================================= */
+
+.filtersButton {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.6rem;
+  color: var(--earthing-ink);
+  cursor: pointer;
+  display: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  padding: 0.65rem 1.1rem;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.filtersButton:hover {
+  border-color: var(--earthing-accent);
+  color: var(--earthing-accent);
+}
+
+.filtersButtonCount {
+  align-items: center;
+  background: var(--earthing-accent);
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.68rem;
+  font-weight: 800;
+  height: 1.15rem;
+  justify-content: center;
+  min-width: 1.15rem;
+  padding: 0 0.35rem;
+}
+
+.selectedFiltersRow {
+  display: none;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.1rem;
+}
+
+.selectedChip {
+  align-items: center;
+  background: var(--earthing-accent-soft);
+  border: 1px solid var(--earthing-accent-light);
+  border-radius: 999px;
+  color: var(--earthing-accent-dark);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 700;
+  gap: 0.4rem;
+  padding: 0.45rem 0.7rem 0.45rem 0.95rem;
+}
+
+.selectedChipIcon {
+  height: 0.7rem;
+  width: 0.7rem;
+}
+
+.filterDrawerOverlay {
+  align-items: flex-end;
+  background: rgb(6 26 53 / 55%);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: fixed;
+  z-index: 60;
+}
+
+.filterDrawer {
+  background: #ffffff;
+  border-radius: 1rem 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  width: 100%;
+}
+
+.filterDrawerHeader {
+  align-items: center;
+  border-bottom: 1px solid var(--earthing-border);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  padding: 1.1rem 1.25rem;
+}
+
+.filterDrawerHeader h3 {
+  color: var(--earthing-navy);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.filterDrawerClose {
+  align-items: center;
+  background: var(--earthing-surface);
+  border: none;
+  border-radius: 50%;
+  color: var(--earthing-muted);
+  cursor: pointer;
+  display: flex;
+  height: 2.1rem;
+  justify-content: center;
+  width: 2.1rem;
+}
+
+.filterDrawerClose svg {
+  height: 0.85rem;
+  width: 0.85rem;
+}
+
+.drawerChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  overflow-y: auto;
+  padding: 1.25rem;
+}
+
+.filterDrawerActions {
+  border-top: 1px solid var(--earthing-border);
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom));
+}
+
+.filterDrawerClearAction {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.6rem;
+  color: var(--earthing-muted);
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.8rem 1.1rem;
+}
+
+.filterDrawerClearAction:disabled {
+  color: var(--earthing-faint);
+  cursor: not-allowed;
+}
+
+.filterDrawerShowAction {
+  background: var(--earthing-accent);
+  border: 1px solid var(--earthing-accent);
+  border-radius: 0.6rem;
+  color: #ffffff;
+  cursor: pointer;
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 800;
+  padding: 0.8rem 1.1rem;
+}
+
+.filterDrawerShowAction:hover {
+  background: var(--earthing-accent-dark);
+}
+
 .variantsResultsLine {
   color: var(--earthing-muted);
   font-size: 0.82rem;
@@ -1159,6 +1339,28 @@
 .variantTableScroll {
   max-height: min(34rem, 70vh);
   overflow: auto;
+}
+
+/* Batched-results control — see visibleCountFor()/showMore() in
+   earthing-variant-table.tsx. Full-width and touch-friendly since it
+   replaces what would otherwise be 40+ more record cards. */
+.showMoreButton {
+  background: var(--earthing-surface);
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.6rem;
+  color: var(--earthing-accent-dark);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-top: 0.6rem;
+  padding: 0.7rem 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.showMoreButton:hover {
+  background: var(--earthing-accent-soft);
+  border-color: var(--earthing-accent-light);
 }
 
 .variantTable {
@@ -1387,22 +1589,87 @@
   }
 }
 
+/* Mobile — compact horizontal engineering-catalogue row instead of the
+   desktop's stacked image-on-top card: image left (fixed ~100px column,
+   spanning both content rows), title + description on row 1, the
+   existing "View Products"/arrow footer on row 2. Same three elements as
+   desktop (.familyMedia/.familyBody/.familyFooter), placed via CSS grid —
+   no JSX change, so the anchor-vs-Link destination logic above is
+   untouched. */
 @media (max-width: 720px) {
   .familiesGrid {
+    gap: 0.65rem;
     grid-template-columns: 1fr;
   }
 
-  .familyMedia {
-    height: 160px;
+  .familyCard {
+    border-radius: 0.7rem;
+    column-gap: 0.85rem;
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    min-height: 7.25rem;
   }
 
-  /* Order-codes toolbar stacks; CSV actions become full-width so they stay
-     easily tappable next to the search field. */
+  .familyMedia {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    height: auto;
+  }
+
+  .familyIndex {
+    font-size: 0.6rem;
+    left: 0.5rem;
+    padding: 0.15rem 0.4rem;
+    top: 0.5rem;
+  }
+
+  .familyBody {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 0.65rem 0.75rem 0.15rem;
+  }
+
+  .familyBody h3 {
+    font-size: 0.94rem;
+    line-height: 1.25;
+  }
+
+  .familyBody p {
+    -webkit-line-clamp: 2;
+    font-size: 0.76rem;
+    line-height: 1.4;
+    margin-top: 0.3rem;
+  }
+
+  .familyFooter {
+    border-top: none;
+    font-size: 0.72rem;
+    grid-column: 2;
+    grid-row: 2;
+    padding: 0 0.75rem 0.65rem;
+  }
+
+  /* Search + Filters share one compact row (wrapping to two only if the
+     viewport is too narrow to fit both); CSV actions and the enquiry
+     summary each get their own full-width row below via flex-basis:100%.
+     IMPORTANT: this must stay row+wrap, never flex-direction:column —
+     .searchField's flex-basis (20rem, set for the row-axis width) becomes
+     a *height* basis in a column-direction flex container, which is
+     exactly what produced the near-300px blank white panel around the
+     search input reported in testing. */
   .variantsToolbar {
-    flex-direction: column;
+    align-items: stretch;
+    flex-direction: row;
+  }
+
+  .searchField {
+    flex: 1 1 12rem;
+    min-width: 0;
   }
 
   .csvActions {
+    flex: 1 1 100%;
     flex-direction: column;
   }
 
@@ -1410,6 +1677,71 @@
   .csvButtonSecondary {
     justify-content: center;
     width: 100%;
+  }
+
+  /* The full material-chip wall would otherwise sit between search and
+     results, pushing products off the first screen — it's replaced by
+     .filtersButton (opens the drawer) + .selectedFiltersRow (the current
+     filter only), both of which stay hidden above this breakpoint.
+     Sits inline next to .searchField, not stacked full-width. */
+  .filtersButton {
+    display: inline-flex;
+    flex: 0 0 auto;
+    justify-content: center;
+  }
+
+  .enquirySummaryWrap {
+    display: block;
+    flex: 1 1 100%;
+  }
+
+  .materialChips {
+    display: none;
+  }
+
+  /* Family cards stay vertical (image/title/description/footer) per the
+     brief — only shrunk, not restructured like the hub's category cards. */
+  .familyMedia {
+    height: 128px;
+  }
+
+  .familyBody {
+    padding: 0.9rem 1.1rem 0.75rem;
+  }
+
+  .familyBody h3 {
+    font-size: 1rem;
+  }
+
+  .familyBody p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-top: 0.4rem;
+    -webkit-line-clamp: 2;
+  }
+
+  .familyFooter {
+    padding: 0.7rem 1.1rem;
+  }
+
+  /* Section rhythm tightened to match the hub's mobile spacing — hero
+     content/CTAs/product image are unchanged, only the gaps between
+     sections shrink. */
+  .heroContent {
+    padding: 1.75rem 0 1rem;
+  }
+
+  .families,
+  .variants {
+    margin-top: 2.25rem;
+  }
+
+  .projectSupport {
+    margin-top: 2.75rem;
+  }
+
+  .selectedFiltersRow {
+    display: flex;
   }
 
   .variantGroupName {
@@ -1443,12 +1775,22 @@
     width: 1px;
   }
 
+  /* Compact record card — same 6 semantic <td>s (model, stock code,
+     material, dimensions, weight, action) as desktop's table, just
+     reflowed via nth-child/grid-column so nothing in
+     earthing-variant-table.tsx has to change:
+       row 1 (full width): model + secondary description
+       row 2 (full width): stock code + copy action
+       row 3 (3 compact columns): material | dimensions | weight
+       row 4: a compact, auto-width Add to Enquiry button (not a
+              full-width block — the old block button was a large part
+              of why each card ran so tall). */
   .variantTable tbody tr {
     border-top: 1px solid var(--earthing-border);
     display: grid;
-    gap: 0.6rem 0.75rem;
-    grid-template-columns: 1fr 1fr;
-    padding: 1rem 1.2rem;
+    gap: 0.5rem 0.6rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 0.85rem 1.1rem;
   }
 
   .variantTable tbody tr:first-child {
@@ -1466,22 +1808,28 @@
     color: var(--earthing-muted);
     content: attr(data-label);
     display: block;
-    font-size: 0.66rem;
+    font-size: 0.6rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.2rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.15rem;
     text-transform: uppercase;
   }
 
-  .variantTable td:first-child,
-  .variantTable td:last-child {
+  .variantTable td:nth-child(1),
+  .variantTable td:nth-child(2),
+  .variantTable td:nth-child(6) {
     grid-column: 1 / -1;
+  }
+
+  .variantTable td:nth-child(3),
+  .variantTable td:nth-child(4),
+  .variantTable td:nth-child(5) {
+    font-size: 0.78rem;
   }
 
   .variantEnquiryButton,
   .variantEnquiredButton {
-    display: block;
-    text-align: center;
-    width: 100%;
+    display: inline-block;
+    margin-top: 0.15rem;
   }
 }

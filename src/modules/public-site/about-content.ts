@@ -92,7 +92,7 @@ const ABOUT_PAGE_CONTENT: Readonly<Record<MarketCode, AboutPageContent>> = {
     },
     hero: {
       eyebrow: "About InfraVolt",
-      title: "Local Expertise. Global Engineering Capability.",
+      title: "Local Expertise\nGlobal Engineering Capability",
       description:
         "InfraVolt connects GERSAN manufacturing and engineering capability with local distribution, technical coordination and project support across the United Kingdom and Ukraine.",
       primaryAction: { href: "/#product-systems", label: "Explore Our Systems" },
@@ -103,7 +103,7 @@ const ABOUT_PAGE_CONTENT: Readonly<Record<MarketCode, AboutPageContent>> = {
       label: "Who We Are",
       descriptor: "Electrical Infrastructure Distribution & Technical Support",
       statement:
-        "InfraVolt supports engineered electrical infrastructure projects across the United Kingdom and Ukraine.",
+        "InfraVolt supports engineered electrical infrastructure projects across the United Kingdom and Ukraine",
       supportingParagraph:
         "We help contractors, consultants and project teams turn project requirements into practical product selections, coordinated technical information, quotations and local supply support.",
       capabilities: [
@@ -127,7 +127,7 @@ const ABOUT_PAGE_CONTENT: Readonly<Record<MarketCode, AboutPageContent>> = {
     },
     relationship: {
       label: "Manufacturer & Distributor",
-      title: "One Engineering Platform. Two Local Markets.",
+      title: "One Engineering Platform\nTwo Local Markets",
       introduction:
         "GERSAN provides the manufacturing and engineering platform, while InfraVolt provides local distribution, technical coordination and project support across the United Kingdom and Ukraine.",
       gersan: {
@@ -262,7 +262,7 @@ const ABOUT_PAGE_CONTENT: Readonly<Record<MarketCode, AboutPageContent>> = {
     },
     hero: {
       eyebrow: "Про InfraVolt",
-      title: "Локальна експертиза. Глобальні інженерні можливості.",
+      title: "Локальна експертиза\nГлобальні інженерні можливості",
       description:
         "InfraVolt поєднує виробничі та інженерні можливості GERSAN із локальною дистрибуцією, технічною координацією та підтримкою проєктів у Великій Британії й Україні.",
       primaryAction: { href: "/#product-systems", label: "Переглянути наші системи" },
@@ -273,7 +273,7 @@ const ABOUT_PAGE_CONTENT: Readonly<Record<MarketCode, AboutPageContent>> = {
       label: "Хто ми",
       descriptor: "Дистрибуція електротехнічної інфраструктури та технічна підтримка",
       statement:
-        "InfraVolt підтримує проєкти інженерної електротехнічної інфраструктури у Великій Британії та Україні.",
+        "InfraVolt підтримує проєкти інженерної електротехнічної інфраструктури у Великій Британії та Україні",
       supportingParagraph:
         "Ми допомагаємо підрядникам, консультантам і проєктним командам перетворювати вимоги проєкту на практичний вибір продукції, координуючи технічну інформацію, комерційні пропозиції та локальне постачання.",
       capabilities: [
@@ -297,7 +297,7 @@ const ABOUT_PAGE_CONTENT: Readonly<Record<MarketCode, AboutPageContent>> = {
     },
     relationship: {
       label: "Виробник і дистриб'ютор",
-      title: "Єдина інженерна платформа. Два локальні ринки.",
+      title: "Єдина інженерна платформа\nДва локальні ринки",
       introduction:
         "GERSAN забезпечує виробничу та інженерну платформу, а InfraVolt — локальну дистрибуцію, технічну координацію та підтримку проєктів у Великій Британії та Україні.",
       gersan: {

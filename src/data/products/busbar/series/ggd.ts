@@ -1,6 +1,13 @@
+import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
+
 import type { BusbarSystemDetailByMarket } from "./types";
 
-const IMAGE_BASE = "/assets/products/busbar/ggd";
+const SOURCE_ROUTE = "/products/busbar-systems/ggd-medium-power-busbar";
+const REQUEST_QUOTE_HREF = buildEnquiryHref("quote", { system: "busbar", family: "ggd-medium-power-busbar", source: SOURCE_ROUTE });
+const REQUEST_DOCUMENTATION_HREF = buildEnquiryHref("technical-document", { system: "busbar", family: "ggd-medium-power-busbar", source: SOURCE_ROUTE });
+
+const IMAGE_BASE = publicMediaUrl("products/busbar/ggd");
 
 const SPEC_COLUMNS_GGDA = [
   { id: "c160", label: "160A" },
@@ -118,7 +125,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Data Centres",
         description:
           "Reliable, high-current power distribution up to 1000 A for data centre server halls.",
-        image: "/assets/industries/cards/data-centres.webp",
+        image: publicMediaUrl("industries/cards/data-centres.webp"),
         imageAlt: "Data centre server room with rows of server racks",
       },
       {
@@ -126,7 +133,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Infrastructure & Utilities",
         description:
           "Robust power distribution for utility plants and other essential-service facilities.",
-        image: "/assets/industries/cards/infrastructure-utilities.webp",
+        image: publicMediaUrl("industries/cards/infrastructure-utilities.webp"),
         imageAlt: "Industrial utility plant with pumps and piping",
       },
       {
@@ -134,7 +141,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Industrial Facilities",
         description:
           "High-current power distribution for production areas and high-ceiling industrial spaces requiring up to 1000 A capacity.",
-        image: "/assets/industries/cards/industrial-facilities.webp",
+        image: publicMediaUrl("industries/cards/industrial-facilities.webp"),
         imageAlt: "Industrial production facility interior",
       },
       {
@@ -142,7 +149,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Commercial Buildings",
         description:
           "Adaptable power distribution for offices, retail units and mixed-use commercial interiors.",
-        image: "/assets/industries/cards/commercial-buildings.webp",
+        image: publicMediaUrl("industries/cards/commercial-buildings.webp"),
         imageAlt: "Illuminated commercial office towers at dusk",
       },
       {
@@ -150,7 +157,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Warehouses & Logistics",
         description:
           "Continuous power distribution above storage aisles, picking areas and logistics operations.",
-        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
+        image: publicMediaUrl("products/busbar/applications/busbar-application-warehouse.webp"),
         imageAlt:
           "Industrial warehouse with continuous overhead lighting above storage and logistics areas",
       },
@@ -159,7 +166,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Parking Structures",
         description:
           "Robust power distribution for lighting, EV charging and ventilation infrastructure in parking facilities.",
-        image: "/assets/products/busbar/applications/busbar-application-parking.webp",
+        image: publicMediaUrl("products/busbar/applications/busbar-application-parking.webp"),
         imageAlt: "Parking structure with overhead lighting and power distribution",
       },
       {
@@ -167,7 +174,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Healthcare",
         description:
           "Resilient power distribution for wards, plant rooms and clinical support areas.",
-        image: "/assets/industries/cards/healthcare.webp",
+        image: publicMediaUrl("industries/cards/healthcare.webp"),
         imageAlt: "Hospital corridor with continuous ceiling lighting",
       },
       {
@@ -175,7 +182,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Transport Infrastructure",
         description:
           "Power distribution for airports, rail stations and other major transport hubs.",
-        image: "/assets/industries/cards/transport-infrastructure.webp",
+        image: publicMediaUrl("industries/cards/transport-infrastructure.webp"),
         imageAlt: "Airport terminal and transit infrastructure at night",
       },
     ],
@@ -202,7 +209,7 @@ export const GGD_SYSTEM_DETAIL = {
             "Track key electrical parameters, automate switching and schedule operations with ease.",
         },
       ],
-      image: "/assets/products/g-bus/g-bus-smart-rail-dashboard.webp",
+      image: publicMediaUrl("products/g-bus/g-bus-smart-rail-dashboard.webp"),
       imageAlt:
         "G-BUS automation dashboard overlay on a Gersan busbar with receiver modules",
       primaryActionLabel: "Explore G-BUS Automation",
@@ -1028,7 +1035,7 @@ export const GGD_SYSTEM_DETAIL = {
         description:
           "Full product catalogue covering all Gersan busbar trunking systems, including GGD technical data, order codes and dimensional drawings.",
         fileLabel: "PDF · 25.1 MB",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Download catalogue",
       },
       {
@@ -1036,12 +1043,12 @@ export const GGD_SYSTEM_DETAIL = {
         description:
           "Quick reference for joining two GGD busbar elements: alignment, one-bolt joint tightening torque and closing the joint covers.",
         fileLabel: "PDF",
-        href: `${IMAGE_BASE}/installation/GGD_Busbar_Installation_Guide.pdf`,
+        href: `${IMAGE_BASE}/installation/ggd-busbar-installation-guide.pdf`,
         downloadLabel: "Download installation guide",
       },
     ],
-    requestQuoteHref: "/uk-support?product=ggd-medium-power-busbar",
-    requestDocumentationHref: "/#technical-documents",
+    requestQuoteHref: REQUEST_QUOTE_HREF,
+    requestDocumentationHref: REQUEST_DOCUMENTATION_HREF,
   },
   ua: {
     slug: "ggd-medium-power-busbar",
@@ -1135,7 +1142,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Дата-центри",
         description:
           "Надійний розподіл живлення до 1000 А для серверних залів дата-центрів.",
-        image: "/assets/industries/cards/data-centres.webp",
+        image: publicMediaUrl("industries/cards/data-centres.webp"),
         imageAlt: "Серверна зала дата-центру з рядами серверних стійок",
       },
       {
@@ -1143,7 +1150,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Інфраструктура та комунальне господарство",
         description:
           "Надійний розподіл живлення для об'єктів комунального господарства та інших об'єктів життєзабезпечення.",
-        image: "/assets/industries/cards/infrastructure-utilities.webp",
+        image: publicMediaUrl("industries/cards/infrastructure-utilities.webp"),
         imageAlt: "Промисловий об'єкт комунального господарства з насосами та трубопроводами",
       },
       {
@@ -1151,7 +1158,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Промислові об'єкти",
         description:
           "Розподіл потужного струму для виробничих зон та промислових приміщень з ємністю до 1000 А.",
-        image: "/assets/industries/cards/industrial-facilities.webp",
+        image: publicMediaUrl("industries/cards/industrial-facilities.webp"),
         imageAlt: "Інтер'єр промислового виробничого об'єкта",
       },
       {
@@ -1159,7 +1166,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Комерційні будівлі",
         description:
           "Адаптивний розподіл живлення для офісів, торговельних приміщень та багатофункціональних комерційних об'єктів.",
-        image: "/assets/industries/cards/commercial-buildings.webp",
+        image: publicMediaUrl("industries/cards/commercial-buildings.webp"),
         imageAlt: "Освітлені комерційні офісні вежі в сутінках",
       },
       {
@@ -1167,7 +1174,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Склади та логістичні центри",
         description:
           "Безперервний розподіл живлення над складськими проходами та логістичними ділянками.",
-        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
+        image: publicMediaUrl("products/busbar/applications/busbar-application-warehouse.webp"),
         imageAlt: "Промисловий склад із безперервним освітленням над стелажами",
       },
       {
@@ -1175,7 +1182,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Паркінги",
         description:
           "Надійний розподіл живлення для освітлення, зарядки електромобілів та вентиляції в паркінгах.",
-        image: "/assets/products/busbar/applications/busbar-application-parking.webp",
+        image: publicMediaUrl("products/busbar/applications/busbar-application-parking.webp"),
         imageAlt: "Паркінг з надстельовим освітленням та розподілом живлення",
       },
       {
@@ -1183,7 +1190,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Охорона здоров'я",
         description:
           "Надійний розподіл живлення для палат, технічних приміщень та клінічних допоміжних зон.",
-        image: "/assets/industries/cards/healthcare.webp",
+        image: publicMediaUrl("industries/cards/healthcare.webp"),
         imageAlt: "Лікарняний коридор з безперервним стельовим освітленням",
       },
       {
@@ -1191,7 +1198,7 @@ export const GGD_SYSTEM_DETAIL = {
         title: "Транспортна інфраструктура",
         description:
           "Розподіл живлення для аеропортів, залізничних станцій та інших великих транспортних вузлів.",
-        image: "/assets/industries/cards/transport-infrastructure.webp",
+        image: publicMediaUrl("industries/cards/transport-infrastructure.webp"),
         imageAlt: "Термінал аеропорту та транспортна інфраструктура вночі",
       },
     ],
@@ -1218,7 +1225,7 @@ export const GGD_SYSTEM_DETAIL = {
             "Відстежуйте ключові електричні параметри, автоматизуйте перемикання та плануйте операції.",
         },
       ],
-      image: "/assets/products/g-bus/g-bus-smart-rail-dashboard.webp",
+      image: publicMediaUrl("products/g-bus/g-bus-smart-rail-dashboard.webp"),
       imageAlt:
         "Панель автоматизації G-BUS поверх шинопроводу Gersan з приймальними модулями",
       primaryActionLabel: "Дізнатися про G-BUS Automation",
@@ -2045,7 +2052,7 @@ export const GGD_SYSTEM_DETAIL = {
         description:
           "Повний каталог з усіма шинопровідними системами Gersan, включно з технічними даними GGD.",
         fileLabel: "PDF · 25,1 МБ",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Завантажити каталог",
       },
       {
@@ -2053,11 +2060,11 @@ export const GGD_SYSTEM_DETAIL = {
         description:
           "Короткий довідник із з'єднання двох елементів шинопроводу GGD: вирівнювання, момент затяжки одноболтового з'єднання та закриття кришок з'єднання.",
         fileLabel: "PDF",
-        href: `${IMAGE_BASE}/installation/GGD_Busbar_Installation_Guide.pdf`,
+        href: `${IMAGE_BASE}/installation/ggd-busbar-installation-guide.pdf`,
         downloadLabel: "Завантажити інструкцію з монтажу",
       },
     ],
-    requestQuoteHref: "/uk-support?product=ggd-medium-power-busbar",
-    requestDocumentationHref: "/#technical-documents",
+    requestQuoteHref: REQUEST_QUOTE_HREF,
+    requestDocumentationHref: REQUEST_DOCUMENTATION_HREF,
   },
 } as const satisfies BusbarSystemDetailByMarket;

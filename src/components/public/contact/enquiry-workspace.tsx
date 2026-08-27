@@ -1,21 +1,28 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
+import Link from "next/link";
 
-import type { MarketCode } from "@/modules/markets/types";
 import { submitEnquiry, type EnquiryDraft } from "@/modules/enquiry/draft";
-import { useEnquiryItems } from "@/modules/enquiry/store";
+import { enquiryItemCountLabel } from "@/modules/enquiry/format";
+import { clearEnquiry, useEnquiryItems } from "@/modules/enquiry/store";
 import { enquirySystemLabelsForMarket, type EnquirySourceContext, type EnquiryType } from "@/modules/enquiry/types";
+import type { MarketCode } from "@/modules/markets/types";
 import type { ContactPageContent } from "@/modules/public-site/contact-content";
 
 import { EnquiryTypeSelector } from "./enquiry-type-selector";
-import { FileUploadField } from "./file-upload-field";
 import { SelectedProductsPanel } from "./selected-products-panel";
 import styles from "./contact-page.module.css";
 
 type FieldErrors = Partial<Record<string, string>>;
-type Status = "idle" | "submitting" | "error";
+type Status = "idle" | "submitting" | "success" | "error";
+type SuccessSnapshot = Readonly<{ referenceNo: string; type: EnquiryType; itemCount: number }>;
+
+// Pragmatic structural check (local-part@domain.tld) — not a full RFC 5322
+// parser and deliberately not DNS-verified, so it never blocks a real
+// Gmail/Outlook/company address while still catching obvious typos.
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function TextField({
   id,
@@ -23,6 +30,7 @@ function TextField({
   value,
   onChange,
   required,
+  optionalHint,
   error,
   type = "text",
   placeholder,
@@ -32,6 +40,7 @@ function TextField({
   value: string;
   onChange: (value: string) => void;
   required?: boolean;
+  optionalHint?: string;
   error?: string;
   type?: string;
   placeholder?: string;
@@ -41,6 +50,7 @@ function TextField({
       <label className={styles.fieldLabel} htmlFor={id}>
         {label}
         {required ? <span aria-hidden="true"> *</span> : null}
+        {!required && optionalHint ? <span className={styles.fieldOptionalHint}> {optionalHint}</span> : null}
       </label>
       <input
         aria-describedby={error ? `${id}-error` : undefined}
@@ -54,7 +64,7 @@ function TextField({
         value={value}
       />
       {error ? (
-        <p className={styles.fieldError} id={`${id}-error`}>
+        <p className={styles.fieldError} id={`${id}-error`} role="alert">
           {error}
         </p>
       ) : null}
@@ -97,7 +107,7 @@ function TextAreaField({
         value={value}
       />
       {error ? (
-        <p className={styles.fieldError} id={`${id}-error`}>
+        <p className={styles.fieldError} id={`${id}-error`} role="alert">
           {error}
         </p>
       ) : null}
@@ -152,11 +162,13 @@ function CheckboxGroup({
   options,
   values,
   onToggle,
+  error,
 }: Readonly<{
   legend: string;
   options: readonly string[];
   values: readonly string[];
   onToggle: (option: string) => void;
+  error?: string;
 }>) {
   return (
     <fieldset className={styles.checkboxGroup}>
@@ -172,6 +184,11 @@ function CheckboxGroup({
           );
         })}
       </div>
+      {error ? (
+        <p className={styles.fieldError} role="alert">
+          {error}
+        </p>
+      ) : null}
     </fieldset>
   );
 }
@@ -194,6 +211,7 @@ export function EnquiryWorkspace({
   const idPrefix = useId();
   const enquiryItems = useEnquiryItems();
   const systemOptions = enquirySystemLabelsForMarket(market).map((system) => ({ value: system.key, label: system.label }));
+  const successHeadingRef = useRef<HTMLHeadingElement>(null);
 
   const [type, setType] = useState<EnquiryType>(initialType);
   const [firstName, setFirstName] = useState("");
@@ -216,9 +234,13 @@ export function EnquiryWorkspace({
   const [interestedSystems, setInterestedSystems] = useState<readonly string[]>([]);
   const [informationRequired, setInformationRequired] = useState<readonly string[]>([]);
   const [documentRequired, setDocumentRequired] = useState<readonly string[]>([]);
-  const [files, setFiles] = useState<readonly File[]>([]);
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [successSnapshot, setSuccessSnapshot] = useState<SuccessSnapshot | null>(null);
+
+  useEffect(() => {
+    if (status === "success") successHeadingRef.current?.focus();
+  }, [status]);
 
   const hasApplicationMapContext = Boolean(
     initialContext.industry || initialContext.zone || initialContext.hotspot,
@@ -254,8 +276,12 @@ export function EnquiryWorkspace({
     setInterestedSystems([]);
     setInformationRequired([]);
     setDocumentRequired([]);
-    setFiles([]);
     setErrors({});
+  }
+
+  function startNewEnquiry() {
+    resetForm();
+    setSuccessSnapshot(null);
     setStatus("idle");
   }
 
@@ -264,14 +290,26 @@ export function EnquiryWorkspace({
     if (!firstName.trim()) nextErrors.firstName = content.fields.firstName;
     if (!lastName.trim()) nextErrors.lastName = content.fields.lastName;
     if (!company.trim()) nextErrors.company = content.fields.company;
-    if (!jobTitle.trim()) nextErrors.jobTitle = content.fields.jobTitle;
-    if (!email.trim()) nextErrors.email = content.fields.workEmail;
+
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) {
+      nextErrors.email = content.fields.workEmail;
+    } else if (!EMAIL_PATTERN.test(trimmedEmail)) {
+      nextErrors.email = content.fields.workEmailInvalid;
+    }
+
     if (type === "general" && !subject.trim()) nextErrors.subject = content.fields.subject;
     if (type === "product" && enquiryItems.length === 0) {
       nextErrors.selectedProducts = market === "ua" ? "Додайте принаймні один продукт до запиту." : "Add at least one product to your enquiry.";
     }
     if (!message.trim() && (type === "general" || type === "product" || type === "quote" || type === "project")) {
       nextErrors.message = content.fields.message;
+    }
+    if (type === "technical" && informationRequired.length === 0 && !message.trim()) {
+      nextErrors.technicalRequirement = content.fields.informationRequiredError;
+    }
+    if (type === "technical-document" && documentRequired.length === 0 && !message.trim()) {
+      nextErrors.documentRequirement = content.fields.documentRequiredError;
     }
     return nextErrors;
   }
@@ -287,6 +325,7 @@ export function EnquiryWorkspace({
     const draft: EnquiryDraft = {
       type,
       market,
+      subject,
       contact: { firstName, lastName, company, jobTitle, email, phone },
       project: {
         projectName,
@@ -305,7 +344,11 @@ export function EnquiryWorkspace({
         documentsRequired: documentRequired,
       },
       selectedItems: enquiryItems,
-      attachmentNames: files.map((file) => file.name),
+      // Website attachment upload is disabled (see FileUploadField /
+      // src/modules/enquiry/attachments.ts, both dormant) until the private
+      // malware-scanning layer is operational — there is no UI path that can
+      // ever populate this today.
+      attachmentNames: [],
       message,
       sourceContext: initialContext,
     };
@@ -315,7 +358,59 @@ export function EnquiryWorkspace({
       setStatus("error");
       return;
     }
-    setStatus("idle");
+
+    // Snapshot what was submitted before the basket is cleared, so the
+    // success screen can still show an accurate item count.
+    setSuccessSnapshot({
+      referenceNo: result.referenceNo,
+      type,
+      itemCount: enquiryItems.length,
+    });
+    clearEnquiry();
+    resetForm();
+    setStatus("success");
+  }
+
+  if (status === "success" && successSnapshot) {
+    const successTypeLabel = content.typeOptions.find((option) => option.id === successSnapshot.type)?.label ?? activeTypeLabel;
+
+    return (
+      <div className={styles.workspace}>
+        <div aria-live="polite" className={styles.successPanel} role="status">
+          <h2 ref={successHeadingRef} tabIndex={-1}>
+            {content.submit.successTitle}
+          </h2>
+          <p>{content.submit.successBody}</p>
+          <dl className={styles.successSummary}>
+            <div>
+              <dt>{content.submit.successReferenceLabel}</dt>
+              <dd>{successSnapshot.referenceNo}</dd>
+            </div>
+            <div>
+              <dt>{content.submit.successTypeLabel}</dt>
+              <dd>{successTypeLabel}</dd>
+            </div>
+            {successSnapshot.itemCount > 0 ? (
+              <div>
+                <dt>{content.selectedProducts.heading}</dt>
+                <dd>{enquiryItemCountLabel(successSnapshot.itemCount, market)}</dd>
+              </div>
+            ) : null}
+          </dl>
+          <p className={styles.fieldHelper}>
+            {content.submit.successAttachmentNoteTemplate.replace("{referenceNo}", successSnapshot.referenceNo)}
+          </p>
+          <div className={styles.successActions}>
+            <button className={styles.submitButton} onClick={startNewEnquiry} type="button">
+              {content.submit.submitAnotherAction}
+            </button>
+            <Link className={styles.resetButton} href="/#product-systems">
+              {content.submit.returnToProductsAction}
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -398,12 +493,11 @@ export function EnquiryWorkspace({
               value={company}
             />
             <TextField
-              error={errors.jobTitle}
               id={`${idPrefix}-job-title`}
               label={content.fields.jobTitle}
               onChange={setJobTitle}
+              optionalHint={content.fields.optionalMarker}
               placeholder={content.fields.jobTitlePlaceholder}
-              required
               value={jobTitle}
             />
           </div>
@@ -530,6 +624,7 @@ export function EnquiryWorkspace({
           {type === "technical" && (
             <>
               <CheckboxGroup
+                error={errors.technicalRequirement}
                 legend={content.fields.informationRequired}
                 onToggle={(option) => setInformationRequired((current) => toggleValue(current, option))}
                 options={content.fields.informationRequiredOptions}
@@ -542,6 +637,7 @@ export function EnquiryWorkspace({
           {type === "technical-document" && (
             <>
               <CheckboxGroup
+                error={errors.documentRequirement}
                 legend={content.fields.documentRequired}
                 onToggle={(option) => setDocumentRequired((current) => toggleValue(current, option))}
                 options={content.fields.documentRequiredOptions}
@@ -628,9 +724,18 @@ export function EnquiryWorkspace({
               <span className={styles.formGroupNumber}>03</span>
               {content.fields.sectionAttachmentsHeading}
             </h3>
-            <FileUploadField content={content} files={files} onFilesChange={setFiles} />
+            <p className={styles.fieldHelper}>{content.fields.attachmentsUnavailableNote}</p>
           </div>
         ) : null}
+
+        <p className={styles.privacyNotice}>
+          {content.privacy.notice}{" "}
+          {content.privacy.href ? (
+            <Link href={content.privacy.href}>{content.privacy.linkLabel}</Link>
+          ) : (
+            <span className={styles.privacyNoticePending}>{content.privacy.linkLabel}</span>
+          )}
+        </p>
 
         {status === "error" ? (
           <div className={styles.formError} role="alert">

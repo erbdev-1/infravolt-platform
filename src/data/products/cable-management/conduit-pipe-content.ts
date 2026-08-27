@@ -1,10 +1,16 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { CableMacroFamilyContent } from "./macro-family-types";
 import { CABLE_SUPPORT_CATALOGUE_PDF_HREF } from "./content";
 
-const IMAGE_BASE = "/assets/products/cable-management";
-const REQUEST_HREF = "/uk-support?request=technical-pack&product=conduit-pipe-systems";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+const REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "conduit-pipe-systems",
+  source: "/products/cable-support-systems",
+});
 
 // Three catalogue series map to this macro group (see category-content.ts):
 // Socket and Fuse Fixing Unit on the Tray, Pipe Clamps, and EMT/IMC/RSC

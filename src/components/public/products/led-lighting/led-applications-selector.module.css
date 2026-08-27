@@ -1,0 +1,141 @@
+/* =========================================================
+   LED APPLICATIONS SELECTOR — shared mobile/tablet component
+   Used by both the series/detail template (led-series-detail-page.tsx)
+   and all 10 category pages (led-category-detail-page*.tsx). A standalone
+   module (not owned by either page's own CSS module) so one component can
+   serve both contexts without duplicating the interaction 10+ times.
+   References the --led-* custom properties that every LED page module
+   already defines on its own .page element — those cascade down to
+   wherever this component actually renders in the real DOM, so no
+   redefinition is needed here.
+   ========================================================= */
+
+.applicationSelector {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .applicationSelector {
+    display: block;
+  }
+}
+
+.applicationActiveCard {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--led-shadow-idle);
+  color: inherit;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.applicationActiveVisual {
+  aspect-ratio: 4 / 3;
+  background: var(--led-accent-tint);
+  position: relative;
+}
+
+.applicationMediaEmpty {
+  align-items: center;
+  background: var(--led-accent-tint);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.applicationMediaEmptyIcon {
+  color: var(--led-accent-border);
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.applicationActiveContent {
+  padding: 0.9rem 1rem 1rem;
+}
+
+.applicationActiveHeading {
+  align-items: center;
+  display: flex;
+  gap: 0.55rem;
+}
+
+.applicationActiveIcon {
+  color: var(--led-accent-dark);
+  flex-shrink: 0;
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+.applicationActiveTitle {
+  color: var(--led-ink);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.applicationActiveDescription {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  color: var(--led-muted);
+  display: -webkit-box;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin: 0.5rem 0 0;
+  overflow: hidden;
+}
+
+.applicationActiveAction {
+  align-items: center;
+  color: var(--led-accent-dark);
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 800;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+.applicationSelectorGrid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0.65rem;
+}
+
+.applicationSelectorItem,
+.applicationSelectorItemActive {
+  border-radius: 0.55rem;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.65rem 0.55rem;
+  text-align: center;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.applicationSelectorItem {
+  background: #ffffff;
+  border: 1px solid var(--led-border);
+  color: var(--led-body);
+}
+
+.applicationSelectorItem:hover {
+  border-color: var(--led-accent-border);
+  color: var(--led-accent-dark);
+}
+
+.applicationSelectorItemActive {
+  background: var(--led-accent);
+  border: 1px solid var(--led-accent);
+  color: var(--led-dark);
+}
+
+.applicationSelectorItem:focus-visible,
+.applicationSelectorItemActive:focus-visible {
+  outline: 2px solid var(--led-accent);
+  outline-offset: 2px;
+}

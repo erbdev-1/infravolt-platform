@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
@@ -13,11 +14,11 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  * against a transparent backdrop (foreground). Copied as-is into this
  * series' own asset folder; no further processing needed. */
 export const GER_LED_INDUSTRIAL_HERO_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-hero-foreground.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-hero-foreground.webp");
 export const GER_LED_INDUSTRIAL_HERO_IMAGE_ALT =
   "GER-LED Industrial High Ceiling luminaire, illuminated, rectangular housing with visible LED array";
 export const GER_LED_INDUSTRIAL_HERO_BACKGROUND_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-hero-background.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-hero-background.webp");
 export const GER_LED_INDUSTRIAL_HERO_BACKGROUND_IMAGE_ALT =
   "Heavy industrial production hall interior with operational high-bay LED lighting";
 /** The family's own verified catalogue application photo — an
@@ -25,7 +26,7 @@ export const GER_LED_INDUSTRIAL_HERO_BACKGROUND_IMAGE_ALT =
  * application card per the verified recommended_site_usage in the
  * catalogue extraction manifest. */
 export const GER_LED_INDUSTRIAL_APPLICATION_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application.webp");
 export const GER_LED_INDUSTRIAL_APPLICATION_IMAGE_ALT =
   "Industrial warehouse roof structure lit by high-bay LED fixtures";
 /** Photometric/technical drawing: higher-resolution renders sourced from
@@ -34,9 +35,9 @@ export const GER_LED_INDUSTRIAL_APPLICATION_IMAGE_ALT =
  * replacing the small raw catalogue-scan PNGs originally extracted
  * directly from the source PDF. */
 export const GER_LED_INDUSTRIAL_PHOTOMETRIC_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-photometric.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-photometric.webp");
 export const GER_LED_INDUSTRIAL_TECHNICAL_DRAWING_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-technical-drawing.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-technical-drawing.webp");
 /** Typical Applications card grid — all 6 grouped cards now reuse real,
  * verified LEDBUS/GERSAN site-ready photography (none repeated within
  * this page's own grid): a genuine aircraft-assembly/maintenance hangar
@@ -49,15 +50,15 @@ export const GER_LED_INDUSTRIAL_TECHNICAL_DRAWING_IMAGE =
  * and a real coal-processing facility interior — conveyor, loader, coal
  * stockpile — under high-bay LED lighting (Coal & Mining). */
 export const GER_LED_INDUSTRIAL_APPLICATION_HANGARS_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application-hangars-aircraft-maintenance.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application-hangars-aircraft-maintenance.webp");
 export const GER_LED_INDUSTRIAL_APPLICATION_PORTS_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application-ports-heavy-industry.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application-ports-heavy-industry.webp");
 export const GER_LED_INDUSTRIAL_APPLICATION_PETROCHEMICAL_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application-petrochemical-gas-stations.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application-petrochemical-gas-stations.webp");
 export const GER_LED_INDUSTRIAL_APPLICATION_FLOUR_DYE_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application-flour-dye.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application-flour-dye.webp");
 export const GER_LED_INDUSTRIAL_APPLICATION_COAL_MINING_IMAGE =
-  "/assets/products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application-coal-mining.webp";
+  publicMediaUrl("products/led-lighting/series/ger-led-industrial-high-ceiling/ger-led-industrial-high-ceiling-application-coal-mining.webp");
 
 /** Source-accuracy note (GER-LED Industrial High Ceiling catalogue
  * extraction, page 14): the catalogue page's icon row visually shows
@@ -99,7 +100,6 @@ const MODELS_UA: readonly LedSeriesModel[] = [
   { model: "GSL IND-250W", powerW: 250, ledQty: 80, luminousFluxLm: "37 600 лм", efficiencyLmW: "150,4 лм/Вт", weightKg: "7,0 кг" },
 ] as const;
 
-const SUPPORT_REQUEST_HREF = "/uk-support?request=technical-pack&product=ger-led-industrial-high-ceiling";
 
 const content = {
   uk: {
@@ -661,5 +661,3 @@ const content = {
 export function gerLedIndustrialHighCeilingContentForMarket(market: MarketCode): LedSeriesDetailContent {
   return content[market];
 }
-
-export { SUPPORT_REQUEST_HREF as GER_LED_INDUSTRIAL_SUPPORT_REQUEST_HREF };
