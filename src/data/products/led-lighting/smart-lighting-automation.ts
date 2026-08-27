@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedCategoryDetailContent } from "./types";
@@ -6,15 +7,15 @@ import type { LedCategoryDetailContent } from "./types";
  *
  * Hero background/foreground and the hub-page card image are the
  * pre-generated assets already prepared for this category under
- * category/smart-lighting&automation/{hero,card} — a smart-building
+ * category/smart-lighting-automation/{hero,card} — a smart-building
  * control-room atmosphere shot (background/card) and a real GERSAN
  * product composite (foreground): the GSL3 C70W smart street luminaire
  * with its integrated 360° camera module and control/receiver unit. */
 export const SMART_LIGHTING_HERO_BACKGROUND =
-  "/assets/products/led-lighting/category/smart-lighting&automation/hero/smart-lighting-automation-hero-background.webp";
+  publicMediaUrl("products/led-lighting/category/smart-lighting-automation/hero/smart-lighting-automation-hero-background.webp");
 export const SMART_LIGHTING_HERO_BACKGROUND_ALT = "Smart building control room with lighting-automation dashboards and touch panels";
 export const SMART_LIGHTING_HERO_FOREGROUND =
-  "/assets/products/led-lighting/category/smart-lighting&automation/hero/smart-lighting-automation-hero-foreground-products.webp";
+  publicMediaUrl("products/led-lighting/category/smart-lighting-automation/hero/smart-lighting-automation-hero-foreground-products.webp");
 export const SMART_LIGHTING_HERO_FOREGROUND_ALT =
   "GER-LED smart street luminaire with an integrated 360° camera module and control/receiver unit";
 export const SMART_LIGHTING_SUPPORT_CTA_IMAGE = SMART_LIGHTING_HERO_BACKGROUND;
@@ -25,9 +26,9 @@ export const SMART_LIGHTING_SUPPORT_CTA_IMAGE_ALT = SMART_LIGHTING_HERO_BACKGROU
  * /products/g-bus page) for the G-BUS PLC Automation series card, and a
  * dedicated clean studio product shot for the GER-LED Smart Street
  * Lighting series card. */
-const SERIES_IMAGE_BASE = "/assets/products/led-lighting/category/smart-lighting&automation/series";
-const CARD_IMAGE_BASE = "/assets/products/led-lighting/category/smart-lighting&automation/card";
-const APPLICATION_IMAGE_BASE = "/assets/products/led-lighting/category/smart-lighting&automation/applications";
+const SERIES_IMAGE_BASE = publicMediaUrl("products/led-lighting/category/smart-lighting-automation/series");
+const CARD_IMAGE_BASE = publicMediaUrl("products/led-lighting/category/smart-lighting-automation/card");
+const APPLICATION_IMAGE_BASE = publicMediaUrl("products/led-lighting/category/smart-lighting-automation/applications");
 
 const content = {
   uk: {

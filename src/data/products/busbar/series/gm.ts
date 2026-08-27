@@ -1,4 +1,11 @@
+import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
+
 import type { BusbarSystemDetailByMarket } from "./types";
+
+const SOURCE_ROUTE = "/products/busbar-systems/gm-low-power-busbar";
+const REQUEST_QUOTE_HREF = buildEnquiryHref("quote", { system: "busbar", family: "gm-low-power-busbar", source: SOURCE_ROUTE });
+const REQUEST_DOCUMENTATION_HREF = buildEnquiryHref("technical-document", { system: "busbar", family: "gm-low-power-busbar", source: SOURCE_ROUTE });
 
 const SPEC_COLUMNS = [
   { id: "gm-100", label: "GM 100A" },
@@ -7,8 +14,8 @@ const SPEC_COLUMNS = [
   { id: "gm-400", label: "GM 400A" },
 ] as const;
 
-const IMAGE_BASE = "/assets/products/busbar/gm";
-const APPLICATION_IMAGE_BASE = "/assets/products/busbar/applications";
+const IMAGE_BASE = publicMediaUrl("products/busbar/gm");
+const APPLICATION_IMAGE_BASE = publicMediaUrl("products/busbar/applications");
 
 export const GM_SYSTEM_DETAIL = {
   uk: {
@@ -383,7 +390,7 @@ export const GM_SYSTEM_DETAIL = {
         description:
           "Full product catalogue covering all Gersan busbar trunking systems, including GM technical data, order codes and dimensional drawings.",
         fileLabel: "PDF · 25.1 MB",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Download catalogue",
       },
       {
@@ -391,12 +398,12 @@ export const GM_SYSTEM_DETAIL = {
         description:
           "Quick reference for joining two GM busbar elements: alignment, hard-fixing bar joint tightening torque and closing the IP55 joint cover.",
         fileLabel: "PDF",
-        href: `${IMAGE_BASE}/installation/GM_Busbar_Installation_Guide.pdf`,
+        href: `${IMAGE_BASE}/installation/gm-busbar-installation-guide.pdf`,
         downloadLabel: "Download installation guide",
       },
     ],
-    requestQuoteHref: "/uk-support?product=gm-low-power-busbar",
-    requestDocumentationHref: "/#technical-documents",
+    requestQuoteHref: REQUEST_QUOTE_HREF,
+    requestDocumentationHref: REQUEST_DOCUMENTATION_HREF,
   },
   ua: {
     slug: "gm-low-power-busbar",
@@ -540,7 +547,7 @@ export const GM_SYSTEM_DETAIL = {
         description:
           "Повний каталог з усіма шинопровідними системами Gersan, включно з технічними даними GM.",
         fileLabel: "PDF · 25,1 МБ",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Завантажити каталог",
       },
       {
@@ -548,11 +555,11 @@ export const GM_SYSTEM_DETAIL = {
         description:
           "Короткий довідник із з'єднання двох елементів шинопроводу GM: вирівнювання, момент затяжки барної системи з'єднання та закриття кришки IP55.",
         fileLabel: "PDF",
-        href: `${IMAGE_BASE}/installation/GM_Busbar_Installation_Guide.pdf`,
+        href: `${IMAGE_BASE}/installation/gm-busbar-installation-guide.pdf`,
         downloadLabel: "Завантажити інструкцію з монтажу",
       },
     ],
-    requestQuoteHref: "/uk-support?product=gm-low-power-busbar",
-    requestDocumentationHref: "/#technical-documents",
+    requestQuoteHref: REQUEST_QUOTE_HREF,
+    requestDocumentationHref: REQUEST_DOCUMENTATION_HREF,
   },
 } as const satisfies BusbarSystemDetailByMarket;

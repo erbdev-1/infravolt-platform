@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
@@ -7,7 +8,7 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  *
  * Hero background/foreground: premium pre-generated assets sourced from
  * the shared Industrial & High-Bay category asset library
- * (category/industrial&high-bay/product and .../product/background) —
+ * (category/industrial-high-bay/product and .../product/background) —
  * a real warehouse/logistics interior and the real, fully visible
  * LED-BUS LDBE fixture, already isolated and switched on with
  * neutral-white light. Replaces this file's earlier from-scratch
@@ -21,11 +22,11 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  * diagram and technical drawing, replacing the small raw catalogue-scan
  * PNGs originally extracted directly from the source PDF. */
 export const LED_BUS_LDBE_HERO_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-hero-foreground.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-hero-foreground.webp");
 export const LED_BUS_LDBE_HERO_IMAGE_ALT =
   "LED-BUS LDBE luminaire, illuminated, angled view of the multi-lens diffuser panel";
 export const LED_BUS_LDBE_HERO_BACKGROUND_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-hero-background.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-hero-background.webp");
 export const LED_BUS_LDBE_HERO_BACKGROUND_IMAGE_ALT =
   "Warehouse and logistics facility interior with conveyor and pallet racking, lit by high-bay LED fixtures";
 /** Typical Applications card grid — the LDBE family's own catalogue page
@@ -40,15 +41,15 @@ export const LED_BUS_LDBE_HERO_BACKGROUND_IMAGE_ALT =
  * forklift (Logistics Facilities, already used as the Industrial &
  * High-Bay category page's "Warehouses & Logistics" card). */
 export const LED_BUS_LDBE_APPLICATION_INDUSTRIAL_FACILITIES_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-application-industrial-facilities.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-application-industrial-facilities.webp");
 export const LED_BUS_LDBE_APPLICATION_AVIATION_AIRPORTS_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-application-aviation-airports.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-application-aviation-airports.webp");
 export const LED_BUS_LDBE_APPLICATION_LOGISTICS_FACILITIES_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-application-logistics-facilities.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-application-logistics-facilities.webp");
 export const LED_BUS_LDBE_PHOTOMETRIC_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-photometric.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-photometric.webp");
 export const LED_BUS_LDBE_TECHNICAL_DRAWING_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-technical-drawing.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbe/led-bus-ldbe-technical-drawing.webp");
 
 // Note: the real assembly-1..7 catalogue images remain on disk under
 // public/assets/products/led-lighting/series/led-bus-ldbe/assembly/ — the
@@ -80,7 +81,6 @@ const MODELS_UA: readonly LedSeriesModel[] = [
   { model: "LDB8E", powerW: 250, luminousFluxLm: "37 000 лм", lens: LENS, ip: "IP20 / IP65", dimensions: "30×120 см", weightKg: "8,0 кг" },
 ] as const;
 
-const SUPPORT_REQUEST_HREF = "/uk-support?request=technical-pack&product=led-bus-ldbe";
 
 const content = {
   uk: {
@@ -544,5 +544,3 @@ const content = {
 export function ledBusLdbeContentForMarket(market: MarketCode): LedSeriesDetailContent {
   return content[market];
 }
-
-export { SUPPORT_REQUEST_HREF as LED_BUS_LDBE_SUPPORT_REQUEST_HREF };

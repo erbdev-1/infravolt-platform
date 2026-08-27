@@ -606,8 +606,10 @@ video {
 }
 
 .hero {
-  /* 4.75rem header + üst/alt 1rem boşluk */
-  --hero-video-height: calc(100svh - 6.75rem);
+  /* 4.75rem header + üst/alt 0.625rem boşluk — hero video'nun daha güçlü,
+     daha "hero" hissettiren bir ilk izlenim vermesi için çerçeve boşluğu
+     daraltıldı (bkz. .hero__video margin altta). */
+  --hero-video-height: calc(100svh - 6rem);
 
   position: relative;
   display: block;
@@ -635,8 +637,9 @@ video {
   width: auto;
   height: var(--hero-video-height);
 
-  /* Dört tarafta eşit lacivert mesafe */
-  margin: 1rem;
+  /* Dört tarafta eşit lacivert mesafe — daha büyük/daha baskın bir video
+     alanı için daraltıldı (önceden 1rem). */
+  margin: 0.625rem;
 
   overflow: hidden;
   background: var(--colour-navy-dark);
@@ -660,6 +663,13 @@ video {
 
   object-fit: cover;
   object-position: 50% 25%;
+
+  /* Video kaynağı koyu pozlanmış (gece sahnesi) — aynı marka için
+     product-card görsellerinde zaten kullanılan hafif parlaklık/kontrast
+     düzeltmesiyle (bkz. .product-card__media > img) detaylar korunarak
+     canlandırılıyor. Doygunluk kasıtlı olarak dokunulmadı (soluk
+     görünmesin diye). */
+  filter: brightness(1.08) contrast(1.02);
 }
 
 /* The source video carries scene titles in its upper safe area. Very
@@ -675,24 +685,28 @@ video {
   position: absolute;
   z-index: 1;
 
-  /* Video ile birebir aynı konum ve yükseklik */
-  top: 1rem;
-  right: 1rem;
-  left: 1rem;
+  /* Video ile birebir aynı konum ve yükseklik (bkz. .hero__video margin) */
+  top: 0.625rem;
+  right: 0.625rem;
+  left: 0.625rem;
 
   height: var(--hero-video-height);
 
   border-radius: 1rem;
   pointer-events: none;
 
+  /* Koyulaştırma azaltıldı (önceden %34/%18/%8) — video artık daha net
+     görünüyor, HTML metin hiçbir zaman videonun üzerine binmediği için
+     (bkz. .hero__content, videonun ALTINDA) bu katmanın tek işlevi
+     atmosferik derinlik; okunabilirlik koruması gerekmiyor. */
   background:
     linear-gradient(
       90deg,
-      rgb(2 18 38 / 34%) 0%,
-      rgb(2 18 38 / 18%) 50%,
-      rgb(2 18 38 / 8%) 100%
+      rgb(2 18 38 / 20%) 0%,
+      rgb(2 18 38 / 10%) 50%,
+      rgb(2 18 38 / 5%) 100%
     ),
-    linear-gradient(0deg, rgb(2 18 38 / 16%), transparent 58%);
+    linear-gradient(0deg, rgb(2 18 38 / 10%), transparent 58%);
 }
 
 .hero__content {
@@ -727,6 +741,24 @@ video {
 
 .hero__copy .button-group {
   margin-top: 1.4rem;
+  flex-wrap: nowrap;
+}
+
+.hero__copy .button-group .button-link {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Refined supporting line — deliberately NOT a badge/pill: small, soft-white,
+   wider letter-spacing, secondary to the eyebrow above it and the h1 below,
+   so it never competes with the headline. */
+.relationship-label {
+  margin-bottom: 1.5rem;
+  color: rgb(255 255 255 / 78%);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .eyebrow {
@@ -736,18 +768,6 @@ video {
   font-weight: 800;
   letter-spacing: 0.14em;
   line-height: 1.4;
-  text-transform: uppercase;
-}
-
-.relationship-label {
-  margin-bottom: 1.25rem;
-  padding: 0.45rem 0.65rem;
-  color: var(--colour-white);
-  background: rgb(4 26 53 / 70%);
-  border-left: 0.1875rem solid var(--colour-red);
-  font-size: 0.6875rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -934,13 +954,13 @@ video {
   grid-column: 1;
   grid-row: 1;
 
-  width: 15.8rem;
+  width: 12.8rem;
   margin: 0;
 
   align-self: center;
   justify-self: center;
 
-  transform: scale(1.05);
+  transform: scale(1.04);
 
   filter: drop-shadow(0 0.9rem 1.4rem rgb(0 0 0 / 28%))
     drop-shadow(0 0 1.4rem rgb(24 164 255 / 34%));
@@ -956,13 +976,13 @@ video {
   grid-column: 2;
   grid-row: 1;
 
-  width: 14.8rem;
+  width: 12.8rem;
   margin: 0;
 
   align-self: center;
   justify-self: center;
 
-  transform: scale(1.01);
+  transform: scale(1.04);
 
   filter: drop-shadow(0 1.1rem 1.8rem rgb(0 0 0 / 34%))
     drop-shadow(0 0 2rem rgb(255 31 46 / 48%));
@@ -979,13 +999,13 @@ video {
   grid-column: 3;
   grid-row: 1;
 
-  width: 13.8rem;
+  width: 12.8rem;
   margin: 0;
 
   align-self: center;
   justify-self: center;
 
-  transform: scale(1.03);
+  transform: scale(1.04);
 
   filter: drop-shadow(0 0.9rem 1.4rem rgb(0 0 0 / 28%))
     drop-shadow(0 0 1.4rem rgb(255 128 0 / 34%));
@@ -1008,7 +1028,7 @@ video {
   align-self: center;
   justify-self: center;
 
-  transform: scale(1.06);
+  transform: scale(1.04);
 
   filter: drop-shadow(0 0.9rem 1.4rem rgb(0 0 0 / 28%))
     drop-shadow(0 0 1.4rem rgb(190 94 28 / 34%));
@@ -1047,13 +1067,13 @@ video {
   grid-column: 3;
   grid-row: 2;
 
-  width: 14.8rem;
+  width: 12.8rem;
   margin: 0;
 
   align-self: center;
   justify-self: center;
 
-  transform: scale(1.03);
+  transform: scale(1.04);
 
   filter: drop-shadow(0 0.9rem 1.4rem rgb(0 0 0 / 28%))
     drop-shadow(0 0 1.4rem rgb(105 220 42 / 34%));
@@ -2854,11 +2874,13 @@ video {
 
   .uk-support-header__actions {
     align-items: stretch;
-    flex-direction: column;
+    flex-wrap: nowrap;
   }
 
   .uk-support-header__actions .button-link {
+    flex: 1 1 0;
     justify-content: center;
+    min-width: 0;
   }
 }
 
@@ -3521,6 +3543,14 @@ video {
     width: clamp(10rem, 51vw, 12rem);
   }
 
+  /* Mobile: "Official UK Representative" sits directly under the header
+     logo, matching the >=96rem desktop tier — see site-header.tsx. */
+  .site-header__relationship {
+    display: block;
+    margin-top: 0.05rem;
+    font-size: 0.5rem;
+  }
+
   .menu-button {
     display: grid;
     width: 2.65rem;
@@ -3734,10 +3764,6 @@ video {
   .hero-badge {
     width: 86%;
   }
-
-  .hero-badge--busbar {
-    width: 96%;
-  }
 }
 
 @media (max-width: 63.99rem) {
@@ -3745,8 +3771,9 @@ video {
     /*
      * Tablet ve telefonda video 16:9 oranında.
      * Kenar boşlukları yine dört tarafta eşit.
+     * Daha güçlü bir tablet hero'su için üst sınır büyütüldü (önceden 30rem).
      */
-    --hero-video-height: clamp(13rem, 56.25vw, 30rem);
+    --hero-video-height: clamp(14rem, 62vw, 34rem);
   }
 
   .hero__video {
@@ -3795,7 +3822,9 @@ video {
 
     width: calc(100% - (2 * var(--hero-mobile-gap)));
     height: auto;
-    aspect-ratio: 16 / 9;
+    /* 16:9 yerine 4:3 — mobilde video aynı genişlikte belirgin şekilde
+       daha uzun/daha fark edilir görünür, sayfayı bozacak kadar değil. */
+    aspect-ratio: 4 / 3;
 
     margin: var(--hero-mobile-gap);
 
@@ -3839,19 +3868,21 @@ video {
 
     width: calc(100% - (2 * var(--hero-mobile-gap)));
     height: auto;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3;
 
     border-radius: 0.875rem;
     pointer-events: none;
 
+    /* Koyulaştırma azaltıldı (önceden %30/%16/%8) — mobilde video neredeyse
+       siyah görünmesin diye. */
     background:
       linear-gradient(
         90deg,
-        rgb(2 18 38 / 30%) 0%,
-        rgb(2 18 38 / 16%) 55%,
-        rgb(2 18 38 / 8%) 100%
+        rgb(2 18 38 / 18%) 0%,
+        rgb(2 18 38 / 9%) 55%,
+        rgb(2 18 38 / 5%) 100%
       ),
-      linear-gradient(0deg, rgb(2 18 38 / 16%), transparent 60%);
+      linear-gradient(0deg, rgb(2 18 38 / 8%), transparent 60%);
   }
 
   /* Lacivert içerik tam genişlikte devam eder */
@@ -3864,7 +3895,10 @@ video {
     min-height: auto;
 
     margin: 0;
-    padding: 2.25rem 1rem 2.5rem;
+    /* Yatay boşluk artık diğer bölümlerle aynı --container-gutter'ı
+       kullanıyor (önceden sabit 1rem) — hero metni sayfanın geri
+       kalanıyla aynı sol/sağ hizaya oturuyor. */
+    padding: 2.25rem var(--container-gutter) 2.5rem;
 
     grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
@@ -3875,6 +3909,13 @@ video {
   /* Compact mobile hero typography — h1 no longer dominates the first
      viewport. Tightened vertical rhythm between eyebrow, representative
      strip, h1 and body copy. Desktop values (line 666+) are untouched. */
+  .hero__copy {
+    /* Masaüstündeki 0.5rem sol nudge'ı iptal et — hero__content artık
+       container-gutter kullandığı için metin diğer bölümlerle birebir
+       aynı hizada başlamalı. */
+    padding-left: 0;
+  }
+
   .hero__copy > .eyebrow {
     margin-bottom: 0.6rem;
   }
@@ -3883,15 +3924,25 @@ video {
     margin-bottom: 0.75rem;
   }
 
+  /* Keeps "Electrical infrastructure" from splitting across lines — see
+     home-page.tsx titleLeadPhrase. Mobile-only: desktop's larger max-width
+     already keeps this phrase together via text-wrap:balance without any
+     help, so this rule is scoped here rather than in the base styles. */
+  .hero__title-lead {
+    white-space: nowrap;
+  }
+
+  /* max-width kaldırıldı (önceden 21.25rem — mevcut genişlikten daha dar
+     bir üst sınır getirip kullanılabilir alanı gereksiz kısıtlıyordu). */
   .hero h1 {
-    max-width: 21.25rem;
-    font-size: clamp(2.5rem, 10vw, 2.75rem);
-    letter-spacing: -0.02em;
-    line-height: 1.02;
+    max-width: 100%;
+    font-size: clamp(1.7rem, 7.6vw, 2.15rem);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
   }
 
   .hero__description {
-    max-width: 20.6rem;
+    max-width: 100%;
     margin-top: 0.75rem;
     font-size: 0.9375rem;
     line-height: 1.5;
@@ -3908,7 +3959,11 @@ video {
      all read, so the box never carries more empty space than its content
      actually needs. */
   .hero__visual {
-    --hero-mobile-badge-size: clamp(4.875rem, 22vw, 5.875rem);
+    /* Büyütüldü (önceden 4.875-5.875rem) — altı halka mobilde fark
+       edilmeyecek kadar küçüktü; .hero__badges/.hero__connector/
+       .hero__value-strip'in tümü bu token'lardan türediği için yükseklik
+       otomatik olarak büyüyor, ayrı bir min-height düzeltmesi gerekmiyor. */
+    --hero-mobile-badge-size: clamp(5.75rem, 26vw, 6.875rem);
     --hero-mobile-row-gap: clamp(2.75rem, 9vw, 3.25rem);
     --hero-mobile-top-pad: clamp(1.5rem, 5vw, 1.75rem);
     --hero-mobile-slogan-gap: clamp(1.5rem, 6vw, 1.875rem);
@@ -4051,13 +4106,22 @@ video {
     left: 0;
     width: 100%;
     min-width: 0;
+    flex-wrap: wrap;
+    row-gap: 0.3rem;
+    padding-inline: 0.5rem;
   }
 
+  /* Büyütüldü (önceden 0.47-0.5625rem — okunaklı olmayacak kadar
+     küçüktü) — but tight enough at the low end of the clamp that the
+     three phrases (esp. "Complete Project Support") could still collide
+     with no room to breathe at 360-390px; see .hero__value-strip below
+     for the wrap fallback. */
   .hero__value-strip span {
     min-width: 0;
-    padding-inline: clamp(0.22rem, 1.2vw, 0.36rem);
-    font-size: clamp(0.47rem, 2vw, 0.5625rem);
-    letter-spacing: 0.06em;
+    padding-inline: clamp(0.3rem, 1.4vw, 0.45rem);
+    font-size: clamp(0.54rem, 2.1vw, 0.65rem);
+    letter-spacing: 0.03em;
+    white-space: normal;
   }
 
   .hero__value-strip span + span::before {
@@ -4449,9 +4513,9 @@ video {
   }
 
   .hero__value-strip span {
-    padding-inline: 0.16rem;
-    font-size: 0.5rem;
-    letter-spacing: 0.05em;
+    padding-inline: 0.22rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.04em;
   }
 }
 
@@ -4462,7 +4526,8 @@ video {
 
 @media (min-width: 48rem) and (max-width: 82rem) {
   .hero__content {
-    width: min(calc(100% - 3rem), 72rem);
+    /* Diğer bölümlerle aynı --container-gutter (önceden sabit 3rem) */
+    width: min(calc(100% - (2 * var(--container-gutter))), 72rem);
     margin-inline: auto;
 
     grid-template-columns: minmax(0, 1fr);
@@ -4639,31 +4704,27 @@ video {
    Page modules retain full control from the tablet breakpoint upward. */
 @media (max-width: 40rem) {
   .hero__content {
-    padding: 2rem 1rem 2.2rem;
+    /* container-gutter (önceden sabit 1rem) — diğer bölümlerle aynı hiza */
+    padding: 2rem var(--container-gutter) 2.2rem;
     gap: 1.25rem;
   }
 
-  main > section:first-of-type h1 {
-    max-width: 21.25rem;
-    font-size: clamp(2.5rem, 11vw, 2.75rem);
-    letter-spacing: -0.02em;
-    line-height: 1;
-    text-align: left;
-  }
-
-  main > section:first-of-type h1 + :is(p, span) {
-    max-width: 20.625rem;
-    margin-top: 0.75rem;
-    font-size: clamp(0.9375rem, 4vw, 1rem);
-    line-height: 1.5;
-  }
-
+  /* Single authoritative rule for both hero titles under 40rem — this ID
+     selector's specificity beats .hero h1 / .heroCopy h1 regardless of
+     source order, so it is the ONE place that actually controls font-size
+     here; two other rules used to duplicate/fight this (a structural
+     `main > section:first-of-type h1` selector, and this same rule with
+     !important) which is why earlier attempts to resize the mobile
+     headline via .hero h1 had no visible effect. Sized so the
+     nowrap-protected phrase "Electrical infrastructure" (see
+     .hero__title-lead) fits on one line down to 360px — verified by
+     direct measurement, not just calculation. */
   #hero-title,
   #about-hero-title {
-    max-width: 20rem;
-    font-size: clamp(2rem, 8.25vw, 2.125rem) !important;
-    letter-spacing: -0.02em;
-    line-height: 1.03;
+    max-width: 100%;
+    font-size: clamp(1.3rem, 5.85vw, 1.6rem);
+    letter-spacing: -0.04em;
+    line-height: 1.14;
   }
 
   .hero__copy > .eyebrow {
@@ -4678,11 +4739,438 @@ video {
     margin-top: 1rem;
     gap: 0.625rem;
   }
+}
 
-  #hero-title + .hero__description {
-    max-width: 20.625rem;
-    margin-top: 0.65rem;
-    font-size: 0.9375rem;
-    line-height: 1.5;
+/* =========================================================
+   GERSAN HOMEPAGE MANUFACTURER CREDIBILITY SECTION
+   Structure: .content-top (eyebrow/heading/intro) and
+   .content-bottom (proof strip/CTAs) both sit in DOM order around
+   .media (factory figure). Desktop (>=80rem) pins content-top and
+   content-bottom into column 1 (stacked) with media spanning
+   column 2 across both rows. Below 80rem the grid collapses to a
+   simple flex column, so DOM order alone gives the required
+   tablet/mobile reading order: intro copy, then image, then proof
+   strip + CTAs.
+   ========================================================= */
+
+.gersan-credibility {
+  padding-block: clamp(2.5rem, 9vw, 3.5rem);
+}
+
+.gersan-credibility__market-grid {
+  align-items: stretch;
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-width: 0;
+}
+
+.gersan-market-card {
+  align-content: center;
+  background: linear-gradient(145deg, #ffffff 0%, #f5f8fb 100%);
+  border: 0.0625rem solid rgb(4 26 53 / 14%);
+  border-radius: 0.55rem;
+  box-shadow: 0 0.35rem 1rem rgb(2 18 38 / 5%);
+  color: var(--colour-navy);
+  display: grid;
+  grid-template-rows: repeat(3, min-content);
+  min-height: 5.35rem;
+  min-width: 0;
+  padding: 0.72rem 0.82rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.gersan-market-card:hover {
+  border-color: rgb(23 105 170 / 35%);
+  box-shadow: 0 0.65rem 1.35rem rgb(2 18 38 / 9%);
+  transform: translateY(-0.125rem);
+}
+
+.gersan-market-card:focus-visible {
+  border-color: var(--colour-blue);
+  outline: 0.1875rem solid rgb(23 105 170 / 20%);
+  outline-offset: 0.125rem;
+}
+
+.gersan-market-card__header {
+  align-items: center;
+  color: var(--colour-text-muted);
+  display: flex;
+  font-size: 0.69rem;
+  font-weight: 800;
+  gap: 0.5rem;
+  justify-content: space-between;
+  letter-spacing: 0.075em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.gersan-market-card__external {
+  align-items: center;
+  color: var(--colour-blue);
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  justify-content: center;
+  line-height: 1;
+  width: 0.9rem;
+}
+
+.gersan-market-card__price {
+  color: var(--colour-navy);
+  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin-top: 0.34rem;
+  white-space: nowrap;
+}
+
+.gersan-market-card__change {
+  align-items: center;
+  display: flex;
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 750;
+  gap: 0.28rem;
+  line-height: 1.2;
+  margin-top: 0.3rem;
+  white-space: nowrap;
+}
+
+.gersan-market-card__change--up {
+  color: #147a4b;
+}
+
+.gersan-market-card__change--down {
+  color: var(--colour-red-dark);
+}
+
+.gersan-market-card__change--flat,
+.gersan-market-card__change--unavailable {
+  color: var(--colour-text-muted);
+}
+
+.gersan-credibility__actions > .button-link {
+  align-self: center;
+  grid-column: 1;
+  grid-row: 1;
+  margin-inline-start: clamp(0.45rem, 1vw, 0.8rem);
+  min-height: 3rem;
+  padding-inline: 0.9rem;
+  white-space: nowrap;
+  width: max-content;
+}
+
+.gersan-credibility__actions > .gersan-credibility__market-grid {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+@media (min-width: 80rem) {
+  .gersan-credibility {
+    padding-block: clamp(4rem, 7vw, 6rem);
+  }
+
+  .gersan-credibility__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
+    grid-template-rows: min-content min-content;
+    align-items: center;
+    column-gap: clamp(2.5rem, 5vw, 5rem);
+    row-gap: 0;
+  }
+
+  .gersan-credibility__content-top,
+  .gersan-credibility__content-bottom {
+    grid-column: 1;
+    max-width: 40rem;
+  }
+
+  .gersan-credibility__content-top {
+    grid-row: 1;
+  }
+
+  .gersan-credibility__content-bottom {
+    grid-row: 2;
+  }
+
+  .gersan-credibility__content-top h2 {
+    color: var(--colour-navy);
+    font-size: clamp(2rem, 2.7vw, 2.85rem);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    margin: 0 0 1.1rem;
+    text-wrap: balance;
+  }
+
+  .gersan-credibility__description {
+    margin: 0;
+    color: var(--colour-text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .gersan-credibility__proof {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 2.25rem 0 2rem;
+    border-top: 0.0625rem solid var(--colour-border);
+    border-bottom: 0.0625rem solid var(--colour-border);
+  }
+
+  .gersan-credibility__proof div {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 3.6rem;
+    padding: 0.9rem 0.5rem 0.9rem 0;
+  }
+
+  .gersan-credibility__proof div + div {
+    padding-left: 0.6rem;
+    border-left: 0.0625rem solid var(--colour-border);
+  }
+
+  .gersan-credibility__proof dt {
+    min-width: 0;
+    overflow: hidden;
+    color: var(--colour-navy);
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .gersan-credibility__actions {
+    align-items: center;
+    column-gap: 0.8rem;
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    row-gap: 0.42rem;
+  }
+
+  .gersan-credibility__actions > .button-link {
+    align-self: center;
+  }
+
+  .gersan-credibility__media {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    margin: 0;
+    overflow: hidden;
+    background: var(--colour-navy-dark);
+    border-radius: 0.5rem;
+    box-shadow: 0 2rem 4rem rgb(2 18 38 / 16%);
+  }
+
+  .gersan-credibility__media img {
+    object-fit: cover;
+  }
+
+  .gersan-credibility__media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgb(2 15 31 / 8%) 0%,
+      transparent 30%,
+      rgb(2 15 31 / 22%) 100%
+    );
+  }
+}
+
+/* ---- Tablet + mobile (<80rem): single-column stack ---- */
+
+@media (max-width: 79.99rem) {
+  .gersan-credibility__grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gersan-credibility__content-top,
+  .gersan-credibility__content-bottom {
+    max-width: 42rem;
+  }
+
+  .gersan-credibility__content-top h2 {
+    color: var(--colour-navy);
+    font-size: clamp(1.65rem, 5vw, 2.35rem);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 0.85rem 0 0.9rem;
+    text-wrap: balance;
+  }
+
+  .gersan-credibility__description {
+    margin: 0;
+    color: var(--colour-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .gersan-credibility__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    background: var(--colour-navy-dark);
+    border-radius: 0.5rem;
+    box-shadow: 0 1rem 2.5rem rgb(2 18 38 / 14%);
+  }
+
+  .gersan-credibility__media img {
+    object-fit: cover;
+  }
+
+  .gersan-credibility__media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgb(2 15 31 / 8%) 0%,
+      transparent 30%,
+      rgb(2 15 31 / 22%) 100%
+    );
+  }
+
+  .gersan-credibility__proof {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0 0 1.5rem;
+    border-top: 0.0625rem solid var(--colour-border);
+    border-bottom: 0.0625rem solid var(--colour-border);
+  }
+
+  .gersan-credibility__proof div {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 3.2rem;
+    padding: 0.75rem 0.4rem 0.75rem 0;
+  }
+
+  .gersan-credibility__proof div + div {
+    padding-left: 0.5rem;
+    border-left: 0.0625rem solid var(--colour-border);
+  }
+
+  .gersan-credibility__proof dt {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--colour-navy);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .gersan-credibility__actions {
+    align-items: center;
+    column-gap: 0.75rem;
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    row-gap: 0.42rem;
+  }
+}
+
+/* ---- Mobile only (<48rem): 2x2 proof grid, stacked CTAs ---- */
+
+@media (max-width: 47.99rem) {
+  .gersan-credibility {
+    padding-block: clamp(2.25rem, 9vw, 2.75rem);
+  }
+
+  .gersan-credibility__content-top h2 {
+    font-size: clamp(1.5rem, 7.2vw, 1.9rem);
+    margin: 0.75rem 0;
+  }
+
+  .gersan-credibility__description {
+    font-size: 0.9rem;
+  }
+
+  .gersan-credibility__media {
+    margin: 1.25rem 0;
+  }
+
+  .gersan-credibility__proof {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 1.25rem;
+  }
+
+  .gersan-credibility__proof div + div {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .gersan-credibility__proof div:nth-child(2n) {
+    padding-left: 0.75rem;
+    border-left: 0.0625rem solid var(--colour-border);
+  }
+
+  .gersan-credibility__proof div:nth-child(n + 3) {
+    padding-top: 0.9rem;
+    border-top: 0.0625rem solid var(--colour-border);
+  }
+
+  .gersan-credibility__proof dt {
+    font-size: 0.88rem;
+  }
+
+  .gersan-credibility__actions {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    row-gap: 0.55rem;
+  }
+
+  .gersan-credibility__actions > .button-link {
+    grid-column: 1;
+    grid-row: 1;
+    margin-inline-start: 0.4rem;
+    padding-inline: 0.85rem;
+    width: max-content;
+  }
+
+  .gersan-credibility__actions > .gersan-credibility__market-grid {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+  }
+
+  .gersan-market-card {
+    min-height: 5.2rem;
+    padding: 0.72rem 0.75rem;
+  }
+
+  .gersan-market-card__price {
+    font-size: 1.2rem;
+  }
+
+  .gersan-market-card__change {
+    font-size: 0.7rem;
+  }
+}
+
+/* ---- Narrow mobile (<=360px): tighten button padding so BIST/OTCQX
+   stay single-line instead of wrapping ---- */
+
+@media (max-width: 22.5rem) {
+  .gersan-credibility__market-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gersan-market-card {
+    min-height: 5rem;
   }
 }

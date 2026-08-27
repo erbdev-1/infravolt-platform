@@ -3,9 +3,12 @@ import Link from "next/link";
 
 import { EARTHING_CATALOGUE_PDF_HREF, earthingHubContentForMarket } from "@/data/products/earthing-lightning/content";
 import type { EarthingSolutionPathwayId } from "@/data/products/earthing-lightning/types";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import { ApplicationsCarousel } from "./earthing-applications-carousel";
+import { EarthingGuidanceAccordion } from "./earthing-guidance-accordion";
 import {
   IconBondingBar,
   IconBondLink,
@@ -13,11 +16,8 @@ import {
   IconDownload,
   IconElectrode,
   IconHazard,
-  IconInspection,
-  IconLayers,
   IconLightningRod,
   IconResistance,
-  IconSoilLayers,
 } from "./earthing-icons";
 import styles from "./earthing-lightning-hub-page.module.css";
 import { TechnicalSnapshotStrip } from "./technical-snapshot-strip";
@@ -35,15 +35,6 @@ const PATHWAY_ICONS = {
   EarthingSolutionPathwayId,
   typeof IconElectrode
 >;
-
-const GUIDANCE_ICONS = [
-  IconElectrode,
-  IconLayers,
-  IconSoilLayers,
-  IconBondLink,
-  IconLightningRod,
-  IconInspection,
-] as const;
 
 const PRINCIPLE_ICONS = [IconResistance, IconCapacity, IconBondLink] as const;
 
@@ -117,11 +108,11 @@ export function EarthingLightningHubPage({
             loop
             muted
             playsInline
-            poster="/assets/media/products/earthing-lightning/infravolt-earthing-lightning-poster.webp"
+            poster={publicMediaUrl("media/products/earthing-lightning/infravolt-earthing-lightning-poster.webp")}
             preload="metadata"
           >
             <source
-              src="/assets/media/products/earthing-lightning/infravolt-earthing-lightning.mp4"
+              src={publicMediaUrl("media/products/earthing-lightning/infravolt-earthing-lightning.mp4")}
               type="video/mp4"
             />
           </video>
@@ -216,21 +207,7 @@ export function EarthingLightningHubPage({
           <p>{content.guidanceIntroduction}</p>
         </div>
 
-        <div className={styles.guidanceGrid}>
-          {content.guidance.map((item, index) => {
-            const GuidanceIcon = GUIDANCE_ICONS[index];
-
-            return (
-              <article className={styles.guidanceCard} key={item.title}>
-                {GuidanceIcon ? (
-                  <GuidanceIcon className={styles.guidanceIcon} />
-                ) : null}
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
-            );
-          })}
-        </div>
+        <EarthingGuidanceAccordion items={content.guidance} />
       </section>
 
       <section className={styles.applicationsSection}>
@@ -266,7 +243,12 @@ export function EarthingLightningHubPage({
           <p>{content.support.description}</p>
         </div>
 
-        <Link href="/uk-support?request=technical-pack&product=earthing-lightning">
+        <Link
+          href={buildEnquiryHref("technical-document", {
+            system: "earthing-lightning",
+            source: "/products/earthing-and-lightning-protection",
+          })}
+        >
           {content.support.action}
           <span aria-hidden="true">→</span>
         </Link>

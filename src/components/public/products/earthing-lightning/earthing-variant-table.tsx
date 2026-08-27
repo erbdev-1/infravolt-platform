@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import {
   EnquiryAddedConfirmation,
@@ -13,7 +13,6 @@ import { earthingEnquiryItem } from "@/modules/enquiry/item-builders";
 import type { MarketCode } from "@/modules/markets/types";
 
 import { buildVariantCsv, downloadCsv } from "./earthing-variant-csv";
-import { slugifyFamilyName } from "./earthing-family-slug";
 import { IconCheck, IconChevronDown, IconClose, IconCopy, IconDownload, IconSearch } from "./earthing-icons";
 import styles from "./earthing-category-detail-page.module.css";
 
@@ -25,6 +24,11 @@ import styles from "./earthing-category-detail-page.module.css";
 // from rendering rows it was never asked to show.
 
 type FamilyGroup = Readonly<{
+  /** Stable, locale-independent id (see LocalizedEarthingProductFamily.id)
+   * — this is what actually identifies the family everywhere in this
+   * component (panel id, #hash target, expandedFamilies key). familyName
+   * is display-only. */
+  familyId: string;
   familyName: string;
   variants: readonly EarthingProductVariant[];
   image?: string;
@@ -50,6 +54,16 @@ function buildHaystack(variant: EarthingProductVariant): string {
     .filter((part): part is string => Boolean(part))
     .join(" ")
     .toLowerCase();
+}
+
+// Display-only cleanup — never touches the underlying value used for
+// filter matching/equality, only how a material string is *shown* (chip
+// label, table cell). Collapses stray double-spaces and normalises the
+// "A; B" separator some catalogue rows use to "A, B" for readability.
+// Distinct raw values (e.g. "AL" vs "Aluminium", "Cu" vs "Copper") are
+// deliberately left unmerged — see the final report for why.
+function formatMaterialLabel(material: string): string {
+  return material.trim().replace(/\s+/g, " ").replace(/\s*;\s*/g, ", ");
 }
 
 export function EarthingVariantTable({
@@ -79,7 +93,7 @@ export function EarthingVariantTable({
     () =>
       groups.map((group) => ({
         ...group,
-        slug: slugifyFamilyName(group.familyName),
+        slug: group.familyId,
         variants: group.variants.map((variant) => ({ variant, haystack: buildHaystack(variant) })),
       })),
     [groups],
@@ -100,9 +114,61 @@ export function EarthingVariantTable({
   const [expandedFamilies, setExpandedFamilies] = useState<Set<string>>(() => new Set());
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
   const [confirmation, setConfirmation] = useState<Readonly<{ id: string; title: string }> | null>(null);
+  const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
+  const filtersButtonRef = useRef<HTMLButtonElement>(null);
+  const drawerCloseButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Expanding a family used to dump every record at once — a 66-code
+  // family alone produced a ~23,000px page. Each panel now renders only
+  // this many rows, with a "Show more" control revealing the rest in the
+  // same-size batches. Keyed by family slug, reset whenever the active
+  // search/filter changes so a fresh query never inherits a previous
+  // panel's expanded-to-200 state.
+  const RESULTS_BATCH_SIZE = 10;
+  const [visibleCounts, setVisibleCounts] = useState<Record<string, number>>({});
+
+  function visibleCountFor(slug: string) {
+    return visibleCounts[slug] ?? RESULTS_BATCH_SIZE;
+  }
+
+  function showMore(slug: string) {
+    setVisibleCounts((prev) => ({ ...prev, [slug]: visibleCountFor(slug) + RESULTS_BATCH_SIZE }));
+  }
+
+  // Mobile filter drawer: lock page scroll while open, close on Escape,
+  // and return focus to the trigger button on close — the drawer itself
+  // is only ever mounted while open (see JSX below), so focus is placed
+  // on its close button as soon as it exists.
+  useEffect(() => {
+    if (!isFilterDrawerOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    drawerCloseButtonRef.current?.focus();
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setIsFilterDrawerOpen(false);
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isFilterDrawerOpen]);
+
+  function closeFilterDrawer() {
+    setIsFilterDrawerOpen(false);
+    filtersButtonRef.current?.focus();
+  }
 
   const normalizedQuery = query.trim().toLowerCase();
   const isFiltering = normalizedQuery !== "" || activeMaterial !== null;
+
+  useEffect(() => {
+    setVisibleCounts({});
+  }, [normalizedQuery, activeMaterial]);
 
   function toggleFamily(slug: string) {
     setExpandedFamilies((prev) => {
@@ -162,10 +228,15 @@ export function EarthingVariantTable({
       });
   }
 
-  function toggleEnquiry(variant: EarthingProductVariant, familyName: string) {
+  function toggleEnquiry(variant: EarthingProductVariant, familyId: string, familyName: string) {
+    // familyId must be the same stable id earthingEnquiryItem is built with
+    // everywhere else in this component (see the inEnquiry check below) —
+    // otherwise the id used to add an item and the id used to check whether
+    // it's already added can disagree, which is exactly what happened when
+    // this re-derived its own slug from the (market-translated) familyName.
     const item = earthingEnquiryItem(
       categorySlug,
-      slugifyFamilyName(familyName),
+      familyId,
       familyName || categoryName,
       variant,
       sourceRoute,
@@ -255,6 +326,37 @@ export function EarthingVariantTable({
     downloadCsv(`${categorySlug}-order-codes-all.csv`, buildVariantCsv(records, csvHeaders));
   }
 
+  // Rendered twice: inline (tablet/desktop, always visible — see
+  // .materialChips) and inside the mobile filter drawer (see .drawerChips).
+  // Same state, same buttons, two CSS-gated placements — never two
+  // independent copies of the filter logic.
+  const materialChipButtons = (
+    <>
+      <button
+        aria-pressed={activeMaterial === null}
+        className={activeMaterial === null ? styles.chipActive : styles.chip}
+        onClick={() => setActiveMaterial(null)}
+        type="button"
+      >
+        {labels.variantsAllMaterials}
+        <span className={styles.chipCount}>{allCount}</span>
+      </button>
+
+      {materials.map((material) => (
+        <button
+          aria-pressed={activeMaterial === material}
+          className={activeMaterial === material ? styles.chipActive : styles.chip}
+          key={material}
+          onClick={() => setActiveMaterial((current) => (current === material ? null : material))}
+          type="button"
+        >
+          {formatMaterialLabel(material)}
+          <span className={styles.chipCount}>{materialCounts.get(material) ?? 0}</span>
+        </button>
+      ))}
+    </>
+  );
+
   return (
     <section className={styles.variants}>
       <div className={styles.familiesHeading}>
@@ -300,8 +402,23 @@ export function EarthingVariantTable({
           ) : null}
         </div>
 
+        {materials.length > 1 ? (
+          <button
+            aria-haspopup="dialog"
+            className={styles.filtersButton}
+            onClick={() => setIsFilterDrawerOpen(true)}
+            ref={filtersButtonRef}
+            type="button"
+          >
+            {labels.variantsFiltersButtonLabel}
+            {activeMaterial ? <span className={styles.filtersButtonCount}>1</span> : null}
+          </button>
+        ) : null}
+
         {hasCurrentPageEnquiryItem ? (
-          <EnquiryToolbarSummary count={enquiryItems.length} market={market} />
+          <div className={styles.enquirySummaryWrap}>
+            <EnquiryToolbarSummary count={enquiryItems.length} market={market} />
+          </div>
         ) : null}
 
         <div className={styles.csvActions}>
@@ -330,30 +447,32 @@ export function EarthingVariantTable({
       </div>
 
       {materials.length > 1 ? (
-        <div aria-label={labels.variantsMaterialFilterLabel} className={styles.materialChips} role="group">
-          <button
-            aria-pressed={activeMaterial === null}
-            className={activeMaterial === null ? styles.chipActive : styles.chip}
-            onClick={() => setActiveMaterial(null)}
-            type="button"
-          >
-            {labels.variantsAllMaterials}
-            <span className={styles.chipCount}>{allCount}</span>
-          </button>
+        <>
+          {/* Tablet/desktop only (see .materialChips) — the full wall stays
+              inline and visible, nothing changes above the mobile
+              breakpoint. */}
+          <div aria-label={labels.variantsMaterialFilterLabel} className={styles.materialChips} role="group">
+            {materialChipButtons}
+          </div>
 
-          {materials.map((material) => (
-            <button
-              aria-pressed={activeMaterial === material}
-              className={activeMaterial === material ? styles.chipActive : styles.chip}
-              key={material}
-              onClick={() => setActiveMaterial((current) => (current === material ? null : material))}
-              type="button"
-            >
-              {material}
-              <span className={styles.chipCount}>{materialCounts.get(material) ?? 0}</span>
-            </button>
-          ))}
-        </div>
+          {/* Mobile only — the wall is hidden (see .filtersButton above)
+              and replaced by this single active-filter chip, so the
+              current filter stays visible without the full chip list
+              occupying the screen. */}
+          {activeMaterial ? (
+            <div className={styles.selectedFiltersRow}>
+              <button
+                aria-label={`${labels.variantsFiltersRemoveAction}: ${formatMaterialLabel(activeMaterial)}`}
+                className={styles.selectedChip}
+                onClick={() => setActiveMaterial(null)}
+                type="button"
+              >
+                {formatMaterialLabel(activeMaterial)}
+                <IconClose aria-hidden="true" className={styles.selectedChipIcon} />
+              </button>
+            </div>
+          ) : null}
+        </>
       ) : null}
 
       {isFiltering ? (
@@ -419,10 +538,11 @@ export function EarthingVariantTable({
                 role="region"
               >
                 <div className={styles.variantGroupPanelInner}>
-                  {isExpanded ? (
+  {isExpanded ? (
                     group.variants.length === 0 ? (
                       <p className={styles.variantsEmpty}>{labels.variantsNoRecordsForFamily}</p>
                     ) : (
+                      <>
                       <div className={styles.variantTableScroll}>
                         <table className={styles.variantTable}>
                           <thead>
@@ -436,7 +556,7 @@ export function EarthingVariantTable({
                             </tr>
                           </thead>
                           <tbody>
-                            {group.visible.map(({ variant }) => {
+                            {group.visible.slice(0, visibleCountFor(group.slug)).map(({ variant }) => {
                               const inEnquiry = enquiryItemIds.has(
                                 earthingEnquiryItem(
                                   categorySlug,
@@ -475,14 +595,16 @@ export function EarthingVariantTable({
                                       </button>
                                     </span>
                                   </td>
-                                  <td data-label={labels.variantsColumnMaterial}>{variant.material ?? "—"}</td>
+                                  <td data-label={labels.variantsColumnMaterial}>
+                                    {variant.material ? formatMaterialLabel(variant.material) : "—"}
+                                  </td>
                                   <td data-label={labels.variantsColumnDimensions}>{variant.dimensions ?? "—"}</td>
                                   <td data-label={labels.variantsColumnWeight}>{variant.weight ?? "—"}</td>
                                   <td data-label={labels.variantsColumnAction}>
                                     <button
                                       aria-pressed={inEnquiry}
                                       className={inEnquiry ? styles.variantEnquiredButton : styles.variantEnquiryButton}
-                                      onClick={() => toggleEnquiry(variant, group.familyName)}
+                                      onClick={() => toggleEnquiry(variant, group.slug, group.familyName)}
                                       type="button"
                                     >
                                       {inEnquiry ? labels.enquiryRemoveAction : labels.enquiryAddAction}
@@ -494,6 +616,17 @@ export function EarthingVariantTable({
                           </tbody>
                         </table>
                       </div>
+
+                      {group.visible.length > visibleCountFor(group.slug) ? (
+                        <button
+                          className={styles.showMoreButton}
+                          onClick={() => showMore(group.slug)}
+                          type="button"
+                        >
+                          {labels.variantsShowMoreAction} ({group.visible.length - visibleCountFor(group.slug)})
+                        </button>
+                      ) : null}
+                      </>
                     )
                   ) : null}
                 </div>
@@ -510,6 +643,54 @@ export function EarthingVariantTable({
           market={market}
           onContinue={() => setConfirmation(null)}
         />
+      ) : null}
+
+      {/* Mobile-only filter drawer — mounted only while open (nothing to
+          tab into or land on with a screen reader when closed). Never
+          rendered at tablet/desktop widths in practice since .filtersButton
+          (its only trigger) is CSS-hidden there. */}
+      {isFilterDrawerOpen ? (
+        <div className={styles.filterDrawerOverlay} onClick={closeFilterDrawer}>
+          <div
+            aria-labelledby="earthing-filter-drawer-title"
+            aria-modal="true"
+            className={styles.filterDrawer}
+            onClick={(event) => event.stopPropagation()}
+            role="dialog"
+          >
+            <div className={styles.filterDrawerHeader}>
+              <h3 id="earthing-filter-drawer-title">{labels.variantsFiltersDrawerTitle}</h3>
+              <button
+                aria-label={labels.variantsFiltersCloseAction}
+                className={styles.filterDrawerClose}
+                onClick={closeFilterDrawer}
+                ref={drawerCloseButtonRef}
+                type="button"
+              >
+                <IconClose aria-hidden="true" />
+              </button>
+            </div>
+
+            <div aria-label={labels.variantsMaterialFilterLabel} className={styles.drawerChips} role="group">
+              {materialChipButtons}
+            </div>
+
+            <div className={styles.filterDrawerActions}>
+              <button
+                className={styles.filterDrawerClearAction}
+                disabled={activeMaterial === null}
+                onClick={() => setActiveMaterial(null)}
+                type="button"
+              >
+                {labels.variantsFiltersClearAllAction}
+              </button>
+
+              <button className={styles.filterDrawerShowAction} onClick={closeFilterDrawer} type="button">
+                {labels.variantsFiltersShowResultsAction} {filteredTotal} {labels.variantsCountSuffix}
+              </button>
+            </div>
+          </div>
+        </div>
       ) : null}
     </section>
   );

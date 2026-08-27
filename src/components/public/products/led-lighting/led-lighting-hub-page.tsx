@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
 import {
   LED_HERO_IMAGE,
   LED_HERO_IMAGE_ALT,
@@ -8,6 +9,7 @@ import {
   LED_SUPPORT_CTA_IMAGE_ALT,
   ledLightingHubContentForMarket,
 } from "@/data/products/led-lighting/content";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import {
@@ -19,6 +21,7 @@ import {
   IconPortfolio,
   IconSupport,
 } from "./led-icons";
+import { LedCtaLabel } from "./led-cta-label";
 import styles from "./led-lighting-hub-page.module.css";
 
 const VALUE_ICONS = {
@@ -27,6 +30,11 @@ const VALUE_ICONS = {
   applications: IconApplications,
   automation: IconAutomation,
 } as const;
+
+const TALK_TO_ENGINEER_HREF = buildEnquiryHref("technical", {
+  system: "led-systems",
+  source: "/products/led-systems",
+});
 
 const TRUST_ICONS = {
   support: IconSupport,
@@ -92,15 +100,15 @@ export function LedLightingHubPage({
 
           <div className={styles.heroActions}>
             <Link className={styles.primaryButton} href="#categories">
-              {content.hero.primaryAction}
-              <span aria-hidden="true">→</span>
+              <LedCtaLabel label={content.hero.primaryAction} />
             </Link>
-            <Link
+            <a
               className={styles.secondaryButton}
-              href="/uk-support?request=technical-question&product=led-systems"
+              download
+              href={canonicalCatalogueHref("led")}
             >
-              {content.hero.secondaryAction}
-            </Link>
+              <LedCtaLabel label={content.hero.secondaryAction} />
+            </a>
           </div>
         </div>
       </section>
@@ -253,7 +261,7 @@ export function LedLightingHubPage({
 
           <Link
             className={styles.bottomCtaAction}
-            href="/uk-support?request=technical-question&product=led-systems"
+            href={TALK_TO_ENGINEER_HREF}
           >
             {content.bottomCta.action}
             <span aria-hidden="true">→</span>

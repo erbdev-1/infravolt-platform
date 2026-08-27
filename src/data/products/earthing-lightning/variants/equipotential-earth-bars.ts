@@ -3,7 +3,7 @@ import type { EarthingProductVariant } from "../types";
 export const EQUIPOTENTIAL_EARTH_BARS_VARIANTS: Readonly<
   Record<string, readonly EarthingProductVariant[]>
 > = {
-  "Equal Potential Bar": [
+  "equal-potential-bar": [
     { name: "Equal Potential Bar (Copper)", model: "GEB-100", stockCode: "3012010009141", material: "Copper", dimensions: "30×5×300 mm", weight: "0.695 kg" },
     { name: "Equal Potential Bar (Copper)", model: "GEB-101", stockCode: "3012010109141", material: "Copper", dimensions: "30×5×500 mm", weight: "1.075 kg" },
     { name: "Equal Potential Bar (Copper)", model: "GEB-102", stockCode: "3012010209141", material: "Copper", dimensions: "40×5×300 mm", weight: "0.650 kg" },

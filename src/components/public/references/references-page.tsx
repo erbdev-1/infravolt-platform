@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import {
+  referenceSectorsForMarket,
   referenceSystemsForMarket,
   referencesContentForMarket,
   type ReferenceSystemKey,
@@ -20,6 +22,7 @@ export function ReferencesPage({
   const content = referencesContentForMarket(market);
   const systems = referenceSystemsForMarket(market);
   const activeSystem = systems.find((system) => system.key === activeSystemKey) ?? systems[0];
+  const sectors = referenceSectorsForMarket(market);
 
   return (
     <main className={styles.page}>
@@ -36,6 +39,53 @@ export function ReferencesPage({
           <span>{content.introduction}</span>
         </div>
         <div aria-hidden="true" className={styles.heroGrid} />
+      </section>
+
+      <section aria-labelledby="references-sectors" className={styles.sectorsSection}>
+        <header className={styles.sectorsHeader}>
+          <div className={styles.sectorsHeaderCopy}>
+            <p>{sectors.eyebrow}</p>
+            <h2 id="references-sectors">{sectors.heading}</h2>
+            <span>{sectors.description}</span>
+          </div>
+        </header>
+
+        <div className={styles.sectorGrid}>
+          {sectors.sectors.map((sector) => {
+            const hasStats = sector.referencesValue !== undefined && sector.countriesValue !== undefined;
+            return (
+              <a className={styles.sectorCard} href="#reference-directory" key={sector.id}>
+                <span className={styles.sectorCardMedia}>
+                  <Image
+                    alt=""
+                    aria-hidden="true"
+                    className={styles.sectorCardImage}
+                    fill
+                    sizes="(min-width: 1100px) 20vw, (min-width: 640px) 33vw, 50vw"
+                    src={sector.image}
+                  />
+                  <span aria-hidden="true" className={styles.sectorCardScrim} />
+                  <strong className={styles.sectorCardTitle}>{sector.title}</strong>
+                </span>
+
+                {hasStats ? (
+                  <dl className={styles.sectorCardStats}>
+                    <div>
+                      <dt>{sectors.cardReferencesLabel}</dt>
+                      <dd>{sector.referencesValue}</dd>
+                    </div>
+                    <div>
+                      <dt>{sectors.cardCountryLabel}</dt>
+                      <dd>{sector.countriesValue}</dd>
+                    </div>
+                  </dl>
+                ) : (
+                  <span aria-hidden="true" className={styles.sectorCardStatsPlaceholder} />
+                )}
+              </a>
+            );
+          })}
+        </div>
       </section>
 
       <section aria-labelledby="references-by-system" className={styles.systemSection}>
@@ -76,9 +126,6 @@ export function ReferencesPage({
           <span>
             {activeSystem.total.toLocaleString()} {content.cataloguedCountLabel}
           </span>
-          <small>
-            {content.sourceLabel}: {activeSystem.source}
-          </small>
           {activeSystem.tabs.length > 1 ? (
             <dl className={styles.activeSystemBreakdown}>
               {activeSystem.tabs.map((tab) => (

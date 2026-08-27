@@ -3,7 +3,7 @@ import type { EarthingProductVariant } from "../types";
 export const CONDUCTORS_TAPES_VARIANTS: Readonly<
   Record<string, readonly EarthingProductVariant[]>
 > = {
-  "Copper & Aluminium Conductor": [
+  "copper-aluminium-conductor": [
     { name: "Bare Stranted Copper Conductor", model: "10mm2 CU", stockCode: "302100100CU0", material: "Copper", dimensions: "10 mm²", weight: "0.090 kg" },
     { name: "Bare Stranted Copper Conductor", model: "16mm2 CU", stockCode: "302100160CU0", material: "Copper", dimensions: "16 mm²", weight: "0.150 kg" },
     { name: "Bare Stranted Copper Conductor", model: "25mm2 CU", stockCode: "302100250CU0", material: "Copper", dimensions: "25 mm²", weight: "0.230 kg" },
@@ -71,13 +71,13 @@ export const CONDUCTORS_TAPES_VARIANTS: Readonly<
     { name: "Black PVC Insulated Aluminium Tape", model: "GALİ-803-S", stockCode: "3022S4050AL0", material: "Aluminium + black PVC", dimensions: "40x5 · Coil 5 m", weight: "0.600 kg" },
     { name: "Black PVC Insulated Aluminium Tape", model: "GALİ-804-S", stockCode: "3022S5050AL0", material: "Aluminium + black PVC", dimensions: "50x5 · Coil 5 m", weight: "0.720 kg" },
   ],
-  "Galvanized Mono Wires & Stranded Conductor": [
+  "galvanized-mono-wires-stranded-conductor": [
     { name: "Galvanized Mono Wire", model: "GTE-133 D", stockCode: "3023013309140", material: "Galvanized steel", dimensions: "Cross-section 50 mm²; Ø8 mm", weight: "0.418 kg" },
     { name: "Galvanized Mono Wire", model: "GTE-134 D", stockCode: "3024013409140", material: "Galvanized steel", dimensions: "Cross-section 70 mm²; Ø10 mm", weight: "0.654 kg" },
     { name: "Galvanized Mono Wire", model: "GTE-134-1 D", stockCode: "3024013419141", material: "Galvanized steel", dimensions: "Cross-section 95 mm²; Ø12 mm", weight: "0.917 kg" },
     { name: "Galvanized Stranded Conductor", model: "GF-412/95mm2", stockCode: "3011041219140", material: "Galvanized steel", dimensions: "Cross-section 95 mm²; Ø12.7 mm; yapı 1 x 19", weight: "0.760 kg" },
   ],
-  "Galvanized Earthing Tapes": [
+  "galvanized-earthing-tapes": [
     { name: "Galvanized Earthing Tape", model: "GTE-135 D", stockCode: "3024013509140", material: "Galvanized steel", dimensions: "Size 30x3 mm · Coil 50000 mm", weight: "0.730 kg" },
     { name: "Galvanized Earthing Tape", model: "GTE-135-1 D", stockCode: "3024013519140", material: "Galvanized steel", dimensions: "Size 30x3.5 mm · Coil 50000 mm", weight: "0.850 kg" },
     { name: "Galvanized Earthing Tape", model: "GTE-136 D", stockCode: "3024013609140", material: "Galvanized steel", dimensions: "Size 40x4 mm · Coil 40000 mm", weight: "1.300 kg" },
@@ -85,7 +85,7 @@ export const CONDUCTORS_TAPES_VARIANTS: Readonly<
     { name: "Galvanized Earthing Tape", model: "GTE-138 D", stockCode: "3024013809140", material: "Galvanized steel", dimensions: "Size 50x5 mm · Coil 6000 mm", weight: "2.000 kg" },
     { name: "Galvanized Earthing Tape", model: "GTE-139 D", stockCode: "3024013909140", material: "Galvanized steel", dimensions: "Size 60x5 mm · Coil 6000 mm", weight: "2.400 kg" },
   ],
-  "Steel Wire Rope": [
+  "steel-wire-rope": [
     { name: "Steel Wire Rope (Galvanized)", model: "GF-402", stockCode: "3011040209140", material: "Galvanized steel", dimensions: "Ø2 mm; Min. Breaking Load 239", weight: "0.014 kg" },
     { name: "Steel Wire Rope (Galvanized)", model: "GF-403", stockCode: "3011040309140", material: "Galvanized steel", dimensions: "Ø3 mm; Min. Breaking Load 538", weight: "0.032 kg" },
     { name: "Steel Wire Rope (Galvanized)", model: "GF-404", stockCode: "3011040409140", material: "Galvanized steel", dimensions: "Ø4 mm; Min. Breaking Load 957", weight: "0.057 kg" },
@@ -123,7 +123,7 @@ export const CONDUCTORS_TAPES_VARIANTS: Readonly<
     { name: "Trun Buckle", model: "GF-716", stockCode: "301071609140", material: "Galvanized metal", dimensions: "Ø14-16 mm", weight: "0.100 kg" },
     { name: "W Outomat Rail", model: "GTE-500", stockCode: "3035050019140", material: "katalogda ayrıntı belirtilmemiş", weight: "0.280 kg" },
   ],
-  "Flexible Bars": [
+  "flexible-bars": [
     { name: "GFLX-1 Flexible Bar 20x5", model: "GFLX-1", stockCode: "3021GFB01CU1", material: "Copper; tin-plated, bare or insulated option", dimensions: "20x5 mm · L 350 mm" },
     { name: "GFLX-2 Flexible Bar 25x4", model: "GFLX-2", stockCode: "3021GFB02CU1", material: "Copper; tin-plated, bare or insulated option", dimensions: "25x4 mm · L 350 mm" },
     { name: "GFLX-3 Flexible Bar 25x5", model: "GFLX-3", stockCode: "3021GFB03CU1", material: "Copper; tin-plated, bare or insulated option", dimensions: "25x5 mm · L 350 mm" },

@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+
 import styles from "./busbar-cinematic-intro.module.css";
 
 const INTRO_STORAGE_KEY = "infravolt:busbar-intro-seen";
@@ -64,7 +66,7 @@ export function BusbarCinematicIntro() {
         fill
         priority
         sizes="100vw"
-        src="/assets/media/products/busbar/busbar-cinematic-intro.png"
+        src={publicMediaUrl("media/products/busbar/busbar-cinematic-intro.png")}
       />
 
       <div className={styles.darkLayer} />

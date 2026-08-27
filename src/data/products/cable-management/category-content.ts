@@ -1,9 +1,16 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { CableManagementCatalogueSeries, CableManagementCategoryContent } from "./category-types";
 import { CABLE_SUPPORT_CATALOGUE_PDF_HREF } from "./content";
 
-const IMAGE_BASE = "/assets/products/cable-management";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+const REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "cable-management-systems",
+  source: "/products/cable-support-systems",
+});
 
 // Every row below corresponds 1:1 to a row in
 // catalog-source/cable-support/catalog-map.md (the catalogue's own
@@ -98,7 +105,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
     description:
       "Engineered cable trays, ladders, trunking, support profiles, conduit systems and fixing accessories for safe, efficient and coordinated cable routing across industrial, commercial and infrastructure projects.",
     requestPackAction: "Request Technical Pack",
-    requestPackHref: "/uk-support?request=technical-pack&product=cable-management-systems",
+    requestPackHref: REQUEST_HREF,
     catalogueDocument: {
       label: "Download PDF Catalogue",
       meta: "PDF Catalogue",
@@ -247,7 +254,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         description:
           "Project-specific dimensions, brackets and fabricated elements engineered to your exact requirements.",
         ctaLabel: "Request Custom Fabrication",
-        href: "/uk-support?request=technical-pack&product=cable-management-systems",
+        href: REQUEST_HREF,
       },
     ],
     applicationsHeading: "Where Cable Management Systems Are Used",
@@ -264,7 +271,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Data Centres",
         description:
           "Structured cable routing for server halls, electrical rooms and mechanical plant — coordinated with power and cooling infrastructure.",
-        image: "/assets/industries/cards/data-centres.webp",
+        image: publicMediaUrl("industries/cards/data-centres.webp"),
         imageAlt: "Data centre server hall with structured cable routing",
         href: "/application-map",
         viewLabel: "View Map",
@@ -274,7 +281,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Healthcare",
         description:
           "Reliable containment for critical power, life-safety and medical equipment circuits across clinical and back-of-house areas.",
-        image: "/assets/industries/cards/healthcare.webp",
+        image: publicMediaUrl("industries/cards/healthcare.webp"),
         imageAlt: "Healthcare facility electrical and medical equipment room",
         href: "/application-map/healthcare",
         viewLabel: "View Map",
@@ -284,7 +291,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Education & Public Sector",
         description:
           "Coordinated cable routing for classrooms, laboratories, sports halls and campus-wide infrastructure.",
-        image: "/assets/industries/cards/education-public-sector.webp",
+        image: publicMediaUrl("industries/cards/education-public-sector.webp"),
         imageAlt: "Education campus building with coordinated cable infrastructure",
         href: "/application-map/education-public-sector",
         viewLabel: "View Map",
@@ -294,7 +301,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Industrial Facilities",
         description:
           "Heavy-duty trays and ladders for production lines, process areas and control rooms in demanding industrial environments.",
-        image: "/assets/industries/cards/industrial-facilities.webp",
+        image: publicMediaUrl("industries/cards/industrial-facilities.webp"),
         imageAlt: "Industrial facility production line with overhead cable containment",
         href: "/application-map/industrial-facility",
         viewLabel: "View Map",
@@ -304,7 +311,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Commercial Buildings",
         description:
           "Concealed and exposed cable routing for office floors, risers and plant rooms in commercial developments.",
-        image: "/assets/industries/cards/commercial-buildings.webp",
+        image: publicMediaUrl("industries/cards/commercial-buildings.webp"),
         imageAlt: "Commercial office building with coordinated cable infrastructure",
         href: "/application-map/commercial-building",
         viewLabel: "View Map",
@@ -314,7 +321,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Infrastructure & Utilities",
         description:
           "Cable containment for substations, pumping stations and utility plant in demanding outdoor environments.",
-        image: "/assets/industries/cards/infrastructure-utilities.webp",
+        image: publicMediaUrl("industries/cards/infrastructure-utilities.webp"),
         imageAlt: "Utility substation with outdoor cable infrastructure",
         href: "/application-map/infrastructure-utilities",
         viewLabel: "View Map",
@@ -324,7 +331,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Renewable Energy",
         description:
           "Cable routing for solar, wind and battery storage installations, from grid connection to plant control.",
-        image: "/assets/industries/cards/renewable-energy.webp",
+        image: publicMediaUrl("industries/cards/renewable-energy.webp"),
         imageAlt: "Renewable energy site with grid-connection cable infrastructure",
         href: "/application-map/renewable-energy",
         viewLabel: "View Map",
@@ -334,7 +341,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Transport Infrastructure",
         description:
           "Cable management for airports, rail stations and transport hubs handling high service volumes.",
-        image: "/assets/industries/cards/transport-infrastructure.webp",
+        image: publicMediaUrl("industries/cards/transport-infrastructure.webp"),
         imageAlt: "Transport hub with coordinated cable infrastructure",
         href: "/application-map/transport-infrastructure",
         viewLabel: "View Map",
@@ -378,7 +385,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
     supportDescription:
       "Get support with system selection, loading requirements, support spacing, materials, finishes and project-specific configurations.",
     supportAction: "Request Technical Support",
-    supportHref: "/uk-support?request=technical-pack&product=cable-management-systems",
+    supportHref: REQUEST_HREF,
   },
   ua: {
     homeLabel: "Головна",
@@ -391,7 +398,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
     description:
       "Інженерні кабельні лотки, драбини, короби, опорні профілі, трубні системи та кріпильні аксесуари для безпечного, ефективного та скоординованого прокладання кабелів на промислових, комерційних та інфраструктурних об'єктах.",
     requestPackAction: "Запросити технічний пакет",
-    requestPackHref: "/uk-support?request=technical-pack&product=cable-management-systems",
+    requestPackHref: REQUEST_HREF,
     catalogueDocument: {
       label: "Завантажити PDF-каталог",
       meta: "PDF-каталог",
@@ -536,7 +543,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         description:
           "Індивідуальні розміри, кронштейни та виготовлені елементи, розроблені під ваші точні вимоги.",
         ctaLabel: "Запросити виготовлення на замовлення",
-        href: "/uk-support?request=technical-pack&product=cable-management-systems",
+        href: REQUEST_HREF,
       },
     ],
     applicationsHeading: "Де застосовуються кабеленесучі системи",
@@ -548,7 +555,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Дата-центри",
         description:
           "Структуроване прокладання кабелів для серверних залів, електрощитових і механічних приміщень — узгоджене з інфраструктурою живлення та охолодження.",
-        image: "/assets/industries/cards/data-centres.webp",
+        image: publicMediaUrl("industries/cards/data-centres.webp"),
         imageAlt: "Серверний зал дата-центру зі структурованим прокладанням кабелів",
         href: "/application-map",
         viewLabel: "Переглянути карту",
@@ -558,7 +565,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Охорона здоров'я",
         description:
           "Надійний захист відповідальних силових, аварійних та медичних електричних кіл у клінічних та допоміжних зонах.",
-        image: "/assets/industries/cards/healthcare.webp",
+        image: publicMediaUrl("industries/cards/healthcare.webp"),
         imageAlt: "Електрощитова та приміщення медичного обладнання закладу охорони здоров'я",
         href: "/application-map/healthcare",
         viewLabel: "Переглянути карту",
@@ -568,7 +575,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Освіта та державний сектор",
         description:
           "Скоординоване прокладання кабелів для аудиторій, лабораторій, спортивних залів та інфраструктури кампусів.",
-        image: "/assets/industries/cards/education-public-sector.webp",
+        image: publicMediaUrl("industries/cards/education-public-sector.webp"),
         imageAlt: "Будівля навчального кампусу зі скоординованою кабельною інфраструктурою",
         href: "/application-map/education-public-sector",
         viewLabel: "Переглянути карту",
@@ -578,7 +585,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Промислові об'єкти",
         description:
           "Лотки та драбини важкого типу для виробничих ліній, технологічних зон і диспетчерських приміщень у складних промислових умовах.",
-        image: "/assets/industries/cards/industrial-facilities.webp",
+        image: publicMediaUrl("industries/cards/industrial-facilities.webp"),
         imageAlt: "Виробнича лінія промислового об'єкта з надземним кабельним захистом",
         href: "/application-map/industrial-facility",
         viewLabel: "Переглянути карту",
@@ -588,7 +595,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Комерційні будівлі",
         description:
           "Приховане та відкрите прокладання кабелів для офісних поверхів, стояків та технічних приміщень комерційних об'єктів.",
-        image: "/assets/industries/cards/commercial-buildings.webp",
+        image: publicMediaUrl("industries/cards/commercial-buildings.webp"),
         imageAlt: "Комерційна офісна будівля зі скоординованою кабельною інфраструктурою",
         href: "/application-map/commercial-building",
         viewLabel: "Переглянути карту",
@@ -598,7 +605,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Інфраструктура та комунальні підприємства",
         description:
           "Захист кабелів для підстанцій, насосних станцій та комунальних об'єктів у складних зовнішніх умовах.",
-        image: "/assets/industries/cards/infrastructure-utilities.webp",
+        image: publicMediaUrl("industries/cards/infrastructure-utilities.webp"),
         imageAlt: "Підстанція комунального підприємства із зовнішньою кабельною інфраструктурою",
         href: "/application-map/infrastructure-utilities",
         viewLabel: "Переглянути карту",
@@ -608,7 +615,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Відновлювана енергетика",
         description:
           "Прокладання кабелів для сонячних, вітрових та накопичувальних установок — від приєднання до мережі до керування станцією.",
-        image: "/assets/industries/cards/renewable-energy.webp",
+        image: publicMediaUrl("industries/cards/renewable-energy.webp"),
         imageAlt: "Об'єкт відновлюваної енергетики з кабельною інфраструктурою приєднання до мережі",
         href: "/application-map/renewable-energy",
         viewLabel: "Переглянути карту",
@@ -618,7 +625,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
         title: "Транспортна інфраструктура",
         description:
           "Кабельні системи для аеропортів, залізничних станцій та транспортних вузлів зі значними обсягами обслуговування.",
-        image: "/assets/industries/cards/transport-infrastructure.webp",
+        image: publicMediaUrl("industries/cards/transport-infrastructure.webp"),
         imageAlt: "Транспортний вузол зі скоординованою кабельною інфраструктурою",
         href: "/application-map/transport-infrastructure",
         viewLabel: "Переглянути карту",
@@ -658,7 +665,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
     supportDescription:
       "Отримайте підтримку з підбору системи, вимог до навантаження, кроку опор, матеріалів, покриттів та індивідуальних конфігурацій проєкту.",
     supportAction: "Запросити технічну підтримку",
-    supportHref: "/uk-support?request=technical-pack&product=cable-management-systems",
+    supportHref: REQUEST_HREF,
   },
 };
 

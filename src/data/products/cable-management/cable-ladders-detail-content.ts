@@ -1,4 +1,6 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { CableAccessoryDisplayGroup, CableManagementFamilyContent, CableManagementRelatedFamily } from "./types";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 import { CABLE_SUPPORT_CATALOGUE_PDF_HREF, heavyDutyCableTraysH60ContentForMarket } from "./content";
 
@@ -7,8 +9,12 @@ import { CABLE_SUPPORT_CATALOGUE_PDF_HREF, heavyDutyCableTraysH60ContentForMarke
 // wired into an actual route and bilingualized together with it.
 const HEAVY_DUTY_CABLE_TRAYS_H60_CONTENT = heavyDutyCableTraysH60ContentForMarket("uk");
 
-const IMAGE_BASE = "/assets/products/cable-management";
-const REQUEST_HREF = "/uk-support?request=technical-pack&product=cable-ladders";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+const REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "cable-ladders",
+  source: "/products/cable-support-systems",
+});
 
 // Real order-code datasets extracted from the Gersan catalogue's own
 // per-series reports (catalog-source/cable-support/catalog-package/) — see

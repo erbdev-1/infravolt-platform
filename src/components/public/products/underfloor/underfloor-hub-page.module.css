@@ -182,9 +182,15 @@
 
 .heroActions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.75rem;
   margin-top: 1.85rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .primaryButton {
@@ -672,6 +678,84 @@
   margin: 0;
 }
 
+/* Mobile-only interactive selector — hidden above 640px (see
+   .applicationsGrid/.applicationSelector visibility toggle in the 640px
+   block below), replacing the multi-card wall with one active
+   presentation card + a compact 2-column selector grid. See
+   underfloor-applications-selector.tsx. */
+.applicationSelector {
+  display: none;
+}
+
+.applicationActiveCard {
+  background: #ffffff;
+  border: 1px solid var(--underfloor-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--underfloor-shadow-idle);
+  overflow: hidden;
+}
+
+.applicationActiveVisual {
+  aspect-ratio: 16 / 10;
+  background: var(--underfloor-surface);
+  position: relative;
+}
+
+.applicationActiveVisual img {
+  object-fit: cover;
+}
+
+.applicationActiveContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.applicationSelectorGrid {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0.75rem;
+}
+
+.applicationSelectorItem,
+.applicationSelectorItemActive {
+  border-radius: 0.55rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.7rem 0.55rem;
+  text-align: center;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.applicationSelectorItem {
+  background: #ffffff;
+  border: 1px solid var(--underfloor-border);
+  color: var(--underfloor-muted);
+}
+
+.applicationSelectorItem:hover {
+  border-color: var(--underfloor-accent-border);
+  color: var(--underfloor-accent);
+}
+
+.applicationSelectorItemActive {
+  background: var(--underfloor-accent);
+  border: 1px solid var(--underfloor-accent);
+  color: #ffffff;
+}
+
+.applicationSelectorItem:focus-visible,
+.applicationSelectorItemActive:focus-visible {
+  outline: 3px solid var(--underfloor-accent-border);
+  outline-offset: 2px;
+}
+
 /* =========================================================
    08. FINAL CTA
    ========================================================= */
@@ -842,12 +926,7 @@
   }
 
   .heroActions {
-    flex-direction: column;
-  }
-
-  .primaryButton,
-  .secondaryButton {
-    width: 100%;
+    gap: 0.625rem;
   }
 
   .overviewGrid {
@@ -862,12 +941,142 @@
     border-top: 1px solid rgb(255 255 255 / 10%);
   }
 
+  /* Product Series — vertical image-on-top card → compact horizontal
+     [image | content] row, via CSS grid areas only (no JSX/DOM reorder —
+     .seriesImage / .seriesContent are still siblings in the same order,
+     just placed into named areas). Feature bullet list hidden here (data
+     preserved, not deleted) since 3 lines of bullets no longer fit a
+     ~120px-tall row; description still communicates the family. */
   .seriesGrid {
+    gap: 0.75rem;
     grid-template-columns: 1fr;
   }
 
+  .seriesCard {
+    display: grid;
+    grid-template-areas: "image content";
+    grid-template-columns: 6.75rem 1fr;
+  }
+
+  .seriesImage {
+    aspect-ratio: auto;
+    grid-area: image;
+  }
+
+  .seriesNumber {
+    font-size: 0.62rem;
+    left: 0.4rem;
+    padding: 0.15rem 0.35rem;
+    top: 0.4rem;
+  }
+
+  .seriesContent {
+    gap: 0.3rem;
+    grid-area: content;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .seriesContent h3 {
+    display: -webkit-box;
+    font-size: 0.9rem;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .seriesDescription {
+    display: -webkit-box;
+    font-size: 0.76rem;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .seriesFeatures {
+    display: none;
+  }
+
+  .seriesLinkAction,
+  .seriesBadge {
+    margin-top: 0.15rem;
+  }
+
+  /* How the Underfloor System Works — the boxed 3-card layout collapses
+     into a compact icon-left/title+description-right row list with a
+     thin vertical connector, instead of 3 full-width bordered cards
+     stacked (still icon + strong title + 1-2 line explanation, same 3
+     real steps, just far less vertical weight per step). */
+  .systemFlow {
+    gap: 0;
+  }
+
+  .systemStep {
+    align-items: flex-start;
+    background: none;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    gap: 0.85rem;
+    padding: 0 0 1.1rem;
+    position: relative;
+  }
+
+  .systemStep:not(:last-child)::before {
+    background: var(--underfloor-border);
+    bottom: 0;
+    content: "";
+    left: 1rem;
+    position: absolute;
+    top: 2.4rem;
+    width: 1px;
+  }
+
+  .systemStepNumber {
+    flex-shrink: 0;
+    height: 2rem;
+    margin-bottom: 0;
+    width: 2rem;
+  }
+
+  .systemStep h3 {
+    margin-top: 0.35rem;
+  }
+
+  .systemConnector {
+    display: none;
+  }
+
+  /* Construction & System Options — exactly 4 real items, so a true 2x2
+     grid fits cleanly (was 1 column from 1100px down). */
+  .constructionGrid {
+    gap: 0.65rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .constructionCard {
+    padding: 0.85rem 0.9rem;
+  }
+
+  .constructionCard h3 {
+    font-size: 0.82rem;
+  }
+
+  .constructionCard p {
+    display: -webkit-box;
+    font-size: 0.76rem;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  /* Typical Applications — multi-card wall/grid → one active card + 2-col
+     selector grid (real 6 applications, no carousel/arrows). */
   .applicationsGrid {
-    grid-template-columns: 1fr;
+    display: none;
+  }
+
+  .applicationSelector {
+    display: block;
   }
 
   .supportCtaInner {

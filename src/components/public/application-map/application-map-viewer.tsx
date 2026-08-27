@@ -141,6 +141,24 @@ export function ApplicationMapViewer({
   // Sol seçiciden tıklanıp o ailede birden fazla hotspot varsa bu null
   // kalır ve seçim listesi (ApplicationProductChooser) gösterilir.
   const [activeHotspotId, setActiveHotspotId] = useState<string | null>(null);
+  // Mobil/tablette (bkz. CSS <=860px) overview'daki sayılı pin'lerden yalnız
+  // BİRİNİN adı/etiketi aynı anda görünür — aksi halde tüm bölge adları
+  // üst üste binip okunmaz hale geliyordu. Bu state SADECE hangi pin'in o
+  // etiketi/nabzı taşıdığını belirler; activeHotspotId'den (bir bölge
+  // İÇİNDEKİ somut ürün seçimi, ürün paneliyle bağlı) kasıtlı olarak
+  // AYRIDIR — ikisini birleştirmek iki farklı anlamı karıştırırdı. null
+  // iken effectiveActiveOverviewHotspotId ilk hotspot'a (map.overview.hotspots[0])
+  // düşer.
+  const [activeOverviewHotspotId, setActiveOverviewHotspotId] = useState<
+    string | null
+  >(null);
+  // Level B onboarding cue: the ONE product/system item that briefly
+  // pulses right after a room becomes active, teaching "these cards are
+  // clickable" — timer-driven (see the effect below), not tied to the
+  // session-scoped hintDismissed/zoneHint text. Reset to null the instant
+  // a different room is selected or the timer expires.
+  const [productPulseFamilyId, setProductPulseFamilyId] =
+    useState<ProductFamilyId | null>(null);
   const [mapAspectRatio, setMapAspectRatio] = useState<number | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   // Native Fullscreen API tarayıcı/ortam sınırlamalarıyla mevcut olsa bile
@@ -271,6 +289,40 @@ export function ApplicationMapViewer({
       )
     : map.productFamilies;
 
+  const firstVisibleProductFamilyId = visibleProductFamilies[0]?.id ?? null;
+
+  // Level B onboarding cue — starts the instant a room becomes active,
+  // targets ONLY that room's first product/system item (existing render
+  // order, never reordered/invented), and auto-stops after ~3 pulse
+  // cycles (appMapPulse runs 1.8s/cycle, so ~5.4s here) so it reads as a
+  // discoverability cue rather than a permanent animation. Re-fires on
+  // every new activeZoneId (including re-selecting a room left earlier —
+  // see PRD section 13), independent of the separate session-scoped
+  // hintDismissed/zoneHint text handled elsewhere in this component.
+  useEffect(() => {
+    if (!activeZoneId || !firstVisibleProductFamilyId) {
+      setProductPulseFamilyId(null);
+      return;
+    }
+
+    setProductPulseFamilyId(firstVisibleProductFamilyId);
+
+    const timeoutId = window.setTimeout(() => {
+      setProductPulseFamilyId(null);
+    }, 5400);
+
+    return () => window.clearTimeout(timeoutId);
+    // Intentionally scoped to activeZoneId only — firstVisibleProductFamilyId
+    // is derived from it every render, re-including it would refire the
+    // cue on every unrelated re-render instead of just on room changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeZoneId]);
+
+  // Hides the cue immediately once a product is actually selected in this
+  // room, regardless of where the timer above currently stands.
+  const productPulseTarget =
+    activeZone && !activeProductFamilyId ? productPulseFamilyId : null;
+
   const matchingHotspotsForFamily =
     activeZone && activeProductFamilyId
       ? activeZone.hotspots.filter(
@@ -344,16 +396,13 @@ export function ApplicationMapViewer({
     !activeHotspot &&
     matchingHotspotsForFamily.length > 1;
 
-  // İlk-ziyaret ipucu: bölgede henüz ürün seçilmemiş ve ipucu bu oturumda
-  // kapatılmamışsa, o bölgenin ilk uygun ürün ailesi ve ona karşılık gelen
-  // hotspot "nabız" alır — tıklanabilirliği işaret eder, seçili durumla
-  // (kırmızı dolgu) karıştırılmaması için ayrı, daha yumuşak bir görsel
-  // kullanır (bkz. .navItemPulse / .hotspotPulse).
+  // İlk-ziyaret metin ipucu ("Select a system to explore") oturum başına
+  // bir kez gösterilir — bu, aşağıdaki productPulseTarget'tan (her yeni
+  // oda seçiminde kısa süreliğine yeniden tetiklenen görsel nabız)
+  // KASITLI olarak ayrı tutulur; ikisi farklı iki iş yapar (bkz. effect
+  // yukarısı).
   const showZoneHint =
     Boolean(activeZone) && !hintDismissed && !activeProductFamilyId;
-  const firstAvailableProductFamilyId = showZoneHint
-    ? (visibleProductFamilies[0]?.id ?? null)
-    : null;
 
   const sceneHotspots: readonly SceneHotspotDescriptor[] = activeZone
     ? activeZone.hotspots.map((hotspot) => ({
@@ -362,7 +411,7 @@ export function ApplicationMapViewer({
         label: hotspot.label,
         x: hotspot.x,
         y: hotspot.y,
-        pulse: hotspot.productFamilyId === firstAvailableProductFamilyId,
+        pulse: hotspot.productFamilyId === productPulseTarget,
       }))
     : map.overview.hotspots.map((hotspot) => ({
         id: hotspot.id,
@@ -372,6 +421,11 @@ export function ApplicationMapViewer({
         y: hotspot.y,
       }));
 
+  // Kural 3: zaten seçili/başlangıç bir hotspot varsa onu kullan, yoksa
+  // hotspot 1'e (overview listesindeki ilk kayıt) düş.
+  const effectiveActiveOverviewHotspotId =
+    activeOverviewHotspotId ?? (map.overview.hotspots[0]?.id ?? null);
+
   const navItems: readonly NavigationItem[] = visibleProductFamilies.map(
     (family) => ({
       id: family.id,
@@ -379,7 +433,7 @@ export function ApplicationMapViewer({
       name: family.name,
       icon: productFamilyIcon(family.id),
       active: family.id === activeProductFamilyId,
-      pulse: family.id === firstAvailableProductFamilyId,
+      pulse: family.id === productPulseTarget,
     }),
   );
 
@@ -407,6 +461,19 @@ export function ApplicationMapViewer({
   }
 
   function backToOverview() {
+    // Overview'a dönerken az önce bakılan bölgenin pin'i aktif kalsın
+    // (Kural 3: "currently selected hotspot" varsa onu kullan) — hep
+    // hotspot 1'e sıfırlanmaz.
+    if (activeZoneId) {
+      const returningHotspot = map.overview.hotspots.find(
+        (hotspot) => hotspot.zoneId === activeZoneId,
+      );
+
+      if (returningHotspot) {
+        setActiveOverviewHotspotId(returningHotspot.id);
+      }
+    }
+
     setActiveZoneId(null);
     setActiveProductFamilyId(null);
     setActiveHotspotId(null);
@@ -483,6 +550,7 @@ export function ApplicationMapViewer({
     );
 
     if (overviewHotspot) {
+      setActiveOverviewHotspotId(overviewHotspot.id);
       selectZone(overviewHotspot.zoneId);
     }
   }
@@ -910,6 +978,7 @@ export function ApplicationMapViewer({
                   {sceneHotspots.map((hotspot) => (
                     <ApplicationHotspot
                       active={false}
+                      activeOnMobile={hotspot.id === effectiveActiveOverviewHotspotId}
                       id={`app-map-hotspot-${hotspot.id}`}
                       key={hotspot.id}
                       label={hotspot.label}
@@ -923,7 +992,14 @@ export function ApplicationMapViewer({
                   {sceneHotspots.map((hotspot) => (
                     <span
                       aria-hidden="true"
-                      className={styles.hotspotLabel}
+                      className={[
+                        styles.hotspotLabel,
+                        hotspot.id === effectiveActiveOverviewHotspotId
+                          ? styles.hotspotLabelActive
+                          : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
                       key={`${hotspot.id}-label`}
                       style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
                     >

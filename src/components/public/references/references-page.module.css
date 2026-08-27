@@ -89,6 +89,296 @@
   display: none;
 }
 
+/* =========================================================
+   REFERENCES ACROSS CRITICAL SECTORS
+   The approved desktop treatment stays isolated at >=80rem;
+   tablet and mobile rules are defined in the adjacent max-width
+   block so desktop geometry remains unchanged.
+   ========================================================= */
+
+.sectorsSection {
+  display: none;
+}
+
+@media (min-width: 80rem) {
+  .sectorsSection {
+    display: block;
+    margin: 0 auto;
+    max-width: 1600px;
+    padding: clamp(3.25rem, 6vw, 5.5rem) clamp(1.25rem, 4vw, 4rem) 0;
+  }
+
+  .sectorsHeader {
+    margin-bottom: 2rem;
+  }
+
+  .sectorsHeaderCopy {
+    max-width: 42rem;
+  }
+
+  .sectorsHeaderCopy h2 {
+    color: var(--reference-navy);
+    font-size: clamp(1.85rem, 3vw, 2.9rem);
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+    margin: 0;
+  }
+
+  .sectorsHeaderCopy > span {
+    color: var(--reference-muted);
+    display: block;
+    line-height: 1.65;
+    margin-top: 0.85rem;
+  }
+
+  .sectorGrid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .sectorCard {
+    background: #fff;
+    border: 1px solid var(--reference-line);
+    border-radius: var(--reference-radius-card);
+    box-shadow: var(--reference-shadow);
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-decoration: none;
+    transition: box-shadow 180ms ease, transform 180ms ease;
+  }
+
+  .sectorCard:hover,
+  .sectorCard:focus-visible {
+    box-shadow: var(--reference-shadow-hover);
+    transform: translateY(-0.25rem);
+  }
+
+  .sectorCard:focus-visible {
+    outline: 3px solid rgb(217 35 50 / 45%);
+    outline-offset: 2px;
+  }
+
+  .sectorCardMedia {
+    aspect-ratio: 16 / 9;
+    color: #fff;
+    display: block;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .sectorCardImage {
+    object-fit: cover;
+    transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .sectorCard:hover .sectorCardImage,
+  .sectorCard:focus-visible .sectorCardImage {
+    transform: scale(1.05);
+  }
+
+  .sectorCardScrim {
+    background: linear-gradient(180deg, rgb(7 26 50 / 0%) 45%, rgb(7 26 50 / 88%) 100%);
+    inset: 0;
+    position: absolute;
+  }
+
+  .sectorCardTitle {
+    bottom: 0;
+    display: block;
+    font-size: 0.86rem;
+    font-weight: 800;
+    left: 0;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    padding: 0.9rem 0.85rem;
+    position: absolute;
+    right: 0;
+  }
+
+  .sectorCardStats,
+  .sectorCardStatsPlaceholder {
+    border-top: 1px solid var(--reference-line);
+    min-height: 4.35rem;
+  }
+
+  .sectorCardStats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sectorCardStats div {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .sectorCardStats div + div {
+    border-left: 1px solid var(--reference-line);
+  }
+
+  .sectorCardStats dt {
+    color: rgb(7 26 50 / 62%);
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    margin: 0 0 0.3rem;
+    text-transform: uppercase;
+  }
+
+  .sectorCardStats dd {
+    color: var(--reference-navy);
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+}
+
+@media (max-width: 79.999rem) {
+  .sectorsSection {
+    display: block;
+    margin: 0 auto;
+    max-width: 1600px;
+    padding: clamp(2.75rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3rem) 0;
+  }
+
+  .sectorsHeader { margin-bottom: 1.5rem; }
+  .sectorsHeaderCopy { max-width: 42rem; }
+
+  .sectorsHeaderCopy > p {
+    color: var(--reference-accent);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    margin: 0 0 0.7rem;
+    text-transform: uppercase;
+  }
+
+  .sectorsHeaderCopy h2 {
+    color: var(--reference-navy);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+    margin: 0;
+  }
+
+  .sectorsHeaderCopy > span {
+    color: var(--reference-muted);
+    display: block;
+    line-height: 1.6;
+    margin-top: 0.75rem;
+  }
+
+  .sectorGrid {
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .sectorCard {
+    background: #fff;
+    border: 1px solid var(--reference-line);
+    border-radius: var(--reference-radius-card);
+    box-shadow: var(--reference-shadow);
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    text-decoration: none;
+    transition: box-shadow 180ms ease, transform 180ms ease;
+  }
+
+  .sectorCard:hover,
+  .sectorCard:focus-visible {
+    box-shadow: var(--reference-shadow-hover);
+    transform: translateY(-0.2rem);
+  }
+
+  .sectorCard:focus-visible {
+    outline: 3px solid rgb(217 35 50 / 45%);
+    outline-offset: 2px;
+  }
+
+  .sectorCardMedia {
+    aspect-ratio: 16 / 9;
+    color: #fff;
+    display: block;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .sectorCardImage {
+    object-fit: cover;
+    transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .sectorCard:hover .sectorCardImage,
+  .sectorCard:focus-visible .sectorCardImage { transform: scale(1.04); }
+
+  .sectorCardScrim {
+    background: linear-gradient(180deg, rgb(7 26 50 / 2%) 30%, rgb(7 26 50 / 90%) 100%);
+    inset: 0;
+    position: absolute;
+  }
+
+  .sectorCardTitle {
+    bottom: 0;
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 800;
+    left: 0;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    padding: 0.75rem;
+    position: absolute;
+    right: 0;
+  }
+
+  .sectorCardStats,
+  .sectorCardStatsPlaceholder {
+    border-top: 1px solid var(--reference-line);
+    min-height: 3.9rem;
+  }
+
+  .sectorCardStats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sectorCardStats div {
+    min-width: 0;
+    padding: 0.55rem 0.65rem;
+  }
+
+  .sectorCardStats div + div { border-left: 1px solid var(--reference-line); }
+
+  .sectorCardStats dt {
+    color: rgb(7 26 50 / 66%);
+    font-size: 0.56rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.22rem;
+    overflow-wrap: anywhere;
+    text-transform: uppercase;
+  }
+
+  .sectorCardStats dd {
+    color: var(--reference-navy);
+    font-size: 0.96rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .systemCard:focus-visible,
+  .systemCardActive:focus-visible {
+    outline: 3px solid rgb(217 35 50 / 38%);
+    outline-offset: 2px;
+  }
+}
+
 .systemSection,
 .activeSystem {
   margin: 0 auto;
@@ -125,8 +415,21 @@
 .systemCard:hover { box-shadow: var(--reference-shadow-hover); transform: translateY(-0.15rem); }
 
 .systemCardActive {
+  background: linear-gradient(155deg, #fff 0%, var(--reference-surface) 100%);
   border-color: var(--reference-navy);
-  box-shadow: var(--reference-shadow);
+  box-shadow: var(--reference-shadow), 0 0 0 0.1875rem rgb(7 26 50 / 9%);
+  overflow: hidden;
+  padding-left: 1.6rem;
+}
+
+.systemCardActive::before {
+  background: var(--reference-accent);
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 0.3rem;
 }
 
 .systemNumber {
@@ -232,7 +535,11 @@
   display: flex;
   gap: 0.25rem;
   margin-bottom: 1.75rem;
+  min-width: 0;
+  overscroll-behavior-inline: contain;
   overflow-x: auto;
+  scroll-padding-inline: 0.5rem;
+  scrollbar-width: thin;
 }
 
 .subTabs button {
@@ -521,36 +828,57 @@
   .logoGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
+@media (max-width: 52rem) {
+  .sectorGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 760px) {
   .hero { min-height: 17rem; }
   .heroGrid { left: 15%; }
-  .systemGrid { grid-template-columns: 1fr; gap: 0.6rem; }
+  .systemGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
 
   .systemCard,
   .systemCardActive {
-    align-items: center;
+    align-content: start;
     display: grid;
-    gap: 0.15rem 0.85rem;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    min-height: 4.25rem;
-    padding: 0.9rem 1.1rem;
+    gap: 0.35rem 0.5rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto 1fr;
+    min-height: 7.6rem;
+    padding: 0.85rem 0.9rem;
   }
+
+  .systemCardActive { padding-left: 1.1rem; }
 
   .systemCard strong,
   .systemCardActive strong {
-    grid-column: 2;
-    grid-row: 1;
+    font-size: 0.92rem;
+    grid-column: 1 / 3;
+    grid-row: 2;
+    overflow-wrap: anywhere;
     padding-right: 0;
   }
 
-  .systemCount { grid-column: 2; grid-row: 2; }
-  .systemNumber { grid-column: 1; grid-row: 1 / 3; }
+  .systemCount { align-self: end; font-size: 0.7rem; grid-column: 1 / 3; grid-row: 3; }
+  .systemNumber { grid-column: 1; grid-row: 1; }
 
   .systemCard svg,
   .systemCardActive svg {
-    grid-column: 3;
-    grid-row: 1 / 3;
+    grid-column: 2;
+    grid-row: 1;
     position: static;
+  }
+
+  .subTabs {
+    margin-bottom: 1.35rem;
+    scroll-snap-type: x proximity;
+  }
+
+  .subTabs button {
+    min-height: 2.75rem;
+    padding: 0.65rem 0.75rem;
+    scroll-snap-align: start;
+    white-space: nowrap;
   }
 
   .filterField { max-width: none; }
@@ -616,10 +944,130 @@
   .loadMoreRow button { margin-top: 0; }
 }
 
+@media (max-width: 40rem) {
+  .breadcrumbs { padding-block: 0.8rem; }
+
+  .hero { min-height: 14.5rem; }
+  .heroInner { padding-block: 2.8rem; }
+
+  .hero h1 {
+    font-size: clamp(2.25rem, 11vw, 2.75rem);
+    line-height: 1;
+  }
+
+  .heroInner > span {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-top: 0.85rem;
+  }
+
+  .sectorsSection { padding: 2.5rem 1rem 0; }
+  .sectorsHeader { margin-bottom: 1.15rem; }
+
+  .sectorsHeaderCopy h2,
+  .sectionHeader h2 { font-size: 1.75rem; }
+
+  .sectorsHeaderCopy > span,
+  .sectionHeader > span {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .sectorGrid { gap: 0.55rem; }
+
+  .sectorCardTitle {
+    font-size: 0.7rem;
+    line-height: 1.15;
+    padding: 0.6rem;
+  }
+
+  .sectorCardStats,
+  .sectorCardStatsPlaceholder { min-height: 3.45rem; }
+
+  .sectorCardStats div { padding: 0.45rem 0.5rem; }
+
+  .sectorCardStats dt {
+    font-size: 0.49rem;
+    letter-spacing: 0.035em;
+  }
+
+  .sectorCardStats dd { font-size: 0.82rem; }
+
+  .systemSection,
+  .activeSystem { padding-inline: 1rem; }
+
+  .systemSection { padding-block: 2.75rem; }
+  .sectionHeader { margin-bottom: 1.35rem; }
+  .activeSystem { padding-bottom: 3.5rem; }
+  .activeSystemHeader { padding-block: 1.75rem 1.25rem; }
+  .activeSystemHeader h2 { font-size: 1.55rem; }
+
+  .activeSystemBreakdown {
+    gap: 0.4rem 1rem;
+    margin-top: 0.85rem;
+  }
+
+  .directory {
+    min-width: 0;
+    padding: 0.8rem;
+  }
+
+  .directoryHeader { margin-bottom: 1.15rem; }
+  .directoryHeader h3 { font-size: 1.2rem; }
+
+  .directoryHeader > span {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .toolbar {
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+    padding: 0.85rem;
+  }
+
+  .searchControl,
+  .filterField select { min-height: 2.75rem; }
+
+  .logoGrid { gap: 0.55rem; }
+
+  .logoCard {
+    min-height: 7.25rem;
+    padding: 0.65rem;
+  }
+
+  .logoImage { height: 4.25rem; }
+
+  .logoCard > span:not(.srOnly) {
+    font-size: 0.62rem;
+    margin-top: 0.45rem;
+  }
+
+  .tableFrame tr { padding-inline: 0.8rem; }
+}
+
+@media (max-width: 23.75rem) {
+  .sectorGrid,
+  .systemGrid { gap: 0.45rem; }
+
+  .systemCard,
+  .systemCardActive {
+    min-height: 7.25rem;
+    padding: 0.75rem;
+  }
+
+  .systemCardActive { padding-left: 0.95rem; }
+
+  .systemCard strong,
+  .systemCardActive strong { font-size: 0.84rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .systemCard,
   .systemCardActive,
-  .logoCard {
+  .logoCard,
+  .sectorCard,
+  .sectorCardImage {
     transition: none;
   }
 }

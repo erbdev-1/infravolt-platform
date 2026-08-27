@@ -1,10 +1,11 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
 
 export const TRACK_DOWNLIGHT_CATEGORY_HREF = "/products/led-systems/track-downlight";
-const ASSET_BASE = "/assets/products/led-lighting/series/track-downlight";
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/track&downlight";
+const ASSET_BASE = publicMediaUrl("products/led-lighting/series/track-downlight");
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/track-downlight");
 const CATEGORY_BACKGROUND = `${CATEGORY_ASSET_BASE}/hero/track-downlight-hero-background.webp`;
 const PRODUCT_BASE = `${CATEGORY_ASSET_BASE}/product`;
 const BACKGROUND_BASE = `${PRODUCT_BASE}/background`;

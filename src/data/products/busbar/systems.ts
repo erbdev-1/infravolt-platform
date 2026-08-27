@@ -1,3 +1,5 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+
 import type {
   BusbarCategoryOption,
   BusbarSystem,
@@ -55,7 +57,7 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
       "Retail environments",
       "Industrial lighting",
     ],
-    image: "/assets/products/busbar/gnl/card/gnl-main-product.webp",
+    image: publicMediaUrl("products/busbar/gnl/card/gnl-main-product.webp"),
     imageAlt: "Gersan GNL lighting busbar system",
   },
   {
@@ -72,7 +74,7 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
     conductorLabel: "Aluminium or copper",
     ipRating: "IP55",
     applications: ["Factories", "Warehouses", "Commercial buildings"],
-    image: "/assets/products/busbar/gl/applications/gl-main-product-01.webp",
+    image: publicMediaUrl("products/busbar/gl/applications/gl-main-product-01.webp"),
     imageAlt: "Gersan GL lighting busbar installation",
   },
   {
@@ -93,7 +95,7 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
       "Industrial facilities",
       "Distribution networks",
     ],
-    image: "/assets/products/busbar/gm/card/gm-main-product.webp",
+    image: publicMediaUrl("products/busbar/gm/card/gm-main-product.webp"),
     imageAlt: "Gersan GM low power busbar system",
   },
   {
@@ -114,7 +116,7 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
       "Commercial distribution",
       "Vertical rising mains",
     ],
-    image: "/assets/products/busbar/ggd/card/ggd-main-product.webp",
+    image: publicMediaUrl("products/busbar/ggd/card/ggd-main-product.webp"),
     imageAlt: "Gersan GGD medium power busbar system",
     featured: true,
   },
@@ -136,7 +138,7 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
       "Large industrial facilities",
       "Critical infrastructure",
     ],
-    image: "/assets/products/busbar/gs/card/gs-main-product.webp",
+    image: publicMediaUrl("products/busbar/gs/card/gs-main-product.webp"),
     imageAlt: "Gersan GS Super Compact transformer installation",
     featured: true,
   },
@@ -158,7 +160,7 @@ export const BUSBAR_SYSTEMS: readonly BusbarSystem[] = [
       "Humid environments",
       "Corrosive locations",
     ],
-    image: "/assets/products/busbar/gr/card/gr-main-product.webp",
+    image: publicMediaUrl("products/busbar/gr/card/gr-main-product.webp"),
     imageAlt: "Gersan GR cast resin busbar system",
   },
 ];

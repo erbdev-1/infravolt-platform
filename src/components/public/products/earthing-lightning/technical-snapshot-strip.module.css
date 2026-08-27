@@ -203,19 +203,63 @@
 }
 
 @media (max-width: 640px) {
+  /* Was 1 column (a tall 4-card stack) — kept as a true 2x2 grid instead,
+     with each cell shrunk enough to fit two per row down to 360px. */
+  .strip {
+    margin: 2.25rem auto 3rem;
+  }
+
   .grid {
-    grid-template-columns: 1fr;
+    gap: 0.6rem;
   }
 
   .cell {
     min-height: 0;
-    padding: 1.25rem 1.5rem 1.5rem; /* ~20px / 24px / 24px */
+    padding: 0.9rem 0.75rem 1rem;
   }
 
-  /* Natural height on mobile — single column means no row of neighbours
-     to stay aligned with, so the fixed reservation that keeps desktop/
-     tablet values level is unnecessary height here. */
+  .header {
+    gap: 0.35rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .iconBadge {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+
+  .icon {
+    height: 0.85rem;
+    width: 0.85rem;
+  }
+
+  .headerLabel {
+    font-size: 0.66rem;
+  }
+
+  /* Natural height on mobile — no row of neighbours in a different
+     column-count context to stay aligned with beyond the 2-up pair. */
   .value {
+    margin-top: 0.6rem;
     min-height: 0;
+  }
+
+  .valueLine {
+    font-size: 0.84rem;
+  }
+
+  .valueList {
+    column-gap: 0.75rem;
+    margin-top: 0.6rem;
+    row-gap: 0.5rem;
+  }
+
+  .valueListLine {
+    font-size: 0.7rem;
+  }
+
+  .note,
+  .tooltip {
+    font-size: 0.66rem;
   }
 }

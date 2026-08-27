@@ -1,10 +1,11 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSystemComponent } from "../types";
 
-const ASSET_BASE = "/assets/products/led-lighting/series/g-bus-plc-automation";
+const ASSET_BASE = publicMediaUrl("products/led-lighting/series/g-bus-plc-automation");
 const COMPONENT_BASE = `${ASSET_BASE}/components`;
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/smart-lighting&automation";
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/smart-lighting-automation");
 const APPLICATION_ASSET_BASE = `${CATEGORY_ASSET_BASE}/applications`;
 
 // Prepared studio/cutout assets (real photography, no low-res clip-art

@@ -178,9 +178,15 @@
 
 .heroActions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.75rem;
   margin-top: 2rem;
+}
+
+.heroActions .primaryButton,
+.heroActions .catalogueButton {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .primaryButton,
@@ -1033,8 +1039,6 @@
   }
 
   .heroActions {
-    align-items: stretch;
-    flex-direction: column;
     gap: 0.6rem;
     margin-top: 1.25rem;
   }
@@ -1044,7 +1048,6 @@
   .catalogueButton {
     min-height: 2.875rem;
     padding: 0.65rem 1rem;
-    width: 100%;
   }
 
   .heroVisual {
@@ -1556,5 +1559,156 @@
   .manufacturerLockup {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+/* =========================================================
+   22. APPLICATIONS — MOBILE/TABLET ACTIVE-CARD SELECTOR
+   Placed last deliberately, same reasoning as
+   busbar-system-detail-page.module.css's equivalent section: several
+   earlier .applicationsGrid media-query blocks in this file (1180/900/
+   768px) already touch column counts at overlapping widths, so this
+   section wins outright by being declared after all of it rather than
+   trying to out-specificity each one individually.
+
+   No real photograph exists for these applications (only a small 52x52
+   decorative SVG icon per item, see APPLICATION_ICONS in
+   busbar-catalog-page.tsx) — the active card presents that same icon
+   larger and centred rather than inventing/fetching a photo that isn't
+   part of the actual data.
+
+   Desktop (>1024px) is untouched: .applicationsGrid keeps rendering
+   exactly as before, .applicationSelector never becomes visible there.
+   ========================================================= */
+
+.applicationSelector {
+  display: none;
+}
+
+.applicationActiveCard {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--busbar-border);
+  border-radius: 0.8rem;
+  box-shadow: 0 0.75rem 1.8rem rgb(6 26 53 / 6%);
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+}
+
+.applicationActiveIcon {
+  align-items: center;
+  background: var(--busbar-accent-soft);
+  border: 1px solid rgb(217 35 50 / 18%);
+  border-radius: 50%;
+  display: flex;
+  height: 4.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 4.5rem;
+}
+
+.applicationActiveIcon img {
+  height: auto;
+  max-height: 2.5rem;
+  object-fit: contain;
+  width: auto;
+}
+
+.applicationActiveContent h3 {
+  color: var(--busbar-navy);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.applicationActiveContent p {
+  color: var(--busbar-muted);
+  display: -webkit-box;
+  font-size: 0.87rem;
+  line-height: 1.6;
+  margin: 0.6rem 0 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.applicationSelectorGrid {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0.9rem;
+}
+
+.applicationSelectorItem,
+.applicationSelectorItemActive {
+  border-radius: 0.55rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.7rem 0.6rem;
+  text-align: center;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.applicationSelectorItem {
+  background: #ffffff;
+  border: 1px solid var(--busbar-border);
+  color: var(--busbar-muted);
+}
+
+.applicationSelectorItem:hover {
+  border-color: rgb(217 35 50 / 35%);
+  color: var(--busbar-accent);
+}
+
+.applicationSelectorItemActive {
+  background: var(--busbar-accent);
+  border: 1px solid var(--busbar-accent);
+  color: #ffffff;
+}
+
+.applicationSelectorItem:focus-visible,
+.applicationSelectorItemActive:focus-visible {
+  outline: 3px solid rgb(217 35 50 / 30%);
+  outline-offset: 2px;
+}
+
+@media (max-width: 1024px) {
+  .applicationsGrid {
+    display: none;
+  }
+
+  .applicationSelector {
+    display: block;
+  }
+}
+
+/* Tablet: 3-column selector uses the extra width intentionally instead
+   of stretching the 2-column phone composition. */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .applicationSelectorGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .applicationActiveContent p {
+    -webkit-line-clamp: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .applicationActiveCard {
+    padding: 1.4rem 1.1rem;
+  }
+
+  .applicationSelectorItem,
+  .applicationSelectorItemActive {
+    font-size: 0.78rem;
+    padding: 0.65rem 0.5rem;
   }
 }

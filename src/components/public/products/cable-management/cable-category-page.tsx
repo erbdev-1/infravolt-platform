@@ -2,8 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { cableManagementCategoryContentForMarket } from "@/data/products/cable-management/category-content";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
+import { CableApplicationsSelector } from "./cable-applications-selector";
 import { IconDocument, IconDownload } from "./cable-icons";
 import styles from "./cable-management-page.module.css";
 import { CableTechnicalSnapshot } from "./cable-technical-snapshot";
@@ -11,7 +14,11 @@ import { CableTechnicalSnapshot } from "./cable-technical-snapshot";
 // Real destination for any macro group / decision-helper scenario without
 // its own built family-detail page — never a link to a page that doesn't
 // exist.
-const TECHNICAL_PACK_REQUEST_HREF = "/uk-support?request=technical-pack&product=cable-management-systems";
+const TECHNICAL_PACK_REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "cable-management-systems",
+  source: "/products/cable-support-systems",
+});
 
 // The reusable Cable Management Systems *category* landing page — distinct
 // from CableFamilyDetailPage (the individual product-family template, e.g.
@@ -64,10 +71,7 @@ export function CableCategoryPage({
                 href={content.catalogueDocument.href}
               >
                 <IconDownload aria-hidden="true" className={styles.catalogueButtonIcon} />
-                <span>
-                  {content.catalogueDocument.label}
-                  <small>{content.catalogueDocument.meta}</small>
-                </span>
+                <span>{content.catalogueDocument.label}</span>
               </a>
             </div>
           </div>
@@ -80,11 +84,11 @@ export function CableCategoryPage({
               loop
               muted
               playsInline
-              poster="/assets/media/products/cable-management-systems/infravolt-cable-support-poster.webp"
+              poster={publicMediaUrl("media/products/cable-management-systems/infravolt-cable-support-poster.webp")}
               preload="metadata"
             >
               <source
-                src="/assets/media/products/cable-management-systems/infravolt-cable-support.mp4"
+                src={publicMediaUrl("media/products/cable-management-systems/infravolt-cable-support.mp4")}
                 type="video/mp4"
               />
             </video>
@@ -150,6 +154,14 @@ export function CableCategoryPage({
         <h2 className={styles.sectionHeading}>{content.decisionHelperHeading}</h2>
         <p className={styles.sectionIntroduction}>{content.decisionHelperIntroduction}</p>
 
+        {/* Desktop: full card grid (unchanged). Mobile/tablet: the same
+            content as a native <details> accordion instead — collapsed by
+            default so this section doesn't add another long stack of tall
+            cards under the six family cards above it. Both render in the
+            DOM; only one is visible at a time via the shared breakpoint
+            (see .decisionGrid / .decisionAccordion in the CSS module),
+            same "render both, toggle by CSS" pattern already used for the
+            schedule table's mobile filter panel. */}
         <div className={styles.decisionGrid}>
           {content.decisionScenarios.map((item) => (
             <div className={styles.decisionCard} key={item.scenario}>
@@ -161,6 +173,27 @@ export function CableCategoryPage({
                 <span aria-hidden="true">→</span>
               </Link>
             </div>
+          ))}
+        </div>
+
+        <div className={styles.decisionAccordion}>
+          {content.decisionScenarios.map((item) => (
+            <details className={styles.decisionAccordionItem} key={item.scenario}>
+              <summary className={styles.decisionAccordionSummary}>
+                <span className={styles.decisionAccordionText}>
+                  <span className={styles.decisionScenario}>{item.scenario}</span>
+                  <span className={styles.decisionAccordionRecommendation}>{item.recommendation}</span>
+                </span>
+                <span aria-hidden="true" className={styles.decisionAccordionChevron} />
+              </summary>
+              <div className={styles.decisionAccordionBody}>
+                <p className={styles.decisionDescription}>{item.description}</p>
+                <Link className={styles.decisionAction} href={item.href}>
+                  {item.ctaLabel}
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </details>
           ))}
         </div>
       </section>
@@ -197,53 +230,7 @@ export function CableCategoryPage({
           <h2 className={styles.sectionHeading}>{content.applicationsHeading}</h2>
           <p className={styles.sectionIntroduction}>{content.applicationsIntroduction}</p>
 
-          <div className={styles.applicationsGrid}>
-            {content.applications.map((application) => {
-              const media = (
-                <div className={styles.applicationMedia}>
-                  <Image
-                    alt={application.imageAlt}
-                    className={styles.applicationImage}
-                    fill
-                    sizes="(min-width: 1050px) 12vw, (min-width: 640px) 24vw, 45vw"
-                    src={application.image}
-                  />
-                </div>
-              );
-
-              if (application.href) {
-                return (
-                  <Link
-                    className={styles.applicationCard}
-                    href={application.href}
-                    key={application.slug}
-                    title={application.description}
-                  >
-                    {media}
-                    <div className={styles.applicationBody}>
-                      <h3>{application.title}</h3>
-                    </div>
-                    <span className={styles.applicationFooter}>
-                      {application.viewLabel}
-                      <span aria-hidden="true" className={styles.applicationFooterArrow}>
-                        →
-                      </span>
-                    </span>
-                  </Link>
-                );
-              }
-
-              return (
-                <div className={styles.applicationCardDisabled} key={application.slug} title={application.description}>
-                  {media}
-                  <div className={styles.applicationBody}>
-                    <h3>{application.title}</h3>
-                  </div>
-                  <span className={styles.applicationComingSoon}>{content.comingSoonLabel}</span>
-                </div>
-              );
-            })}
-          </div>
+          <CableApplicationsSelector applications={content.applications} comingSoonLabel={content.comingSoonLabel} />
         </div>
       </section>
 

@@ -1,15 +1,21 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import { CABLE_SUPPORT_CATALOGUE_PDF_HREF, heavyDutyCableTraysH60ContentForMarket } from "./content";
 import type { CableAccessoryDisplayGroup, CableManagementFamilyContent } from "./types";
 
-const IMAGE_BASE = "/assets/products/cable-management";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
 
 function t(market: MarketCode, uk: string, ua: string): string {
   return market === "ua" ? ua : uk;
 }
 
-const REQUEST_HREF = "/uk-support?request=technical-pack&product=conduit-pipe-systems";
+const REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "conduit-pipe-systems",
+  source: "/products/cable-support-systems",
+});
 
 function relatedConduitPipeFamilies(market: MarketCode): CableManagementFamilyContent["relatedFamilies"] {
   return [

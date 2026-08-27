@@ -1,0 +1,20 @@
+# Vercel runs its own install/build — never upload local build artifacts or
+# dependency trees; Vercel's CLI upload does not reliably fall back to
+# .gitignore's exclusions for these paths.
+node_modules
+.next
+.git
+
+# Raw source catalogue archives (zips/CSVs used only by the one-off scripts
+# under scripts/references and scripts/resources to regenerate content files
+# — never read by `next build` or at runtime). Several hundred MB, well over
+# Vercel's 100MB per-file upload limit.
+catalog-source
+
+# Exceeds Vercel's 100MB per-file deployment upload limit — excluded from
+# the upload only (never deleted/modified). This is the current known gap:
+# the site's public/hero video still lives in the local public/ folder
+# rather than Cloudflare R2 (NEXT_PUBLIC_ASSET_BASE_URL) like the rest of
+# public media. Out of scope for this deployment task to migrate — see
+# src/modules/storage/asset-url.ts.
+public/assets/media/home/infravolt-home-hero-00-20-final.mp4

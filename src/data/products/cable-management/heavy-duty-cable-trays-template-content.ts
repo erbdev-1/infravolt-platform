@@ -1,3 +1,5 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import {
@@ -11,8 +13,12 @@ import {
 import { cableTraysTrunkingSiblingFamilies } from "./cable-trays-trunking-content";
 import type { CableVariantFamilyTemplateContent } from "./variant-family-template-types";
 
-const IMAGE_BASE = "/assets/products/cable-management";
-const REQUEST_HREF = "/uk-support?request=technical-pack&product=cable-management-heavy-duty-cable-trays";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+const REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "cable-management-heavy-duty-cable-trays",
+  source: "/products/cable-support-systems",
+});
 
 function t(market: MarketCode, uk: string, ua: string): string {
   return market === "ua" ? ua : uk;

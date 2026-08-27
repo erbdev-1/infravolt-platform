@@ -1,9 +1,10 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type {
   UnderfloorApplicationIconName,
   UnderfloorSeriesSlug,
 } from "./types";
 
-const UNDERFLOOR_ASSET_BASE = "/assets/products/underfloor";
+const UNDERFLOOR_ASSET_BASE = publicMediaUrl("products/underfloor");
 
 export const UNDERFLOOR_HUB_HERO_BACKGROUND =
   `${UNDERFLOOR_ASSET_BASE}/hero/underfloor-cable-trunking-hero-background.webp`;

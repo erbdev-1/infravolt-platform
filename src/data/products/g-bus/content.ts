@@ -1,7 +1,9 @@
+import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+
 import type { BusbarHeroImage } from "@/data/products/busbar/series/types";
 import type { MarketCode } from "@/modules/markets/types";
 
-const IMAGE_BASE = "/assets/products/g-bus";
+const IMAGE_BASE = publicMediaUrl("products/g-bus");
 
 export type GBusModuleItem = Readonly<{
   name: string;
@@ -276,7 +278,7 @@ const GBUS_CONTENT = {
         description:
           "Dedicated G-BUS product catalogue covering modules, control interfaces, wiring topologies and stock codes.",
         fileLabel: "PDF · 11.1 MB",
-        href: "/assets/documents/g-bus/g-bus.pdf",
+        href: publicDocumentUrl("documents/g-bus/g-bus.pdf"),
         downloadLabel: "Download catalogue",
       },
       {
@@ -284,7 +286,7 @@ const GBUS_CONTENT = {
         description:
           "Full product catalogue covering the G-BUS automation system alongside Gersan's busbar trunking systems, including stock codes and system diagrams.",
         fileLabel: "PDF · 25.1 MB",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Download catalogue",
       },
     ],
@@ -332,7 +334,7 @@ const GBUS_CONTENT = {
         title: "Commercial Buildings",
         description:
           "Remote lighting and load control for offices, retail units and mixed-use commercial interiors.",
-        image: "/assets/industries/cards/commercial-buildings.webp",
+        image: publicMediaUrl("industries/cards/commercial-buildings.webp"),
         imageAlt: "Illuminated commercial office towers at dusk",
       },
       {
@@ -340,7 +342,7 @@ const GBUS_CONTENT = {
         title: "Data centres",
         description:
           "Continuous measurement and remote control of critical power distribution circuits.",
-        image: "/assets/industries/cards/data-centres.webp",
+        image: publicMediaUrl("industries/cards/data-centres.webp"),
         imageAlt: "Data centre server room with rows of server racks",
       },
       {
@@ -348,7 +350,7 @@ const GBUS_CONTENT = {
         title: "Warehouses & Logistics",
         description:
           "Scheduled lighting and load switching above storage aisles and logistics operations.",
-        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
+        image: publicMediaUrl("products/busbar/applications/busbar-application-warehouse.webp"),
         imageAlt:
           "Industrial warehouse with continuous overhead lighting above storage and logistics areas",
       },
@@ -357,7 +359,7 @@ const GBUS_CONTENT = {
         title: "Infrastructure & Utilities",
         description:
           "Remote monitoring and switching for utility plants and other essential-service facilities.",
-        image: "/assets/industries/cards/infrastructure-utilities.webp",
+        image: publicMediaUrl("industries/cards/infrastructure-utilities.webp"),
         imageAlt: "Industrial utility plant with pumps and piping",
       },
     ],
@@ -556,7 +558,7 @@ const GBUS_CONTENT = {
         description:
           "Спеціальний каталог продукції G-BUS: модулі, панелі керування, схеми підключення та коди товарів.",
         fileLabel: "PDF · 11.1 MB",
-        href: "/assets/documents/g-bus/g-bus.pdf",
+        href: publicDocumentUrl("documents/g-bus/g-bus.pdf"),
         downloadLabel: "Завантажити каталог",
       },
       {
@@ -564,7 +566,7 @@ const GBUS_CONTENT = {
         description:
           "Повний каталог продукції, що охоплює систему автоматизації G-BUS разом із шинопровідними системами Gersan, включно з кодами товарів та схемами системи.",
         fileLabel: "PDF · 25.1 MB",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Завантажити каталог",
       },
     ],
@@ -612,7 +614,7 @@ const GBUS_CONTENT = {
         title: "Комерційні будівлі",
         description:
           "Віддалене керування освітленням та навантаженням для офісів, торгових приміщень та багатофункціональних об'єктів.",
-        image: "/assets/industries/cards/commercial-buildings.webp",
+        image: publicMediaUrl("industries/cards/commercial-buildings.webp"),
         imageAlt: "Освітлені комерційні офісні вежі у сутінках",
       },
       {
@@ -620,7 +622,7 @@ const GBUS_CONTENT = {
         title: "Дата-центри",
         description:
           "Безперервний вимір та віддалене керування критично важливими колами розподілу живлення.",
-        image: "/assets/industries/cards/data-centres.webp",
+        image: publicMediaUrl("industries/cards/data-centres.webp"),
         imageAlt: "Серверна зала дата-центру з рядами серверних стійок",
       },
       {
@@ -628,7 +630,7 @@ const GBUS_CONTENT = {
         title: "Склади та логістика",
         description:
           "Плановане освітлення та перемикання навантаження над проходами складів і логістичними операціями.",
-        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
+        image: publicMediaUrl("products/busbar/applications/busbar-application-warehouse.webp"),
         imageAlt:
           "Промисловий склад з безперервним верхнім освітленням над зонами зберігання та логістики",
       },
@@ -637,7 +639,7 @@ const GBUS_CONTENT = {
         title: "Інфраструктура та комунальне господарство",
         description:
           "Віддалений моніторинг та перемикання для комунальних об'єктів та інших об'єктів життєзабезпечення.",
-        image: "/assets/industries/cards/infrastructure-utilities.webp",
+        image: publicMediaUrl("industries/cards/infrastructure-utilities.webp"),
         imageAlt: "Промисловий об'єкт комунального господарства з насосами та трубопроводами",
       },
     ],

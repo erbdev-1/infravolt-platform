@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
@@ -5,8 +6,8 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
 export const OUTDOOR_INFRASTRUCTURE_CATEGORY_HREF =
   "/products/led-systems/outdoor-infrastructure-lighting";
 
-const ASSET_BASE = "/assets/products/led-lighting/series/outdoor-infrastructure";
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/outdorr&infrastructure";
+const ASSET_BASE = publicMediaUrl("products/led-lighting/series/outdoor-infrastructure");
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/outdoor-infrastructure");
 const PRODUCT_HERO_BASE = `${CATEGORY_ASSET_BASE}/product`;
 const PRODUCT_BACKGROUND_BASE = `${PRODUCT_HERO_BASE}/background`;
 const PHOTOMETRIC_BASE = `${CATEGORY_ASSET_BASE}/photometric`;

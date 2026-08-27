@@ -53,6 +53,15 @@ export type LocalizedTechnicalSnapshotItem = Readonly<{
 }>;
 
 export type LocalizedEarthingProductFamily = Readonly<{
+  /** Stable, locale-independent identifier — English kebab-case, shared
+   * verbatim between the uk/ua blocks in content.ts, derived from the
+   * family's own image filename. This is the ONLY key used to look up
+   * EARTHING_CATEGORY_VARIANTS (see earthing-category-detail-page.tsx) and
+   * to build the order-code anchor slug (see earthing-variant-table.tsx) —
+   * `name` is display-only and must never be used for either, since it's
+   * translated per market and would silently break the UA lookup (this
+   * was exactly the bug this field fixes). */
+  id: string;
   name: string;
   description: string;
   /** Optional representative product photo for the family card's media
@@ -186,6 +195,23 @@ export type EarthingHubContent = Readonly<{
     variantsSearchPlaceholder: string;
     variantsClearSearchAction: string;
     variantsMaterialFilterLabel: string;
+    /** Mobile-only filter drawer — the material chip wall collapses behind
+     * this button below the tablet breakpoint; tablet/desktop keep the
+     * chips visible inline and never render the drawer. */
+    variantsFiltersButtonLabel: string;
+    variantsFiltersDrawerTitle: string;
+    variantsFiltersClearAllAction: string;
+    /** Accessible label prefix for the single active-filter chip shown on
+     * mobile, e.g. "Remove filter" + ": Copper". */
+    variantsFiltersRemoveAction: string;
+    /** Batched-results control inside an expanded family panel, e.g.
+     * "Show more" — the remaining count is appended in parentheses at
+     * render time, not part of this string. */
+    variantsShowMoreAction: string;
+    /** e.g. "Show" — combined with the live count as
+     * "{variantsFiltersShowResultsAction} {n} {variantsCountSuffix}". */
+    variantsFiltersShowResultsAction: string;
+    variantsFiltersCloseAction: string;
     /** "Showing {n} {variantsOfLabel} {total} {variantsCountSuffix}" while a
      * search or material filter is active. */
     variantsShowingLabel: string;

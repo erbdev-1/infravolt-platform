@@ -1,0 +1,18 @@
+import "server-only";
+
+/**
+ * Explicit feature flag controlling whether the site is indexable —
+ * replaces the earlier VERCEL_ENV-based default now that the real
+ * production domain (infravolt.co.uk) is connected to Vercel Production
+ * before the SEO launch has been approved (VERCEL_ENV alone would have
+ * made a real Production deployment indexable immediately, which is no
+ * longer correct). Fails closed: only the exact string "true" enables
+ * indexing — unset, "false", or any other value means noindex/nofollow.
+ * Server-side only by design, never a NEXT_PUBLIC_ variable, so it can
+ * never be read or spoofed from the client bundle. Flip to indexable by
+ * setting SITE_INDEXING_ENABLED=true in Vercel Production and redeploying
+ * — no code change needed.
+ */
+export function isSiteIndexingEnabled(): boolean {
+  return process.env.SITE_INDEXING_ENABLED === "true";
+}

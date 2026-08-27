@@ -45,6 +45,7 @@ export function CableSizeVariantTable({
   const [activeTypes, setActiveTypes] = useState<ReadonlySet<string>>(() => new Set());
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [resultsOpen, setResultsOpen] = useState(false);
+  const [typeGroupOpen, setTypeGroupOpen] = useState(true);
 
   const types = useMemo(() => {
     const set = new Set<string>();
@@ -125,8 +126,18 @@ export function CableSizeVariantTable({
             </div>
 
             {types.length > 1 ? (
-              <div aria-label="Filter by type" className={styles.filterGroup} role="group">
-                <h3 className={styles.filterGroupLabel}>Type</h3>
+              <details
+                className={styles.filterGroup}
+                onToggle={(event) => setTypeGroupOpen(event.currentTarget.open)}
+                open={typeGroupOpen}
+              >
+                <summary className={styles.filterGroupSummary}>
+                  <span className={styles.filterGroupLabel}>Type</span>
+                  {activeTypes.size > 0 ? (
+                    <span className={styles.filterGroupCount}>{activeTypes.size}</span>
+                  ) : null}
+                  <span aria-hidden="true" className={styles.filterGroupChevron} />
+                </summary>
                 <div className={styles.filterCheckList}>
                   {types.map((type) => (
                     <label className={styles.filterCheckOption} key={type}>
@@ -135,7 +146,7 @@ export function CableSizeVariantTable({
                     </label>
                   ))}
                 </div>
-              </div>
+              </details>
             ) : null}
 
             <button className={styles.applyFiltersButton} onClick={() => setFiltersOpen(false)} type="button">

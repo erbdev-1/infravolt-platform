@@ -1,8 +1,9 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
 
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/parking&waterproof";
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/parking-waterproof");
 const APPLICATION_ASSET_BASE = `${CATEGORY_ASSET_BASE}/applications`;
 const CATEGORY_HREF = "/products/led-systems/parking-waterproof-lighting";
 
@@ -63,7 +64,7 @@ const content = {
     metadata: { title: "LED-BUS Etange Carpark | Parking & Waterproof Lighting | InfraVolt", description: "LED-BUS Etange Carpark IP65 linear lighting, with 24 catalogue models from 11–70 W." },
     breadcrumbs: { home: "Home", products: "Products", ledSystems: "LED Systems", category: "Parking & Waterproof Lighting", current: "LED-BUS Etange Carpark" },
     backToCategoryLabel: "Back to Parking & Waterproof Lighting",
-    hero: { eyebrow: "LED-BUS ETANGE CARPARK", category: "Parking & Waterproof Lighting", title: "LED-BUS Etange Carpark", description: "IP65 linear LED luminaires for car parks, offices, retail, education spaces and corridors, with anodised construction and a satin opal PS diffuser.", primaryAction: "Request Technical Data", secondaryAction: "Request RFQ / Enquiry" },
+    hero: { eyebrow: "LED-BUS ETANGE CARPARK", category: "Parking & Waterproof Lighting", title: "LED-BUS Etange Carpark", description: "IP65 linear LED luminaires for car parks, offices, retail, education spaces and corridors, with anodised construction and a satin opal PS diffuser.", primaryAction: "Request Technical Pack", secondaryAction: "Download PDF Catalogue" },
     ...shared,
     heroImageAlt: "LED-BUS Etange Carpark linear luminaire from the source catalogue",
     heroBackgroundImageAlt: "LED-BUS Etange Carpark luminaires installed in a covered car park",
@@ -102,7 +103,7 @@ const content = {
     metadata: { title: "LED-BUS Etange Carpark | Освітлення паркінгів та вологозахищене освітлення | InfraVolt", description: "Лінійне освітлення LED-BUS Etange Carpark IP65: 24 каталожні моделі 11–70 Вт." },
     breadcrumbs: { home: "Головна", products: "Продукція", ledSystems: "LED-системи", category: "Освітлення паркінгів та вологозахищене освітлення", current: "LED-BUS Etange Carpark" },
     backToCategoryLabel: "Назад до освітлення паркінгів",
-    hero: { eyebrow: "LED-BUS ETANGE CARPARK", category: "Освітлення паркінгів та вологозахищене освітлення", title: "LED-BUS Etange Carpark", description: "Лінійні LED-світильники IP65 для паркінгів, офісів, магазинів, освітніх приміщень і коридорів з анодованою конструкцією та сатиновим опаловим PS-дифузором.", primaryAction: "Запросити технічні дані", secondaryAction: "Запросити пропозицію" },
+    hero: { eyebrow: "LED-BUS ETANGE CARPARK", category: "Освітлення паркінгів та вологозахищене освітлення", title: "LED-BUS Etange Carpark", description: "Лінійні LED-світильники IP65 для паркінгів, офісів, магазинів, освітніх приміщень і коридорів з анодованою конструкцією та сатиновим опаловим PS-дифузором.", primaryAction: "Запросити технічний пакет", secondaryAction: "Завантажити PDF-каталог" },
     ...shared,
     heroImageAlt: "Лінійний світильник LED-BUS Etange Carpark із каталогу",
     heroBackgroundImageAlt: "Світильники LED-BUS Etange Carpark у критому паркінгу",

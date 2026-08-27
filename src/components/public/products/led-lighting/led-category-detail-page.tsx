@@ -10,6 +10,8 @@ import {
   INDUSTRIAL_HIGH_BAY_SUPPORT_CTA_IMAGE_ALT,
   industrialHighBayLightingContentForMarket,
 } from "@/data/products/led-lighting/industrial-high-bay-lighting";
+import { canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import {
@@ -36,6 +38,8 @@ import {
   IconTemperedGlass,
   IconWarehouse,
 } from "./led-icons";
+import { LedApplicationsSelector } from "./led-applications-selector";
+import { LedCtaLabel } from "./led-cta-label";
 import styles from "./led-category-detail-page.module.css";
 
 const APPLICATION_ICONS = [IconFactory, IconWarehouse, IconHangar, IconPort] as const;
@@ -71,8 +75,11 @@ const TECHNICAL_SNAPSHOT_ICONS = {
   control: IconAutomation,
 } as const;
 
-const SUPPORT_REQUEST_HREF =
-  "/uk-support?request=technical-pack&product=industrial-high-bay-lighting";
+const SUPPORT_REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "led-systems",
+  family: "industrial-high-bay-lighting",
+  source: "/products/led-systems/industrial-high-bay-lighting",
+});
 
 export function LedCategoryDetailPage({
   market,
@@ -129,12 +136,11 @@ export function LedCategoryDetailPage({
 
           <div className={styles.heroActions}>
             <Link className={styles.primaryButton} href={SUPPORT_REQUEST_HREF}>
-              {content.hero.primaryAction}
-              <span aria-hidden="true">→</span>
+              <LedCtaLabel label={content.hero.primaryAction} />
             </Link>
-            <Link className={styles.secondaryButton} href={SUPPORT_REQUEST_HREF}>
-              {content.hero.secondaryAction}
-            </Link>
+            <a className={styles.secondaryButton} download href={canonicalCatalogueHref("led")}>
+              <LedCtaLabel label={content.hero.secondaryAction} />
+            </a>
           </div>
         </div>
       </section>
@@ -272,6 +278,16 @@ export function LedCategoryDetailPage({
             );
           })}
         </div>
+
+        <LedApplicationsSelector
+          applications={content.applications.map((application, index) => ({
+            id: String(index),
+            title: application.title,
+            description: application.description,
+            image: application.image,
+            imageAlt: application.imageAlt,
+          }))}
+        />
       </section>
 
       <section className={styles.supportCta}>

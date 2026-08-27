@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
@@ -7,7 +8,7 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  *
  * Hero background/foreground: premium pre-generated assets sourced from
  * the shared Industrial & High-Bay category asset library
- * (category/industrial&high-bay/product and .../product/background) —
+ * (category/industrial-high-bay/product and .../product/background) —
  * a real industrial/logistics interior and the real, fully visible
  * LED-BUS LDBSE fixture, already isolated and switched on with
  * neutral-white light. Replaces this file's earlier from-scratch
@@ -21,21 +22,21 @@ import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
  * diagram and technical drawing, replacing the small raw catalogue-scan
  * PNGs originally extracted directly from the source PDF. */
 export const LED_BUS_LDBSE_HERO_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-hero-foreground.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-hero-foreground.webp");
 export const LED_BUS_LDBSE_HERO_IMAGE_ALT =
   "LED-BUS LDBSE luminaire, illuminated, angled view of the multi-lens diffuser strip";
 export const LED_BUS_LDBSE_HERO_BACKGROUND_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-hero-background.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-hero-background.webp");
 export const LED_BUS_LDBSE_HERO_BACKGROUND_IMAGE_ALT =
   "Industrial hangar interior with an aircraft visible in the background, lit by high-bay LED fixtures";
 export const LED_BUS_LDBSE_APPLICATION_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-industrial-application.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-industrial-application.webp");
 export const LED_BUS_LDBSE_APPLICATION_IMAGE_ALT =
   "Large-span industrial facility interior lit by LED-BUS LDBSE high-bay fixtures";
 export const LED_BUS_LDBSE_PHOTOMETRIC_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-photometric.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-photometric.webp");
 export const LED_BUS_LDBSE_TECHNICAL_DRAWING_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-technical-drawing.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-technical-drawing.webp");
 /** Typical Applications card grid — Aviation & Airports and Logistics
  * Facilities photos. Real LEDBUS/GERSAN catalogue site-ready photography
  * reused from elsewhere on the site (the LDBSE family's own catalogue
@@ -46,9 +47,9 @@ export const LED_BUS_LDBSE_TECHNICAL_DRAWING_IMAGE =
  * the Industrial & High-Bay category page's "Warehouses & Logistics"
  * card). Neither photo is reused twice within this page's own grid. */
 export const LED_BUS_LDBSE_APPLICATION_AVIATION_AIRPORTS_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-application-aviation-airports.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-application-aviation-airports.webp");
 export const LED_BUS_LDBSE_APPLICATION_LOGISTICS_FACILITIES_IMAGE =
-  "/assets/products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-application-logistics-facilities.webp";
+  publicMediaUrl("products/led-lighting/series/led-bus-ldbse/led-bus-ldbse-application-logistics-facilities.webp");
 
 const MODELS_UK: readonly LedSeriesModel[] = [
   { model: "LDBS1E", powerW: 50, luminousFluxLm: "6,750 lm", efficiencyLmW: "135 lm/W", ip: "IP20 / IP65", dimensions: "11×60 cm", weightKg: "2.00 kg" },
@@ -72,7 +73,6 @@ const MODELS_UA: readonly LedSeriesModel[] = [
   { model: "LDBS8E", powerW: 250, luminousFluxLm: "37 000 лм", efficiencyLmW: "148 лм/Вт", ip: "IP20 / IP65", dimensions: "11×150 см", weightKg: "4,80 кг" },
 ] as const;
 
-const SUPPORT_REQUEST_HREF = "/uk-support?request=technical-pack&product=led-bus-ldbse";
 
 const content = {
   uk: {
@@ -536,5 +536,3 @@ const content = {
 export function ledBusLdbseContentForMarket(market: MarketCode): LedSeriesDetailContent {
   return content[market];
 }
-
-export { SUPPORT_REQUEST_HREF as LED_BUS_LDBSE_SUPPORT_REQUEST_HREF };

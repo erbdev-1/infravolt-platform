@@ -2878,3 +2878,144 @@
     transition: none;
   }
 }
+
+/* =========================================================
+   APPLICATIONS — MOBILE/TABLET ACTIVE-CARD SELECTOR
+   Placed last deliberately: this file has several earlier, overlapping
+   .applicationsGrid media-query blocks at 900/780/768/640px written at
+   different points in the file's history that all still match at once
+   below 640px (later source order wins on equal specificity, so the
+   768px block's 2-column rule silently overrides the 640px block's
+   1-column rule today). Rather than untangle that history, this section
+   simply wins outright by being declared after all of it — the
+   .applicationsGrid { display: none } below is unambiguous regardless of
+   whatever grid-template-columns a leftover rule still sets upstream.
+
+   Desktop (>1024px) is completely untouched: .applicationsGrid keeps
+   rendering exactly as before, .applicationSelector never becomes
+   visible there.
+   ========================================================= */
+
+.applicationSelector {
+  display: none;
+}
+
+.applicationActiveCard {
+  background: #ffffff;
+  border: 1px solid var(--busbar-border);
+  border-radius: 0.8rem;
+  box-shadow: 0 0.75rem 1.8rem rgb(6 26 53 / 6%);
+  overflow: hidden;
+}
+
+.applicationActiveVisual {
+  aspect-ratio: 16 / 10;
+  background: #e9eef2;
+  position: relative;
+}
+
+.applicationActiveContent {
+  padding: 1.1rem 1.25rem 1.3rem;
+}
+
+.applicationActiveContent h3 {
+  color: var(--busbar-navy);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.applicationActiveContent p {
+  color: #607087;
+  display: -webkit-box;
+  font-size: 0.87rem;
+  line-height: 1.6;
+  margin: 0.55rem 0 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.applicationSelectorGrid {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0.75rem;
+}
+
+.applicationSelectorItem,
+.applicationSelectorItemActive {
+  border-radius: 0.55rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.7rem 0.6rem;
+  text-align: center;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.applicationSelectorItem {
+  background: #ffffff;
+  border: 1px solid var(--busbar-border);
+  color: var(--busbar-muted);
+}
+
+.applicationSelectorItem:hover {
+  border-color: rgb(217 35 50 / 35%);
+  color: var(--busbar-accent);
+}
+
+.applicationSelectorItemActive {
+  background: var(--busbar-accent);
+  border: 1px solid var(--busbar-accent);
+  color: #ffffff;
+}
+
+.applicationSelectorItem:focus-visible,
+.applicationSelectorItemActive:focus-visible {
+  outline: 3px solid rgb(217 35 50 / 30%);
+  outline-offset: 2px;
+}
+
+@media (max-width: 1024px) {
+  .applicationsGrid {
+    display: none;
+  }
+
+  .applicationSelector {
+    display: block;
+  }
+}
+
+/* Tablet: 3-column selector uses the extra width intentionally instead
+   of stretching the 2-column phone composition. */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .applicationsSection {
+    padding-bottom: 3.5rem;
+  }
+
+  .applicationSelectorGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .applicationActiveContent p {
+    -webkit-line-clamp: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .applicationActiveContent {
+    padding: 1rem 1.1rem 1.2rem;
+  }
+
+  .applicationSelectorItem,
+  .applicationSelectorItemActive {
+    font-size: 0.78rem;
+    padding: 0.65rem 0.5rem;
+  }
+}

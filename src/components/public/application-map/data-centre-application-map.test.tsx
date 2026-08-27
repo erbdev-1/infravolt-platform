@@ -449,3 +449,70 @@ describe("DataCentreApplicationMap", () => {
     ).toHaveFocus();
   });
 });
+
+// Mobile/tablet label rendering is CSS-driven (see application-map-viewer.module.css
+// section 05b, <=860px) rather than JS-conditional, so it can't be asserted
+// via jsdom viewport simulation — these tests instead verify the underlying
+// state/markup the CSS depends on: exactly one hotspot carries the "active"
+// marker classes at any time, every pin stays in the DOM, and the active
+// one tracks selection/navigation correctly.
+describe("DataCentreApplicationMap — overview active-pin label state", () => {
+  it("marks exactly one overview hotspot active by default (hotspot 1)", () => {
+    const { container } = renderMap("uk");
+
+    const pins = container.querySelectorAll('button[id^="app-map-hotspot-"]');
+    expect(pins).toHaveLength(8);
+
+    const activePins = container.querySelectorAll('[class*="hotspotActiveMobile"]');
+    expect(activePins).toHaveLength(1);
+    expect(activePins[0]).toBe(pins[0]);
+
+    const activeLabels = container.querySelectorAll('[class*="hotspotLabelActive"]');
+    expect(activeLabels).toHaveLength(1);
+  });
+
+  it("keeps all eight zone pins in the DOM regardless of which one is active", () => {
+    const { container } = renderMap("uk");
+
+    expect(
+      container.querySelectorAll('button[id^="app-map-hotspot-"]'),
+    ).toHaveLength(8);
+  });
+
+  it("moves the active pin/label to the last-viewed zone when the carousel returns to Overview", async () => {
+    const user = userEvent.setup();
+    const { container } = renderMap("uk");
+
+    await clickZone(user, /Data Hall/);
+    await clickZone(user, /^Overview$/);
+
+    const activePins = container.querySelectorAll('[class*="hotspotActiveMobile"]');
+    expect(activePins).toHaveLength(1);
+
+    const dataHallPin = container.querySelector(
+      'button[id^="app-map-hotspot-"][aria-label*="Data Hall"]',
+    );
+    expect(activePins[0]).toBe(dataHallPin);
+
+    const activeLabels = container.querySelectorAll('[class*="hotspotLabelActive"]');
+    expect(activeLabels).toHaveLength(1);
+  });
+
+  it("does not change which overview hotspot is active while browsing inside a zone (no duplicate state leak)", async () => {
+    const user = userEvent.setup();
+    const { container } = renderMap("uk");
+
+    await clickZone(user, /Main Electrical/);
+
+    // Overview pins are unmounted while a zone scene is showing.
+    expect(container.querySelectorAll('[class*="hotspotActiveMobile"]')).toHaveLength(0);
+
+    await clickZone(user, /^Overview$/);
+
+    // Returning without having tapped a different overview pin restores
+    // Main Electrical as active (the zone just viewed).
+    const activePins = container.querySelectorAll('[class*="hotspotActiveMobile"]');
+    expect(activePins).toHaveLength(1);
+    expect(activePins[0].getAttribute("aria-label")).toMatch(/Main Electrical/);
+  });
+});

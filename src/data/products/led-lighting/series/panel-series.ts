@@ -1,10 +1,11 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel } from "../types";
 
 export const PANEL_CATEGORY_HREF = "/products/led-systems/panel-lighting";
 
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/panel";
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/panel");
 const PRODUCT_HERO_BASE = `${CATEGORY_ASSET_BASE}/product`;
 const PRODUCT_BACKGROUND_BASE = `${PRODUCT_HERO_BASE}/background`;
 const PHOTOMETRIC_BASE = `${CATEGORY_ASSET_BASE}/photometric`;
@@ -117,7 +118,7 @@ function shared(market: MarketCode, slug: string, title: string) {
 
 function panelApplications(ua: boolean) {
   return [
-    { icon: "office", title: ua ? "Офіси та робочі простори" : "Offices & Workspaces", description: ua ? "Загальне панельне освітлення офісів і робочих зон." : "General panel lighting for offices and work areas.", image: `${APPLICATION_IMAGE_BASE}/panel-lighting-application-offices-workspaces .webp`, imageAlt: ua ? "Офіс, освітлений LED-панелями" : "Office illuminated by LED panel lighting" },
+    { icon: "office", title: ua ? "Офіси та робочі простори" : "Offices & Workspaces", description: ua ? "Загальне панельне освітлення офісів і робочих зон." : "General panel lighting for offices and work areas.", image: `${APPLICATION_IMAGE_BASE}/panel-lighting-application-offices-workspaces.webp`, imageAlt: ua ? "Офіс, освітлений LED-панелями" : "Office illuminated by LED panel lighting" },
     { icon: "education", title: ua ? "Освіта" : "Education", description: ua ? "Рівномірне освітлення класів і навчальних просторів." : "Uniform illumination for classrooms and learning spaces.", image: `${APPLICATION_IMAGE_BASE}/panel-lighting-application-education.webp`, imageAlt: ua ? "Клас, освітлений LED-панелями" : "Classroom illuminated by LED panel lighting" },
     { icon: "corridor", title: ua ? "Коридори та громадські зони" : "Corridors & Public Areas", description: ua ? "Панельне освітлення для зон циркуляції та спільних громадських інтер'єрів." : "Panel lighting for circulation and shared public interiors.", image: `${APPLICATION_IMAGE_BASE}/panel-lighting-application-corridors-public-areas.webp`, imageAlt: ua ? "Коридор, освітлений LED-панелями" : "Corridor illuminated by LED panel lighting" },
     { icon: "retail", title: ua ? "Роздрібні та комерційні інтер'єри" : "Retail & Commercial Interiors", description: ua ? "Загальне освітлення для роздрібних і комерційних просторів." : "General lighting for retail and commercial spaces.", image: `${APPLICATION_IMAGE_BASE}/panel-lighting-application-retail-commercial-interiors.webp`, imageAlt: ua ? "Роздрібний інтер'єр, освітлений LED-панелями" : "Retail interior illuminated by LED panel lighting" },

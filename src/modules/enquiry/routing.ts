@@ -50,6 +50,21 @@ function shortDisplayLabel(value: string | string[] | undefined): string | undef
   return candidate && candidate.length <= 120 ? candidate : undefined;
 }
 
+const CONTROL_CHARACTERS = /[\x00-\x1F\x7F]/;
+
+/**
+ * Real catalogue family names / model / order codes legitimately contain
+ * uppercase letters, digits, spaces, and punctuation like "GS-400A",
+ * "TTK 100x50", "GKT-CE" — so this only rejects empty/oversized/control-
+ * character payloads, never narrows to a slug-style regex the way
+ * canonicalIdentifier() does for internal ids.
+ */
+function safeCatalogValue(value: string | string[] | undefined, maxLength: number): string | undefined {
+  const candidate = firstValue(value)?.trim();
+  if (!candidate || candidate.length > maxLength || CONTROL_CHARACTERS.test(candidate)) return undefined;
+  return candidate;
+}
+
 function safeSourcePath(value: string | string[] | undefined): string | undefined {
   const candidate = firstValue(value);
   return candidate && /^\/[a-z0-9-]+(?:\/[a-z0-9-]+)*$/.test(candidate)
@@ -62,7 +77,13 @@ export type ParsedEnquiryContext = Readonly<{
   context: EnquirySourceContext;
 }>;
 
-/** Validates and narrows raw route searchParams into a trusted enquiry type + source context. */
+/**
+ * Validates and narrows raw route searchParams into a trusted enquiry type +
+ * source context. An unrecognised/missing `type` intentionally falls back to
+ * "general" rather than erroring — Contact must always render a usable form
+ * even from a malformed or hand-edited URL; see routing.test.ts for the
+ * behaviour this locks in.
+ */
 export function parseEnquiryContext(searchParams: ContactRouteSearchParams): ParsedEnquiryContext {
   const rawType = firstValue(searchParams.type);
   const type = isEnquiryType(rawType) ? rawType : "general";
@@ -74,9 +95,9 @@ export function parseEnquiryContext(searchParams: ContactRouteSearchParams): Par
     type,
     context: {
       system,
-      family: firstValue(searchParams.family),
-      model: firstValue(searchParams.model),
-      label: firstValue(searchParams.label),
+      family: safeCatalogValue(searchParams.family, 120),
+      model: safeCatalogValue(searchParams.model, 80),
+      label: shortDisplayLabel(searchParams.label),
       industry: canonicalIdentifier(searchParams.industry),
       industryLabel: shortDisplayLabel(searchParams.industryLabel),
       zone: canonicalIdentifier(searchParams.zone),

@@ -164,9 +164,15 @@
 
 .heroActions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.75rem;
   margin-top: 2rem;
+}
+
+.heroActions .primaryButton,
+.heroActions .catalogueButton {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .primaryButton {
@@ -197,9 +203,9 @@
 
 /* Secondary CTA — a softly-tinted outline so it doesn't compete with the
    copper-filled .primaryButton, per the hero-CTA hierarchy brief. The two
-   remaining hero actions ("Explore Product Families" + this one) sit on
-   one row on desktop, stacked full-width on mobile (see the media query
-   below) — "Talk to an Engineer" was removed from this row entirely. */
+   remaining hero actions ("Explore Product Families" + this one) sit
+   side by side at equal width on every breakpoint (see .heroActions) —
+   "Talk to an Engineer" was removed from this row entirely. */
 .catalogueButton {
   align-items: center;
   background: var(--earthing-accent-soft);
@@ -246,12 +252,7 @@
 
 @media (max-width: 640px) {
   .heroActions {
-    flex-direction: column;
-  }
-
-  .primaryButton,
-  .catalogueButton {
-    width: 100%;
+    gap: 0.625rem;
   }
 }
 
@@ -597,6 +598,96 @@
   margin: 0.6rem 0 0;
 }
 
+/* Mobile-only accordion — hidden above 640px (see .guidanceGrid /
+   .guidanceAccordion visibility toggle in the 640px block below),
+   replacing the stacked full-height cards with collapsed rows. Same
+   grid-template-rows expand/collapse technique as
+   .variantGroupPanel/earthing-category-detail-page.module.css, reused
+   here for a consistent interaction language across the page. */
+.guidanceAccordion {
+  display: none;
+}
+
+.guidanceAccordionItem {
+  border-bottom: 1px solid var(--earthing-border);
+}
+
+.guidanceAccordionItem:first-child {
+  border-top: 1px solid var(--earthing-border);
+}
+
+.guidanceAccordionTrigger {
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  padding: 0.95rem 0.25rem;
+  text-align: left;
+  width: 100%;
+}
+
+.guidanceAccordionTitle {
+  align-items: center;
+  color: var(--earthing-navy);
+  display: flex;
+  font-size: 0.88rem;
+  font-weight: 700;
+  gap: 0.65rem;
+}
+
+.guidanceAccordionIcon {
+  color: var(--earthing-accent);
+  flex-shrink: 0;
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.guidanceAccordionChevron,
+.guidanceAccordionChevronOpen {
+  color: var(--earthing-muted);
+  flex-shrink: 0;
+  height: 0.9rem;
+  transition: transform 200ms ease;
+  width: 0.9rem;
+}
+
+.guidanceAccordionChevronOpen {
+  transform: rotate(180deg);
+}
+
+.guidanceAccordionPanel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 240ms ease;
+}
+
+.guidanceAccordionPanel[data-expanded="true"] {
+  grid-template-rows: 1fr;
+}
+
+.guidanceAccordionDescription {
+  color: var(--earthing-body);
+  font-size: 0.83rem;
+  line-height: 1.6;
+  margin: 0;
+  min-height: 0;
+  overflow: hidden;
+  padding-right: 1.5rem;
+}
+
+.guidanceAccordionPanel[data-expanded="true"] .guidanceAccordionDescription {
+  padding-bottom: 0.95rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guidanceAccordionPanel {
+    transition: none;
+  }
+}
+
 /* =========================================================
    08b. THREE PRINCIPLES (standalone, high-impact band —
    deliberately placed ABOVE Engineering Guidance as the
@@ -851,6 +942,94 @@
   transform: translateX(4px);
 }
 
+/* Mobile-only interactive selector — hidden above 640px (see
+   .applicationsCarousel/.applicationSelector visibility toggle in the
+   640px block below), replacing the half-visible-next-card scroller with
+   one active presentation card + a compact selector grid. See
+   earthing-applications-carousel.tsx. */
+.applicationSelector {
+  display: none;
+}
+
+.applicationActiveCard {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  border-radius: 0.7rem;
+  box-shadow: var(--earthing-shadow-idle);
+  color: inherit;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.applicationActiveVisual {
+  aspect-ratio: 16 / 10;
+  background: var(--earthing-surface);
+  position: relative;
+}
+
+.applicationActiveContent {
+  padding: 1.1rem 1.25rem 1.3rem;
+}
+
+.applicationActiveContent h3 {
+  color: var(--earthing-navy);
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.applicationActiveContent p {
+  color: var(--earthing-body);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 0;
+}
+
+.applicationSelectorGrid {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0.75rem;
+}
+
+.applicationSelectorItem,
+.applicationSelectorItemActive {
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.75rem 0.6rem;
+  text-align: center;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.applicationSelectorItem {
+  background: #ffffff;
+  border: 1px solid var(--earthing-border);
+  color: var(--earthing-muted);
+}
+
+.applicationSelectorItem:hover {
+  border-color: rgb(193 98 45 / 45%);
+  color: var(--earthing-accent);
+}
+
+.applicationSelectorItemActive {
+  background: var(--earthing-accent);
+  border: 1px solid var(--earthing-accent);
+  color: #ffffff;
+}
+
+.applicationSelectorItem:focus-visible,
+.applicationSelectorItemActive:focus-visible {
+  outline: 3px solid rgb(193 98 45 / 30%);
+  outline-offset: 2px;
+}
+
 /* =========================================================
    10. PROJECT SUPPORT CTA
    ========================================================= */
@@ -993,13 +1172,207 @@
 }
 
 @media (max-width: 720px) {
-  .pathwaysGrid,
-  .categoriesGrid,
   .guidanceGrid {
     grid-template-columns: 1fr;
   }
 
   .applicationPhotoCard {
     flex-basis: 13.5rem;
+  }
+
+  /* Trims the hero's own top/bottom padding and the video's tall fixed
+     floor — the hero/product visual and CTAs are otherwise untouched.
+     .pathwaysGrid / .categoriesGrid deliberately stay 2-column here (see
+     08. HUB MOBILE COMPACTION below), not 1-column like .guidanceGrid. */
+  .heroContent {
+    padding: 2rem 0 1.5rem;
+  }
+
+  .heroVisual {
+    min-height: 14rem;
+  }
+
+  .pathways,
+  .categories,
+  .principlesSection,
+  .guidance,
+  .applicationsSection {
+    margin-top: 2.75rem;
+  }
+}
+
+/* =========================================================
+   12. HUB MOBILE COMPACTION
+   "What are you installing?" stays a true 2x2 (not a 4-row stack) and the
+   category cards switch to a compact horizontal layout — both explicitly
+   requested as mobile-only changes; desktop/tablet composition above is
+   untouched (still 4-col desktop / 2-col ≤1100px from section 11).
+   ========================================================= */
+
+@media (max-width: 640px) {
+  /* Compact 3-row dark panel — was a vertical icon-above-title stack per
+     item (icon 3.5rem, 1.1rem gap, 1.75rem side padding each, stacked
+     into 3 full rows by the 1100px tier below), which read as far too
+     tall for what is 3 short lines of text. Same panel, same 3
+     principles, just icon-left/text-right rows separated by thin
+     dividers instead. */
+  .principlesSection {
+    margin-top: 2.75rem;
+  }
+
+  .principles {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .principles h2 {
+    font-size: 1.35rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .principlesList {
+    gap: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .principlesList li {
+    flex-direction: row;
+    gap: 0.85rem;
+    padding: 0.85rem 0.25rem;
+    text-align: left;
+  }
+
+  .principlesList li + li {
+    border-left: 0;
+    border-top: 1px solid rgb(255 255 255 / 14%);
+    padding-top: 0.85rem;
+  }
+
+  .principlesList li:first-child {
+    padding-top: 0;
+  }
+
+  .principlesList li span:last-child {
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  .principleIcon {
+    flex-shrink: 0;
+    height: 2.35rem;
+    width: 2.35rem;
+  }
+
+  .principleIcon svg {
+    height: 1.05rem;
+    width: 1.05rem;
+  }
+
+  /* Half-visible-next-card scroller → one active card + selector grid —
+     see earthing-applications-carousel.tsx and H. APPLICATIONS above. */
+  .applicationsCarousel {
+    display: none;
+  }
+
+  .applicationSelector {
+    display: block;
+  }
+
+  .guidanceGrid {
+    display: none;
+  }
+
+  .guidanceAccordion {
+    display: block;
+  }
+
+  .pathwaysGrid {
+    column-gap: 0.6rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 0.6rem;
+  }
+
+  .pathwayCard {
+    padding: 1rem 0.9rem;
+  }
+
+  .pathwayIcon {
+    height: 1.6rem;
+    margin-bottom: 0.6rem;
+    width: 1.6rem;
+  }
+
+  .pathwayCard h3 {
+    font-size: 0.88rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .pathwayCard p {
+    display: -webkit-box;
+    font-size: 0.76rem;
+    line-height: 1.45;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  /* Vertical image-on-top card → horizontal [image | title+action] card,
+     via CSS grid areas only (no JSX/DOM reorder — .categoryImage,
+     .categoryContent and .categoryAction are still siblings in the same
+     order, just placed into named areas). */
+  .categoriesGrid {
+    gap: 0.75rem;
+    grid-template-columns: 1fr;
+  }
+
+  .categoryCard {
+    display: grid;
+    grid-template-areas:
+      "image content"
+      "image action";
+    grid-template-columns: 34% 1fr;
+    grid-template-rows: 1fr auto;
+  }
+
+  .categoryImage {
+    aspect-ratio: auto;
+    grid-area: image;
+  }
+
+  .categoryContent {
+    grid-area: content;
+    padding: 0.75rem 0.85rem 0.5rem;
+  }
+
+  .categoryContent h3 {
+    font-size: 0.92rem;
+  }
+
+  .categoryDescription {
+    display: -webkit-box;
+    font-size: 0.76rem;
+    margin-top: 0.35rem;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .categoryFamilyCount {
+    border-top: 0;
+    font-size: 0.72rem;
+    margin-top: 0.4rem;
+    padding-top: 0;
+  }
+
+  .categoryAction {
+    background: transparent;
+    border-top: 0;
+    color: var(--earthing-accent);
+    grid-area: action;
+    padding: 0 0.85rem 0.75rem;
+  }
+
+  .categoryCard:hover .categoryAction {
+    background: transparent;
+    color: var(--earthing-accent-dark);
   }
 }

@@ -1,4 +1,11 @@
+import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
+
 import type { BusbarSystemDetailByMarket } from "./types";
+
+const SOURCE_ROUTE = "/products/busbar-systems/gl-lighting-busbar";
+const REQUEST_QUOTE_HREF = buildEnquiryHref("quote", { system: "busbar", family: "gl-lighting-busbar", source: SOURCE_ROUTE });
+const REQUEST_DOCUMENTATION_HREF = buildEnquiryHref("technical-document", { system: "busbar", family: "gl-lighting-busbar", source: SOURCE_ROUTE });
 
 const SPEC_COLUMNS = [
   { id: "gl-40", label: "GL 40A" },
@@ -6,7 +13,7 @@ const SPEC_COLUMNS = [
   { id: "gl-100", label: "GL 100A" },
 ] as const;
 
-const IMAGE_BASE = "/assets/products/busbar/gl";
+const IMAGE_BASE = publicMediaUrl("products/busbar/gl");
 
 export const GL_SYSTEM_DETAIL = {
   uk: {
@@ -80,7 +87,7 @@ export const GL_SYSTEM_DETAIL = {
         title: "Retail & Supermarkets",
         description:
           "Adaptable lighting distribution for supermarkets, showrooms and retail units.",
-        image: "/assets/products/busbar/applications/busbar-application-retail.webp",
+        image: publicMediaUrl("products/busbar/applications/busbar-application-retail.webp"),
         imageAlt: "Retail interior with adaptable overhead lighting distribution",
       },
       {
@@ -88,7 +95,7 @@ export const GL_SYSTEM_DETAIL = {
         title: "Warehouses & Logistics",
         description:
           "Continuous lighting distribution above storage aisles, picking areas and logistics operations.",
-        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
+        image: publicMediaUrl("products/busbar/applications/busbar-application-warehouse.webp"),
         imageAlt:
           "Industrial warehouse with continuous overhead lighting above storage and logistics areas",
       },
@@ -97,7 +104,7 @@ export const GL_SYSTEM_DETAIL = {
         title: "Commercial Buildings",
         description:
           "Adaptable lighting distribution for offices, retail units and mixed-use commercial interiors.",
-        image: "/assets/industries/cards/commercial-buildings.webp",
+        image: publicMediaUrl("industries/cards/commercial-buildings.webp"),
         imageAlt: "Illuminated commercial office towers at dusk",
       },
       {
@@ -105,7 +112,7 @@ export const GL_SYSTEM_DETAIL = {
         title: "Industrial Facilities",
         description:
           "Flexible lighting connections for production areas, workshops and high-ceiling industrial spaces requiring 40–100 A capacity.",
-        image: "/assets/industries/cards/industrial-facilities.webp",
+        image: publicMediaUrl("industries/cards/industrial-facilities.webp"),
         imageAlt: "Industrial production facility interior",
       },
       {
@@ -113,7 +120,7 @@ export const GL_SYSTEM_DETAIL = {
         title: "Education & Public Sector",
         description:
           "Continuous, low-maintenance lighting distribution for institutional and civic buildings.",
-        image: "/assets/industries/cards/education-public-sector.webp",
+        image: publicMediaUrl("industries/cards/education-public-sector.webp"),
         imageAlt: "University building lighting distribution context",
       },
     ],
@@ -140,7 +147,7 @@ export const GL_SYSTEM_DETAIL = {
             "Track key electrical parameters, automate switching and schedule operations with ease.",
         },
       ],
-      image: "/assets/products/g-bus/g-bus-smart-rail-dashboard.webp",
+      image: publicMediaUrl("products/g-bus/g-bus-smart-rail-dashboard.webp"),
       imageAlt:
         "G-BUS automation dashboard overlay on a Gersan busbar with receiver modules",
       primaryActionLabel: "Explore G-BUS Automation",
@@ -372,7 +379,7 @@ export const GL_SYSTEM_DETAIL = {
         description:
           "Full product catalogue covering all Gersan busbar trunking systems, including GL technical data, order codes and dimensional drawings.",
         fileLabel: "PDF · 25.1 MB",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Download catalogue",
       },
       {
@@ -380,12 +387,12 @@ export const GL_SYSTEM_DETAIL = {
         description:
           "Quick reference for joining two GL busbar elements: alignment, M5 fixing and joint set, and closing the IP55 joint cover.",
         fileLabel: "PDF",
-        href: `${IMAGE_BASE}/installation/GL_Busbar_Installation_Guide.pdf`,
+        href: `${IMAGE_BASE}/installation/gl-busbar-installation-guide.pdf`,
         downloadLabel: "Download installation guide",
       },
     ],
-    requestQuoteHref: "/uk-support?product=gl-lighting-busbar",
-    requestDocumentationHref: "/#technical-documents",
+    requestQuoteHref: REQUEST_QUOTE_HREF,
+    requestDocumentationHref: REQUEST_DOCUMENTATION_HREF,
   },
   ua: {
     slug: "gl-lighting-busbar",
@@ -459,7 +466,7 @@ export const GL_SYSTEM_DETAIL = {
         title: "Роздрібна торгівля та супермаркети",
         description:
           "Адаптивний розподіл освітлення для супермаркетів, шоурумів та торговельних приміщень.",
-        image: "/assets/products/busbar/applications/busbar-application-retail.webp",
+        image: publicMediaUrl("products/busbar/applications/busbar-application-retail.webp"),
         imageAlt: "Торговельне приміщення з адаптивною системою стельового освітлення",
       },
       {
@@ -467,7 +474,7 @@ export const GL_SYSTEM_DETAIL = {
         title: "Склади та логістичні центри",
         description:
           "Безперервний розподіл освітлення над складськими проходами, зонами комплектування та логістичними ділянками.",
-        image: "/assets/products/busbar/applications/busbar-application-warehouse.webp",
+        image: publicMediaUrl("products/busbar/applications/busbar-application-warehouse.webp"),
         imageAlt:
           "Промисловий склад із безперервним освітленням над стелажами та логістичними зонами",
       },
@@ -476,7 +483,7 @@ export const GL_SYSTEM_DETAIL = {
         title: "Комерційні будівлі",
         description:
           "Адаптивний розподіл освітлення для офісів, торговельних приміщень та багатофункціональних комерційних об'єктів.",
-        image: "/assets/industries/cards/commercial-buildings.webp",
+        image: publicMediaUrl("industries/cards/commercial-buildings.webp"),
         imageAlt: "Освітлені комерційні офісні вежі в сутінках",
       },
       {
@@ -484,7 +491,7 @@ export const GL_SYSTEM_DETAIL = {
         title: "Промислові об'єкти",
         description:
           "Гнучке підключення освітлення у виробничих зонах, майстернях та промислових приміщеннях із потужністю 40–100 А.",
-        image: "/assets/industries/cards/industrial-facilities.webp",
+        image: publicMediaUrl("industries/cards/industrial-facilities.webp"),
         imageAlt: "Інтер'єр промислового виробничого об'єкта",
       },
       {
@@ -492,7 +499,7 @@ export const GL_SYSTEM_DETAIL = {
         title: "Освіта та державний сектор",
         description:
           "Безперервний, невибагливий до обслуговування розподіл освітлення для навчальних та громадських будівель.",
-        image: "/assets/industries/cards/education-public-sector.webp",
+        image: publicMediaUrl("industries/cards/education-public-sector.webp"),
         imageAlt: "Університетська будівля — контекст розподілу освітлення",
       },
     ],
@@ -519,7 +526,7 @@ export const GL_SYSTEM_DETAIL = {
             "Відстежуйте ключові електричні параметри, автоматизуйте перемикання та плануйте операції.",
         },
       ],
-      image: "/assets/products/g-bus/g-bus-smart-rail-dashboard.webp",
+      image: publicMediaUrl("products/g-bus/g-bus-smart-rail-dashboard.webp"),
       imageAlt:
         "Панель автоматизації G-BUS поверх шинопроводу Gersan з приймальними модулями",
       primaryActionLabel: "Дізнатися про G-BUS Automation",
@@ -764,7 +771,7 @@ export const GL_SYSTEM_DETAIL = {
         description:
           "Повний каталог продукції з усіма шинопровідними системами Gersan, включно з технічними даними GL, кодами замовлення та кресленнями розмірів.",
         fileLabel: "PDF · 25.1 МБ",
-        href: "/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf",
+        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
         downloadLabel: "Завантажити каталог",
       },
       {
@@ -772,11 +779,11 @@ export const GL_SYSTEM_DETAIL = {
         description:
           "Короткий довідник із з'єднання двох елементів шинопроводу GL: вирівнювання, кріплення M5 з комплектом з'єднання та закриття кришки IP55.",
         fileLabel: "PDF",
-        href: `${IMAGE_BASE}/installation/GL_Busbar_Installation_Guide.pdf`,
+        href: `${IMAGE_BASE}/installation/gl-busbar-installation-guide.pdf`,
         downloadLabel: "Завантажити інструкцію з монтажу",
       },
     ],
-    requestQuoteHref: "/uk-support?product=gl-lighting-busbar",
-    requestDocumentationHref: "/#technical-documents",
+    requestQuoteHref: REQUEST_QUOTE_HREF,
+    requestDocumentationHref: REQUEST_DOCUMENTATION_HREF,
   },
 } as const satisfies BusbarSystemDetailByMarket;

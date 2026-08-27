@@ -121,5 +121,11 @@ export type UnderfloorHubContent = Readonly<{
     codesCountSuffix: string;
     addToEnquiryLabel: string;
     removeFromEnquiryLabel: string;
+    /** e.g. "models" — used in the mobile accordion header, "N {suffix}". */
+    modelsCountSuffix: string;
+    /** e.g. "Show more" — combined with a live remaining count at render
+     * time, same pattern as earthing's variantsFiltersShowResultsAction. */
+    showMoreAction: string;
+    relatedSeriesHeading: string;
   }>;
 }>;

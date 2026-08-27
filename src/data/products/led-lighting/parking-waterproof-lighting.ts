@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedCategoryDetailContent } from "./types";
@@ -5,26 +6,26 @@ import type { LedCategoryDetailContent } from "./types";
 /** Parking & Waterproof Lighting category page.
  *
  * Hero background/foreground are the pre-generated assets already
- * prepared for this category under category/parking&waterproof/hero —
+ * prepared for this category under category/parking-waterproof/hero —
  * a real underground car-park interior (background, white LED light
  * only, no coloured emission) and a real product composite (foreground)
  * showing the three families below, switched on with neutral-white
  * light: LED-BUS Etange Carpark (dominant), LED-BUS StepDIM Waterproof
  * (secondary) and LED-BUS Etanj PC (supporting). */
 export const PARKING_WATERPROOF_HERO_BACKGROUND =
-  "/assets/products/led-lighting/category/parking&waterproof/hero/parking-waterproof-lighting-hero-background.webp";
+  publicMediaUrl("products/led-lighting/category/parking-waterproof/hero/parking-waterproof-lighting-hero-background.webp");
 export const PARKING_WATERPROOF_HERO_BACKGROUND_ALT = "Underground car park interior lit by linear LED luminaires along the ceiling";
 export const PARKING_WATERPROOF_HERO_FOREGROUND =
-  "/assets/products/led-lighting/category/parking&waterproof/hero/parking-waterproof-lighting-hero-foreground-products.webp";
+  publicMediaUrl("products/led-lighting/category/parking-waterproof/hero/parking-waterproof-lighting-hero-foreground-products.webp");
 export const PARKING_WATERPROOF_HERO_FOREGROUND_ALT =
   "LED-BUS Etange Carpark, StepDIM Waterproof and Etanj PC linear luminaires, illuminated";
 export const PARKING_WATERPROOF_SUPPORT_CTA_IMAGE = PARKING_WATERPROOF_HERO_BACKGROUND;
 export const PARKING_WATERPROOF_SUPPORT_CTA_IMAGE_ALT = PARKING_WATERPROOF_HERO_BACKGROUND_ALT;
 
 /** Family-matched category-card assets supplied for this category. */
-const SERIES_IMAGE_BASE = "/assets/products/led-lighting/category/parking&waterproof/card";
+const SERIES_IMAGE_BASE = publicMediaUrl("products/led-lighting/category/parking-waterproof/card");
 /** Family- and application-matched imagery supplied for this category. */
-const APPLICATION_IMAGE_BASE = "/assets/products/led-lighting/category/parking&waterproof/applications";
+const APPLICATION_IMAGE_BASE = publicMediaUrl("products/led-lighting/category/parking-waterproof/applications");
 
 const content = {
   uk: {

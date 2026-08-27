@@ -1,0 +1,27 @@
+/* =========================================================
+   LED CTA LABEL — shared mobile-abbreviation wrapper
+   Renders the same button copy the desktop already shows, plus a
+   shorter mobile-only alternative sourced from a fixed known-phrase map
+   (see led-cta-label.tsx) — never a data-file change, so every existing
+   CTA destination/action/analytics binding is untouched. Only one of
+   the two spans is ever in the accessible tree at a time (display:none
+   removes it), so the accessible name always matches what's visible.
+   ========================================================= */
+
+.ctaLabelFull {
+  display: inline;
+}
+
+.ctaLabelShort {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .ctaLabelFull {
+    display: none;
+  }
+
+  .ctaLabelShort {
+    display: inline;
+  }
+}

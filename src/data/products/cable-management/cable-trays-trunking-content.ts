@@ -1,11 +1,17 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { CableMacroFamilyContent } from "./macro-family-types";
 import { CABLE_SUPPORT_CATALOGUE_PDF_HREF } from "./content";
 import type { CableFamilySiblingLink } from "./types";
 
-const IMAGE_BASE = "/assets/products/cable-management";
-const REQUEST_HREF = "/uk-support?request=technical-pack&product=cable-trays-trunking";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+const REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "cable-trays-trunking",
+  source: "/products/cable-support-systems",
+});
 
 // Curated down to 6 cards (from the catalogue's real 11 series) so this
 // section reads as a category overview, not a raw list — see the

@@ -3,7 +3,7 @@ import type { EarthingProductVariant } from "../types";
 export const EARTHING_ELECTRODES_PLATES_VARIANTS: Readonly<
   Record<string, readonly EarthingProductVariant[]>
 > = {
-  "Earthing Electrodes": [
+  "earthing-electrodes": [
     { name: "Earthing Electrodes (Copper Pipe Insert)", model: "GTE-105/Q16-1200", stockCode: "30105Q16FECU120", material: "Copper covered", dimensions: "L 1200 mm · Ø16 mm", weight: "2.050 kg" },
     { name: "Earthing Electrodes (Copper Pipe Insert)", model: "GTE-105/Q16-1500", stockCode: "30105Q16FECU150", material: "Copper covered", dimensions: "L 1500 mm · Ø16 mm", weight: "2.550 kg" },
     { name: "Earthing Electrodes (Copper Pipe Insert)", model: "GTE-105-A", stockCode: "3015105A0FECU0", material: "Copper covered", dimensions: "L 1000 mm · Ø18 mm", weight: "2.200 kg" },
@@ -73,7 +73,7 @@ export const EARTHING_ELECTRODES_PLATES_VARIANTS: Readonly<
     { name: "Angle Iron", model: "GTE-130- 8 D", stockCode: "3024515009141", material: "Galvanized", dimensions: "L 1500 mm · 65x65x7 mm", weight: "10.500 kg" },
     { name: "Angle Iron", model: "GTE-130- 9 D", stockCode: "3024520009142", material: "Galvanized", dimensions: "L 2000 mm · 65x65x7 mm", weight: "14.000 kg" },
   ],
-  "Earth Plate – Lattice Copper": [
+  "earth-plate-lattice-copper": [
     { name: "Earth Plate - Solid Copper", model: "GTE-108-A", stockCode: "3017108A0CU0", material: "Copper", dimensions: "700×700 mm · e=1 mm", weight: "4.350 kg" },
     { name: "Earth Plate - Solid Copper", model: "GTE-108-B", stockCode: "3017108B0CU0", material: "Copper", dimensions: "700×700 mm · e=1,5 mm", weight: "6.500 kg" },
     { name: "Earth Plate - Solid Copper", model: "GTE-108-C", stockCode: "3017108C0CU0", material: "Copper", dimensions: "700×700 mm · e=2 mm", weight: "8.700 kg" },

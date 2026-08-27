@@ -1,3 +1,5 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { CableMacroFamilyContent } from "./macro-family-types";
@@ -11,8 +13,12 @@ import { REDUCERS_VARIANTS } from "./variants/reducers";
 import { SCREW_SETS_THREADED_RODS_ANCHORS_VARIANTS } from "./variants/screw-sets-threaded-rods-anchors";
 import { SEPARATOR_END_CAP_LEVEL_DIRECTION_CHANGER_VARIANTS } from "./variants/separator-end-cap-level-direction-changer";
 
-const IMAGE_BASE = "/assets/products/cable-management";
-const REQUEST_HREF = "/uk-support?request=technical-pack&product=accessories-fixings";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+const REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "cable-management",
+  family: "accessories-fixings",
+  source: "/products/cable-support-systems",
+});
 
 // Ten catalogue series map to this macro group (see category-content.ts).
 // All ten now have a real, dedicated card image (see

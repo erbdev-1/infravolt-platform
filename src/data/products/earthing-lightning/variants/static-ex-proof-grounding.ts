@@ -3,7 +3,7 @@ import type { EarthingProductVariant } from "../types";
 export const STATIC_EX_PROOF_GROUNDING_VARIANTS: Readonly<
   Record<string, readonly EarthingProductVariant[]>
 > = {
-  "Static Electric Earthing Equipment": [
+  "static-electric-earthing-equipment": [
     { name: "Circular Vertical Outlet", model: "GTP-P-10", stockCode: "303300100PRÇ0", weight: "0.152 kg" },
     { name: "Rectangular Vertical Outlet", model: "GTP-P-20", stockCode: "303300100PRÇ0", weight: "0.373 kg" },
     { name: "Square Vertical Outlet", model: "GTP-P-30", stockCode: "303300300PRÇ0", weight: "0.520 kg" },
@@ -29,7 +29,7 @@ export const STATIC_EX_PROOF_GROUNDING_VARIANTS: Readonly<
     { name: "300 mm Earthing Terminal", model: "GTP-P-830", stockCode: "303300830304", dimensions: "Stud diameter 10 mm; connection M8/M10 · L 300 mm", weight: "0.365 kg" },
     { name: "Copper Static Electric Earthing Plate", model: "GTE-303", stockCode: "303203020LVH0", material: "Copper", weight: "0.940 kg" },
   ],
-  "Ex-Proof Grounding System": [
+  "ex-proof-grounding-system": [
 
   ],
 };

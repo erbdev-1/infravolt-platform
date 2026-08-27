@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
 import type { LedSeriesDetailContent } from "@/data/products/led-lighting/types";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 
 import {
   IconAdjustableAngle,
@@ -54,6 +56,8 @@ import {
   IconWarehouse,
   IconStreetLight,
 } from "./led-icons";
+import { LedApplicationsSelector } from "./led-applications-selector";
+import { LedCtaLabel } from "./led-cta-label";
 import { LedSeriesModelsTable } from "./led-series-models-table";
 import styles from "./led-series-detail-page.module.css";
 import { LedTechnicalAssetVariants } from "./led-technical-asset-variants";
@@ -152,6 +156,19 @@ export function LedSeriesDetailPage({
   categoryHref: string;
   configurationSelector?: ReactNode;
 }>) {
+  const sourceRoute = `${categoryHref}/${seriesSlug}`;
+  const requestDocumentHref = buildEnquiryHref("technical-document", {
+    system: "led-systems",
+    family: seriesSlug,
+    label: content.hero.title,
+    source: sourceRoute,
+  });
+  const requestTechnicalHref = buildEnquiryHref("technical", {
+    system: "led-systems",
+    family: seriesSlug,
+    label: content.hero.title,
+    source: sourceRoute,
+  });
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
@@ -200,13 +217,12 @@ export function LedSeriesDetailPage({
           <p className={styles.heroDescription}>{content.hero.description}</p>
 
           <div className={styles.heroActions}>
-            <Link className={styles.primaryButton} href={`/uk-support?request=technical-pack&product=${seriesSlug}`}>
-              {content.hero.primaryAction}
-              <span aria-hidden="true">→</span>
+            <Link className={styles.primaryButton} href={requestDocumentHref}>
+              <LedCtaLabel label={content.hero.primaryAction} />
             </Link>
-            <Link className={styles.secondaryButton} href={`/uk-support?request=technical-pack&product=${seriesSlug}`}>
-              {content.hero.secondaryAction}
-            </Link>
+            <a className={styles.secondaryButton} download href={canonicalCatalogueHref("led")}>
+              <LedCtaLabel label={content.hero.secondaryAction} />
+            </a>
           </div>
         </div>
       </section>
@@ -328,7 +344,7 @@ export function LedSeriesDetailPage({
             models={content.models}
             seriesSlug={seriesSlug}
             seriesTitle={content.hero.title}
-            sourceRoute={`${categoryHref}/${seriesSlug}`}
+            sourceRoute={sourceRoute}
           />
         ) : null}
 
@@ -585,7 +601,22 @@ export function LedSeriesDetailPage({
               );
             })}
           </div>
-        ) : (
+        ) : null}
+
+        {content.applicationCardsAlways || content.applications.some((application) => application.image) ? (
+          <LedApplicationsSelector
+            applications={content.applications.map((application, index) => ({
+              id: `${application.icon}-${index}`,
+              title: application.title,
+              description: application.description,
+              image: application.image,
+              imageAlt: application.imageAlt,
+              icon: application.icon,
+            }))}
+          />
+        ) : null}
+
+        {!content.applicationCardsAlways && !content.applications.some((application) => application.image) ? (
           <div className={`${styles.applicationsLayout} ${content.compactApplicationsRow ? styles.applicationsLayoutCompact : ""}`}>
             {content.applicationImage ? (
               <div className={styles.applicationsVisual}>
@@ -606,7 +637,7 @@ export function LedSeriesDetailPage({
               })}
             </div>
           </div>
-        )}
+        ) : null}
       </section>
 
       <section className={styles.siblings}>
@@ -657,7 +688,7 @@ export function LedSeriesDetailPage({
           <h2>{content.supportCta.title}</h2>
           <p>{content.supportCta.description}</p>
 
-          <Link className={styles.supportCtaAction} href={`/uk-support?request=technical-question&product=${seriesSlug}`}>
+          <Link className={styles.supportCtaAction} href={requestTechnicalHref}>
             {content.supportCta.action}
             <span aria-hidden="true">→</span>
           </Link>

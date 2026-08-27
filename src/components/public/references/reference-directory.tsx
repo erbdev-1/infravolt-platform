@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 import { resolveOwnerCountry, resolveReferenceLocation } from "@/modules/references/geography";
 import { transliterateTurkish } from "@/modules/references/english-display";
@@ -419,15 +419,36 @@ export function ReferenceDirectory({
   market: MarketCode;
 }>) {
   const tabIdPrefix = useId();
-  const [activeTabId, setActiveTabId] = useState(system.tabs[0]?.id);
+  const subTabsRef = useRef<HTMLDivElement>(null);
+  const [activeTabId, setActiveTabId] = useState(
+    system.tabs.find((tab) => tab.id === "worldwide-companies")?.id ?? system.tabs[0]?.id,
+  );
   const activeTab = system.tabs.find((tab) => tab.id === activeTabId) ?? system.tabs[0];
+
+  useEffect(() => {
+    const tabList = subTabsRef.current;
+    const selectedTab = tabList?.querySelector<HTMLElement>('[aria-pressed="true"]');
+
+    if (!tabList || !selectedTab || tabList.scrollWidth <= tabList.clientWidth) return;
+
+    const listBounds = tabList.getBoundingClientRect();
+    const tabBounds = selectedTab.getBoundingClientRect();
+    const isOutsideVisibleArea = tabBounds.left < listBounds.left || tabBounds.right > listBounds.right;
+
+    if (isOutsideVisibleArea) {
+      tabList.scrollTo({
+        behavior: "smooth",
+        left: Math.max(0, tabList.scrollLeft + tabBounds.left - listBounds.left - 8),
+      });
+    }
+  }, [activeTabId, system.key]);
 
   if (!activeTab) return null;
 
   return (
     <div className={styles.directory}>
       {system.tabs.length > 1 ? (
-        <div aria-label={system.title} className={styles.subTabs}>
+        <div aria-label={system.title} className={styles.subTabs} ref={subTabsRef}>
           {system.tabs.map((tab) => (
             <button
               aria-controls={`${tabIdPrefix}-${tab.id}-panel`}

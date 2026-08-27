@@ -1,8 +1,9 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedCategoryDetailContent } from "./types";
 
-const ASSET_BASE = "/assets/products/led-lighting/category/special&hazardous";
+const ASSET_BASE = publicMediaUrl("products/led-lighting/category/special-hazardous");
 
 export const SPECIAL_HAZARDOUS_HERO_BACKGROUND =
   `${ASSET_BASE}/hero/special-hazardous-environment-lighting-hero-background.webp`;

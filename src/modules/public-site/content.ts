@@ -106,6 +106,7 @@ type FourFacts = readonly [
   ContentCard,
   ContentCard,
 ];
+type TwoLabels = readonly [string, string];
 type FiveTechnicalDocumentItems = readonly [
   ContentCard,
   ContentCard,
@@ -150,6 +151,8 @@ export type PublicSiteContent = Readonly<{
   hero: Readonly<{
     eyebrow: string;
     title: string;
+    /** Leading phrase of `title` that must never line-wrap on mobile (e.g. "Electrical infrastructure"). Undefined when the market's headline has no such phrase. */
+    titleLeadPhrase?: string;
     description: string;
     relationshipLabel?: string;
     primaryAction: AnchorLink;
@@ -233,6 +236,23 @@ export type PublicSiteContent = Readonly<{
     internalAction: AnchorLink;
     externalAction: ExternalLink;
   }>;
+  manufacturerCredibility: Readonly<{
+    eyebrow: string;
+    title: string;
+    description: string;
+    proofPoints: TwoLabels;
+    factoryImageAlt: string;
+    primaryAction: ExternalLink;
+    bistAction: ExternalLink;
+    otcAction: ExternalLink;
+    marketDataLabels: Readonly<{
+      attribution: string;
+      down: string;
+      flat: string;
+      unavailable: string;
+      up: string;
+    }>;
+  }>;
   technicalDocuments: Readonly<{
     eyebrow: string;
     title: string;
@@ -284,7 +304,7 @@ export const PUBLIC_SITE_CONTENT = {
         { href: "/about", label: "About" },
         { href: "/#product-systems", label: "Gersan Products" },
         { href: "/#industries", label: "Industries" },
-        { href: "/uk-support", label: "UK Support" },
+        { href: "/uk-support", label: "Support" },
         { href: "/resources", label: "Resources" },
         { href: "/references", label: "References" },
         { href: "/contact", label: "Contact" },
@@ -323,7 +343,8 @@ export const PUBLIC_SITE_CONTENT = {
     },
     hero: {
       eyebrow: "Electrical infrastructure • Project supply",
-      title: "Electrical infrastructure systems for demanding projects.",
+      title: "Electrical infrastructure systems for demanding projects",
+      titleLeadPhrase: "Electrical infrastructure",
       description:
         "InfraVolt supplies Gersan busbar, cable management, earthing, distribution and project-support solutions for the UK market.",
       relationshipLabel: "Official UK Representative",
@@ -579,7 +600,7 @@ export const PUBLIC_SITE_CONTENT = {
 
       overviewAction: {
         href: "/uk-support",
-        label: "Explore UK Support",
+        label: "Explore Support",
       },
 
       primaryAction: {
@@ -644,6 +665,37 @@ export const PUBLIC_SITE_CONTENT = {
         label: "View Official Disclosures",
         accessibleLabel:
           "View official Gersan disclosures on the external KAP website (opens in a new tab)",
+      },
+    },
+    manufacturerCredibility: {
+      eyebrow: "ENGINEERED & MANUFACTURED BY GERSAN",
+      title: "Global Engineering. International Reach. Public-Market Transparency",
+      description:
+        "Gersan Elektrik designs and manufactures integrated electrical infrastructure systems for commercial, industrial, energy and mission-critical projects worldwide. Established in 1980, the company combines engineering, R&D, manufacturing and testing within one industrial platform. InfraVolt represents and supports Gersan solutions in the United Kingdom.",
+      proofPoints: ["45+ YEARS", "90+ COUNTRIES"],
+      factoryImageAlt:
+        "Gersan Elektrik manufacturing facility in Çaycuma, Zonguldak, Türkiye",
+      primaryAction: {
+        href: "https://gersan.com.tr/en/about-us/",
+        label: "About GERSAN",
+        accessibleLabel: "Visit the official Gersan corporate website (opens in a new tab)",
+      },
+      bistAction: {
+        href: "https://kap.org.tr/tr/sirket-finansal-bilgileri/964-gersan-elektrik-ticaret-ve-sanayi-a-s",
+        label: "BIST: GEREL",
+        accessibleLabel: "View official Gersan disclosures on the KAP website (opens in a new tab)",
+      },
+      otcAction: {
+        href: "https://www.otcmarkets.com/stock/GERLF/overview",
+        label: "OTCQX: GERLF",
+        accessibleLabel: "View the Gersan GERLF listing on OTC Markets (opens in a new tab)",
+      },
+      marketDataLabels: {
+        attribution: "Market data",
+        down: "Down",
+        flat: "Unchanged",
+        unavailable: "Market data unavailable",
+        up: "Up",
       },
     },
     technicalDocuments: {
@@ -728,6 +780,7 @@ export const PUBLIC_SITE_CONTENT = {
       marketName: "Україна",
       localeName: "uk-UA",
       brandDescriptor: "Електрична інфраструктура",
+      relationshipLabel: "Official Ukraine Distributor",
       enquiryLabel: "Запит",
       commercialGroupLabel: "Комерційні можливості",
       commercialPartnersLabel: "Комерційні партнери",
@@ -738,7 +791,7 @@ export const PUBLIC_SITE_CONTENT = {
         { href: "/about", label: "Про InfraVolt" },
         { href: "/#product-systems", label: "Продукція Gersan" },
         { href: "/#industries", label: "Галузі" },
-        { href: "/uk-support", label: "Підтримка у Великій Британії" },
+        { href: "/uk-support", label: "Підтримка" },
         { href: "/resources", label: "Ресурси" },
         { href: "/references", label: "Референції" },
         { href: "/contact", label: "Контакти" },
@@ -777,12 +830,12 @@ export const PUBLIC_SITE_CONTENT = {
     },
     hero: {
       eyebrow: "Електрична інфраструктура • Проєктне постачання",
-      title: "Системи електричної інфраструктури для складних проєктів.",
+      title: "Системи електричної інфраструктури для складних проєктів",
       description:
         "InfraVolt допомагає проєктним командам в Україні добирати шинопровідні системи Gersan, кабельні траси, рішення для заземлення, розподілу електроенергії та технічної підтримки.",
       primaryAction: {
         href: "#product-systems",
-        label: "Оглянути системи продукції",
+        label: "Оглянути системи",
       },
       secondaryAction: {
         href: "/contact?type=project",
@@ -1030,7 +1083,7 @@ export const PUBLIC_SITE_CONTENT = {
       ],
       overviewAction: {
         href: "/uk-support",
-        label: "Детальніше про підтримку у Великій Британії",
+        label: "Детальніше про підтримку",
       },
       primaryAction: {
         href: "/contact?type=project",
@@ -1094,6 +1147,40 @@ export const PUBLIC_SITE_CONTENT = {
         label: "Офіційні розкриття",
         accessibleLabel:
           "Переглянути офіційні розкриття Gersan на зовнішньому сайті KAP (відкриється в новій вкладці)",
+      },
+    },
+    manufacturerCredibility: {
+      eyebrow: "Розроблено та вироблено компанією GERSAN",
+      title:
+        "Глобальна інженерія. Міжнародна присутність. Прозорість публічного ринку",
+      description:
+        "Gersan Elektrik розробляє та виробляє інтегровані системи електричної інфраструктури для комерційних, промислових, енергетичних та критично важливих проєктів у всьому світі. Заснована у 1980 році, компанія поєднує інжиніринг, НДДКР, виробництво та випробування в межах єдиної промислової платформи. InfraVolt представляє та підтримує рішення Gersan у Великій Британії.",
+      proofPoints: ["45+ РОКІВ", "90+ КРАЇН"],
+      factoryImageAlt:
+        "Виробничий майданчик Gersan Elektrik у Чайджумі, Зонгулдак, Туреччина",
+      primaryAction: {
+        href: "https://gersan.com.tr/en/about-us/",
+        label: "Про GERSAN",
+        accessibleLabel: "Перейти на офіційний сайт Gersan (відкриється в новій вкладці)",
+      },
+      bistAction: {
+        href: "https://kap.org.tr/tr/sirket-finansal-bilgileri/964-gersan-elektrik-ticaret-ve-sanayi-a-s",
+        label: "BIST: GEREL",
+        accessibleLabel:
+          "Переглянути офіційні розкриття Gersan на сайті KAP (відкриється в новій вкладці)",
+      },
+      otcAction: {
+        href: "https://www.otcmarkets.com/stock/GERLF/overview",
+        label: "OTCQX: GERLF",
+        accessibleLabel:
+          "Переглянути лістинг GERLF на OTC Markets (відкриється в новій вкладці)",
+      },
+      marketDataLabels: {
+        attribution: "Ринкові дані",
+        down: "Зниження",
+        flat: "Без змін",
+        unavailable: "Ринкові дані недоступні",
+        up: "Зростання",
       },
     },
     technicalDocuments: {

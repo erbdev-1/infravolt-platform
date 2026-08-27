@@ -95,7 +95,6 @@ export function GersanManufacturerPreview({
             <div className={styles.actions}>
               <LinkButton href={content.internalAction.href}>
                 {content.internalAction.label}
-                <span aria-hidden="true">→</span>
               </LinkButton>
 
               <LinkButton

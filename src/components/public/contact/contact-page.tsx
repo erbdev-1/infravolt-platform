@@ -35,14 +35,14 @@ export function ContactPage({
             <div className={styles.heroMarket}>{content.hero.market}</div>
           </div>
 
-          <aside aria-label={content.hero.contactDetails.heading} className={styles.heroContactPanel}>
-            <p>{content.hero.contactDetails.heading}</p>
-            {content.hero.contactDetails.email ? (
+          {content.hero.contactDetails?.email ? (
+            <aside aria-label={content.hero.contactDetails.heading} className={styles.heroContactPanel}>
+              <p>{content.hero.contactDetails.heading}</p>
               <a className={styles.heroEmail} href={`mailto:${content.hero.contactDetails.email}`}>
                 <strong>{content.hero.contactDetails.email}</strong>
               </a>
-            ) : null}
-          </aside>
+            </aside>
+          ) : null}
         </div>
         <div aria-hidden="true" className={styles.heroGrid} />
       </section>

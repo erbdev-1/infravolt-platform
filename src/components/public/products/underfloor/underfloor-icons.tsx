@@ -202,3 +202,14 @@ export function IconImagePending({ className }: IconProps) {
     </svg>
   );
 }
+
+// Mobile family accordion (GDK/model-list groups) + Typical Applications
+// selector — same chevron-down affordance used elsewhere on the site's
+// accordion patterns (see earthing-lightning's IconChevronDown).
+export function IconChevronDown({ className }: IconProps) {
+  return (
+    <svg aria-hidden="true" className={className} {...BASE_PROPS}>
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}

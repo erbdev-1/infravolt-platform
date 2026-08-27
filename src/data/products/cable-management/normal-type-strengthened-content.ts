@@ -1,3 +1,5 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import { cableTraysTrunkingSiblingFamilies } from "./cable-trays-trunking-content";
@@ -5,8 +7,15 @@ import { CABLE_SUPPORT_CATALOGUE_PDF_HREF, heavyDutyCableTraysH60ContentForMarke
 import type { CableAccessoryDisplayGroup, CableManagementFamilyContent, CableManagementFamilySlug } from "./types";
 import type { CableVariantFamilyTemplateContent } from "./variant-family-template-types";
 
-const IMAGE_BASE = "/assets/products/cable-management";
-const REQUEST_HREF_BASE = "/uk-support?request=technical-pack&product=cable-management";
+const IMAGE_BASE = publicMediaUrl("products/cable-management");
+
+function requestHrefFor(familySuffix: string): string {
+  return buildEnquiryHref("technical-document", {
+    system: "cable-management",
+    family: `cable-management${familySuffix}`,
+    source: "/products/cable-support-systems",
+  });
+}
 
 function t(market: MarketCode, uk: string, ua: string): string {
   return market === "ua" ? ua : uk;
@@ -69,7 +78,7 @@ export function normalTypeCableTraysContentForMarket(market: MarketCode): CableM
       { label: t(market, "Normal Type Cable Trays", "Кабельні лотки стандартного типу") },
     ],
     requestPackAction: t(market, "Request Technical Pack", "Запросити технічний пакет"),
-    requestPackHref: `${REQUEST_HREF_BASE}-normal-type-cable-trays`,
+    requestPackHref: requestHrefFor("-normal-type-cable-trays"),
     catalogueDocument: {
       label: t(market, "Download PDF Catalogue", "Завантажити PDF-каталог"),
       meta: t(market, "PDF Catalogue", "PDF-каталог"),
@@ -133,7 +142,7 @@ export function normalTypeCableTraysContentForMarket(market: MarketCode): CableM
       "Наша технічна команда допоможе з підбором продукції, вимогами до навантаження, координацією монтажу та індивідуальними конфігураціями проєкту.",
     ),
     supportAction: t(market, "Request Technical Support", "Запросити технічну підтримку"),
-    supportHref: `${REQUEST_HREF_BASE}-normal-type-cable-trays`,
+    supportHref: requestHrefFor("-normal-type-cable-trays"),
   };
 }
 
@@ -167,7 +176,7 @@ function strengthenedContent(
       { label: t(market, `Strengthened H = ${heightLabel} mm`, `Посилений тип H = ${heightLabel} мм`) },
     ],
     requestPackAction: t(market, "Request Technical Pack", "Запросити технічний пакет"),
-    requestPackHref: `${REQUEST_HREF_BASE}-strengthened-cable-trays-h${heightLabel}`,
+    requestPackHref: requestHrefFor(`-strengthened-cable-trays-h${heightLabel}`),
     catalogueDocument: {
       label: t(market, "Download PDF Catalogue", "Завантажити PDF-каталог"),
       meta: t(market, "PDF Catalogue", "PDF-каталог"),
@@ -222,7 +231,7 @@ function strengthenedContent(
       "Наша технічна команда допоможе з підбором продукції, вимогами до навантаження, координацією монтажу та індивідуальними конфігураціями проєкту.",
     ),
     supportAction: t(market, "Request Technical Support", "Запросити технічну підтримку"),
-    supportHref: `${REQUEST_HREF_BASE}-strengthened-cable-trays-h${heightLabel}`,
+    supportHref: requestHrefFor(`-strengthened-cable-trays-h${heightLabel}`),
   };
 }
 
@@ -264,7 +273,7 @@ export function normalTypeStrengthenedTemplateContentForMarket(market: MarketCod
     ),
     heroVisualMode: "frameless",
     requestPackAction: t(market, "Request Technical Pack", "Запросити технічний пакет"),
-    requestPackHref: `${REQUEST_HREF_BASE}-normal-type-cable-trays`,
+    requestPackHref: requestHrefFor("-normal-type-cable-trays"),
     catalogueDocument: {
       label: t(market, "Download PDF Catalogue", "Завантажити PDF-каталог"),
       meta: t(market, "PDF Catalogue", "PDF-каталог"),
@@ -354,6 +363,6 @@ export function normalTypeStrengthenedTemplateContentForMarket(market: MarketCod
       "Наша технічна команда допоможе з підбором продукції, вимогами до навантаження, координацією монтажу та індивідуальними конфігураціями проєкту.",
     ),
     supportAction: t(market, "Request Technical Support", "Запросити технічну підтримку"),
-    supportHref: `${REQUEST_HREF_BASE}-normal-type-cable-trays`,
+    supportHref: requestHrefFor("-normal-type-cable-trays"),
   };
 }

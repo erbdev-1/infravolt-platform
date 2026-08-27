@@ -228,6 +228,32 @@ export function createMarketResolver(
   });
 }
 
+/**
+ * Vercel automatically provides VERCEL_URL (unique per deployment) and
+ * VERCEL_BRANCH_URL (stable per git branch) — plain hostnames, never
+ * user-configured, present only when actually running on Vercel. Trusting
+ * them as additional preview hosts lets a raw Vercel deployment/preview
+ * URL render the site instead of proxy.ts's unknown-host 404 — with zero
+ * Vercel-side environment configuration required. A malformed value
+ * (never expected from the platform itself) is silently skipped rather
+ * than throwing, so this can never turn into a crash.
+ */
+function vercelPreviewHosts(): readonly URL[] {
+  const candidates = [process.env.VERCEL_URL, process.env.VERCEL_BRANCH_URL].filter(
+    (value): value is string => Boolean(value),
+  );
+
+  const urls: URL[] = [];
+  for (const host of candidates) {
+    try {
+      urls.push(new URL(`https://${host}`));
+    } catch {
+      // Ignore — never expected from the platform itself.
+    }
+  }
+  return urls;
+}
+
 export function createRuntimeMarketResolver(): MarketResolver {
   const mode = runtimeEnvironmentMode();
   const environment = readClientEnvironment(mode);
@@ -241,6 +267,12 @@ export function createRuntimeMarketResolver(): MarketResolver {
     aliases: {
       uk: runtimeAliases("uk", publicSiteUrls.uk),
       ua: runtimeAliases("ua", publicSiteUrls.ua),
+    },
+    // Preview/deployment hosts default to the uk market — a single Vercel
+    // preview URL can't represent both markets at once, and uk is
+    // InfraVolt's primary market.
+    previewSiteUrls: {
+      uk: vercelPreviewHosts(),
     },
     allowLocalHosts: mode !== "production",
   });

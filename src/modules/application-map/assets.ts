@@ -1,3 +1,4 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import {
   PRODUCT_ASSETS,
   PRODUCT_PAGE_HREFS,
@@ -36,15 +37,15 @@ const CATEGORY_LINKED_PRODUCT_IDS = {
 
 const CATEGORY_LINKED_PRODUCT_IMAGES = {
   "cable-management":
-    "/assets/products/application-map/cable-management-category-transparent.png",
+    publicMediaUrl("products/application-map/cable-management-category-transparent.png"),
   underfloor:
-    "/assets/products/application-map/underfloor-systems-category-transparent.png",
+    publicMediaUrl("products/application-map/underfloor-systems-category-transparent.png"),
   "earthing-lightning":
-    "/assets/products/application-map/earthing-lightning-category-transparent.png",
+    publicMediaUrl("products/application-map/earthing-lightning-category-transparent.png"),
   "led-systems":
-    "/assets/products/application-map/led-systems-category-transparent.png",
+    publicMediaUrl("products/application-map/led-systems-category-transparent.png"),
   "ev-charging":
-    "/assets/products/application-map/ev-charging-category-transparent.png",
+    publicMediaUrl("products/application-map/ev-charging-category-transparent.png"),
 } as const satisfies Readonly<Record<CategoryLinkedProductFamilyId, string>>;
 
 export type ApplicationMapCategoryPresentation = Readonly<{

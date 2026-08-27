@@ -10,6 +10,8 @@ import {
   DECORATIVE_LIGHTING_SUPPORT_CTA_IMAGE_ALT,
   decorativeLightingContentForMarket,
 } from "@/data/products/led-lighting/decorative-lighting";
+import { canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
+import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
 import {
@@ -37,6 +39,8 @@ import {
   IconTemperedGlass,
   IconWarehouse,
 } from "./led-icons";
+import { LedApplicationsSelector } from "./led-applications-selector";
+import { LedCtaLabel } from "./led-cta-label";
 import styles from "./led-category-detail-page.module.css";
 
 const APPLICATION_ICONS = [
@@ -75,7 +79,11 @@ const TECHNICAL_SNAPSHOT_ICONS = {
   control: IconAutomation,
 } as const;
 
-const SUPPORT_REQUEST_HREF = "/uk-support?request=technical-pack&product=decorative-lighting";
+const SUPPORT_REQUEST_HREF = buildEnquiryHref("technical-document", {
+  system: "led-systems",
+  family: "decorative-lighting",
+  source: "/products/led-systems/decorative-lighting",
+});
 
 export function LedCategoryDetailPageDecorative({ market }: Readonly<{ market: MarketCode }>) {
   const content = decorativeLightingContentForMarket(market);
@@ -105,8 +113,8 @@ export function LedCategoryDetailPageDecorative({ market }: Readonly<{ market: M
           <h1>{content.hero.title}</h1>
           <p className={styles.heroDescription}>{content.hero.description}</p>
           <div className={styles.heroActions}>
-            <Link className={styles.primaryButton} href={SUPPORT_REQUEST_HREF}>{content.hero.primaryAction}<span aria-hidden="true">→</span></Link>
-            <Link className={styles.secondaryButton} href={SUPPORT_REQUEST_HREF}>{content.hero.secondaryAction}</Link>
+            <Link className={styles.primaryButton} href={SUPPORT_REQUEST_HREF}><LedCtaLabel label={content.hero.primaryAction} /></Link>
+            <a className={styles.secondaryButton} download href={canonicalCatalogueHref("led")}><LedCtaLabel label={content.hero.secondaryAction} /></a>
           </div>
         </div>
       </section>
@@ -179,6 +187,16 @@ export function LedCategoryDetailPageDecorative({ market }: Readonly<{ market: M
             );
           })}
         </div>
+
+        <LedApplicationsSelector
+          applications={content.applications.map((application, index) => ({
+            id: String(index),
+            title: application.title,
+            description: application.description,
+            image: application.image,
+            imageAlt: application.imageAlt,
+          }))}
+        />
       </section>
 
       <section className={styles.supportCta}>

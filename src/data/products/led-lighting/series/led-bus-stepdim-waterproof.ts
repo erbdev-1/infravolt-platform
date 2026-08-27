@@ -1,8 +1,9 @@
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 import type { MarketCode } from "@/modules/markets/types";
 
 import type { LedSeriesDetailContent, LedSeriesModel, LedSiblingFamily } from "../types";
 
-const CATEGORY_ASSET_BASE = "/assets/products/led-lighting/category/parking&waterproof";
+const CATEGORY_ASSET_BASE = publicMediaUrl("products/led-lighting/category/parking-waterproof");
 const APPLICATION_ASSET_BASE = `${CATEGORY_ASSET_BASE}/applications`;
 const STEPDIM_TECHNICAL_ASSET_BASE = `${CATEGORY_ASSET_BASE}/technical/stepdim`;
 const CATEGORY_HREF = "/products/led-systems/parking-waterproof-lighting";
@@ -46,7 +47,7 @@ const content = {
     metadata: { title: "LED-BUS StepDIM Waterproof | Parking & Waterproof Lighting | InfraVolt", description: "LED-BUS StepDIM Waterproof radar-controlled car-park lighting in four catalogue models from 25–65 W." },
     breadcrumbs: { home: "Home", products: "Products", ledSystems: "LED Systems", category: "Parking & Waterproof Lighting", current: "LED-BUS StepDIM Waterproof" },
     backToCategoryLabel: "Back to Parking & Waterproof Lighting",
-    hero: { eyebrow: "LED-BUS STEPDIM WATERPROOF", category: "Parking & Waterproof Lighting", title: "LED-BUS StepDIM Waterproof", description: "Car-park lighting with an integrated 5.8 GHz radar sensor and dimmable LED driver for presence- and daylight-responsive operation.", primaryAction: "Request Technical Data", secondaryAction: "Request RFQ / Enquiry" },
+    hero: { eyebrow: "LED-BUS STEPDIM WATERPROOF", category: "Parking & Waterproof Lighting", title: "LED-BUS StepDIM Waterproof", description: "Car-park lighting with an integrated 5.8 GHz radar sensor and dimmable LED driver for presence- and daylight-responsive operation.", primaryAction: "Request Technical Pack", secondaryAction: "Download PDF Catalogue" },
     ...shared,
     heroImageAlt: "Four LED-BUS StepDIM Waterproof catalogue luminaires with exact model codes and wattages",
     heroBackgroundImageAlt: "LED-BUS StepDIM Waterproof lighting installed in a car park",
@@ -100,7 +101,7 @@ const content = {
     metadata: { title: "LED-BUS StepDIM Waterproof | Освітлення паркінгів | InfraVolt", description: "LED-BUS StepDIM Waterproof з радарним керуванням для паркінгів: чотири каталожні моделі 25–65 Вт." },
     breadcrumbs: { home: "Головна", products: "Продукція", ledSystems: "LED-системи", category: "Освітлення паркінгів та вологозахищене освітлення", current: "LED-BUS StepDIM Waterproof" },
     backToCategoryLabel: "Назад до освітлення паркінгів",
-    hero: { eyebrow: "LED-BUS STEPDIM WATERPROOF", category: "Освітлення паркінгів та вологозахищене освітлення", title: "LED-BUS StepDIM Waterproof", description: "Освітлення паркінгів з інтегрованим радарним датчиком 5,8 ГГц і димованим LED-драйвером для реагування на присутність і денне світло.", primaryAction: "Запросити технічні дані", secondaryAction: "Запросити пропозицію" },
+    hero: { eyebrow: "LED-BUS STEPDIM WATERPROOF", category: "Освітлення паркінгів та вологозахищене освітлення", title: "LED-BUS StepDIM Waterproof", description: "Освітлення паркінгів з інтегрованим радарним датчиком 5,8 ГГц і димованим LED-драйвером для реагування на присутність і денне світло.", primaryAction: "Запросити технічний пакет", secondaryAction: "Завантажити PDF-каталог" },
     ...shared,
     heroImageAlt: "Чотири каталожні світильники LED-BUS StepDIM Waterproof з точними кодами та потужністю",
     heroBackgroundImageAlt: "LED-BUS StepDIM Waterproof у паркінгу",

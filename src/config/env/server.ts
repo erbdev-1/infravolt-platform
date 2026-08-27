@@ -18,6 +18,7 @@ export const SERVER_ENVIRONMENT_VARIABLES = [
   "EMAIL_REPLY_TO_UK",
   "EMAIL_FROM_UA",
   "EMAIL_REPLY_TO_UA",
+  "EODHD_API_KEY",
   "LOG_LEVEL",
 ] as const;
 
@@ -87,6 +88,7 @@ const serverEnvironmentSchema = z.object({
   EMAIL_REPLY_TO_UK: optionalEmailMailboxSchema,
   EMAIL_FROM_UA: optionalEmailMailboxSchema,
   EMAIL_REPLY_TO_UA: optionalEmailMailboxSchema,
+  EODHD_API_KEY: optionalServerValueSchema,
   LOG_LEVEL: z.preprocess(
     emptyStringToUndefined,
     z.enum(["debug", "info", "warn", "error"]).optional(),
@@ -129,6 +131,7 @@ export function readServerEnvironment(): ServerEnvironment {
     EMAIL_REPLY_TO_UK: process.env.EMAIL_REPLY_TO_UK,
     EMAIL_FROM_UA: process.env.EMAIL_FROM_UA,
     EMAIL_REPLY_TO_UA: process.env.EMAIL_REPLY_TO_UA,
+    EODHD_API_KEY: process.env.EODHD_API_KEY,
     LOG_LEVEL: process.env.LOG_LEVEL,
   });
 }

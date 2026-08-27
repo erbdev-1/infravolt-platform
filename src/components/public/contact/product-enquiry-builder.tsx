@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import type { KeyboardEvent } from "react";
 
 import { CONTACT_PRODUCT_SYSTEMS, loadEnquiryProductFamilies, type EnquiryProductFamily } from "@/modules/enquiry/product-catalog";
 import { addEnquiryItem, useEnquiryItems } from "@/modules/enquiry/store";
@@ -44,6 +45,12 @@ const COPY = {
   },
 } as const;
 
+function filterOptions(options: readonly Option[], needle: string): readonly Option[] {
+  const trimmed = needle.trim().toLocaleLowerCase();
+  if (!trimmed) return options;
+  return options.filter((option) => `${option.label} ${option.meta ?? ""}`.toLocaleLowerCase().includes(trimmed));
+}
+
 function CustomSelect({ id, label, value, options, placeholder, disabled, searchLabel, noOptionsLabel, onChange }: Readonly<{
   id: string;
   label: string;
@@ -57,42 +64,111 @@ function CustomSelect({ id, label, value, options, placeholder, disabled, search
 }>) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [activeIndex, setActiveIndex] = useState(-1);
   const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const selected = options.find((option) => option.value === value);
-  const filtered = useMemo(() => {
-    const needle = query.trim().toLocaleLowerCase();
-    if (!needle) return options;
-    return options.filter((option) => `${option.label} ${option.meta ?? ""}`.toLocaleLowerCase().includes(needle));
-  }, [options, query]);
+  const filtered = useMemo(() => filterOptions(options, query), [options, query]);
+  // Index 0 is the synthetic "placeholder / clear selection" row, only
+  // rendered while not searching — every real option shifts by one to match.
+  const rowCount = (query ? 0 : 1) + filtered.length;
+
+  // The active (keyboard-highlighted) row for a given query, computed
+  // synchronously at the point the list opens or the search text changes —
+  // not in an effect, since that would cascade a second render every time.
+  function activeIndexForQuery(nextQuery: string): number {
+    const nextFiltered = filterOptions(options, nextQuery);
+    if (nextQuery) return nextFiltered.length > 0 ? 0 : -1;
+    const selectedFilteredIndex = nextFiltered.findIndex((option) => option.value === value);
+    return selectedFilteredIndex >= 0 ? selectedFilteredIndex + 1 : 0;
+  }
 
   useEffect(() => {
     if (!open) return;
     function closeOnOutsideClick(event: MouseEvent) {
       if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
     }
-    function closeOnEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
-    }
     document.addEventListener("mousedown", closeOnOutsideClick);
-    document.addEventListener("keydown", closeOnEscape);
-    return () => {
-      document.removeEventListener("mousedown", closeOnOutsideClick);
-      document.removeEventListener("keydown", closeOnEscape);
-    };
+    return () => document.removeEventListener("mousedown", closeOnOutsideClick);
   }, [open]);
 
+  function commitRow(rowIndex: number) {
+    if (rowIndex < 0 || rowIndex >= rowCount) return;
+    if (!query && rowIndex === 0) {
+      onChange("");
+    } else {
+      const option = filtered[query ? rowIndex : rowIndex - 1];
+      if (!option) return;
+      onChange(option.value);
+    }
+    setOpen(false);
+    setQuery("");
+    triggerRef.current?.focus();
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (!open) {
+      if (event.key === "ArrowDown" || event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        setOpen(true);
+        setActiveIndex(activeIndexForQuery(query));
+      }
+      return;
+    }
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        setActiveIndex((current) => Math.min(current + 1, rowCount - 1));
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        setActiveIndex((current) => Math.max(current - 1, 0));
+        break;
+      case "Home":
+        event.preventDefault();
+        setActiveIndex(0);
+        break;
+      case "End":
+        event.preventDefault();
+        setActiveIndex(rowCount - 1);
+        break;
+      case "Enter":
+        event.preventDefault();
+        commitRow(activeIndex);
+        break;
+      case "Escape":
+        event.preventDefault();
+        setOpen(false);
+        setQuery("");
+        triggerRef.current?.focus();
+        break;
+      default:
+        break;
+    }
+  }
+
+  const activeOptionId = open && activeIndex >= 0 ? `${id}-option-${activeIndex}` : undefined;
+
   return (
-    <div className={styles.field} ref={rootRef}>
+    <div className={styles.field} onKeyDown={handleKeyDown} ref={rootRef}>
       <span className={styles.fieldLabel} id={`${id}-label`}>{label}</span>
       <div className={styles.customSelect}>
         <button
+          aria-activedescendant={activeOptionId}
+          aria-controls={`${id}-listbox`}
           aria-expanded={open}
           aria-haspopup="listbox"
           aria-labelledby={`${id}-label ${id}-value`}
           className={styles.customSelectTrigger}
           disabled={disabled}
           id={id}
-          onClick={() => setOpen((current) => !current)}
+          onClick={() => {
+            const next = !open;
+            setOpen(next);
+            if (next) setActiveIndex(activeIndexForQuery(query));
+          }}
+          ref={triggerRef}
+          role="combobox"
           type="button"
         >
           <span data-placeholder={!selected || undefined} id={`${id}-value`}>
@@ -104,33 +180,55 @@ function CustomSelect({ id, label, value, options, placeholder, disabled, search
         {open ? (
           <div className={styles.customSelectPanel}>
             {options.length > 12 ? (
-              <input aria-label={searchLabel} autoFocus className={styles.customSelectSearch} onChange={(event) => setQuery(event.target.value)} placeholder={searchLabel} type="search" value={query} />
+              <input
+                aria-label={searchLabel}
+                autoFocus
+                className={styles.customSelectSearch}
+                onChange={(event) => {
+                  const nextQuery = event.target.value;
+                  setQuery(nextQuery);
+                  setActiveIndex(activeIndexForQuery(nextQuery));
+                }}
+                placeholder={searchLabel}
+                type="search"
+                value={query}
+              />
             ) : null}
-            <div aria-labelledby={`${id}-label`} className={styles.customSelectOptions} role="listbox">
+            <div aria-labelledby={`${id}-label`} className={styles.customSelectOptions} id={`${id}-listbox`} role="listbox">
               {!query ? (
                 <button
                   aria-selected={!value}
-                  className={!value ? styles.customSelectOptionActive : styles.customSelectOption}
-                  onClick={() => { onChange(""); setOpen(false); }}
+                  className={activeIndex === 0 ? styles.customSelectOptionFocused : !value ? styles.customSelectOptionActive : styles.customSelectOption}
+                  id={`${id}-option-0`}
+                  onClick={() => commitRow(0)}
                   role="option"
+                  tabIndex={-1}
                   type="button"
                 >
                   <span>{placeholder}</span>
                 </button>
               ) : null}
-              {filtered.map((option) => (
-                <button
-                  aria-selected={option.value === value}
-                  className={option.value === value ? styles.customSelectOptionActive : styles.customSelectOption}
-                  key={option.value}
-                  onClick={() => { onChange(option.value); setOpen(false); setQuery(""); }}
-                  role="option"
-                  type="button"
-                >
-                  <span>{option.label}</span>
-                  {option.meta ? <small>{option.meta}</small> : null}
-                </button>
-              ))}
+              {filtered.map((option, index) => {
+                const rowIndex = query ? index : index + 1;
+                const isActiveRow = activeIndex === rowIndex;
+                const isSelected = option.value === value;
+                return (
+                  <button
+                    aria-selected={isSelected}
+                    className={isActiveRow ? styles.customSelectOptionFocused : isSelected ? styles.customSelectOptionActive : styles.customSelectOption}
+                    id={`${id}-option-${rowIndex}`}
+                    key={option.value}
+                    onClick={() => commitRow(rowIndex)}
+                    onMouseEnter={() => setActiveIndex(rowIndex)}
+                    role="option"
+                    tabIndex={-1}
+                    type="button"
+                  >
+                    <span>{option.label}</span>
+                    {option.meta ? <small>{option.meta}</small> : null}
+                  </button>
+                );
+              })}
               {filtered.length === 0 ? <p className={styles.customSelectEmpty}>{noOptionsLabel}</p> : null}
             </div>
           </div>
