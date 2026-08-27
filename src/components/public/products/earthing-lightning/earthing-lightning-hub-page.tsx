@@ -232,7 +232,7 @@ export function EarthingLightningHubPage({
                 alt="InfraVolt"
                 className={styles.infravoltWordmark}
                 height={30}
-                src="/assets/brand/infravolt-wordmark-primary.webp"
+                src={publicMediaUrl("brand/infravolt-wordmark-primary.webp")}
                 width={154}
               />
             </div>

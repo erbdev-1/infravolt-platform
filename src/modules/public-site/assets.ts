@@ -25,10 +25,11 @@ export type CapabilityId =
   | "market";
 
 type ProductAsset = Readonly<{
-  // `image` resolves through publicMediaUrl() — either a local `/assets/...` path
-  // or an absolute Cloudflare R2 URL, so it can't stay a `/`-rooted branded type.
+  // `image`/`icon` resolve through publicMediaUrl() — either a local
+  // `/assets/...` path or an absolute Cloudflare R2 URL, so neither can stay
+  // a `/`-rooted branded type.
   image: string;
-  icon: `/${string}.svg`;
+  icon: string;
 }>;
 
 type IndustryAsset = Readonly<{
@@ -57,42 +58,42 @@ export const COMPANY_ASSETS = Object.freeze({
 } as const);
 
 export const CAPABILITY_ICONS = Object.freeze({
-  documentation: "/assets/icons/actions/icon-technical-pack.svg",
-  "project-support": "/assets/icons/actions/icon-quote.svg",
-  specification: "/assets/icons/actions/icon-cad.svg",
-  market: "/assets/icons/actions/icon-question.svg",
-} as const satisfies Readonly<Record<CapabilityId, `/${string}.svg`>>);
+  documentation: publicMediaUrl("icons/actions/icon-technical-pack.svg"),
+  "project-support": publicMediaUrl("icons/actions/icon-quote.svg"),
+  specification: publicMediaUrl("icons/actions/icon-cad.svg"),
+  market: publicMediaUrl("icons/actions/icon-question.svg"),
+} as const satisfies Readonly<Record<CapabilityId, string>>);
 
 // Eşleme çalışma anında dosya keşfi yapmayarak yalnız önceden incelenmiş public asset'lerin kullanılmasını sağlar.
 export const PRODUCT_ASSETS = Object.freeze({
   busbar: {
     image: publicMediaUrl("products/thumbnails/product-busbar-systems.webp"),
-    icon: "/assets/icons/products/icon-busbar.svg",
+    icon: publicMediaUrl("icons/products/icon-busbar.svg"),
   },
 
   "cable-management": {
     image: publicMediaUrl("products/thumbnails/cable-tray-and-ladder.webp"),
-    icon: "/assets/icons/products/icon-cable-tray.svg",
+    icon: publicMediaUrl("icons/products/icon-cable-tray.svg"),
   },
 
   "earthing-lightning": {
     image: publicMediaUrl("products/thumbnails/earthing-lighting.webp"),
-    icon: "/assets/icons/products/icon-earthing.svg",
+    icon: publicMediaUrl("icons/products/icon-earthing.svg"),
   },
 
   underfloor: {
     image: publicMediaUrl("products/thumbnails/product-underfloor-systems.webp"),
-    icon: "/assets/icons/products/icon-support-system.svg",
+    icon: publicMediaUrl("icons/products/icon-support-system.svg"),
   },
 
   "led-bus lighting": {
     image: publicMediaUrl("products/thumbnails/product-ledbus-systems.webp"),
-    icon: "/assets/icons/products/icon-lighting-busbar.svg",
+    icon: publicMediaUrl("icons/products/icon-lighting-busbar.svg"),
   },
 
   "ev-charging": {
     image: publicMediaUrl("products/thumbnails/product-ev-charging-systems.webp"),
-    icon: "/assets/icons/products/icon-ev-charging.svg",
+    icon: publicMediaUrl("icons/products/icon-ev-charging.svg"),
   },
 } as const satisfies Readonly<Record<ProductId, ProductAsset>>);
 
@@ -141,18 +142,21 @@ export const GERSAN_COMPANY_ASSETS = Object.freeze({
 } as const);
 
 export const TECHNICAL_RESOURCE_ICONS = Object.freeze({
-  datasheets: "/assets/icons/technical-resources/icon-datasheets.svg",
+  datasheets: publicMediaUrl("icons/technical-resources/icon-datasheets.svg"),
 
-  certificatesTests:
-    "/assets/icons/technical-resources/icon-certificates-tests.svg",
+  certificatesTests: publicMediaUrl(
+    "icons/technical-resources/icon-certificates-tests.svg",
+  ),
 
-  installationGuidance:
-    "/assets/icons/technical-resources/icon-installation-guidance.svg",
+  installationGuidance: publicMediaUrl(
+    "icons/technical-resources/icon-installation-guidance.svg",
+  ),
 
-  bimCad: "/assets/icons/technical-resources/icon-bim-cad.svg",
+  bimCad: publicMediaUrl("icons/technical-resources/icon-bim-cad.svg"),
 
-  specificationSupport:
-    "/assets/icons/technical-resources/icon-specification-support.svg",
+  specificationSupport: publicMediaUrl(
+    "icons/technical-resources/icon-specification-support.svg",
+  ),
 } as const);
 
 export const GERSAN_QUALITY_ASSETS = Object.freeze({

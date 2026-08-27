@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 
 import {
   referenceSectorsForMarket,
@@ -8,9 +9,14 @@ import {
   type ReferenceSystemKey,
 } from "@/data/references";
 import type { MarketCode } from "@/modules/markets/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import { ReferenceDirectory } from "./reference-directory";
 import styles from "./references-page.module.css";
+
+const heroStyle = {
+  "--hero-background-image": `url(${publicMediaUrl("references/references-hero-background.webp")})`,
+} as CSSProperties;
 
 export function ReferencesPage({
   market,
@@ -32,7 +38,7 @@ export function ReferencesPage({
         <span aria-current="page">{content.breadcrumbCurrent}</span>
       </nav>
 
-      <section className={styles.hero}>
+      <section className={styles.hero} style={heroStyle}>
         <div className={styles.heroInner}>
           <p>{content.eyebrow}</p>
           <h1>{content.heading}</h1>

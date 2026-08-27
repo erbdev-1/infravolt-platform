@@ -3,9 +3,15 @@ import cableReferenceListJson from "./generated/cable-reference-list.json";
 import busbarCompaniesJson from "./generated/busbar-companies.json";
 import ledSupplyPartnersJson from "./generated/led-supply-partners.json";
 
-import { resolveOwnerCountry, resolveReferenceLocation } from "@/modules/references/geography";
+import {
+  resolveOwnerCountry,
+  resolveReferenceLocation,
+  ukrainianCountryDisplay,
+  ukrainianTurkiyeDisplay,
+} from "@/modules/references/geography";
 import { englishReferenceText, transliterateTurkish } from "@/modules/references/english-display";
 import type { MarketCode } from "@/modules/markets/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 export const referenceSystemKeys = [
   "busbar",
@@ -352,17 +358,18 @@ export type ReferenceSectorsContent = Readonly<{
 // intentionally omitted rather than invented — see the ternary in
 // references-page.tsx for that fallback.
 const sectorImages: Record<string, string> = {
-  global: "/assets/references/card/global.webp",
-  "commercial-buildings": "/assets/references/card/sector-commercial-buildings.webp",
-  "industrial-facilities": "/assets/references/card/sector-industrial-facilities.webp",
-  "data-centres": "/assets/references/card/sector-data-centres.webp",
-  "energy-utilities": "/assets/references/card/sector-energy-utilities.webp",
-  "oil-gas": "/assets/references/card/sector-oil-gas.webp",
-  airports: "/assets/references/card/sector-airports.webp",
-  "rail-metro": "/assets/references/card/sector-rail-metro.webp",
-  healthcare: "/assets/references/card/sector-healthcare.webp",
-  "public-educational-infrastructure":
-    "/assets/references/card/sector-public-educational-infrastructure.webp",
+  global: publicMediaUrl("references/card/global.webp"),
+  "commercial-buildings": publicMediaUrl("references/card/sector-commercial-buildings.webp"),
+  "industrial-facilities": publicMediaUrl("references/card/sector-industrial-facilities.webp"),
+  "data-centres": publicMediaUrl("references/card/sector-data-centres.webp"),
+  "energy-utilities": publicMediaUrl("references/card/sector-energy-utilities.webp"),
+  "oil-gas": publicMediaUrl("references/card/sector-oil-gas.webp"),
+  airports: publicMediaUrl("references/card/sector-airports.webp"),
+  "rail-metro": publicMediaUrl("references/card/sector-rail-metro.webp"),
+  healthcare: publicMediaUrl("references/card/sector-healthcare.webp"),
+  "public-educational-infrastructure": publicMediaUrl(
+    "references/card/sector-public-educational-infrastructure.webp",
+  ),
 };
 
 const sectorStats: Record<string, { references: string; countries: string } | undefined> = {
@@ -476,11 +483,20 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   const publicGBusCompanies = sourceData.gBus.companies.filter((company) => !isRussiaOnlyCompany(company));
   const projectDisplay = (value: string) => (market === "uk" ? englishReferenceText(value) : value);
   const locationDisplay = (value: string) => {
-    if (market !== "uk") return value;
+    if (market === "uk") {
+      const resolved = resolveReferenceLocation(value);
+      if (resolved.kind !== "unknown") return transliterateTurkish(resolved.display).replace(/\bTurkiye\b/gu, "Turkey");
+      const ownerCountry = resolveOwnerCountry(value);
+      return ownerCountry ? transliterateTurkish(ownerCountry).replace(/\bTurkiye\b/gu, "Turkey") : englishReferenceText(value);
+    }
+    // UA: localise only recognised geography tokens (country/city/region);
+    // unrecognised location text is left exactly as printed in the source
+    // catalogue — this is a display-layer swap, not a translation pass.
     const resolved = resolveReferenceLocation(value);
-    if (resolved.kind !== "unknown") return transliterateTurkish(resolved.display).replace(/\bTurkiye\b/gu, "Turkey");
+    if (resolved.kind === "turkiye") return ukrainianTurkiyeDisplay(resolved.display);
+    if (resolved.kind === "country") return ukrainianCountryDisplay(resolved.display);
     const ownerCountry = resolveOwnerCountry(value);
-    return ownerCountry ? transliterateTurkish(ownerCountry).replace(/\bTurkiye\b/gu, "Turkey") : englishReferenceText(value);
+    return ownerCountry ? ukrainianCountryDisplay(ownerCountry) : value;
   };
   const isTurkeyCountry = (value: string | undefined) => value === "Türkiye" || value === "Turkey";
   const isDomesticTurkeyLocation = (value: string) => {
@@ -541,9 +557,9 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   );
   const busbarDomestic = busbarUnified.filter((item) => isDomesticTurkeyLocation(item.location));
   const busbarColumns = [
-    { key: "who", label: t("Customer / Contractor", "Замовник / Підрядник") },
+    { key: "who", label: t("Customer / Contractor", "Компанія") },
     { key: "project", label: t("Project", "Проєкт") },
-    { key: "location", label: t("Location", "Локація") },
+    { key: "location", label: t("Location", "Місцезнаходження") },
   ];
 
   // --- Cable Management: two independent source tables cover International.
@@ -585,7 +601,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   ];
   const cableColumns = [
     { key: "project", label: t("Project", "Проєкт") },
-    { key: "location", label: t("Location", "Локація") },
+    { key: "location", label: t("Location", "Місцезнаходження") },
   ];
 
   // --- Earthing & Lightning: the source "scope" field is authoritative, but
@@ -612,7 +628,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   const earthingInternational = [...earthingIntlScoped, ...earthingReclassified];
   const earthingColumns = [
     { key: "project", label: t("Project Reference", "Референція проєкту") },
-    { key: "location", label: t("Location", "Локація") },
+    { key: "location", label: t("Location", "Місцезнаходження") },
   ];
 
   return [

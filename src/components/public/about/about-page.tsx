@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 
 import { AboutGersanCopy } from "@/components/public/about/about-gersan-copy";
 import { Container } from "@/components/ui/container";
@@ -9,6 +10,7 @@ import {
   GERSAN_COMPANY_ASSETS,
   GERSAN_QUALITY_ASSETS,
 } from "@/modules/public-site/assets";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import type { MarketCode } from "@/modules/markets/types";
 
@@ -47,10 +49,18 @@ type AboutPageViewProps = Readonly<{
 
 export function AboutPageView({ market }: AboutPageViewProps) {
   const content = aboutPageContentForMarket(market);
+  const heroStyle = {
+    "--hero-background-image": `url(${publicMediaUrl("company/about-hero-background.webp")})`,
+    "--hero-mobile-background-image": `url(${publicMediaUrl("company/about-hero-background-mobile.webp")})`,
+  } as CSSProperties;
 
   return (
     <main className={styles.page} id="main-content">
-      <section aria-labelledby="about-hero-title" className={styles.hero}>
+      <section
+        aria-labelledby="about-hero-title"
+        className={styles.hero}
+        style={heroStyle}
+      >
         <div aria-hidden="true" className={styles.heroBackdrop} />
 
         <Container className={styles.heroInner} size="wide">
@@ -97,7 +107,7 @@ export function AboutPageView({ market }: AboutPageViewProps) {
                 className={styles.whoWeAreLogo}
                 height={235}
                 sizes="(min-width: 768px) 13rem, 11rem"
-                src="/assets/brand/infravolt-wordmark-primary.webp"
+                src={publicMediaUrl("brand/infravolt-wordmark-primary.webp")}
                 unoptimized
                 width={1040}
               />
@@ -178,7 +188,7 @@ export function AboutPageView({ market }: AboutPageViewProps) {
                         className={styles.marketPanelLogo}
                         height={235}
                         sizes="6.5rem"
-                        src="/assets/brand/infravolt-wordmark-transparent.webp"
+                        src={publicMediaUrl("brand/infravolt-wordmark-transparent.webp")}
                         unoptimized
                         width={1040}
                       />

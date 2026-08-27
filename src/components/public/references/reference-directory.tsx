@@ -14,6 +14,7 @@ import type {
   ReferencesUiContent,
 } from "@/data/references";
 import type { MarketCode } from "@/modules/markets/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import styles from "./references-page.module.css";
 
@@ -36,8 +37,17 @@ function resultLabel(count: number, singular: string, plural: string) {
   return `${count.toLocaleString()} ${count === 1 ? singular : plural}`;
 }
 
-/** Resolves a geography display label from a cell's raw value, matching the tab's declared geography kind. */
+function resolveReferenceCompanyLogo(logo: string | undefined): string | undefined {
+  if (!logo || /^https?:\/\//iu.test(logo)) return logo;
+  return logo.startsWith("/assets/") ? publicMediaUrl(logo.slice("/assets/".length)) : logo;
+}
+
+/** Resolves a geography display label from a cell's raw value, matching the tab's declared geography kind.
+ * UA: the cell value passed in here is already the Ukrainian-localised display text produced by
+ * referenceSystemsForMarket's locationDisplay() at data-build time, so it's returned as-is — re-resolving
+ * it through the (Latin-keyed) alias tables below would never match Ukrainian text. */
 function resolveGeoDisplay(raw: string, geography: ReferenceGeography, market: MarketCode): string | undefined {
+  if (market === "ua") return raw;
   if (geography === "country") {
     const country = resolveOwnerCountry(raw);
     return country && market === "uk" ? transliterateTurkish(country).replace(/\bTurkiye\b/gu, "Turkey") : country;
@@ -350,16 +360,17 @@ function LogoGrid({
         <ul className={styles.logoGrid}>
           {visibleCompanies.map((company, index) => {
             const accessibleName = company.name || `${content.catalogueMark} ${index + 1}`;
+            const logo = resolveReferenceCompanyLogo(company.logo);
             return (
               <li className={styles.logoCard} key={company.id}>
-                {company.logo ? (
+                {logo ? (
                   <div className={styles.logoImage}>
                     <Image
                       alt={accessibleName}
                       fill
                       loading="lazy"
                       sizes="(min-width: 1200px) 18vw, (min-width: 760px) 25vw, 46vw"
-                      src={company.logo}
+                      src={logo}
                     />
                   </div>
                 ) : null}

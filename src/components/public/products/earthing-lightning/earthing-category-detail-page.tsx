@@ -6,6 +6,7 @@ import type { LocalizedEarthingCategory } from "@/data/products/earthing-lightni
 import { EARTHING_CATEGORY_VARIANTS } from "@/data/products/earthing-lightning/variants";
 import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import { IconDownload } from "./earthing-icons";
 import { EarthingHeroEffects } from "./earthing-hero-effects";
@@ -238,7 +239,7 @@ export function EarthingCategoryDetailPage({
                 alt="InfraVolt"
                 className={styles.infravoltWordmark}
                 height={30}
-                src="/assets/brand/infravolt-wordmark-primary.webp"
+                src={publicMediaUrl("brand/infravolt-wordmark-primary.webp")}
                 width={154}
               />
             </div>

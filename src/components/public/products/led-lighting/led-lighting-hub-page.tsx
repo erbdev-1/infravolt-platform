@@ -11,6 +11,7 @@ import {
 } from "@/data/products/led-lighting/content";
 import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import {
   IconApplications,
@@ -250,7 +251,7 @@ export function LedLightingHubPage({
               alt="InfraVolt"
               className={styles.infravoltWordmark}
               height={26}
-              src="/assets/brand/infravolt-wordmark-transparent.webp"
+              src={publicMediaUrl("brand/infravolt-wordmark-transparent.webp")}
               width={134}
             />
             <p className={styles.bottomCtaEyebrow}>{content.bottomCta.eyebrow}</p>

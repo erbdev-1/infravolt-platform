@@ -16,6 +16,7 @@ import {
 } from "@/modules/application-map/enquiry-routing";
 import type { ResolvedApplicationMap } from "@/modules/application-map/resolve";
 import type { ProductFamilyId } from "@/modules/application-map/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import { ApplicationMapAspectFrame } from "./application-map-aspect-frame";
 import { ApplicationHotspot } from "./application-hotspot";
@@ -782,7 +783,7 @@ export function ApplicationMapViewer({
                           alt=""
                           aria-hidden="true"
                           height={235}
-                          src="/assets/brand/infravolt-wordmark-transparent.webp"
+                          src={publicMediaUrl("brand/infravolt-wordmark-transparent.webp")}
                           width={1040}
                         />
                       </Link>
@@ -980,7 +981,7 @@ export function ApplicationMapViewer({
                         alt=""
                         aria-hidden="true"
                         height={235}
-                        src="/assets/brand/infravolt-wordmark-transparent.webp"
+                        src={publicMediaUrl("brand/infravolt-wordmark-transparent.webp")}
                         width={1040}
                       />
                     </Link>

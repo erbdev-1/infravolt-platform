@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
 import type { MarketCode } from "@/modules/markets/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import type { EnquiryDraft } from "./draft";
 import { cleanText, formatCompanyName, formatEnquiryType, formatJobTitle, formatMarket, formatPersonName, trimOnly } from "./display-format";
@@ -285,6 +286,17 @@ function siteHostname(market: MarketCode): string | undefined {
   }
 }
 
+function absolutePublicMediaUrl(path: string): string | undefined {
+  const resolved = publicMediaUrl(path);
+
+  try {
+    const url = new URL(resolved);
+    return url.protocol === "http:" || url.protocol === "https:" ? url.href : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 function acknowledgementSubject(market: MarketCode, referenceNo: string): string {
   return market === "ua" ? `Запит отримано — ${referenceNo}` : `Enquiry Received — ${referenceNo}`;
 }
@@ -295,11 +307,11 @@ function acknowledgementHtml(draft: EnquiryDraft, referenceNo: string): string {
   const enquiryTypeLabel = escapeHtml(formatEnquiryType(draft.type, draft.market));
   const marketLabel = escapeHtml(formatMarket(draft.market));
   const teamPhrase = marketTeamPhrase(draft.market, ua);
-  const logoOrigin = siteOrigin(draft.market);
+  const logoUrl = absolutePublicMediaUrl("brand/infravolt-wordmark-primary.webp");
   const hostname = siteHostname(draft.market);
 
-  const logoHtml = logoOrigin
-    ? `<img src="${escapeHtml(logoOrigin)}/assets/brand/infravolt-wordmark-primary.webp" alt="InfraVolt" width="160" style="display:block;height:auto;max-width:160px;border:0;outline:none;text-decoration:none;" />`
+  const logoHtml = logoUrl
+    ? `<img src="${escapeHtml(logoUrl)}" alt="InfraVolt" width="160" style="display:block;height:auto;max-width:160px;border:0;outline:none;text-decoration:none;" />`
     : `<span style="color:#ffffff;font-size:18px;font-weight:700;letter-spacing:0.02em;">InfraVolt</span>`;
 
   const summaryRows = [

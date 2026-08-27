@@ -302,6 +302,167 @@ function normalise(value: string): string {
   return value.trim().replace(/\s+/g, " ").toUpperCase();
 }
 
+/**
+ * Ukrainian display names for every canonical country value produced by
+ * COUNTRY_ALIASES above — a closed, deterministic dictionary (no external
+ * translation API), following standard Ukrainian country-name conventions.
+ * Keyed by the English canonical value (COUNTRY_ALIASES' right-hand side),
+ * never by the raw source string, so it stays a pure display-layer lookup.
+ */
+const UKRAINIAN_COUNTRY_NAMES: Record<string, string> = {
+  UAE: "Об’єднані Арабські Емірати",
+  Bangladesh: "Бангладеш",
+  India: "Індія",
+  Qatar: "Катар",
+  Colombia: "Колумбія",
+  Israel: "Ізраїль",
+  "Saudi Arabia": "Саудівська Аравія",
+  Russia: "Росія",
+  Mexico: "Мексика",
+  Germany: "Німеччина",
+  Uzbekistan: "Узбекистан",
+  Malta: "Мальта",
+  Azerbaijan: "Азербайджан",
+  Kazakhstan: "Казахстан",
+  Norway: "Норвегія",
+  Iraq: "Ірак",
+  "UK / Ireland": "Велика Британія / Ірландія",
+  Iran: "Іран",
+  Pakistan: "Пакистан",
+  Cyprus: "Кіпр",
+  Romania: "Румунія",
+  Poland: "Польща",
+  Algeria: "Алжир",
+  Bulgaria: "Болгарія",
+  Turkmenistan: "Туркменістан",
+  Nigeria: "Нігерія",
+  Ukraine: "Україна",
+  Netherlands: "Нідерланди",
+  Libya: "Лівія",
+  Hungary: "Угорщина",
+  Egypt: "Єгипет",
+  Georgia: "Грузія",
+  "Azerbaijan, Georgia, Türkiye": "Азербайджан, Грузія, Туреччина",
+  "Sri Lanka": "Шрі-Ланка",
+  Greece: "Греція",
+  Oman: "Оман",
+  Singapore: "Сінгапур",
+  Cameroon: "Камерун",
+  Latvia: "Латвія",
+  Tanzania: "Танзанія",
+  Mauritius: "Маврикій",
+  Lebanon: "Ліван",
+  Bahrain: "Бахрейн",
+  Spain: "Іспанія",
+  Thailand: "Таїланд",
+  Syria: "Сирія",
+  Lithuania: "Литва",
+  Tunisia: "Туніс",
+  Jordan: "Йорданія",
+  Sudan: "Судан",
+  Kuwait: "Кувейт",
+  Türkiye: "Туреччина",
+  Turkey: "Туреччина",
+  Tajikistan: "Таджикистан",
+  Afghanistan: "Афганістан",
+  Moldova: "Молдова",
+  Mali: "Малі",
+  "Northern Cyprus": "Північний Кіпр",
+};
+
+/** Returns the Ukrainian display name for a canonical (English) country
+ * value, falling back to the input unchanged if it isn't in the dictionary
+ * (defensive only — every COUNTRY_ALIASES value above has an entry). */
+export function ukrainianCountryDisplay(canonicalCountry: string): string {
+  return UKRAINIAN_COUNTRY_NAMES[canonicalCountry] ?? canonicalCountry;
+}
+
+/**
+ * Ukrainian display names for every canonical Türkiye city/region value
+ * produced by TURKIYE_ALIASES above — deterministic transliteration/known
+ * exonyms (e.g. İstanbul -> Стамбул), not machine translation.
+ */
+const UKRAINIAN_TURKIYE_NAMES: Record<string, string> = {
+  "İstanbul": "Стамбул",
+  Gaziantep: "Газіантеп",
+  "İzmir": "Ізмір",
+  Bursa: "Бурса",
+  Kocaeli: "Коджаелі",
+  "İzmit": "Ізміт",
+  Konya: "Конья",
+  Ankara: "Анкара",
+  "Tekirdağ": "Текірдаг",
+  "Çorlu": "Чорлу",
+  Zonguldak: "Зонгулдак",
+  Manisa: "Маніса",
+  Adana: "Адана",
+  Kayseri: "Кайсері",
+  "Kahramanmaraş": "Кахраманмараш",
+  "Aydın": "Айдин",
+  Hatay: "Хатай",
+  "İskenderun": "Іскендерун",
+  Sakarya: "Сакар’я",
+  Antalya: "Анталія",
+  "Şanlıurfa": "Шанлиурфа",
+  "Eskişehir": "Ескішехір",
+  Mersin: "Мерсін",
+  Denizli: "Денізлі",
+  "Balıkesir": "Баликесір",
+  Afyonkarahisar: "Афьонкарахісар",
+  "Bartın": "Бартин",
+  "Niğde": "Нігде",
+  "Çanakkale": "Чанаккале",
+  Sivas: "Сівас",
+  Edirne: "Едірне",
+  "Çankırı": "Чанкири",
+  "Muğla": "Мугла",
+  Van: "Ван",
+  Yalova: "Ялова",
+  Erzurum: "Ерзурум",
+  "Uşak": "Ушак",
+  Bolu: "Болу",
+  Erzincan: "Ерзінджан",
+  "Ağrı": "Агри",
+  Kilis: "Кіліс",
+  Rize: "Різе",
+  Yozgat: "Йозгат",
+  Ardahan: "Ардаган",
+  Trabzon: "Трабзон",
+  "Düzce": "Дюздже",
+  Siirt: "Сіірт",
+  Kars: "Карс",
+  Aksaray: "Аксарай",
+  "Kırklareli": "Киркларелі",
+  "Elazığ": "Елязиг",
+  "Kırşehir": "Киршехір",
+  Karaman: "Караман",
+  Mardin: "Мардін",
+  Malatya: "Малатья",
+  "Adıyaman": "Адияман",
+  "Diyarbakır": "Діярбакир",
+  Bilecik: "Біледжік",
+  "Kütahya": "Кютах’я",
+  Osmaniye: "Османіє",
+  Isparta: "Іспарта",
+  Samsun: "Самсун",
+  Burdur: "Бурдур",
+  Giresun: "Гіресун",
+  "Nevşehir": "Невшехір",
+  Batman: "Батман",
+  "Çorum": "Чорум",
+  "İnegöl": "Інегьол",
+  "Bingöl": "Бінгьол",
+  "Akşehir": "Акшехір",
+  Tire: "Тіре",
+};
+
+/** Returns the Ukrainian display name for a canonical Türkiye city/region
+ * value, falling back to the input unchanged if it isn't in the dictionary
+ * (defensive only — every TURKIYE_ALIASES value above has an entry). */
+export function ukrainianTurkiyeDisplay(canonicalDisplay: string): string {
+  return UKRAINIAN_TURKIYE_NAMES[canonicalDisplay] ?? canonicalDisplay;
+}
+
 export function resolveReferenceLocation(raw: string): ResolvedLocation {
   const key = normalise(raw);
   if (!key) return { kind: "unknown" };
