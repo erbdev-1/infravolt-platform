@@ -1030,6 +1030,24 @@
   outline-offset: 2px;
 }
 
+/* Desktop: all 8 application cards visible in one row, no arrows, no
+   scroll — same treatment already used by Cable Management's Applications
+   section (see cable-management-page.module.css .applicationsGrid at the
+   same 1050px tier). Tablet (641–1049px) keeps the existing horizontal
+   scroller with arrows above; mobile (<=640px) keeps the one-active-card
+   selector (see .applicationSelector) — neither is touched here. */
+@media (min-width: 1050px) {
+  .applicationsArrow {
+    display: none;
+  }
+
+  .applicationsRow {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    overflow-x: visible;
+  }
+}
+
 /* =========================================================
    10. PROJECT SUPPORT CTA
    ========================================================= */

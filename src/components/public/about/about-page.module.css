@@ -35,7 +35,7 @@
   color: var(--colour-white);
   background:
     linear-gradient(90deg, rgb(2 18 38 / 38%) 0%, rgb(2 18 38 / 8%) 72%),
-    var(--colour-navy-dark) url("/assets/company/about-hero-background.webp") center / cover no-repeat;
+    var(--colour-navy-dark) var(--hero-background-image) center / cover no-repeat;
 }
 
 .heroBackdrop {
@@ -1254,7 +1254,7 @@
   .hero {
     background:
       linear-gradient(90deg, rgb(2 18 38 / 42%) 0%, rgb(2 18 38 / 12%) 76%),
-      var(--colour-navy-dark) url("/assets/company/about-hero-background-mobile.webp") center / cover no-repeat;
+      var(--colour-navy-dark) var(--hero-mobile-background-image) center / cover no-repeat;
   }
 
   .heroInner {

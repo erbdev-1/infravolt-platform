@@ -31,17 +31,20 @@ type CurrentFilter = "all" | "up-to-100" | "100-to-1000" | "above-1000";
 type IpFilter = "all" | "ip55" | "ip68";
 
 const APPLICATION_ICONS = {
-  "data-centres": "/assets/icons/products/busbar/applications/data-centres.svg",
-  "industrial-facilities":
-    "/assets/icons/products/busbar/applications/industrial-facilities.svg",
-  "warehouses-logistics":
-    "/assets/icons/products/busbar/applications/warehouses-logistics.svg",
-  "commercial-buildings":
-    "/assets/icons/products/busbar/applications/commercial-buildings.svg",
-  "transport-infrastructure":
-    "/assets/icons/products/busbar/applications/transport-infrastructure.svg",
-  "energy-utilities":
-    "/assets/icons/products/busbar/applications/energy-utilities.svg",
+  "data-centres": publicMediaUrl("icons/products/busbar/applications/data-centres.svg"),
+  "industrial-facilities": publicMediaUrl(
+    "icons/products/busbar/applications/industrial-facilities.svg",
+  ),
+  "warehouses-logistics": publicMediaUrl(
+    "icons/products/busbar/applications/warehouses-logistics.svg",
+  ),
+  "commercial-buildings": publicMediaUrl(
+    "icons/products/busbar/applications/commercial-buildings.svg",
+  ),
+  "transport-infrastructure": publicMediaUrl(
+    "icons/products/busbar/applications/transport-infrastructure.svg",
+  ),
+  "energy-utilities": publicMediaUrl("icons/products/busbar/applications/energy-utilities.svg"),
 } as const satisfies Readonly<Record<BusbarApplicationId, string>>;
 
 function matchesCurrentFilter(
@@ -109,7 +112,7 @@ function TechnicalPack({
         aria-hidden="true"
         className={styles.technicalPackIcon}
         height={28}
-        src="/assets/icons/actions/icon-technical-pack.svg"
+        src={publicMediaUrl("icons/actions/icon-technical-pack.svg")}
         width={28}
       />
 
@@ -581,7 +584,7 @@ export function BusbarCatalogPage({
                   alt="InfraVolt"
                   className={styles.infravoltWordmark}
                   height={30}
-                  src="/assets/brand/infravolt-wordmark-primary.webp"
+                  src={publicMediaUrl("brand/infravolt-wordmark-primary.webp")}
                   width={154}
                 />
               </div>

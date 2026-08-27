@@ -30,7 +30,7 @@
 .hero {
   background:
     linear-gradient(90deg, rgb(7 26 50 / 38%) 0%, rgb(7 26 50 / 10%) 72%),
-    var(--resource-navy) url("/assets/resources/technical-resources-hero-background.webp") center / cover no-repeat;
+    var(--resource-navy) var(--hero-background-image) center / cover no-repeat;
   color: #fff;
   min-height: 21rem;
   overflow: hidden;

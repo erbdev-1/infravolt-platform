@@ -1,13 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 
 import { resourcesContentForMarket, technicalResources } from "@/data/resources";
 import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import { TECHNICAL_RESOURCE_ICONS } from "@/modules/public-site/assets";
 import type { MarketCode } from "@/modules/markets/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import { ResourceLibrary } from "./resource-library";
 import styles from "./resources-page.module.css";
+
+const heroStyle = {
+  "--hero-background-image": `url(${publicMediaUrl("resources/technical-resources-hero-background.webp")})`,
+} as CSSProperties;
 
 const overviewIcons = {
   certificate: TECHNICAL_RESOURCE_ICONS.certificatesTests,
@@ -22,7 +28,7 @@ export function ResourcesPage({ market }: Readonly<{ market: MarketCode }>) {
       <nav aria-label="Breadcrumb" className={styles.breadcrumbs}>
         <Link href="/">{content.breadcrumbHome}</Link><span aria-hidden="true">/</span><span aria-current="page">{content.breadcrumbCurrent}</span>
       </nav>
-      <section className={styles.hero}>
+      <section className={styles.hero} style={heroStyle}>
         <div className={styles.heroInner}>
           <p>{content.eyebrow}</p><h1>{content.heading}</h1><span>{content.introduction}</span>
           <div className={styles.heroActions}>

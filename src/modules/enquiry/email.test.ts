@@ -90,6 +90,7 @@ beforeEach(() => {
   vi.stubEnv("EMAIL_REPLY_TO_UA", "sales@infravolt.test");
   vi.stubEnv("NEXT_PUBLIC_SITE_URL_UK", "https://uk.infravolt.test");
   vi.stubEnv("NEXT_PUBLIC_SITE_URL_UA", "https://ua.infravolt.test");
+  vi.stubEnv("NEXT_PUBLIC_ASSET_BASE_URL", "https://assets.infravolt.test");
   vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "https://project.supabase.test");
   vi.stubEnv("SUPABASE_SECRET_KEY", "test-secret-key");
 });
@@ -143,9 +144,16 @@ describe("sendEnquiryEmails — customer acknowledgement", () => {
 
   it("includes the InfraVolt logo as an absolute URL and the response-time wording", async () => {
     const body = await captureAcknowledgementEmailBody(BASE_DRAFT);
-    expect(body.html).toContain('src="https://uk.infravolt.test/assets/brand/infravolt-wordmark-primary.webp"');
+    expect(body.html).toContain('src="https://assets.infravolt.test/brand/infravolt-wordmark-primary.webp"');
     expect(body.html).toContain("24–48 business hours");
     expect(body.text).toContain("24–48 business hours");
+  });
+
+  it("keeps the text fallback when no absolute public asset base is configured", async () => {
+    vi.stubEnv("NEXT_PUBLIC_ASSET_BASE_URL", "");
+    const body = await captureAcknowledgementEmailBody(BASE_DRAFT);
+    expect(body.html).not.toContain("<img");
+    expect(body.html).toContain(">InfraVolt</span>");
   });
 
   it("never includes the customer's message, phone number or basket items", async () => {

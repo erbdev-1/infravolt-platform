@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import type { BusbarSystemDetail } from "@/data/products/busbar/series/types";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import styles from "./busbar-system-detail-page.module.css";
 
 const FEATURE_ICONS = [
-  "/assets/icons/products/busbar/g-bus/icon-powerline-communication.svg",
-  "/assets/icons/products/busbar/g-bus/icon-remote-monitoring.svg",
-  "/assets/icons/products/busbar/g-bus/icon-measurement-scheduling.svg",
+  publicMediaUrl("icons/products/busbar/g-bus/icon-powerline-communication.svg"),
+  publicMediaUrl("icons/products/busbar/g-bus/icon-remote-monitoring.svg"),
+  publicMediaUrl("icons/products/busbar/g-bus/icon-measurement-scheduling.svg"),
 ] as const;
 
 export function BusbarSmartAutomationSection({
@@ -39,7 +40,7 @@ export function BusbarSmartAutomationSection({
             alt=""
             aria-hidden="true"
             height={18}
-            src="/assets/icons/products/busbar/g-bus/icon-check-circle.svg"
+            src={publicMediaUrl("icons/products/busbar/g-bus/icon-check-circle.svg")}
             width={18}
           />
           {smartAutomation.compatibilityLine}

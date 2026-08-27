@@ -780,7 +780,7 @@ export const PUBLIC_SITE_CONTENT = {
       marketName: "Україна",
       localeName: "uk-UA",
       brandDescriptor: "Електрична інфраструктура",
-      relationshipLabel: "Official Ukraine Distributor",
+      relationshipLabel: "ОФІЦІЙНИЙ ДИСТРИБ’ЮТОР В УКРАЇНІ",
       enquiryLabel: "Запит",
       commercialGroupLabel: "Комерційні можливості",
       commercialPartnersLabel: "Комерційні партнери",

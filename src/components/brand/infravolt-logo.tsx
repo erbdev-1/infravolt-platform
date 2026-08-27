@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+
 type InfraVoltLogoProps = Readonly<{
   href: string;
   accessibleLabel: string;
@@ -9,8 +11,8 @@ type InfraVoltLogoProps = Readonly<{
 }>;
 
 const LOGO_SOURCES = {
-  primary: "/assets/brand/infravolt-wordmark-primary.webp",
-  transparent: "/assets/brand/infravolt-wordmark-transparent.webp",
+  primary: publicMediaUrl("brand/infravolt-wordmark-primary.webp"),
+  transparent: publicMediaUrl("brand/infravolt-wordmark-transparent.webp"),
 } as const;
 
 export function InfraVoltLogo({

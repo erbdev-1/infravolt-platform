@@ -4,6 +4,7 @@ import Link from "next/link";
 import { LinkButton } from "@/components/ui/link-button";
 import type { MarketCode } from "@/modules/markets/types";
 import { tradeAccountStatusContentForMarket } from "@/modules/public-site/trade-account-status-content";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import styles from "./trade-account-status-page.module.css";
 
@@ -28,7 +29,7 @@ export function TradeAccountPage({ market }: Readonly<{ market: MarketCode }>) {
               className={styles.logo}
               height={235}
               priority
-              src="/assets/brand/infravolt-wordmark-transparent.webp"
+              src={publicMediaUrl("brand/infravolt-wordmark-transparent.webp")}
               unoptimized
               width={1040}
             />
