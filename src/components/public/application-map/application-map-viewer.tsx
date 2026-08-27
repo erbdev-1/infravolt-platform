@@ -206,10 +206,24 @@ export function ApplicationMapViewer({
     };
   }, []);
 
-  // Kullanıcı CSS fallback tam ekran açıkken sayfadan ayrılırsa (route
-  // değişimi vb.) body kilidi component ile birlikte kaybolmasın diye
-  // güvenlik amaçlı geri alınır.
   useEffect(() => {
+    if (!cssFallbackActive || bodyScrollLockRef.current) return;
+
+    scrollPositionRef.current = window.scrollY;
+    bodyScrollLockRef.current = {
+      bodyOverflow: document.body.style.overflow,
+      bodyPosition: document.body.style.position,
+      bodyTop: document.body.style.top,
+      bodyWidth: document.body.style.width,
+      htmlOverflow: document.documentElement.style.overflow,
+    };
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollPositionRef.current}px`;
+    document.body.style.width = "100%";
+
     return () => {
       const savedStyles = bodyScrollLockRef.current;
 
@@ -223,7 +237,7 @@ export function ApplicationMapViewer({
         window.scrollTo(0, scrollPositionRef.current);
       }
     };
-  }, []);
+  }, [cssFallbackActive]);
 
   useEffect(() => {
     if (!cssFallbackActive) {
@@ -235,20 +249,8 @@ export function ApplicationMapViewer({
         return;
       }
 
-      const savedStyles = bodyScrollLockRef.current;
-
       setCssFallbackActive(false);
       setIsFullscreen(false);
-
-      if (savedStyles) {
-        document.body.style.overflow = savedStyles.bodyOverflow;
-        document.body.style.position = savedStyles.bodyPosition;
-        document.body.style.top = savedStyles.bodyTop;
-        document.body.style.width = savedStyles.bodyWidth;
-        document.documentElement.style.overflow = savedStyles.htmlOverflow;
-        bodyScrollLockRef.current = null;
-        window.scrollTo(0, scrollPositionRef.current);
-      }
     }
 
     window.addEventListener("keydown", handleOverlayKeyDown);
@@ -289,7 +291,17 @@ export function ApplicationMapViewer({
       )
     : map.productFamilies;
 
-  const firstVisibleProductFamilyId = visibleProductFamilies[0]?.id ?? null;
+  function updateActiveZone(zoneId: string | null) {
+    const nextZone = zoneId ? (zoneById.get(zoneId) ?? null) : null;
+    const firstApprovedFamilyId = nextZone
+      ? (map.productFamilies.find((family) =>
+          nextZone.approvedProductFamilyIds.includes(family.id),
+        )?.id ?? null)
+      : null;
+
+    setActiveZoneId(nextZone?.id ?? null);
+    setProductPulseFamilyId(firstApprovedFamilyId);
+  }
 
   // Level B onboarding cue — starts the instant a room becomes active,
   // targets ONLY that room's first product/system item (existing render
@@ -300,23 +312,14 @@ export function ApplicationMapViewer({
   // see PRD section 13), independent of the separate session-scoped
   // hintDismissed/zoneHint text handled elsewhere in this component.
   useEffect(() => {
-    if (!activeZoneId || !firstVisibleProductFamilyId) {
-      setProductPulseFamilyId(null);
-      return;
-    }
-
-    setProductPulseFamilyId(firstVisibleProductFamilyId);
+    if (!activeZoneId || !productPulseFamilyId) return;
 
     const timeoutId = window.setTimeout(() => {
       setProductPulseFamilyId(null);
     }, 5400);
 
     return () => window.clearTimeout(timeoutId);
-    // Intentionally scoped to activeZoneId only — firstVisibleProductFamilyId
-    // is derived from it every render, re-including it would refire the
-    // cue on every unrelated re-render instead of just on room changes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeZoneId]);
+  }, [activeZoneId, productPulseFamilyId]);
 
   // Hides the cue immediately once a product is actually selected in this
   // room, regardless of where the timer above currently stands.
@@ -455,7 +458,7 @@ export function ApplicationMapViewer({
   ];
 
   function selectZone(zoneId: string) {
-    setActiveZoneId(zoneId);
+    updateActiveZone(zoneId);
     setActiveProductFamilyId(null);
     setActiveHotspotId(null);
   }
@@ -474,7 +477,7 @@ export function ApplicationMapViewer({
       }
     }
 
-    setActiveZoneId(null);
+    updateActiveZone(null);
     setActiveProductFamilyId(null);
     setActiveHotspotId(null);
   }
@@ -593,58 +596,14 @@ export function ApplicationMapViewer({
     backToOverview();
   }
 
-  // Yalnız CSS fallback modunda gerekli: gerçek Fullscreen API zaten
-  // arkadaki sayfanın scroll'unu engelliyor (fullscreen elemanı kendi
-  // scroll konteyneri olur), position:fixed ile taklit edilen modda ise
-  // bunu elle yapmak gerekir. Scroll konumu kaydedilip çıkışta geri
-  // yüklenir — sayfa başa sıçramaz.
-  function lockBodyScroll() {
-    if (bodyScrollLockRef.current) {
-      return;
-    }
-
-    scrollPositionRef.current = window.scrollY;
-    bodyScrollLockRef.current = {
-      bodyOverflow: document.body.style.overflow,
-      bodyPosition: document.body.style.position,
-      bodyTop: document.body.style.top,
-      bodyWidth: document.body.style.width,
-      htmlOverflow: document.documentElement.style.overflow,
-    };
-
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollPositionRef.current}px`;
-    document.body.style.width = "100%";
-  }
-
-  function unlockBodyScroll() {
-    const savedStyles = bodyScrollLockRef.current;
-
-    if (!savedStyles) {
-      return;
-    }
-
-    document.body.style.overflow = savedStyles.bodyOverflow;
-    document.body.style.position = savedStyles.bodyPosition;
-    document.body.style.top = savedStyles.bodyTop;
-    document.body.style.width = savedStyles.bodyWidth;
-    document.documentElement.style.overflow = savedStyles.htmlOverflow;
-    bodyScrollLockRef.current = null;
-    window.scrollTo(0, scrollPositionRef.current);
-  }
-
   function enterCssFallbackFullscreen() {
     setCssFallbackActive(true);
     setIsFullscreen(true);
-    lockBodyScroll();
   }
 
   function exitCssFallbackFullscreen() {
     setCssFallbackActive(false);
     setIsFullscreen(false);
-    unlockBodyScroll();
   }
 
   async function toggleFullscreen() {

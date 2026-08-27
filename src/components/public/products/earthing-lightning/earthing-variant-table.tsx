@@ -166,9 +166,19 @@ export function EarthingVariantTable({
   const normalizedQuery = query.trim().toLowerCase();
   const isFiltering = normalizedQuery !== "" || activeMaterial !== null;
 
-  useEffect(() => {
-    setVisibleCounts({});
-  }, [normalizedQuery, activeMaterial]);
+  function updateQuery(nextQuery: string) {
+    if (nextQuery.trim().toLowerCase() !== normalizedQuery) {
+      setVisibleCounts({});
+    }
+    setQuery(nextQuery);
+  }
+
+  function updateActiveMaterial(nextMaterial: string | null) {
+    if (nextMaterial !== activeMaterial) {
+      setVisibleCounts({});
+    }
+    setActiveMaterial(nextMaterial);
+  }
 
   function toggleFamily(slug: string) {
     setExpandedFamilies((prev) => {
@@ -335,7 +345,7 @@ export function EarthingVariantTable({
       <button
         aria-pressed={activeMaterial === null}
         className={activeMaterial === null ? styles.chipActive : styles.chip}
-        onClick={() => setActiveMaterial(null)}
+        onClick={() => updateActiveMaterial(null)}
         type="button"
       >
         {labels.variantsAllMaterials}
@@ -347,7 +357,7 @@ export function EarthingVariantTable({
           aria-pressed={activeMaterial === material}
           className={activeMaterial === material ? styles.chipActive : styles.chip}
           key={material}
-          onClick={() => setActiveMaterial((current) => (current === material ? null : material))}
+          onClick={() => updateActiveMaterial(activeMaterial === material ? null : material)}
           type="button"
         >
           {formatMaterialLabel(material)}
@@ -385,7 +395,7 @@ export function EarthingVariantTable({
           <input
             aria-label={labels.variantsSearchLabel}
             className={styles.searchInput}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => updateQuery(event.target.value)}
             placeholder={labels.variantsSearchPlaceholder}
             type="text"
             value={query}
@@ -394,7 +404,7 @@ export function EarthingVariantTable({
             <button
               aria-label={labels.variantsClearSearchAction}
               className={styles.searchClear}
-              onClick={() => setQuery("")}
+              onClick={() => updateQuery("")}
               type="button"
             >
               <IconClose aria-hidden="true" />
@@ -464,7 +474,7 @@ export function EarthingVariantTable({
               <button
                 aria-label={`${labels.variantsFiltersRemoveAction}: ${formatMaterialLabel(activeMaterial)}`}
                 className={styles.selectedChip}
-                onClick={() => setActiveMaterial(null)}
+                onClick={() => updateActiveMaterial(null)}
                 type="button"
               >
                 {formatMaterialLabel(activeMaterial)}
@@ -679,7 +689,7 @@ export function EarthingVariantTable({
               <button
                 className={styles.filterDrawerClearAction}
                 disabled={activeMaterial === null}
-                onClick={() => setActiveMaterial(null)}
+                onClick={() => updateActiveMaterial(null)}
                 type="button"
               >
                 {labels.variantsFiltersClearAllAction}
