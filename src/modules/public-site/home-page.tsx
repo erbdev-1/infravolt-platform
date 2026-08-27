@@ -77,11 +77,13 @@ export function HomePageView({ market }: HomePageViewProps) {
       <section className="hero" aria-labelledby="hero-title">
         <AccessibleVideo
           className="hero__video"
+          desktopSource={MEDIA_ASSETS.hero.videoDesktop}
           fallback={content.hero.fallback}
           label={content.hero.videoLabel}
+          mobileSource={MEDIA_ASSETS.hero.videoMobile}
           pauseLabel={content.hero.pauseLabel}
           playLabel={content.hero.playLabel}
-          source={MEDIA_ASSETS.hero.video}
+          poster={MEDIA_ASSETS.hero.poster}
         />
 
         <div aria-hidden="true" className="hero__overlay" />

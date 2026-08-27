@@ -8,7 +8,19 @@ type AccessibleVideoProps = Readonly<{
   label: string;
   pauseLabel: string;
   playLabel: string;
-  source: string;
+  // Single-source callers (e.g. the About/Gersan clip) keep using `source`.
+  // Callers with separately-encoded desktop/mobile renders (e.g. the
+  // homepage hero) use `desktopSource`/`mobileSource` instead — the browser
+  // picks exactly one via native <source media> matching, so only one file
+  // ever downloads; no viewport JS needed.
+  source?: string;
+  desktopSource?: string;
+  mobileSource?: string;
+  // Desktop/mobile <source> tiers split at the same 64rem (1024px) point
+  // this hero already uses for its own responsive sizing (see .hero__video
+  // in globals.css, "max-width: 63.99rem" tablet tier).
+  desktopMediaQuery?: string;
+  poster?: string;
 }>;
 
 export function AccessibleVideo({
@@ -18,6 +30,10 @@ export function AccessibleVideo({
   pauseLabel,
   playLabel,
   source,
+  desktopSource,
+  mobileSource,
+  desktopMediaQuery = "(min-width: 64rem)",
+  poster,
 }: AccessibleVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hasFailed, setHasFailed] = useState(false);
@@ -80,10 +96,15 @@ export function AccessibleVideo({
         onPause={() => setIsPlaying(false)}
         onPlay={() => setIsPlaying(true)}
         playsInline
+        poster={poster}
         preload="metadata"
         ref={videoRef}
       >
-        <source src={source} type="video/mp4" />
+        {desktopSource ? (
+          <source media={desktopMediaQuery} src={desktopSource} type="video/mp4" />
+        ) : null}
+        {mobileSource ? <source src={mobileSource} type="video/mp4" /> : null}
+        {source ? <source src={source} type="video/mp4" /> : null}
       </video>
       {!hasFailed ? (
         <button

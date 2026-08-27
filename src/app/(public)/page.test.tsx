@@ -97,7 +97,12 @@ describe("HomePage", () => {
       expect(videos).toHaveLength(1);
       expect(
         container.querySelector(
-          `source[src="${MEDIA_ASSETS.hero.video}"][type="video/mp4"]`,
+          `source[src="${MEDIA_ASSETS.hero.videoDesktop}"][type="video/mp4"]`,
+        ),
+      ).not.toBeNull();
+      expect(
+        container.querySelector(
+          `source[src="${MEDIA_ASSETS.hero.videoMobile}"][type="video/mp4"]`,
         ),
       ).not.toBeNull();
 
