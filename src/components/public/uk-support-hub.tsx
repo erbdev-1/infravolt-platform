@@ -4,7 +4,8 @@ import { Container } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/link-button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Section } from "@/components/ui/section";
-import { COMPANY_ASSETS } from "@/modules/public-site/assets";
+import type { MarketCode } from "@/modules/markets/types";
+import { COMPANY_ASSETS, UA_SUPPORT_ASSETS } from "@/modules/public-site/assets";
 
 import type { PublicSiteContent } from "@/modules/public-site/content";
 
@@ -14,6 +15,7 @@ type SupportServiceId = SupportService["id"];
 
 type UKSupportHubProps = Readonly<{
   content: SupportContent;
+  market: MarketCode;
 }>;
 
 function SupportIcon({
@@ -76,7 +78,12 @@ function SupportIcon({
   );
 }
 
-export function UKSupportHub({ content }: UKSupportHubProps) {
+export function UKSupportHub({ content, market }: UKSupportHubProps) {
+  const showroomImage =
+    market === "ua" ? UA_SUPPORT_ASSETS.technicalSupport.image : COMPANY_ASSETS.showroom.image;
+  const warehouseImage =
+    market === "ua" ? UA_SUPPORT_ASSETS.logistics.image : COMPANY_ASSETS.warehouse.image;
+
   return (
     <Section className="uk-support-section" id="project-support" tone="navy">
       <Container size="wide">
@@ -108,7 +115,7 @@ export function UKSupportHub({ content }: UKSupportHubProps) {
                 alt={content.showroom.imageAlt}
                 fill
                 sizes="(min-width: 1024px) 58vw, 100vw"
-                src={COMPANY_ASSETS.showroom.image}
+                src={showroomImage}
                 unoptimized
               />
 
@@ -158,7 +165,7 @@ export function UKSupportHub({ content }: UKSupportHubProps) {
               alt={content.warehouse.imageAlt}
               fill
               sizes="(min-width: 1024px) 42vw, 100vw"
-              src={COMPANY_ASSETS.warehouse.image}
+              src={warehouseImage}
               unoptimized
             />
 

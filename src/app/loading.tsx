@@ -56,6 +56,19 @@ const LOADING_STYLES = `
 }
 `;
 
+// No import from @/modules/storage/asset-url here — same imports-free
+// constraint as the rest of this file (see the note at the top): reads
+// process.env directly (a plain Node global, no bundler substitution
+// required) rather than pulling in the shared publicMediaUrl() resolver.
+function resolveLoadingLogoUrl(): string {
+  const base = process.env.NEXT_PUBLIC_ASSET_BASE_URL;
+  const trimmedBase = base && base.trim() !== "" ? base.trim().replace(/\/+$/, "") : "";
+
+  return trimmedBase
+    ? `${trimmedBase}/brand/infravolt-wordmark-primary.webp`
+    : "/assets/brand/infravolt-wordmark-primary.webp";
+}
+
 export default function Loading() {
   return (
     // Onaylı çeviri olmadan locale içeriği uydurmamak için fallback metnin gerçek dili belirtilir.
@@ -68,7 +81,7 @@ export default function Loading() {
         alt="InfraVolt"
         className="infravolt-loading-logo"
         height={235}
-        src="/assets/brand/infravolt-wordmark-primary.webp"
+        src={resolveLoadingLogoUrl()}
         width={1040}
       />
 
