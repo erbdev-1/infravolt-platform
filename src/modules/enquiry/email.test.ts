@@ -213,7 +213,8 @@ describe("sendEnquiryEmails — customer acknowledgement", () => {
 
 describe("sendEnquiryEmails — internal notification", () => {
   it("no-ops without attempting a request when Resend env vars are unset", async () => {
-    vi.unstubAllEnvs();
+    vi.stubEnv("RESEND_API_KEY", undefined);
+    vi.stubEnv("RESEND_API_KEY_UA", undefined);
     const mock = fetchMock();
     vi.stubGlobal("fetch", mock);
     await sendEnquiryEmails(BASE_DRAFT, "IV-2026-000123");

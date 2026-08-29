@@ -2,6 +2,11 @@ import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+vi.mock("server-only", () => ({}));
+vi.mock("@/components/public/gersan-homepage-credibility", () => ({
+  GersanHomepageCredibility: () => null,
+}));
+
 import { PublicSiteShell } from "@/components/public/public-site-shell";
 import { MEDIA_ASSETS } from "@/modules/public-site/assets";
 import { publicSiteContentForMarket } from "@/modules/public-site/content";
@@ -142,8 +147,6 @@ describe("HomePage", () => {
         "kaliningrad",
         "ексклюзивний дистриб’ютор",
         "ексклюзивний дистриб'ютор",
-        "офіційний дистриб’ютор",
-        "офіційний дистриб'ютор",
         "сертифікований партнер",
         "росія",
         "росії",
@@ -166,6 +169,9 @@ describe("HomePage", () => {
         expect(
           screen.queryByText("Official UK Representative"),
         ).not.toBeInTheDocument();
+        expect(
+          screen.getAllByText("ОФІЦІЙНИЙ ДИСТРИБ’ЮТОР В УКРАЇНІ").length,
+        ).toBeGreaterThan(0);
       }
 
       // Technical Resources Preview is the current final homepage section
