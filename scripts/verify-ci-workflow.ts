@@ -172,8 +172,8 @@ const buildEnvironment = asMapping(
   "production build env",
 );
 assert.deepEqual(buildEnvironment, {
-  NEXT_PUBLIC_SITE_URL_UA: "http://ua.infravolt.localhost:3000",
-  NEXT_PUBLIC_SITE_URL_UK: "http://uk.infravolt.localhost:3000",
+  NEXT_PUBLIC_SITE_URL_UA: "https://ua.infravolt.localhost:3000",
+  NEXT_PUBLIC_SITE_URL_UK: "https://uk.infravolt.localhost:3000",
 });
 
 const qualityCheckout = qualitySteps.find(
