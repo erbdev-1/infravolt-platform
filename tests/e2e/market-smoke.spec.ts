@@ -26,7 +26,7 @@ test("@uk public root renders the UK market homepage safely", async ({
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Electrical infrastructure systems for demanding projects.",
+      name: "Electrical infrastructure systems for demanding projects",
     }),
   ).toBeVisible();
   await expect(
@@ -77,11 +77,11 @@ test("@ua public root renders the Ukraine market homepage safely", async ({
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Системи електричної інфраструктури для складних проєктів.",
+      name: "Системи електричної інфраструктури для складних проєктів",
     }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Оглянути системи продукції" }).first(),
+    page.getByRole("link", { name: "Оглянути системи" }).first(),
   ).toHaveAttribute("href", "#product-systems");
   await expect(page.getByText("Official UK Representative")).toHaveCount(0);
   await expect(page.locator("#product-systems a.product-card")).toHaveCount(6);

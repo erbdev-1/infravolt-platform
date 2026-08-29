@@ -36,13 +36,164 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      companies: {
+        Row: {
+          created_at: string
+          id: string
+          market: string
+          name: string
+          slug: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          market: string
+          name: string
+          slug: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          market?: string
+          name?: string
+          slug?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      company_members: {
+        Row: {
+          company_id: string
+          created_at: string
+          id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          id?: string
+          role?: string
+          user_id: string
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "company_members_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_clean_attachment_for_download: {
+        Args: { p_reference_no: string; p_storage_object_path: string }
+        Returns: {
+          content_type: string
+          file_name: string
+        }[]
+      }
+      list_enquiry_attachments_for_email: {
+        Args: { p_reference_no: string }
+        Returns: {
+          content_type: string
+          file_name: string
+          scan_status: string
+          size_bytes: number
+          storage_object_path: string
+        }[]
+      }
+      record_enquiry_attachment: {
+        Args: {
+          p_content_type: string
+          p_file_name: string
+          p_reference_no: string
+          p_size_bytes: number
+          p_storage_object_path: string
+        }
+        Returns: string
+      }
+      submit_commercial_partner_application: {
+        Args: {
+          p_business_type: string
+          p_commercial_requirements: string
+          p_company_location: string
+          p_company_name: string
+          p_contact_name: string
+          p_current_sales_service_coverage: string[]
+          p_declaration_accepted: boolean
+          p_email: string
+          p_industry_interests: string[]
+          p_job_title: string
+          p_market: string
+          p_partnership_interest: string
+          p_phone: string
+          p_product_system_interests: string[]
+          p_requested_dealership_cities: string
+          p_requested_dealership_regions: string[]
+          p_requested_dealership_scale: string
+          p_source_path: string
+          p_website: string
+          p_years_trading: string
+        }
+        Returns: string
+      }
+      submit_enquiry: {
+        Args: {
+          p_company: string
+          p_documents_required: string[]
+          p_email: string
+          p_estimated_quantity: string
+          p_first_name: string
+          p_information_required: string[]
+          p_interested_systems: string[]
+          p_items: Json
+          p_job_title: string
+          p_last_name: string
+          p_market: string
+          p_message: string
+          p_model_code: string
+          p_phone: string
+          p_product_series: string
+          p_product_system: string
+          p_project_location: string
+          p_project_name: string
+          p_project_stage: string
+          p_project_type: string
+          p_required_date: string
+          p_source_context: Json
+          p_subject: string
+          p_type: string
+        }
+        Returns: string
+      }
+      update_attachment_scan_result: {
+        Args: {
+          p_scan_notes?: string
+          p_scan_status: string
+          p_scanner_provider?: string
+          p_sha256?: string
+          p_storage_object_path: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

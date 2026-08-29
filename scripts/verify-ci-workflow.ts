@@ -126,6 +126,10 @@ for (const [name, job, maximumMinutes] of [
 
 assert.equal(browser.needs, "quality");
 assert.equal(database.needs, "quality");
+assert.deepEqual(asMapping(browser.env, "jobs.browser-smoke.env"), {
+  NEXT_PUBLIC_SITE_URL_UA: "https://ua.infravolt.localhost:3000",
+  NEXT_PUBLIC_SITE_URL_UK: "https://uk.infravolt.localhost:3000",
+});
 assert.equal(asMapping(database.env, "jobs.database.env").DOCKER_HOST, "unix:///var/run/docker.sock");
 
 const allSteps = Object.entries(jobs).flatMap(([name, value]) =>
