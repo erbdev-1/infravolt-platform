@@ -1,5 +1,9 @@
 import { useSyncExternalStore } from "react";
 
+import { trackAddToEnquiry } from "@/modules/analytics/tracker";
+import { localeForMarket } from "@/modules/markets/locale";
+
+import type { MarketCode } from "@/modules/markets/types";
 import type { EnquiryItem } from "./types";
 
 const STORAGE_KEY = "infravolt.enquiry.items";
@@ -50,10 +54,20 @@ export function isInEnquiry(id: string): boolean {
   return readAll().some((item) => item.id === id);
 }
 
-export function addEnquiryItem(item: EnquiryItem): void {
+/**
+ * `market` is required (not inferred) so `add_to_enquiry` always carries a
+ * trusted, server-resolved market rather than guessing one client-side —
+ * every call site already has it as a prop/local variable.
+ */
+export function addEnquiryItem(item: EnquiryItem, market: MarketCode): void {
   const items = readAll();
   if (items.some((existing) => existing.id === item.id)) return;
+
   writeAll([...items, item]);
+  trackAddToEnquiry(
+    { market, locale: localeForMarket(market) },
+    { product_family: item.system, product_slug: item.model },
+  );
 }
 
 export function removeEnquiryItem(id: string): void {

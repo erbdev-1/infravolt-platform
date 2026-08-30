@@ -1,13 +1,21 @@
+"use client";
+
 import { InfraVoltLogo } from "@/components/brand/infravolt-logo";
 import { FooterNavAccordion } from "@/components/public/footer-nav-accordion";
 import { Container } from "@/components/ui/container";
+import { consentCopyForMarket } from "@/modules/analytics/consent-copy";
+import { openConsentPreferences } from "@/modules/analytics/consent-store";
+import { trackCtaClick } from "@/modules/analytics/tracker";
+import { localeForMarket } from "@/modules/markets/locale";
 import { PRODUCT_PAGE_HREFS } from "@/modules/public-site/assets";
 
 import type { CSSProperties } from "react";
+import type { MarketCode } from "@/modules/markets/types";
 import type { PublicSiteContent } from "@/modules/public-site/content";
 
 type SiteFooterProps = Readonly<{
   content: PublicSiteContent["shell"];
+  market: MarketCode;
 }>;
 
 const FOOTER_CTA_HREF = "/contact?type=project";
@@ -50,8 +58,17 @@ const SOCIAL_ICONS = [
   },
 ] as const;
 
-export function SiteFooter({ content }: SiteFooterProps) {
+export function SiteFooter({ content, market }: SiteFooterProps) {
   const currentYear = new Date().getFullYear();
+  const locale = localeForMarket(market);
+  const consentCopy = consentCopyForMarket(market);
+
+  function handleFooterCtaClick() {
+    trackCtaClick(
+      { market, locale },
+      { cta_name: "footer_discuss_project", cta_location: "footer" },
+    );
+  }
 
   const productLinks = content.footerProducts.map((item) => {
     const href = PRODUCT_PAGE_HREFS[item.id];
@@ -108,7 +125,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
         <div className="site-footer__cta">
           <p className="site-footer__cta-label">{content.footerCtaLabel}</p>
           <p className="site-footer__cta-copy">{content.footerCtaCopy}</p>
-          <a className="site-footer__cta-action" href={FOOTER_CTA_HREF}>
+          <a className="site-footer__cta-action" href={FOOTER_CTA_HREF} onClick={handleFooterCtaClick}>
             {content.footerCtaActionLabel}
             <span aria-hidden="true">→</span>
           </a>
@@ -141,11 +158,21 @@ export function SiteFooter({ content }: SiteFooterProps) {
 
       <div className="site-footer__legal">
         <Container className="site-footer__legal-inner" size="wide">
-          <p className="site-footer__copyright">© {currentYear} InfraVolt</p>
-          <p className="site-footer__market">
-            {content.footerMarketLabel}: {content.marketName} ·{" "}
-            {content.localeName}
-          </p>
+          <div className="site-footer__legal-meta">
+            <p className="site-footer__copyright">© {currentYear} InfraVolt</p>
+            <p className="site-footer__market">
+              {content.footerMarketLabel}: {content.marketName} ·{" "}
+              {content.localeName}
+            </p>
+          </div>
+
+          <button
+            className="site-footer__consent-trigger"
+            onClick={() => openConsentPreferences()}
+            type="button"
+          >
+            {consentCopy.preferencesTriggerLabel}
+          </button>
         </Container>
       </div>
     </footer>

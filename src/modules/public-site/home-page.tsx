@@ -9,6 +9,8 @@ import { Container } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/link-button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Section } from "@/components/ui/section";
+import { TrackedCtaLink } from "@/modules/analytics/tracked-cta-link";
+import { localeForMarket } from "@/modules/markets/locale";
 import {
   INDUSTRY_ASSETS,
   MEDIA_ASSETS,
@@ -71,6 +73,7 @@ const HERO_BADGES = [
 // Onaylı yerel WebP/SVG dosyaları yayına hazırdır; unoptimized kullanımı yeniden kodlama hatasıyla görsellerin kaybolmasını önler.
 export function HomePageView({ market }: HomePageViewProps) {
   const content = publicSiteContentForMarket(market);
+  const locale = localeForMarket(market);
 
   return (
     <main id="main-content">
@@ -121,12 +124,16 @@ export function HomePageView({ market }: HomePageViewProps) {
                 {content.hero.primaryAction.label}
               </LinkButton>
 
-              <LinkButton
+              <TrackedCtaLink
+                ctaLocation="home_hero"
+                ctaName="request_project_support"
                 href={content.hero.secondaryAction.href}
+                locale={locale}
+                market={market}
                 variant="light-outline"
               >
                 {content.hero.secondaryAction.label}
-              </LinkButton>
+              </TrackedCtaLink>
             </div>
           </div>
 

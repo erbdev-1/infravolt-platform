@@ -276,7 +276,7 @@ export function ProductEnquiryBuilder({ market, onClose }: Readonly<{ market: Ma
 
   function addSelectedItem() {
     if (!selectedItem || duplicate) return;
-    addEnquiryItem(selectedItem);
+    addEnquiryItem(selectedItem, market);
     setMessage(copy.added);
     setSystem("");
     setFamilies([]);
