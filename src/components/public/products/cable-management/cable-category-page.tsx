@@ -87,8 +87,18 @@ export function CableCategoryPage({
               poster={publicMediaUrl("media/products/cable-management-systems/infravolt-cable-support-poster.webp")}
               preload="metadata"
             >
+              {/* Desktop/mobile are separately encoded renders of the same
+                  source video (see docs/performance audit) — the browser's
+                  native <source media> selection picks exactly one, so only
+                  one ever downloads. Split at the same 64rem (1024px) point
+                  the homepage hero uses. */}
               <source
-                src={publicMediaUrl("media/products/cable-management-systems/infravolt-cable-support.mp4")}
+                media="(min-width: 64rem)"
+                src={publicMediaUrl("media/products/cable-management-systems/infravolt-cable-support-desktop.mp4")}
+                type="video/mp4"
+              />
+              <source
+                src={publicMediaUrl("media/products/cable-management-systems/infravolt-cable-support-mobile.mp4")}
                 type="video/mp4"
               />
             </video>

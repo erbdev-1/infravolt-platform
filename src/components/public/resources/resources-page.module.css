@@ -393,7 +393,12 @@
 }
 
 @media (max-width: 760px) {
-  .hero { min-height: 19rem; }
+  .hero {
+    min-height: 19rem;
+    background:
+      linear-gradient(90deg, rgb(7 26 50 / 38%) 0%, rgb(7 26 50 / 10%) 72%),
+      var(--resource-navy) var(--hero-mobile-background-image) center / cover no-repeat;
+  }
   .heroGrid { left: 15%; }
   .overview { grid-template-columns: 1fr; max-width: calc(100% - 2.5rem); }
   .controls { gap: 0.9rem; grid-template-columns: 1fr; padding: 0.9rem; }
