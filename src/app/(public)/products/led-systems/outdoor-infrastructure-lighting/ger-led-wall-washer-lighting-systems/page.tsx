@@ -7,6 +7,7 @@ import {
   wallWasherSeriesContentForMarket,
 } from "@/data/products/led-lighting/series/outdoor-infrastructure-series";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 const SERIES_SLUG = "ger-led-wall-washer-lighting-systems";
 
@@ -14,16 +15,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = wallWasherSeriesContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: `${OUTDOOR_INFRASTRUCTURE_CATEGORY_HREF}/${SERIES_SLUG}`,
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL(
-        `${OUTDOOR_INFRASTRUCTURE_CATEGORY_HREF}/${SERIES_SLUG}`,
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function GerLedWallWasherLightingSystemsPage() {

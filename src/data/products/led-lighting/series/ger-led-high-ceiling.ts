@@ -460,7 +460,7 @@ const content = {
   },
   ua: {
     metadata: {
-      title: "GER-LED High Ceiling Lighting Systems | Промислове освітлення та освітлення високих прольотів | Системи LED-освітлення | InfraVolt",
+      title: "GER-LED High Ceiling – освітлення високих прольотів | InfraVolt",
       description:
         "GER-LED High Ceiling Lighting Systems — 4 каталожні моделі, 50–150 Вт, Ø434 мм, врізна (стельова) та накладна конфігурації, IP66, 7 років гарантії.",
     },

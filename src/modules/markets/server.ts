@@ -256,11 +256,7 @@ function vercelPreviewHosts(): readonly URL[] {
 
 export function createRuntimeMarketResolver(): MarketResolver {
   const mode = runtimeEnvironmentMode();
-  const environment = readClientEnvironment(mode);
-  const publicSiteUrls = {
-    uk: environment.NEXT_PUBLIC_SITE_URL_UK ?? LOCAL_SITE_URLS.uk,
-    ua: environment.NEXT_PUBLIC_SITE_URL_UA ?? LOCAL_SITE_URLS.ua,
-  } as const satisfies MarketUrlMap;
+  const publicSiteUrls = runtimePublicSiteUrls(mode);
 
   return createMarketResolver({
     publicSiteUrls,
@@ -276,6 +272,17 @@ export function createRuntimeMarketResolver(): MarketResolver {
     },
     allowLocalHosts: mode !== "production",
   });
+}
+
+export function runtimePublicSiteUrls(
+  mode: EnvironmentMode = runtimeEnvironmentMode(),
+): MarketUrlMap {
+  const environment = readClientEnvironment(mode);
+
+  return Object.freeze({
+    uk: environment.NEXT_PUBLIC_SITE_URL_UK ?? LOCAL_SITE_URLS.uk,
+    ua: environment.NEXT_PUBLIC_SITE_URL_UA ?? LOCAL_SITE_URLS.ua,
+  } as const satisfies MarketUrlMap);
 }
 
 export function createTrustedMarketHeaders(

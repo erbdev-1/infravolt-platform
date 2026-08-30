@@ -1,5 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+vi.mock("server-only", () => ({}));
+vi.mock("next/headers", () => ({ headers: vi.fn() }));
+
+import { headers } from "next/headers";
 import type { EnquiryDraft } from "./draft";
 import { sendEnquiryEmails } from "./email";
 
@@ -45,6 +49,14 @@ type AttachmentFixture = Readonly<{
   scan_status: "pending" | "clean" | "infected" | "scan_failed";
 }>;
 
+function trustedRequestHeaders(market: "uk" | "ua"): Headers {
+  return new Headers({
+    "x-infravolt-host": `${market}.infravolt.localhost:3000`,
+    "x-infravolt-locale": market === "uk" ? "en-GB" : "uk-UA",
+    "x-infravolt-market": market,
+  });
+}
+
 /**
  * URL-aware: mocks list_enquiry_attachments_for_email and
  * get_clean_attachment_for_download (the two RPCs sendEnquiryEmails now
@@ -83,7 +95,9 @@ function fetchMock(attachmentFixtures: readonly AttachmentFixture[] = []) {
 }
 
 beforeEach(() => {
+  vi.mocked(headers).mockResolvedValue(trustedRequestHeaders("uk"));
   vi.stubEnv("RESEND_API_KEY", "test-key");
+  vi.stubEnv("RESEND_API_KEY_UA", "test-key");
   vi.stubEnv("EMAIL_FROM_UK", "InfraVolt <no-reply@infravolt.test>");
   vi.stubEnv("EMAIL_REPLY_TO_UK", "sales@infravolt.test");
   vi.stubEnv("EMAIL_FROM_UA", "InfraVolt <no-reply@infravolt.test>");
@@ -171,6 +185,7 @@ describe("sendEnquiryEmails — customer acknowledgement", () => {
   });
 
   it("uses the Ukraine market team phrasing and labels for a ua submission", async () => {
+    vi.mocked(headers).mockResolvedValueOnce(trustedRequestHeaders("ua"));
     const uaDraft: EnquiryDraft = { ...BASE_DRAFT, market: "ua" };
     const body = await captureAcknowledgementEmailBody(uaDraft);
     expect(body.html).toContain("Україні");
@@ -198,7 +213,8 @@ describe("sendEnquiryEmails — customer acknowledgement", () => {
 
 describe("sendEnquiryEmails — internal notification", () => {
   it("no-ops without attempting a request when Resend env vars are unset", async () => {
-    vi.unstubAllEnvs();
+    vi.stubEnv("RESEND_API_KEY", undefined);
+    vi.stubEnv("RESEND_API_KEY_UA", undefined);
     const mock = fetchMock();
     vi.stubGlobal("fetch", mock);
     await sendEnquiryEmails(BASE_DRAFT, "IV-2026-000123");

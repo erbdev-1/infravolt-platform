@@ -7,6 +7,7 @@ import {
   OUTDOOR_INFRASTRUCTURE_CATEGORY_HREF,
 } from "@/data/products/led-lighting/series/outdoor-infrastructure-series";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 const SERIES_SLUG = "led-bus-ldb-kmx-canopy-lighting-systems";
 
@@ -15,16 +16,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const configurations = kmxLightingConfigurationsForMarket(marketContext.market);
   const content = configurations[0].content;
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: `${OUTDOOR_INFRASTRUCTURE_CATEGORY_HREF}/${SERIES_SLUG}`,
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL(
-        `${OUTDOOR_INFRASTRUCTURE_CATEGORY_HREF}/${SERIES_SLUG}`,
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function LedBusLdbKmxCanopyLightingSystemsPage() {

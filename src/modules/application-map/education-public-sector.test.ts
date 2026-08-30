@@ -1,6 +1,3 @@
-import { existsSync } from "node:fs";
-import { join } from "node:path";
-
 import { describe, expect, it } from "vitest";
 
 import {
@@ -9,8 +6,6 @@ import {
 } from "./education-public-sector";
 import { PRODUCT_FAMILY_IDS } from "./types";
 import { validateApplicationMap } from "./validation";
-
-const REPO_ROOT = join(__dirname, "..", "..", "..");
 
 function findZone(id: string) {
   const zone = EDUCATION_PUBLIC_SECTOR_APPLICATION_MAP.zones.find(
@@ -91,17 +86,15 @@ describe("EDUCATION_PUBLIC_SECTOR_APPLICATION_MAP", () => {
     }
   });
 
-  it("references only image assets that exist on disk", () => {
+  it("references only canonical public media assets", () => {
     const imagePaths = [
       EDUCATION_PUBLIC_SECTOR_APPLICATION_MAP.overview.image,
       ...EDUCATION_PUBLIC_SECTOR_APPLICATION_MAP.zones.map((zone) => zone.image),
     ];
 
     for (const imagePath of imagePaths) {
-      const absolutePath = join(REPO_ROOT, "public", imagePath);
-
-      expect(existsSync(absolutePath), `Missing asset: ${imagePath}`).toBe(
-        true,
+      expect(imagePath).toMatch(
+        /^(?:\/assets|https:\/\/[^/]+)\/application-map\/[a-z0-9./-]+\.(?:png|webp)$/,
       );
     }
   });

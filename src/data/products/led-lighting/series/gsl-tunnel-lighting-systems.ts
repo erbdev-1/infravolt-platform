@@ -532,7 +532,7 @@ const content = {
   },
   ua: {
     metadata: {
-      title: "GSL Tunnel Lighting Systems | Зовнішнє освітлення та освітлення інфраструктури | Системи LED-освітлення | InfraVolt",
+      title: "GSL Tunnel Lighting – тунельне LED-освітлення | InfraVolt",
       description:
         "GSL Tunnel Lighting Systems — 8 каталожних моделей GSL-TUNEL та GSL-TUNEL CORNER, 25–60 Вт, IP65, IK16, для тунелів, портів та інших об'єктів важкої інфраструктури.",
     },

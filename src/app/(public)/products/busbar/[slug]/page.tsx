@@ -10,6 +10,7 @@ import {
 import { getBusbarSystemDetail } from "@/data/products/busbar/series";
 import { getBusbarSystemBySlug } from "@/data/products/busbar/systems";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 type RouteParams = Readonly<{ slug: string }>;
 
@@ -30,16 +31,12 @@ export async function generateMetadata({
   const content = busbarCatalogContentForMarket(marketContext.market);
   const systemCopy = content.systems[system.slug as BusbarSystemSlug];
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: `/products/busbar/${slug}`,
     title: `${systemCopy.name} | InfraVolt`,
     description: systemCopy.description,
-    alternates: {
-      canonical: new URL(
-        `/products/busbar/${slug}`,
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function BusbarSeriesPage({

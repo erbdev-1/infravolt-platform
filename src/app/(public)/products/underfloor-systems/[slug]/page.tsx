@@ -7,6 +7,7 @@ import { underfloorSeriesDetailForMarket } from "@/data/products/underfloor/seri
 import { underfloorHubContentForMarket } from "@/data/products/underfloor/content";
 import type { UnderfloorSeriesSlug } from "@/data/products/underfloor/types";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 const UNDERFLOOR_SERIES_SLUGS: readonly UnderfloorSeriesSlug[] = [
   "underfloor-junction-boxes",
@@ -37,16 +38,12 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: `/products/underfloor-systems/${slug}`,
     title: `${series.name} | InfraVolt`,
     description: series.description,
-    alternates: {
-      canonical: new URL(
-        `/products/underfloor-systems/${slug}`,
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function UnderfloorSeriesPage({

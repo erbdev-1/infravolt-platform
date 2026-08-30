@@ -313,7 +313,7 @@ const content = {
   },
   ua: {
     metadata: {
-      title: "LED-BUS LDBE Series Lighting Systems | Промислове освітлення та освітлення високих прольотів | Системи LED-освітлення | InfraVolt",
+      title: "LED-BUS LDBE – промислове LED-освітлення | InfraVolt",
       description:
         "LED-BUS LDBE Series Lighting Systems — 8 каталожних моделей, 50–250 Вт, мультилінзова оптика 30°/60°/90°, IP20/IP65, для промислових, авіаційних та логістичних об'єктів.",
     },

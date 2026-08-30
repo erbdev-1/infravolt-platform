@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { CableMacroFamilyPage } from "@/components/public/products/cable-management/cable-macro-family-page";
 import { supportHangingSystemsContentForMarket } from "@/data/products/cable-management/support-hanging-content";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 // Static route, sibling to the [slug] dynamic family-detail route — Next.js
 // resolves this exact segment before falling back to [slug], so no change
@@ -14,16 +15,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = supportHangingSystemsContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/products/cable-support-systems/support-hanging-systems",
     title: `${content.title} | Cable Management Systems | InfraVolt`,
     description: content.description,
-    alternates: {
-      canonical: new URL(
-        "/products/cable-support-systems/support-hanging-systems",
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function SupportHangingSystemsPage() {

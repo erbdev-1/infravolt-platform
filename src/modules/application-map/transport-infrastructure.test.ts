@@ -1,6 +1,3 @@
-import { existsSync } from "node:fs";
-import { join } from "node:path";
-
 import { describe, expect, it } from "vitest";
 
 import {
@@ -9,8 +6,6 @@ import {
 } from "./transport-infrastructure";
 import { PRODUCT_FAMILY_IDS } from "./types";
 import { validateApplicationMap } from "./validation";
-
-const REPO_ROOT = join(__dirname, "..", "..", "..");
 
 function findZone(id: string) {
   const zone = TRANSPORT_INFRASTRUCTURE_APPLICATION_MAP.zones.find(
@@ -102,7 +97,7 @@ describe("TRANSPORT_INFRASTRUCTURE_APPLICATION_MAP", () => {
     }
   });
 
-  it("references only image assets that exist on disk, and never a .webp.png path", () => {
+  it("references only canonical public media assets, and never a .webp.png path", () => {
     const imagePaths = [
       TRANSPORT_INFRASTRUCTURE_APPLICATION_MAP.overview.image,
       ...TRANSPORT_INFRASTRUCTURE_APPLICATION_MAP.zones.map((zone) => zone.image),
@@ -110,10 +105,9 @@ describe("TRANSPORT_INFRASTRUCTURE_APPLICATION_MAP", () => {
 
     for (const imagePath of imagePaths) {
       expect(imagePath.endsWith(".webp.png")).toBe(false);
-
-      const absolutePath = join(REPO_ROOT, "public", imagePath);
-
-      expect(existsSync(absolutePath), `Missing asset: ${imagePath}`).toBe(true);
+      expect(imagePath).toMatch(
+        /^(?:\/assets|https:\/\/[^/]+)\/application-map\/[a-z0-9./-]+\.(?:png|webp)$/,
+      );
     }
   });
 

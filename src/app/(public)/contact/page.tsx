@@ -5,18 +5,18 @@ import { ContactPage } from "@/components/public/contact/contact-page";
 import { parseEnquiryContext, type ContactRouteSearchParams } from "@/modules/enquiry/routing";
 import { contactPageContentForMarket } from "@/modules/public-site/contact-content";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = contactPageContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/contact",
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL("/contact", marketContext.publicSiteUrl),
-    },
-  };
+  });
 }
 
 export default async function ContactRoute({

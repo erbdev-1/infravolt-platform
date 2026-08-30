@@ -138,7 +138,7 @@ const checks: readonly Check[] = [
           NEXT_PUBLIC_SITE_URL_UA:
             "  HTTP://UA.INFRAVOLT.LOCALHOST.:3000/  ",
         },
-        "production",
+        "development",
       );
 
       assert.equal(
@@ -157,6 +157,27 @@ const checks: readonly Check[] = [
         environment.NEXT_PUBLIC_SITE_URL_UA?.host,
         "ua.infravolt.localhost:3000",
       );
+    },
+  },
+  {
+    name: "production market origins require HTTPS",
+    run: () => {
+      for (const variable of [
+        "NEXT_PUBLIC_SITE_URL_UK",
+        "NEXT_PUBLIC_SITE_URL_UA",
+      ] as const) {
+        expectEnvironmentError(
+          () =>
+            parseClientEnvironment(
+              {
+                ...safeProductionFixture,
+                [variable]: `http://${variable === "NEXT_PUBLIC_SITE_URL_UK" ? "uk" : "ua"}.example.test`,
+              },
+              "production",
+            ),
+          variable,
+        );
+      }
     },
   },
   {

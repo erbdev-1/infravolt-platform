@@ -2,6 +2,8 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+vi.mock("server-only", () => ({}));
+
 import { CONTACT_PRODUCT_SYSTEMS } from "@/modules/enquiry/product-catalog";
 import { addEnquiryItem } from "@/modules/enquiry/store";
 import type { EnquiryItem } from "@/modules/enquiry/types";

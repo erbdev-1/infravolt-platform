@@ -6,6 +6,7 @@ import { commercialBuildingApplicationMapContentForMarket } from "@/modules/appl
 import { COMMERCIAL_BUILDING_APPLICATION_MAP } from "@/modules/application-map/commercial-building";
 import { resolveApplicationMap } from "@/modules/application-map/resolve";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
@@ -13,16 +14,12 @@ export async function generateMetadata(): Promise<Metadata> {
     marketContext.market,
   );
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/application-map/commercial-building",
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL(
-        "/application-map/commercial-building",
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function CommercialBuildingApplicationMapRoute() {

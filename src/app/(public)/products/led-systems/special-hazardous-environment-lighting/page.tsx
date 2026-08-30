@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { LedCategoryDetailPageSpecialHazardous } from "@/components/public/products/led-lighting/led-category-detail-page-special-hazardous";
 import { specialHazardousEnvironmentLightingContentForMarket } from "@/data/products/led-lighting/special-hazardous-environment-lighting";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 const CATEGORY_HREF = "/products/led-systems/special-hazardous-environment-lighting";
 
@@ -11,13 +12,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = specialHazardousEnvironmentLightingContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: CATEGORY_HREF,
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL(CATEGORY_HREF, marketContext.publicSiteUrl),
-    },
-  };
+  });
 }
 
 export default async function SpecialHazardousEnvironmentLightingPage() {

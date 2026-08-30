@@ -67,12 +67,19 @@ describe("CTA routing regression sweep", () => {
     expect(findBrokenHrefs(APPLICATION_MAP_EXCEPTION).length).toBeGreaterThan(0);
   });
 
-  it("no product-family file promises a PDF download that doesn't route anywhere real", () => {
-    const offenders = walk(join(SRC_ROOT, "data", "products", "led-lighting")).filter((file) => {
+  it("routes every rendered LED PDF catalogue CTA through the canonical catalogue resource", () => {
+    const consumers = walk(
+      join(SRC_ROOT, "components", "public", "products", "led-lighting"),
+    ).filter((file) => {
       const content = readFileSync(file, "utf-8");
-      return content.includes("Download PDF Catalogue") || content.includes("Завантажити PDF-каталог");
+      return content.includes("content.hero.secondaryAction");
+    });
+    const offenders = consumers.filter((file) => {
+      const content = readFileSync(file, "utf-8");
+      return !content.includes('href={canonicalCatalogueHref("led")}');
     });
 
+    expect(consumers.length).toBeGreaterThan(0);
     expect(offenders).toEqual([]);
   });
 

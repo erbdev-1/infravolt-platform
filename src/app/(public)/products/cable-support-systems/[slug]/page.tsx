@@ -37,6 +37,7 @@ import { heavyDutyCableTraysH60ContentForMarket } from "@/data/products/cable-ma
 import type { CableManagementFamilyContent } from "@/data/products/cable-management/types";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
 import type { MarketCode } from "@/modules/markets/types";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 // Only families with a real, fully-populated content entry are routable —
 // see src/data/products/cable-management/content.ts and variants/index.ts.
@@ -126,16 +127,12 @@ export async function generateMetadata({
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = contentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: `/products/cable-support-systems/${slug}`,
     title: `${content.title} (${content.titleQualifier}) | InfraVolt`,
     description: content.description,
-    alternates: {
-      canonical: new URL(
-        `/products/cable-support-systems/${slug}`,
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function CableManagementFamilyPage({

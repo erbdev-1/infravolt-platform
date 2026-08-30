@@ -7,6 +7,7 @@ import {
   TRACK_DOWNLIGHT_CATEGORY_HREF,
 } from "@/data/products/led-lighting/series/track-downlight-series";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 const SERIES_SLUG = "mcrh-downlights";
 
@@ -14,16 +15,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = mcrhConfigurationsForMarket(marketContext.market)[0].content;
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: `${TRACK_DOWNLIGHT_CATEGORY_HREF}/${SERIES_SLUG}`,
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL(
-        `${TRACK_DOWNLIGHT_CATEGORY_HREF}/${SERIES_SLUG}`,
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function McrhDownlightsPage() {

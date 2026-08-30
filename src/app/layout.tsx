@@ -10,10 +10,8 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
-  // Fails closed on SITE_INDEXING_ENABLED (see src/config/site-indexing.ts)
-  // rather than VERCEL_ENV: infravolt.co.uk is connected to Vercel
-  // Production before SEO launch is approved, so noindex must stay on
-  // until that flag is explicitly flipped and redeployed.
+  // Fails closed unless SITE_INDEXING_ENABLED is explicitly enabled in
+  // Vercel Production (see src/config/site-indexing.ts).
   robots: isSiteIndexingEnabled() ? undefined : { index: false, follow: false },
 };
 

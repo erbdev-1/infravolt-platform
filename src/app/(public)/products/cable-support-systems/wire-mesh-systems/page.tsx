@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { CableVariantFamilyTemplate } from "@/components/public/products/cable-management/cable-variant-family-template";
 import { wireMeshSystemsContentForMarket } from "@/data/products/cable-management/wire-mesh-content";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 // Static route using the shared Cable Trays & Trunking family-detail
 // template. The catalogue-backed TTK sub-families remain searchable within
@@ -12,16 +13,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = wireMeshSystemsContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/products/cable-support-systems/wire-mesh-systems",
     title: `${content.title} | Cable Management Systems | InfraVolt`,
     description: content.heroDescription,
-    alternates: {
-      canonical: new URL(
-        "/products/cable-support-systems/wire-mesh-systems",
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function WireMeshSystemsPage() {

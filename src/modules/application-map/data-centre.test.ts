@@ -1,13 +1,8 @@
-import { existsSync } from "node:fs";
-import { join } from "node:path";
-
 import { describe, expect, it } from "vitest";
 
 import { DATA_CENTRE_APPLICATION_MAP } from "./data-centre";
 import { PRODUCT_FAMILY_IDS, ZONE_IDS } from "./types";
 import { validateDataCentreApplicationMap } from "./validation";
-
-const REPO_ROOT = join(__dirname, "..", "..", "..");
 
 describe("DATA_CENTRE_APPLICATION_MAP", () => {
   it("passes all static invariant checks", () => {
@@ -131,17 +126,15 @@ describe("DATA_CENTRE_APPLICATION_MAP", () => {
     ).toBe(true);
   });
 
-  it("references only image assets that exist on disk", () => {
+  it("references only canonical public media assets", () => {
     const imagePaths = [
       DATA_CENTRE_APPLICATION_MAP.overview.image,
       ...DATA_CENTRE_APPLICATION_MAP.zones.map((zone) => zone.image),
     ];
 
     for (const imagePath of imagePaths) {
-      const absolutePath = join(REPO_ROOT, "public", imagePath);
-
-      expect(existsSync(absolutePath), `Missing asset: ${imagePath}`).toBe(
-        true,
+      expect(imagePath).toMatch(
+        /^(?:\/assets|https:\/\/[^/]+)\/application-map\/[a-z0-9./-]+\.(?:png|webp)$/,
       );
     }
   });

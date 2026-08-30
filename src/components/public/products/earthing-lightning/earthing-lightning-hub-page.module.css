@@ -934,12 +934,16 @@
   margin-top: 1rem;
 }
 
-.applicationAction span {
+.applicationAction > span[aria-hidden="true"] {
   transition: transform 180ms ease;
 }
 
-.applicationPhotoCard:hover .applicationAction span {
+.applicationPhotoCard:hover .applicationAction > span[aria-hidden="true"] {
   transform: translateX(4px);
+}
+
+.applicationActionDesktopLabel {
+  display: none;
 }
 
 /* Mobile-only interactive selector — hidden above 640px (see
@@ -1045,6 +1049,15 @@
     display: grid;
     grid-template-columns: repeat(8, minmax(0, 1fr));
     overflow-x: visible;
+  }
+
+  .applicationPhotoContent > p,
+  .applicationActionDefaultLabel {
+    display: none;
+  }
+
+  .applicationActionDesktopLabel {
+    display: inline;
   }
 }
 

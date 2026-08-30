@@ -310,7 +310,7 @@ const content = {
   },
   ua: {
     metadata: {
-      title: "LED-BUS LDB-FL Series Lighting Systems | Промислове освітлення та освітлення високих прольотів | Системи LED-освітлення | InfraVolt",
+      title: "LED-BUS LDB-FL – промислове LED-освітлення | InfraVolt",
       description:
         "LED-BUS LDB-FL Series Lighting Systems — 4 каталожні моделі, 75–205 Вт, фабрикований сталевий корпус, загартоване скло 4 мм, IP65, для промислових, авіаційних та логістичних об'єктів.",
     },

@@ -11,6 +11,7 @@ import {
 } from "@/data/products/led-lighting/track-downlight";
 import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 const ROUTE = "/products/led-systems/track-downlight/downlight-lighting-systems";
 const PARENT_ROUTE = "/products/led-systems/track-downlight";
@@ -19,11 +20,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = downlightLightingSystemsContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: ROUTE,
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: { canonical: new URL(ROUTE, marketContext.publicSiteUrl) },
-  };
+  });
 }
 
 export default async function DownlightLightingSystemsPage() {

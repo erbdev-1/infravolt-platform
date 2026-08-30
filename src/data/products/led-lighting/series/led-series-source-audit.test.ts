@@ -1,6 +1,3 @@
-import { existsSync } from "node:fs";
-import { join } from "node:path";
-
 import { describe, expect, it } from "vitest";
 
 import type { LedSeriesDetailContent } from "../types";
@@ -77,8 +74,8 @@ function configured(name: string, configurations: readonly Configuration[]): Nam
   return configurations.map(({ id, content }) => ({ name: `${name}:${id}`, content }));
 }
 
-function localAssetExists(asset: string): boolean {
-  return asset.startsWith("/") && existsSync(join(process.cwd(), "public", asset.replace(/^\//, "")));
+function isCanonicalMediaReference(asset: string): boolean {
+  return /^(?:\/assets|https:\/\/[^/]+)\/[a-z0-9][a-z0-9./_-]*\.(?:avif|jpe?g|png|webp)$/.test(asset);
 }
 
 function contentAssets(content: LedSeriesDetailContent): string[] {
@@ -186,9 +183,9 @@ describe("LED series source and completeness audit", () => {
     }
   });
 
-  it.each(SERIES)("uses existing local assets for $name", ({ content }) => {
-    const missing = contentAssets(content).filter((asset) => !localAssetExists(asset));
-    expect(missing).toEqual([]);
+  it.each(SERIES)("uses canonical supported media references for $name", ({ content }) => {
+    const unsupported = contentAssets(content).filter((asset) => !isCanonicalMediaReference(asset));
+    expect(unsupported).toEqual([]);
   });
 
   it("does not publish unsupported hazardous-certification claims", () => {

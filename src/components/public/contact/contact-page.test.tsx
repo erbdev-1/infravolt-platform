@@ -1,5 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+vi.mock("server-only", () => ({}));
 
 import { ContactPage } from "./contact-page";
 
@@ -14,9 +16,9 @@ describe("ContactPage — hero contact-details panel", () => {
     expect(screen.getByText("info@infravolt.co.uk")).toBeInTheDocument();
   });
 
-  it("never renders an empty Contact Details panel for UA (no approved email exists yet)", () => {
-    const { container } = render(<ContactPage initialContext={{}} initialType="general" market="ua" />);
+  it("renders the UA contact-details panel with the approved market email", () => {
+    render(<ContactPage initialContext={{}} initialType="general" market="ua" />);
 
-    expect(container.querySelector('[class*="heroContactPanel"]')).not.toBeInTheDocument();
+    expect(screen.getByText("info@infravolt.com.ua")).toBeInTheDocument();
   });
 });

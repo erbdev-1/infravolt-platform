@@ -4,21 +4,18 @@ import { headers } from "next/headers";
 import { UnderfloorHubPage } from "@/components/public/products/underfloor/underfloor-hub-page";
 import { underfloorHubContentForMarket } from "@/data/products/underfloor/content";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = underfloorHubContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/products/underfloor-systems",
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL(
-        "/products/underfloor-systems",
-        marketContext.publicSiteUrl,
-      ),
-    },
-  };
+  });
 }
 
 export default async function UnderfloorSystemsPage() {

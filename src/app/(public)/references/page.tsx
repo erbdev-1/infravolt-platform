@@ -7,18 +7,18 @@ import {
   referencesContentForMarket,
 } from "@/data/references";
 import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { marketPageMetadata } from "@/modules/seo/market-metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const marketContext = resolveTrustedMarketContext(await headers());
   const content = referencesContentForMarket(marketContext.market);
 
-  return {
+  return marketPageMetadata({
+    market: marketContext.market,
+    pathname: "/references",
     title: content.metadata.title,
     description: content.metadata.description,
-    alternates: {
-      canonical: new URL("/references", marketContext.publicSiteUrl),
-    },
-  };
+  });
 }
 
 export default async function ReferencesRoute({

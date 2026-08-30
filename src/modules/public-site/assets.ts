@@ -38,7 +38,15 @@ type IndustryAsset = Readonly<{
 
 export const MEDIA_ASSETS = Object.freeze({
   hero: {
-    video: publicMediaUrl("media/home/infravolt-home-hero-00-20-final.mp4"),
+    // Desktop/mobile are separately web-encoded renders of the same approved
+    // source video (see docs/performance audit) — the browser's native
+    // <source media> selection picks exactly one, so only one ever
+    // downloads. Do not point either of these back at the original
+    // infravolt-home-hero-00-20-final.mp4 (211MB/66Mbps, kept only as the
+    // unpublished master).
+    videoDesktop: publicMediaUrl("media/home/infravolt-home-hero-desktop.mp4"),
+    videoMobile: publicMediaUrl("media/home/infravolt-home-hero-mobile.mp4"),
+    poster: publicMediaUrl("media/home/infravolt-home-hero-poster.webp"),
   },
 
   aboutGersan: {
