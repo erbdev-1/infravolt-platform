@@ -117,7 +117,6 @@ export function UKSupportHub({ content, market }: UKSupportHubProps) {
                 fill
                 sizes="(min-width: 1024px) 58vw, 100vw"
                 src={showroomImage}
-                unoptimized
               />
 
               <div
@@ -167,7 +166,6 @@ export function UKSupportHub({ content, market }: UKSupportHubProps) {
               fill
               sizes="(min-width: 1024px) 42vw, 100vw"
               src={warehouseImage}
-              unoptimized
             />
 
             <div aria-hidden="true" className="uk-support-warehouse__overlay" />

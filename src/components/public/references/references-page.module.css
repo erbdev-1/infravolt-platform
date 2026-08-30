@@ -833,7 +833,12 @@
 }
 
 @media (max-width: 760px) {
-  .hero { min-height: 17rem; }
+  .hero {
+    min-height: 17rem;
+    background:
+      linear-gradient(90deg, rgb(7 26 50 / 38%) 0%, rgb(7 26 50 / 10%) 72%),
+      var(--reference-navy) var(--hero-mobile-background-image) center / cover no-repeat;
+  }
   .heroGrid { left: 15%; }
   .systemGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
 
