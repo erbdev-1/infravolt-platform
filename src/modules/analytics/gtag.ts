@@ -10,10 +10,15 @@ declare global {
   }
 }
 
+// `...args` exists only to type-check call sites below; the push itself
+// uses the live `arguments` object. gtag.js's dataLayer queue processor
+// requires an arguments-like entry — pushing a real Array (from a rest
+// param) is silently ignored and no collect request is ever sent.
 function gtag(...args: unknown[]): void {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || args.length === 0) return;
   window.dataLayer = window.dataLayer ?? [];
-  window.dataLayer.push(args);
+  // eslint-disable-next-line prefer-rest-params -- must match gtag.js's arguments-based queue format, not a rest-param Array
+  window.dataLayer.push(arguments);
 }
 
 let scriptRequested = false;
