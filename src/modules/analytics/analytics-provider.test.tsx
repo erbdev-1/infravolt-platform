@@ -23,6 +23,15 @@ function eventPushes(name: string): unknown[][] {
     .map((entry) => Array.from(entry as ArrayLike<unknown>));
 }
 
+// The gtag "command name" for a dataLayer entry: "consent"/"js"/"config" for
+// gtag.js lifecycle calls, or "event:<name>" for gtag('event', name, ...).
+function commandLabels(): string[] {
+  return (window.dataLayer ?? []).map((entry) => {
+    const cmd = entry as ArrayLike<unknown>;
+    return cmd[0] === "event" ? `event:${String(cmd[1])}` : String(cmd[0]);
+  });
+}
+
 beforeEach(() => {
   currentPathname = "/";
   window.localStorage.clear();
@@ -236,6 +245,72 @@ describe("AnalyticsProvider — disallowed host", () => {
     await user.click(screen.getByRole("button", { name: "Accept analytics" }));
 
     expect(scriptTags()).toHaveLength(0);
+  });
+});
+
+describe("AnalyticsProvider — dataLayer queue order", () => {
+  it("queues consent update, js, and config before the first page_view on accept", async () => {
+    const user = userEvent.setup();
+    render(
+      <AnalyticsProvider market="uk">
+        <p>Page content</p>
+      </AnalyticsProvider>,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Accept analytics" }));
+
+    await waitFor(() => expect(eventPushes("page_view")).toHaveLength(1));
+
+    // queueConsentDefaults() runs once at module import (before this test's
+    // dataLayer reset in beforeEach), so only the accept-triggered entries
+    // are present here: consent update, js, config, page_view — in order.
+    const labels = commandLabels();
+    expect(labels).toEqual(["consent", "js", "config", "event:page_view"]);
+
+    const updateIndex = labels.indexOf("consent");
+    const jsIndex = labels.indexOf("js");
+    const configIndex = labels.indexOf("config");
+    const pageViewIndex = labels.indexOf("event:page_view");
+
+    // The exact invariant this task fixes: activation (consent update ->
+    // js -> config) must be queued strictly before the first page_view, or
+    // gtag.js silently drops it and no collect request is ever sent.
+    expect(updateIndex).toBeLessThan(jsIndex);
+    expect(jsIndex).toBeLessThan(configIndex);
+    expect(configIndex).toBeLessThan(pageViewIndex);
+  });
+
+  it("queues every dataLayer entry as an arguments-like object, never a real Array", async () => {
+    const user = userEvent.setup();
+    render(
+      <AnalyticsProvider market="uk">
+        <p>Page content</p>
+      </AnalyticsProvider>,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Accept analytics" }));
+    await waitFor(() => expect(eventPushes("page_view")).toHaveLength(1));
+
+    for (const entry of window.dataLayer ?? []) {
+      expect(Array.isArray(entry)).toBe(false);
+    }
+  });
+
+  it("never grants advertising consent — only analytics_storage is updated on accept", async () => {
+    const user = userEvent.setup();
+    render(
+      <AnalyticsProvider market="uk">
+        <p>Page content</p>
+      </AnalyticsProvider>,
+    );
+
+    await user.click(screen.getByRole("button", { name: "Accept analytics" }));
+    await waitFor(() => expect(eventPushes("page_view")).toHaveLength(1));
+
+    const consentUpdate = (window.dataLayer ?? []).find(
+      (entry) => (entry as ArrayLike<unknown>)[0] === "consent" && (entry as ArrayLike<unknown>)[1] === "update",
+    ) as ArrayLike<unknown>;
+    expect(consentUpdate[2]).toEqual({ analytics_storage: "granted" });
   });
 });
 
