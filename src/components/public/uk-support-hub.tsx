@@ -4,6 +4,8 @@ import { Container } from "@/components/ui/container";
 import { LinkButton } from "@/components/ui/link-button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Section } from "@/components/ui/section";
+import { TrackedCtaLink } from "@/modules/analytics/tracked-cta-link";
+import { localeForMarket } from "@/modules/markets/locale";
 import type { MarketCode } from "@/modules/markets/types";
 import { COMPANY_ASSETS, UA_SUPPORT_ASSETS } from "@/modules/public-site/assets";
 
@@ -79,6 +81,7 @@ function SupportIcon({
 }
 
 export function UKSupportHub({ content, market }: UKSupportHubProps) {
+  const locale = localeForMarket(market);
   const showroomImage =
     market === "ua" ? UA_SUPPORT_ASSETS.technicalSupport.image : COMPANY_ASSETS.showroom.image;
   const warehouseImage =
@@ -96,9 +99,16 @@ export function UKSupportHub({ content, market }: UKSupportHubProps) {
           />
 
           <div className="uk-support-header__actions">
-            <LinkButton href={content.primaryAction.href} variant="accent">
+            <TrackedCtaLink
+              ctaLocation="uk_support_header"
+              ctaName="discuss_a_project"
+              href={content.primaryAction.href}
+              locale={locale}
+              market={market}
+              variant="accent"
+            >
               {content.primaryAction.label}
-            </LinkButton>
+            </TrackedCtaLink>
 
             <LinkButton
               href={content.secondaryAction.href}
@@ -182,9 +192,16 @@ export function UKSupportHub({ content, market }: UKSupportHubProps) {
 
             <small>{content.warehouse.status}</small>
 
-            <LinkButton href={content.primaryAction.href} variant="accent">
+            <TrackedCtaLink
+              ctaLocation="uk_support_warehouse"
+              ctaName="discuss_a_project"
+              href={content.primaryAction.href}
+              locale={locale}
+              market={market}
+              variant="accent"
+            >
               {content.primaryAction.label}
-            </LinkButton>
+            </TrackedCtaLink>
           </div>
         </article>
 

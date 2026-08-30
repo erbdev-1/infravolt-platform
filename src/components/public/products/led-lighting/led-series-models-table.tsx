@@ -210,7 +210,7 @@ export function LedSeriesModelsTable({
       return;
     }
 
-    addEnquiryItem(item);
+    addEnquiryItem(item, market);
     setConfirmation({ id, title: model.model });
   }
 

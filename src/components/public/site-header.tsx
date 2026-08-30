@@ -6,13 +6,17 @@ import { usePathname } from "next/navigation";
 import { InfraVoltLogo } from "@/components/brand/infravolt-logo";
 import { MobileNavigation } from "@/components/public/mobile-navigation";
 import { Container } from "@/components/ui/container";
+import { trackCtaClick } from "@/modules/analytics/tracker";
 import { PRODUCT_ENQUIRY_REVIEW_HREF } from "@/modules/enquiry/routing";
 import { useEnquiryItems } from "@/modules/enquiry/store";
+import { localeForMarket } from "@/modules/markets/locale";
 
+import type { MarketCode } from "@/modules/markets/types";
 import type { PublicSiteContent } from "@/modules/public-site/content";
 
 type SiteHeaderProps = Readonly<{
   content: PublicSiteContent["shell"];
+  market: MarketCode;
 }>;
 
 function splitNavigationHref(href: string) {
@@ -31,8 +35,9 @@ function splitNavigationHref(href: string) {
   };
 }
 
-export function SiteHeader({ content }: SiteHeaderProps) {
+export function SiteHeader({ content, market }: SiteHeaderProps) {
   const pathname = usePathname();
+  const locale = localeForMarket(market);
   const [activeHash, setActiveHash] = useState("#top");
   const enquiryCount = useEnquiryItems().length;
 
@@ -94,6 +99,9 @@ export function SiteHeader({ content }: SiteHeaderProps) {
                 onClick={() => {
                   if (target.hash) {
                     setActiveHash(target.hash);
+                  }
+                  if (isContact) {
+                    trackCtaClick({ market, locale }, { cta_name: "contact", cta_location: "header_nav" });
                   }
                 }}
               >

@@ -3,11 +3,14 @@
 import { useEffect, useId, useRef, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
+import { trackGenerateLead, trackRequestQuote, trackTechnicalDocumentEnquiry, trackTechnicalEnquiry } from "@/modules/analytics/tracker";
 import { submitEnquiry, type EnquiryDraft } from "@/modules/enquiry/draft";
 import { enquiryItemCountLabel } from "@/modules/enquiry/format";
 import { clearEnquiry, useEnquiryItems } from "@/modules/enquiry/store";
 import { enquirySystemLabelsForMarket, type EnquirySourceContext, type EnquiryType } from "@/modules/enquiry/types";
+import { localeForMarket } from "@/modules/markets/locale";
 import type { MarketCode } from "@/modules/markets/types";
 import type { ContactPageContent } from "@/modules/public-site/contact-content";
 
@@ -242,6 +245,30 @@ export function EnquiryWorkspace({
     if (status === "success") successHeadingRef.current?.focus();
   }, [status]);
 
+  const locale = localeForMarket(market);
+  const pathname = usePathname();
+
+  // Conversion-intent events: fired once when the workspace mounts with a
+  // given `initialType` from the URL (i.e. the user actually followed a
+  // "Request Quote" / "Ask Technical Question" / "Request Technical
+  // Document" CTA to get here) — a distinct, earlier signal from
+  // `generate_lead`, which only fires after genuine submission success.
+  // Keyed on `initialType` (not the mutable `type` state) so later
+  // switching tabs in-page doesn't re-fire a new "started" event.
+  useEffect(() => {
+    const common = { market, locale };
+    const productContext = { product_family: initialContext.system, product_slug: initialContext.model };
+
+    if (initialType === "quote") {
+      trackRequestQuote(common, pathname ?? "/contact", productContext);
+    } else if (initialType === "technical") {
+      trackTechnicalEnquiry(common, pathname ?? "/contact", productContext);
+    } else if (initialType === "technical-document") {
+      trackTechnicalDocumentEnquiry(common, pathname ?? "/contact", productContext);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialType]);
+
   const hasApplicationMapContext = Boolean(
     initialContext.industry || initialContext.zone || initialContext.hotspot,
   );
@@ -358,6 +385,24 @@ export function EnquiryWorkspace({
       setStatus("error");
       return;
     }
+
+    // GA4-recommended `generate_lead` — fired exactly once, only after the
+    // server has actually confirmed the enquiry was persisted (never on
+    // submit-button click, never on a failed/errored submission). No form
+    // field values, contact details or free text are included.
+    const productFamily =
+      (enquiryItems.length === 1 ? enquiryItems[0].system : undefined) ?? productSystem ?? initialContext.system;
+    const productSlug =
+      (enquiryItems.length === 1 ? enquiryItems[0].model : undefined) ?? modelCode ?? initialContext.model;
+    trackGenerateLead(
+      { market, locale },
+      {
+        lead_type: type,
+        source_path: pathname ?? "/contact",
+        product_family: productFamily,
+        product_slug: productSlug,
+      },
+    );
 
     // Snapshot what was submitted before the basket is cleared, so the
     // success screen can still show an accurate item count.

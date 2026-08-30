@@ -259,7 +259,7 @@ export function EarthingVariantTable({
       return;
     }
 
-    addEnquiryItem(item);
+    addEnquiryItem(item, market);
     setConfirmation({ id, title: `${variant.model} · ${variant.stockCode}` });
   }
 

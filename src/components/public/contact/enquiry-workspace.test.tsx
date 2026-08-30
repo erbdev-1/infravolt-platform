@@ -1,8 +1,27 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/contact",
+}));
+
+const mockTrackRequestQuote = vi.fn();
+const mockTrackTechnicalEnquiry = vi.fn();
+const mockTrackTechnicalDocumentEnquiry = vi.fn();
+const mockTrackGenerateLead = vi.fn();
+const mockTrackAddToEnquiry = vi.fn();
+vi.mock("@/modules/analytics/tracker", () => ({
+  trackRequestQuote: (...args: unknown[]) => mockTrackRequestQuote(...args),
+  trackTechnicalEnquiry: (...args: unknown[]) => mockTrackTechnicalEnquiry(...args),
+  trackTechnicalDocumentEnquiry: (...args: unknown[]) => mockTrackTechnicalDocumentEnquiry(...args),
+  trackGenerateLead: (...args: unknown[]) => mockTrackGenerateLead(...args),
+  // Not asserted on in this file (see store.test.ts) — stubbed only so
+  // addEnquiryItem() (called via the basket helpers below) doesn't hit the
+  // unmocked module's real gtag-gated code path.
+  trackAddToEnquiry: (...args: unknown[]) => mockTrackAddToEnquiry(...args),
+}));
 
 import { CONTACT_PRODUCT_SYSTEMS } from "@/modules/enquiry/product-catalog";
 import { addEnquiryItem } from "@/modules/enquiry/store";
@@ -133,7 +152,7 @@ describe("EnquiryWorkspace — Product Enquiry", () => {
       sourceRoute: "/products/cable-support-systems/cable-ladders",
       quantity: "4",
     };
-    addEnquiryItem(item);
+    addEnquiryItem(item, "uk");
 
     const user = userEvent.setup();
     renderWorkspace({ initialType: "product" });
@@ -250,12 +269,15 @@ describe("EnquiryWorkspace — Project Support", () => {
 
 describe("EnquiryWorkspace — successful submission", () => {
   it("shows a reference number, announces it accessibly, and clears the basket only after success", async () => {
-    addEnquiryItem({
-      id: "cable-management:cable-ladders:GKT-100",
-      title: "GKT-100 Cable Ladder",
-      system: "cable-management",
-      sourceRoute: "/products/cable-support-systems/cable-ladders",
-    });
+    addEnquiryItem(
+      {
+        id: "cable-management:cable-ladders:GKT-100",
+        title: "GKT-100 Cable Ladder",
+        system: "cable-management",
+        sourceRoute: "/products/cable-support-systems/cable-ladders",
+      },
+      "uk",
+    );
     submitEnquiryMock.mockResolvedValue({ ok: true, referenceNo: "IV-2026-000123" });
 
     const user = userEvent.setup();
@@ -285,12 +307,15 @@ describe("EnquiryWorkspace — successful submission", () => {
   });
 
   it("does not clear the basket when submission fails", async () => {
-    addEnquiryItem({
-      id: "cable-management:cable-ladders:GKT-100",
-      title: "GKT-100 Cable Ladder",
-      system: "cable-management",
-      sourceRoute: "/products/cable-support-systems/cable-ladders",
-    });
+    addEnquiryItem(
+      {
+        id: "cable-management:cable-ladders:GKT-100",
+        title: "GKT-100 Cable Ladder",
+        system: "cable-management",
+        sourceRoute: "/products/cable-support-systems/cable-ladders",
+      },
+      "uk",
+    );
 
     const user = userEvent.setup();
     renderWorkspace({ initialType: "product" });
@@ -328,5 +353,130 @@ describe("Contact — product system taxonomy", () => {
 
   it("does not expose G-BUS as a primary Contact product system", () => {
     expect(CONTACT_PRODUCT_SYSTEMS).not.toContain("g-bus");
+  });
+});
+
+describe("EnquiryWorkspace — conversion-intent analytics (fires on arrival, not on submit)", () => {
+  it("fires request_quote once when the workspace opens with type=quote", () => {
+    renderWorkspace({ initialType: "quote" });
+
+    expect(mockTrackRequestQuote).toHaveBeenCalledTimes(1);
+    expect(mockTrackRequestQuote).toHaveBeenCalledWith({ market: "uk", locale: "en-GB" }, "/contact", expect.anything());
+    expect(mockTrackTechnicalEnquiry).not.toHaveBeenCalled();
+    expect(mockTrackTechnicalDocumentEnquiry).not.toHaveBeenCalled();
+  });
+
+  it("fires technical_enquiry once when the workspace opens with type=technical", () => {
+    renderWorkspace({ initialType: "technical" });
+
+    expect(mockTrackTechnicalEnquiry).toHaveBeenCalledTimes(1);
+    expect(mockTrackRequestQuote).not.toHaveBeenCalled();
+  });
+
+  it("fires technical_document_enquiry once when the workspace opens with type=technical-document", () => {
+    renderWorkspace({ initialType: "technical-document" });
+
+    expect(mockTrackTechnicalDocumentEnquiry).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not fire any intent event for type=general/product/project", () => {
+    renderWorkspace({ initialType: "general" });
+    renderWorkspace({ initialType: "product" });
+    renderWorkspace({ initialType: "project" });
+
+    expect(mockTrackRequestQuote).not.toHaveBeenCalled();
+    expect(mockTrackTechnicalEnquiry).not.toHaveBeenCalled();
+    expect(mockTrackTechnicalDocumentEnquiry).not.toHaveBeenCalled();
+  });
+
+  it("carries product context from the URL-sourced initialContext", () => {
+    renderWorkspace({ initialType: "quote", initialContext: { system: "busbar", model: "GS-400A" } });
+
+    expect(mockTrackRequestQuote).toHaveBeenCalledWith(
+      { market: "uk", locale: "en-GB" },
+      "/contact",
+      { product_family: "busbar", product_slug: "GS-400A" },
+    );
+  });
+});
+
+describe("EnquiryWorkspace — generate_lead (only after genuine server-confirmed success)", () => {
+  it("does not fire on the submit click itself, before the server responds", async () => {
+    // Default beforeEach mock resolves ok:false ("not-configured"); this
+    // asserts the event is absent regardless of timing, not just after resolution.
+    const user = userEvent.setup();
+    renderWorkspace();
+    await fillContactDetails(user);
+    await user.type(screen.getByLabelText(/Subject/), "Subject");
+    await user.type(screen.getByLabelText(/^Message/), "Message");
+    await user.click(screen.getByRole("button", { name: "Send Enquiry" }));
+
+    expect(mockTrackGenerateLead).not.toHaveBeenCalled();
+  });
+
+  it("does not fire when the server reports failure", async () => {
+    const user = userEvent.setup();
+    renderWorkspace();
+    await fillContactDetails(user);
+    await user.type(screen.getByLabelText(/Subject/), "Subject");
+    await user.type(screen.getByLabelText(/^Message/), "Message");
+    await user.click(screen.getByRole("button", { name: "Send Enquiry" }));
+
+    await screen.findByText("We couldn't send your enquiry.");
+    expect(mockTrackGenerateLead).not.toHaveBeenCalled();
+  });
+
+  it("fires exactly once, with lead_type/market/locale, only after the server confirms success", async () => {
+    submitEnquiryMock.mockResolvedValue({ ok: true, referenceNo: "IV-2026-000123" });
+    const user = userEvent.setup();
+    renderWorkspace({ initialType: "quote" });
+    await fillContactDetails(user);
+    await user.type(screen.getByLabelText(/Requirement \/ Question/), "Please quote.");
+    await user.click(screen.getByRole("button", { name: "Send Enquiry" }));
+
+    await waitFor(() => expect(mockTrackGenerateLead).toHaveBeenCalledTimes(1));
+    expect(mockTrackGenerateLead).toHaveBeenCalledWith(
+      { market: "uk", locale: "en-GB" },
+      expect.objectContaining({ lead_type: "quote", source_path: "/contact" }),
+    );
+  });
+
+  it("never includes contact details, message text, or any form field value in the event payload", async () => {
+    submitEnquiryMock.mockResolvedValue({ ok: true, referenceNo: "IV-2026-000123" });
+    const user = userEvent.setup();
+    renderWorkspace({ initialType: "quote" });
+    await fillContactDetails(user);
+    await user.type(screen.getByLabelText(/Requirement \/ Question/), "Please quote on 40 units, urgent, call me on 07700 900000.");
+    await user.click(screen.getByRole("button", { name: "Send Enquiry" }));
+
+    await waitFor(() => expect(mockTrackGenerateLead).toHaveBeenCalledTimes(1));
+    const [, params] = mockTrackGenerateLead.mock.calls[0] as [unknown, Record<string, unknown>];
+    const serialized = JSON.stringify(params);
+    expect(serialized).not.toContain("Alex");
+    expect(serialized).not.toContain("Morgan");
+    expect(serialized).not.toContain("acme-contractors");
+    expect(serialized).not.toContain("07700");
+    expect(serialized).not.toContain("urgent");
+    expect(Object.keys(params).sort()).toEqual(
+      ["lead_type", "product_family", "product_slug", "source_path"].filter((k) => k in params).sort(),
+    );
+  });
+
+  it("does not re-fire generate_lead on an unrelated rerender after success", async () => {
+    submitEnquiryMock.mockResolvedValue({ ok: true, referenceNo: "IV-2026-000123" });
+    const user = userEvent.setup();
+    renderWorkspace({ initialType: "quote" });
+    await fillContactDetails(user);
+    await user.type(screen.getByLabelText(/Requirement \/ Question/), "Please quote.");
+    await user.click(screen.getByRole("button", { name: "Send Enquiry" }));
+
+    await waitFor(() => expect(mockTrackGenerateLead).toHaveBeenCalledTimes(1));
+
+    // Triggers a rerender of the success screen (focus effect) — must not
+    // cause a second generate_lead call.
+    const successHeading = await screen.findByText("Enquiry Received");
+    successHeading.focus();
+
+    expect(mockTrackGenerateLead).toHaveBeenCalledTimes(1);
   });
 });

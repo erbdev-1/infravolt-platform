@@ -3370,6 +3370,36 @@ video {
   letter-spacing: 0.01em;
 }
 
+.site-footer__legal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.site-footer__consent-trigger {
+  margin: 0;
+  padding: 0;
+  color: var(--colour-text-light);
+  font: inherit;
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+  text-decoration: underline;
+  text-underline-offset: 0.15rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.site-footer__consent-trigger:hover {
+  color: var(--colour-white);
+}
+
+.site-footer__consent-trigger:focus-visible {
+  outline: 0.125rem solid var(--colour-white);
+  outline-offset: 0.1875rem;
+}
+
 @media (max-width: 47.99rem) {
   .site-footer__legal-inner {
     flex-direction: column;

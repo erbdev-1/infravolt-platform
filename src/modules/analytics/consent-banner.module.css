@@ -1,0 +1,94 @@
+.banner {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 60;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem clamp(1rem, 4vw, 2rem);
+  background: var(--colour-navy);
+  border-top: 0.1875rem solid var(--colour-red);
+  box-shadow: 0 -0.5rem 2rem rgb(2 18 38 / 22%);
+}
+
+.message {
+  flex: 1 1 20rem;
+  max-width: 52rem;
+  margin: 0;
+  color: var(--colour-white);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.reject,
+.accept {
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: var(--radius-control);
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.accept {
+  color: var(--colour-white);
+  background: var(--colour-red);
+  border: 0.0625rem solid var(--colour-red);
+}
+
+.accept:hover {
+  background: var(--colour-red-dark);
+  border-color: var(--colour-red-dark);
+}
+
+.reject {
+  color: var(--colour-white);
+  background: transparent;
+  border: 0.0625rem solid var(--colour-text-light);
+}
+
+.reject:hover {
+  background: rgb(255 255 255 / 10%);
+}
+
+.accept:focus-visible,
+.reject:focus-visible {
+  outline: 0.1875rem solid var(--colour-white);
+  outline-offset: 0.1875rem;
+}
+
+@media (max-width: 40rem) {
+  .banner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .accept,
+  .reject {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accept,
+  .reject {
+    transition: none;
+  }
+}

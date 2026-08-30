@@ -357,7 +357,7 @@ export function CableFamilyVariantTable({
       return;
     }
 
-    addEnquiryItem(item);
+    addEnquiryItem(item, market);
     setConfirmation({ id, title: `${variant.model} · ${variant.stockCode}` });
   }
 
