@@ -14,10 +14,13 @@ function scriptTags(): HTMLScriptElement[] {
   return Array.from(document.querySelectorAll("script[data-ga-measurement-id]"));
 }
 
+// gtag() pushes arguments-like entries (not real Arrays) onto dataLayer —
+// see gtag.ts. Normalize matches into real arrays so callers can keep
+// indexing/toEqual-ing them like plain command tuples.
 function eventPushes(name: string): unknown[][] {
-  return (window.dataLayer ?? []).filter(
-    (entry): entry is unknown[] => Array.isArray(entry) && entry[0] === "event" && entry[1] === name,
-  );
+  return (window.dataLayer ?? [])
+    .filter((entry) => (entry as ArrayLike<unknown> | undefined)?.[0] === "event" && (entry as ArrayLike<unknown>)[1] === name)
+    .map((entry) => Array.from(entry as ArrayLike<unknown>));
 }
 
 beforeEach(() => {
