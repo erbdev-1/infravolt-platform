@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
+import { preload } from "react-dom";
 
 import { AboutGersanCopy } from "@/components/public/about/about-gersan-copy";
 import { Container } from "@/components/ui/container";
@@ -47,12 +48,21 @@ type AboutPageViewProps = Readonly<{
   market: MarketCode;
 }>;
 
+const HERO_BACKGROUND_DESKTOP_URL = publicMediaUrl("company/about-hero-background.webp");
+const HERO_BACKGROUND_MOBILE_URL = publicMediaUrl("company/about-hero-background-mobile.webp");
+
 export function AboutPageView({ market }: AboutPageViewProps) {
   const content = aboutPageContentForMarket(market);
   const heroStyle = {
-    "--hero-background-image": `url(${publicMediaUrl("company/about-hero-background.webp")})`,
-    "--hero-mobile-background-image": `url(${publicMediaUrl("company/about-hero-background-mobile.webp")})`,
+    "--hero-background-image": `url(${HERO_BACKGROUND_DESKTOP_URL})`,
+    "--hero-mobile-background-image": `url(${HERO_BACKGROUND_MOBILE_URL})`,
   } as CSSProperties;
+
+  // Confirmed LCP element (see docs/performance audit) — preload only the
+  // variant the current viewport will actually use, matching the .hero
+  // background-image media query below, so we never fetch both.
+  preload(HERO_BACKGROUND_DESKTOP_URL, { as: "image", media: "(min-width: 48rem)" });
+  preload(HERO_BACKGROUND_MOBILE_URL, { as: "image", media: "(max-width: 47.99rem)" });
 
   return (
     <main className={styles.page} id="main-content">
@@ -222,7 +232,6 @@ export function AboutPageView({ market }: AboutPageViewProps) {
                   fill
                   sizes="(min-width: 1024px) 52vw, 100vw"
                   src={GERSAN_COMPANY_ASSETS.tuzlaFactory}
-                  unoptimized
                 />
               </figure>
 
@@ -294,7 +303,6 @@ export function AboutPageView({ market }: AboutPageViewProps) {
                     fill
                     sizes="(min-width: 64rem) 32vw, (min-width: 48rem) 46vw, 100vw"
                     src={FOOTPRINT_IMAGES[index] ?? FOOTPRINT_IMAGES[0]}
-                    unoptimized
                   />
                   <span aria-hidden="true" className={styles.footprintCardNumber}>
                     {location.number}

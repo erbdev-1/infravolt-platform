@@ -139,7 +139,6 @@ export async function GersanHomepageCredibility({
               fill
               sizes="(min-width: 80rem) 48vw, (min-width: 48rem) 92vw, 100vw"
               src={GERSAN_COMPANY_ASSETS.zonguldakFactory}
-              unoptimized
             />
             <div aria-hidden="true" className="gersan-credibility__media-overlay" />
           </figure>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { preload } from "react-dom";
 
 import {
   referenceSectorsForMarket,
@@ -14,8 +15,12 @@ import { publicMediaUrl } from "@/modules/storage/asset-url";
 import { ReferenceDirectory } from "./reference-directory";
 import styles from "./references-page.module.css";
 
+const HERO_BACKGROUND_DESKTOP_URL = publicMediaUrl("references/references-hero-background.webp");
+const HERO_BACKGROUND_MOBILE_URL = publicMediaUrl("references/references-hero-background-mobile.webp");
+
 const heroStyle = {
-  "--hero-background-image": `url(${publicMediaUrl("references/references-hero-background.webp")})`,
+  "--hero-background-image": `url(${HERO_BACKGROUND_DESKTOP_URL})`,
+  "--hero-mobile-background-image": `url(${HERO_BACKGROUND_MOBILE_URL})`,
 } as CSSProperties;
 
 export function ReferencesPage({
@@ -29,6 +34,12 @@ export function ReferencesPage({
   const systems = referenceSystemsForMarket(market);
   const activeSystem = systems.find((system) => system.key === activeSystemKey) ?? systems[0];
   const sectors = referenceSectorsForMarket(market);
+
+  // Confirmed LCP element (see docs/performance audit) — preload only the
+  // variant the current viewport will actually use, matching the .hero
+  // background-image media query below, so we never fetch both.
+  preload(HERO_BACKGROUND_DESKTOP_URL, { as: "image", media: "(min-width: 761px)" });
+  preload(HERO_BACKGROUND_MOBILE_URL, { as: "image", media: "(max-width: 760px)" });
 
   return (
     <main className={styles.page}>

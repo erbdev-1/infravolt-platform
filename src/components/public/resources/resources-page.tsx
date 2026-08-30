@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { preload } from "react-dom";
 
 import { resourcesContentForMarket, technicalResources } from "@/data/resources";
 import { buildEnquiryHref } from "@/modules/enquiry/routing";
@@ -11,8 +12,12 @@ import { publicMediaUrl } from "@/modules/storage/asset-url";
 import { ResourceLibrary } from "./resource-library";
 import styles from "./resources-page.module.css";
 
+const HERO_BACKGROUND_DESKTOP_URL = publicMediaUrl("resources/technical-resources-hero-background.webp");
+const HERO_BACKGROUND_MOBILE_URL = publicMediaUrl("resources/technical-resources-hero-background-mobile.webp");
+
 const heroStyle = {
-  "--hero-background-image": `url(${publicMediaUrl("resources/technical-resources-hero-background.webp")})`,
+  "--hero-background-image": `url(${HERO_BACKGROUND_DESKTOP_URL})`,
+  "--hero-mobile-background-image": `url(${HERO_BACKGROUND_MOBILE_URL})`,
 } as CSSProperties;
 
 const overviewIcons = {
@@ -23,6 +28,13 @@ const overviewIcons = {
 
 export function ResourcesPage({ market }: Readonly<{ market: MarketCode }>) {
   const content = resourcesContentForMarket(market);
+
+  // Confirmed LCP element (see docs/performance audit) — preload only the
+  // variant the current viewport will actually use, matching the .hero
+  // background-image media query below, so we never fetch both.
+  preload(HERO_BACKGROUND_DESKTOP_URL, { as: "image", media: "(min-width: 761px)" });
+  preload(HERO_BACKGROUND_MOBILE_URL, { as: "image", media: "(max-width: 760px)" });
+
   return (
     <main className={styles.page}>
       <nav aria-label="Breadcrumb" className={styles.breadcrumbs}>
