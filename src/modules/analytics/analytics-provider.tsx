@@ -36,19 +36,21 @@ export function AnalyticsProvider({ market, children }: AnalyticsProviderProps) 
 
   useEffect(() => {
     if (consentState?.status === "granted") {
+      // Activation (consent update -> js -> config) must be queued before
+      // any page_view, in this same synchronous call — splitting these
+      // into separate effects left the ordering between them dependent on
+      // React's cross-effect scheduling, which does not hold in every
+      // scenario, and gtag.js silently drops a page_view that arrives
+      // before consent/config are queued.
       activateAnalyticsIfAllowed();
+
+      if (pathname && isAnalyticsTrackingAllowed() && lastTrackedPathRef.current !== pathname) {
+        lastTrackedPathRef.current = pathname;
+        trackPageView({ market, locale }, pathname);
+      }
     } else if (consentState?.status === "denied") {
       deactivateAnalytics();
     }
-  }, [consentState?.status]);
-
-  useEffect(() => {
-    if (!pathname) return;
-    if (!isAnalyticsTrackingAllowed()) return;
-    if (lastTrackedPathRef.current === pathname) return;
-
-    lastTrackedPathRef.current = pathname;
-    trackPageView({ market, locale }, pathname);
     // consentState?.status is a dependency (not just pathname) so that
     // accepting consent on the current page fires the first page_view
     // immediately, without needing an unrelated route change first.
