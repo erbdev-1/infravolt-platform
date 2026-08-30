@@ -22,6 +22,11 @@ const FOOTPRINT_IMAGES = [
   GERSAN_COMPANY_ASSETS.omanFactory,
 ] as const;
 
+const MARKET_PANEL_BACKGROUND_ASSETS: Record<MarketCode, string> = {
+  uk: "company/infravolt-uk-market-card-background.webp",
+  ua: "company/infravolt-ukraine-market-card-background.webp",
+};
+
 const QUALITY_MARKS = [
   { id: "lovag", label: "LOVAG", image: GERSAN_QUALITY_ASSETS.lovag },
   { id: "asta", label: "ASTA", image: GERSAN_QUALITY_ASSETS.asta },
@@ -150,7 +155,15 @@ export function AboutPageView({ market }: AboutPageViewProps) {
           </div>
 
           <div className={styles.ecosystemFlow}>
-            <article className={styles.gersanPlatform}>
+            <article
+              className={styles.gersanPlatform}
+              style={
+                {
+                  "--gersan-platform-background-image": `url(${publicMediaUrl("company/gersan-market-card-background.webp")})`,
+                  "--gersan-platform-motif-mobile-image": `url(${publicMediaUrl("company/gersan-market-card-motif-mobile.png")})`,
+                } as CSSProperties
+              }
+            >
               <span aria-hidden="true" className={styles.gersanPlatformTexture} />
               <div className={styles.gersanPlatformHeader}>
                 <Image
@@ -179,7 +192,16 @@ export function AboutPageView({ market }: AboutPageViewProps) {
 
             <div className={styles.marketsGrid}>
               {content.relationship.panels.map((panel) => (
-                <article className={styles.marketPanel} data-market={panel.id} key={panel.id}>
+                <article
+                  className={styles.marketPanel}
+                  data-market={panel.id}
+                  key={panel.id}
+                  style={
+                    {
+                      "--market-panel-background-image": `url(${publicMediaUrl(MARKET_PANEL_BACKGROUND_ASSETS[panel.id])})`,
+                    } as CSSProperties
+                  }
+                >
                   <div className={styles.marketPanelHeader}>
                     <div className={styles.marketPanelBrandRow}>
                       <span className={styles.marketMark}>{panel.id.toUpperCase()}</span>

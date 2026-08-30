@@ -485,7 +485,7 @@
   margin-inline: auto;
   padding: clamp(2rem, 4vw, 3.1rem);
   overflow: hidden;
-  background: var(--colour-white) url("/assets/company/gersan-market-card-background.webp") center / cover no-repeat;
+  background: var(--colour-white) var(--gersan-platform-background-image) center / cover no-repeat;
   border: 0.0625rem solid var(--colour-border);
   border-top: 0.2rem solid var(--colour-navy);
   border-radius: 1.3rem;
@@ -603,6 +603,7 @@
   padding: clamp(1.5rem, 3.5vw, 2.25rem);
   color: var(--colour-white);
   background-color: var(--colour-navy-dark);
+  background-image: var(--market-panel-background-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -613,14 +614,6 @@
     0 1.5rem 3.5rem rgb(4 26 53 / 17%),
     inset 0 0.0625rem rgb(255 255 255 / 8%);
   transition: border-color 160ms ease-out, box-shadow 160ms ease-out, transform 160ms ease-out;
-}
-
-.marketPanel[data-market="uk"] {
-  background-image: url("/assets/company/infravolt-uk-market-card-background.webp");
-}
-
-.marketPanel[data-market="ua"] {
-  background-image: url("/assets/company/infravolt-ukraine-market-card-background.webp");
 }
 
 .marketPanel:hover {
@@ -1431,7 +1424,7 @@
     width: 64%;
     aspect-ratio: 480 / 354;
     content: "";
-    background: url("/assets/company/gersan-market-card-motif-mobile.png") center / contain no-repeat;
+    background: var(--gersan-platform-motif-mobile-image) center / contain no-repeat;
     opacity: 0.92;
   }
 
