@@ -35,7 +35,7 @@ export const GGD_SYSTEM_DETAIL = {
     slug: "ggd-medium-power-busbar",
     categoryEyebrow: "Medium Power Busbar System",
     heroDescription:
-      "GGD is a 160 A to 1000 A medium power busbar trunking system for industrial and commercial power distribution, available in aluminium (GGD-A, up to 1000 A) and copper (GGD-C, up to 800 A) conductor variants, with a one-bolt monoblock joint system and an extensive range of elbow, offset, expansion, feed and tap-off accessories.",
+      "GGD is a 160 A to 1000 A medium power busbar trunking system for industrial and commercial power distribution, available in aluminium (GGD-A, up to 1000 A) and copper (GGD-C, up to 800 A) conductor variants, with a one-bolt monoblock joint system, dedicated vertical riser hangers for rising main installations, and an extensive range of elbow, offset, expansion, feed and tap-off accessories.",
     heroFeatureImage: `${IMAGE_BASE}/card/ggd-main-transparent-product.webp`,
     heroFeatureImageAlt: "GGD medium power busbar system cutaway view",
     heroImages: [

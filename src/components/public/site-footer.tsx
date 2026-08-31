@@ -99,6 +99,16 @@ export function SiteFooter({ content, market }: SiteFooterProps) {
               {content.relationshipLabel}
             </p>
           ) : null}
+          {content.registeredOffice ? (
+            <address className="site-footer__registered-office">
+              <span className="site-footer__registered-office-label">
+                {content.registeredOffice.label}
+              </span>
+              {content.registeredOffice.lines.map((line) => (
+                <span key={line}>{line}</span>
+              ))}
+            </address>
+          ) : null}
         </div>
 
         <FooterNavAccordion
