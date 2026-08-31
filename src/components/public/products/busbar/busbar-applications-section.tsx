@@ -37,6 +37,8 @@ export function BusbarApplicationsSection({
       <header className={styles.applicationsHeader}>
         <p className={styles.eyebrow}>{detail.applicationsEyebrow}</p>
 
+        <h2>{detail.applicationsHeading}</h2>
+
         <p className={styles.applicationsDescription}>
           {detail.applicationsDescription}
         </p>

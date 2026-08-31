@@ -26,6 +26,11 @@ type CategoryCopy = Readonly<{
 
 type SystemCopy = Readonly<{
   name: string;
+  // Optional <title>-only override — falls back to `name` when absent.
+  // Exists so a page's title can carry an additional search-intent phrase
+  // (e.g. GGD's "Rising Main Busbar") without changing the H1/breadcrumb/
+  // catalog-card label, which stay on `name` for product-identity reasons.
+  metaTitle?: string;
   description: string;
   conductorLabel: string;
   imageAlt: string;
@@ -107,6 +112,8 @@ export type BusbarCatalogContent = Readonly<{
     description: string;
     action: string;
   }>;
+  relatedSystemsLabel: string;
+  dataCentreApplicationMapLabel: string;
   categories: Readonly<Record<BusbarCatalogView, CategoryCopy>>;
   systems: Readonly<Record<BusbarSystemSlug, SystemCopy>>;
 }>;
@@ -115,19 +122,19 @@ export type BusbarCatalogContent = Readonly<{
 export const BUSBAR_CATALOG_CONTENT = {
   uk: {
     metadata: {
-      title: "Busbar systems for UK projects | InfraVolt",
+      title: "Busbar Trunking Systems UK | InfraVolt",
       description:
-        "Explore Gersan lighting, power-distribution, compact and cast-resin busbar systems with technical project support from InfraVolt.",
+        "Gersan busbar trunking systems for UK projects — lighting, power-distribution, compact and cast-resin systems, with technical project support from InfraVolt.",
     },
     breadcrumbs: {
       home: "Home",
       products: "Products",
-      current: "Busbar Systems",
+      current: "Busbar Trunking Systems",
       back: "Back",
     },
     hero: {
       eyebrow: "",
-      title: "Busbar Systems",
+      title: "Busbar Trunking Systems",
       description:
         "Engineered for safe, efficient and flexible electrical power distribution across commercial, industrial and critical-infrastructure projects.",
       primaryAction: "Explore systems",
@@ -227,6 +234,8 @@ export const BUSBAR_CATALOG_CONTENT = {
         "Share your current requirement, installation environment and project stage with our technical team.",
       action: "Talk to our team",
     },
+    relatedSystemsLabel: "Related busbar systems:",
+    dataCentreApplicationMapLabel: "See this system in the Data Centre Application Map",
     categories: {
       all: {
         label: "All systems",
@@ -257,14 +266,14 @@ export const BUSBAR_CATALOG_CONTENT = {
       "gnl-lighting-busbar": {
         name: "GNL Lighting Busbar",
         description:
-          "Compact lighting busbar system for flexible lighting distribution and fixture connections.",
+          "Compact lighting busbar for raised-floor supply points and flexible, relocatable luminaire connections.",
         conductorLabel: "Copper conductors",
         imageAlt: "Gersan GNL lighting busbar system",
       },
       "gl-lighting-busbar": {
         name: "GL Lighting Busbar",
         description:
-          "Lighting busbar system with aluminium and copper conductor options for industrial and commercial projects.",
+          "Lighting busbar trunking system with aluminium and copper conductor options for industrial and commercial lighting distribution.",
         conductorLabel: "Aluminium or copper",
         imageAlt: "Gersan GL lighting busbar system",
       },
@@ -277,22 +286,23 @@ export const BUSBAR_CATALOG_CONTENT = {
       },
       "ggd-medium-power-busbar": {
         name: "GGD Medium Power Busbar",
+        metaTitle: "GGD Medium Power & Rising Main Busbar",
         description:
-          "Modular medium-power distribution system with extensive feed, elbow, offset, expansion and tap-off options.",
+          "Modular medium-power busbar trunking system for horizontal runs and rising main installations, with extensive feed, elbow, offset, expansion and tap-off options.",
         conductorLabel: "Aluminium or copper",
         imageAlt: "Gersan GGD medium power busbar system",
       },
       "gs-super-compact": {
-        name: "GS Super Compact",
+        name: "GS Super Compact High Power Busbar",
         description:
-          "Compact high-current busbar system for major infrastructure, transformer and switchboard connections.",
+          "Compact, high power busbar system (400–6300 A) for major infrastructure, transformer and switchboard connections.",
         conductorLabel: "Aluminium or copper",
         imageAlt: "Gersan GS Super Compact busbar system",
       },
       "gr-cast-resin": {
         name: "GR Cast Resin Busbar",
         description:
-          "IP68 cast-resin insulated busbar system developed for humid, saline and demanding operating environments.",
+          "IP68 cast resin busbar system developed for humid, saline and demanding operating environments.",
         conductorLabel: "Aluminium or copper",
         imageAlt: "Gersan GR cast resin busbar system",
       },
@@ -413,6 +423,8 @@ export const BUSBAR_CATALOG_CONTENT = {
         "Надайте нашій технічній команді вимоги до струму, умови монтажу та поточну стадію проєкту.",
       action: "Звернутися до команди",
     },
+    relatedSystemsLabel: "Суміжні шинопровідні системи:",
+    dataCentreApplicationMapLabel: "Переглянути цю систему на карті застосувань центру обробки даних",
     categories: {
       all: {
         label: "Усі системи",

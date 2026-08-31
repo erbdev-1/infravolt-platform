@@ -3158,6 +3158,29 @@ video {
   text-transform: uppercase;
 }
 
+.site-footer__registered-office {
+  display: block;
+  max-width: 26rem;
+  margin-top: 1rem;
+  color: var(--colour-text-light);
+  font-size: 0.8125rem;
+  font-style: normal;
+  line-height: 1.55;
+}
+
+.site-footer__registered-office span {
+  display: block;
+}
+
+.site-footer__registered-office-label {
+  margin-bottom: 0.25rem;
+  color: var(--colour-white);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
 .site-footer__label {
   margin-bottom: 1.25rem;
   color: var(--colour-white);
@@ -4338,6 +4361,10 @@ video {
   /* ---- Footer accordion ---- */
 
   .site-footer__brand > p {
+    margin-top: 0.85rem;
+  }
+
+  .site-footer__registered-office {
     margin-top: 0.85rem;
   }
 

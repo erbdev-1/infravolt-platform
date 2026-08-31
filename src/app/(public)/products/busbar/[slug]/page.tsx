@@ -34,7 +34,7 @@ export async function generateMetadata({
   return marketPageMetadata({
     market: marketContext.market,
     pathname: `/products/busbar/${slug}`,
-    title: `${systemCopy.name} | InfraVolt`,
+    title: `${systemCopy.metaTitle ?? systemCopy.name} | InfraVolt`,
     description: systemCopy.description,
   });
 }

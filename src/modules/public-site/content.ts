@@ -130,6 +130,10 @@ export type PublicSiteContent = Readonly<{
     localeName: string;
     brandDescriptor: string;
     relationshipLabel?: string;
+    // UK-only legal footer detail — omitted entirely from the UA shell
+    // content (not just empty) so there is no risk of it rendering, or of
+    // an English legal address leaking into the Ukrainian-localised footer.
+    registeredOffice?: Readonly<{ label: string; lines: readonly string[] }>;
     enquiryLabel: string;
     commercialGroupLabel: string;
     commercialPartnersLabel: string;
@@ -294,6 +298,14 @@ export const PUBLIC_SITE_CONTENT = {
       localeName: "en-GB",
       brandDescriptor: "Electrical infrastructure",
       relationshipLabel: "Official UK Representative",
+      registeredOffice: {
+        label: "Registered Office",
+        lines: [
+          "HTS Building, Tyne View Terrace",
+          "Wallsend, Tyne and Wear",
+          "NE28 6SG, United Kingdom",
+        ],
+      },
       enquiryLabel: "Enquiry",
       commercialGroupLabel: "Commercial",
       commercialPartnersLabel: "Commercial Partners",

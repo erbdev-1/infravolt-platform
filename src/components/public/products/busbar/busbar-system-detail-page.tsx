@@ -14,6 +14,18 @@ import { BusbarProductHeroVisual } from "./busbar-product-hero-visual";
 import { BusbarSmartAutomationSection } from "./busbar-smart-automation-section";
 import styles from "./busbar-system-detail-page.module.css";
 
+// Two closely-adjacent systems to surface as "related" on each detail page
+// — grouped by current tier/segment (high-current, medium-power, lighting)
+// so the suggestion is genuinely relevant, not just "every other system".
+const RELATED_SYSTEM_SLUGS: Readonly<Record<BusbarSystemSlug, readonly BusbarSystemSlug[]>> = {
+  "gs-super-compact": ["gr-cast-resin", "ggd-medium-power-busbar"],
+  "gr-cast-resin": ["gs-super-compact", "ggd-medium-power-busbar"],
+  "ggd-medium-power-busbar": ["gs-super-compact", "gr-cast-resin"],
+  "gl-lighting-busbar": ["gnl-lighting-busbar", "ggd-medium-power-busbar"],
+  "gnl-lighting-busbar": ["gl-lighting-busbar", "ggd-medium-power-busbar"],
+  "gm-low-power-busbar": ["ggd-medium-power-busbar", "gnl-lighting-busbar"],
+};
+
 export function BusbarSystemDetailPage({
   market,
   system,
@@ -26,6 +38,10 @@ export function BusbarSystemDetailPage({
   const content = busbarCatalogContentForMarket(market);
   const systemCopy = content.systems[system.slug as BusbarSystemSlug];
   const heroFeatureImage = detail.heroImages[0];
+  const relatedSlugs = RELATED_SYSTEM_SLUGS[system.slug as BusbarSystemSlug] ?? [];
+  const showsDataCentreApplication = detail.applications.some(
+    (application) => application.slug === "data-centres",
+  );
   return (
     <main className={styles.page}>
       <div className={styles.breadcrumbs}>
@@ -50,6 +66,20 @@ export function BusbarSystemDetailPage({
           <h1>{systemCopy.name}</h1>
 
           <p className={styles.heroDescription}>{detail.heroDescription}</p>
+
+          {relatedSlugs.length > 0 ? (
+            <p className={styles.relatedSystems}>
+              {content.relatedSystemsLabel}{" "}
+              {relatedSlugs.map((relatedSlug, index) => (
+                <span key={relatedSlug}>
+                  {index > 0 ? ", " : ""}
+                  <Link href={`/products/busbar/${relatedSlug}`}>
+                    {content.systems[relatedSlug].name}
+                  </Link>
+                </span>
+              ))}
+            </p>
+          ) : null}
 
           <div className={styles.heroActions}>
             <Link
@@ -112,6 +142,14 @@ export function BusbarSystemDetailPage({
       <BusbarSmartAutomationSection detail={detail} />
 
       <BusbarApplicationsSection detail={detail} />
+
+      {showsDataCentreApplication ? (
+        <p className={styles.relatedSystems}>
+          <Link href="/application-map">
+            {content.dataCentreApplicationMapLabel}
+          </Link>
+        </p>
+      ) : null}
 
       <section className={styles.projectSupport}>
         <div>
