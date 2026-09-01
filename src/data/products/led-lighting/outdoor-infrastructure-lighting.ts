@@ -22,7 +22,7 @@ const content = {
     metadata: {
       title: "Outdoor & Infrastructure Lighting | LED Systems | LEDBUS by Gersan | InfraVolt",
       description:
-        "Explore catalogue-verified GER-LED and LED-BUS lighting families for roads, large outdoor areas, canopies, tunnels and architectural facade.",
+        "Explore catalogue-verified GER-LED and LED-BUS LED street lighting, industrial flood lighting and LED tunnel lighting systems for roads, large outdoor areas, canopies and architectural facades.",
     },
     breadcrumbs: {
       home: "Home",
