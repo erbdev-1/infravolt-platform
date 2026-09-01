@@ -102,8 +102,9 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
     comingSoonLabel: "Coming soon",
     eyebrow: "Product Category",
     title: "Cable Management Systems",
+    metaTitle: "Cable Management Systems UK",
     description:
-      "Engineered cable trays, ladders, trunking, support profiles, conduit systems and fixing accessories for safe, efficient and coordinated cable routing across industrial, commercial and infrastructure projects.",
+      "Engineered cable containment, cable support and management systems — trays, ladders, trunking, support profiles, conduit systems and fixing accessories — for safe, efficient and coordinated cable routing across industrial, commercial and infrastructure projects.",
     requestPackAction: "Request Technical Pack",
     requestPackHref: REQUEST_HREF,
     catalogueDocument: {
@@ -152,7 +153,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
       {
         slug: "cable-trays-trunking",
         index: 2,
-        title: "Cable Trays & Trunking",
+        title: "Cable Tray Systems",
         description:
           "Perforated, strengthened, heavy-duty and trunking systems for power, control and data cable routing.",
         image: `${IMAGE_BASE}/cable-trays-trunking/hero/able-trays-trunking-hero.png`,
@@ -162,7 +163,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
       {
         slug: "cable-ladders",
         index: 3,
-        title: "Cable Ladders",
+        title: "Cable Ladder Systems",
         description:
           "High-capacity ladder systems and directional accessories for demanding industrial cable installations.",
         image: `${IMAGE_BASE}/cable-ladders/hero/cable-ladders-hero.png`,
@@ -172,7 +173,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
       {
         slug: "wire-mesh-systems",
         index: 4,
-        title: "Wire-Mesh Systems",
+        title: "Wire-Mesh Cable Trays",
         description:
           "Lightweight ventilated wire-mesh containment systems for flexible cable routing and rapid installation.",
         image: `${IMAGE_BASE}/wire-mesh-cable-systems/hero/wire-mesh-systems-hero.png`,

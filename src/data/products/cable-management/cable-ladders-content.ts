@@ -26,12 +26,12 @@ const CABLE_LADDERS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableMacroFam
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: "Cable Management Systems", href: "/products/cable-support-systems" },
-      { label: "Cable Ladders" },
+      { label: "Cable Ladder Systems" },
     ],
     eyebrow: "Cable Management Systems",
-    title: "Cable Ladders",
+    title: "Cable Ladder Systems",
     description:
-      "High-capacity ladder systems and directional accessories for demanding industrial cable installations.",
+      "Cable ladder systems — high-capacity ladders and directional accessories — for demanding industrial cable installations.",
     requestPackAction: "Request Technical Pack",
     requestPackHref: REQUEST_HREF,
     catalogueDocument: {
@@ -119,7 +119,7 @@ const CABLE_LADDERS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableMacroFam
         href: "/products/cable-support-systems/support-hanging-systems",
       },
       {
-        label: "Cable Trays & Trunking",
+        label: "Cable Tray Systems",
         description: "Perforated, heavy-duty and trunking systems for lighter cable routing.",
         href: "/products/cable-support-systems/cable-trays-trunking",
       },

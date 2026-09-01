@@ -33,12 +33,12 @@ const CABLE_TRAYS_TRUNKING_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableM
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: "Cable Management Systems", href: "/products/cable-support-systems" },
-      { label: "Cable Trays & Trunking" },
+      { label: "Cable Tray Systems" },
     ],
     eyebrow: "Cable Management Systems",
-    title: "Cable Trays & Trunking",
+    title: "Cable Tray Systems",
     description:
-      "Perforated, strengthened, heavy-duty and trunking systems for power, control and data cable routing.",
+      "Cable tray systems — perforated, strengthened, heavy-duty and trunking variants — for power, control and data cable routing.",
     requestPackAction: "Request Technical Pack",
     requestPackHref: REQUEST_HREF,
     catalogueDocument: {
@@ -148,7 +148,7 @@ const CABLE_TRAYS_TRUNKING_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableM
         href: "/products/cable-support-systems/support-hanging-systems",
       },
       {
-        label: "Cable Ladders",
+        label: "Cable Ladder Systems",
         description: "High-capacity ladder systems for demanding industrial cable installations.",
         href: "/products/cable-support-systems/cable-ladders",
       },

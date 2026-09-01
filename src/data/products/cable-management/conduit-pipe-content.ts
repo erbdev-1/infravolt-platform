@@ -109,7 +109,7 @@ const CONDUIT_PIPE_SYSTEMS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableM
         href: "/products/cable-support-systems/support-hanging-systems",
       },
       {
-        label: "Cable Trays & Trunking",
+        label: "Cable Tray Systems",
         description: "Perforated, heavy-duty and trunking systems for wider cable routing.",
         href: "/products/cable-support-systems/cable-trays-trunking",
       },

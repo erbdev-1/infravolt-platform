@@ -190,7 +190,7 @@ const ACCESSORIES_FIXINGS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableMa
         href: "/products/cable-support-systems/support-hanging-systems",
       },
       {
-        label: "Cable Trays & Trunking",
+        label: "Cable Tray Systems",
         description: "Perforated, heavy-duty and trunking systems that use these covers and reducers.",
         href: "/products/cable-support-systems/cable-trays-trunking",
       },

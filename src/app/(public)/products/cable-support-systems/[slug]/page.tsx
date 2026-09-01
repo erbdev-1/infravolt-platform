@@ -130,9 +130,22 @@ export async function generateMetadata({
   return marketPageMetadata({
     market: marketContext.market,
     pathname: `/products/cable-support-systems/${slug}`,
-    title: `${content.title} (${content.titleQualifier}) | InfraVolt`,
+    title: `${content.title} ${titleQualifierForTitleTag(content.titleQualifier)} | InfraVolt`,
     description: content.description,
   });
+}
+
+// Most `titleQualifier` values are bare (e.g. "H = 70–200 mm") and need
+// wrapping here, but the "(N Items)" / "(Made to Order)"-style qualifiers
+// used by several accessory/component families already carry their own
+// parentheses — wrapping those unconditionally produced a visible
+// "((220 Items))" double-wrap in the rendered title. This keeps a
+// pre-wrapped qualifier as-is and only adds parentheses when they're
+// genuinely missing, so every existing qualifier (including the empty
+// string used by GMIE Type Cable Ladders) renders exactly as before.
+export function titleQualifierForTitleTag(titleQualifier: string): string {
+  const trimmed = titleQualifier.trim();
+  return trimmed.startsWith("(") && trimmed.endsWith(")") ? trimmed : `(${trimmed})`;
 }
 
 export default async function CableManagementFamilyPage({

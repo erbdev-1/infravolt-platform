@@ -91,6 +91,11 @@ export type CableManagementCategoryContent = Readonly<{
   comingSoonLabel: string;
   eyebrow: string;
   title: string;
+  // Optional <title>-only override — falls back to `title` when absent.
+  // Same pattern as SystemCopy.metaTitle in the Busbar catalogue content:
+  // lets the title tag carry an additional market-specific phrase (e.g.
+  // "UK") without changing the H1, which stays on `title`.
+  metaTitle?: string;
   description: string;
   requestPackAction: string;
   requestPackHref: string;
