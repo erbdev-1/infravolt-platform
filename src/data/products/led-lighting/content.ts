@@ -13,9 +13,9 @@ export const LED_SUPPORT_CTA_IMAGE_ALT = "LEDBUS track and pendant lighting in a
 const content = {
   uk: {
     metadata: {
-      title: "LED Systems | LEDBUS by Gersan | InfraVolt",
+      title: "Commercial & Industrial LED Lighting | InfraVolt",
       description:
-        "LEDBUS LED lighting systems from Gersan — smart, industrial, outdoor and project-based LED product families with full technical data and order codes.",
+        "LEDBUS commercial and industrial LED lighting systems from Gersan — smart, industrial, outdoor and project-based LED product families with full technical data and order codes.",
     },
     breadcrumbs: {
       home: "Home",
@@ -148,7 +148,7 @@ const content = {
         slug: "emergency-guidance-lighting",
         number: "10",
         name: "Emergency & Guidance Lighting",
-        description: "Emergency and guidance LED fixtures for compliant escape-route and safety lighting.",
+        description: "Emergency and guidance LED fixtures for escape-route and safety lighting applications.",
         image: publicMediaUrl("products/led-lighting/category/emergency-guidance/card/emergency-guidance-lighting-category-card.webp"),
         imageAlt: "Emergency exit guidance and route lighting in a public-building corridor",
         href: "/products/led-systems/emergency-guidance-lighting",

@@ -21,7 +21,7 @@ const content = {
     metadata: {
       title: "Linear & Trunking Lighting | LED Systems | LEDBUS by Gersan | InfraVolt",
       description:
-        "Explore catalogue-verified LINNER architectural linear luminaires and the MULTILINE 45 continuous trunking lighting system.",
+        "Explore catalogue-verified LED linear lighting systems — LINNER architectural linear luminaires and the MULTILINE 45 continuous-row trunking lighting system.",
     },
     breadcrumbs: {
       home: "Home",

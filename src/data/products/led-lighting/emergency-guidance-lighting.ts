@@ -165,7 +165,7 @@ const content = {
     metadata: {
       title: "Emergency & Guidance Lighting | LED Systems | LEDBUS by Gersan | InfraVolt",
       description:
-        "Catalogue-verified emergency exit signs, directional guidance, twin-spot systems, high-output emergency spots and 15 W emergency luminaires.",
+        "Catalogue-verified emergency lighting systems — exit signs, directional guidance, twin-spot systems, high-output emergency spots and 15 W emergency luminaires.",
     },
     breadcrumbs: { home: "Home", products: "Products", ledSystems: "LED Systems", current: "Emergency & Guidance Lighting" },
     backToLedSystemsLabel: "Back to LED Systems",
