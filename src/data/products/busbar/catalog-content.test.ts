@@ -60,28 +60,66 @@ describe("busbarCatalogContentForMarket — UK Phase 1A SEO", () => {
   });
 });
 
-describe("busbarCatalogContentForMarket — UA content is untouched by the UK Phase 1A edits", () => {
+describe("busbarCatalogContentForMarket — UA Busbar Phase 1A SEO (own natural Ukrainian keyword strategy, not a translation of UK copy)", () => {
   const ua = busbarCatalogContentForMarket("ua");
 
-  it("keeps its own (non-English) hub title, H1 and breadcrumb", () => {
-    expect(ua.metadata.title).toBe("Шинопровідні системи для проєктів в Україні | InfraVolt");
-    expect(ua.hero.title).toBe("Шинопровідні системи");
-    expect(ua.breadcrumbs.current).toBe("Шинопровідні системи");
+  it("hub title/H1/breadcrumb carry the UA primary intent (mainline & power busbars)", () => {
+    expect(ua.metadata.title).toBe("Магістральні та силові шинопроводи в Україні | InfraVolt");
+    expect(ua.hero.title).toBe("Магістральні та силові шинопроводи");
+    expect(ua.breadcrumbs.current).toBe("Магістральні та силові шинопроводи");
+    // Full category breadth (incl. lighting) stays honestly represented in
+    // the meta description even though the H1 narrows to the priority intent.
+    expect(ua.metadata.description).toContain("освітлювальні");
   });
 
-  it("keeps its own system names and descriptions, not the UK English text", () => {
-    expect(ua.systems["gs-super-compact"].name).toBe("GS Super Compact");
+  it("GS carries the UA high-power-busbar keyword while keeping the GS Super Compact identity", () => {
+    expect(ua.systems["gs-super-compact"].name).toBe(
+      "GS Super Compact — силовий шинопровід високої потужності",
+    );
+    expect(ua.systems["gs-super-compact"].description.toLowerCase()).toContain(
+      "силовий шинопровід високої потужності",
+    );
+    expect(ua.systems["gs-super-compact"].description).not.toContain("високої напруги");
+  });
+
+  it("GR already matched its UA primary/secondary keywords (cast-insulation + IP68) and is left as-is", () => {
     expect(ua.systems["gr-cast-resin"].name).toBe("Шинопровід GR з литою ізоляцією");
-    expect(ua.systems["gnl-lighting-busbar"].description).not.toContain("raised-floor");
+    expect(ua.systems["gr-cast-resin"].description).toContain("з литою ізоляцією");
+    expect(ua.systems["gr-cast-resin"].description).toContain("IP68");
   });
 
-  it("does not carry the UK-only 'UK' title suffix or the UK-only GGD rising-main metaTitle override", () => {
-    expect(ua.metadata.title).not.toContain(" UK ");
+  it("GGD carries mainline/medium-power identity and vertical-distribution intent, with no English 'rising main' text", () => {
+    expect(ua.systems["ggd-medium-power-busbar"].name).toBe(
+      "Магістральний шинопровід середньої потужності GGD",
+    );
     expect(ua.systems["ggd-medium-power-busbar"].metaTitle).toBeUndefined();
-    expect(ua.systems["ggd-medium-power-busbar"].name).toBe("Шинопровід середньої потужності GGD");
+    expect(ua.systems["ggd-medium-power-busbar"].description).toContain("вертикального розподілу");
+    expect(ua.systems["ggd-medium-power-busbar"].description.toLowerCase()).not.toContain("rising main");
   });
 
-  it("has its own (non-English) related-systems and data-centre-map labels", () => {
+  it("GL is the preferred broad UA lighting-busbar page, with industrial/commercial context (not decorative/retail)", () => {
+    expect(ua.systems["gl-lighting-busbar"].name).toBe("Освітлювальний шинопровід GL");
+    expect(ua.systems["gl-lighting-busbar"].description).toContain("промислових і комерційних");
+  });
+
+  // "точок підключення в фальшпідлогах" (raised-floor connection points) is the
+  // exact phrase already present, pre-existing, in this system's own Ukrainian
+  // heroDescription (series/gnl.ts) — not a translation of the English UK
+  // copy, and not an invented differentiator. See series/gnl.ts for the source.
+  it("GNL is repositioned toward its genuinely-sourced compact/raised-floor intent, not duplicating GL's broad head phrase", () => {
+    expect(ua.systems["gnl-lighting-busbar"].name).toBe("Компактний освітлювальний шинопровід GNL");
+    expect(ua.systems["gnl-lighting-busbar"].description).toContain("фальшпідлогах");
+    expect(ua.systems["gnl-lighting-busbar"].description).not.toBe(
+      ua.systems["gl-lighting-busbar"].description,
+    );
+  });
+
+  it("does not carry the UK-only 'UK' title suffix", () => {
+    expect(ua.metadata.title).not.toContain(" UK ");
+    expect(ua.metadata.title).not.toContain("InfraVolt UK");
+  });
+
+  it("has its own (non-English) related-systems and data-centre-map labels, unchanged from Phase 1A", () => {
     expect(ua.relatedSystemsLabel).toBe("Суміжні шинопровідні системи:");
     expect(ua.dataCentreApplicationMapLabel.length).toBeGreaterThan(0);
     expect(ua.dataCentreApplicationMapLabel).not.toBe(
