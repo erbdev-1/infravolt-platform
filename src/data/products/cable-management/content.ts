@@ -297,7 +297,7 @@ export function heavyDutyCableTraysH60ContentForMarket(market: MarketCode): Cabl
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби") },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки") },
       { label: t(market, "Heavy Duty Cable Trays", "Кабельні лотки важкого типу") },
       { label: "H = 60 mm" },
     ],
@@ -368,7 +368,7 @@ export function heavyDutyCableTraysH40ContentForMarket(market: MarketCode): Cabl
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби") },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки") },
       { label: t(market, "Heavy Duty Cable Trays", "Кабельні лотки важкого типу") },
       { label: "H = 40 mm" },
     ],
@@ -404,7 +404,7 @@ export function heavyDutyCableTraysH50ContentForMarket(market: MarketCode): Cabl
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби") },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки") },
       { label: t(market, "Heavy Duty Cable Trays", "Кабельні лотки важкого типу") },
       { label: "H = 50 mm" },
     ],
@@ -446,7 +446,7 @@ export function heavyDutyCableTraysH100ContentForMarket(market: MarketCode): Cab
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби") },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки") },
       { label: t(market, "Heavy Duty Cable Trays", "Кабельні лотки важкого типу") },
       { label: "H = 100 mm" },
     ],
@@ -486,7 +486,7 @@ export function heavyDutyCableTraysGktCeContentForMarket(market: MarketCode): Ca
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби") },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки") },
       { label: t(market, "Heavy Duty Cable Trays", "Кабельні лотки важкого типу") },
       { label: "GKT-CE" },
     ],

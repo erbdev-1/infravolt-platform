@@ -397,7 +397,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
     eyebrow: "Категорія продукції",
     title: "Кабеленесучі системи",
     description:
-      "Інженерні кабельні лотки, драбини, короби, опорні профілі, трубні системи та кріпильні аксесуари для безпечного, ефективного та скоординованого прокладання кабелів на промислових, комерційних та інфраструктурних об'єктах.",
+      "Кабеленесучі системи та системи прокладання кабелю — кабельні лотки, драбини, короби, опорні профілі, трубні системи та кріпильні аксесуари — для безпечного, ефективного та скоординованого прокладання кабелів на промислових, комерційних та інфраструктурних об'єктах.",
     requestPackAction: "Запросити технічний пакет",
     requestPackHref: REQUEST_HREF,
     catalogueDocument: {
@@ -446,7 +446,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
       {
         slug: "cable-trays-trunking",
         index: 2,
-        title: "Кабельні лотки та короби",
+        title: "Кабельні лотки",
         description:
           "Перфоровані, посилені, важкого типу та коробчасті системи для прокладання силових, контрольних та інформаційних кабелів.",
         image: `${IMAGE_BASE}/cable-trays-trunking/hero/able-trays-trunking-hero.png`,
@@ -466,7 +466,7 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
       {
         slug: "wire-mesh-systems",
         index: 4,
-        title: "Дротяні лоткові системи",
+        title: "Дротяні кабельні лотки",
         description:
           "Легкі вентильовані дротяні лоткові системи для гнучкого прокладання кабелів і швидкого монтажу.",
         image: `${IMAGE_BASE}/wire-mesh-cable-systems/hero/wire-mesh-systems-hero.png`,

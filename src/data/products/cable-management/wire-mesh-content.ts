@@ -21,12 +21,12 @@ function wireMeshScheduleContent(market: MarketCode): CableManagementFamilyConte
   return {
     slug: "wire-mesh-systems",
     eyebrow: t(market, "Cable Management Systems", "Кабеленесучі системи"),
-    title: t(market, "Wire-Mesh Cable Trays", "Сітчасті кабельні лотки"),
+    title: t(market, "Wire-Mesh Cable Trays", "Дротяні кабельні лотки"),
     titleQualifier: "TTK · TTK-A · TTK-B · TTK-C · TTK-L",
     description: t(
       market,
       "Wire mesh cable tray (cable basket) systems — open, ventilated and lightweight — for flexible cable routing, available in multiple tray heights and widths with matching jointing and support accessories.",
-      "Відкриті сітчасті кабельні лотки для вентильованого, легкого та гнучкого прокладання кабелів, доступні з різною висотою й шириною лотка та сумісними з'єднувальними й опорними елементами.",
+      "Відкриті дротяні кабельні лотки (сітчасті) для вентильованого, легкого та гнучкого прокладання кабелів, доступні з різною висотою й шириною лотка та сумісними з'єднувальними й опорними елементами.",
     ),
     image: `${IMAGE_BASE}/family/wire-mesh-cable-system.webp`,
     imageAlt: t(
@@ -37,7 +37,7 @@ function wireMeshScheduleContent(market: MarketCode): CableManagementFamilyConte
     breadcrumbs: [
       { label: t(market, "Home", "Головна"), href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Wire-Mesh Cable Trays", "Сітчасті кабельні лотки") },
+      { label: t(market, "Wire-Mesh Cable Trays", "Дротяні кабельні лотки") },
     ],
     requestPackAction: t(market, "Request Technical Pack", "Запросити технічний пакет"),
     requestPackHref: REQUEST_HREF,
@@ -108,10 +108,10 @@ export function wireMeshSystemsContentForMarket(
     breadcrumbs: [
       { label: t(market, "Home", "Головна"), href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Wire-Mesh Cable Trays", "Сітчасті кабельні лотки") },
+      { label: t(market, "Wire-Mesh Cable Trays", "Дротяні кабельні лотки") },
     ],
     eyebrow: t(market, "Cable Management Systems", "Кабеленесучі системи"),
-    title: t(market, "Wire-Mesh Cable Trays", "Сітчасті кабельні лотки"),
+    title: t(market, "Wire-Mesh Cable Trays", "Дротяні кабельні лотки"),
     heroDescription: scheduleContent.description,
     heroImage: `${IMAGE_BASE}/hero/wire-mesh-systems-transparent-hero.png`,
     heroImageAlt: t(

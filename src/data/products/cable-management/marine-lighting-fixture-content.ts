@@ -40,7 +40,7 @@ export function marineTypeCableTraysContentForMarket(market: MarketCode): CableM
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби") },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки") },
       { label: t(market, "Marine & Lighting Fixture Cable Trays", "Кабельні лотки морського та освітлювального типу") },
       { label: t(market, "Marine Type", "Морський тип") },
     ],
@@ -138,7 +138,7 @@ export function lightingFixtureCableTraysContentForMarket(market: MarketCode): C
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби") },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки") },
       { label: t(market, "Marine & Lighting Fixture Cable Trays", "Кабельні лотки морського та освітлювального типу") },
       { label: t(market, "Lighting Fixture Type", "Освітлювальний тип") },
     ],
@@ -222,7 +222,7 @@ export function marineLightingFixtureTemplateContentForMarket(market: MarketCode
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи"), href: "/products/cable-support-systems" },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби"), href: "/products/cable-support-systems/cable-trays-trunking" },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки"), href: "/products/cable-support-systems/cable-trays-trunking" },
       { label: t(market, "Marine & Lighting Fixture Cable Trays", "Кабельні лотки морського та освітлювального типу") },
     ],
     eyebrow: t(market, "Cable Management Systems", "Кабеленесучі системи"),
