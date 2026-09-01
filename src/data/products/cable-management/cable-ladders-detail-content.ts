@@ -342,8 +342,9 @@ const GMIE_CABLE_LADDERS_CONTENT: CableManagementFamilyContent = {
 };
 
 // UK Phase 1A SEO wording only — keeps HEAVY_DUTY_CABLE_LADDERS_CONTENT
-// itself byte-for-byte unchanged so the UA branch below (still awaiting its
-// own bilingualization pass) keeps rendering exactly as before.
+// itself byte-for-byte unchanged so other, not-yet-bilingualized fields
+// (relatedFamilies, resources) keep rendering exactly as before for both
+// markets via the spread below.
 const HEAVY_DUTY_CABLE_LADDERS_CONTENT_UK: CableManagementFamilyContent = {
   ...HEAVY_DUTY_CABLE_LADDERS_CONTENT,
   title: "Heavy Duty Cable Ladders",
@@ -357,10 +358,69 @@ const HEAVY_DUTY_CABLE_LADDERS_CONTENT_UK: CableManagementFamilyContent = {
   ],
 };
 
-// Market-parameterized content factories (currently English-only for ua;
-// Ukraine copy will be added during the bilingualization pass)
+// UA Phase 1A SEO wording — the source data only evidences a wider H=70–200mm
+// dimensional range for this series, not genuine structural "reinforcement",
+// so "Посилені" is not used here. "важкого типу" is the conservative,
+// catalogue-literal rendering of the preserved English family name "Heavy
+// Duty Type Cable Ladders", and matches the same term already used
+// site-wide for every other "Heavy Duty" series (see cable-trays-trunking-
+// content.ts, cable-ladders-content.ts, content.ts). Material & Finish
+// wording follows the existing approved translation in
+// normal-type-strengthened-content.ts ("Сталь, гаряче цинкування") for
+// consistency; the flowing-text equivalent uses the natural adjectival form
+// "гарячеоцинкованої сталі". relatedFamilies/resources stay on the shared
+// English object via the spread — those sibling series have no UA copy yet.
+const HEAVY_DUTY_CABLE_LADDERS_CONTENT_UA: CableManagementFamilyContent = {
+  ...HEAVY_DUTY_CABLE_LADDERS_CONTENT,
+  eyebrow: "Кабеленесучі системи",
+  title: "Кабельні драбини важкого типу",
+  titleQualifier: "H = 70–200 мм",
+  description:
+    "Кабельні драбини важкого типу (лотки драбинного типу) з гарячеоцинкованої сталі для промислових кабельних трас. Висота борту h=70–200 мм, з повним асортиментом поворотів, трійників, хрестовин, підйомних елементів та кришок в одній системі.",
+  imageAlt: "Кабельна драбина Gersan важкого типу, фото продукту",
+  breadcrumbs: [
+    { label: "Головна", href: "/" },
+    { label: "Кабеленесучі системи" },
+    { label: "Кабельні драбини" },
+    { label: "Кабельні драбини важкого типу" },
+  ],
+  requestPackAction: "Запросити технічний пакет",
+  catalogueDocument: {
+    label: "Завантажити PDF-каталог",
+    meta: "PDF-каталог",
+    href: CABLE_SUPPORT_CATALOGUE_PDF_HREF,
+    accessibleName: "Завантажити PDF-каталог систем кабельної підтримки Gersan",
+  },
+  technicalSnapshot: [
+    { icon: "shield", label: "Застосовні стандарти", value: ["BS EN 61537", "IEC 61537"] },
+    { icon: "layers", label: "Матеріал та покриття", value: ["Сталь, гаряче цинкування"] },
+    {
+      icon: "system",
+      label: "Основні характеристики",
+      value: ["Висота борту H=70–200 мм", "Ширина 200–600 мм", "Повний асортимент аксесуарів"],
+    },
+    {
+      icon: "support",
+      label: "Інженерна підтримка",
+      value: ["Дані навантаження та опор", "Технічні креслення", "Індивідуальні розміри", "Настанови з монтажу"],
+    },
+  ],
+  relatedFamiliesHeading: "Серії продукції цієї категорії",
+  scheduleHeading: "Коди замовлення та технічна таблиця",
+  scheduleIntroduction:
+    "Кожна модель, код складу, розмір та вага нижче взяті безпосередньо з каталогу Gersan Cable Support.",
+  accessoriesHeading: "Сумісні аксесуари",
+  accessoriesIntroduction: "Повороти, трійники, хрестовини, підйомні елементи та кришки з тієї ж драбинкової системи.",
+  resourcesHeading: "Технічні ресурси",
+  supportHeading: "Потрібна допомога з підбором системи кабельних драбин?",
+  supportDescription:
+    "Отримайте технічну підтримку з підбору розмірів драбин, розрахунку навантаження, матеріалів, покриттів та індивідуальних конфігурацій проєкту.",
+  supportAction: "Запросити технічну підтримку",
+};
+
+// Market-parameterized content factory
 export function heavyDutyCableLaddersContentForMarket(market: MarketCode): CableManagementFamilyContent {
-  return market === "uk" ? HEAVY_DUTY_CABLE_LADDERS_CONTENT_UK : HEAVY_DUTY_CABLE_LADDERS_CONTENT;
+  return market === "uk" ? HEAVY_DUTY_CABLE_LADDERS_CONTENT_UK : HEAVY_DUTY_CABLE_LADDERS_CONTENT_UA;
 }
 
 export function gcmcConcaveConvexLadderContentForMarket(_market: MarketCode): CableManagementFamilyContent {

@@ -75,7 +75,7 @@ function aluminiumContent(market: MarketCode, heightLabel: string, slug: CableMa
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби") },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки") },
       { label: t(market, "Aluminium Cable Trays", "Алюмінієві кабельні лотки") },
       { label: `H = ${heightLabel} mm` },
     ],
@@ -160,7 +160,7 @@ export function aluminiumCableTraysTemplateContentForMarket(market: MarketCode):
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи"), href: "/products/cable-support-systems" },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби"), href: "/products/cable-support-systems/cable-trays-trunking" },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки"), href: "/products/cable-support-systems/cable-trays-trunking" },
       { label: t(market, "Aluminium Cable Trays", "Алюмінієві кабельні лотки") },
     ],
     eyebrow: t(market, "Cable Management Systems", "Кабеленесучі системи"),

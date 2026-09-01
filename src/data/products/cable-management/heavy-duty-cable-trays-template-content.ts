@@ -33,7 +33,7 @@ export function heavyDutyCableTraysTemplateContentForMarket(market: MarketCode):
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи"), href: "/products/cable-support-systems" },
       {
-        label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби"),
+        label: t(market, "Cable Trays & Trunking", "Кабельні лотки"),
         href: "/products/cable-support-systems/cable-trays-trunking",
       },
       { label: t(market, "Heavy Duty Cable Trays", "Кабельні лотки важкого типу") },

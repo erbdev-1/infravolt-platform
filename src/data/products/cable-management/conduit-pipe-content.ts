@@ -127,8 +127,8 @@ const CONDUIT_PIPE_SYSTEMS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableM
   },
   ua: {
     breadcrumbs: [
-      { label: "Home", href: "/" },
-      { label: "Cable Management Systems", href: "/products/cable-support-systems" },
+      { label: "Головна", href: "/" },
+      { label: "Кабеленесучі системи", href: "/products/cable-support-systems" },
       { label: "Трубні та кабелепровідні системи" },
     ],
     eyebrow: "Кабеленесучі системи",
@@ -212,7 +212,7 @@ const CONDUIT_PIPE_SYSTEMS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableM
         href: "/products/cable-support-systems/support-hanging-systems",
       },
       {
-        label: "Кабельні лотки та короби",
+        label: "Кабельні лотки",
         description: "Перфоровані, важкого типу та коробчасті системи для ширшого прокладання кабелів.",
         href: "/products/cable-support-systems/cable-trays-trunking",
       },

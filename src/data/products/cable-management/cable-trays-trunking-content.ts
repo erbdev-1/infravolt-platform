@@ -166,14 +166,14 @@ const CABLE_TRAYS_TRUNKING_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableM
   },
   ua: {
     breadcrumbs: [
-      { label: "Home", href: "/" },
-      { label: "Cable Management Systems", href: "/products/cable-support-systems" },
-      { label: "Кабельні лотки та короби" },
+      { label: "Головна", href: "/" },
+      { label: "Кабеленесучі системи", href: "/products/cable-support-systems" },
+      { label: "Кабельні лотки" },
     ],
     eyebrow: "Кабеленесучі системи",
-    title: "Кабельні лотки та короби",
+    title: "Кабельні лотки",
     description:
-      "Перфоровані, посилені, важкого типу та коробчасті системи для прокладання силових, контрольних та інформаційних кабелів.",
+      "Кабельні лотки — перфоровані, посилені, важкого типу та короби — для прокладання силових, контрольних та інформаційних кабелів.",
     requestPackAction: "Запросити технічний пакет",
     requestPackHref: REQUEST_HREF,
     catalogueDocument: {

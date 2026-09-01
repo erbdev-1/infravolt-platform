@@ -137,8 +137,8 @@ const CABLE_LADDERS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableMacroFam
   },
   ua: {
     breadcrumbs: [
-      { label: "Home", href: "/" },
-      { label: "Cable Management Systems", href: "/products/cable-support-systems" },
+      { label: "Головна", href: "/" },
+      { label: "Кабеленесучі системи", href: "/products/cable-support-systems" },
       { label: "Кабельні драбини" },
     ],
     eyebrow: "Кабеленесучі системи",
@@ -232,7 +232,7 @@ const CABLE_LADDERS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableMacroFam
         href: "/products/cable-support-systems/support-hanging-systems",
       },
       {
-        label: "Кабельні лотки та короби",
+        label: "Кабельні лотки",
         description: "Перфоровані, важкого типу та коробчасті системи для легшого прокладання кабелів.",
         href: "/products/cable-support-systems/cable-trays-trunking",
       },

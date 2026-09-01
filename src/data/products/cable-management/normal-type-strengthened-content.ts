@@ -74,7 +74,7 @@ export function normalTypeCableTraysContentForMarket(market: MarketCode): CableM
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби") },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки") },
       { label: t(market, "Normal Type Cable Trays", "Кабельні лотки стандартного типу") },
     ],
     requestPackAction: t(market, "Request Technical Pack", "Запросити технічний пакет"),
@@ -171,7 +171,7 @@ function strengthenedContent(
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи") },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби") },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки") },
       { label: t(market, "Normal Type Cable Trays", "Кабельні лотки стандартного типу") },
       { label: t(market, `Strengthened H = ${heightLabel} mm`, `Посилений тип H = ${heightLabel} мм`) },
     ],
@@ -253,7 +253,7 @@ export function normalTypeStrengthenedTemplateContentForMarket(market: MarketCod
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: t(market, "Cable Management Systems", "Кабеленесучі системи"), href: "/products/cable-support-systems" },
-      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки та короби"), href: "/products/cable-support-systems/cable-trays-trunking" },
+      { label: t(market, "Cable Trays & Trunking", "Кабельні лотки"), href: "/products/cable-support-systems/cable-trays-trunking" },
       { label: t(market, "Normal Type Cable Trays", "Кабельні лотки стандартного типу") },
     ],
     eyebrow: t(market, "Cable Management Systems", "Кабеленесучі системи"),

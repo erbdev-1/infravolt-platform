@@ -173,14 +173,14 @@ const SUPPORT_HANGING_SYSTEMS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, Cab
   },
   ua: {
     breadcrumbs: [
-      { label: "Home", href: "/" },
-      { label: "Cable Management Systems", href: "/products/cable-support-systems" },
+      { label: "Головна", href: "/" },
+      { label: "Кабеленесучі системи", href: "/products/cable-support-systems" },
       { label: "Системи опор та підвісу" },
     ],
     eyebrow: "Кабеленесучі системи",
     title: "Системи опор та підвісу",
     description:
-      "Опорні профілі, кронштейни, консолі, різьбові шпильки та підвісні компоненти, розроблені для надійного настінного, стельового та конструктивного монтажу кабельних систем.",
+      "Системи кріплення кабельних лотків і драбин — опорні профілі, кронштейни, консолі, різьбові шпильки та підвісні компоненти, розроблені для надійного настінного, стельового та конструктивного монтажу кабельних систем.",
     requestPackAction: "Запросити технічний пакет",
     requestPackHref: REQUEST_HREF,
     catalogueDocument: {
@@ -297,7 +297,7 @@ const SUPPORT_HANGING_SYSTEMS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, Cab
       "Продукція для опор та підвісу формує конструктивний рівень монтажу для цих кабеленесучих систем.",
     compatibleSystems: [
       {
-        label: "Кабельні лотки та короби",
+        label: "Кабельні лотки",
         description: "Перфоровані, важкого типу та коробчасті системи, які несуть ці опорні профілі та кронштейни.",
         href: "/products/cable-support-systems/cable-trays-trunking",
       },

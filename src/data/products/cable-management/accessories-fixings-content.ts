@@ -208,8 +208,8 @@ const ACCESSORIES_FIXINGS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableMa
   },
   ua: {
     breadcrumbs: [
-      { label: "Home", href: "/" },
-      { label: "Cable Management Systems", href: "/products/cable-support-systems" },
+      { label: "Головна", href: "/" },
+      { label: "Кабеленесучі системи", href: "/products/cable-support-systems" },
       { label: "Аксесуари та кріплення" },
     ],
     eyebrow: "Кабеленесучі системи",
@@ -361,7 +361,7 @@ const ACCESSORIES_FIXINGS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, CableMa
         href: "/products/cable-support-systems/support-hanging-systems",
       },
       {
-        label: "Кабельні лотки та короби",
+        label: "Кабельні лотки",
         description: "Перфоровані, важкого типу та коробчасті системи, що використовують ці кришки та редукції.",
         href: "/products/cable-support-systems/cable-trays-trunking",
       },
