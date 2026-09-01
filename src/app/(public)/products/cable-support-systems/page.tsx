@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return marketPageMetadata({
     market: marketContext.market,
     pathname: "/products/cable-support-systems",
-    title: `${content.title} | InfraVolt`,
+    title: `${content.metaTitle ?? content.title} | InfraVolt`,
     description: content.description,
   });
 }

@@ -395,9 +395,9 @@ export const PUBLIC_SITE_CONTENT = {
         },
         {
           id: "cable-management",
-          title: "Cable Tray & Ladder Systems",
+          title: "Cable Management Systems",
           description:
-            "Cable-management routes for coordinated power, control and data installations.",
+            "Cable containment routes — trays, ladders and support systems — for coordinated power, control and data installations.",
           imageAlt: "Gersan cable tray system product view",
         },
         {

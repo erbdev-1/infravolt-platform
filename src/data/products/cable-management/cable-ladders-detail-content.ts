@@ -341,10 +341,26 @@ const GMIE_CABLE_LADDERS_CONTENT: CableManagementFamilyContent = {
   supportHref: `${REQUEST_HREF}-gmie`,
 };
 
-// Market-parameterized content factories (currently English-only; Ukraine copy
-// will be added during the bilingualization pass)
-export function heavyDutyCableLaddersContentForMarket(_market: MarketCode): CableManagementFamilyContent {
-  return HEAVY_DUTY_CABLE_LADDERS_CONTENT;
+// UK Phase 1A SEO wording only — keeps HEAVY_DUTY_CABLE_LADDERS_CONTENT
+// itself byte-for-byte unchanged so the UA branch below (still awaiting its
+// own bilingualization pass) keeps rendering exactly as before.
+const HEAVY_DUTY_CABLE_LADDERS_CONTENT_UK: CableManagementFamilyContent = {
+  ...HEAVY_DUTY_CABLE_LADDERS_CONTENT,
+  title: "Heavy Duty Cable Ladders",
+  description:
+    "Heavy duty cable ladder systems in hot-dip galvanized steel, engineered for demanding industrial cable loads. H=70 to H=200 mm edge heights, with a full range of bends, tees, crossings, riser elements and covers in the same system.",
+  breadcrumbs: [
+    { label: "Home", href: "/" },
+    { label: "Cable Management Systems" },
+    { label: "Cable Ladder Systems" },
+    { label: "Heavy Duty Cable Ladders" },
+  ],
+};
+
+// Market-parameterized content factories (currently English-only for ua;
+// Ukraine copy will be added during the bilingualization pass)
+export function heavyDutyCableLaddersContentForMarket(market: MarketCode): CableManagementFamilyContent {
+  return market === "uk" ? HEAVY_DUTY_CABLE_LADDERS_CONTENT_UK : HEAVY_DUTY_CABLE_LADDERS_CONTENT;
 }
 
 export function gcmcConcaveConvexLadderContentForMarket(_market: MarketCode): CableManagementFamilyContent {

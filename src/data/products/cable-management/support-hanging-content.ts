@@ -32,7 +32,7 @@ const SUPPORT_HANGING_SYSTEMS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, Cab
     eyebrow: "Cable Management Systems",
     title: "Support & Hanging Systems",
     description:
-      "Support profiles, brackets, consoles, threaded rods and suspension components engineered for secure wall, ceiling and structural cable management installations.",
+      "Cable tray and cable ladder support systems — profiles, brackets, consoles, threaded rods and suspension components engineered for secure wall, ceiling and structural cable management installations.",
     requestPackAction: "Request Technical Pack",
     requestPackHref: REQUEST_HREF,
     catalogueDocument: {
@@ -150,12 +150,12 @@ const SUPPORT_HANGING_SYSTEMS_CONTENT_BY_MARKET: Readonly<Record<MarketCode, Cab
       "Support & Hanging products form the structural installation layer for these cable-containment systems.",
     compatibleSystems: [
       {
-        label: "Cable Trays & Trunking",
+        label: "Cable Tray Systems",
         description: "Perforated, heavy-duty and trunking systems carried by these support profiles and brackets.",
         href: "/products/cable-support-systems/cable-trays-trunking",
       },
       {
-        label: "Cable Ladders",
+        label: "Cable Ladder Systems",
         description: "High-capacity ladder systems for demanding industrial cable installations.",
         href: "/products/cable-support-systems/cable-ladders",
       },

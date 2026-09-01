@@ -25,7 +25,7 @@ function wireMeshScheduleContent(market: MarketCode): CableManagementFamilyConte
     titleQualifier: "TTK · TTK-A · TTK-B · TTK-C · TTK-L",
     description: t(
       market,
-      "Open wire-mesh cable-tray systems for ventilated, lightweight and flexible cable routing, available in multiple tray heights and widths with matching jointing and support accessories.",
+      "Wire mesh cable tray (cable basket) systems — open, ventilated and lightweight — for flexible cable routing, available in multiple tray heights and widths with matching jointing and support accessories.",
       "Відкриті сітчасті кабельні лотки для вентильованого, легкого та гнучкого прокладання кабелів, доступні з різною висотою й шириною лотка та сумісними з'єднувальними й опорними елементами.",
     ),
     image: `${IMAGE_BASE}/family/wire-mesh-cable-system.webp`,
