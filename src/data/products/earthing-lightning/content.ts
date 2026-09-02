@@ -43,7 +43,7 @@ const EARTHING_HUB_CONTENT = {
     technicalSnapshot: [
       {
         icon: "shield",
-        label: "Standards",
+        label: "Product-Specific Standards Referenced",
         value: ["IEC/EN 62561 Series", "IEC 62305", "BS 7430"],
       },
       {
@@ -84,9 +84,9 @@ const EARTHING_HUB_CONTENT = {
       },
       {
         id: "industrial-hazardous-grounding",
-        title: "Industrial & Hazardous-Area Grounding",
+        title: "Industrial & Hazardous-Area Earthing",
         description:
-          "Static discharge, tanker and aircraft grounding, heavy-duty clamps and Ex-proof solutions.",
+          "Static discharge, tanker and aircraft earthing, heavy-duty clamps and Ex-proof solutions.",
       },
     ],
     categoriesHeading: "Product families",
@@ -95,7 +95,7 @@ const EARTHING_HUB_CONTENT = {
     categories: [
       {
         slug: "lightning-protection",
-        name: "Lightning Protection",
+        name: "Lightning Protection Products",
         description:
           "Air termination rods, active lightning rods, mounting bases and down-conductor fixing components for complete rooftop capture systems.",
         materials: "Copper · Aluminium · Galvanized Steel",
@@ -173,7 +173,7 @@ const EARTHING_HUB_CONTENT = {
           {
             icon: "support",
             label: "Installation Support",
-            value: ["Selection", "Spacing", "Grounding Layout Guidance"],
+            value: ["Selection", "Spacing", "Earthing Layout Guidance"],
           },
         ],
         families: [
@@ -429,7 +429,7 @@ const EARTHING_HUB_CONTENT = {
         ],
         families: [
           {
-            name: "Thermoveld",
+            name: "Thermoweld",
             description:
               "Exothermic welding moulds, welding powder and ignition equipment for permanent conductor-to-electrode connections.",
             id: "thermoveld",
@@ -455,7 +455,7 @@ const EARTHING_HUB_CONTENT = {
             value: ["Inspection Pits", "Ground Enhancement Material", "Pipe Clamps"],
           },
           { icon: "layers", label: "Materials / Construction", value: ["Galvanized Steel", "Plastic", "Concrete"] },
-          { icon: "bond", label: "Grounding Application", value: "Low-Resistance Earthing Access Points" },
+          { icon: "bond", label: "Earthing Application", value: "Low-Resistance Earthing Access Points" },
           {
             icon: "support",
             label: "Technical Support",
@@ -489,9 +489,9 @@ const EARTHING_HUB_CONTENT = {
       },
       {
         slug: "static-ex-proof-grounding",
-        name: "Static & Ex-Proof Grounding",
+        name: "Static & Ex-Proof Earthing",
         description:
-          "Static discharge receptacles, heavy-duty grounding clamps and Ex-proof grounding devices for hazardous-area, tanker and aircraft applications.",
+          "Static discharge receptacles, heavy-duty earthing clamps and Ex-proof earthing devices for hazardous-area, tanker and aircraft applications.",
         materials: "Bronze · Brass · Stainless Steel",
         familyCount: "2 product families",
         image: `${IMAGE_BASE}/static-ex-proof-grounding/card/gst-1-bronze-static-earth-receptacle.webp`,
@@ -514,18 +514,18 @@ const EARTHING_HUB_CONTENT = {
         families: [
           {
             name: "Static Electric Earthing Equipment",
-            description: "Static discharge clips, reels and plates for controlled static grounding.",
+            description: "Static discharge clips, reels and plates for controlled static earthing.",
             id: "static-electric-earthing-equipment",
             image: `${IMAGE_BASE}/static-ex-proof-grounding/family/static-electric-earthing-equipment.webp`,
             imageAlt: "Gersan bronze static earth discharge receptacle",
           },
           {
-            name: "Ex-Proof Grounding System",
+            name: "Ex-Proof Earthing System",
             description:
-              "Ex-proof grounding devices and connection schemes for hazardous-area installations.",
+              "Ex-proof earthing devices and connection schemes for hazardous-area installations.",
             id: "ex-proof-grounding-system",
             image: `${IMAGE_BASE}/static-ex-proof-grounding/family/ex-proof-grounding-system.webp`,
-            imageAlt: "Gersan PTC.1000 Ex-proof grounding system",
+            imageAlt: "Gersan PTC.1000 Ex-proof earthing system",
           },
         ],
       },
@@ -620,7 +620,7 @@ const EARTHING_HUB_CONTENT = {
         id: "oil-gas-petrochemical",
         title: "Oil, Gas and Petrochemical",
         description:
-          "Static grounding, Ex-proof grounding devices and corrosion-resistant earthing components for hazardous-area installations.",
+          "Static earthing, Ex-proof earthing devices and corrosion-resistant earthing components for hazardous-area installations.",
         image: `${IMAGE_BASE}/applications/earthing-application-oil-gas-petrochemical.webp`,
         imageAlt: "Petrochemical tank farm with elevated pipe racks",
       },
