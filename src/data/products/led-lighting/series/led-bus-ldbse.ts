@@ -313,13 +313,13 @@ const content = {
       home: "Головна",
       products: "Продукція",
       ledSystems: "Системи LED-освітлення",
-      category: "Промислове освітлення та освітлення високих прольотів",
+      category: "Промислове LED-освітлення для високих приміщень",
       current: "LED-BUS LDBSE Series Lighting Systems",
     },
-    backToCategoryLabel: "Назад до промислового освітлення та освітлення високих прольотів",
+    backToCategoryLabel: "Назад до промислового LED-освітлення для високих приміщень",
     hero: {
       eyebrow: "СИСТЕМИ LED",
-      category: "Промислове освітлення та освітлення високих прольотів",
+      category: "Промислове LED-освітлення для високих приміщень",
       title: "LED-BUS LDBSE Series Lighting Systems",
       description:
         "Тонкопрофільне промислове LED-освітлення з мультилінзовою оптичною структурою для промислових об'єктів, авіаційних та аеропортових середовищ, а також логістичних застосувань, з кількома системними варіантами монтажу.",
@@ -488,7 +488,7 @@ const content = {
         description: "Логістичні проходи та складські зали з високими стелями.",
       },
     ],
-    siblingFamiliesHeading: "Інші промислові серії та серії високих прольотів",
+    siblingFamiliesHeading: "Інші промислові серії та серії для високих приміщень",
     siblingViewSeriesLabel: "Переглянути серію",
     currentFamilyBadgeLabel: "Поточна серія",
     siblingFamilies: [

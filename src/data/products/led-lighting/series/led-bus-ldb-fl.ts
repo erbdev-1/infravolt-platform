@@ -318,13 +318,13 @@ const content = {
       home: "Головна",
       products: "Продукція",
       ledSystems: "Системи LED-освітлення",
-      category: "Промислове освітлення та освітлення високих прольотів",
+      category: "Промислове LED-освітлення для високих приміщень",
       current: "LED-BUS LDB-FL Series Lighting Systems",
     },
-    backToCategoryLabel: "Назад до промислового освітлення та освітлення високих прольотів",
+    backToCategoryLabel: "Назад до промислового LED-освітлення для високих приміщень",
     hero: {
       eyebrow: "СИСТЕМИ LED",
-      category: "Промислове освітлення та освітлення високих прольотів",
+      category: "Промислове LED-освітлення для високих приміщень",
       title: "LED-BUS LDB-FL Series Lighting Systems",
       description:
         "Промислове LED-освітлення підвищеної міцності з фабрикованим сталевим корпусом, електростатичним порошковим покриттям та загартованим склом 4 мм, для промислових, авіаційних та логістичних середовищ.",
@@ -334,7 +334,7 @@ const content = {
     heroImage: LED_BUS_LDB_FL_HERO_IMAGE,
     heroImageAlt: "Увімкнений світильник LED-BUS LDB-FL, фабрикований сталевий корпус із загартованим склом 4 мм",
     heroBackgroundImage: LED_BUS_LDB_FL_HERO_BACKGROUND_IMAGE,
-    heroBackgroundImageAlt: "Інтер'єр темного промислового виробничого об'єкта з робочим освітленням високих прольотів",
+    heroBackgroundImageAlt: "Інтер'єр темного промислового виробничого об'єкта з робочим високостельовим освітленням",
     technicalInformationHeading: "Технічна інформація",
     technicalInformation: [
       {
@@ -480,7 +480,7 @@ const content = {
         description: "Складські та логістичні середовища з підвищеними вимогами до промислового освітлення.",
       },
     ],
-    siblingFamiliesHeading: "Інші промислові серії та серії високих прольотів",
+    siblingFamiliesHeading: "Інші промислові серії та серії для високих приміщень",
     siblingViewSeriesLabel: "Переглянути серію",
     currentFamilyBadgeLabel: "Поточна серія",
     siblingFamilies: [

@@ -210,9 +210,9 @@ const content = {
   },
   ua: {
     metadata: {
-      title: "Системи LED-освітлення | LEDBUS від Gersan | InfraVolt",
+      title: "Системи LED-освітлення | InfraVolt",
       description:
-        "Системи LED-освітлення LEDBUS від Gersan — розумні, промислові, зовнішні та проєктні продуктові категорії з повними технічними даними та кодами замовлення.",
+        "LEDBUS — системи LED-освітлення від Gersan для комерційних і промислових проєктів: розумні, промислові, зовнішні та проєктні продуктові категорії з повними технічними даними та кодами замовлення.",
     },
     breadcrumbs: {
       home: "Головна",
@@ -272,10 +272,10 @@ const content = {
       {
         slug: "industrial-high-bay-lighting",
         number: "02",
-        name: "Промислове освітлення та освітлення високих прольотів",
+        name: "Промислове LED-освітлення для високих приміщень",
         description: "Потужні світильники LED для складів, виробничих цехів та приміщень з високими стелями.",
         image: publicMediaUrl("products/led-lighting/category/industrial-high-bay/card/industrial-high-bay-lighting-category-card.webp"),
-        imageAlt: "Прохід складу зі стелажами та навантажувачем, освітлений світильниками LEDBUS високих прольотів",
+        imageAlt: "Прохід складу зі стелажами та навантажувачем, освітлений високостельовими світильниками LEDBUS",
         href: "/products/led-systems/industrial-high-bay-lighting",
       },
       {
@@ -345,7 +345,7 @@ const content = {
         slug: "emergency-guidance-lighting",
         number: "10",
         name: "Аварійне та евакуаційне освітлення",
-        description: "Аварійні та евакуаційні світильники LED для нормативного освітлення шляхів евакуації та безпеки.",
+        description: "Аварійні та евакуаційні світильники LED для освітлення шляхів евакуації та зон безпеки.",
         image: publicMediaUrl("products/led-lighting/category/emergency-guidance/card/emergency-guidance-lighting-category-card.webp"),
         imageAlt: "Аварійне орієнтування й освітлення маршруту в коридорі громадської будівлі",
         href: "/products/led-systems/emergency-guidance-lighting",
