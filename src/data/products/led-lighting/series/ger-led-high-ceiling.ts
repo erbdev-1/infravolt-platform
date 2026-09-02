@@ -460,7 +460,7 @@ const content = {
   },
   ua: {
     metadata: {
-      title: "GER-LED High Ceiling – освітлення високих прольотів | InfraVolt",
+      title: "GER-LED High Ceiling – освітлення для високих приміщень | InfraVolt",
       description:
         "GER-LED High Ceiling Lighting Systems — 4 каталожні моделі, 50–150 Вт, Ø434 мм, врізна (стельова) та накладна конфігурації, IP66, 7 років гарантії.",
     },
@@ -468,13 +468,13 @@ const content = {
       home: "Головна",
       products: "Продукція",
       ledSystems: "Системи LED-освітлення",
-      category: "Промислове освітлення та освітлення високих прольотів",
+      category: "Промислове LED-освітлення для високих приміщень",
       current: "GER-LED High Ceiling Lighting Systems",
     },
-    backToCategoryLabel: "Назад до промислового освітлення та освітлення високих прольотів",
+    backToCategoryLabel: "Назад до промислового LED-освітлення для високих приміщень",
     hero: {
       eyebrow: "СИСТЕМИ LED",
-      category: "Промислове освітлення та освітлення високих прольотів",
+      category: "Промислове LED-освітлення для високих приміщень",
       title: "GER-LED High Ceiling Lighting Systems",
       description:
         "Система LED-освітлення для високих стель із врізною (стельовою) та накладною конфігураціями, конструкцією Ø434 мм, захистом IP66 та спеціальними оптичними опціями для заводів, складів та інших приміщень з високими стелями.",
@@ -666,7 +666,7 @@ const content = {
         description: "Великооб'ємні внутрішні простори, що потребують врізного (стельового) або накладного LED-освітлення.",
       },
     ],
-    siblingFamiliesHeading: "Інші промислові серії та серії високих прольотів",
+    siblingFamiliesHeading: "Інші промислові серії та серії для високих приміщень",
     siblingViewSeriesLabel: "Переглянути серію",
     currentFamilyBadgeLabel: "Поточна серія",
     siblingFamilies: [

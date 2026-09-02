@@ -389,13 +389,13 @@ const content = {
       home: "Головна",
       products: "Продукція",
       ledSystems: "Системи LED-освітлення",
-      category: "Промислове освітлення та освітлення високих прольотів",
+      category: "Промислове LED-освітлення для високих приміщень",
       current: "GER-LED Industrial High Ceiling Lighting Systems",
     },
-    backToCategoryLabel: "Назад до промислового освітлення та освітлення високих прольотів",
+    backToCategoryLabel: "Назад до промислового LED-освітлення для високих приміщень",
     hero: {
       eyebrow: "СИСТЕМИ LED",
-      category: "Промислове освітлення та освітлення високих прольотів",
+      category: "Промислове LED-освітлення для високих приміщень",
       title: "GER-LED Industrial High Ceiling Lighting Systems",
       description:
         "Промислове LED-освітлення підвищеної потужності для високих стель з модульними так-чіпними секціями LED та драйвера, регульованим кутом світильника та розширеними опціями моніторингу й керування для складних промислових середовищ.",
@@ -608,7 +608,7 @@ const content = {
         description: "Об'єкти вугільної та гірничодобувної галузі.",
       },
     ],
-    siblingFamiliesHeading: "Інші промислові серії та серії високих прольотів",
+    siblingFamiliesHeading: "Інші промислові серії та серії для високих приміщень",
     siblingViewSeriesLabel: "Переглянути серію",
     currentFamilyBadgeLabel: "Поточна серія",
     siblingFamilies: [

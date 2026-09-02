@@ -320,7 +320,7 @@ const content = {
   },
   ua: {
     metadata: {
-      title: "LED-BUS High Ceiling – освітлення високих прольотів | InfraVolt",
+      title: "LED-BUS High Ceiling – освітлення для високих приміщень | InfraVolt",
       description:
         "LED-BUS High Ceiling Lighting Systems — 8 каталожних моделей, 50–240 Вт, IP65, пряма інтеграція з шинопроводом Gersan Lighting Busbar, для складів, ангарів, портів та зон обслуговування авіатехніки.",
     },
@@ -328,13 +328,13 @@ const content = {
       home: "Головна",
       products: "Продукція",
       ledSystems: "Системи LED-освітлення",
-      category: "Промислове освітлення та освітлення високих прольотів",
+      category: "Промислове LED-освітлення для високих приміщень",
       current: "LED-BUS High Ceiling Lighting Systems",
     },
-    backToCategoryLabel: "Назад до промислового освітлення та освітлення високих прольотів",
+    backToCategoryLabel: "Назад до промислового LED-освітлення для високих приміщень",
     hero: {
       eyebrow: "СИСТЕМИ LED",
-      category: "Промислове освітлення та освітлення високих прольотів",
+      category: "Промислове LED-освітлення для високих приміщень",
       title: "LED-BUS High Ceiling Lighting Systems",
       description:
         "Потужне промислове LED-освітлення для складів, ангарів, портів, зон обслуговування авіатехніки та інших приміщень з високими стелями, з прямою інтеграцією до шинопроводу Gersan Lighting Busbar та варіантами підвісного монтажу.",
@@ -516,7 +516,7 @@ const content = {
         description: "Технічне обслуговування та зони огляду.",
       },
     ],
-    siblingFamiliesHeading: "Інші промислові серії та серії високих прольотів",
+    siblingFamiliesHeading: "Інші промислові серії та серії для високих приміщень",
     siblingViewSeriesLabel: "Переглянути серію",
     currentFamilyBadgeLabel: "Поточна серія",
     siblingFamilies: [
