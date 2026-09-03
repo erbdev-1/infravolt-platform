@@ -101,7 +101,7 @@ assert.equal(concurrency["cancel-in-progress"], true);
 
 const environment = asMapping(workflow.env, "env");
 assert.equal(environment.NODE_VERSION, "24.18.0");
-assert.equal(environment.PNPM_VERSION, "11.13.0");
+assert.equal(environment.PNPM_VERSION, "11.25.0");
 assert.equal(environment.NEXT_TELEMETRY_DISABLED, "1");
 
 const jobs = asMapping(workflow.jobs, "jobs");

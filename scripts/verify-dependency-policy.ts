@@ -25,7 +25,7 @@ const lifecycleScripts = ["preinstall", "install", "postinstall", "prepare"];
 
 assert.equal(packageJson.private, true);
 assert.equal(packageJson.engines?.node, "24.x");
-assert.equal(packageJson.packageManager, "pnpm@11.13.0");
+assert.equal(packageJson.packageManager, "pnpm@11.25.0");
 assert.match(lockfile, /^lockfileVersion: '9\.0'$/mu);
 
 const directPackages = {
@@ -60,6 +60,7 @@ assert.equal(
     '  "next@16.2.11>sharp": "0.35.0"',
     '  "jsdom>undici": "7.29.0"',
     '  "nanoid": "3.3.18"',
+    '  "browserslist": ">=4.28.7"',
     "",
     "peerDependencyRules:",
     "  allowedVersions:",
