@@ -21,7 +21,7 @@ env:
   CI: "true"
   NEXT_TELEMETRY_DISABLED: "1"
   NODE_VERSION: "24.18.0"
-  PNPM_VERSION: "11.13.0"
+  PNPM_VERSION: "11.25.0"
   TZ: UTC
 
 jobs:
@@ -43,7 +43,7 @@ jobs:
       - name: Set up pnpm
         uses: pnpm/action-setup@d15e628ca66d93ee5f352c71671a7bc6a97af5c9 # v6.0.8
         with:
-          version: 11.13.0
+          version: 11.25.0
           run_install: false
 
       - name: Set up Node.js
@@ -56,7 +56,7 @@ jobs:
       - name: Verify runtime contract
         run: |
           test "$(node --version)" = "v24.18.0"
-          test "$(pnpm --version)" = "11.13.0"
+          test "$(pnpm --version)" = "11.25.0"
 
       - name: Install frozen dependencies
         run: pnpm install --frozen-lockfile
@@ -128,7 +128,7 @@ jobs:
       - name: Set up pnpm
         uses: pnpm/action-setup@d15e628ca66d93ee5f352c71671a7bc6a97af5c9 # v6.0.8
         with:
-          version: 11.13.0
+          version: 11.25.0
           run_install: false
 
       - name: Set up Node.js
@@ -181,7 +181,7 @@ jobs:
       - name: Set up pnpm
         uses: pnpm/action-setup@d15e628ca66d93ee5f352c71671a7bc6a97af5c9 # v6.0.8
         with:
-          version: 11.13.0
+          version: 11.25.0
           run_install: false
 
       - name: Set up Node.js
