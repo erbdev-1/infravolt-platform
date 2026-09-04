@@ -28,19 +28,19 @@ export const UNDERFLOOR_HERO_VISUAL_IMAGE_ALT =
 const content = {
   uk: {
     metadata: {
-      title: "Underfloor Cable Trunking Systems | InfraVolt",
+      title: "Underfloor Cable Management Systems UK | InfraVolt",
       description:
-        "Underfloor Cable Trunking Systems — GDK junction boxes, GDKF socket & data accessories, GDK cable trays, GYDK raised-floor trunking and GOR aluminium trunking for flexible underfloor service distribution.",
+        "Underfloor cable management systems for UK commercial interiors — GDK floor boxes and junction boxes, GDKF power and data accessories, underfloor cable trays, GYDK raised-floor trunking and GOR aluminium trunking, with technical project support from InfraVolt.",
     },
     breadcrumbs: {
       home: "Home",
       products: "Products",
-      current: "Underfloor Cable Trunking Systems",
+      current: "Underfloor Cable Management Systems",
     },
     backToHomeLabel: "Back to home",
     hero: {
       eyebrow: "UNDERFLOOR CABLE TRUNKING",
-      title: "Underfloor Cable Trunking Systems",
+      title: "Underfloor Cable Management Systems",
       description:
         "Flexible underfloor power and data distribution solutions for modern commercial interiors, providing accessible and adaptable service routing beneath the finished floor.",
       primaryAction: "Explore Series",
@@ -80,9 +80,9 @@ const content = {
       {
         slug: "underfloor-junction-boxes",
         number: "01",
-        name: "GDK Underfloor Junction Boxes",
+        name: "GDK Floor Boxes & Underfloor Junction Boxes",
         description:
-          "Floor-set junction and distribution boxes for power and data outlets, including GDK, GDK-Y and the British-system (ING) variant.",
+          "Floor boxes and underfloor junction/distribution boxes for power and data outlets, available in GDK, GDK-Y and the British-system (ING) variant.",
         features: [
           { icon: "configuration", label: "GDK / GDK-Y / British System (ING)" },
           { icon: "capacity", label: "19 Catalogue Models" },
@@ -95,8 +95,8 @@ const content = {
       {
         slug: "socket-data-accessories",
         number: "02",
-        name: "GDKF Socket & Data Accessories",
-        description: "Power, earthed, data (RJ-45) and telephone (RJ-11/RJ12) socket inserts and blank plates for GDK and GOR housings.",
+        name: "GDKF Floor Box Socket & Data Accessories",
+        description: "Power, earthed, data (RJ-45) and telephone (RJ-11/RJ12) socket inserts, plus 13A BS socket accessories used with GDK floor boxes and GOR aluminium trunking.",
         features: [
           { icon: "configuration", label: "Power / Data / Telephone Inserts" },
           { icon: "capacity", label: "16 Catalogue Models" },
@@ -151,7 +151,7 @@ const content = {
       {
         slug: "tray-accessories",
         number: "06",
-        name: "GDK Tray Accessories",
+        name: "GDK Underfloor Tray Accessories",
         description: "Joining straps, end caps and 90° risers (GDKE / GDKS / GDKD) for the GDK underfloor cable tray range.",
         features: [
           { icon: "configuration", label: "Joining Strap / End Cap / 90° Riser" },
@@ -216,7 +216,7 @@ const content = {
       action: "Talk to Our Technical Team",
     },
     seriesDetail: {
-      backLabel: "Back to Underfloor Cable Trunking Systems",
+      backLabel: "Back to Underfloor Cable Management Systems",
       codesCountSuffix: "catalogue codes",
       addToEnquiryLabel: "Add to Enquiry",
       removeFromEnquiryLabel: "Remove from Enquiry",
