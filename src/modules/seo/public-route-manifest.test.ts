@@ -4,7 +4,7 @@ import { PUBLIC_ROUTE_PATHS } from "./public-route-manifest";
 
 describe("PUBLIC_ROUTE_PATHS", () => {
   it("contains only bounded canonical pathnames", () => {
-    expect(PUBLIC_ROUTE_PATHS).toHaveLength(147);
+    expect(PUBLIC_ROUTE_PATHS).toHaveLength(148);
     expect(new Set(PUBLIC_ROUTE_PATHS).size).toBe(PUBLIC_ROUTE_PATHS.length);
     expect(PUBLIC_ROUTE_PATHS.every((pathname) => pathname.startsWith("/"))).toBe(true);
     expect(PUBLIC_ROUTE_PATHS.every((pathname) => !pathname.includes("?") && !pathname.includes("#"))).toBe(true);
@@ -18,5 +18,12 @@ describe("PUBLIC_ROUTE_PATHS", () => {
     expect(PUBLIC_ROUTE_PATHS).not.toContain(
       "/products/cable-support-systems/heavy-duty-cable-trays-h60",
     );
+  });
+
+  it("includes the Phase 2 Data Centre Busbar landing page exactly once", () => {
+    const matches = PUBLIC_ROUTE_PATHS.filter(
+      (pathname) => pathname === "/products/busbar/data-centre-busbar",
+    );
+    expect(matches).toHaveLength(1);
   });
 });

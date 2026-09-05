@@ -831,6 +831,20 @@
   margin: 0.55rem 0 0;
 }
 
+.applicationLink {
+  color: var(--busbar-accent);
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-top: 0.65rem;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.applicationLink:hover {
+  text-decoration: none;
+}
+
 /* =========================================================
    15. PROJECT SUPPORT CTA
    ========================================================= */

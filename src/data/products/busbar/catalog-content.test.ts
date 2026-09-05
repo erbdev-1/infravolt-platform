@@ -58,6 +58,19 @@ describe("busbarCatalogContentForMarket — UK Phase 1A SEO", () => {
   it("has a Data Centre Application Map label for the reciprocal link", () => {
     expect(uk.dataCentreApplicationMapLabel.length).toBeGreaterThan(0);
   });
+
+  it("the Data centres application card links to the Phase 2 landing page; every other card is unchanged", () => {
+    const dataCentresItem = uk.applications.items.find((item) => item.id === "data-centres");
+    expect(dataCentresItem?.href).toBe("/products/busbar/data-centre-busbar");
+    expect(dataCentresItem?.linkLabel?.length).toBeGreaterThan(0);
+
+    for (const item of uk.applications.items) {
+      if (item.id !== "data-centres") {
+        expect(item.href).toBeUndefined();
+        expect(item.linkLabel).toBeUndefined();
+      }
+    }
+  });
 });
 
 describe("busbarCatalogContentForMarket — UA Busbar Phase 1A SEO (own natural Ukrainian keyword strategy, not a translation of UK copy)", () => {
@@ -125,5 +138,11 @@ describe("busbarCatalogContentForMarket — UA Busbar Phase 1A SEO (own natural 
     expect(ua.dataCentreApplicationMapLabel).not.toBe(
       busbarCatalogContentForMarket("uk").dataCentreApplicationMapLabel,
     );
+  });
+
+  it("the Data centres application card links to the Phase 2 landing page in its own natural UA wording", () => {
+    const dataCentresItem = ua.applications.items.find((item) => item.id === "data-centres");
+    expect(dataCentresItem?.href).toBe("/products/busbar/data-centre-busbar");
+    expect(dataCentresItem?.linkLabel?.length).toBeGreaterThan(0);
   });
 });

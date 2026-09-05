@@ -126,6 +126,30 @@ describe("DATA_CENTRE_APPLICATION_MAP", () => {
     ).toBe(true);
   });
 
+  it("gives every busbar hotspot a Data Centre Busbar landing-page action, alongside its existing actions", () => {
+    const busbarHotspots = DATA_CENTRE_APPLICATION_MAP.zones.flatMap((zone) =>
+      zone.hotspots.filter((hotspot) => hotspot.productFamilyId === "busbar"),
+    );
+
+    expect(busbarHotspots.length).toBeGreaterThan(0);
+
+    for (const hotspot of busbarHotspots) {
+      const override = (hotspot as { actionsOverride?: Record<string, readonly { label: string; href: string }[]> })
+        .actionsOverride;
+      expect(override).toBeDefined();
+
+      const ukHrefs = override!.uk.map((action) => action.href);
+      const uaHrefs = override!.ua.map((action) => action.href);
+
+      expect(ukHrefs).toContain("/products/busbar/data-centre-busbar");
+      expect(uaHrefs).toContain("/products/busbar/data-centre-busbar");
+      // Pre-existing actions are preserved, not replaced.
+      expect(ukHrefs).toContain("/products/busbar");
+      expect(uaHrefs).toContain("/products/busbar");
+      expect(ukHrefs.some((href) => href.startsWith("/products/busbar/") && href !== "/products/busbar/data-centre-busbar")).toBe(true);
+    }
+  });
+
   it("references only canonical public media assets", () => {
     const imagePaths = [
       DATA_CENTRE_APPLICATION_MAP.overview.image,

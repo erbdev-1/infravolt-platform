@@ -526,6 +526,14 @@ export function BusbarCatalogPage({
                       <div className={styles.applicationContent}>
                         <h3>{application.title}</h3>
                         <p>{application.description}</p>
+                        {application.href && application.linkLabel ? (
+                          <Link
+                            className={styles.applicationLink}
+                            href={application.href}
+                          >
+                            {application.linkLabel}
+                          </Link>
+                        ) : null}
                       </div>
                     </article>
                   ))}
