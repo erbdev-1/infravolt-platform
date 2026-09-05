@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import { CableFamilyDetailPage } from "@/components/public/products/cable-management/cable-family-detail-page";
 import {
@@ -105,11 +105,25 @@ const MACRO_GROUP_SIBLING_HEADINGS: Readonly<Record<string, Readonly<{ uk: strin
   "shaft-access-cover": { uk: "Other Accessories & Fixings Families", ua: "Інші родини аксесуарів та кріплення" },
 };
 
+// Superseded by the variant-tab heavy-duty-cable-trays route (see the
+// CABLE_MANAGEMENT_FAMILIES comment above) — the slug stays in the map so
+// the URL still resolves, but every request now permanently redirects to
+// the canonical route instead of rendering the legacy content page.
+const LEGACY_HEAVY_DUTY_H60_SLUG = "heavy-duty-cable-trays-h60";
+const HEAVY_DUTY_H60_REDIRECT_TARGET = "/products/cable-support-systems/heavy-duty-cable-trays";
+
 type RouteParams = Readonly<{ slug: string }>;
 type RouteSearchParams = Readonly<{ group?: string }>;
 
 export function generateStaticParams(): RouteParams[] {
-  return Object.keys(CABLE_MANAGEMENT_FAMILIES).map((slug) => ({ slug }));
+  // Excluded from static prerendering: a permanentRedirect() thrown during
+  // static generation bakes a client-side meta-refresh into the prebuilt
+  // HTML instead of a real HTTP redirect. Leaving this one slug dynamic
+  // (dynamicParams defaults to true) lets the redirect below fire at
+  // request time as a genuine 308.
+  return Object.keys(CABLE_MANAGEMENT_FAMILIES)
+    .filter((slug) => slug !== LEGACY_HEAVY_DUTY_H60_SLUG)
+    .map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -156,6 +170,11 @@ export default async function CableManagementFamilyPage({
   searchParams: Promise<RouteSearchParams>;
 }>) {
   const { slug } = await params;
+
+  if (slug === LEGACY_HEAVY_DUTY_H60_SLUG) {
+    permanentRedirect(HEAVY_DUTY_H60_REDIRECT_TARGET);
+  }
+
   const contentForMarket = CABLE_MANAGEMENT_FAMILIES[slug];
 
   if (!contentForMarket) {

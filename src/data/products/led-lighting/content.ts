@@ -203,8 +203,8 @@ const content = {
       },
       {
         icon: "certified",
-        title: "Certified Quality",
-        description: "Manufactured to recognised industrial and safety standards.",
+        title: "Product Documentation",
+        description: "Technical data and order codes support product selection and project specification across the LEDBUS range.",
       },
     ],
   },
@@ -400,8 +400,8 @@ const content = {
       },
       {
         icon: "certified",
-        title: "Сертифікована якість",
-        description: "Виготовляється відповідно до визнаних промислових стандартів і стандартів безпеки.",
+        title: "Технічна документація",
+        description: "Технічні дані та коди замовлення допомагають підбирати продукцію LEDBUS і готувати проєктні специфікації.",
       },
     ],
   },
