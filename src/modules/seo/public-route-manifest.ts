@@ -143,6 +143,7 @@ const CABLE_FAMILY_PATHS = [
 ].map((slug) => `/products/cable-support-systems/${slug}`);
 
 const EARTHING_PATHS = [
+  "data-centre-earthing",
   "lightning-protection",
   "earthing-electrodes-plates",
   "conductors-tapes",

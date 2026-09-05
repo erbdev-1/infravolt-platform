@@ -20,8 +20,8 @@ const APPLICATION_MAP_HREFS: Readonly<Record<string, string>> = {
   "utilities-substations": "/application-map/infrastructure-utilities",
 };
 
-function applicationHref(id: string): string {
-  return APPLICATION_MAP_HREFS[id] ?? "/#application-map";
+function applicationHref(application: EarthingHubContent["applications"][number]): string {
+  return application.href ?? APPLICATION_MAP_HREFS[application.id] ?? "/#application-map";
 }
 
 type ApplicationsCarouselProps = Readonly<{
@@ -121,7 +121,7 @@ export function ApplicationsCarousel({
           {applications.map((application) => (
             <Link
               className={styles.applicationPhotoCard}
-              href={applicationHref(application.id)}
+              href={applicationHref(application)}
               key={application.id}
             >
               <div className={styles.applicationPhotoVisual}>
@@ -139,8 +139,12 @@ export function ApplicationsCarousel({
                 <p>{application.description}</p>
 
                 <span className={styles.applicationAction}>
-                  <span className={styles.applicationActionDefaultLabel}>{exploreLabel}</span>
-                  <span className={styles.applicationActionDesktopLabel}>View Map</span>
+                  <span className={styles.applicationActionDefaultLabel}>
+                    {application.actionLabel ?? exploreLabel}
+                  </span>
+                  <span className={styles.applicationActionDesktopLabel}>
+                    {application.actionLabel ?? "View Map"}
+                  </span>
                   <span aria-hidden="true">→</span>
                 </span>
               </div>
@@ -165,7 +169,7 @@ export function ApplicationsCarousel({
       <div className={styles.applicationSelector}>
         <Link
           className={styles.applicationActiveCard}
-          href={applicationHref(activeApplication.id)}
+          href={applicationHref(activeApplication)}
           key={activeApplication.id}
         >
           <div className={styles.applicationActiveVisual}>
@@ -183,7 +187,7 @@ export function ApplicationsCarousel({
             <p>{activeApplication.description}</p>
 
             <span className={styles.applicationAction}>
-              {exploreLabel}
+              {activeApplication.actionLabel ?? exploreLabel}
               <span aria-hidden="true">→</span>
             </span>
           </div>
