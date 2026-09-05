@@ -113,6 +113,14 @@ export type LocalizedEarthingApplication = Readonly<{
   description: string;
   image: string;
   imageAlt: string;
+  /** Optional per-application override for the carousel's destination and
+   * action text (see earthing-applications-carousel.tsx). Only set for
+   * "data-centres" so it links to the dedicated Data Centre Earthing
+   * landing page with truthful copy instead of the generic Application
+   * Map fallback — every other application is left unset and keeps the
+   * existing id-keyed href map / "View Map" behaviour. */
+  href?: string;
+  actionLabel?: string;
 }>;
 
 export type EarthingHubContent = Readonly<{

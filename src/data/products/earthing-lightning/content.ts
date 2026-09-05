@@ -599,6 +599,8 @@ const EARTHING_HUB_CONTENT = {
           "Low-resistance earthing and equipotential bonding supporting sensitive electrical and IT infrastructure.",
         image: `${IMAGE_BASE}/applications/earthing-application-data-centres.webp`,
         imageAlt: "Data centre server hall aisle",
+        href: "/products/earthing-and-lightning-protection/data-centre-earthing",
+        actionLabel: "Explore Data Centre Earthing",
       },
       {
         id: "utilities-substations",
@@ -1281,6 +1283,8 @@ const EARTHING_HUB_CONTENT = {
           "Заземлення з низьким опором та зрівнювання потенціалів для чутливої електротехнічної та ІТ-інфраструктури.",
         image: `${IMAGE_BASE}/applications/earthing-application-data-centres.webp`,
         imageAlt: "Ряд серверних шаф у центрі обробки даних",
+        href: "/products/earthing-and-lightning-protection/data-centre-earthing",
+        actionLabel: "Заземлення для ЦОД",
       },
       {
         id: "utilities-substations",
