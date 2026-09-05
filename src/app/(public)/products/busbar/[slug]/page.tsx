@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/seo/json-ld";
 import { BusbarSystemDetailPage } from "@/components/public/products/busbar/busbar-system-detail-page";
 import {
   busbarCatalogContentForMarket,
@@ -9,8 +10,9 @@ import {
 } from "@/data/products/busbar/catalog-content";
 import { getBusbarSystemDetail } from "@/data/products/busbar/series";
 import { getBusbarSystemBySlug } from "@/data/products/busbar/systems";
-import { resolveTrustedMarketContext } from "@/modules/markets/server";
+import { resolveTrustedMarketContext, runtimePublicSiteUrls } from "@/modules/markets/server";
 import { marketPageMetadata } from "@/modules/seo/market-metadata";
+import { buildBreadcrumbListJsonLd, jsonLdGraph } from "@/modules/seo/structured-data";
 
 type RouteParams = Readonly<{ slug: string }>;
 
@@ -46,18 +48,35 @@ export default async function BusbarSeriesPage({
 }>) {
   const { slug } = await params;
   const marketContext = resolveTrustedMarketContext(await headers());
+  const market = marketContext.market;
   const system = getBusbarSystemBySlug(slug);
-  const detail = getBusbarSystemDetail(slug, marketContext.market);
+  const detail = getBusbarSystemDetail(slug, market);
 
   if (!system || !detail) {
     notFound();
   }
 
+  const content = busbarCatalogContentForMarket(market);
+  const systemCopy = content.systems[system.slug as BusbarSystemSlug];
+  const origin = runtimePublicSiteUrls()[market].origin;
+  const pageUrl = `${origin}/products/busbar/${slug}`;
+
+  const graph = jsonLdGraph([
+    buildBreadcrumbListJsonLd(pageUrl, [
+      { name: content.breadcrumbs.home, url: `${origin}/` },
+      { name: content.breadcrumbs.current, url: `${origin}/products/busbar` },
+      { name: systemCopy.name, url: pageUrl },
+    ]),
+  ]);
+
   return (
-    <BusbarSystemDetailPage
-      detail={detail}
-      market={marketContext.market}
-      system={system}
-    />
+    <>
+      <JsonLd data={graph} />
+      <BusbarSystemDetailPage
+        detail={detail}
+        market={market}
+        system={system}
+      />
+    </>
   );
 }
