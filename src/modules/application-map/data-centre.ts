@@ -430,6 +430,11 @@ function busbarSeriesActions(slug: string) {
         type: "page" as const,
       },
       {
+        label: "Data Centre Busbar Systems",
+        href: "/products/busbar/data-centre-busbar",
+        type: "page" as const,
+      },
+      {
         label: "Request Quote",
         href: "/uk-support?request=quote&product=busbar",
         type: "request" as const,
@@ -444,6 +449,11 @@ function busbarSeriesActions(slug: string) {
       {
         label: "Переглянути шинопровідні системи",
         href: "/products/busbar",
+        type: "page" as const,
+      },
+      {
+        label: "Шинопроводи для ЦОД",
+        href: "/products/busbar/data-centre-busbar",
         type: "page" as const,
       },
       {

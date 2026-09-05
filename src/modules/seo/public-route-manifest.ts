@@ -113,6 +113,7 @@ const BUSBAR_PATHS = [
   "ggd-medium-power-busbar",
   "gs-super-compact",
   "gr-cast-resin",
+  "data-centre-busbar",
 ].map((slug) => `/products/busbar/${slug}`);
 
 const CABLE_FAMILY_PATHS = [

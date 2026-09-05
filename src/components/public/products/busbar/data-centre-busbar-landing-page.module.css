@@ -1,0 +1,520 @@
+/* =========================================================
+   01. PAGE THEME & DESIGN TOKENS
+   (same token values as busbar-system-detail-page.module.css /
+   busbar-catalog-page.module.css, for visual consistency with the
+   rest of the Busbar family)
+   ========================================================= */
+
+.page {
+  --busbar-accent: #d92332;
+  --busbar-accent-dark: #a91624;
+  --busbar-navy: #061a35;
+  --busbar-ink: #102033;
+  --busbar-muted: #53657d;
+  --busbar-border: #dce2e8;
+  --busbar-surface: #f5f7f9;
+
+  background: linear-gradient(180deg, #ffffff 0%, var(--busbar-surface) 54%, #ffffff 100%);
+  color: var(--busbar-ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.srOnly {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* =========================================================
+   02. BREADCRUMBS
+   ========================================================= */
+
+.breadcrumbs {
+  align-items: center;
+  border-bottom: 1px solid rgb(6 26 53 / 9%);
+  color: #607087;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  gap: 0.65rem;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem);
+}
+
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--busbar-accent);
+}
+
+/* =========================================================
+   03. HERO
+   ========================================================= */
+
+.hero {
+  align-items: center;
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: minmax(0, 1.1fr) minmax(16rem, 0.9fr);
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 2.5rem clamp(1.25rem, 4vw, 4rem) 1rem;
+}
+
+.heroContent {
+  max-width: 40rem;
+}
+
+.eyebrow {
+  color: var(--busbar-accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  color: var(--busbar-navy);
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.heroDescription {
+  color: var(--busbar-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 1.25rem 0 0;
+  max-width: 36rem;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.tertiaryLink {
+  margin-top: 1rem;
+}
+
+.tertiaryLink a {
+  color: var(--busbar-navy);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.tertiaryLink a:hover {
+  color: var(--busbar-accent);
+}
+
+.primaryButton,
+.secondaryButton {
+  align-items: center;
+  border-radius: 0.45rem;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 3.1rem;
+  padding: 0.8rem 1.3rem;
+  text-decoration: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.primaryButton {
+  background: var(--busbar-navy);
+  border: 1px solid var(--busbar-navy);
+  color: #ffffff;
+}
+
+.secondaryButton {
+  background: #ffffff;
+  border: 1px solid rgb(6 26 53 / 35%);
+  color: var(--busbar-navy);
+}
+
+.primaryButton:hover,
+.secondaryButton:hover {
+  transform: translateY(-2px);
+}
+
+.primaryButton:hover {
+  background: #0b2b51;
+  border-color: #0b2b51;
+}
+
+.secondaryButton:hover {
+  border-color: var(--busbar-accent);
+  color: var(--busbar-accent);
+}
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.tertiaryLink a:focus-visible,
+.breadcrumbs a:focus-visible {
+  outline: 3px solid rgb(217 35 50 / 30%);
+  outline-offset: 3px;
+}
+
+.heroVisual {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.heroVisual img {
+  height: auto;
+  max-width: 100%;
+}
+
+/* =========================================================
+   04. ENTITY STATEMENT
+   ========================================================= */
+
+.entityStatement {
+  background: var(--busbar-surface);
+  border-radius: 0.6rem;
+  color: var(--busbar-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin: 0 auto 2rem;
+  max-width: 1200px;
+  padding: 1rem clamp(1.25rem, 4vw, 4rem);
+}
+
+/* =========================================================
+   05. SHARED SECTION LAYOUT
+   ========================================================= */
+
+.directAnswer,
+.useCases,
+.comparison,
+.whyBusbar,
+.checklist,
+.faq {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 2.5rem clamp(1.25rem, 4vw, 4rem);
+}
+
+.directAnswer h2,
+.useCases h2,
+.comparison h2,
+.whyBusbar h2,
+.checklist h2,
+.faq h2 {
+  color: var(--busbar-navy);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+}
+
+.directAnswer {
+  background: #ffffff;
+  border: 1px solid var(--busbar-border);
+  border-radius: 0.7rem;
+  box-shadow: 0 1rem 3rem rgb(6 26 53 / 7%);
+  margin-top: 0;
+}
+
+.directAnswer p {
+  color: var(--busbar-ink);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* =========================================================
+   06. USE CASES
+   ========================================================= */
+
+.useCasesGrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.useCasesGrid article {
+  background: #ffffff;
+  border: 1px solid var(--busbar-border);
+  border-radius: 0.6rem;
+  padding: 1.4rem;
+}
+
+.useCasesGrid h3 {
+  color: var(--busbar-navy);
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.useCasesGrid p {
+  color: var(--busbar-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================================
+   07. COMPARISON TABLE
+   ========================================================= */
+
+.comparisonIntroduction {
+  color: var(--busbar-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+  max-width: 48rem;
+}
+
+.tableWrap {
+  border: 1px solid var(--busbar-border);
+  border-radius: 0.6rem;
+  overflow-x: auto;
+}
+
+.tableWrap table {
+  border-collapse: collapse;
+  min-width: 46rem;
+  width: 100%;
+}
+
+.tableWrap th,
+.tableWrap td {
+  border-bottom: 1px solid var(--busbar-border);
+  font-size: 0.88rem;
+  padding: 0.9rem 1rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.tableWrap thead th {
+  background: var(--busbar-surface);
+  color: var(--busbar-navy);
+  font-weight: 800;
+}
+
+.tableWrap tbody th {
+  color: var(--busbar-navy);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tableWrap tbody tr:last-child th,
+.tableWrap tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.tableWrap td a {
+  color: var(--busbar-accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.tableWrap td a:hover {
+  text-decoration: none;
+}
+
+/* =========================================================
+   08. WHY BUSBAR / CHECKLIST
+   ========================================================= */
+
+.whyBusbar ul,
+.checklist ul {
+  color: var(--busbar-ink);
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.whyBusbar li,
+.checklist li {
+  background: #ffffff;
+  border: 1px solid var(--busbar-border);
+  border-radius: 0.5rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  padding: 0.85rem 1.1rem;
+}
+
+/* =========================================================
+   09. FAQ
+   ========================================================= */
+
+.faqItem {
+  border-bottom: 1px solid var(--busbar-border);
+  padding: 1.25rem 0;
+}
+
+.faqItem:first-of-type {
+  border-top: 1px solid var(--busbar-border);
+}
+
+.faqItem h3 {
+  color: var(--busbar-navy);
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.faqItem p {
+  color: var(--busbar-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================================
+   10. APPLICATION MAP BLOCK
+   ========================================================= */
+
+.applicationMap {
+  align-items: center;
+  background: var(--busbar-surface);
+  border-radius: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+  margin: 1rem auto 2.5rem;
+  max-width: min(1200px, calc(100% - 2.5rem));
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.applicationMap h2 {
+  color: var(--busbar-navy);
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  margin: 0 0 0.5rem;
+}
+
+.applicationMap p {
+  color: var(--busbar-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 38rem;
+}
+
+/* =========================================================
+   11. PROJECT SUPPORT CTA
+   ========================================================= */
+
+.projectSupport {
+  align-items: center;
+  background:
+    radial-gradient(circle at 78% 25%, rgb(31 83 132 / 30%), transparent 32%),
+    var(--busbar-navy);
+  border-radius: 0.7rem;
+  color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  margin: 1rem auto 4rem;
+  max-width: min(1200px, calc(100% - 2.5rem));
+  padding: clamp(2rem, 5vw, 3rem);
+}
+
+.projectSupport h2 {
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0.5rem 0;
+}
+
+.projectSupport p:not(.eyebrow) {
+  color: rgb(255 255 255 / 82%);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 32rem;
+}
+
+.projectSupport .eyebrow {
+  color: #ff8a94;
+}
+
+.projectSupportActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.projectSupportActions .secondaryButton {
+  background: transparent;
+  border-color: rgb(255 255 255 / 40%);
+  color: #ffffff;
+}
+
+.projectSupportActions .secondaryButton:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+/* =========================================================
+   12. RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .heroVisual {
+    order: -1;
+    max-width: 20rem;
+    margin: 0 auto;
+  }
+}
+
+/* =========================================================
+   13. RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 620px) {
+  .breadcrumbs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+
+  .applicationMap,
+  .projectSupport {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .projectSupportActions {
+    width: 100%;
+  }
+
+  .projectSupportActions a {
+    width: 100%;
+  }
+}

@@ -40,6 +40,11 @@ type ApplicationCopy = Readonly<{
   id: BusbarApplicationId;
   title: string;
   description: string;
+  // Optional — only the "data-centres" card links out today, to the Phase 2
+  // Data Centre Busbar landing page. Absent on every other application card,
+  // which render exactly as before.
+  href?: string;
+  linkLabel?: string;
 }>;
 
 export type BusbarCatalogContent = Readonly<{
@@ -194,6 +199,8 @@ export const BUSBAR_CATALOG_CONTENT = {
           title: "Data centres",
           description:
             "Reliable power distribution for high-density and mission-critical electrical infrastructure.",
+          href: "/products/busbar/data-centre-busbar",
+          linkLabel: "Explore Data Centre Busbar Systems",
         },
         {
           id: "industrial-facilities",
@@ -383,6 +390,8 @@ export const BUSBAR_CATALOG_CONTENT = {
           title: "Центри обробки даних",
           description:
             "Надійний розподіл електроенергії для щільної та критично важливої електротехнічної інфраструктури.",
+          href: "/products/busbar/data-centre-busbar",
+          linkLabel: "Переглянути шинопроводи для ЦОД",
         },
         {
           id: "industrial-facilities",
