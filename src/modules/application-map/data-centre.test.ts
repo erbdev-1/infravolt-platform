@@ -150,6 +150,39 @@ describe("DATA_CENTRE_APPLICATION_MAP", () => {
     }
   });
 
+  it("gives the Cable Management product family a Data Centre Cable Management landing-page action, alongside its existing request/question actions, in both markets", () => {
+    const cableManagementFamily = DATA_CENTRE_APPLICATION_MAP.productFamilies.find(
+      (family) => family.id === "cable-management",
+    );
+    expect(cableManagementFamily).toBeDefined();
+
+    const ukHrefs = cableManagementFamily!.content.uk.actions.map((action) => action.href);
+    const uaHrefs = cableManagementFamily!.content.ua.actions.map((action) => action.href);
+
+    expect(ukHrefs).toContain("/products/cable-support-systems/data-centre-cable-management");
+    expect(uaHrefs).toContain("/products/cable-support-systems/data-centre-cable-management");
+    // Pre-existing technical-pack/quote/question actions are preserved, not replaced.
+    expect(ukHrefs).toContain("/uk-support?request=technical-pack&product=cable-management");
+    expect(ukHrefs).toContain("/uk-support?request=quote&product=cable-management");
+    expect(ukHrefs).toContain("/uk-support?request=technical-question&product=cable-management");
+    expect(uaHrefs).toContain("/uk-support?request=technical-pack&product=cable-management");
+    expect(uaHrefs).toContain("/uk-support?request=quote&product=cable-management");
+    expect(uaHrefs).toContain("/uk-support?request=technical-question&product=cable-management");
+  });
+
+  it("every cable-management hotspot has no actionsOverride, so it resolves the new landing-page action through the family default path asserted above", () => {
+    const cableManagementHotspots = DATA_CENTRE_APPLICATION_MAP.zones.flatMap((zone) =>
+      zone.hotspots.filter((hotspot) => hotspot.productFamilyId === "cable-management"),
+    );
+
+    expect(cableManagementHotspots.length).toBeGreaterThan(0);
+
+    for (const hotspot of cableManagementHotspots) {
+      const override = (hotspot as { actionsOverride?: unknown }).actionsOverride;
+      expect(override).toBeUndefined();
+    }
+  });
+
   it("references only canonical public media assets", () => {
     const imagePaths = [
       DATA_CENTRE_APPLICATION_MAP.overview.image,
