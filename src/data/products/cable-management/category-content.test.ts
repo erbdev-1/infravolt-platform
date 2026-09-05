@@ -147,3 +147,36 @@ describe("Cable Management UA Phase 1A SEO (own natural Ukrainian keyword strate
     expect(conduitCard?.title).toBe("Трубні та кабелепровідні системи");
   });
 });
+
+describe("Cable Management hub — Data Centres application card (Phase 2)", () => {
+  it("UK: the Data Centres card now links to the dedicated landing page, not the generic Application Map", () => {
+    const uk = cableManagementCategoryContentForMarket("uk");
+    const dataCentresCard = uk.applications.find((application) => application.slug === "data-centres");
+    expect(dataCentresCard?.href).toBe("/products/cable-support-systems/data-centre-cable-management");
+    expect(dataCentresCard?.viewLabel).toBe("Explore Data Centre Cable Management");
+    // Card title/description/image are unchanged — only the destination and its label moved.
+    expect(dataCentresCard?.title).toBe("Data Centres");
+    expect(dataCentresCard?.description).toBe(
+      "Structured cable routing for server halls, electrical rooms and mechanical plant — coordinated with power and cooling infrastructure.",
+    );
+  });
+
+  it("UA: the Data Centres card links to the same landing page with a natural Ukrainian label, title/description unchanged", () => {
+    const ua = cableManagementCategoryContentForMarket("ua");
+    const dataCentresCard = ua.applications.find((application) => application.slug === "data-centres");
+    expect(dataCentresCard?.href).toBe("/products/cable-support-systems/data-centre-cable-management");
+    expect(dataCentresCard?.viewLabel).toBe("Переглянути системи для ЦОД");
+    expect(dataCentresCard?.title).toBe("Дата-центри");
+  });
+
+  it("every other sector card keeps its original Application Map destination and 'View Map' label, both markets", () => {
+    for (const market of ["uk", "ua"] as const) {
+      const content = cableManagementCategoryContentForMarket(market);
+      const otherCards = content.applications.filter((application) => application.slug !== "data-centres");
+      expect(otherCards.length).toBeGreaterThan(0);
+      for (const card of otherCards) {
+        expect(card.href).toMatch(/^\/application-map/);
+      }
+    }
+  });
+});

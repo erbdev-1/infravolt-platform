@@ -35,6 +35,11 @@ const PRODUCT_FAMILIES = [
         ],
         actions: [
           {
+            label: "Data Centre Cable Management",
+            href: "/products/cable-support-systems/data-centre-cable-management",
+            type: "page",
+          },
+          {
             label: "Request Technical Pack",
             href: "/uk-support?request=technical-pack&product=cable-management",
             type: "request",
@@ -63,6 +68,11 @@ const PRODUCT_FAMILIES = [
           "Менше кабельного безладу, кращий повітрообмін",
         ],
         actions: [
+          {
+            label: "Кабеленесучі системи для ЦОД",
+            href: "/products/cable-support-systems/data-centre-cable-management",
+            type: "page",
+          },
           {
             label: "Запросити технічний пакет",
             href: "/uk-support?request=technical-pack&product=cable-management",

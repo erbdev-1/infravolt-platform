@@ -262,10 +262,13 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
     applicationsIntroduction:
       "See how Gersan cable trays, ladders and support systems are specified across major sectors — explore the full application map for typical products, zones and quantities.",
     // 8 sectors — one card per set of industry imagery in
-    // public/assets/industries/cards/. `href` is only set for sectors with
-    // a real, built Application Map route (see
-    // src/app/(public)/application-map/**); the rest render as non-link
-    // "coming soon" cards rather than a link to a page that doesn't exist.
+    // public/assets/industries/cards/. `href` is set for sectors with a
+    // real, built destination page — the Application Map (see
+    // src/app/(public)/application-map/**) for most, or the dedicated Data
+    // Centre Cable Management landing page for the "data-centres" card
+    // specifically; the rest without a built destination render as
+    // non-link "coming soon" cards rather than a link to a page that
+    // doesn't exist.
     applications: [
       {
         slug: "data-centres",
@@ -274,8 +277,8 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
           "Structured cable routing for server halls, electrical rooms and mechanical plant — coordinated with power and cooling infrastructure.",
         image: publicMediaUrl("industries/cards/data-centres.webp"),
         imageAlt: "Data centre server hall with structured cable routing",
-        href: "/application-map",
-        viewLabel: "View Map",
+        href: "/products/cable-support-systems/data-centre-cable-management",
+        viewLabel: "Explore Data Centre Cable Management",
       },
       {
         slug: "healthcare",
@@ -558,8 +561,8 @@ const CABLE_MANAGEMENT_CATEGORY_CONTENT_BY_MARKET: Readonly<Record<MarketCode, C
           "Структуроване прокладання кабелів для серверних залів, електрощитових і механічних приміщень — узгоджене з інфраструктурою живлення та охолодження.",
         image: publicMediaUrl("industries/cards/data-centres.webp"),
         imageAlt: "Серверний зал дата-центру зі структурованим прокладанням кабелів",
-        href: "/application-map",
-        viewLabel: "Переглянути карту",
+        href: "/products/cable-support-systems/data-centre-cable-management",
+        viewLabel: "Переглянути системи для ЦОД",
       },
       {
         slug: "healthcare",

@@ -117,6 +117,7 @@ const BUSBAR_PATHS = [
 ].map((slug) => `/products/busbar/${slug}`);
 
 const CABLE_FAMILY_PATHS = [
+  "data-centre-cable-management",
   "cable-ladder-c-profile-rung",
   "heavy-duty-cable-ladders",
   "gcmc-concave-convex-ladder",
