@@ -86,6 +86,27 @@ describe("HomePage", () => {
         ).toBeInTheDocument();
       }
 
+      // Phase 2: the Data Centres card now links to the dedicated
+      // /data-centres hub with its own truthful action label, while every
+      // other industry card keeps the shared Application Map destination
+      // and default action label.
+      const dataCentresItem = content.industries.items.find(
+        (item) => item.id === "data-centres",
+      )!;
+      const dataCentresLink = within(industries as HTMLElement).getByRole("link", {
+        name: `${dataCentresItem.actionLabel}: ${dataCentresItem.title}`,
+      });
+      expect(dataCentresLink).toHaveAttribute("href", "/data-centres");
+
+      for (const item of content.industries.items) {
+        if (item.id === "data-centres") continue;
+        expect(
+          within(industries as HTMLElement).getByRole("link", {
+            name: `${content.industries.actionLabel}: ${item.title}`,
+          }),
+        ).toHaveAttribute("href", item.href);
+      }
+
       const fragmentLinks = [
         ...container.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'),
       ];

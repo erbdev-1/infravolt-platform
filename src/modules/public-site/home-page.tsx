@@ -270,37 +270,41 @@ export function HomePageView({ market }: HomePageViewProps) {
             title={content.industries.title}
           />
           <div className="industry-grid">
-            {content.industries.items.map((item) => (
-              <article className="industry-card" key={item.id}>
-                <a
-                  aria-label={`${content.industries.actionLabel}: ${item.title}`}
-                  className="industry-card__link"
-                  href={item.href}
-                >
-                  <div className="industry-card__media">
-                    <Image
-                      alt={item.imageAlt}
-                      fill
-                      sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
-                      src={INDUSTRY_ASSETS[item.id].image}
-                      unoptimized
-                    />
-                  </div>
+            {content.industries.items.map((item) => {
+              const actionLabel = item.actionLabel ?? content.industries.actionLabel;
 
-                  <div className="industry-card__content">
-                    <div className="industry-card__copy">
-                      <h3>{item.title}</h3>
-                      <p>{item.description}</p>
+              return (
+                <article className="industry-card" key={item.id}>
+                  <a
+                    aria-label={`${actionLabel}: ${item.title}`}
+                    className="industry-card__link"
+                    href={item.href}
+                  >
+                    <div className="industry-card__media">
+                      <Image
+                        alt={item.imageAlt}
+                        fill
+                        sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
+                        src={INDUSTRY_ASSETS[item.id].image}
+                        unoptimized
+                      />
                     </div>
 
-                    <span aria-hidden="true" className="industry-card__action">
-                      <span>{content.industries.actionLabel}</span>
-                      <span className="industry-card__arrow">→</span>
-                    </span>
-                  </div>
-                </a>
-              </article>
-            ))}
+                    <div className="industry-card__content">
+                      <div className="industry-card__copy">
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                      </div>
+
+                      <span aria-hidden="true" className="industry-card__action">
+                        <span>{actionLabel}</span>
+                        <span className="industry-card__arrow">→</span>
+                      </span>
+                    </div>
+                  </a>
+                </article>
+              );
+            })}
           </div>
         </Container>
       </Section>

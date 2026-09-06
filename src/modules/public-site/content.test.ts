@@ -22,3 +22,47 @@ describe("publicSiteContentForMarket — UK footer registered office address", (
     expect(ua.shell.registeredOffice).toBeUndefined();
   });
 });
+
+describe("publicSiteContentForMarket — homepage Data Centres industry card (Phase 2)", () => {
+  it("UK: the Data Centres card now links to the dedicated /data-centres hub, with a truthful custom action label", () => {
+    const uk = publicSiteContentForMarket("uk");
+    const dataCentresCard = uk.industries.items.find((item) => item.id === "data-centres");
+
+    expect(dataCentresCard?.href).toBe("/data-centres");
+    expect(dataCentresCard?.actionLabel).toBe("Explore Data Centre Systems");
+    // Title/description/imageAlt are unchanged — only the destination and its label were added.
+    expect(dataCentresCard?.title).toBe("Data Centres");
+    expect(dataCentresCard?.description).toBe(
+      "System coordination for dense, continuity-focused technical environments.",
+    );
+  });
+
+  it("UA: the Data Centres card links to the same hub with a natural Ukrainian action label, title/description unchanged", () => {
+    const ua = publicSiteContentForMarket("ua");
+    const dataCentresCard = ua.industries.items.find((item) => item.id === "data-centres");
+
+    expect(dataCentresCard?.href).toBe("/data-centres");
+    expect(dataCentresCard?.actionLabel).toBe("Системи для ЦОД");
+    expect(dataCentresCard?.title).toBe("Центри обробки даних");
+  });
+
+  it("every other industry card keeps its original Application Map destination and no actionLabel override, both markets", () => {
+    for (const market of ["uk", "ua"] as const) {
+      const content = publicSiteContentForMarket(market);
+      const otherCards = content.industries.items.filter((item) => item.id !== "data-centres");
+
+      expect(otherCards).toHaveLength(7);
+      for (const card of otherCards) {
+        expect(card.href).toMatch(/^\/application-map/);
+        expect(card.actionLabel).toBeUndefined();
+      }
+    }
+  });
+
+  it("the separate Featured Application Map homepage CTA still points to /application-map, both markets", () => {
+    for (const market of ["uk", "ua"] as const) {
+      const content = publicSiteContentForMarket(market);
+      expect(content.applicationMap.action.href).toBe("/application-map");
+    }
+  });
+});

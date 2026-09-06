@@ -65,6 +65,10 @@ export type DataCentreBusbarLandingContent = Readonly<{
     current: string;
   }>;
   entityStatement: string;
+  // Phase 2 Data Centre Infrastructure Hub backlink — see
+  // src/data/data-centres/content.ts. Label only; the href is always
+  // "/data-centres", set directly in the component.
+  dataCentresBacklinkLabel: string;
   hero: Readonly<{
     eyebrow: string;
     title: string;
@@ -132,6 +136,7 @@ const content = {
     },
     entityStatement:
       "Gersan manufactures the busbar systems shown on this page. InfraVolt supports UK and Ukraine projects with product selection, technical-commercial coordination and enquiries.",
+    dataCentresBacklinkLabel: "Data Centre Infrastructure Overview",
     hero: {
       eyebrow: "DATA CENTRE POWER DISTRIBUTION",
       title: "Data Centre Busbar Trunking Systems",
@@ -298,6 +303,7 @@ const content = {
     },
     entityStatement:
       "Gersan виробляє шинопровідні системи, представлені на цій сторінці. InfraVolt супроводжує проєкти у Великій Британії та Україні: підбір продукції, технічно-комерційна координація та обробка запитів.",
+    dataCentresBacklinkLabel: "Огляд інфраструктури ЦОД",
     hero: {
       eyebrow: "РОЗПОДІЛ ЖИВЛЕННЯ В ЦОД",
       title: "Шинопроводи для центрів обробки даних",

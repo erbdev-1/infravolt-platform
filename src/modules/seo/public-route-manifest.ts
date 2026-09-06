@@ -11,6 +11,7 @@ const STATIC_PUBLIC_PATHS = [
   "/application-map/transport-infrastructure",
   "/commercial-partners",
   "/contact",
+  "/data-centres",
   "/products/busbar",
   "/products/cable-support-systems",
   "/products/cable-support-systems/accessories-fixings",

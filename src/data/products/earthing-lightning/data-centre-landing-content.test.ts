@@ -169,3 +169,14 @@ describe("dataCentreEarthingLandingContentForMarket — UA", () => {
     }
   });
 });
+
+describe("dataCentreEarthingLandingContentForMarket — Data Centre Infrastructure Hub backlink (Phase 2)", () => {
+  it("carries a truthful, localized backlink label to /data-centres, both markets", () => {
+    expect(dataCentreEarthingLandingContentForMarket("uk").dataCentresBacklinkLabel).toBe(
+      "Data Centre Infrastructure Overview",
+    );
+    expect(dataCentreEarthingLandingContentForMarket("ua").dataCentresBacklinkLabel).toBe(
+      "Огляд інфраструктури ЦОД",
+    );
+  });
+});

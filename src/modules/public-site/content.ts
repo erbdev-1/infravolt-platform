@@ -60,6 +60,12 @@ type IndustryItem = ContentCard &
     // "#application-map" ile aynı sayfadaki Featured Application Map
     // bölümüne düşer (kırık link yerine mevcut, çalışan bir hedef).
     href: `#${string}` | `/${string}`;
+    // Optional per-card override for the shared industries.actionLabel —
+    // only set for "data-centres" so it truthfully reads "Explore Data
+    // Centre Systems" now that its href points to the dedicated /data-centres
+    // hub instead of the generic Application Map. Every other card is left
+    // unset and keeps the shared actionLabel ("View application map").
+    actionLabel?: string;
   }>;
 
 type Navigation = readonly [
@@ -447,7 +453,8 @@ export const PUBLIC_SITE_CONTENT = {
             "System coordination for dense, continuity-focused technical environments.",
           imageAlt:
             "Illustrative data-centre server hall showing electrical service routes",
-          href: "/application-map",
+          href: "/data-centres",
+          actionLabel: "Explore Data Centre Systems",
         },
         {
           id: "commercial-buildings",
@@ -932,7 +939,8 @@ export const PUBLIC_SITE_CONTENT = {
             "Координація систем для щільних технічних середовищ із фокусом на безперервності.",
           imageAlt:
             "Ілюстративний серверний зал із маршрутами інженерних мереж",
-          href: "/application-map",
+          href: "/data-centres",
+          actionLabel: "Системи для ЦОД",
         },
         {
           id: "commercial-buildings",

@@ -35,6 +35,10 @@ export function DataCentreEarthingLandingPage({
         <span>{content.breadcrumbs.current}</span>
       </div>
 
+      <p className={styles.tertiaryLink}>
+        <Link href="/data-centres">{content.dataCentresBacklinkLabel}</Link>
+      </p>
+
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>{content.hero.eyebrow}</p>
