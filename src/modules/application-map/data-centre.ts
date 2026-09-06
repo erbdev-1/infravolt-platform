@@ -248,6 +248,11 @@ const PRODUCT_FAMILIES = [
         ],
         actions: [
           {
+            label: "Data Centre Earthing & Bonding",
+            href: "/products/earthing-and-lightning-protection/data-centre-earthing",
+            type: "page",
+          },
+          {
             label: "Request Technical Pack",
             href: "/uk-support?request=technical-pack&product=earthing-lightning",
             type: "request",
@@ -275,6 +280,11 @@ const PRODUCT_FAMILIES = [
           "Захист обладнання від імпульсних перенапруг, пов'язаних з блискавкою",
         ],
         actions: [
+          {
+            label: "Заземлення для ЦОД",
+            href: "/products/earthing-and-lightning-protection/data-centre-earthing",
+            type: "page",
+          },
           {
             label: "Запросити технічний пакет",
             href: "/uk-support?request=technical-pack&product=earthing-lightning",

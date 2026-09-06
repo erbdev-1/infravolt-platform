@@ -170,6 +170,39 @@ describe("DATA_CENTRE_APPLICATION_MAP", () => {
     expect(uaHrefs).toContain("/uk-support?request=technical-question&product=cable-management");
   });
 
+  it("gives the Earthing & Lightning Protection product family a Data Centre Earthing landing-page action, alongside its existing request/question actions, in both markets", () => {
+    const earthingFamily = DATA_CENTRE_APPLICATION_MAP.productFamilies.find(
+      (family) => family.id === "earthing-lightning",
+    );
+    expect(earthingFamily).toBeDefined();
+
+    const ukHrefs = earthingFamily!.content.uk.actions.map((action) => action.href);
+    const uaHrefs = earthingFamily!.content.ua.actions.map((action) => action.href);
+
+    expect(ukHrefs).toContain("/products/earthing-and-lightning-protection/data-centre-earthing");
+    expect(uaHrefs).toContain("/products/earthing-and-lightning-protection/data-centre-earthing");
+    // Pre-existing technical-pack/quote/question actions are preserved, not replaced.
+    expect(ukHrefs).toContain("/uk-support?request=technical-pack&product=earthing-lightning");
+    expect(ukHrefs).toContain("/uk-support?request=quote&product=earthing-lightning");
+    expect(ukHrefs).toContain("/uk-support?request=technical-question&product=earthing-lightning");
+    expect(uaHrefs).toContain("/uk-support?request=technical-pack&product=earthing-lightning");
+    expect(uaHrefs).toContain("/uk-support?request=quote&product=earthing-lightning");
+    expect(uaHrefs).toContain("/uk-support?request=technical-question&product=earthing-lightning");
+  });
+
+  it("every earthing-lightning hotspot has no actionsOverride, so it resolves the new landing-page action through the family default path asserted above", () => {
+    const earthingHotspots = DATA_CENTRE_APPLICATION_MAP.zones.flatMap((zone) =>
+      zone.hotspots.filter((hotspot) => hotspot.productFamilyId === "earthing-lightning"),
+    );
+
+    expect(earthingHotspots.length).toBeGreaterThan(0);
+
+    for (const hotspot of earthingHotspots) {
+      const override = (hotspot as { actionsOverride?: unknown }).actionsOverride;
+      expect(override).toBeUndefined();
+    }
+  });
+
   it("every cable-management hotspot has no actionsOverride, so it resolves the new landing-page action through the family default path asserted above", () => {
     const cableManagementHotspots = DATA_CENTRE_APPLICATION_MAP.zones.flatMap((zone) =>
       zone.hotspots.filter((hotspot) => hotspot.productFamilyId === "cable-management"),
