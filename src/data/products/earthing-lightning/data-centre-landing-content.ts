@@ -64,6 +64,10 @@ export type DataCentreEarthingLandingContent = Readonly<{
     current: string;
   }>;
   entityStatement: string;
+  // Phase 2 Data Centre Infrastructure Hub backlink — see
+  // src/data/data-centres/content.ts. Label only; the href is always
+  // "/data-centres", set directly in the component.
+  dataCentresBacklinkLabel: string;
   hero: Readonly<{
     eyebrow: string;
     title: string;
@@ -138,6 +142,7 @@ const content = {
     },
     entityStatement:
       "Gersan manufactures the earthing and lightning-protection components shown on this page. InfraVolt supports UK and Ukraine projects with product selection, technical-commercial coordination and enquiries.",
+    dataCentresBacklinkLabel: "Data Centre Infrastructure Overview",
     hero: {
       eyebrow: "DATA CENTRE EARTHING & BONDING",
       title: "Data Centre Earthing & Bonding Systems",
@@ -337,6 +342,7 @@ const content = {
     },
     entityStatement:
       "Gersan виробляє компоненти заземлення та блискавкозахисту, представлені на цій сторінці. InfraVolt супроводжує проєкти у Великій Британії та Україні: підбір продукції, технічно-комерційна координація та обробка запитів.",
+    dataCentresBacklinkLabel: "Огляд інфраструктури ЦОД",
     hero: {
       eyebrow: "ЗАЗЕМЛЕННЯ ТА ЗРІВНЮВАННЯ ПОТЕНЦІАЛІВ ДЛЯ ЦОД",
       title: "Заземлення та зрівнювання потенціалів для центрів обробки даних",

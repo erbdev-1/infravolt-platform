@@ -64,6 +64,10 @@ export type DataCentreCableManagementLandingContent = Readonly<{
     current: string;
   }>;
   entityStatement: string;
+  // Phase 2 Data Centre Infrastructure Hub backlink — see
+  // src/data/data-centres/content.ts. Label only; the href is always
+  // "/data-centres", set directly in the component.
+  dataCentresBacklinkLabel: string;
   hero: Readonly<{
     eyebrow: string;
     title: string;
@@ -139,6 +143,7 @@ const content = {
     },
     entityStatement:
       "Gersan manufactures the cable management systems shown on this page. InfraVolt supports UK and Ukraine projects with system selection, technical-commercial coordination and enquiries.",
+    dataCentresBacklinkLabel: "Data Centre Infrastructure Overview",
     hero: {
       eyebrow: "DATA CENTRE CABLE CONTAINMENT",
       title: "Data Centre Cable Management Systems",
@@ -316,6 +321,7 @@ const content = {
     },
     entityStatement:
       "Gersan виробляє кабеленесучі системи, представлені на цій сторінці. InfraVolt супроводжує проєкти у Великій Британії та Україні: підбір систем, технічно-комерційна координація та обробка запитів.",
+    dataCentresBacklinkLabel: "Огляд інфраструктури ЦОД",
     hero: {
       eyebrow: "КАБЕЛЬНІ СИСТЕМИ ДЛЯ ЦОД",
       title: "Кабеленесучі системи для центрів обробки даних",
