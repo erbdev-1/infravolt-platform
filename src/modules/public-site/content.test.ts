@@ -23,6 +23,23 @@ describe("publicSiteContentForMarket — UK footer registered office address", (
   });
 });
 
+describe("publicSiteContentForMarket — UA footer Odesa office address", () => {
+  it("UA shell carries the neutral office-address label and the exact Odesa address lines", () => {
+    const ua = publicSiteContentForMarket("ua");
+
+    expect(ua.shell.officeAddress).toEqual({
+      label: "Офіс в Одесі",
+      lines: ["вул. Рішельєвська, 40", "Одеса, Одеська область", "65000, Україна"],
+    });
+  });
+
+  it("UK shell does not carry an officeAddress field (UA-only)", () => {
+    const uk = publicSiteContentForMarket("uk");
+
+    expect(uk.shell.officeAddress).toBeUndefined();
+  });
+});
+
 describe("publicSiteContentForMarket — homepage Data Centres industry card (Phase 2)", () => {
   it("UK: the Data Centres card now links to the dedicated /data-centres hub, with a truthful custom action label", () => {
     const uk = publicSiteContentForMarket("uk");

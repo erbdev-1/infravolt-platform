@@ -41,6 +41,16 @@ export function ContactPage({
               <a className={styles.heroEmail} href={`mailto:${content.hero.contactDetails.email}`}>
                 <strong>{content.hero.contactDetails.email}</strong>
               </a>
+              {content.hero.contactDetails.officeAddress ? (
+                <address className={styles.heroAddress}>
+                  <span className={styles.heroAddressLabel}>
+                    {content.hero.contactDetails.officeAddress.label}
+                  </span>
+                  {content.hero.contactDetails.officeAddress.lines.map((line) => (
+                    <span key={line}>{line}</span>
+                  ))}
+                </address>
+              ) : null}
             </aside>
           ) : null}
         </div>

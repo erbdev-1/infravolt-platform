@@ -140,6 +140,12 @@ export type PublicSiteContent = Readonly<{
     // content (not just empty) so there is no risk of it rendering, or of
     // an English legal address leaking into the Ukrainian-localised footer.
     registeredOffice?: Readonly<{ label: string; lines: readonly string[] }>;
+    // UA-only neutral office/contact address (the Odesa address supplied
+    // by the business) — deliberately a separate field from
+    // registeredOffice, never labelled "Registered Office" or any
+    // stronger legal/commercial status. Omitted entirely from the UK
+    // shell content so it can never render there.
+    officeAddress?: Readonly<{ label: string; lines: readonly string[] }>;
     enquiryLabel: string;
     commercialGroupLabel: string;
     commercialPartnersLabel: string;
@@ -800,6 +806,14 @@ export const PUBLIC_SITE_CONTENT = {
       localeName: "uk-UA",
       brandDescriptor: "Електрична інфраструктура",
       relationshipLabel: "ОФІЦІЙНИЙ ДИСТРИБ’ЮТОР В УКРАЇНІ",
+      officeAddress: {
+        label: "Офіс в Одесі",
+        lines: [
+          "вул. Рішельєвська, 40",
+          "Одеса, Одеська область",
+          "65000, Україна",
+        ],
+      },
       enquiryLabel: "Запит",
       commercialGroupLabel: "Комерційні можливості",
       commercialPartnersLabel: "Комерційні партнери",

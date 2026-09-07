@@ -20,6 +20,11 @@ export type ContactPageContent = Readonly<{
     contactDetails?: Readonly<{
       heading: string;
       email?: string;
+      /** UA-only neutral office/contact address (the Odesa address
+       * supplied by the business) — never labelled "registered office",
+       * legal address, headquarters or branch. Omitted entirely for the
+       * UK market, which has no equivalent address on this page. */
+      officeAddress?: Readonly<{ label: string; lines: readonly string[] }>;
     }>;
   }>;
   typeSectionHeading: string;
@@ -270,6 +275,14 @@ const CONTENT: Record<MarketCode, ContactPageContent> = {
       contactDetails: {
         heading: "Контактні дані",
         email: "info@infravolt.com.ua",
+        officeAddress: {
+          label: "Офіс в Одесі",
+          lines: [
+            "вул. Рішельєвська, 40",
+            "Одеса, Одеська область",
+            "65000, Україна",
+          ],
+        },
       },
     },
     typeSectionHeading: "Чим ми можемо вам допомогти?",

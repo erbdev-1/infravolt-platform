@@ -45,8 +45,9 @@ export type OrganizationJsonLdInput = Readonly<{
   email: string;
   /** schema.org Country name, e.g. "United Kingdom" / "Ukraine". */
   areaServedCountry: string;
-  /** UK-only today — the Ukraine market has no currently-verified public
-   * registered address, so callers must omit this rather than guess one. */
+  /** Optional per-market address — omit entirely for a market with no
+   * currently-verified public address rather than guessing one. Both UK
+   * and UA callers supply this today; see src/app/(public)/page.tsx. */
   address?: OrganizationAddressInput;
 }>;
 

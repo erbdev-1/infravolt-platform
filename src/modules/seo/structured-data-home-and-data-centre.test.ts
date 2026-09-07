@@ -21,12 +21,21 @@ import {
 const CONTACT_EMAIL = { uk: "info@infravolt.co.uk", ua: "info@infravolt.com.ua" } as const;
 const AREA_SERVED_COUNTRY = { uk: "United Kingdom", ua: "Ukraine" } as const;
 const HOME_LANGUAGE = { uk: "en-GB", ua: "uk-UA" } as const;
-const UK_REGISTERED_OFFICE: OrganizationAddressInput = {
-  streetAddress: "HTS Building, Tyne View Terrace",
-  addressLocality: "Wallsend",
-  addressRegion: "Tyne and Wear",
-  postalCode: "NE28 6SG",
-  addressCountry: "GB",
+const MARKET_ORGANIZATION_ADDRESS: Readonly<Record<"uk" | "ua", OrganizationAddressInput>> = {
+  uk: {
+    streetAddress: "HTS Building, Tyne View Terrace",
+    addressLocality: "Wallsend",
+    addressRegion: "Tyne and Wear",
+    postalCode: "NE28 6SG",
+    addressCountry: "GB",
+  },
+  ua: {
+    streetAddress: "вул. Рішельєвська, 40",
+    addressLocality: "Одеса",
+    addressRegion: "Одеська область",
+    postalCode: "65000",
+    addressCountry: "UA",
+  },
 };
 
 const PRODUCTION_ORIGINS = { uk: "https://infravolt.co.uk", ua: "https://infravolt.com.ua" } as const;
@@ -43,7 +52,7 @@ function buildHomeGraph(market: "uk" | "ua") {
       description: content.metadata.description,
       email: CONTACT_EMAIL[market],
       areaServedCountry: AREA_SERVED_COUNTRY[market],
-      address: market === "uk" ? UK_REGISTERED_OFFICE : undefined,
+      address: MARKET_ORGANIZATION_ADDRESS[market],
     }),
     buildWebSiteJsonLd({ origin, name: "InfraVolt", inLanguage: HOME_LANGUAGE[market] }),
   ]);
@@ -118,14 +127,25 @@ describe("Home page structured data — UA", () => {
     expect(website.publisher).toEqual({ "@id": "https://infravolt.com.ua/#organization" });
   });
 
-  it("has no address — no currently-verified public UA registered address", () => {
-    expect(organization).not.toHaveProperty("address");
+  it("carries the exact UA Odesa office address (business-supplied contact address, not a legal/registered address)", () => {
+    expect(organization.address).toEqual({
+      "@type": "PostalAddress",
+      streetAddress: "вул. Рішельєвська, 40",
+      addressLocality: "Одеса",
+      addressRegion: "Одеська область",
+      postalCode: "65000",
+      addressCountry: "UA",
+    });
   });
 
-  it("never encodes InfraVolt as a manufacturer, never adds sameAs/telephone", () => {
+  it("never encodes InfraVolt as a manufacturer, never adds sameAs/telephone/legalName, and emits no LocalBusiness type", () => {
     expect(organization).not.toHaveProperty("manufacturer");
     expect(organization).not.toHaveProperty("sameAs");
     expect(organization).not.toHaveProperty("telephone");
+    expect(organization).not.toHaveProperty("legalName");
+    expect(organization["@type"]).toBe("Organization");
+    const serialized = JSON.stringify(graph);
+    expect(serialized).not.toContain("LocalBusiness");
   });
 
   it("uses only production URLs — no localhost/www", () => {
