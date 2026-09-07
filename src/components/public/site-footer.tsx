@@ -109,6 +109,21 @@ export function SiteFooter({ content, market }: SiteFooterProps) {
               ))}
             </address>
           ) : null}
+          {/* UA-only neutral office address (Odesa) — reuses the same
+              presentational block/classes as registeredOffice above; the
+              two fields are mutually exclusive per market (see
+              modules/public-site/content.ts), so this never duplicates
+              the registered-office block. */}
+          {content.officeAddress ? (
+            <address className="site-footer__registered-office">
+              <span className="site-footer__registered-office-label">
+                {content.officeAddress.label}
+              </span>
+              {content.officeAddress.lines.map((line) => (
+                <span key={line}>{line}</span>
+              ))}
+            </address>
+          ) : null}
         </div>
 
         <FooterNavAccordion

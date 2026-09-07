@@ -55,18 +55,23 @@ describe("buildOrganizationJsonLd", () => {
     expect(node).not.toHaveProperty("legalName");
   });
 
-  it("omits address entirely when none is provided (Ukraine market)", () => {
+  // Generic builder capability, not a description of a real market today —
+  // both UK and UA currently supply a verified address (see
+  // structured-data-home-and-data-centre.test.ts). This only proves the
+  // builder itself tolerates a future market with no verified address yet,
+  // by omitting the field entirely rather than emitting a guessed one.
+  it("omits address entirely when the caller supplies none", () => {
     const node = buildOrganizationJsonLd({
-      origin: "https://infravolt.com.ua",
+      origin: "https://example.infravolt.test",
       name: "InfraVolt",
-      logoUrl: "https://infravolt.com.ua/assets/brand/infravolt-wordmark-transparent.webp",
-      description: "Системи електричної інфраструктури Gersan для України.",
-      email: "info@infravolt.com.ua",
-      areaServedCountry: "Ukraine",
+      logoUrl: "https://example.infravolt.test/assets/brand/infravolt-wordmark-transparent.webp",
+      description: "Placeholder description for a market with no verified address yet.",
+      email: "info@example.infravolt.test",
+      areaServedCountry: "Placeholder Country",
     });
 
     expect(node).not.toHaveProperty("address");
-    expect(node.areaServed).toEqual({ "@type": "Country", name: "Ukraine" });
+    expect(node.areaServed).toEqual({ "@type": "Country", name: "Placeholder Country" });
   });
 });
 

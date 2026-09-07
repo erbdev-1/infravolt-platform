@@ -29,9 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 // Every value below is reused from existing, already-published market
-// content (footer registered-office address, contact-form emails) —
-// nothing here is a new business fact. See structured-data.ts for why the
-// UK-only address, and no telephone/sameAs/legalName, are intentional.
+// content (footer address block, contact-form emails) — nothing here is a
+// new business fact. See structured-data.ts for why no
+// telephone/sameAs/legalName/LocalBusiness is emitted for either market.
 const CONTACT_EMAIL: Readonly<Record<MarketCode, string>> = {
   uk: "info@infravolt.co.uk",
   ua: "info@infravolt.com.ua",
@@ -47,15 +47,27 @@ const HOME_LANGUAGE: Readonly<Record<MarketCode, string>> = {
   ua: "uk-UA",
 };
 
-// Matches the footer's Registered Office lines verbatim
-// (modules/public-site/content.ts) — UK only; Ukraine has no
-// currently-verified public registered address to encode.
-const UK_REGISTERED_OFFICE: OrganizationAddressInput = {
-  streetAddress: "HTS Building, Tyne View Terrace",
-  addressLocality: "Wallsend",
-  addressRegion: "Tyne and Wear",
-  postalCode: "NE28 6SG",
-  addressCountry: "GB",
+// UK: matches the footer's Registered Office lines verbatim
+// (modules/public-site/content.ts). UA: matches the footer's neutral
+// Odesa office-address lines verbatim (modules/public-site/content.ts,
+// officeAddress) and the UA Contact page's address panel
+// (modules/public-site/contact-content.ts) — a supplied InfraVolt Ukraine
+// office/contact address, not a registered/legal address.
+const MARKET_ORGANIZATION_ADDRESS: Readonly<Record<MarketCode, OrganizationAddressInput>> = {
+  uk: {
+    streetAddress: "HTS Building, Tyne View Terrace",
+    addressLocality: "Wallsend",
+    addressRegion: "Tyne and Wear",
+    postalCode: "NE28 6SG",
+    addressCountry: "GB",
+  },
+  ua: {
+    streetAddress: "вул. Рішельєвська, 40",
+    addressLocality: "Одеса",
+    addressRegion: "Одеська область",
+    postalCode: "65000",
+    addressCountry: "UA",
+  },
 };
 
 export default async function HomePage() {
@@ -75,7 +87,7 @@ export default async function HomePage() {
       description: content.metadata.description,
       email: CONTACT_EMAIL[market],
       areaServedCountry: AREA_SERVED_COUNTRY[market],
-      address: market === "uk" ? UK_REGISTERED_OFFICE : undefined,
+      address: MARKET_ORGANIZATION_ADDRESS[market],
     }),
     buildWebSiteJsonLd({
       origin,
