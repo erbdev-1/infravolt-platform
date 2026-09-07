@@ -23,6 +23,14 @@ const nextConfig: NextConfig = {
   // src/modules/enquiry/attachments.ts) — file bytes never pass through a
   // Server Action request body, so the framework default is fine.
   images: {
+    // Emergency hotfix: Vercel Image Optimization quota (transformations +
+    // cache writes) was exhausted in production, causing 402
+    // OPTIMIZED_IMAGE_REQUEST_PAYMENT_REQUIRED on every /_next/image
+    // request. Source assets on the R2 custom domain
+    // (NEXT_PUBLIC_ASSET_BASE_URL) are healthy and directly reachable, so
+    // next/image now serves their original src unoptimized instead of
+    // routing through the paid optimization endpoint.
+    unoptimized: true,
     remotePatterns: [
       ...assetBaseRemotePattern(),
       // Pre-authorised for Supabase-backed private storage (enquiry attachments,
