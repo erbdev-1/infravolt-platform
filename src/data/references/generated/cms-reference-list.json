@@ -1,0 +1,5421 @@
+{
+  "source": {
+    "title": "GERSAN REFERENCE LIST- CABLE MANAGEMENT SYSTEMS",
+    "file": "GERSAN REFERENCE LIST- CMS.pdf",
+    "originalPath": "c:\\Users\\erhan\\Desktop\\Dosyalar\\gersan\\NHS\\NHS New Hospital Programme\\Referans List\\GERSAN REFERENCE LIST- CMS.pdf",
+    "columns": [
+      "Contractor/Consultant",
+      "Project",
+      "End Client / Owner",
+      "Product"
+    ],
+    "pages": 97,
+    "rowFormat": "Each row is a 4-tuple [contractor, project, endClient, product], grouped by source PDF page.",
+    "note": "Full-fidelity transcription of every legitimate row across all 97 pages. Two rows were excluded at import time as Russia-linked (client identity, not location): a NEFT BADRA B.V (Iraq) row whose end client is GAZPROM, and a West Qurna Phase 2 (Iraq) row whose end client is LUKOIL MID-EAST LIMITED. No Iran-linked or Kurgan-Balt-linked rows were present in this source."
+  },
+  "excludedRecords": [
+    {
+      "id": "cms-pdf-excluded-1",
+      "page": 53,
+      "reason": "russia-linked-client",
+      "contractor": "IRAQI ELITE COMPANY FOR GENERAL CONTRACTS & ENGINEERING CONSULTANTIONS LTD",
+      "project": "NEFT BADRA B.V",
+      "endClient": "GAZPROM",
+      "product": "CABLE MANAGEMENT SYSTEM"
+    },
+    {
+      "id": "cms-pdf-excluded-2",
+      "page": 62,
+      "reason": "russia-linked-client",
+      "contractor": "SICIM S.p.A",
+      "project": "Engineering, Procurement & Construction for PRODUCED WATER TREATMENT AND WATER INJECTION FACILITIES (PHASE 1) AT THE WEST QURNA (PHASE 2) CONTRACT AREA",
+      "endClient": "LUKOIL MID-EAST LIMITED, IRAQ",
+      "product": "CABLE MANAGEMENT SYSTEM"
+    }
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "rows": [
+        [
+          "China Petroleum Pipeline Engineering Company Limited",
+          "RAS MARKAZ CRUDE OIL PARK PROJECT (PHASE1)",
+          "OMAN TANK TERMINAL COMPANY LLC",
+          "CABLE TRAY & LADDER"
+        ],
+        [
+          "COMAPLE S.L.",
+          "RAIZEN/BANDEJA/1BD1055C",
+          "RAIZEN ARGENTINA S.A.",
+          "CABLE LADDERS, TRAYS AND ACCESSORIES"
+        ],
+        [
+          "COMAPLE S.L.",
+          "02230 TOTAL RAFFINADERIJ ANTWERPEN OPTARA",
+          "TECNICAS REUNIDAS",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "COMAPLE S.L.",
+          "NEC 10PPM GB CILC ARGENTIA",
+          "TECNCIAS REUNIDAS",
+          "HDG CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "COMAPLE S.L.",
+          "OSTROLEKA CCGT",
+          "TECNCIAS REUNIDAS",
+          "HDG CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "COMAPLE S.L.",
+          "\"UNA (01) UNIDAD FUNCIONAL PARA TRATAMIENTO DE EMISIONES ATMOSFERICAS, UTILIZADA EN PROCESAMIENTO DE CORRIENTES DE PROCESO CON ALTO CONTENIDO DE AZUFRE\"",
+          "TECNCIAS REUNIDAS",
+          "HDG CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "COMAPLE S.L.",
+          "ENAP BIO BIO CHILE",
+          "TECNCIAS REUNIDAS",
+          "HDG CABLE TRAY, LADDER & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 2,
+      "rows": [
+        [
+          "DODSAL ENGG. AND CONST.FZE",
+          "EXECUTION OF A SEPARATION & COMPRESSION CENTRE AT THE PERIPHERY SOUTH HGA - PROJECT NO.: 86 SOUTH HGA",
+          "SONATRACH S.p.A., Algeria",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "DODSAL ENGG. AND CONST.FZE",
+          "EXECUTION OF THECOMPRESSION STATION IN HASSI R'MEL OF GAS LINE GR5 48\" REGGANE- KRECHBA-HASSI R'MEL",
+          "SONATRACH",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "EXTERRAN ENERGY FZE",
+          "FIRST 250MMSCFD TRAIN OF KM500 GAS TREATMENT PLANT - P.O. No.: 89004903/89005704(SKID PACKAGE)",
+          "PEARL PETROLEUM",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "EXTERRAN ENERGY FZE",
+          "FIRST 250MMSCFD TRAIN OF KM500 GAS TREATMENT PLANT - P.O. No.: 89005073/ 89005705/89006076 (BOP PACKAGE)",
+          "PEARL PETROLEUM",
+          "ELECTRICAL CABLE TRAY"
+        ],
+        [
+          "L & T HYDROCARBON ENGINEERING LIMITED",
+          "SOUTH WEST GAS FIELD DEVELOPMENT PROJECT",
+          "SONATRACH",
+          "HDG CABLE TRAY, LADDDER & ACCESSORIES"
+        ],
+        [
+          "LARSEN & TOUBRO- ABU DHABI",
+          "HALIBA DEVELOPMENT PROJECT / PO: HMDI/75000-50331/AJB",
+          "ADNOC",
+          "CABLE TRAY"
+        ],
+        [
+          "LARSEN & TOUBRO- ABU DHABI",
+          "HALIBA DEVELOPMENT PROJECT/ PO: HMDI/75000-50827/HVS",
+          "ADNOC",
+          "CABLE TRAY"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 3,
+      "rows": [
+        [
+          "LARSEN & TOUBRO LIMITED, CONSTRUCTION",
+          "HESSI BERKIN - REHABILATION & UPGRADING OF THE ELECTRICAL NETWORK OF THE BERKIN REGION",
+          "SONATRACH",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN &TOURBO - KUWAIT",
+          "NEW STRATEGIC GAS EXPORT PIPELINE FROM NORTH KUWAIT TO MAA",
+          "KUWAIT OIL COMPANY(K.S.C.) A Subsidiary of Kuwait Petroleum Corporation",
+          "ELECTRICAL AND INSTRUMENT CABLE TRAY"
+        ],
+        [
+          "PETROFAC INTERNATIONAL (UAE) LLC.",
+          "Development of the Tinrhert Gas Fields to Alrar \"Full Development\" EPC2 -Lot-1 Construction of Separation and Decarbonation Units in Alrar, Algeria",
+          "SONATRACH SPA, ALGERIA",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "HABSHAN 5 CO2RECOVERY and INJECTION PROJECT",
+          "ADNOC Gas",
+          "CABLE TRAYS, LADDERS AND ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "ASAB FULL FIELD DEVELOPMENT PROJECT",
+          "ADCO",
+          "HDG CABLE TRUNKING"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "ASAB FULL FIELD DEVELOPMENT PROJECT",
+          "ADCO",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "SALALAH LPG PROJECT",
+          "SALALAH LPG SFZ CO, OMAN",
+          "CABLE TRAYS"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 4,
+      "rows": [
+        [
+          "PETROFAC INTERNATIONAL",
+          "TURKSTREAM ONSHORE RECEIVING TERMINAL - TURKEY",
+          "SOUTH STREAM TRANSPORT B.V",
+          "CABLE TRY & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "GHAZEER PROJECT -KHAZZAN CENTRAL PROCESSING FACILITY",
+          "BP EXPLORATION(EPSILON) LIMITED, OMAN",
+          "CABLE TRAYS"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "MAJNOON CPF2 PROJECT, THE REPUBLIC OF IRAQ",
+          "BASRA OIL COMPANY",
+          "CABLE TRAYS"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "EPC FOR MOVEYEID GAS STORAGE SURFACE FACILITY PROJECT",
+          "SHARJAH NATIONAL OIL CORPORATION (SNOC)",
+          "CABLE LADDER, TRAYS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "IN SALAH GAS PROJECT - REQUISITION NO: 5918 1 OF 2 & 2 OF 2",
+          "OMAN",
+          "CABLE TRAYS & LADDERS"
+        ],
+        [
+          "PETROFAC INTERNATIONAL (UAE) LLC.",
+          "Development of the Tinrhert Gas Fields to Alrar \"Full Development\" EPC2 -Lot-1 Construction of Separation and Decarbonation Units in Alrar, Algeria",
+          "Sonatrach SPA, Algeria",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "PETROFACE INTERNATIONAL",
+          "THAI OIL CLEAN FUEL PROJECT",
+          "THAI OIL PUBLIC COMPANY LIMITED / SRIRACHA - THAILAND",
+          "CABLE TRAY & FITTINGS - INSTRUMENTATION"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 5,
+      "rows": [
+        [
+          "PETROFAC-ISKER LLP",
+          "EPCC OF THE NEW WATER TREATING FACILITIES (BROWNFIELD & GREENFIELD)",
+          "NORTH CASPIAN OPERATING COMPANY N.V.",
+          "CABLE LADDERS, TRAYS AND ACCESSORIES"
+        ],
+        [
+          "PETROFAC-ISKER LLP",
+          "JV-NCOC-EPCC FOR TIE-IN SCOPE FOR 1BCMA PROJECT (BROWNFIELD)",
+          "NORTH CASPIAN OPERATING COMPANY N.V.",
+          "CABLE LADDER & TRAYS"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "EPC FOR QUSAHWIRA FIELD DEVELOPMENT PROJECT",
+          "ADNOC-ONSHORE",
+          "CABLE TRAYS"
+        ],
+        [
+          "PETROFAC-SAMSUNG-CB&I JOINT VENTURE",
+          "CLEAN FUELS PROJECT (CFP) KUWAIT",
+          "Kuwait National Petroleum Company - KNPC",
+          "Clamps and Covers for Cable Trays"
+        ],
+        [
+          "NPCC / TECNICAS REUNIDAS ABU DHABI",
+          "MAXIMIZE ETHANE RECOVERY & MONETIZATION (MERAM)-EPC ELECTRICAL",
+          "ADNOC",
+          "CABLE TRAYS/LADDER & ACCESSORIES"
+        ],
+        [
+          "SAIPEM S.P.A",
+          "OPTIMUM SHAH GAS EXPANSION(OSGE)",
+          "ADNOC",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "SAIPEM S.P.A",
+          "THAI OIL CLEAN FUEL PROJECT",
+          "THAI OIL PUBLIC COMPANY LIMITED / SRIRACHA - THAILAND",
+          "CABLE TRAYS & FITTINGS"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 6,
+      "rows": [
+        [
+          "SAIPEM S.P.A",
+          "NEPTUN EPCI SWP # SUBSEA STRUCTURES",
+          "OMV PETROM",
+          "SS316L CABELE TRAYS & LADDERS"
+        ],
+        [
+          "SAMSUNG C&T ENG. & CONSTRUCTION GROUP",
+          "ALGERIA MEGA DEAL CCPP PROJECT(NAAMA SITE) - AMOS",
+          "SONELGAZ ELECTRICITY PRODUCTION COMPANY, ALGERIA",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "SAMSUNG ENGINEERING CO.LTD",
+          "THAI OIL CLEAN FUEL PROJECT",
+          "THAI OIL PUBLIC COMPANY LIMITED / SRIRACHA - THAILAND",
+          "CABLE TRAY & FITTINGS INSTRUMENTATION"
+        ],
+        [
+          "TECNICAS REUNIDAS",
+          "PROJECT ONE ECR INEOS BELGIUM",
+          "INEOS OLEFINS BELGIUM NV/SA",
+          "CABLE TRAYS"
+        ],
+        [
+          "TECNICAS REUNIDAS",
+          "EPC & C OF GAS TRAIN 5 PROJECT AT MAA REFINERY",
+          "MINA AL-AHMADI GT-5 - KNPC",
+          "CABLE TRAY"
+        ],
+        [
+          "TECNICAS REUNIDAS",
+          "CRUDE OIL AND FUEL OIL TANKS FARM(COFOT) IN START REFINERY TURKEY",
+          "STAR REFINERY TURKEY-SOCAR",
+          "CABLE TRAYS, LADDER & ACCESSORIES"
+        ],
+        [
+          "TECNICAS REUNIDAS / COMAPLE",
+          "NEC 10 PPM GB",
+          "YPF",
+          "CABLE TRAYS/LADDER & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 7,
+      "rows": [
+        [
+          "TECNICAS REUNIDAS ABU DHABI",
+          "BU HASA INTERGRATED FIELD DEVELOPMENT PROJECT",
+          "ADNOC",
+          "CABLE TRAYS/LADDER & ACCESSORIES"
+        ],
+        [
+          "NPCC / TECNICAS REUNIDAS ABU DHABI",
+          "MAXIMIZE ETHANE RECOVERY & MONETIZATION (MERAM)-EPC INSTRUMENT",
+          "ADNOC",
+          "CABLE TRAYS/LADDER & ACCESSORIES"
+        ],
+        [
+          "TECNICAS REUNIDAS(TR) / NICSA",
+          "LIQUID SEPARATION PLANT BY TURBOEXPANSION AT GRAN CHACO",
+          "YACIMIENTOS PETROLIFEROS FISCALES BOLIVIANOS (\"YPFB\"), BOLIVIA",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "TECNICAS REUNIDAS/ DAEWOOD E&C",
+          "DUQM REFINERY PCKG 1",
+          "DUQM",
+          "INSTRUMENT CABLE TRAYS"
+        ],
+        [
+          "TECHNIMONT ICB PVT. LTD",
+          "BOROUGE III PROJECT : PROJECT NO 8960",
+          "ABU DHABI POLYMERS CO LTD / BOROUGE",
+          "HDG+PAINTED CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "TECNIMONT",
+          "HDPE SUMGAYIT",
+          "SOCAR POLYMER",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "TECNIMONT",
+          "4439- New Linear Alkyl Benezene Unit (LAB)",
+          "SONATRACH",
+          "CABLE TRAYS AND ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 8,
+      "rows": [
+        [
+          "TECNIMONT",
+          "LPG EXTRACTION PLANT in RHOURDE EL BAGUEL,ALGERIA",
+          "SONATRACH",
+          "CABLE TRAYS AND ACCESSORIES"
+        ],
+        [
+          "COMAPLE S.L.",
+          "SEWA IPP COMBINED CYCLE POWER PLANT",
+          "SEWA",
+          "CABLE LADDER, TRAY & ACCESSORIES"
+        ],
+        [
+          "COMAPLE S.L.",
+          "Kraftwerk Scholven Phase III: CHP Plant",
+          "SENER /UNIPER",
+          "HDG CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "COMAPLE S.L.",
+          "KELVIN ERF PROJECT",
+          "ACCIONA",
+          "HDG CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "COMAPLE S.L.",
+          "PLANTA DE BIOMASA LOGROSAN",
+          "ACCIONA",
+          "HDG CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "R&M ELECTRICAL GROUP LTD",
+          "EP RATAWI HUB",
+          "TOTAL ENNERGIES",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "Saipem (Portugal) Comércio Maritimo Socieda de Unipessoal Lda / Saipem Luxembourg S. A., Angola Branch",
+          "097275 ENI ANG Q&M PRJ WP8 NORTH GAS COMP -PA ANGOLA- QUILUMA & MABOQUEIRO (Q&M) PROJECT",
+          "ENI ANGOLA",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 9,
+      "rows": [
+        [
+          "AATI CONTRACTS / CKR CONSULTING ENGINEERS",
+          "AREEJ - MALL OF EMIRATES",
+          "AL TAYER GROUP LLC",
+          "CABLE TRAY, TRUNKING & SUPPORT"
+        ],
+        [
+          "AATI CONTRACTS / ESA ENGINEERING",
+          "PRADA - MALL OF EMIRATES",
+          "AL TAYER GROUP LLC",
+          "CABLE TRAY, TRUNKING & SUPPORT"
+        ],
+        [
+          "ABB",
+          "Dubai HillS",
+          "DEWA",
+          "HDG CABLE TRAY, LADDER AND ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "LV Cable ladder/tray BOQ - MBR Solar Modn-2",
+          "DEWA",
+          "HDG CABLE LADDER,TRAY,CHANNEL AND ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "RFQ-68532-0 EMAAR-MBR DEVT - DUBAI HILLS ESTATE 132/11 kV GRENHILS SS",
+          "DEWA",
+          "CABLE LADDER, TRAY & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "RFQ-68532-0 EMAAR-MBR DEVT - DUBAI HILLS ESTATE 132/11 kV RABWAH SS",
+          "DEWA",
+          "CABLE LADDER, TRAY & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "AKOYA OXYGEN",
+          "DEWA",
+          "CABLE LADDER, TRAY AND ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 10,
+      "rows": [
+        [
+          "ABB",
+          "132/11kV MAJAN SUBSTATION",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ABB",
+          "NAD AL HAMMAR SUBSTATION",
+          "DEWA",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "PEARL JUMEIRAH SUBSTATION",
+          "UAE : DEWA",
+          "HDG CABLE LADDERS,TRAYS & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "DPG PROJECT : 132kV SUBSTATION AT CULTURE VILLAGE, DOHA ROAD, BUSINESS BAY CREEK SUBSTATIONS",
+          "UAE : DEWA",
+          "HDG CABLE LADDERS,TRAYS & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "RESORT WORLD SUSBSTATION",
+          "UAE : DEWA",
+          "HDG CABLE LADDERS,TRAYS & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "132/11KV SUBSTATION AT PEARL JUMEIRAH,DUBAI PARK LLC:MERAAS DEVELOPMENT",
+          "UAE : DEWA",
+          "HDG CABLE LADDERS,TRAYS & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "DPG TATWEER PROJECT ( CULTURE VILLAGE, DOHA ROAD, BUSINESS BAY CREEK SUBSTATIONS)",
+          "UAE : DEWA",
+          "HDG CABLE LADDERS,TRAYS & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 11,
+      "rows": [
+        [
+          "ABB",
+          "WASIT C SUBSTATION",
+          "SEWA",
+          "CABLE LADDER, TRAY & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "RFQ-76483-0 132kV WASIT SS",
+          "DEWA",
+          "HDG LADDER, TRAY & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "MAADEN SUBSTATION",
+          "DEWA",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "MAJAN SUBSTATION",
+          "DEWA",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "3X132/11KV SUBSTATIONS - DEWA CE/0716 ( AID CITY S/S, AL NAHDA S/S & TERMINAL 2 S/S)",
+          "UAE : DEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "ABB",
+          "FEWA E03 PROJECT (Corniche, Naimiya, Nakheel Old Town, Sawan & Sheria Substations)",
+          "UAE : FEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "ABB / PARSONS BRINKERHOFF (MIDDLE EAST) LIMITED",
+          "REZD/E/2008/1 - TATWEER DUBAILAND 8X132/11KV SUBSTATIONS",
+          "DEWA / TATWEER DUBAILAND",
+          "CABLE LADDER & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 12,
+      "rows": [
+        [
+          "ABB HITACHI LLC",
+          "220/33kV KAKULA CONSUMER SUBSTATION",
+          "KAMOA-KAULA MINES, Democratic Republic of the Congo (DRC)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ACCIONA-MAYNILAD WATER SERVICES",
+          "WATER TREATMENT PLANT PUTATAN MUNTINLUPA CITY",
+          "METRO MANILA-PHILIPPINES",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ACE ASSOCIATED CONSULTING ENGINEERS INTL/ HOTEL AND RESORTS",
+          "KINGDOM OF SHEBA",
+          "IFA",
+          "CABLE TRAY AND TRUNKING"
+        ],
+        [
+          "ACWA / DAR AL HANDASAH",
+          "SEWAGE TREATMENT PLANT 'A' - JEBEL ALI AIRPORT CITY PHASE 1 AIR FIELD AND INFRASTRUCTURE",
+          "DUBAI CIVIL AVIATION",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "ADVANCE ENGINEERING",
+          "PDO PROJECT",
+          "OMAN : PDO",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "ADVANCED OILFIELD TECHNOLOGY CO. LLC",
+          "VEOLIA VESSELS",
+          "OXY - OMAN",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "AFEE / AL HUSAM GENERAL CONTRACTING ESTABLISHMENT",
+          "TABREED COOLING PLANT - AD06",
+          "TABREED",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 13,
+      "rows": [
+        [
+          "AFEE / DNO",
+          "SUMMAIL GAS PROJECT",
+          "IRAQ",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "AFEE / QATAR PETROLEUM",
+          "SILVERTECH PROJECT : REF PRJ175",
+          "QATAR PETROLEUM",
+          "CORTEN A CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "AFEE / SK ENGINEERING & CONSTRUCTION",
+          "RUWAIS REFINERY EXPANSION PROJECT",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AGNICE INTERNATIONAL LLC",
+          "MARBLE FACTORY AT SOHAR FREE ZONE",
+          "OMAN : SERVICE & TRADE LLC",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "AIR TRAFFIC CONTROL POWER/ DAR/ ADPI JV/ EFECO",
+          "JXB1/BLD/420 PHASE 1",
+          "DUBAI CIVIL AVIATION",
+          "HDG CABLE TRAY, HDG LADDER & GI TRUNKING"
+        ],
+        [
+          "AL ANSARI",
+          "BARKA SEWERAGE TREATMENT PLANT",
+          "OMAN",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "AL ASAR CONTRACTING",
+          "OMAN CEMENTS WORKS",
+          "OMAN : OMAN CEMENTS",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 14,
+      "rows": [
+        [
+          "AL ENSHAA ELECTROMECHANICAL CONT. LLC./NEXT ENGINEERING CONSULTANTS.",
+          "(B+G+2M+20F+R) BUILDING DAFFAN – RAK.",
+          "AHMED ESSA AHMED ALNAEEM",
+          "HDG CABLE TRAY,PG TRUNKING & ACCESSORIES"
+        ],
+        [
+          "AL FALAHY CO LLC",
+          "GUtech BUILDING",
+          "OMAN : MAZOON ELECTRICITY COMPANY",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "AL FALAHY CO LLC",
+          "SUBSTATION AT SOHAR FREE ZONE",
+          "OMAN",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "AL FALAHY CO LLC",
+          "ADAM AIRPORT SUBSTATION",
+          "OMAN : MEDC",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "AL FALAHY CO LLC",
+          "PRIMARY SUBSTATION",
+          "OMAN : MAZOON ELECTRICITY COMPANY",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "AL FUTTAIM CARILLION LLC",
+          "DUBAL CAST HOUSE - 3, DUBAI",
+          "DUBAL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AL FUTTAIM CARILLION/ SNC LAVALIN",
+          "CATHOUSE 3",
+          "DUBAL",
+          "CABLE SUPPORT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 15,
+      "rows": [
+        [
+          "AL HAJIRY LLC",
+          "SIDHI WAREHOUSE",
+          "OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AL HAJIRY LLC",
+          "DAR AL MAHAA RESIDENTIAL COMPLEX",
+          "OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AL HAJIRY LLC",
+          "PDO MOSQUE",
+          "OMAN : PDO",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "AL HAJIRY LLC",
+          "PDO HEADQUARTERS BUILDING",
+          "OMAN : PDO",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "AL HAJIRY LLC",
+          "STP - SOHAR RADISSON BLU HOTEL",
+          "OMAN",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "AL HAJIRY LLC",
+          "RAS AL HAMRA INFRASTRUCTURE PHASE 1",
+          "OMAN : PDO",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AL HASSAN ENGINEERING",
+          "LONG TERM POWER SUPPLY PROJECT",
+          "OMAN : OXY",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 16,
+      "rows": [
+        [
+          "AL HASSAN ENGINEERING",
+          "QARN ALAM PROJECT",
+          "OMAN : PDO",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AL HASSAN ENGINEERING",
+          "ZAULIYAH GAS COMPRESSION PROJECT",
+          "OMAN : PDO",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AL HASSAN ENGINEERING",
+          "AMAL STEAM PROJECT",
+          "OMAN : PDO",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AL HASSAN ENGINEERING",
+          "2x126MW AMAL POWER STATION",
+          "OMAN : PDO",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "AL HASSAN ENGINEERING",
+          "EXPORT PIPELINE PROJECT",
+          "OMAN : OOCEP",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "AL HASSAN ENGINEERING / GS E&C KOREA",
+          "SAIH NIHAYDA DEPLETION COMPRESSION (SNDC) PROJECT",
+          "OMAN : PDO",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "Al Hassan Engineering Co. S.A.O.G.",
+          "Liwa Plastics Industries Complex project, Sohar, Oman",
+          "",
+          "SS316 CABLE CROCHET"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 17,
+      "rows": [
+        [
+          "AL HUSAM GENERAL CONTRACTING",
+          "AAD- OC0000- CORPORATE- SLGC C- 5001 T06- MECHANICAL AND PIPING AND MAJOR EQUIP. INST.",
+          "",
+          "CABLE TRAYS AND STEEL CONDUITS"
+        ],
+        [
+          "AL HUSAM GENERAL CONTRACTING",
+          "BOILER REHABILITATION",
+          "",
+          "CABLE TRAY MATERIALS"
+        ],
+        [
+          "AL HUSAM GENERAL CONTRACTING / SNC- LAVALIN GULF CONTRACTORS",
+          "TABREED DISTRICT COOLING PLANT",
+          "SAUDI ARABIA",
+          "CABLE TRAYS & SUPPORT SYSTEMS"
+        ],
+        [
+          "AL HUSAM GENERAL CONTRACTING / SNC- LAVALIN GULF CONTRACTORS",
+          "KING ABDULLAH FINANCIAL DISTRICT",
+          "SAUDI ARABIA",
+          "CABLE TRAYS & SUPPORT SYSTEMS"
+        ],
+        [
+          "AL KHAIR TRADING CO.",
+          "ABU DHABI PROJECT, UAE",
+          "",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "AL MOSTAJED TECHNOLOGIES COMPANY LLC",
+          "PO - 3761600087 /Cont. Ref. 4351600021 SUPPLY, INSTALLATION, TESTING AND COMMISSIONING OF 132/11KV DUBAI CANAL SUBSTATIONS & ASSOCIATED WORKS",
+          "DEWA",
+          "CABLE TRAY AND ACCESSORIES"
+        ],
+        [
+          "AL MUHANAD ELECTRO MECHANICAL CONTRACTING LLC",
+          "PRIVATE SCHOOL PLOT NO 316 AT TAWI HAMDEH,MALEEHA,SHARJAH",
+          "",
+          "HDG CABLE TRAY, PRE GALVANISED TRUNKING & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 18,
+      "rows": [
+        [
+          "AL MUHANAD ELECTRO MECHANICAL CONTRACTING LLC/QHC Architects & Engineers",
+          "CONSTRUCTION OF G+2 CLINICAL BUILDING ON PLOT NO. 1163 AT FREEZONE, SHARJAH",
+          "GOVERNMENT OF SHARJAH (M/S DPW)",
+          "HDG CABLE TRAY,TRUNKING & ACCESSORIES"
+        ],
+        [
+          "AL MUHANAD ELECTRO MECHANICAL CONTRACTING LLC/QHC Architects & Engineers",
+          "ARAB MARINE ACADEMY",
+          "Government of Sharjah",
+          "HDG CABLE TRAY,TRUNKING & ACCESSORIES"
+        ],
+        [
+          "AL MUHANAD ELECTRO MECHANICAL CONTRACTING LLC/QHC Architects & Engineers",
+          "VICTORIA INTERNATIONAL SCHOOL PLOT NO 1502 KHORFAKKAN",
+          "Government of Sharjah",
+          "HDG CABLE TRAY,TRUNKING & ACCESSORIES"
+        ],
+        [
+          "AL MUHANAD ELECTRO MECHANICAL CONTRACTING LLC/QHC Architects & Engineers",
+          "VICTORIA INTERNATIONAL SCHOOL PLOT NO 1502 KHORFAKKAN- PHASE 2",
+          "Government of Sharjah",
+          "HDG CABLE TRAY,TRUNKING & ACCESSORIES"
+        ],
+        [
+          "AL NABOODAH",
+          "JXB1/ INF/ 104A SEWAGE TREATMENT PLANT A",
+          "UAE : DUBAI CIVIL AVIATION",
+          "CABLE TRAYS AND ACCESSORIES"
+        ],
+        [
+          "AL NABOODAH",
+          "JXB1/ INF/ 104A SEWAGE TREATMENT PLANT A (CHECK LIST)",
+          "UAE : DUBAI CIVIL AVIATION",
+          "CABLE TRAYS AND ACCESSORIES"
+        ],
+        [
+          "AL NABOODAH CONSTRUCTION GROUP / ONLINE ARCHITECTS",
+          "AL AHLI CLUB ACADEMY BUILDING",
+          "",
+          "CABLE TRAY, LADDER, TRUNKING & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 19,
+      "rows": [
+        [
+          "Al Naboodah Contracting Co. L.L.C. (ACC) / DAR AL-HANDASAH Shair & Partners",
+          "PLAYER CHANGING ROOM / DEVELOPING THE FACILITIES WITHIN NAD AL SHEEBA COMPLEX PACKAGE-2",
+          "RTA / DUBAI",
+          "CABLE TRAYS AND ACCESSORIES"
+        ],
+        [
+          "AL NABOODAH/ DAR/ ADPI JV",
+          "APRONS AND ASSOCIATED TAXIWAYS JXB1/ INF/ 010",
+          "UAE : DUBAI CIVIL AVIATION",
+          "CABLE TRAYS AND LADDERS"
+        ],
+        [
+          "AL NABOODAH/ DAR/ ADPI JV",
+          "JXB1/INF/050 ROADS AND INFRASTRUCTURE",
+          "UAE : DUBAI CIVIL AVIATION",
+          "CABLE TRAYS, LADDER AND SUPPORT SYSTEM"
+        ],
+        [
+          "AL NABOODAH/ DAR/ ADPI JV",
+          "JXB1/INF/060 PERIPHERAL ROADS",
+          "UAE : DUBAI CIVIL AVIATION",
+          "CABLE TRAYS, LADDERS AND SUPPORT SYSTEM"
+        ],
+        [
+          "AL NABOODAH/ DAR/ ADPI JV",
+          "RUNAWAY 12/ 30 AND ASSOCIATED TAXIWAYS JXB1/ INF/",
+          "UAE : DUBAI CIVIL AVIATION",
+          "CABLE TRAYS AND LADDERS"
+        ],
+        [
+          "AL OMARAA COMPANY / SIEMENS",
+          "KUWAIT 33/11KV SUBSTATION RIQA-M, ABDALY-N, SALMIYA-Q, JALEEB-M AND SHUWAIKH INDUSTRIAL AREA-M",
+          "KUWAIT : MEW",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AL OMARAA COMPANY / SIEMENS",
+          "KUWAIT 33/11KV SUBSTATION RASS-M, RAWDATAIN TV-N AND SABAHIYA-M",
+          "KUWAIT : MEW",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        false,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 20,
+      "rows": [
+        [
+          "AL RAFAA TRADING & CONTRACTING",
+          "BRITISH SCHOOL",
+          "",
+          "CABLE TRAY, LADDER, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "AL RAFAA TRADING & CONTRACTING",
+          "BENZ SHOWROOM FACILITY",
+          "",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "AL TURKI ENTERPRISES",
+          "ODC PROJECT",
+          "OMAN : PDO",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "AL TURKI ENTERPRISES",
+          "FEWA E03 PROJECT (Corniche, Naimiya, Nakheel Old Town, Sawan & Sheria Substations)",
+          "OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AL TURKI ENTERPRISES",
+          "RAS AL HAMRA INFRASTRUCTURE PHASE 1",
+          "OMAN : PDO",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "AL WATANYIAH UNITED ENGINEERING & CONTRACTING LLC",
+          "AL HUSN HT PROJECT SALALAH 33/11kV SUBSTATION",
+          "OMAN : DPC",
+          "CABLE TRAY,LADDER & ACCESSORIES"
+        ],
+        [
+          "ALDERLEY FZE",
+          "ONGC",
+          "ONGC",
+          "CABLE TRAYS & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 21,
+      "rows": [
+        [
+          "ALSTOM",
+          "Dubai Route 2020 Metro Extension",
+          "RTA",
+          "Cable Trays and Accessories"
+        ],
+        [
+          "ALSTOM",
+          "66kV Substation with EWA, Bahrain.",
+          "EWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "DUBAI METRO ROUTE 2020 PROJECT",
+          "RTA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "CONSTRUCTION OF BAGHDAD WEST NORTH 400 kV SUBSTATION",
+          "MINISTRY OF ELECTRICITY IRAQ, BAGHDAD",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "MARITZA EAST 1",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "STAYTHROPE C CCGT POWER STATION (UK)",
+          "RWE N POWER",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "MAROWE DAM PROJECT (SUDAN)",
+          "LAHMEYER INTERNATIONAL",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 22,
+      "rows": [
+        [
+          "ALSTOM",
+          "CYCOFOS PROJECT (FRANCE)",
+          "COFATHEC",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "DUBAL GTX COGENERATION (FRANCE)",
+          "DUBAL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "MOROCCO PROJECT 400 KV(MOROCCO)",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "ZAWIA EXTENSION (LIBYA)",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "ALUAR PROJECT -ARGENTINA",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "SYRIA PROJECT",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "RELIZANE - 3 X 155 MW",
+          "ALSTOM POWER SYSTEMS",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 23,
+      "rows": [
+        [
+          "ALSTOM",
+          "ALSTOM POWER TURBO SYSTEM - KESTREL PROJECT, DUBAI",
+          "DUBAL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "ALSTOM POWER TURBO SYSTEM - KESTREL PROJECT II, DUBAI",
+          "DUBAL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "ALSTOM POWER ALBA POWER STATION 4, BAHRAIN",
+          "BAHRAIN ALUMINUM",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "ALSTOM POWER CENTRALES CERNOVADA NUCLEAR POWER PLANT, ROMANIA",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "HO PING COAL FIRED",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "DERNIER HYDRO POWER PLANT (URFA), TURKEY",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "DRIMRIVER HYDRO POWER PLANT, ALBABIE",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 24,
+      "rows": [
+        [
+          "ALSTOM",
+          "WASHASH GAS INSULATED, ADAMIYA AIR INSULATED, POWER SUBSTATIONS WASHASH, IRAQ",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "CAN 2x160 MW CFB THERMAL POWER PLANT CANAKKALE, TURKEY",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "ALSTOM BHT FACTORY STEELWORKS (CEDEX), FRANCE",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "LAJANURI HYDRO POWER PLANT, GEORGIA",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "NEHUENCO STEAM POWER PLANT, CHILE",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "PHU MY COMBINED CYCLE POWER PLANT, VIETNAM",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "N-11448-ASAB-2 TRANSCO 220Kv SWITCHING STATION",
+          "TRANSCO (TAQA) / EDF",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 25,
+      "rows": [
+        [
+          "ALSTOM",
+          "N-11447-BAB-2 SUBSTATION",
+          "TRANSCO (TAQA)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "BAGHDAD WEST NORTH 400kV S/S",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM",
+          "EESTI ENERGIA NARVA 1X300 MW CFB POWER PLANT ESTONIA",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM / LAHMEYER INTERNATIONAL",
+          "NEW 400/132/33KV GIS AJMAN GRID STATION",
+          "TRANSCO (TAQA)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM / PB POWER LTD.",
+          "KURDISTAN -132/33kV SS AT STAGE 6 IN DOHUK GOVERNORATE",
+          "KURDISTAN, IRAQ (MINISTRY OF ELECTRICITY)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM FRANCE",
+          "QATALUM - POWER GENERATION",
+          "QATALUM",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM GE",
+          "66 Kv BANAGAS SUBSTATION",
+          "EWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        true,
+        false,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 26,
+      "rows": [
+        [
+          "ALSTOM GE",
+          "66 Kv AMAZON ALZALAQ SUBSTATION",
+          "EWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ALSTOM GE",
+          "66 Kv AMAZON HAMALASUBSTATION",
+          "EWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ANEL TAAHHÜT",
+          "LINEADECOR (ISTANBUL)",
+          "AREVA T&D",
+          ""
+        ],
+        [
+          "AQUATECH INTERNATIONAL CORPORATION",
+          "WATER TREATMENT PLANT -PHASE 2 390K BWPD OF BOILER FEED WATER",
+          "OMAN : OXY",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ARABIAN TECHNICAL SUPPLIES",
+          "COMMERCIAL BUILDING",
+          "OMAN : BADAR SHIPPING",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "ARABIAN TECHNICAL SUPPLIES",
+          "RESIDENTIAL & COMMERCIAL BUILDING",
+          "OMAN",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "ARABTECH-CCC-EFECO JV",
+          "ADP KAZAKHSTAN",
+          "",
+          "CABLE TRAY & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 27,
+      "rows": [
+        [
+          "AREVA T&D",
+          "BARSHA & HORSE RACE - DUBAI",
+          "DEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "AREVA T&D",
+          "APF PARAFOUDURE FACTORY, FRANCE",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AREVA T&D",
+          "ERT MOROCCO PROJECT, CASABLANCA",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AREVA T&D",
+          "DEWA CONTRACT CE716 - 8 SUBSTATIONS (SKLN, KFAF, BIRD, LBAC, KNWJ, MCLB & WSHP)",
+          "DEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "AREVA T&D",
+          "DEWA CE/220A/2007",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AREVA T&D - DUBAI BRANCH",
+          "TAKREER 5631",
+          "TAKREER",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "AREVA T&D -DUBAI BRANCH",
+          "132/22KV SUBSTATIONS AND ASSOCIATED WORKS AT PALM DEIRA",
+          "DEWA / NAKHEEL",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 28,
+      "rows": [
+        [
+          "ASCON",
+          "CONSTRUCTION OF BOROUGE INNOVATION CENTRE IN ABU DHABI",
+          "ADNOC",
+          "CABLE TRAY AND FITTINGS"
+        ],
+        [
+          "ASCON",
+          "INNOVATION CENTRE FOR BOROUGE IN ABU DHABI",
+          "ADNOC",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "AUDEX PTE LTD",
+          "ENOC FUJAIRAH DISTRIBUTION & TRADING TERMINAL",
+          "ENOC",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "BAHWAN ENGINEERING",
+          "HABBI SUBSTATION",
+          "OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "BAHWAN ENGINEERING",
+          "SOHAR SUBSTATION",
+          "OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "BAHWAN ENGINEERING",
+          "AFI & SALLA SUBSTATION",
+          "OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "BATI - SERVICE CO.LTD",
+          "PROJECT TWIGA",
+          "TANZANIA",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 29,
+      "rows": [
+        [
+          "BELHASA PROJECT LLC / MEYDAN GROUP LLC / ADEL AL MOJIL CONSULTING ENGINEERS",
+          "CONSTRUCTION OF CHILLER PLANT AND SUBSTATION AT MEYDAN BEACH CLUB",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "BELHASA SIX CONSTRUCT / DANWAY ELECTRICAL & MECHANICAL CONTRACT",
+          "R800/1- RAS AL KHOR CREEK CROSSING",
+          "DUBAI MUNICIPALITY / RTA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "BEST & BETAS CONSORTIUM",
+          "QATAR POWER TRANSMISSION SYSTEM EXPANSION - PHASE-13",
+          "KAHRAMAA ( QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "BIN DALMOUK CONSULTANT/ ENVICON EMIRATES/ NCC",
+          "3B + G + 6 STOREY COMMERCIAL BUILDING",
+          "",
+          "CABLE TRAY, TRUNKING, LADDER AND ACCESSORIES"
+        ],
+        [
+          "BIN HAFEEZ GENERAL CONTRACTING CO. / BESIX CONSTRUCT / ZENER ELECTRICAL",
+          "CONTRACT R757/1B - PALM ISLAND (JUMEIRAH) ACCESS ROAD, DUBAI",
+          "DUBAI MUNICIPALITY / RTA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "BK GULF",
+          "INGOT CASTING FACILITY, DUBAI",
+          "DUBAL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "BK GULF",
+          "E&I WORKS FOR CAST HOUSE 3, DUBAI",
+          "DUBAL",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 30,
+      "rows": [
+        [
+          "CADAGUA",
+          "DARSAIT SEWERAGE TREATMENT PLANT",
+          "OMAN",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "CAPITAL COAST CONTRACTING LLC",
+          "R800/2 RAS AL KHOR CROSSING",
+          "RTA",
+          "SS316 -CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "CARAWAN ELECTRICAL AND MECHANICALWORKS/AL GURG CONSULTANT",
+          "PROPOSED THREE FILLING STATION IN DUBAI FOR EMIRATES GENERAL PETROLEUM CORPORATION",
+          "EMARAT",
+          "HDG CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "CARAWAN ELECTRICAL AND MECHANICALWORKS/AL GURG CONSULTANT",
+          "VVIP Private Luxury Villa",
+          "UAQ RULERS COURT",
+          "HDG CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "CBI EASTERN ANSTALT",
+          "SHELL PEARL GTL TANKAGE QATAR",
+          "SHELL GTL LIMITED",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "CCC / ELSERVCO",
+          "CNE/015/2002 JEBEL ALI POWER & DESALINATION STATION - L, PHASE 1, DUBAI",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "CENTAUR ELECTRO-MECHANICAL CONTRACTING CO.",
+          "INSTALLATION, TESTING & COMMISSIONING OF 132/33kV SUBSTATION",
+          "FEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 31,
+      "rows": [
+        [
+          "CENTAUR ELECTRO-MECHANICAL CONTRACTING CO.",
+          "FEWA CONTRACT E28/2006 SUPPLY, INSTALLATION, TESTING & COMMISSIONING OF 132/11kV SUBSTATION",
+          "FEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "CHINA PETROLEUM ENGINEERING / EXTOL",
+          "ABU DHABI CRUDE OIL PIPELINE PROJECT HABSHANFUJAIRAH",
+          "IPIC",
+          "CABLE TRUNKING AND FITTINGS"
+        ],
+        [
+          "CHINA PETROLEUM ENGINEERING / CONSILLIUM",
+          "VOPAK TERMINAL - FUJAIRAH",
+          "FEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "COMAPLE S.L.",
+          "RFQ CABLE TRAYS 10441BeAAT PROJECT TAKREER RFQ5649-6300-MR-IU-031",
+          "ADNOC",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "CONSILIUM MIDDLE EAST FZC",
+          "ENOC JOB",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "CONSILIUM MIDDLE EAST FZC",
+          "HORIZON & GRC PROJECT",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "CONVERSION ELECTROMECHANICAL LLC / METAC GENERAL CONTRACTING CO. / ARIF & BINTOAK",
+          "NEIGHBORHOOD RETAIL CENTER AT INTERNATIONAL CITY, DUBAI",
+          "NAKHEEL",
+          "CABLE TRAY & CABLE SUPPORT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        true,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 32,
+      "rows": [
+        [
+          "CONVERSION ELECTROMECHANICAL LLC/ AL GURG CONSULTANT",
+          "GOLF CLUB HOUSE ,MOHAMMED BIN RASHID CITY,DUBAI HILLS ESTATE",
+          "EMAAR",
+          "HDG CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "CONVRGNT",
+          "JXB1/ BLD/440/441/442 FUEL STAGING AREA. FIRE STATION & POLICE FACILITIES - PHASE 1 ANCILLARY BUILDINGS",
+          "DUBAI CIVIL AVIATION",
+          "HDG CABLE TRAY & HDG LADDER"
+        ],
+        [
+          "CW SINGAPORE PTE LTD / COMPRA ENERGY S.A.",
+          "GAS LIFT COMPRESSION STATION",
+          "COMPRA ENERGY S.A.",
+          "CABLE LADDER, TRAY & ACCESSORIES"
+        ],
+        [
+          "DADABHI CONSTRUCTION/ TWOSEAS",
+          "ADDRESS HOTEL AND SERVICED APARTMENTS-BAHRAIN",
+          "EGLE HILLS - DIYAR",
+          "CABLE TRAY AND TRUNKING"
+        ],
+        [
+          "DANWAY",
+          "D513",
+          "",
+          "SUPPLY OF HDG(85microns) +Powder Coated(155microns) Vertical Adjustable Connector"
+        ],
+        [
+          "DANWAY / AL FUTTAIM CARILLION",
+          "CG5460- MAINTENANCE SHOP, CATHODE SEALING POT LINING FACILITIES",
+          "EMAL",
+          "CABLE TRAY, LADDER AND ACCESSORIES"
+        ],
+        [
+          "DANWAY / AL FUTTAM CARILLION / SNC LAVALIN",
+          "CATHOUSE 3",
+          "DUBAL",
+          "CABLE SUPPORT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 33,
+      "rows": [
+        [
+          "DANWAY BAHRAIN",
+          "B 002 : ALBA PROJECT",
+          "ALBA",
+          "HDG LADDER, COVER & FITTINGS"
+        ],
+        [
+          "DANWAY BAHRAIN",
+          "B 002 : RFP NO. 26096-6320-YK2-E00Z-0017; POTLINE FACILITIES - ELECTRICAL INSTALLATION",
+          "ALBA",
+          "HDG CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "HIGH BAY LIGHTING, DUBAI",
+          "DUBAL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "132/11kV ABRJKHOR SUBSTATION(D640) & MRABEARD SUBSTATION(D641)",
+          "DEWA",
+          "HDG CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "VHFL MINI FINGER PIER PROJECT",
+          "FUJAIRAH VOPAC TERMINAL",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "132KV CABLE LAYING FOR DUBAL POT LINE 7, DUBAI",
+          "DUBAL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "CONTRACT 757/1A - PALM ISLAND INTERCHANGE ACCESS ROADS",
+          "DUBAI MUNICIPALITY",
+          "CABLE TRAYS & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 34,
+      "rows": [
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "DORALEH BULK PRODUCTS TERMINAL, DJOUBITI",
+          "ENOC",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "RAS AL KHOR CROSSING - CONTRACT R800/1",
+          "RTA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "RAS AL KHOR INTERCHANGE NO.1 (TEMPORARY DIVERSION) - CONTRACT R800/6",
+          "RTA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "IRM TRADING TERMINAL INSIDE FUJAIRA PORT",
+          "VOPAK HORIZON FUJAIRA LTD.",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "CONTRACT NO E05/05 SUPPLY, INSTALLATION, TESTING & COMMISSIONING OF 132/11KV SUBSTATION",
+          "FEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "FEDERAL ELECTRICITY & WATER AUTHORITY PROJECT",
+          "FEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "REINFORCEMENT OF 1/0, 4KV DISTRIBUTION SUBSTATION IN ABU DHABI LOT 2-11KV SWITCHING STATION IN UMM AL NAR",
+          "PB POWER/ ADDC",
+          "CABLE SUPPORT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 35,
+      "rows": [
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "HV/LV ELECTRICAL & INSTRUMENTATION WORKS FOR POT LINE 7, DUBAI",
+          "DUBAL",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "SHIBAHTS (MAYDAN) SUBSTATION",
+          "DEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "MIRAA SUBSTATION",
+          "DEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "KHIL ROAD SUBSTATION , SOBHA HARTLAND",
+          "DEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING / AL FUTTAIM CARILLION",
+          "EMAL CG5460: MAINTENANCE SHOP, CATHODE SEALING, POT LINING FACILITIES",
+          "EMAL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING / AL NABOODAH CIVIL ENGINEERING DIVISION",
+          "JEBEL ALI AIRPORT CITY PHASE 1A - JXB1/INF/002 (RUNWAY 12/30 AND ASSOCIATED TAXI WAYS)",
+          "DUBAI CIVIL AVIATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 36,
+      "rows": [
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING / AL NABOODAH CIVIL ENGINEERING DIVISION",
+          "JEBEL ALI AIRPORT CITY PHASE 1A - JXB1/INF/010 (AIRFIELD AND INFRASTRUCTURE)",
+          "DUBAI CIVIL AVIATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING / AL NABOODAH CIVIL ENGINEERING DIVISION",
+          "JEBEL ALI AIRPORT CITY PHASE 1A - JXB1/INF/050",
+          "DUBAI CIVIL AVIATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING / AL NABOODAH CIVIL ENGINEERING DIVISION",
+          "JEBEL ALI AIRPORT CITY PHASE 1A - JXB1/INF/060",
+          "DUBAI CIVIL AVIATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING / AL NABOODAH CIVIL ENGINEERING DIVISION",
+          "SOWWAH ISLAND ROADS, BRIDGES INFRASTRUCTURE WORKS PACKAGE PHASE 1- A, B & C",
+          "ATKINS/ KEO",
+          "STRUT CHANNEL & CHANNEL SUPPORT"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING / CANSULT- MAUNSELL - AECOM",
+          "R-885 : COMPREHENSIVE IMPROVEMENT TO ITTIHAD ROAD (PHASE II)",
+          "RTA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING / NATIONAL WHEEL J&P LLC",
+          "DUBAI INTERNATIONAL AIRPORT CITY EXPANSION (PHASE II) AX 304- EK OPERATION CENTER TUNNEL",
+          "DUBAI CIVIL AVIATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING / OUTOTEC GMBH",
+          "EMAL- GREEN CARBON PLANT AND BUTTS CRUSHING",
+          "EMAL",
+          "CABLE TRAYS AND ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 37,
+      "rows": [
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING / PARSONS DE LEUW CATHER OVERSEAS LIMITED",
+          "DUBAI AIRPORT ROADS IMPROVEMENTS PHASE II",
+          "RTA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING / SNC - LAVALIN",
+          "EMAL CAST HOUSE",
+          "EMAL",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING.",
+          "D504 and D505: MNTKHORA AND MEDHMAR 132/11kV DEWA SUBSTATION PROJECT",
+          "",
+          "HDG CABLE LADDER, TRAY & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING.",
+          "CARBON BLACK & DELAYED COKER",
+          "TAKREER",
+          "HDG +PAINTED CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING.",
+          "132/11kV WADI AL SAFA SUBSTATION",
+          "DEWA",
+          "PERFORATED CABLE, LADDER & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING.",
+          "REPLACEMENT OF GAS MONITORING SYSTEM FOR GAS OIL TREATMENT PLANT AND TRUCK LOADING PLANT AT ABU DHABI REFINERY",
+          "TAKREER",
+          "CABLE TRAYS"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING.",
+          "CE/ 409C/ 2005 SUPPLY, INSTALLATION, TESTING AND COMMISSIONING OF 132/ 11KC SUBSTATIONS 132KV CABLE LAYING WORKS, UNDERGROUNDING 132KV OVERHEAD LINE WORK AND ASSOCIATED WORKS",
+          "DEWA",
+          "CABLE LADDER, TRAY & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 38,
+      "rows": [
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING.",
+          "CE/ 409C/ 2005 SUPPLY, INSTALLATION, TESTING AND COMMISSIONING OF 132/ 11KC SUBSTATION & ASSOCIATE WORKS FOR DUBAI SILICON OASIS S/ S",
+          "DEWA",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING.",
+          "LARGE CAPACITY DC SYSTEM",
+          "ETISALAT",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "DANWAY ELECTRICAL & MECHANICAL ENGINEERING.",
+          "INSTALLATION TUNNEL LIGHTING AT CULTURAL SQUARE & ABU SHAGARA UNDERPASSES",
+          "SEWA",
+          "PERFORATED CABLE GI TRAYS AND ACCESSORIES"
+        ],
+        [
+          "DAR AL HANDASAH CONSULTANT",
+          "DUBAI WORLD CENTRAL-JXB1/INF/030-GENERAL AVIATION AREA HELIPORT PHASE 1",
+          "DUBAI CIVIL AVIATION",
+          "HDG CABLE TRAY, HDG LADDER & GI TRUNKING"
+        ],
+        [
+          "DAR AL HANDASAH CONSULTANT / ADPI JV",
+          "JXB1/ BLD/440/441/442 FUEL STAGING AREA. FIRE STATION & POLICE FACILITIES - PHASE 1 ANCILLARY BUILDINGS",
+          "DUBAI CIVIL AVIATION",
+          "HDG CABLE TRAY & HDG LADDER"
+        ],
+        [
+          "DAR AL HANDASAH CONSULTANT/ AL NABOODAH",
+          "DLC ROAD INFRASTRUCTURE- PHASE II JXB1/INF/052",
+          "DUBAI CIVIL AVIATION",
+          "CABLE TRAYS & TRUNKING"
+        ],
+        [
+          "DESCON ENGINEERING LIMITED",
+          "EPC FOR ADCO TRUNKLINE ISOLATION PROJECT : ADCO PROJECT NO P90112",
+          "ADCO",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 39,
+      "rows": [
+        [
+          "DESCON ENGINEERING LIMITED",
+          "HB02 - FERTIL UREA BOTTLENECKING",
+          "FERTIL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DESCON ENGINEERING LIMITED",
+          "HB02 - UREA MODIFICATION",
+          "FERTIL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DESCON ENGINEERING LIMITED",
+          "HB02 - FERTIL UDP",
+          "FERTIL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DHABI CONTRACTING",
+          "RAA/ T/ 06 2008 DUBAI METRO PROJECT AL QUSAIS CAR PARK & RELATED FACILITIES",
+          "RTA",
+          "CABLE TRAY, TRUNKING AND ACCESSORIES"
+        ],
+        [
+          "DHABI CONTRACTING / ATKINS / MUSANADA",
+          "DESIGN AND CONSTRUCTION OF 786 RESIDENTIAL UNITS IN GHYATHI CITY - WESTERN REGION",
+          "",
+          "CABLE TRAY, TRUNKING AND ACCESSORIES"
+        ],
+        [
+          "DNO",
+          "SUMMAIL, IRAQ",
+          "",
+          "CABLE TRAY LADDER & ACCESSORIES"
+        ],
+        [
+          "DNO",
+          "KURTAWKE.FD.CAP.00005",
+          "DNO",
+          "CABLE TRAYS"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 40,
+      "rows": [
+        [
+          "DODSAL ENGG. CONST. PTE LTD",
+          "New Gathering Center, GC-31 in North Kuwait",
+          "KOC - KUWAIT",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DODSAL ENGG. CONST. PTE LTD",
+          "ABU DHABI GAS IND LTD (AE66)",
+          "GASCO",
+          "CABLE LADDER, TRAY & ACCESSORIES"
+        ],
+        [
+          "DODSAL ENGG. CONST. PTE LTD",
+          "REPLACEMENT OF NGL PIPELINES NETWORK PROJECT NO. 6139",
+          "GASCO",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "DODSAL ENGG. CONST. PTE LTD",
+          "ZCINA PROJECT",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DORCH GRUPPE DC ABUDHABI",
+          "MS- IRR- 056",
+          "AL GHADEER",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "DRAKE & SCULL INTERNATIONAL ALGERIA",
+          "EMIRAL TOWER",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DRAKE & SCULL INTERNATIONAL LLC",
+          "OMAN NATIONAL MUSEUM",
+          "OMAN : CULTURE & HERITAGE MINISTRY",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 41,
+      "rows": [
+        [
+          "DRAKE & SCULL INTERNATIONAL LLC / M-ENGINEERING INC.",
+          "MUSHEIRABAD - HEART OF DOHA",
+          "DOHA LAND",
+          "CABLE TRAYS, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "KHATIB & ALAMI / FREIBURG CONTRACTING",
+          "MEZYED POLICE STATION, AL AIN, UAE",
+          "ABU DHABI POLICE MANAGEMENT",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DRAKE & SCULL INTERNATIONAL LLC / ARABTEC / KHATIB & ALAMI",
+          "INFINITY TOWER",
+          "",
+          "CABLE TRAY, LADDER & TRUNKING"
+        ],
+        [
+          "DRAKE & SCULL INTERNATIONAL LLC / BOMBARDIER",
+          "DUBAI INTERNATIONAL AIRPORT EXPANSION (PHASE III) SP-500 CONCOURSE 4 & ASSOCIATED",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DRAKE & SCULL INTERNATIONAL LLC / GHD GLOBAL",
+          "AL WAJBA PALACE CLUBHOUSE",
+          "AMIRI - PRIVATE ENGINEERING OFFICE",
+          "CABLE TRAY, LADDER & TRUNKING"
+        ],
+        [
+          "DRAKE & SCULL INTERNATIONAL LLC / KEO",
+          "MALL OF QATAR",
+          "",
+          "HDG WIRE MESH TRAY"
+        ],
+        [
+          "DRAKE & SCULL INTERNATIONAL LLC / M-ENGINEERING INC.",
+          "HATTA STAFF ACCOMODATION",
+          "BEL- YOAHA/ TCC",
+          "CABLE TRAYS, TRUNKING AND ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 42,
+      "rows": [
+        [
+          "DRAKE & SCULL INTERNATIONAL LLC / ROYAL HASKONING",
+          "T3 - Q10 CONTAINER TERMINAL BUILDING WORKS",
+          "DP WORLD",
+          "CABLE TRAY & TRUNKING"
+        ],
+        [
+          "DRAKE & SCULL INTERNATIONAL LLC / SUN ENGINEERING AND CONTRACTING CO.",
+          "SAHARA MALL EXPANSION- PHASE I",
+          "KHATIB AND ALAMI",
+          "CABLE TRAY, TRUNKING AND LADDER"
+        ],
+        [
+          "DRAKE & SCULL INTERNATIONAL LLC / SUN INTERNATIONAL",
+          "KINGDOM OF SHEBA (DSD045)",
+          "",
+          "CABLE TRAY AND TRUNKING"
+        ],
+        [
+          "DRAKKEN",
+          "ORYX DEMIR-DAGH TEMPORARY PRODUCTION FACILITY - IRAQ",
+          "EXPRO/ORYX",
+          "CABLE TRAY & LADDER"
+        ],
+        [
+          "DUBAI CONTRACTING COMPANY",
+          "KINGDOM OF SHEBA",
+          "IFA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "DUBAI CONTRACTING COMPANY",
+          "R757- 1A PLAM ISLAND INTERCHANGE- PALM ISLAND (JUMEIRA) ACCESS ROADS",
+          "DUBAI MUNICIPALITY",
+          "CABLE TRAY AND SUPPORT SYSTEM"
+        ],
+        [
+          "DURAT AL SAHIL / EIDC",
+          "DAR AL MAHAA RESIDENTIAL BUILDING",
+          "",
+          "CABLE TRAYS & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 43,
+      "rows": [
+        [
+          "DUTCO CONSTRUCTION COMPANY LLC / DANWAY ELECTRICAL & MECHANICAL ENGINEERING",
+          "PALM ISLAND (JUMEIRAH) ACCESS ROADS, DUBAI",
+          "DUBAI MUNICIPALITY",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "DUTCO CONSTRUCTION COMPANY LLC / PARSON DE LEUW CATHER OVERSEAS LTD",
+          "R800/ 2 RAS AL KHOR CROSSING",
+          "RTA",
+          "CABLE TRAYS WITH ACCESSORIES"
+        ],
+        [
+          "EASTERN OVERSEAS",
+          "SALALAH SUBSTATION",
+          "OMAN : EDC",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "ELSEWADY POWER SAE AND SIEMENS",
+          "H- STATION PHASE -IV PROJECT",
+          "DEWA",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "EMAAR",
+          "SUPPLY AND INSTALLATION, TESTING AND COMMISSIONING OF 132/ 11KV SUBSTATION AND ASSOCIATED 132KV CABLE WORKS AT OLD TOWN AND BURJ RESIDENCE 132/ 11KV SUBSTATION",
+          "DEWA",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "EMIRATES ELECTRICAL ENGINEERING LLC",
+          "SILICON PARK SUBSTATION",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "EMIRATES ELECTRICAL ENGINEERING LLC",
+          "TIJOORI PARK SUBSTATION",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 44,
+      "rows": [
+        [
+          "EMIRATES ELECTRICAL ENGINEERING LLC",
+          "OPPORTUNITY SS",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "EMIRATES ELECTRICAL ENGINEERING LLC",
+          "DEWA CONTRACTOR CE/002D/2005 SUPPLY, INSTALLATION, TESTING AND COMMISSIONING OF 132/11KV SUBSTATION & ASSOCIATED WORKS",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "EMIRATES ELECTRICAL ENGINEERING LLC",
+          "SUPPLY, INSTALLATION, TESTING AND COMMISSIONING OF 132/11KV SUBSTATION & ASSOCIATED WORKS AT DUBAI MOTOR CITY",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "EMIRATES ELECTRICAL ENGINEERING LLC",
+          "DEWA CONTRACT CE/448C/2007- 132/11KV SUBSTATION",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "EMIRATES FALCON ELECTROMECHANICAL CO. (EFECO)",
+          "DUBAI WORLD CENTRAL INTERNATIONAL AIRPORT- AIR TRAFFIC CONTROL TOWER- JEBEL ALI AIRPORT",
+          "DUBAI CIVIL AVIATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "EMIRATES FALCON ELECTROMECHANICAL CO. (EFECO) / ARABTEC CONSOLIDATED CONTRACTORS LIMITED",
+          "ABU DHABI PLAZA, ASTANA - KAZAKHSTAN",
+          "ALDAR",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "EMT ELECTROMACHANICAL WORKS LLC",
+          "P0037 COMMERCIAL/RES BUILDING G+3P+17+R, AL NAHDA",
+          "ETJAR INVESTMENTS",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 45,
+      "rows": [
+        [
+          "ENOC PROCESSING COMPANY LLC (EPCL)",
+          "ESR-00311 - BURK 9 PROJECT",
+          "ENOC",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "ENOC PROCESSING COMPANY LLC (EPCL)",
+          "ESR-00323 - NEW MEROX UNIT",
+          "ENOC",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "ENVICON EMIRATES/ NAEL CONSTRUCTION AND CONTRACTING",
+          "DS- 130- PUMPING STATION \"H\" AND ITS RISING MAIN",
+          "DUBAI MUNICIPALITY",
+          "CABLE TRAYS AND ACCESSORIES"
+        ],
+        [
+          "ERCON COMPOSITES/SAMSUNG C&T",
+          "QATAR NORTH FIELD EXPANSION PROJECT EPC-2",
+          "QATAR GAS",
+          "HDG CABLE TRAYS,LADDER WITH ACCESSORIES"
+        ],
+        [
+          "ETA",
+          "TRANSCO CONTRACT NO N-5629-1E 132/33kV SUBSTATION AT AL HAYL INDUSTRIAL IN FUJAIRAH",
+          "TRANSCO (TAQA)",
+          "CABLE LADDER, TRAY & ACCESSORIES"
+        ],
+        [
+          "ETA",
+          "TRANSCO CONTRACT NO. N-7169 132/33kV SUBSTATION AT KHOR FAKKAN",
+          "TRANSCO (TAQA)",
+          "CABLE LADDER, TRAY & ACCESSORIES"
+        ],
+        [
+          "ETA",
+          "132/11KV SUBSTATIONS AND ASSOCIATED WORKS AT BUSINESS PARK (P/186 & MASKHAN PE/096 SUBSTATIONS)",
+          "DEWA / DUBAI PROPERTIES",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 46,
+      "rows": [
+        [
+          "ETA",
+          "DEWA CONTRACTOR CE/002A/2005 SUPPLY, INSTALLATION, TESTING AND COMMISSIONING OF 132/11KV SUBSTATION & ASSOCIATED WORKS",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ETA",
+          "132/22KV SUBSTATIONS AND ASSOCIATED WORKS AT PALM DEIRA",
+          "DEWA / NAKHEEL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ETA",
+          "DAMAC CRESCENT PROPERTIES LLC : 132/12/Kv S/S AT DUBAILAND (MUDON)",
+          "DEWA",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "EVERSENDAI OFFSHORE RMC FZE",
+          "EPCI OF MODULAR BUILDING 93-B-01 FOR KNPC",
+          "KNPC",
+          "CABLE TRAYS"
+        ],
+        [
+          "EXTOL INTERNATIONAL LLC",
+          "ADCOP - ABU DHABI CRUDE OIL & PIPELINE PROJECT HABSHAN TO FUJAIRAH",
+          "ADCOP",
+          "CORTEN A CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "EXTOL INTERNATIONAL LLC",
+          "HABSHAN OILY WATER SUMP",
+          "GASCO",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "EXTOL INTERNATIONAL LLC",
+          "PUNJ LOYD",
+          "PUNJ LOYD",
+          "CABLE LADDER & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 47,
+      "rows": [
+        [
+          "FERNAS CONSTRUCTION CO.",
+          "EPIC CONSOLIDATED GAS SUPPLY PROJECT WITHIN MESAIEED AND RAS LAFFAN AREAS",
+          "QATAR PETROLEUM",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "FOSTER WHEELER",
+          "SIPD MAJNOON ASP-3 Project",
+          "SHELL IRAQ PETROLEUM DEVELOPMENT",
+          "CABLE TRAY LADDER & ACCESSORIES"
+        ],
+        [
+          "FUJENG",
+          "FUJAIRAH AIRPORT TUNNEL - PHASE 3 - MEP",
+          "FUJAIRAJ AIRPORT",
+          "SS316L- CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "GALFAR ENGINEERING & CONTRACTING SAOG",
+          "AL AMEEN MOSQUE",
+          "OMAN : SAUD BAHWAN GROUP",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "GALFAR ENGINEERING & CONTRACTING SAOG",
+          "QURUM GRID STATION",
+          "OMAN : OETC",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "GALFAR ENGINEERING & CONTRACTING SAOG",
+          "MUTTRAH GRID DTATION",
+          "OMAN : OETC",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "GALFAR ENGINEERING & CONTRACTING SAOG",
+          "UPGRADING OF KHUWAIR SOUTH, 33/11kV PRIMARY SUBSTATION (UNS)",
+          "OMAN : MEDC",
+          "CABLE TRAY & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        false,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 48,
+      "rows": [
+        [
+          "GALFAR ENGINEERING & CONTRACTING SAOG",
+          "UPGRADING OF MUDHAIBI, RUSTAQ, & IZKI GRID STATIONS",
+          "OMAN : OETC",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "GALFAR ENGINEERING & CONTRACTING SAOG",
+          "GALFAR STAFF ACCOMODATION",
+          "OMAN : GALFAR",
+          "CABLE TRAY & SUPPORTS"
+        ],
+        [
+          "GALFAR ENGINEERING & CONTRACTING SAOG",
+          "AL KAMIL GRID STATION",
+          "OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GE GLOBAL PARTS & PRODUCTS",
+          "EBA EL BRACHO EQ20 CABLE TRAYS",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GE GLOBAL PARTS & PRODUCTS",
+          "EVM II MEXICO - EQ20 CABLE TRAYS",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GE GLOBAL PARTS & PRODUCTS",
+          "CHIA HUI PHASE 2 CCPP # EQ20 CABLE SUPPORT STEEL WORK",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GE GLOBAL PARTS & PRODUCTS",
+          "OROT RABIN UNIT 20 -EQ20 CABLE SUPPORT ADN STEELWORK",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 49,
+      "rows": [
+        [
+          "GE GLOBAL SERVICES GmbH",
+          "INFRASEVR HOECHT - EQ20",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GE GLOBAL SERVICES GmbH",
+          "DOLNA ODRA ,POLAND EQ20 CABLE SUPPORT AND STEEL WORK",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GE GRID SOLUTIONS",
+          "PROJECT FIL FRANCE",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GE HYDRO FRANCE",
+          "KOKHAV PROJECT",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GE Switzerland GmbH",
+          "SERGIPIE PROJECT / COUNTRY : BRAZIL",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GE Switzerland GmbH",
+          "TUCUMAN PROJECT / GQ CABLE TRAYS",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GECO ELECTRICAL & MECHNICAL LTD.",
+          "AL ZAHIYA CITY CENTRE AT MOILAH SHARJAH UAE",
+          "MAJID AL FUTTAIM",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 50,
+      "rows": [
+        [
+          "GLOBAL MAINTENANCE & CHEMICALS",
+          "NIZWA SUBSTATION",
+          "OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GRID SOLUTIONS",
+          "BIRSKA & JIJEL & GW - ALGERIA",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GRID SOLUTIONS SAS",
+          "LIBYA RADISSON (3135 PM 148-1.1)",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GRID SOLUTIONS SAS",
+          "ZAMBIA KEFIRE & 3135 PM164-1A",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GRID SOLUTIONS SAS",
+          "ALGERIA 8GW 3135 -PM162 LA",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GRID SOLUTIONS SAS",
+          "KKH CABLE TRAYS - ISREAL",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "GRID SOLUTIONS SAS",
+          "FIL PROJECT - FRANCE ITALY LINK",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 51,
+      "rows": [
+        [
+          "GULF CONTRACTORS / SNC- LAVALIN",
+          "TABREED COOLING PLANT ZMC T- 06",
+          "AL HUSAM GENERAL CONTRACTING EST",
+          "CABLE TRAYS, LADDERS AND FIXATION ACCESSORIES"
+        ],
+        [
+          "GULF INDUSTRIAL SUPPLY FZE / GS ENGINEERING & CONSTRUCTION CORP.",
+          "OMAN BARKA 3 IPP & OMAN SOHAR 2 IPP",
+          "AL BATINAH POWER COMPANY SAOC",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "HANI OIL FIELD SERVICES",
+          "RENTAL POWER AT MIS",
+          "OMAN : OPWP",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "HIGLEIG PETROLEUM",
+          "",
+          "GNPOC - SUDAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "HOLFORDS ASSOSCIATE/ DUBAI CONTRACTING COMPANY LLC",
+          "KINGDOM OF SHEBA DEVELOPMENT PHASE I",
+          "ACE",
+          "CABLE TRAY AND TRUNKING"
+        ],
+        [
+          "HYUNDAI ENGINEERING & CONSTRUCTIONS.",
+          "BOROUGE - 3",
+          "ABU DHABI POLYMERS CO LTD / BOROUGE",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "HITACHI ENERGY",
+          "EWA BAHRAIN Dynamic Reactive Power Compensation Substation",
+          "EWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 52,
+      "rows": [
+        [
+          "HITACHI ENERGY",
+          "NEW +300/-300 MVAr 132kV DRPC (STATCOM) AT 400/132/33kV CAPITAL GRID STATION",
+          "TRANSCO (TAQA)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "HITACHI ENERGY",
+          "Al wathbha Ph3 Project",
+          "TRANSCO (TAQA)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "HITACHI ENERGY",
+          "Al wathbha Ph2 Project",
+          "TRANSCO (TAQA)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "HITACHI ENERGY",
+          "132/11kV Hatta Power Plant - DEWA_132/11kV Hatta Power Plant - DEWA",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "HITACHI ENERGY",
+          "Supply and Installation of New +300/-300 MVAr 132kV DRPC (STATCOM) at 400/132/33kV Capital Grid Station",
+          "TRANSCO (TAQA)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "INTECSA INDUSTRIAL ABU-DHABI",
+          "RFQ CABLE TRAYS 10441BeAAT PROJECT TAKREER RFQ5649-6300-MR-IU-031",
+          "TAKREER",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "INTERKAB / EXTERRAN",
+          "SUMMAIL, IRAQ",
+          "DNO",
+          "CABLE TRAY LADDER & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 53,
+      "rows": [
+        [
+          "JGC MIDDLE EAST / TAISEI CORPORATION",
+          "QATAR DOLPHIN PROJECT (QATAR)",
+          "QATAR PETROLEUM",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "JGC MIDDLE EAST FZE",
+          "DOLPHIN PROJECT UPSTREAM AND COMPRESSION FACILITIES",
+          "DOLPHIN ENERGY - QATAR",
+          "CABLE TRAYS AND SUPPORTING SYSTEM"
+        ],
+        [
+          "KENTECH / FOSTER WHEELER",
+          "EMIRATES NATIONAL OIL COMPANY (ENOC) EXPANSION PHASE I",
+          "ENOC",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "KENTECH / FOSTER WHEELER",
+          "MALL OF EMIRATES – EXPANSION ON PLOT NO. 373-917, DUBAI, UAE",
+          "M/s MAF PROPERTIES LLC , P.O BOX 60772 DUBAI, UAE",
+          "CABLE TRAY, LADDER & TRUNKING"
+        ],
+        [
+          "KHANSAHEB / ARIF AND BINTOAK CONSULTANT ARCHITECTS AND ENGINEERS",
+          "PROPOSED INTERNAL MODIFICATION OF EXISTING OFFICE & PROPOSED SPLIT LEVEL CAR PARK BUILDING",
+          "",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "KHANSAHEB / KEO INTERNATIONAL",
+          "KB 668EKFC EXPANSION",
+          "",
+          "CABLE TRAY TRUNKING"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 54,
+      "rows": [
+        [
+          "KHANSAHEB / MACE / NORR CONSULTANTS",
+          "EAST HOTEL AT MALL OF THE EMIRATES",
+          "MAF",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "KHANSAHEB CIVIL / ARIF AND BINTOAK CONSULTANT ARCHITECTS AND ENGINEERS / KCE BUILDING SERVICE DIVISION",
+          "6387 BEACH PALACE- DEMOLITION OF EXISTING MAJLIS AND CONSTRUCTION OF NEW MAJLIS OFFICE",
+          "DUBAI MUNICIPALITY",
+          "CABLE TRAY, TRUNKING AND LADDER"
+        ],
+        [
+          "KHARAFI NATIONAL / DAR",
+          "JXB1/041 CENTRAL UTILITY COMPLEX (CUC- 2)",
+          "DUBAI CIVIL AVIATION",
+          "CABLE TRUNKING AND CONTAINMENT ACCESSORIES"
+        ],
+        [
+          "KHARAFI NATIONAL / DAR AL HANDASAH",
+          "JEBEL ALI AIRPORT CITY PHASE-1A AIRFIELD AND INFRASTRUCTURE CONTRACT NO: JXB1/INF/040 CENTRAL UTILITY COMPLEXES - CUC1",
+          "DUBAI CIVIL AVIATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "KHARAFI NATIONAL / DAR AL HANDASAH",
+          "JEBEL ALI AIRPORT CITY PHASE-1A AIRFIELD AND INFRASTRUCTURE CONTRACT NO: JXB1/INF/041 CENTRAL UTILITY COMPLEXES - CUC2",
+          "DUBAI CIVIL AVIATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "KINDEN CORPORATION / TAISEI CORPORATION / PARSONS DE LEUW CATHER OVERSEAS LTD.",
+          "RAS AL KHOR CROSSING - CONTRACT R800/5",
+          "RTA",
+          "SS316L- CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "KINDEN CORPORATION / TAISEI CORPORATION / PARSONS DE LEUW CATHER OVERSEAS LTD.",
+          "DOUBLE DECKING OF DOHA ROAD",
+          "RTA",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 55,
+      "rows": [
+        [
+          "KINDEN CORPORATION",
+          "DEVELOPMENT OF ALKHAIL ROAD",
+          "RTA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "KOAM ELECTROMECHANICAL / HYUNDAI ENGINEERING & CONSTRUCTION",
+          "BOROUGE 3",
+          "BOROUGE",
+          "HDG+EPOXY POWDER COATED CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "KUMHO / ASCON / JUNGDO / JV / DAR AL HANDASAH",
+          "JXB1/BLD/431 PASSENGER TERMINAL BUILDINGFINISHES & MEP PACKAGE",
+          "DUBAI CIVIL AVIATION",
+          "HDG CABLE TRAY, HDG LADDER & GI TRUNKING"
+        ],
+        [
+          "LARSEN & TOUBRO LIMITED, CONSTRUCTION",
+          "132kV SIHSHUIB & BADIYA SUBSTATION",
+          "DEWA",
+          "HDG CABLE TRAYS, LADDERS, SUPPORTS & ACCESSORIES"
+        ],
+        [
+          "L & T",
+          "Expo link-Dubai Metro project",
+          "DEWA",
+          "C CHANNEL AND ACCESSORIES"
+        ],
+        [
+          "L & T",
+          "132/11kV AL-YALAYIS Substaion (DEWA NASHMA)",
+          "DEWA",
+          "HDG CABLE LADDDER, CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "L&T",
+          "EXPO LINK",
+          "DEWA",
+          "CABLE TRAY SUPPORT"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        false,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 56,
+      "rows": [
+        [
+          "L&T",
+          "GARHOUD SS ADDITIONAL",
+          "DEWA",
+          "CABLE TRAY SUPPORT"
+        ],
+        [
+          "L&T",
+          "ADDITIONAL REQUIREMENT FOR MANKHOOL SS",
+          "DEWA",
+          "GB-2 DAK"
+        ],
+        [
+          "LAING O'RDUAKE CO./ PENGUIN ENGINEERING LTD LLC",
+          "RASIS BUSINESS CENTER/ ARCHGROUP",
+          "RASIS DEVELOPER",
+          "CABLE TRAY, TRUNKING, LADDER AND ACCESSORIES"
+        ],
+        [
+          "LARSEN & TOUBRO",
+          "EXPANSION OF 33 KV NETWORK IN ALL REGION",
+          "ADWEA",
+          "CABLE SUPPORT SYSTEM"
+        ],
+        [
+          "LARSEN & TOUBRO",
+          "LE140370 - IPTD - 33/11 KV SS 33kV UG CABLE -AL AIN HOSPITAL",
+          "ADWEA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN & TOUBRO",
+          "E3/09/(3) - 132/11 KV& 132/33/11 KV SUBSTATION WORKS IN NORTHERN EMIRATES (MASAFI-FUJAIRAH & RIFA-RAK)",
+          "FEWA",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "LARSEN & TOUBRO - UAE",
+          "DEWA 6SS : GARHOUD, MANKHOOL, EXPOLINK (3), 1 DEWA NEW",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 57,
+      "rows": [
+        [
+          "LARSEN & TOUBRO - BAHRAIN",
+          "C0-062-2010-EPC & C FOR FIT OUT OF THREE ELECTRICAL SUBSTATIONS & 220kV DISTRIBUTION SYSTEM FOR TATWEER PETROLEUM, BAHRAIN FIELD DEVELOPMENT",
+          "TATWEER PETROLEUM - BAHRAIN FIELD DEVELOPMENT COMPANY",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN & TOUBRO LTD., CONSTRUCTION",
+          "132/11kVKHOR DUBAI SUBSTATION",
+          "DEWA",
+          "CABLE TRAY, SUPPORTS & ACCESSORIES"
+        ],
+        [
+          "LARSEN & TOUBRO - OMAN",
+          "MIXED USE DEVELOPMENT PROJECT - AL KHUWAIR",
+          "OMAN : OOSC",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "LARSEN & TOUBRO - OMAN",
+          "MISFAH GRID STATION",
+          "OMAN : OETC",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "LARSEN & TOUBRO - OMAN",
+          "GERMAN UNIVERSITY TECHNOLOGY BUILDING",
+          "OMAN : MAZOON ELECTRICITY COMPANY",
+          "WIRE MESH CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "LARSEN & TOUBRO - OMAN",
+          "POWER SYSTEM UPGARDE/132KV SUBSTATION/OHL(PDO C311302)",
+          "PDO - OMAN",
+          "HDG CABLE TRAY LADDRS,FITTINGS & ACCESSORIES"
+        ],
+        [
+          "LARSEN & TOUBRO - OMAN",
+          "CONSTRUCTION SERVICES FOR 2X20MVA, 33/11 KV INDOOR PRIMARY SUBSTATION FOR MILITARY TECHNICAL COLLEGE",
+          "OMAN",
+          "HDG CABLE TRAY LADDRS,FITTINGS & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 58,
+      "rows": [
+        [
+          "LARSEN & TOUBRO - OMAN",
+          "UPGRADING OF MAWELAH 132/33KV GRID STATION (TENDER 262/2011)",
+          "OMAN",
+          "HDG CABLE TRAY, LADDERS & ACCESSORIES"
+        ],
+        [
+          "LARSEN & TOUBRO - OMAN",
+          "NEW SOHAR POWER GRID STATION & INSTALLATION.",
+          "OMAN",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "LARSEN & TOUBRO - QATAR",
+          "DOHA SOUTH SEWAGE TREATMENT WORKS - PHASE II EXPANSION",
+          "PUBLIC WORKS AUTHORITY",
+          "HDG & GRP CABLE TRAY"
+        ],
+        [
+          "LARSEN & TOUBRO - QATAR",
+          "DESIGN & CONSTRUCTION OF 66/11KV SUBSTATIONS FOR WEST, WADI, NORTH, MARINA, DISTRICT COOLING PLANTS AND QETAIFAN ISLAND SOUTH SUBSTATION",
+          "LUSAIL CP24 PROJECT",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "LARSEN & TOUBRO -UAE",
+          "MIRACLE",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN & TOUBRO -UAE",
+          "CEMENT",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN & TOUBRO -UAE",
+          "UMM DAMAN",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 59,
+      "rows": [
+        [
+          "LARSEN & TOUBRO -UAE",
+          "CE/448B/2007 - INVESTMENT RESIDENCES & JEBEL ALI HORSE RACE COURSE 132/11 KV SUBSTATIONS AND ASSOCIATE WORKS",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN & TOUBRO -UAE",
+          "CANALGATE SS",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN & TOUBRO -UAE",
+          "JUMEIRAH SOUTH SS",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN & TOUBRO -UAE",
+          "NAD AL SHEBA SS",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN & TOUBRO -UAE",
+          "NAS & JUMSOUTH",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN & TOUBRO -UAE",
+          "QANAT SS",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN &TOUBRO",
+          "FEWA E11 : 132/11kV S/S AT DIHAN SITE RAS AL KHAIMAH, 132/33kV S/S AT INDUSTRIAL AREA UMM AL QUWAIN",
+          "FEWA",
+          "CABLE TRAY & LADDER"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        true,
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 60,
+      "rows": [
+        [
+          "LARSEN &TOUBRO",
+          "ABU DHABI AIRPORT : MIDFIELD TERMINAL COMPLEX, AIRSIDE CONSTRUCTION",
+          "ADAC",
+          "CABLE TRAY & CABLE LADDER"
+        ],
+        [
+          "LARSEN &TOUBRO",
+          "Al Layyah Power Station",
+          "SEWA",
+          "CABLE TRAY & CABLE LADDER"
+        ],
+        [
+          "LARSEN &TOUBRO DUBAI",
+          "DEWA BANIYAS S/S",
+          "DEWA",
+          "CABLE TRAY & CABLE LADDER"
+        ],
+        [
+          "LARSEN &TOURBO - QATAR",
+          "QATAR POWER TRANSMISSION SYSTEM EXPANSION - PHASE-13",
+          "KAHRAMAA ( QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN &TOURBO - QATAR",
+          "GTC/371A/2010 QATAR POWER TRANSMISSION SYSTEM EXPANSION - PHASE-10 (PACKAGE - S1 & S6)",
+          "KAHRAMAA ( QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN &TOURBO - QATAR",
+          "GTC/371A/2010 QATAR POWER TRANSMISSION SYSTEM EXPANSION - PHASE-10 (PACKAGE - S2)",
+          "KAHRAMAA ( QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN &TOURBO - QATAR",
+          "GTC 954 Reactor Project",
+          "KAHRAMAA ( QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 61,
+      "rows": [
+        [
+          "LARSEN &TOURBO - QATAR",
+          "KAHRAMAA PHASE 13 GTC/735/2015",
+          "KAHRAMAA ( QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN &TOURBO - QATAR",
+          "QATAR POWER TRANSMISSION SYSTEM EXPANSION PHASE-13 SUBSTATION PACKAGES - S8, S9, S12 , S13, S14, S15 & S16 CONTRACT No. GTC/735/2015",
+          "KAHRAMAA ( QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LARSEN &TOURBO & POWER CHINA - JV",
+          "ETIHAD RAIL STAGE 2, PACKAGE 2F2",
+          "ETHIHAD RAIL COMPANY PJSC",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LEIGHTON / HYDER CONSULTANT",
+          "P038- SAADIYAT BEACH GOLF COURSE BUILDINGS",
+          "PARSONS / TDIC",
+          "STEEL SUPPORT SYSTEM"
+        ],
+        [
+          "LINXON DUBAI",
+          "JICA Lot2 – MOE Iraq 4 x 132/33kV Substations Project",
+          "MOE",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LINXON KSA",
+          "RUMAILA POWER PLANT 300 MW HAY AL KARRADA, BAGHDAD, IRAQ",
+          "BASRAH GAS COMPANY",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "LINXON KSA",
+          "Rumaila 2 Fast Track Project",
+          "BASRAH GAS COMPANY",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 62,
+      "rows": [
+        [
+          "MARITIME INDUSTRIAL SERVICES CO LTD INC",
+          "AR9980 ASIPEM - REFURBISHMENT OF RIG PN4",
+          "SAIPEM",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "MARITIME INDUSTRIAL SERVICES CO LTD INC",
+          "SUPER M2, NEW BUILD RIG PROJECT",
+          "KS ENERGY",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "MARITIME INDUSTRIAL SERVICES CO LTD INC",
+          "HULL 106 - AE2203 MOSVOLD MIDDLE EAST JACK UP",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "MARITIME INDUSTRIAL SERVICES CO LTD INC",
+          "HULL 107 - AE2304 KS ENERGY - CONSTRUCTION OF RIG",
+          "KS ENERGY",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "MEKANIKA LTD (MALTA)",
+          "EDEN INTERCONTINENTAL HOTEL, MALTA",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "MEKANIKA LTD (MALTA)",
+          "QRENDI STORES, MALTA",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 63,
+      "rows": [
+        [
+          "MELCO",
+          "SUPPLY INSTALLTION, TESTING & COMMISSIONING OF STATIC VAR COMPENSATION STATIONS AT CARX SVC STATION",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "MELCO",
+          "SUPPLY INSTALLTION, TESTING & COMMISSIONING OF STATIC VAR COMPENSATION STATIONS AT PDM SVC STATION",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "MELCO",
+          "SUPPLY INSTALLTION, TESTING & COMMISSIONING OF STATIC VAR COMPENSATION STATIONS AT NAHDA SVC STATION",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "METCO / HAIMO",
+          "SHAH GAS GATHERING PROJECT",
+          "GASCO",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "METITO (OVERSEAS LIMITED)",
+          "KASHAGAN OIL FIELD DEVELOPMENT",
+          "AGIP KCO",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "MIDDLE EAST CONTROL SERVICES",
+          "JEBEL ALI AIRPORT HYDRANT PROJECT - M26022",
+          "DUBAI CIVIL AVIATION",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "MIDDLE EAST CONTROL SERVICES",
+          "DUBAI WORLD CENTRAL INTERNATIONAL AIRPORT FUEL PUMP - JXB1/INF/080",
+          "DUBAI CIVIL AVIATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 64,
+      "rows": [
+        [
+          "MITSUBISHI CORPORATION",
+          "CE/ 015/ 2002 JEBEL ALI POWER AND DESALINATION STATION \"L\"- PHASE 1",
+          "LAHMEYER INTERNATIONAL",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "MITSUBISHI CORPORATION",
+          "CNE/015/2002 JEBEL ALI POWER & DESALINATION STATION - L STATION, PHASE 1, DUBAI",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "MITSUBISHI CORPORATION",
+          "DUBAI METRO PHASE I - RED LINE N9-05681",
+          "RTA",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "MITSUBISHI HEAVY INDUSTRIES LTD",
+          "STATION CONTEXT PLANNING N9-5972",
+          "RTA",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "MITSUBISHI HEAVY INDUSTRIES LTD",
+          "VIDEO BROADCASTING SYSTEM IN STATION N9-5974",
+          "RTA",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "MITSUBISHI HEAVY INDUSTRIES LTD",
+          "RASHIDIYA CAR PARK N9-5976",
+          "RTA",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "MITSUBISHI HEAVY INDUSTRIES LTD",
+          "JUMEIRAH ISLAND CAR PARK N9-5978",
+          "RTA",
+          "CABLE TRAYS & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 65,
+      "rows": [
+        [
+          "MK TRADING",
+          "MHD WAREHOUSE",
+          "OMAN",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "MONTAZHSPETSSTROY (MSS)",
+          "AGIP/KCO 2002/0973 - EXPANSION EPC NORTH OFFSITES",
+          "AGIP KCO",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "MSS / SEA STAR COMPANY",
+          "KASHAGAN OIL FIELD DEVELOPMENT",
+          "AGIP KCO",
+          "CABLE TRAYS & SUPPORT SYSTEMS"
+        ],
+        [
+          "MULTI ELECTROMECHANICAL TRADING CO",
+          "ERIGAL & SULABIYA",
+          "JORDAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "NAEL & BIN HANMAL HYDRO EXPORT ESTABLISHMENT",
+          "SSD- 001- SW00- C 00 AL GHADEEER DEVELOPMENT PHASE 1- ROAD INFRASTRUCURE WORKS, ABU DHABI",
+          "DORCH CONSULT",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "NAEL CONSTRUCTION AND CONTRACTING / AL TURATH / AAW CONSULTING",
+          "PUMPING STATION \"H\"AND ITS RISING MAIN",
+          "DUBAI MUNICIPALITY",
+          "CABLE TRAYS AND ACCESSORIES"
+        ],
+        [
+          "NATIONAL CONTRACTING CO. LTD. / ENERGOPROJEKT- ENTEL CO. LTD.",
+          "33/11KV SUBSTATION WORKS IN NORTH AND EASTERN AREAS OF NORTHERN EMIRATES - E18",
+          "FEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 66,
+      "rows": [
+        [
+          "NATIONAL CONTRACTING CO. LTD. / ENERGOPROJEKT- ENTEL CO. LTD.",
+          "33/11KV SUBSTATION WORKS IN NORTH AND EASTERN AREAS OF NORTHERN EMIRATES - E19",
+          "FEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "NATIONAL ENGINEERING UNITED CONTRACTING",
+          "SHADEN RESIDENTIAL COMMERCIAL BUILDING",
+          "OMAN",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "NATIONAL ENGINEERING UNITED CONTRACTING",
+          "CALEDONIAN COLLEGE OF ENGINEERING",
+          "OMAN",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "NATIONAL ENGINEERING UNITED CONTRACTING",
+          "WADI KABIR RESIDENTIAL PROJECT",
+          "OMAN",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "NATIONAL WHEEL J&P / DANWAY / DAR ALHANDASAH",
+          "DUBAI INTERNATIONAL AIRPORT EXPANSION PROJECT (PHASE II) EK OPERATION CENTER TUNNEL",
+          "DUBAI CIVIL AVIATION",
+          "HDG CABLE TRAY, HDG LADDER & GI TRUNKING"
+        ],
+        [
+          "NATIONAL WHEEL J&P L.L.C",
+          "R-885 : COMPREHENSIVE IMPROVEMENT TO ITTIHAD ROAD (PHASE II)",
+          "RTA",
+          "CABLE SUPPORT SYSTEM"
+        ],
+        [
+          "NICSA",
+          "EPC FOR SAHIL & SHAH FULL FIELD DEVELOPMENT PROJECT : ADCO PROJECT NO 8500",
+          "ADCO",
+          "CABLE TRAY, LADDER AND ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 67,
+      "rows": [
+        [
+          "NICSA",
+          "TAKREER ABU DHABI FLARE GAS RECOVERY 10422 - PHASE 2",
+          "TAKREER",
+          "CABLE TRAY & ACCESSORIE"
+        ],
+        [
+          "NICSA",
+          "RUWAIS FLARE GAS RECOVERY PROJECT 10425- PHASE 2 RUWAIS",
+          "TAKREER",
+          "PAINTED CABLE TRAYS & CONDUITS"
+        ],
+        [
+          "NICSA",
+          "02230 TOTAL RAFFINADERIJ ANTWERPEN OPTARA",
+          "TECNICAS REUNIDAS",
+          "HDG CABLE TRAY, LADDERS & ACCESSORIES"
+        ],
+        [
+          "NICSA",
+          "UNITE PRODUCTION DE VAPEUR & AMMONIAC EN MODE:EPC",
+          "",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "NICSA",
+          "CASTANHA FIELD PRODUCTION FACILITIES EPC-1",
+          "",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "NICSA",
+          "PLANTA DE SEPARACION DE LIQUIDOS POR TURBOEXPANSION DE GRAN CHACO",
+          "YACIMIENTOS PETROLIFEROS FISCALES BOLIVIANOS (\"YPFB\").",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "NORTH CASPIAN CONSTRUCTORS",
+          "KASHAGAN DEVELOPMENT EXPERIMENTAL PROGRAM",
+          "AGIP KCO",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 68,
+      "rows": [
+        [
+          "NOUS TRADING",
+          "LABOR OFFICE AT BARKA",
+          "OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "SALAH AL BULUSHI",
+          "OXY - OMAN",
+          "HDG CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "SCR PROECT",
+          "OXY - OMAN",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "240000041074",
+          "OXY - OMAN",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "REF PO NO : 24000012295, 24000012375, 24000013087, 24000013928, 24000014532",
+          "OXY - OMAN",
+          "CABLE SUPPORT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "OXY MUKHAIZNA OIL FIELD",
+          "OMAN : OXY",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "OXY SAFAH",
+          "OMAN : OXY",
+          "CABLE LADDER & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 69,
+      "rows": [
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "MUKHAIZNA OIL FIELD",
+          "OXY - OMAN",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "REF PO NO : 24000012295,24000012375, 24000013087,24000013928,24000014532",
+          "OMAN : OXY",
+          "CABLE LADDER, TRAY, SUPPORT & ACCESSORIES"
+        ],
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "0200691",
+          "OMAN : OXY",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "0200691",
+          "OXY - OMAN",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "1105673",
+          "OXY - OMAN",
+          "CABLE SUPPORT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL MUKHAIZNA LLC",
+          "1105673",
+          "OMAN : OXY",
+          "CABLE SUPPORT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "1505-UPS REPLACE. SAFAH, WADILATHAM, LEKHWAIR METERING STATION",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 70,
+      "rows": [
+        [
+          "OCCIDENTAL OF OMAN",
+          "2015 NEW WELLS",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "(WI 003) DD FOR REPLACEMENT OF CRUDE HEATER",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "KHAMILA DEBOTTLENECKING PHASE-II - SHED LIGHTING MATERIALS",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "(WI 003) DD FOR REPLACEMENT OF CRUDE HEATER",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "CABLE TRAY REMEDIAL WORKS AT CPFS",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "GAS LIFT IMPROVEMENT PHASE-II (K610 COMPRESSOR)",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "2014 NEW ESP WELLS",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 71,
+      "rows": [
+        [
+          "OCCIDENTAL OF OMAN",
+          "SAFAH FAR WEST INTERIM PUMPS",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "GP GLYCOL PUMPS",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "EXPANSION OF PRODUCED WATER HANDLING FACILITY AT JALAL",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "SAFAH WATER INJECTION UPGRADE",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "2014 NAG WELLS",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "SAFAH WATER INJECTION UPGRADE-II (SOUTH WEST AREA)",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "SAFAH GAS LIFT IMPROVEMENT",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 72,
+      "rows": [
+        [
+          "OCCIDENTAL OF OMAN",
+          "SAFAH WATER INJECTION UPGRADE-II (NORTH B)",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "WADI LATHAM CAMP EXPANSION",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "EXPANSION OF LIQUID HANDLING SYSTEM AT SAFAH",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "2014 NEW WELLS - STRUCTURAL MATERIALS FOR GENERATOR FUEL LINE",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "SLUG CATCHERS CONDENSATE RE-ROUTING",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "BACK UP FUEL GAS TO POWER STATION AT SAFAH",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "JALAL EXPANSION PROJECT",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 73,
+      "rows": [
+        [
+          "OCCIDENTAL OF OMAN",
+          "SAFAH WI (PHASE III) FAR EAST AREA PUMPS",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "2015 NEW PRODUCER WELLS BEAM PUMPS - FOR BULK INSTRUMENT MATERIALS",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "SAFAH LP FLARE UPGRADE PROJECT",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "RELIABLE POWER SUPPLY FOR OMAN NORTH DATA SERVER",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OCCIDENTAL OF OMAN",
+          "WADI LATHAM 33KV SUBSTATION NO.1",
+          "OXY - OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OMAN NATIONAL ENGINEERING & INVESTMENT COMPANY (ONEIC)",
+          "AL KHOUD SUBSTATION",
+          "OMAN : MEDC",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "OMAN NATIONAL ENGINEERING & INVESTMENT COMPANY (ONEIC)",
+          "HASSIK POWER STATION",
+          "OMAN : RAECO",
+          "CABLE TRAY & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 74,
+      "rows": [
+        [
+          "OMAN NATIONAL ENGINEERING & INVESTMENT COMPANY (ONEIC)",
+          "AL KHADRA SUBSTATION",
+          "OMAN : RAECO",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "OMAN NATIONAL ENGINEERING & INVESTMENT COMPANY (ONEIC)",
+          "KASAB POWER STATION",
+          "OMAN : RAECO",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "OMAN NATIONAL ENGINEERING & INVESTMENT COMPANY (ONEIC)",
+          "MEDC SCADA",
+          "OMAN : MEDC",
+          "CABLE TRAY, LADDER, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "OMAN NATIONAL ENGINEERING & INVESTMENT COMPANY (ONEIC)",
+          "SAMAIL GRID STATION",
+          "OMAN : OETC",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "OMAN SHAPOORJI CONSTRUCTION COMPANY LLC",
+          "HH VILLA AL KHOUD",
+          "OMAN",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "OMAN SHAPOORJI CONSTRUCTION COMPANY LLC",
+          "RADISSON BLU HOTEL - SOHAR",
+          "OMAN",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "ONLINE CABLES",
+          "BASARA ELECTRIC POWER PLANT",
+          "BASARA OIL COMPANY, IRAQ",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 75,
+      "rows": [
+        [
+          "ORION ENGINEERING CONSULTANTS",
+          "CONSTRUCTION OF WAREHOUSE AT JAFZA FOR DIESEL TECHNIC ME",
+          "AMANA STEEL BUILDING CONTRACTIONG.",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "OUTOTEC",
+          "ALBA POTLINE 6 PROJECT",
+          "EWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PANORAMA CONTRACTING & ENGINEERING SERVICES WLL",
+          "CONTRACT NO: GTC 189/ED/03 - EPIC OF INDEPENDENT FLARE FOR QJA - 1&2 AND REPLACEMENT SEPARATORS AT DUKHAN FIELDS",
+          "QATAR PETROLEUM",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "PARKWAY INTERNATIONAL CONTRACTING / ARIF & BINTOAK CONSULTANT",
+          "JUMEIRAH PARK , DUBAI",
+          "DUBAI",
+          "GI CABLE TRAY"
+        ],
+        [
+          "PARSONS- DE LEUW CATHER OVERSEAS LIMITED/ TAISEI CORPORATION",
+          "RAS AL KHOR CROSSING- R800/ 5",
+          "RTA",
+          "CABLE TRAY & CABLE SUPPORT SYSTEM"
+        ],
+        [
+          "PARSONS OVERSEAS LIMITED",
+          "COMPREHENSIVE IMPROVEMENTS OF THE PARALLEL ROADS - PHASE 2A2-1",
+          "RTA",
+          "SS316L CABLE TRAYS & ACCESSORIES MS- 001"
+        ],
+        [
+          "PETRO GAS LLP (DUBAI)",
+          "EPIC OF GAS DEHUMIDIFICATION PLANT (GDP), BAGTYYARLYK-2 0513 - RECONSTRUCTION OF BLOCKS OF WATER RECYCLING SYSTEM, 41330-ENGINEERING AND CONSTRUCTION OF OFF-PLANT FACILITIES TNPZ",
+          "TURKMENGAS",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 76,
+      "rows": [
+        [
+          "PETRO GAS YEMEN CO FOR OIL AND GAS SERVICES LTD",
+          "",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC",
+          "NC200 ERAWIN FIELD DEVELOPMENT PROJECT PHASE I, ERAWIN EARLY PRODUCTION",
+          "ZALLAF LIBYA FOR OIL & GAS EXPLORATION AND PRODUCTION",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC E&C OMAN LLC.",
+          "CENTRAL PROCESSING FACILITY (CPF), KHAZZAN PROJECT",
+          "BP EXPLORATION(EPSILON) LIMITED, OMAN",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC EMIRATES",
+          "EPC OF EXPANSION OF BAB GAS COMPRESSION PROJECT (EBGCP)",
+          "ADCO",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC EMIRATES",
+          "BAB HABSHAN 1 DEVELOPMENT PROJECT(PHASE-1)",
+          "ADCO",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "LOWER FARS HEAVY OIL DEVELOPMENT PROGRAM PHASE-1 (60 MBOPD)",
+          "KOC KUWAIT",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "New Gathering Center, GC-29 in North Kuwait",
+          "KOC KUWAIT",
+          "CABLE TRAYS & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 77,
+      "rows": [
+        [
+          "PETROFAC INTERNATIONAL",
+          "MGT (MANIFOLD, GROUP TRUNKLINE) SYSTEM for GC-29,30 & 31 in North Kuwait",
+          "KOC KUWAIT",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "KHOR MOR LPG LOADING FACILITIES REPAIRS / REPLACEMENT PROJECT",
+          "CRESCENT PETROLEUM DANA GAS, IRAQ",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "C31/ 0615- EPC HARWEEL CLUSTER PHASE 2 FACILITIES",
+          "OMAN : PDO",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "KAUTHER DEPLETION COMPRESSION PROJECT",
+          "OMAN : PDO",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "CPF PHASE 1 AT BADRA OIL FIELD PROJECT IRAQ",
+          "IRAQ",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "EARLY PRODUCTION SYSTEM & BROWNFIELD FACILITIES MAJNOON, SOUTHERN IRAQ",
+          "SHELL IRAQ PETROLEUM DEVELOPMENT BV",
+          "CABLE SUPPORT SYSTEM"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "INSTALLATION OF FG & GAS OIL PIPELINES FROM MAA TO AZZOUR AND SHUIBA POWER STATIONS FOR KUWAIT OIL COMPANY",
+          "KOC - KUWAIT",
+          "CABLE TRAYS & LADDERS"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 78,
+      "rows": [
+        [
+          "PETROFAC INTERNATIONAL",
+          "SOUTH YOLTEN GAS FIELD DEVELOPMENT PROJECT, TURKMENISTAN",
+          "TURKMENGAS",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "REPLACEMENT OF NK CRUDE OIL EXPORT SYSTEM, KUWAIT",
+          "KOC - KUWAIT",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "HASDARBUL PROJECT: ONSHORE TERMINAL, TUNISIA",
+          "BG TUNISIA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "HASDARBUL PROJECT: ONSHORE TERMINAL, TUNISIA",
+          "BG TUNISIA",
+          "CABLE TRUNKING SYSTEM"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "JIHAR STAGE 3 PROJECT SYRIA",
+          "HAYAN PETROLEUM COMPANY - SYRIA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "KAUTHER DEPLETION COMPRESSION PROJECT",
+          "OMAN : PDO",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "EBLA GAS PROJECT, SYRIA",
+          "PETRO CANADA, PALMYRA BV",
+          "CABLE TRAY COVERS"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 79,
+      "rows": [
+        [
+          "PETROFAC INTERNATIONAL",
+          "C31/ 0615- EPC HARWEEL CLUSTER PHASE 2 FACILITIES",
+          "OMAN : PDO",
+          "CABLE TRAYS AND ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "SALAM GAS TREATMENT UNIT TRAIN - 3/4, (SGT 3/4) EGYPT",
+          "KHALDA PETROLEUM COMPANY",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "KASHAGAN PROJECT",
+          "AGIP KCO",
+          "CORTEN A CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL",
+          "NEW GAS PROCESSING PLANT, SAJAA - SHARJAH",
+          "CRESCENT PETROLEUM COMPANY",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL (UAE) LLC.",
+          "REGGANE NORD DEVELOPMENT PROJECT",
+          "GROUPEMENT REGGANE, ALGERIA",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC INTERNATIONAL (UAE) LLC.",
+          "EPC for RHCU ISBL AND FEED OSBL, Lithuania",
+          "Public Company ORLEN Lietuva",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC QATAR",
+          "RGEXP58029(RGCP-256), CT/RG27/G006/09",
+          "MEDGULF CONSTRUCTION CO. AT RAS LAFFAN",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 80,
+      "rows": [
+        [
+          "PETROFAC QATAR / COBRAIN - SINOHYDRO- GAMMUDA-WCT-JB",
+          "NDIA - AIRFIELD PAVING, TUNNEL & DETENTION PONDS",
+          "NDIA/OVERSEAS BECHTEL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC QATAR / GALFAR AL MISNAD ENGINEERING & CONTRACTING WLL",
+          "QP STORAGE TANKS PRG - GALFAR",
+          "QATAR PETROLEUM",
+          "CORTEN A CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC QATAR / LFE",
+          "NEW DOHA INTERNATIONAL AIRPORT - CP10",
+          "NDIA/OVERSEAS BECHTEL",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "PETROFAC QATAR / QCON",
+          "RASGAS HELIUM 2 HEXU AND UTILITIES",
+          "RASGAS",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC QATAR / SECCO ENGINEERING",
+          "NDIA - CP11",
+          "NDIA/OVERSEAS BECHTEL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC QATAR / SECCO ENGINEERING",
+          "NDIA - AIRPORT SUPPORT FACILITY",
+          "NDIA/OVERSEAS BECHTEL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROFAC QATAR / SG-WCT / LFE ENGINEERING",
+          "NEW DOHA INTERNATIONAL AIRPORT - CP10",
+          "NDIA/OVERSEAS BECHTEL",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 81,
+      "rows": [
+        [
+          "PETROFAC QATAR / SKY ORYX / TAISEI / ANEL / EKIN TROJE",
+          "NDIA - CP-18",
+          "NDIA/OVERSEAS BECHTEL",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "PETROFAC QATAR / VOLTAS OVERSEAS",
+          "EMIRI TERMINAL BUILDING",
+          "NDIA/OVERSEAS BECHTEL",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROGAS FZE",
+          "PROJECT: NPF - CFT/45/04/184",
+          "TURKMENISTAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "PETROLCOM",
+          "EPC FOR RUMAITHA TAMAMA ZONE B PHASE III EXPANSION DEVELOPMENT & CONVERSION OF RA PHASE 1/II CO2 AFFECTED WELL",
+          "ADNOC",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "PETROLEUM DEVELOPMENT OMAN (PDO)",
+          "SUBSTATION C&A NORTH",
+          "OMAN : PDO",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "PETRON GULF LLC",
+          "SOHAR ALUMINUM",
+          "OMAN : SOHAR ALUMINUM",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "POWER TURBO SYSTEM",
+          "DUBAL CCPP22",
+          "DUBAL",
+          "CABLE TRAYS"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        true,
+        false,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 82,
+      "rows": [
+        [
+          "POWER TURBO SYSTEM",
+          "KESTREL",
+          "DUBAL",
+          "CABLE TRAYS, LADDER AND ACCESSORIES"
+        ],
+        [
+          "POWERTECH ENGINEERING",
+          "SUBSTATION - WADI KABIR",
+          "OMAN : OETC",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "PROCESS FZE",
+          "ME22310A Analyzer Cabinet &ME22310B Metering Skid for NCOC Kazakhstan",
+          "NCOC",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "PEG Engineering & Contracting DMCC",
+          "ZUBAIR MISHRIF DGS EXPANSION",
+          "ENI IRAQ B.V",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "QATAR PETROLEUM",
+          "QC SURVEILANCE",
+          "",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "RAY OMAN",
+          "SUBSTATION AT GUtech",
+          "OMAN : MAZOON ELECTRICITY COMPANY",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "REMCON ELECTRICAL CO. LLC",
+          "FEWA CONTRACT E05/2008 - 132/33 KV SUBSTATION WORKS IN NORTHERN EMIRATES",
+          "FEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        false,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 83,
+      "rows": [
+        [
+          "SAIPEM S.P.A",
+          "INSTALLATION OF NEW COMPRESSORS AT GC78 & 21 FOR KUWAIT OIL COMPANY (KOC)",
+          "KOC - KUWAIT",
+          "CABLE TRAYS WITH ACCESSORIES"
+        ],
+        [
+          "SAIPEM S.P.A SERVIZI ENERGIA ITALIA",
+          "QUILUMA & MABOQUEIRO (Q&M) PROJECT EPC of Quiluma Deck",
+          "AZULE ENERGY- A BP AND ENI COMPANY",
+          "SS316L CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SAIPEM S.P.A SERVIZI ENERGIA ITALIA",
+          "QUILUMA & MABOQUEIRO (Q&M) PROJECT EPC of Quiluma Jacket",
+          "AZULE ENERGY- A BP AND ENI COMPANY",
+          "SS316L CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SAIPEM S.P.A- SERVIZI ENERGIA ITALIA",
+          "HAIFA CHEMICALS AMMONIA PLAN",
+          "HAIFA NEGEV TECHNOLOGIES LTD",
+          "EPOXY COATED CABLE TRAYS"
+        ],
+        [
+          "SALINI CONTRUTTORI S.p.A DUBAI BRANCH/ PARSON- DE LEUW CATHER OVERSEAS LTD",
+          "RAS AL KHOR R800/ 6",
+          "RTA",
+          "CABLE SUPPORT SYSTEM"
+        ],
+        [
+          "SAMSUNG C&T ENG. & CONSTRUCTION GROUP",
+          "ALGERIA NAMMA CCPP PJT (ANAA)",
+          "SONELGAZ ELECTRICITY PRODUCTION COMPANY, ALGERIA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SFO SALALAH",
+          "33/11kV PRIMARY SUBSTATION",
+          "OMAN : DPC",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 84,
+      "rows": [
+        [
+          "SHAMEL INTERNATIONAL INDUSTRIES, TRADING & CONTRACTING LLC",
+          "AMAL STEAM PROJECT",
+          "OMAN : PDO",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "SHAMEL INTERNATIONAL INDUSTRIES, TRADING & CONTRACTING LLC",
+          "QARN ALAM PROJECT",
+          "OMAN : PDO",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "SHARMA CONTRACTING COMPANY",
+          "UNION PAPER MILL EXPANSION, DUBAI",
+          "M.A.H.Y KHOORY & CO.",
+          "CABLE TRAYS & SUPPORT SYSTEMS"
+        ],
+        [
+          "SICAMEX (FRANCE)",
+          "VIA ZAKHO BAGHDAD, IRAQ",
+          "",
+          ""
+        ],
+        [
+          "SIDEM",
+          "BASRAH 144010",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIDEM",
+          "SHARQIYAH DESALINATION PLANT, OMAN",
+          "SUR IWP",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIDEM",
+          "124010 - AZ ZOUR NORTH IWPP- DESALINATION PLANT 4790 - CABLE LADDERS AND ACCESSORIES Gersan ADDENDUM NR EL 2045/005",
+          "KUWAIT",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 85,
+      "rows": [
+        [
+          "SIEMENS WLL QATAR",
+          "QATAR POWER TRANSMISSION SYSTEM EXPANSION PHASE - 13 SUBSTATIONS , PACKAGES – S1,S3, S4, S5 & S20",
+          "KAHRAMAA (QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIEMENS AG",
+          "COMBINED CYCLE POWER PLANT, SAN GABRIEL PH1003/PHILIPPINES",
+          "FIRST NAS GAS POWER CORPORATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIEMENS AG & WLL CONSORTIUM",
+          "QATAR POWER TRANSMISSION SYSTEM EXPANSION PHASE-10",
+          "KAHRAMAA (QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIEMENS AG & WLL CONSORTIUM",
+          "GTC/407/2011 QATAR POWER TRANSMISSION SYSTEM EXPANSION - PHASE IX SUBSTATIONS 66KV AL MERGAB MALL SUBSTATIONS",
+          "KAHRAMAA (QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIEMENS AG & WLL CONSORTIUM",
+          "GTC/371D/2010 QATAR POWER TRANSMISSION SYSTEM EXPANSION - PHASE-10 (PACKAGE - S9 & S10)",
+          "KAHRAMAA (QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIEMENS AG & WLL CONSORTIUM",
+          "GTC/371B/2010 QATAR POWER TRANSMISSION SYSTEM EXPANSION - PHASE-10 (PACKAGE - S3 & S4)",
+          "KAHRAMAA (QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIEMENS AG & WLL CONSORTIUM",
+          "GTC/240D/2008 QATAR POWER TRANSMISSION SYSTEM EXPANSION - PHASE IX SUBSTATIONS PACKAGES S-3",
+          "KAHRAMAA (QATAR GENERAL ELECTRICITY & WATER CORPORATION)",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 86,
+      "rows": [
+        [
+          "SIEMENS AG & WLL CONSORTIUM",
+          "KAHRAMAA PHASE-X, STAGE 1 & STAGE 2",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIEMENS LLC",
+          "SHARAJAH UNIVERSITY PROJECT",
+          "DEWA",
+          "CABLE TRAYS SYSTEM"
+        ],
+        [
+          "SIEMENS LLC",
+          "DIERA ISLAND",
+          "DEWA",
+          "CABLE TRAYS SYSTEM"
+        ],
+        [
+          "SIEMENS LLC",
+          "SAHIL SUBSTATION",
+          "DEWA",
+          "CABLE TRAYS SYSTEM"
+        ],
+        [
+          "SIEMENS LLC",
+          "DIERA TOWER SUBSTATION",
+          "DEWA",
+          "CABLE TRAYS SYSTEM"
+        ],
+        [
+          "SIEMENS LLC",
+          "ASAB POWER SKID",
+          "TRANSCO (TAQA)",
+          "HDG CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "SIEMENS LLC",
+          "MADINAT AL SEHA SUBSTATION",
+          "DEWA",
+          "CABLE TRAYS SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 87,
+      "rows": [
+        [
+          "SIEMENS LLC",
+          "MOBILITY SUBSTATION",
+          "DEWA",
+          "CABLE TRAYS SYSTEM"
+        ],
+        [
+          "SIEMENS LLC",
+          "NAKHAL ROAD SUBSTATION",
+          "DEWA",
+          "CABLE TRAYS SYSTEM"
+        ],
+        [
+          "SIEMENS LLC",
+          "JUMAIRAH HILLS SUBSTATION",
+          "DEWA",
+          "CABLE TRAYS SYSTEM"
+        ],
+        [
+          "SIEMENS LLC",
+          "ABRA SUBSTATION",
+          "DEWA",
+          "CABLE TRAYS, LADDER, SUPPORT AND ACCESSORIES"
+        ],
+        [
+          "SIEMENS LLC",
+          "LPO NO. 4502582857",
+          "ABU DHABI",
+          "CABLE TRAYS AND ACCESSORIES"
+        ],
+        [
+          "SIEMENS LLC",
+          "SHARJAH UNIVERSITY",
+          "SEWA",
+          "HDG CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "SIEMENS LLC",
+          "JAMEX -AE 1338 JEBEL ALI M-EXTENSION",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 88,
+      "rows": [
+        [
+          "SIEMENS LLC",
+          "AL HASSAYAN SUBSTATION",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIEMENS LLC / ELECTRICITE DE FRANCE (EDF)",
+          "400/132kV SUBSTATION - MAMZAR BEACH",
+          "DEWA",
+          "HDG CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "SIEMENS LLC / ENERGO",
+          "400kV GIL FOR REPLACEMENT OF 400kV OHL AT L STATION - M STATION INTERLINK AT ASSOCIATED",
+          "DEWA",
+          "HDG CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "SIEMENS LLC / ENERGO",
+          "5NOS SERIES REACTOR STATION AT GENERATING STATION WITH 400KV OHL MOTIFICATION FOR DEWA - GIB",
+          "DEWA",
+          "HDG CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "SIEMENS LLC / MOTT MAC DONALD",
+          "TATWEER - WAHAT & REMRAM SUBSTATIONS",
+          "DEWA",
+          "HDG CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "SIEMENS LLC / MOTT MAC DONALD / LAHMEYER INTERNATIONAL",
+          "132/11 KV & 132/33/11 KV SUBSTATION WORKS IN NORTHERN EMIRATES",
+          "FEWA",
+          "CABLE LADDER, SUPPORT & ACCESSORIES"
+        ],
+        [
+          "SIEMENS LLC / PB POWER",
+          "4X132 KV SUBSTATIONS - KHALIFA PARK, E-1, W2 & KHALIFA II A",
+          "TRANSCO (TAQA)",
+          "CABLE SUPPORT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false
+      ]
+    },
+    {
+      "page": 89,
+      "rows": [
+        [
+          "SIEMENS LLC / SIGMA",
+          "CNE599B - DUBAI LAND 2",
+          "DEWA",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "SIEMENS LLC BAHRAIN",
+          "400/220/21 Kv HIDD SUBSTATION",
+          "EWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIEMENS LLC BAHRAIN",
+          "400/220/21 Kv AL HASSAM SUBSTATION",
+          "EWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIEMENS LLC BAHRAIN",
+          "400/220/21 Kv RIFFA SUBSTATION",
+          "EWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SIEMENS PAKISTAN ENGINEERING",
+          "CE/024A/04 - 9 SUBSTATION, DUBAI",
+          "DEWA",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "SIEMENS PAKISTAN ENGINEERING",
+          "NATIONAL TRANSMISSION AND DISPATCH COMPANY - KESC 500/220kV INTERCONNECTION, KARACHI",
+          "KARACHI ELECTRICAL STATE COMPANY",
+          "CABLE TRAYS AND ACCESSORIES"
+        ],
+        [
+          "SIEMENS PAKISTAN ENGINEERING",
+          "CE/ 024A/ 2004 AND BURJ DUBAI II",
+          "DEWA",
+          "CABLE LADDER & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 90,
+      "rows": [
+        [
+          "SIEMENS PAKISTAN ENGINEERING / DAR / ADPI JV",
+          "JXB1/ INF/ 042; DEWA 132/ 11 KV SUBSTATION AND 132KV CABLING WORKS",
+          "DUBAI CIVIL AVIATION",
+          "CABLE TRAYS AND LADDERS"
+        ],
+        [
+          "SIEMENS PAKISTAN ENGINEERING / DAR AL HANDASAH",
+          "DUBAI WORLD CENTRAL INTERNATIONAL AIRPORT JXB1/INF/042: DEWA 132/11KV SUBSTATION AND 132KV CABLING WORKS",
+          "DEWA / DCA",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "SIEMENS PAKISTAN ENGINEERING / ELECTROWATT- EKONO",
+          "EMAAR PROPERTIES- 132/ 11KV BRES (SS#4) AND OTWN (SS#2) SUBSTATION",
+          "DEWA / EMAAR",
+          "CABLE TRAYS AND ACCESSORIES"
+        ],
+        [
+          "SIEMENS PAKISTAN ENGINEERING / ELECTROWATT-EKONO",
+          "CITY OF ARABIA - II/132/11KV SUBSTATION",
+          "DEWA / HILL INTERNATIONAL",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "SIEMENS PAKISTAN ENGINEERING / ELECTROWATT-EKONO",
+          "DUBAI FESTIVAL CITY",
+          "DEWA / HILL INTERNATIONAL",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "SIEMENS PAKISTAN ENGINEERING / ELECTROWATT-EKONO",
+          "BURJ DUBAI DEVELOPMENT PHASE II",
+          "DEWA / EMAAR",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "SIEMENS PAKISTAN ENGINEERING / EMAAR",
+          "132/11KV SUBSTATION & ASSOCIATED 132KV CABLE WORKS AT OLD TOWN & BURJ RESIDENCE 132/11KV SUBSTATION",
+          "DEWA",
+          "CABLE LADDER & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 91,
+      "rows": [
+        [
+          "SIEMENS PAKISTAN ENGINEERING / ENERGO PROJEKT - ENTEL",
+          "DUBAI WORLD CENTRAL INTERNATIONAL AIRPORT JXB1/INF/043 & JXB/INF045: DEWA 132/11KV SUBSTATION AND 132 KV CABLING WORKS",
+          "DEWA / DAR AL HANDASAH",
+          "CABLE TRAYS, LADDERS & ACCESSORIES"
+        ],
+        [
+          "SIEMENS PAKISTAN ENGINEERING COMPANY / ELECTROWATT- EKONO",
+          "CITY OF ARABIA- 2, NOS 132/ 11KV SUBSTATION",
+          "DEWA / HILL INTERNATIONAL",
+          "CABLE LADDER & ACCESSORIES"
+        ],
+        [
+          "SIEMENS SANAYI VE TICARET A.S.",
+          "TR1020-BANDIRMA II",
+          "ENERJISA POWER GENERATION",
+          "CABLE SUPPORT SYSTEM"
+        ],
+        [
+          "SK ECOPLANT/SAMHEUNG/YUNI P&C",
+          "BATTERY PLNAT IN HUNGARY",
+          "SK INNOVATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SK ENGINEERING & CONSTRUCTION CO., LTD",
+          "TUFANBEYLI THERMAL POWER PLANT PROJECT",
+          "ENERJISA ENERGJI URETIM A.S.",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SK ENGINEERING & CONSTRUCTION CO., LTD",
+          "RUWAIS REFINERY EXPANSION PROJECT - PROJECT NO:09-5578-E-1",
+          "TAKREER / ABU DHABI OIL REFINING COMPANY",
+          "HDG+PAINTED CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "SNC- LAVALIN / DANWAY",
+          "HV/ LV ELECTRICAL AND INSTRUMENTATION WORKS POTLINE 7",
+          "DUBAL",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        false,
+        true,
+        true,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "page": 92,
+      "rows": [
+        [
+          "SOHAR INDUSTRIAL SUPPLIES & TRADING",
+          "RADISSON BLU SOHAR",
+          "OMAN",
+          "CABLE TRAYS, TRUNKING AND ACCESSORIES"
+        ],
+        [
+          "SOHAR INDUSTRIAL SUPPLIES & TRADING",
+          "SOHAR BULK JETTY",
+          "OMAN : PORT OF SOHAR",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "SOHAR INDUSTRIAL SUPPLIES & TRADING / CADAGUA",
+          "DARSAIT SEWAGE TREATMENT PLAN",
+          "HAYA WATER",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SORCOM (FRANCE)",
+          "PETKIM PROJECT, TURKEY",
+          "",
+          ""
+        ],
+        [
+          "SORCOM (FRANCE)",
+          "QATAR PETROLEUM PROJECT, QATAR",
+          "QATAR PETROLEUM",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SORCOM (FRANCE)",
+          "ROD PROJECT, ALGERIA",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SPACE ELECTROMECHANICAL WORKS LLC/AL GURG",
+          "ARCADE- ENOC STAFF ACCOMMODATION (P167) AT AL QUOZ DUBAI",
+          "ENOC",
+          "HDG CABLE TRAY, PG TRUNKING & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 93,
+      "rows": [
+        [
+          "SPACEAGE ELECTRICAL SWITCHGEAR",
+          "METRO PROJECT, NEW DELHI, INDIA",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "SPECIAL TECHNICAL SERVICES & TEBODIN LLC",
+          "UPGRADE OBOLETE FOXBRO DCS SYSTEM",
+          "OMAN : PDO",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "SUPPLIES & SERVICES SOLUTION FZE",
+          "FCP OFFSITE 2 FAILITIES",
+          "PETRONAS",
+          "CABLE TRAY, LADDER & ACCESSORIES"
+        ],
+        [
+          "SYSTRA/ PARSONS",
+          "SIGNALING AND COMMUNICATIONS SYSTEM: APPROVAL REQUEST (PHASE I- RED LINE)",
+          "DUBAI METRO",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "TAISEI CORPORATION/ JGC MIDDLE EAST FZE",
+          "DOLPHIN PROJECT",
+          "DOLPHIN ENERGY - QATAR",
+          "CABLE TRAYS AND SUPPORTING SYSTEM"
+        ],
+        [
+          "TAISEICORPORATION/ KINDEN CORPORATION",
+          "RAS AL KHOR CROSSING- DOUBLE DECKING OF DOHA ROAD R800/ 5",
+          "RTA",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "TASNEEM GEN. CONTRACTING CO. LLC / MORGAN CONSULTING ENGINEERS",
+          "FERTILITY ASSISTED REPRODUCTIVE TECHNIQUE & GENTIC DIAGNOSIS CENTER",
+          "POLICE PROJECT COMMITTEE",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 94,
+      "rows": [
+        [
+          "TEEJAN TRADING & CONTRACTING LLC",
+          "ROP MUSIC SCHOOL",
+          "OMAN : ROYAL OMAN POLICE",
+          "CABLE TRAY, TRUNKING & ACCESSORIES"
+        ],
+        [
+          "TEEJAN TRADING & CONTRACTING LLC",
+          "AL RUWAD INTERNATIONAL SCHOOL",
+          "OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "TEKFIN CONSTRUCTION & INSTALLATION COMPANY",
+          "KASHAGAN OIL FIELD DEVELOPMENT",
+          "AGIP KCO",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "THALES INTERNAIONAL MIDDLE EAST",
+          "DUBAI METRO GREEN LINE AL GHUSAIS CAR PARK",
+          "RTA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "TOWERS TECH.",
+          "GLASS FACTORY FOR M/S/ STREET SECURITY VEHICLES",
+          "SHARJAH",
+          "CABLE TRAYS"
+        ],
+        [
+          "TRANS GULF / AL NABOODHA",
+          "MANKHOOL MIXED USE DEVELOPMENT",
+          "AWD / ARIF/ BINTOAK",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "TRANSGULF",
+          "MIXED DEVELOPMENT COMPLEX-MANKOOL",
+          "",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "page": 95,
+      "rows": [
+        [
+          "UEP / AFCONS-SAIPEM",
+          "PORT OF SOHAR - BULK JETTY",
+          "OMAN : PORT OF SOHAR",
+          "CABLE TRAY & ACCESSORIES"
+        ],
+        [
+          "UNION CONTRACTING / A&Z ARCHITECTURAL ENG.",
+          "PROPOSED NMC HOSPITAL INTERIOR",
+          "NMC HEALTH CARE",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "UNIVERSAL CONSULTING ENGINEERING",
+          "EXTENSION OF EXISTING DESALINATION PLANT OF 2000M3/DAY WILAYAT DIBA (MUSANDAM GOEVRNORATE) : TENDER NO. 159/2009",
+          "OMAN : GLOBAL CHEMICALS & MAINTENANCE SYSTEM",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "UTICO",
+          "22 MIGD WATER PROJECT",
+          "AL HAMRA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "UTICO",
+          "DESIGN, CONSTRUCTION, SUPPLY, INSTALLATION, TESTING, COMMISSIONING & MAINTENANCE OF THREE UNITS OF REVERSE OSMOSIS PLANT WITH 100,000 IGPD CAPACITIES PER UNIT AND ASSOCIATED WORKS",
+          "DEWA",
+          "CABLE TRAY & TRUNKING SYSTEM"
+        ],
+        [
+          "VENTURE GLOBAL",
+          "MEGA RESERVOIR PROJECT",
+          "OMEGA ENGINEERING",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "VENTURE GLOBAL",
+          "Project – Industrial Area Sewage Treatment Works (IASTW) Phase III A Expansion",
+          "ASHGHAL, QATAR",
+          "CABLE TRAYS & ACCESSORIES"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 96,
+      "rows": [
+        [
+          "VOLTAS OMAN LLC / WSP CONSULTANTS",
+          "KEMPINSKI HOTEL AND APARTMENTS",
+          "OMAN",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "VS Oil Terminal Fze",
+          "Onshore oil storage and export facility based in the South KAZ Port, Basra, Iraq.",
+          "VSOT IRAQ",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "WADE ADAMS CONTRACTING LLC",
+          "R1013/1- IMPROVEMENTS OF AL SHINDAGHA CORRIDOR (SANA JUNCTION)",
+          "RTA",
+          "SS316L CABLE TRAYS, LADDER, ACCESSORIES & SS316L HARDWARE"
+        ],
+        [
+          "WESCO",
+          "BAPCO PROJECT",
+          "BAHRAIN PETROLEUM COMPANY BSC",
+          "CABLE TRAYS & ACCESSORIES"
+        ],
+        [
+          "WORLEY PARSONS",
+          "MAJNOON GAS TIE- INS PROJECT",
+          "BASRAH GAS COMPANY",
+          "CABLE TRAY"
+        ],
+        [
+          "WORLEYPARSONS RESOURCES & ENERGY",
+          "EM 739- R1020/1A UPGRADE OF DUBAI -AL AIN ROAD, CONTRACT 1A",
+          "RTA",
+          "SS316L CHANNEL & ACCESSORIES"
+        ],
+        [
+          "WORLEYPARSONS RESOURCES & ENERGY",
+          "REHABILITATION OF IRAQ SOUTH GAS FACILITIES- WEST QURNA GAS INTERFACE FACILITIES FOR CGS 7&8",
+          "BASRAH GAS COMPANY /IRAQ",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        true,
+        false,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "page": 97,
+      "rows": [
+        [
+          "YUNI P&C/SK INNOVATION",
+          "SK ON- SK BATTERY UNIT HUNGARY",
+          "SK INNOVATION",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "ZENER ELECTRONICS SERVICES / FICHTNER",
+          "DEWA 'M' STATION",
+          "DEWA",
+          "CABLE MANAGEMENT SYSTEM"
+        ],
+        [
+          "FUTURE BUILDERS ENGINEERING GENERAL CONTRACTING / BAIT ALSALAM ELECTROMECHANICAL CONTRACTING LLC",
+          "ALSAAD TAQA DISTRIBUTION BUILDING",
+          "TAQA DISTRIBUTION COMPANY (TRANSCO) / AADC",
+          "CABLE MANAGEMENT SYSTEM"
+        ]
+      ],
+      "duplicateOfExisting": [
+        false,
+        true,
+        false
+      ]
+    }
+  ]
+}
