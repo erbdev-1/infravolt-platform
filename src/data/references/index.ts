@@ -2,6 +2,8 @@ import referenceDataJson from "./generated/references.json";
 import cableReferenceListJson from "./generated/cable-reference-list.json";
 import busbarCompaniesJson from "./generated/busbar-companies.json";
 import ledSupplyPartnersJson from "./generated/led-supply-partners.json";
+import busductOverallJson from "./generated/busduct-overall-reference-list.json";
+import cmsReferenceListJson from "./generated/cms-reference-list.json";
 
 import {
   resolveOwnerCountry,
@@ -174,23 +176,90 @@ const ledSupplyPartners: readonly ReferenceCompany[] = ledSupplyPartnerEntries.m
   sourcePage: 128,
 }));
 
-const RUSSIA_REFERENCE_PATTERN = /(?:\brussia(?:n)?\b|\brusya\b|\brossiya\b|\brossia\b|\bgersan-r\b|росси)/iu;
-const RUSSIA_ONLY_COMPANY_NAMES = new Set(["ZAO GERSAN-R", "ЭнергоСервис"]);
+// --- Supplemental Busduct (overall reference list) rows -------------------
+// Sourced from "Busduct-Reference list- overall.pdf" and pre-deduped against
+// the existing Busbar source data by scripts/references/dedupe-supplemental-
+// reference-data.mjs (see `duplicateOfExisting` on each record). Only
+// genuinely new rows are merged into the public Busbar unified list below.
+type BusductRecord = Readonly<{
+  id: string;
+  project: string;
+  client: string;
+  location: string;
+  duplicateOfExisting?: boolean;
+}>;
+const busductRecords = busductOverallJson.records as unknown as readonly BusductRecord[];
+const busductSupplemental = busductRecords
+  .filter((record) => !record.duplicateOfExisting)
+  .map((record) => ({ id: record.id, who: record.client, project: record.project, location: record.location }));
 
-function isRussiaPublicReference(...values: readonly (string | undefined)[]): boolean {
+// --- Supplemental Cable Management Systems detail rows ---------------------
+// Sourced from "GERSAN REFERENCE LIST- CMS.pdf". Preserves Contractor/
+// Consultant and Product fields the existing two-column Cable Management
+// table discards, surfaced via a dedicated "Detailed Project References" tab.
+// Pre-deduped against the existing Cable Management relationships the same
+// way as the Busduct rows above.
+type CmsPage = Readonly<{
+  page: number;
+  rows: readonly (readonly [string, string, string, string])[];
+  duplicateOfExisting?: readonly boolean[];
+}>;
+const cmsPages = cmsReferenceListJson.pages as unknown as readonly CmsPage[];
+type CmsDetailRow = Readonly<{ id: string; contractor: string; project: string; endClient: string; product: string }>;
+const cmsDetailRows: readonly CmsDetailRow[] = cmsPages.flatMap((page) =>
+  page.rows
+    .map((row, index) => ({ row, index }))
+    .filter(({ index }) => !page.duplicateOfExisting?.[index])
+    .map(({ row, index }) => ({
+      id: `cms-pdf-${page.page}-${index + 1}`,
+      contractor: row[0],
+      project: row[1],
+      endClient: row[2],
+      product: row[3],
+    })),
+);
+
+// Explicit public-display exclusion policy — NOT a geopolitical inference
+// engine. Only Russia, Iran and the Kurgan-Balt company mark are excluded
+// from public reference output; nothing else is inferred from this list.
+const EXCLUDED_PUBLIC_COUNTRIES = new Set(["Russia", "Iran"]);
+
+// JS's \b is ASCII-only (\w = [A-Za-z0-9_]), so it cannot safely bound the
+// Turkish dotted İ in "İran"/"İRAN" — a plain \b would still misfire (or
+// silently no-op) around it. Real Turkish place names embed that exact
+// substring, e.g. "VİRANŞEHİR" (Viranşehir, Şanlıurfa) contains "İRAN"
+// verbatim, so the Turkish forms use explicit Unicode letter/number
+// lookaround instead of \b to avoid falsely excluding them.
+const EXCLUDED_PUBLIC_COUNTRY_PATTERN =
+  /(?:\brussia(?:n)?\b|\brusya\b|\brossiya\b|\brossia\b|\bgersan-r\b|росси|\biran(?:ian)?\b|(?<![\p{L}\p{N}])(?:İran|İRAN)(?![\p{L}\p{N}]))/iu;
+
+// Kurgan-Balt is excluded as a specific company/reference mark (Latin and
+// Cyrillic, common punctuation variants) — this must never match the
+// generic word "Balt" on its own.
+const KURGAN_BALT_SEPARATOR = "[\\s\\u2010-\\u2015-]*";
+const KURGAN_BALT_PATTERN = new RegExp(
+  `kurgan${KURGAN_BALT_SEPARATOR}balt|курган${KURGAN_BALT_SEPARATOR}балт`,
+  "iu",
+);
+
+const EXCLUDED_PUBLIC_COMPANY_NAMES = new Set(["ZAO GERSAN-R", "ЭнергоСервис"]);
+
+function isExcludedPublicReference(...values: readonly (string | undefined)[]): boolean {
   return values.some((value) => {
     if (!value) return false;
-    if (RUSSIA_REFERENCE_PATTERN.test(value)) return true;
-    if (resolveOwnerCountry(value) === "Russia") return true;
+    if (EXCLUDED_PUBLIC_COUNTRY_PATTERN.test(value)) return true;
+    if (KURGAN_BALT_PATTERN.test(value)) return true;
+    const ownerCountry = resolveOwnerCountry(value);
+    if (ownerCountry && EXCLUDED_PUBLIC_COUNTRIES.has(ownerCountry)) return true;
     const resolved = resolveReferenceLocation(value);
-    return resolved.kind === "country" && resolved.display === "Russia";
+    return resolved.kind === "country" && EXCLUDED_PUBLIC_COUNTRIES.has(resolved.display);
   });
 }
 
-function isRussiaOnlyCompany(company: ReferenceCompany): boolean {
+function isExcludedPublicCompany(company: ReferenceCompany): boolean {
   return (
-    RUSSIA_ONLY_COMPANY_NAMES.has(company.name.trim()) ||
-    isRussiaPublicReference(company.name, company.logoIdentity)
+    EXCLUDED_PUBLIC_COMPANY_NAMES.has(company.name.trim()) ||
+    isExcludedPublicReference(company.name, company.logoIdentity)
   );
 }
 
@@ -473,14 +542,14 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   const names = systemNames[market];
   const companiesSuppliedLabel = t("Companies Supplied Worldwide", "Компанії, яким постачалася продукція у світі");
   const worldwideCompanies = sourceData.earthingLightning.companies.filter(
-    (company) => !isRussiaOnlyCompany(company),
+    (company) => !isExcludedPublicCompany(company),
   );
-  const publicBusbarCompanies = busbarCompanies.filter((company) => !isRussiaOnlyCompany(company));
+  const publicBusbarCompanies = busbarCompanies.filter((company) => !isExcludedPublicCompany(company));
   const publicLedReferenceCompanies = sourceData.ledSystems.companies.filter(
-    (company) => !isRussiaOnlyCompany(company),
+    (company) => !isExcludedPublicCompany(company),
   );
-  const publicLedSupplyPartners = ledSupplyPartners.filter((company) => !isRussiaOnlyCompany(company));
-  const publicGBusCompanies = sourceData.gBus.companies.filter((company) => !isRussiaOnlyCompany(company));
+  const publicLedSupplyPartners = ledSupplyPartners.filter((company) => !isExcludedPublicCompany(company));
+  const publicGBusCompanies = sourceData.gBus.companies.filter((company) => !isExcludedPublicCompany(company));
   const projectDisplay = (value: string) => (market === "uk" ? englishReferenceText(value) : value);
   const locationDisplay = (value: string) => {
     if (market === "uk") {
@@ -551,7 +620,8 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   const busbarUnified = [
     ...sourceData.busbar.customerProjects.map((item) => ({ id: item.id, who: item.customer, project: item.project, location: item.location })),
     ...sourceData.busbar.projectContractors.map((item) => ({ id: item.id, who: item.contractor, project: item.project, location: item.location })),
-  ].filter((item) => !isRussiaPublicReference(item.who, item.project, item.location));
+    ...busductSupplemental,
+  ].filter((item) => !isExcludedPublicReference(item.who, item.project, item.location));
   const busbarInternational = busbarUnified.filter(
     (item) => resolveReferenceLocation(item.location).kind === "country" && !isDomesticTurkeyLocation(item.location),
   );
@@ -573,21 +643,21 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   const cableReferenceListInternational = cableReferenceList
     .filter(
       (item) =>
-        !isRussiaPublicReference(item.project, item.location) &&
+        !isExcludedPublicReference(item.project, item.location) &&
         resolveReferenceLocation(item.location).kind === "country" &&
         !isDomesticTurkeyLocation(item.location),
     )
     .map((item) => ({ id: item.id, project: item.project, location: item.location }));
   const cableRelationshipsInternational = sourceData.cableManagement.relationships
     .filter((item) => {
-      if (isRussiaPublicReference(item.contractor, item.project, item.owner)) return false;
+      if (isExcludedPublicReference(item.contractor, item.project, item.owner)) return false;
       const country = resolveOwnerCountry(item.owner);
       return country !== undefined && !isTurkeyCountry(country);
     })
     .map((item) => ({ id: item.id, project: item.project, location: item.owner }));
   const cableRelationshipsDomestic = sourceData.cableManagement.relationships
     .filter((item) => {
-      if (isRussiaPublicReference(item.contractor, item.project, item.owner)) return false;
+      if (isExcludedPublicReference(item.contractor, item.project, item.owner)) return false;
       const country = resolveOwnerCountry(item.owner);
       return isTurkeyCountry(country);
     })
@@ -595,7 +665,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
   const cableInternational = [...cableReferenceListInternational, ...cableRelationshipsInternational];
   const cableDomestic = [
     ...cableReferenceList.filter(
-      (item) => !isRussiaPublicReference(item.project, item.location) && isDomesticTurkeyLocation(item.location),
+      (item) => !isExcludedPublicReference(item.project, item.location) && isDomesticTurkeyLocation(item.location),
     ),
     ...cableRelationshipsDomestic,
   ];
@@ -604,19 +674,32 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
     { key: "location", label: t("Location", "Місцезнаходження") },
   ];
 
+  // --- Cable Management detail tab: supplemental CMS PDF rows that would
+  // lose their Contractor/Consultant or Product fields in the two-column
+  // model above, so they get their own tab instead of being force-fit in.
+  const publicCmsDetailRows = cmsDetailRows.filter(
+    (item) => !isExcludedPublicReference(item.contractor, item.project, item.endClient, item.product),
+  );
+  const cableDetailColumns = [
+    { key: "contractor", label: t("Contractor / Consultant", "Підрядник / Консультант") },
+    { key: "project", label: t("Project", "Проєкт") },
+    { key: "endClient", label: t("End Client / Owner", "Кінцевий замовник / Власник") },
+    { key: "product", label: t("Product", "Продукція") },
+  ];
+
   // --- Earthing & Lightning: the source "scope" field is authoritative, but
   // Türkiye always belongs to Domestic / Regional. Domestic-scoped rows with
   // an unambiguous foreign country (e.g. Turkmenistan, Kazakhstan) are moved
   // in the opposite direction into International.
   const earthingIntlScoped = sourceData.earthingLightning.references.filter(
     (item) =>
-      !isRussiaPublicReference(item.reference, item.project, item.location) &&
+      !isExcludedPublicReference(item.reference, item.project, item.location) &&
       item.scope === "international_project_references" &&
       !isDomesticTurkeyLocation(item.location),
   );
   const earthingDomesticScoped = sourceData.earthingLightning.references.filter(
     (item) =>
-      !isRussiaPublicReference(item.reference, item.project, item.location) &&
+      !isExcludedPublicReference(item.reference, item.project, item.location) &&
       (item.scope !== "international_project_references" || isDomesticTurkeyLocation(item.location)),
   );
   const earthingReclassified = earthingDomesticScoped.filter(
@@ -677,7 +760,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
       title: names["cable-management"].title,
       description: descriptions["cable-management"],
       source: "GERSAN Cable Support catalogue · PDF pages 163–183",
-      total: cableInternational.length + cableDomestic.length + worldwideCompanies.length,
+      total: cableInternational.length + cableDomestic.length + worldwideCompanies.length + publicCmsDetailRows.length,
       tabs: [
         {
           id: "international",
@@ -704,6 +787,20 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
           geography: "city-region",
           columns: cableColumns,
           rows: cableDomestic.map((item) => tableRow(item.id, projectDisplay(item.project), locationDisplay(item.location))),
+        },
+        {
+          id: "detailed-project-references",
+          label: t("Detailed Project References", "Детальні проєктні референції"),
+          heading: t("Cable Management Project References", "Проєктні референції кабельних систем"),
+          description: t(
+            "Supplemental contractor/consultant, end client and product references from the GERSAN Cable Management Systems reference list, kept separate so no source detail is discarded.",
+            "Додаткові референції підрядника/консультанта, кінцевого замовника та продукції з референційного переліку кабельних систем GERSAN — окремою вкладкою, щоб не втрачати деталі джерела.",
+          ),
+          kind: "table",
+          columns: cableDetailColumns,
+          rows: publicCmsDetailRows.map((item) =>
+            tableRow(item.id, item.contractor, projectDisplay(item.project), item.endClient, item.product),
+          ),
         },
         worldwideCompaniesTab(),
       ],

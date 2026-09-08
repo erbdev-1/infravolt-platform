@@ -181,6 +181,8 @@ const COUNTRY_ALIASES: Record<string, string> = {
   KHAIMAH: "UAE",
   "ADDUBAF.AI/UAE": "UAE",
   "AFDUBAI/UAE": "UAE",
+  "ABU DHABI/UAE": "UAE",
+  "RAS AL KHAIMAH": "UAE",
   BANGLADESH: "Bangladesh",
   BANGLADASH: "Bangladesh",
   INDIA: "India",
