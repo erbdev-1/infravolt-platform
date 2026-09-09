@@ -18,9 +18,10 @@ import type {
   BusbarCatalogView,
   BusbarConductor,
 } from "@/data/products/busbar/types";
+import { canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
 import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
-import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import { BusbarCinematicIntro } from "./busbar-cinematic-intro";
 import styles from "./busbar-catalog-page.module.css";
@@ -235,7 +236,7 @@ export function BusbarCatalogPage({
               <a
                 className={styles.catalogueButton}
                 download="gersan-busbar-systems-catalogue.pdf"
-                href={publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf")}
+                href={canonicalCatalogueHref("busbar")}
               >
                 {content.hero.downloadAction}
                 <span aria-hidden="true">↓</span>

@@ -1,4 +1,5 @@
-import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
 import { buildEnquiryHref } from "@/modules/enquiry/routing";
 
 import type { BusbarSystemDetailByMarket } from "./types";
@@ -390,7 +391,7 @@ export const GM_SYSTEM_DETAIL = {
         description:
           "Full product catalogue covering all Gersan busbar trunking systems, including GM technical data, order codes and dimensional drawings.",
         fileLabel: "PDF · 25.1 MB",
-        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
+        href: canonicalCatalogueHref("busbar"),
         downloadLabel: "Download catalogue",
       },
       {
@@ -547,7 +548,7 @@ export const GM_SYSTEM_DETAIL = {
         description:
           "Повний каталог з усіма шинопровідними системами Gersan, включно з технічними даними GM.",
         fileLabel: "PDF · 25,1 МБ",
-        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
+        href: canonicalCatalogueHref("busbar"),
         downloadLabel: "Завантажити каталог",
       },
       {
