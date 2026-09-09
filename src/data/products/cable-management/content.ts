@@ -1,5 +1,6 @@
-import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
+import { canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
 import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
@@ -15,11 +16,8 @@ function heavyDutyRequestHrefFor(familySuffix: string): string {
   });
 }
 
-// Real file, already in the repo at this path (not /public/documents/... and
-// not duplicated anywhere) — see public/assets/documents/cable-support/.
-// Follows the same convention as busbar/g-bus/earthing-lightning catalogues.
-export const CABLE_SUPPORT_CATALOGUE_PDF_HREF =
-  publicDocumentUrl("documents/cable-support/cable_support.pdf");
+// Canonical R2 catalogue path — see src/data/resources/canonical-catalogues.ts.
+export const CABLE_SUPPORT_CATALOGUE_PDF_HREF = canonicalCatalogueHref("cable");
 
 // Picks the right-language string for a given market — used throughout
 // this file (and the other cable-management *-content.ts files) instead

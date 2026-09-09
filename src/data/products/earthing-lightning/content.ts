@@ -1,18 +1,14 @@
-import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
 
+import { canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
 import type { EarthingHubContent } from "./types";
 
 import type { MarketCode } from "@/modules/markets/types";
 
 const IMAGE_BASE = publicMediaUrl("products/earthing-lightning");
 
-// Same asset for both markets — see public/assets/documents/earthing-lightning/.
-// Follows the existing busbar/g-bus convention
-// (public/assets/documents/busbar/gersan-busbar-systems-catalogue.pdf),
-// not the /downloads/ path floated during planning — that path doesn't
-// exist anywhere else on the site.
-export const EARTHING_CATALOGUE_PDF_HREF =
-  publicDocumentUrl("documents/earthing-lightning/gersan-earthing-lightning-protection-catalogue-2026.pdf");
+// Canonical R2 catalogue path — see src/data/resources/canonical-catalogues.ts.
+export const EARTHING_CATALOGUE_PDF_HREF = canonicalCatalogueHref("earthing");
 
 const EARTHING_HUB_CONTENT = {
   uk: {

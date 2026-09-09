@@ -1,4 +1,5 @@
-import { publicDocumentUrl, publicMediaUrl } from "@/modules/storage/asset-url";
+import { publicMediaUrl } from "@/modules/storage/asset-url";
+import { canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
 
 import type { BusbarHeroImage } from "@/data/products/busbar/series/types";
 import type { MarketCode } from "@/modules/markets/types";
@@ -278,7 +279,7 @@ const GBUS_CONTENT = {
         description:
           "Dedicated G-BUS product catalogue covering modules, control interfaces, wiring topologies and stock codes.",
         fileLabel: "PDF · 11.1 MB",
-        href: publicDocumentUrl("documents/g-bus/g-bus.pdf"),
+        href: canonicalCatalogueHref("gbus"),
         downloadLabel: "Download catalogue",
       },
       {
@@ -286,7 +287,7 @@ const GBUS_CONTENT = {
         description:
           "Full product catalogue covering the G-BUS automation system alongside Gersan's busbar trunking systems, including stock codes and system diagrams.",
         fileLabel: "PDF · 25.1 MB",
-        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
+        href: canonicalCatalogueHref("busbar"),
         downloadLabel: "Download catalogue",
       },
     ],
@@ -558,7 +559,7 @@ const GBUS_CONTENT = {
         description:
           "Спеціальний каталог продукції G-BUS: модулі, панелі керування, схеми підключення та коди товарів.",
         fileLabel: "PDF · 11.1 MB",
-        href: publicDocumentUrl("documents/g-bus/g-bus.pdf"),
+        href: canonicalCatalogueHref("gbus"),
         downloadLabel: "Завантажити каталог",
       },
       {
@@ -566,7 +567,7 @@ const GBUS_CONTENT = {
         description:
           "Повний каталог продукції, що охоплює систему автоматизації G-BUS разом із шинопровідними системами Gersan, включно з кодами товарів та схемами системи.",
         fileLabel: "PDF · 25.1 MB",
-        href: publicDocumentUrl("documents/busbar/gersan-busbar-systems-catalogue.pdf"),
+        href: canonicalCatalogueHref("busbar"),
         downloadLabel: "Завантажити каталог",
       },
     ],

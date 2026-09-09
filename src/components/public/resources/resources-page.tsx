@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { preload } from "react-dom";
 
 import { resourcesContentForMarket, technicalResources } from "@/data/resources";
+import { canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
 import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import { TECHNICAL_RESOURCE_ICONS } from "@/modules/public-site/assets";
 import type { MarketCode } from "@/modules/markets/types";
@@ -11,6 +12,15 @@ import { publicMediaUrl } from "@/modules/storage/asset-url";
 
 import { ResourceLibrary } from "./resource-library";
 import styles from "./resources-page.module.css";
+
+// Catalogue-type resources route through the same canonical R2 map as the
+// product/system pages, overriding the generated dataset's stale
+// downloadPath. Certificates and technical documents are left untouched.
+const RESOURCES_WITH_CANONICAL_CATALOGUE_PATHS = technicalResources.map((resource) =>
+  resource.documentType === "catalogue"
+    ? { ...resource, downloadPath: canonicalCatalogueHref(resource.productSystemKey) }
+    : resource,
+);
 
 const HERO_BACKGROUND_DESKTOP_URL = publicMediaUrl("resources/technical-resources-hero-background.webp");
 const HERO_BACKGROUND_MOBILE_URL = publicMediaUrl("resources/technical-resources-hero-background-mobile.webp");
@@ -64,7 +74,7 @@ export function ResourcesPage({ market }: Readonly<{ market: MarketCode }>) {
 
       <section className={styles.library} id="resource-library">
         <header className={styles.sectionHeader}><p>{content.libraryEyebrow}</p><h2>{content.libraryHeading}</h2><span>{content.libraryDescription}</span></header>
-        <ResourceLibrary content={content} resources={technicalResources} />
+        <ResourceLibrary content={content} resources={RESOURCES_WITH_CANONICAL_CATALOGUE_PATHS} />
       </section>
 
       <section className={styles.request} id="request-technical-information">
