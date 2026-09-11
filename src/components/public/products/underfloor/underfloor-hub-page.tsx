@@ -6,6 +6,7 @@ import {
   UNDERFLOOR_HUB_HERO_FOREGROUND,
 } from "@/data/products/underfloor/assets";
 import { underfloorHubContentForMarket } from "@/data/products/underfloor/content";
+import { canonicalCatalogueFilename, canonicalCatalogueHref } from "@/data/resources/canonical-catalogues";
 import { buildEnquiryHref } from "@/modules/enquiry/routing";
 import type { MarketCode } from "@/modules/markets/types";
 
@@ -106,9 +107,13 @@ export function UnderfloorHubPage({
               <Link className={styles.primaryButton} href="#series">
                 {content.hero.primaryAction}
               </Link>
-              <Link className={styles.secondaryButton} href={SUPPORT_REQUEST_HREF}>
+              <a
+                className={styles.secondaryButton}
+                download={canonicalCatalogueFilename("underfloor")}
+                href={canonicalCatalogueHref("underfloor")}
+              >
                 {content.hero.secondaryAction}
-              </Link>
+              </a>
             </div>
           </div>
 

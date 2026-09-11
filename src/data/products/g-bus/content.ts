@@ -57,6 +57,8 @@ export type GBusPageContent = Readonly<{
     imageAlt: string;
     actionLabel: string;
     actionHref: string;
+    catalogueActionLabel: string;
+    catalogueHref: string;
   }>;
   facts: readonly [GBusFact, GBusFact, GBusFact, GBusFact];
   overviewEyebrow: string;
@@ -113,6 +115,8 @@ const GBUS_CONTENT = {
         "G-BUS Automation showcase with receiver modules, control panels and monitoring dashboard overlays",
       actionLabel: "Talk to our team",
       actionHref: "/contact?type=project&system=g-bus",
+      catalogueActionLabel: "Download Catalogue",
+      catalogueHref: canonicalCatalogueHref("gbus"),
     },
     facts: [
       { value: "25–6000 A", label: "System compatibility" },
@@ -393,6 +397,8 @@ const GBUS_CONTENT = {
         "Вітрина G-BUS Automation з приймальними модулями, панелями керування та накладками моніторингу",
       actionLabel: "Зв'язатися з нашою командою",
       actionHref: "/contact?type=project&system=g-bus",
+      catalogueActionLabel: "Завантажити каталог",
+      catalogueHref: canonicalCatalogueHref("gbus"),
     },
     facts: [
       { value: "25–6000 А", label: "Сумісність систем" },
