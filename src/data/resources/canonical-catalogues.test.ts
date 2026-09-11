@@ -18,8 +18,12 @@ const OLD_STALE_PATHS = [
   "documents/cable-support/cable_support.pdf",
   "documents/earthing-lightning/gersan-earthing-lightning-protection-catalogue-2026.pdf",
   "documents/g-bus/g-bus.pdf",
-  "resources/catalogues/gersan-led-systems-catalogue.pdf",
-  "resources/catalogues/gersan-underfloor-cable-trunking-catalogue.pdf",
+  "documents/gersan-busbar-systems-catalogue.pdf",
+  "documents/gersan-cable-management-systems-catalogue.pdf",
+  "documents/gersan-earthing-lightning-protection-systems-catalogue.pdf",
+  "documents/gersan-g-bus-automation-systems-catalogue.pdf",
+  "documents/gersan-led-systems-catalogue.pdf",
+  "documents/gersan-underfloor-cable-trunking-catalogue.pdf",
 ];
 
 afterEach(() => {
@@ -31,7 +35,7 @@ describe("canonicalCatalogueHref", () => {
     vi.stubEnv("NEXT_PUBLIC_ASSET_BASE_URL", "https://assets.infravolt.co.uk");
 
     for (const [key, filename] of Object.entries(EXPECTED_FILENAMES) as [ResourceSystemKey, string][]) {
-      expect(canonicalCatalogueHref(key)).toBe(`https://assets.infravolt.co.uk/documents/${filename}`);
+      expect(canonicalCatalogueHref(key)).toBe(`https://assets.infravolt.co.uk/resources/catalogues/${filename}`);
     }
   });
 
@@ -50,7 +54,7 @@ describe("canonicalCatalogueHref", () => {
   it("falls back to the local /assets path when no base URL is configured, using the same canonical filename", () => {
     vi.stubEnv("NEXT_PUBLIC_ASSET_BASE_URL", "");
 
-    expect(canonicalCatalogueHref("busbar")).toBe("/assets/documents/gersan-busbar-systems-catalogue.pdf");
+    expect(canonicalCatalogueHref("busbar")).toBe("/assets/resources/catalogues/gersan-busbar-systems-catalogue.pdf");
   });
 });
 
