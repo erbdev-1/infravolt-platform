@@ -9,12 +9,12 @@ import { publicDocumentUrl } from "@/modules/storage/asset-url";
  * through `canonicalCatalogueHref()` instead.
  */
 const CANONICAL_CATALOGUE_PATHS: Record<ResourceSystemKey, string> = {
-  busbar: "documents/gersan-busbar-systems-catalogue.pdf",
-  cable: "documents/gersan-cable-management-systems-catalogue.pdf",
-  earthing: "documents/gersan-earthing-lightning-protection-systems-catalogue.pdf",
-  gbus: "documents/gersan-g-bus-automation-systems-catalogue.pdf",
-  led: "documents/gersan-led-systems-catalogue.pdf",
-  underfloor: "documents/gersan-underfloor-cable-trunking-catalogue.pdf",
+  busbar: "resources/catalogues/gersan-busbar-systems-catalogue.pdf",
+  cable: "resources/catalogues/gersan-cable-management-systems-catalogue.pdf",
+  earthing: "resources/catalogues/gersan-earthing-lightning-protection-systems-catalogue.pdf",
+  gbus: "resources/catalogues/gersan-g-bus-automation-systems-catalogue.pdf",
+  led: "resources/catalogues/gersan-led-systems-catalogue.pdf",
+  underfloor: "resources/catalogues/gersan-underfloor-cable-trunking-catalogue.pdf",
 };
 
 export function canonicalCatalogueHref(key: ResourceSystemKey): string {
