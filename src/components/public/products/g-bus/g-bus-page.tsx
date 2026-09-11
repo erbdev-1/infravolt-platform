@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { gBusContentForMarket } from "@/data/products/g-bus/content";
+import { canonicalCatalogueFilename } from "@/data/resources/canonical-catalogues";
 import type { MarketCode } from "@/modules/markets/types";
 
 import { GBusTabs } from "./g-bus-tabs";
@@ -35,10 +36,19 @@ export function GBusPage({
           <h1>{content.hero.heading}</h1>
           <p className={styles.heroDescription}>{content.hero.description}</p>
 
-          <Link className={styles.primaryButton} href={content.hero.actionHref}>
-            {content.hero.actionLabel}
-            <span aria-hidden="true">→</span>
-          </Link>
+          <div className={styles.heroActions}>
+            <Link className={styles.primaryButton} href={content.hero.actionHref}>
+              {content.hero.actionLabel}
+              <span aria-hidden="true">→</span>
+            </Link>
+            <a
+              className={styles.catalogueButton}
+              download={canonicalCatalogueFilename("gbus")}
+              href={content.hero.catalogueHref}
+            >
+              {content.hero.catalogueActionLabel}
+            </a>
+          </div>
         </div>
 
         <div className={styles.heroVisual}>

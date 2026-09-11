@@ -44,7 +44,7 @@ const content = {
       description:
         "Flexible underfloor power and data distribution solutions for modern commercial interiors, providing accessible and adaptable service routing beneath the finished floor.",
       primaryAction: "Explore Series",
-      secondaryAction: "Request Support",
+      secondaryAction: "Download Catalogue",
     },
     heroVisualImage: UNDERFLOOR_HERO_VISUAL_IMAGE,
     heroVisualImageAlt: UNDERFLOOR_HERO_VISUAL_IMAGE_ALT,
@@ -243,7 +243,7 @@ const content = {
       description:
         "Гнучкі рішення розподілу живлення та даних під підлогою для сучасних комерційних приміщень, що забезпечують зручний і гнучкий доступ до з'єднань під готовою підлогою.",
       primaryAction: "Переглянути серії",
-      secondaryAction: "Запросити підтримку",
+      secondaryAction: "Завантажити каталог",
     },
     heroVisualImage: UNDERFLOOR_HERO_VISUAL_IMAGE,
     heroVisualImageAlt:

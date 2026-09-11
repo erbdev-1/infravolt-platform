@@ -119,17 +119,21 @@
   margin: 1.2rem 0 0;
 }
 
-.primaryButton {
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 2rem 0 0;
+}
+
+.primaryButton,
+.catalogueButton {
   align-items: center;
-  background: var(--busbar-accent);
-  border: 1px solid var(--busbar-accent);
   border-radius: 0.45rem;
-  color: #ffffff;
   display: inline-flex;
   font-size: 0.9rem;
   font-weight: 800;
   gap: 0.5rem;
-  margin: 2rem 0 0;
   padding: 0.85rem 1.4rem;
   text-decoration: none;
   transition:
@@ -138,10 +142,31 @@
     transform 180ms ease;
 }
 
+.primaryButton {
+  background: var(--busbar-accent);
+  border: 1px solid var(--busbar-accent);
+  color: #ffffff;
+}
+
+.catalogueButton {
+  background: var(--busbar-accent-soft);
+  border: 1px solid rgb(217 35 50 / 35%);
+  color: var(--busbar-accent-dark);
+}
+
+.primaryButton:hover,
+.catalogueButton:hover {
+  transform: translateY(-2px);
+}
+
 .primaryButton:hover {
   background: var(--busbar-accent-dark);
   border-color: var(--busbar-accent-dark);
-  transform: translateY(-2px);
+}
+
+.catalogueButton:hover {
+  background: #ffe7e9;
+  border-color: var(--busbar-accent);
 }
 
 .heroVisual {
