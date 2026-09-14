@@ -3,6 +3,7 @@ import cableReferenceListJson from "./generated/cable-reference-list.json";
 import busbarCompaniesJson from "./generated/busbar-companies.json";
 import ledSupplyPartnersJson from "./generated/led-supply-partners.json";
 import busductOverallJson from "./generated/busduct-overall-reference-list.json";
+import ukBusbarSupplementalJson from "./generated/uk-busbar-supplemental-reference-list.json";
 import cmsReferenceListJson from "./generated/cms-reference-list.json";
 
 import {
@@ -190,6 +191,24 @@ type BusductRecord = Readonly<{
 }>;
 const busductRecords = busductOverallJson.records as unknown as readonly BusductRecord[];
 const busductSupplemental = busductRecords
+  .filter((record) => !record.duplicateOfExisting)
+  .map((record) => ({ id: record.id, who: record.client, project: record.project, location: record.location }));
+
+// --- Supplemental UK Busbar reference rows (user-supplied, 2026-09-14) -----
+// Client / Project / Country only, by design — Type, Ampere and Year were
+// never supplied for this batch and must never be surfaced. Pre-deduped
+// against the existing Busbar source data by normalised client+project key,
+// the same convention as the Busduct rows above — see uk-busbar-supplemental
+// -reference-list.json's source note.
+type UkBusbarSupplementalRecord = Readonly<{
+  id: string;
+  client: string;
+  project: string;
+  location: string;
+  duplicateOfExisting?: boolean;
+}>;
+const ukBusbarSupplementalRecords = ukBusbarSupplementalJson.records as unknown as readonly UkBusbarSupplementalRecord[];
+const ukBusbarSupplemental = ukBusbarSupplementalRecords
   .filter((record) => !record.duplicateOfExisting)
   .map((record) => ({ id: record.id, who: record.client, project: record.project, location: record.location }));
 
@@ -621,6 +640,7 @@ export function referenceSystemsForMarket(market: MarketCode): readonly Referenc
     ...sourceData.busbar.customerProjects.map((item) => ({ id: item.id, who: item.customer, project: item.project, location: item.location })),
     ...sourceData.busbar.projectContractors.map((item) => ({ id: item.id, who: item.contractor, project: item.project, location: item.location })),
     ...busductSupplemental,
+    ...ukBusbarSupplemental,
   ].filter((item) => !isExcludedPublicReference(item.who, item.project, item.location));
   const busbarInternational = busbarUnified.filter(
     (item) => resolveReferenceLocation(item.location).kind === "country" && !isDomesticTurkeyLocation(item.location),
