@@ -1,0 +1,30 @@
+{
+  "source": {
+    "title": "UK Busbar Reference Additions",
+    "file": "user-supplied (2026-09-14 request)",
+    "columns": [
+      "Client",
+      "Project",
+      "Country"
+    ],
+    "note": "16 user-supplied UK Busbar reference rows (Client / Project / Country only — Type, Ampere and Year were intentionally not supplied and must never be added or displayed). Pre-deduped against the existing Busbar source data (customerProjects, projectContractors, busduct-overall-reference-list) by normalised client+project key — all 16 rows were genuinely new. No Russia-, Iran- or Kurgan-Balt-linked rows were present, so none were excluded at import time. Row 16 (ARENA ELECTRICAL SERVICES) has no source project name; an em dash placeholder is used since the table's project cell requires a non-empty string."
+  },
+  "records": [
+    { "id": "uk-busbar-pl-1", "client": "POWER AND LIGHT", "project": "Allerton", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-2", "client": "POWER AND LIGHT", "project": "Cambridge House", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-3", "client": "POWER AND LIGHT", "project": "Regent Bupa", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-4", "client": "POWER AND LIGHT", "project": "Menai Science", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-5", "client": "POWER AND LIGHT", "project": "Pall Europe", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-6", "client": "POWER AND LIGHT", "project": "The Strand", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-7", "client": "POWER AND LIGHT", "project": "Hatton Cross", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-8", "client": "POWER AND LIGHT", "project": "Albion House-1", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-9", "client": "POWER AND LIGHT", "project": "Fruit and Veg Phase 2", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-10", "client": "POWER AND LIGHT", "project": "Bupa Stage-3", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-11", "client": "POWER AND LIGHT", "project": "Senator House", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-12", "client": "POWER AND LIGHT", "project": "Glenthorne Road", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-13", "client": "POWER AND LIGHT", "project": "Albion House-2", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-14", "client": "POWER AND LIGHT", "project": "Skelhorne Student Acc.", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-15", "client": "POWER AND LIGHT", "project": "Axis Apartments Risers", "location": "United Kingdom", "duplicateOfExisting": false },
+    { "id": "uk-busbar-pl-16", "client": "ARENA ELECTRICAL SERVICES", "project": "—", "location": "United Kingdom", "duplicateOfExisting": false }
+  ]
+}
